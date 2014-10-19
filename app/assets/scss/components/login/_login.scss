@@ -1,0 +1,94 @@
+.login-page {
+    padding-top: 160px;
+    .ant {
+	background: url('assets/img/login-ant.png') no-repeat;
+	display: block;
+	position: absolute;
+	width: 126px;
+	height: 147px;
+	top: -140px;
+	left: 50%;
+	z-index: 1;
+    }
+    .container {
+	background: $white;
+	border-radius: $global-radius;
+	padding: 20px;
+	width: 100%;
+	.title {
+	    text-align: center;
+	}
+    }
+    .facebook.button, .google.button, .login.button {
+	font-size: 1em;
+    }
+    .forgot-password {
+	margin-bottom: 20px;
+    }
+    .facebook.button{
+	background: #1f518b;
+	&:hover {
+	}
+    }
+    .google.button {
+	background: #eb4a24;
+	&:hover {
+	}
+    }
+}
+
+.login-modal, .register-modal {
+    @include reveal-modal-base (
+        $base-style: false,
+        $width: rem-calc(450)
+    );
+}
+
+.login-modal, .register-modal {
+    @include reveal-modal-style (
+        $bg: $smoke,
+        $border: false
+    );
+
+}
+
+.login-modal, .register-modal {
+    padding: 20px 0 0 0;
+    text-align: center;
+    min-height: 1px;
+
+    .modal-title {
+        font-size: 1.2em;
+    }
+    
+    .modal-footer {
+        background-color: $gainsboro;
+        border-radius: 0 0 10px 10px;
+        height: 64px;
+        text-align: center;
+
+        p {
+            line-height: 64px;
+        }
+    }
+
+    .fields {
+        margin-bottom: 16px;
+        input {
+            margin-bottom: 0;
+        }
+        
+    }
+
+    .buttons {
+        .button {
+            margin-bottom: 10px;
+        }
+    }
+    
+    .social-buttons {
+        .button {
+            padding: rem-calc(14) rem-calc(20) rem-calc(15);
+        }
+    }
+}

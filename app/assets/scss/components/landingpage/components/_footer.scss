@@ -1,0 +1,65 @@
+@import 'animate';
+.landingpage {
+    .footer {
+        background: url('assets/img/pattern02.png') repeat;
+        height: 480px;
+        .container {
+            height: 480px;
+        }
+        .register.button {
+            margin-top: 70px;
+        }
+        h3 {
+            color: $white;
+        }
+        .inline-list.download {
+            margin-top: 50px;
+            padding-left: 20px;;
+            > * {
+                background: rgba(255, 255, 255, 0.3);
+                width: 260px;
+                height: 80px;
+                border-radius: $global-radius;
+                margin-right: 20px;
+                a {
+                    border-radius: $global-radius;
+                    color: $white;
+                    padding: 15px;
+                    height: 100%;
+                    width: 100%;
+                    &:hover {
+                        background-color: rgba(255,255,255,.5);
+                    }
+                    span {
+                        display: inline-block;
+                    }
+                    span.icon {
+                        width: 41px;
+                        height: 50px;
+                        background: url('assets/img/icon-os.png') no-repeat;
+                    }
+                    span.text {
+                        margin-left: 30px;
+                        margin-top: 10px;
+                        font-size: 20px;
+                    }
+                }
+            }
+            .ios {
+                span.icon {
+                    background-position: 0 0;
+                }
+            }
+            .android {
+                span.icon {
+                    background-position: -42px 0;
+                }
+            }
+            .window {
+                span.icon {
+                    background-position: -84px 0;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+.lesson-page {
+    .question {
+        margin-top: 70px;
+        h4.name {
+            font-weight: 700;
+            margin-bottom: 70px;
+            text-align: center;
+        }
+    }
+}
+
+@import
+    "question-select",
+    "question-translate",
+    "question-form",
+    "question-judge",
+    "question-listen",
+    "question-name",
+    "question-speak";

@@ -1,0 +1,108 @@
+.landingpage {
+    .info {
+        background-color: $white;
+        min-height: 600px;
+        .container {
+            height: 600px;
+            h3 {
+                margin-top: 70px;
+                text-align: center;
+                .pressed {
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    color: $primary-color;
+                }
+            }
+            .sa {
+                margin-top: 70px;
+                h4.title {
+                    color: $steel;
+                    font-weight: 700;
+                }
+                ul.inline-list.download {
+                    margin-top: 10px;
+                    > * {
+                        border-radius: $global-radius;
+                        width: 120px;
+                        height: 120px;
+                        a {
+                            &:hover {
+                                background-color: rgba(0,0,0, .3);
+                            }
+                            width: 100%;
+                            height: 100%;
+                            border-radius: $global-radius;
+                            text-align: center;
+                            padding-top: 15px;
+                            span {
+                                display: inline-block;
+                                background: url('assets/img/icon-os.png') no-repeat;
+                                width: 41px;
+                                height: 50px;
+                            }
+                            color: $white;
+                        }
+                    }
+                    .ios {
+                        background-color: #fcc2b5;
+                        a {
+                            span {
+                                background-position: 0 0;
+                            }
+                        }
+                    }
+                    .android {
+                        background-color: #b1d77c;
+                        a {
+                            span {
+                                background-position: -42px 0;
+                            }
+                        }
+                    }
+                    .window {
+                        background-color: #9bddf6;
+                        a {
+                            span {
+                                background-position: -84px 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.appear {
+            .tablet {
+                background: url('assets/img/2-ipad.png') no-repeat;
+                position: absolute;
+                height: 193px;
+                width: 139px;
+                top: 160px;
+                left: 0;
+                z-index: 1;
+                @include animation(bounceInLeft 1.3s);
+            }
+
+            .laptop {
+                background: url('assets/img/2-macbook.png') no-repeat;
+                position: absolute;
+                width: 386px;
+                height: 227px;
+                top: 210px;
+                left: 50px;
+                z-index: 2;
+                @include animation(bounceInLeft 1.6s);
+            }
+            .phone {
+                background: url('assets/img/2-iphone.png') no-repeat;
+                position: absolute;
+                width: 190px;
+                height: 402px;
+                top: 147px;
+                left: 350px;
+                z-index: 3;
+                @include animation(bounceInLeft 2s);
+            }
+        }
+    }
+}

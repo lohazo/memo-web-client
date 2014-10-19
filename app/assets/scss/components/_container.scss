@@ -1,0 +1,26 @@
+html, body {
+    min-width: rem-calc(1120);
+}
+
+.full {
+    display: block;
+    float: left;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.header {
+    display: block;
+    float: left;
+    min-width: $row-width;
+}
+
+.top-bar {
+    min-width: $row-width;
+}
+
+.container {
+    display: block;
+    position: relative;
+}

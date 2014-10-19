@@ -1,0 +1,31 @@
+.lesson-page .question.select {
+    margin-bottom: 120px;
+    .answers {
+        .image {
+            background-color: $smoke;
+            border-radius: $global-radius;
+            float: left;
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 10px;
+            height: 220px;
+            width: 190px;
+            transition: all .2s ease-in-out;
+            &:hover, &.selected {
+                background-color: $primary-color;
+                label {
+                    color: $white;
+                }
+            }
+            &.image-1 {
+                margin-left: 100px;
+            }
+            img {
+                margin-bottom: 10px;
+                height: 170px;
+                width: 170px;
+                background-color: $white;
+            }
+        }
+    }
+}

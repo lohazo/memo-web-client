@@ -1,0 +1,37 @@
+.lesson-page .question.translate {
+    .content {
+        border: 2px solid $gainsboro;
+        border-radius: 10px;
+        padding: 18px;
+    }
+    .text-to-translate {
+        border: 2px solid $gainsboro;
+        border-radius: 10px;
+        padding: 18px;
+        width: 340px;
+        min-height: 150px;
+    }
+    .translate-area {
+        border: 2px solid $gainsboro;
+        border-radius: 10px;
+        padding: 18px;
+        width: 340px;
+        min-height: 150px;
+        resize: none;
+    }
+    .speaker {
+        background: url('assets/img/lesson-speaker.png') no-repeat;
+        background-size: cover;
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+    }
+    .text {
+        line-height: 40px;
+        vertical-align: middle;
+    }
+    h2.icon-arrow-right {
+        padding-left: 40px;
+        padding-top: 12px;
+    }
+}

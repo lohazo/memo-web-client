@@ -1,0 +1,118 @@
+.profile {
+    .avatar {
+        background-color: $iron;
+        border-radius: 50%;
+        &.big {
+            height: 120px;
+            width: 120px;
+        }
+        &.small {
+            height: 60px;
+            width: 60px;
+        }
+    }
+    .memo-progress {
+        position: relative;
+        min-height: 40px;
+        margin: 14px 0;
+        .current-level, .next-level {
+            font-size: .9em;
+            line-height: 40px;
+            position: absolute;
+            width: 40px;
+            z-index: 1;
+        }
+        .current-level {
+            background-color: $gold;
+            border-radius: 50%;
+            color: $white;
+            text-align: center;
+            left: 0;
+        }
+        .padder {
+            background-color: #ffe79d;
+            height: 20px;
+            margin-top: 10px;
+            position: relative;
+            left: 20px;
+            width: 160px;
+            .bar {
+                background-color: $gold;
+                height: 20px;
+                width: 0;
+            }
+        }
+        .next-level {
+            background: url('assets/img/icon-system-01.png') no-repeat -40px -30px;
+            line-height: 40px;
+            right: 0px;
+            top: 0;
+            padding-left: 5px;
+            z-index: 1;
+        }
+    }
+    &.profile-embed, &.profile-page {
+        .username {
+            h3 {
+                line-height: 60px;
+                margin: 0;
+            }
+        }
+        .fullname, .location {
+            margin-top: 15px;
+        }
+        .streak, .memos, .exp, .known-words {
+            padding: 0;
+            .icon, .text {
+                display: inline-block;
+                float: left;
+                line-height: 30px;
+            }
+            .icon {
+                background: url('assets/img/icon-system-01.png') no-repeat;
+                margin-right: 5px;
+            }
+        }
+        .streak {
+            .icon {
+                background-position: -26px 0;
+                width: 30px;
+                height: 30px;
+            }
+        }
+        .memos {
+            padding: 0;
+            .icon {
+                background-position: 0 0;
+                width: 26px;
+                height: 30px;
+            }
+        }
+        .exp {
+            .icon {
+                background-position: -56px 0;
+                width: 30px;
+                height: 30px;
+            }
+        }
+        .known-words {
+            .icon {
+                background-position: -86px 0;
+                height: 30px;
+                width: 30px;
+            }
+        }
+    }
+    &.profile-page {
+        .username {
+            margin: 20px auto;
+            h3 {
+                padding-left: 0;
+            }
+        }
+        .name, .location, .level, .streak {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+}
