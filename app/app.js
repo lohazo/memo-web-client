@@ -4,14 +4,15 @@
 angular.module('app', [
     'ngRoute',
     'app.controllers',
+    'app.directives',
     'mm.foundation'
 ]).config(['$routeProvider','$locationProvider', '$httpProvider', AppConfig]);
 
 function AppConfig($routeProvider, $locationProvider, $httpProvider) {
     $locationProvider.html5Mode(true).hashPrefix('!');
     $routeProvider.when('/', {
-	templateUrl: 'home/_index.html',
-	controller: 'HomeCtrl'
+	templateUrl: '_index.html',
+	controller: 'AppCtrl'
     });
     $routeProvider.otherwise({redirectTo: '/'});
 

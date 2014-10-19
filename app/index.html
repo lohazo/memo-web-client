@@ -9,14 +9,14 @@
   <title>Topica Memo</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
   <link rel="stylesheet" href="vendors/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="vendors/html5-boilerplate/css/main.css">
   <link rel="stylesheet" href="app.css"/>
   <script src="vendors/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
-  <div ng-if="auth.loggedIn || auth.trial" home></div>
-  <div ng-if="!auth.loggedIn && !auth.trial" landingpage></div>
+  <div ng-view></div>
 
   <script src="vendors/angular/angular.js"></script>
   <script src="vendors/angular-route/angular-route.js"></script>
@@ -25,6 +25,7 @@
   <!-- App -->
   <script src="app.js"></script>
   <script src="controller.js"></script>
+  <script src="directives.js"></script>
 
   <!-- Home -->
   <script src="home/controller.js"></script>

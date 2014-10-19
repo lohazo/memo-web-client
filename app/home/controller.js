@@ -1,7 +1,5 @@
 'use strict';
 
-angular.module('myApp.controllers', [])
-    .controller('HomeCtrl', ['$scope', HomeCtrl]);
-
-function HomeCtrl($scope) {
-}
+angular.module('home', [])
+    .controller('HomeCtrl', ['$scope', function($scope) {
+    }]);
