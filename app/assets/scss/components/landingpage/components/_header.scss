@@ -1,0 +1,14 @@
+.landingpage {
+    .header {
+	display: block;
+	float: left;
+	min-width: $row-width;
+    }
+
+    .top-bar {
+	min-width: $row-width;
+	.name {
+            line-height: $topbar-height;
+	}
+    }
+}

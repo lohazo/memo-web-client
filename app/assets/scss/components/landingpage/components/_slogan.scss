@@ -1,6 +1,6 @@
 .landingpage {
     .slogan {
-        background: url('assets/img/pattern01.png') repeat;
+        background: url('assets/img/landingpage/pattern01.png') repeat;
         height: 220px;
         h3 {
             text-transform: uppercase;
@@ -16,20 +16,20 @@
             height: 220px;
         }
         .image-1 {
-            background: url('assets/img/5-ant.png') no-repeat;
+            background: url('assets/img/landingpage/5-ant.png') no-repeat;
             left: 250px;
             bottom: 0;
             z-index: 3;
         }
         .image-2 {
-            background: url('assets/img/5-effect.png') no-repeat;
+            background: url('assets/img/landingpage/5-effect.png') no-repeat;
             left: 245px;
             bottom: 0px;
             z-index: 2;
             @include animation(flash 1.2s 6);
         }
         .image-3 {
-            background: url('assets/img/5-power.png') no-repeat;
+            background: url('assets/img/landingpage/5-power.png') no-repeat;
             left: 240px;
             bottom: 0;
             z-index: 1;

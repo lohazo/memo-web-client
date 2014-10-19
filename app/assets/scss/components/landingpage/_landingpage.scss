@@ -10,20 +10,11 @@
             color: $white;
         }
     }
-    a.reverse.login.button {
-        line-height: 27px;
-    }
     header {
         background-color: $white;
     }
     .top-bar {
         background-color: $white;
-        .name {
-            a {
-                line-height: 70px;
-                vertical-align: middle;
-            }
-        }
     }
     .top-bar-section {
         li {
@@ -32,6 +23,7 @@
     }
 }
 @import
+    "components/header",
     "components/head",
     "components/info",
     "components/sb",

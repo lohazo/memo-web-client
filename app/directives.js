@@ -8,6 +8,7 @@ angular.module('app.directives', [])
 	return {
 	    restrict: 'EA',
 	    replace: true,
+	    controller: 'HomeCtrl',
 	    templateUrl: 'home/_index.html'
 	};
     })
@@ -15,6 +16,7 @@ angular.module('app.directives', [])
 	return {
 	    restrict: 'EA',
 	    replace: true,
-	    template: '<div>Landing page</div>'
+	    controller: 'LpCtrl',
+	    templateUrl: 'components/landingpage/_index.html'
 	};
     });

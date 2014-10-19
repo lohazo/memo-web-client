@@ -5,6 +5,7 @@ angular.module('app', [
     'ngRoute',
     'app.controllers',
     'app.directives',
+    'landingpage',
     'mm.foundation'
 ]).config(['$routeProvider','$locationProvider', '$httpProvider', AppConfig]);
 

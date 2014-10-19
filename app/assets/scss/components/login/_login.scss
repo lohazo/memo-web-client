@@ -25,35 +25,39 @@
     .forgot-password {
 	margin-bottom: 20px;
     }
-    .facebook.button{
-	background: #1f518b;
-	&:hover {
-	}
-    }
-    .google.button {
-	background: #eb4a24;
-	&:hover {
-	}
-    }
 }
 
 .login-modal, .register-modal {
     @include reveal-modal-base (
         $base-style: false,
-        $width: rem-calc(450)
+        $width: rem-calc(400)
     );
+    max-width: rem-calc(400);
+    top: 190px !important;
+    .ant {
+	background: url('assets/img/login-ant.png') no-repeat;
+	display: block;
+	position: absolute;
+	width: 126px;
+	height: 147px;
+	top: -160px;
+	left: 50%;
+	z-index: 1;
+    }
+    .forgot-password {
+	margin-bottom: 20px;
+    }
 }
 
 .login-modal, .register-modal {
     @include reveal-modal-style (
-        $bg: $smoke,
+        $bg: $white,
         $border: false
     );
-
 }
 
 .login-modal, .register-modal {
-    padding: 20px 0 0 0;
+    padding: 20px;
     text-align: center;
     min-height: 1px;
 
@@ -78,17 +82,5 @@
             margin-bottom: 0;
         }
         
-    }
-
-    .buttons {
-        .button {
-            margin-bottom: 10px;
-        }
-    }
-    
-    .social-buttons {
-        .button {
-            padding: rem-calc(14) rem-calc(20) rem-calc(15);
-        }
     }
 }

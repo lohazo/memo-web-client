@@ -36,7 +36,7 @@
                             padding-top: 15px;
                             span {
                                 display: inline-block;
-                                background: url('assets/img/icon-os.png') no-repeat;
+                                background: url('assets/img/landingpage/icon-os.png') no-repeat;
                                 width: 41px;
                                 height: 50px;
                             }
@@ -73,7 +73,7 @@
 
         &.appear {
             .tablet {
-                background: url('assets/img/2-ipad.png') no-repeat;
+                background: url('assets/img/landingpage/2-ipad.png') no-repeat;
                 position: absolute;
                 height: 193px;
                 width: 139px;
@@ -84,7 +84,7 @@
             }
 
             .laptop {
-                background: url('assets/img/2-macbook.png') no-repeat;
+                background: url('assets/img/landingpage/2-macbook.png') no-repeat;
                 position: absolute;
                 width: 386px;
                 height: 227px;
@@ -94,7 +94,7 @@
                 @include animation(bounceInLeft 1.6s);
             }
             .phone {
-                background: url('assets/img/2-iphone.png') no-repeat;
+                background: url('assets/img/landingpage/2-iphone.png') no-repeat;
                 position: absolute;
                 width: 190px;
                 height: 402px;

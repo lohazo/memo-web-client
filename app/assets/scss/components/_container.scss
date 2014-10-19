@@ -24,3 +24,19 @@ html, body {
     display: block;
     position: relative;
 }
+
+.facebook.button{
+    background: #1f518b;
+    &:hover {
+    }
+}
+
+.google.button {
+    background: #eb4a24;
+    &:hover {
+    }
+}
+
+.facebook.button, .google.button, .login.button {
+    font-size: 1em;
+}
