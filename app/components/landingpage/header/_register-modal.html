@@ -4,16 +4,20 @@
     <div class="container">
       <h3 class="title">Đăng nhập</h3>
       <form>
-	<div class="row fields">
+	<div class="row">
 	  <div class="small-16 columns">
-	    <input class="username" ng-model="user.username" type="text" placeholder="Tên đăng nhập/Email">
-	  </div>
-	</div>
-	<div class="row fields">
+	    <input class="name" ng-model="user.name" type="text" placeholder="Tên đầy đủ (không bắt buộc)">
+	  </div>          
 	  <div class="small-16 columns">
-	    <input class="password" ng-model="user.password" type="password" placeholder="Mật khẩu">
-	  </div>
-	</div>
+            <input class="email" ng-model="user.email" type="email" placeholder="Email: jerry@mouse.com" required>
+          </div>
+          <div class="small-16 columns">
+            <input class="username" ng-model="user.username" type="text" placeholder="Tên đăng nhập" required>
+          </div>
+          <div class="small-16 columns">
+            <input class="password" ng-model="user.password" type="password" placeholder="Mật khẩu" required>
+          </div>
+	</div>	
 	<div class="row">
 	  <div class="large-16 columns">
 	    <a class="large-16 small radius login button" ng-click="login()">Đăng nhập</a>
@@ -25,21 +29,21 @@
 	  </div>
 	</div>
 	<div class="row">
-	  <div class="large-16 columns">
+	  <div class="large-8 columns">
 	    <a class="large-16 small radius facebook button" ng-click="FbLogin()">
-	      Đăng nhập bằng Facebook
+	      Facebook
 	    </a>
 	  </div>
-	  <div class="large-16 columns">
+	  <div class="large-8 columns">
 	    <a class="large-16 small radius google button" ng-click="GLogin()">
-	      Đăng nhập bằng Google
+	      Google+
 	    </a>
 	  </div>
 	</div>
       </form>
       <div class="row">
 	<div class="large-16 columns">
-	  <a ng-click="openRegister()">Tạo tài khoản</a>
+	  <span>Bạn đã có tài khoản? <a ng-click="loginModal()">Đăng nhập</a></span>
 	</div>
       </div>
     </div>

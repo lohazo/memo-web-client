@@ -7,5 +7,5 @@ angular.module('landingpage', [
     'landingpage.services',
     'landingpage.directives',
     'landingpage.controllers',
-    'landingpage.header'
+    'landingpage.login'
 ]);

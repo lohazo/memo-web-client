@@ -14,6 +14,7 @@ angular.module('landingpage.directives', [])
     .directive('landingHead', function() {
         return {
             strict: 'EA',
+	    scope: true,
             templateUrl: 'components/landingpage/_head.html'
         };
     })
@@ -98,4 +99,11 @@ angular.module('landingpage.directives', [])
             strict: 'EA',
             templateUrl: 'components/landingpage/_footer.html'
         };
+    })
+    .directive('coursesModal', function() {
+	return {
+	    strict: 'EA',
+	    scope: true,
+	    templateUrl: 'components/landingpage/_courses-modal.html'
+	};
     });

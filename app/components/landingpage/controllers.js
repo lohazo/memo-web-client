@@ -6,13 +6,32 @@ var angular = window.angular || angular;
 angular.module('landingpage.controllers', [])
     .controller('LpCtrl', [
 	'$scope',
-	function($scope) {
+	'$modal',
+	function($scope, $modal) {
+	    $scope.courseModal = function() {
+		var modalInstance = $modal.open({
+		    template: '<div courses-modal></div>',
+		    controller: 'CourseModalInstanceCtrl',
+		    windowClass: 'course-modal'
+		});
+	    };
+	}
+    ])
+    .controller('CourseModalInstanceCtrl', [
+	'$scope',
+	function($scope, $modalInstance) {
+	    
 	}
     ])
     .controller('LpHeaderCtrl', [
 	'$scope',
 	'$http',
 	function($scope, $http) {
+	}
+    ])
+    .controller('LpHeadCtrl', [
+	'$scope',
+	function($scope) {
 	}
     ])
     .controller('LpStatCtrl', [
