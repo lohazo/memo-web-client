@@ -17,7 +17,7 @@ angular.module('app.controllers', ['ngStorage'])
 	    $rootScope.$on('event:auth-loginConfirmed', function(e, data) {	
 		$scope.auth = {
 		    loggedIn: true,
-		    user: data,
+		    user: data.user,
 		    trial: data.is_trial
 		};
 		$localStorage.auth = $scope.auth;

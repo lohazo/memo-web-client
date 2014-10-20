@@ -5,7 +5,7 @@
 	<h3 class="title">Chọn khóa học</h3>
 	<div class="row" ng-repeat="course in courses">
 	  <div class="large-16 columns">
-	    <a class="reverse course">
+	    <a class="reverse course" ng-click="selectCourse(course._id)">
 	      <img src="/assets/img/{{course._id}}.png" />
 	      <span>{{course.name}}</span>
 	    </a>

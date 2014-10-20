@@ -1,21 +1,34 @@
 'use strict';
 
 angular.module('course.services', [])
-    .factory('Course', ['CourseServices', function(CourseServices) {
+    .factory('Course', ['CourseServices', '$localStorage', function(CourseServices, $localStorage) {
 	var Course = function() {};
-	
+
 	Course.prototype.setData = function(data) {
-	    this.data = data;
+	    Course.list = data;
 	};
 
 	Course.prototype.getData = function(data) {
-	    return this.data;
+	    return Course.list;
 	};
-	
-	Course.prototype.getCourses = function(data) {
-	    CourseServices.courses(data).then(function(response) {
-		Course.data = response.data;
-	    });
+
+	Course.prototype.getCourse = function(data) {
+	    return Course.course;
+	};
+
+	Course.prototype.list = function(data) {
+	    return CourseServices.courses(data)
+		.then(function(response) {
+		    Course.list = response.data;
+		});
+	};
+
+	Course.prototype.selectCourse = function(data) {
+	    return CourseServices.selectCourse(data)
+		.then(function(response) {
+		    Course.course = response.data;
+		    $localStorage.auth.current_course = Course.course;
+		});
 	};
 
 	return new Course();
