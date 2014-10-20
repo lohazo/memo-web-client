@@ -1,15 +1,4 @@
 .landingpage {
-    a.reverse.button {
-        background-color: $white;
-        border: 2px solid $primary-color;
-        border-radius: $global-radius;
-        color: $primary-color;
-        font-weight: 600;
-        &:hover {
-            background-color: $primary-color;
-            color: $white;
-        }
-    }
     header {
         background-color: $white;
     }

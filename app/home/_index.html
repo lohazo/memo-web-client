@@ -1,1 +1,4 @@
-<div></div>
+<header app-header></header>
+<section class="app" ng-if="auth.course" app-main></section>
+<section class="app" ng-if="!auth.course" app-courses></section>
+<footer app-footer></footer>

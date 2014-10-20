@@ -1,0 +1,36 @@
+<div class="fixed contain-to-grid app-top-bar">
+  <top-bar>
+    <ul class="columns small-4 title-area">
+      <li class="name">
+        <img src="assets/img/logo.png">
+      </li>
+    </ul>
+    <top-bar-section ng-if="auth.loggedIn">
+      <!-- Left Nav Section -->
+      <ul class="left menus">
+        <li class="menu-item" ng-repeat="item in menus">
+          <a href="{{item.link}}">{{item.title}}</a>
+        </li>
+      </ul>
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="has-form notification">
+          <a class="button">
+            <img src="assets/img/button-03.png" />
+            <div class="indicator"></div>
+          </a>
+        </li>
+        <li class="has-form setting">
+          <a dropdown-toggle="#dropdown-setting" class="button">
+            <img src="assets/img/button-05.png" alt="" />
+          </a>
+          <ul id="dropdown-setting" class="f-dropdown" dropdown-align="right">
+            <li><a href="/profile">Hồ sơ cá nhân</a></li>
+            <li><a href="/setting/account">Cài đặt</a></li>
+            <li><a ng-click="showShortcutPopup()">Thiết lập phím tắt</a></li>
+            <li><a ng-click="logout()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </top-bar-section>
+  </top-bar>

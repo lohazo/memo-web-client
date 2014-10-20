@@ -54,15 +54,29 @@ angular.module('landingpage.login', [])
 	}
     ])
     .controller('LoginModalInstanceCtrl', [
+	'$rootScope',
 	'$scope',
 	'$modalInstance',
-	function($scope, $modalInstance) {
+	'AuthService',
+	function($rootScope, $scope, $modalInstance, AuthService) {
 	    $scope.registerModal = function() {
-                $modalInstance.close('openRegister');
-            };
+		$modalInstance.close('openRegister');
+	    };
 
-            $scope.loginModal = function() {
-                $modalInstance.close('open');
-            };
+	    $scope.loginModal = function() {
+		$modalInstance.close('open');
+	    };
+
+	    $scope.FbLogin = function() {
+		AuthService.FbLogin();
+	    };
+	    
+	    $scope.GLogin = function() {
+		AuthService.GLogin();
+	    };
+	    
+	    $rootScope.$on('event:auth-loginConfirmed', function(e, data) {
+		$modalInstance.close();
+	    });
 	}
     ]);

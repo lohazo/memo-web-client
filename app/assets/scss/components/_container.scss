@@ -40,3 +40,150 @@ html, body {
 .facebook.button, .google.button, .login.button {
     font-size: 1em;
 }
+
+.main {
+    margin-top: 40px;
+    .main-left, .main-center, .main-right {
+	min-height: 580px;
+	.container {
+	    background-color: $white;
+	    border-radius: 15px;
+	    padding: 20px;
+	}
+    }
+    .container {
+	.row {
+	    margin-left: auto;
+	    margin-right: auto;
+	    padding-left: auto;
+	    padding-right: auto;
+	}
+    }
+
+    .main-center .container {
+	float: left;
+	width: 100%;
+	h4 {
+	    line-height: 60px;
+	    margin: 0;
+	    padding-left: 20px;
+	}
+	.fanto-store {
+	    height: 40px;
+	    line-height: 40px;
+	    padding-top: 0;
+	    padding-bottom: 0;
+	    margin-bottom: 0;
+	    margin-top: 10px;
+	}
+    }
+
+    .main-right {
+	.container {
+	    .facebook-search, .memo-search, .email-invitation {
+		height: 40px;
+		line-height: 40px;
+		padding: 0;
+		margin-bottom: 10px;
+	    }
+	}
+
+	.social-bar {
+	    margin-top: 10px;
+	    padding: 5px;
+	    li {
+		background-color: $white;
+		border-radius: 10px;
+		width: 80px;
+		margin-left: 5px;
+		margin-right: 5px;
+		min-height: 40px;
+	    }
+	}
+    }
+}
+
+#search-friend {
+    border-radius: 10px;
+    padding: 10px;
+    max-width: none;
+    width: 230px !important;
+
+    h4 {
+	font-weight: bold;
+    }
+    textarea {
+	resize: none;
+    }
+}
+
+a.reverse.button {
+    background-color: $white;
+    border: 2px solid $primary-color;
+    border-radius: $global-radius;
+    color: $primary-color;
+    font-weight: 600;
+    &:hover {
+        background-color: $primary-color;
+        color: $white;
+    }
+}
+
+.memo-button {
+    @include button(
+	$padding: $button-tny,
+	$radius: $global-radius
+    );
+    font-size: $button-font-med;
+    font-weight: $font-weight-bold;
+    margin-bottom: 0;
+    &.secondary {
+	@include button(
+	    $padding: $button-tny,
+	    $bg: $white,
+	    $radius: $global-radius
+	);
+	border: 2px solid $gold;
+	color: $primary-color;
+	font-size: $button-font-med;
+	font-weight: $font-weight-bold;
+	margin-bottom: 0;
+	&:hover {
+	    background-color: $gold;
+	    color: $primary-color;
+	}
+    }
+}
+
+.hex-memo-button {
+    @include button(
+	$padding: $button-med
+    );
+    background: url('assets/img/button-checkpoint-bg.png') no-repeat;
+    background-position: -300px 0;
+    color: $primary-color;
+    line-height: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+    vertical-algin: middle;
+    width: 300px;
+    &.secondary {
+	background-position: 0 0;
+	background-color: transparent;
+	color: $primary-color;
+	&:hover {
+	    background-position: -300px 0;
+	    .icon-lock {
+		color: $white;
+	    }
+	}
+	.icon-lock {
+	    color: $gold;
+	}
+    }
+    &.disabled {
+	background-position: -600px 0;
+    }
+}
