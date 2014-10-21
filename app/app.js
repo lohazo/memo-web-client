@@ -15,7 +15,8 @@ angular.module('app', [
     'landingpage',
     'login',
     'home',
-    'course'
+    'course',
+    'profile'
 ]).config([
     '$routeProvider',
     '$locationProvider',

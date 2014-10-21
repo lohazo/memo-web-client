@@ -1,0 +1,53 @@
+<div class="container">
+  <section class="profile profile-embed">
+    <div class="row">
+      <div class="large-6 columns avatar small"></div>
+      <div class="large-10 columns username">
+        <h4>{{profile.username}}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-10 columns fullname">
+        {{profile.name}}
+      </div>
+      <div class="large-6 columns location">
+        <i class="icon-map-marker"></i>
+        {{profile.location}}
+      </div>
+    </div>
+    <hr/>
+    <div class="row">
+      <div class="large-8 columns streak">
+	<i class="icon"></i><span class="text">{{profile.streak}} Streak</span>
+      </div>
+      <div class="large-8 columns memos">
+	<i class="icon"></i><span class="text">{{auth.current_course.virtual_money}} Memos</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-16 columns memo-progress">
+	<span class="current-level">{{auth.current_course.level}}</span>
+	<div class="padder">
+	  <div class="bar"></div>
+	</div>
+	<span class="next-level">{{auth.current_course.level + 1}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-8 columns exp">
+	<i class="icon"></i><span class="text">{{auth.current_course.exp}} XP</span>
+      </div>
+      <div class="large-8 columns known-words">
+	<i class="left icon"></i><span class="text">{{auth.current_course.known_words}} từ</span>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <canvas linechart options="chartOptions" data="expChart" width="220" height="150"></canvas>
+    </div>
+    <hr />
+    <div class="row">
+      <a href="#" class="small-16 memo-button">Nâng cao kĩ năng</a>
+    </div>
+  </section>
+</div>

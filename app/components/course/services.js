@@ -26,7 +26,7 @@ angular.module('course.services', [])
 	Course.prototype.selectCourse = function(data) {
 	    return CourseServices.selectCourse(data)
 		.then(function(response) {
-		    Course.course = response.data;
+		    Course.course = response.data.current_course;
 		    $localStorage.auth.current_course = Course.course;
 		});
 	};

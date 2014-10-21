@@ -41,68 +41,6 @@ html, body {
     font-size: 1em;
 }
 
-.main {
-    margin-top: 40px;
-    .main-left, .main-center, .main-right {
-	min-height: 580px;
-	.container {
-	    background-color: $white;
-	    border-radius: 15px;
-	    padding: 20px;
-	}
-    }
-    .container {
-	.row {
-	    margin-left: auto;
-	    margin-right: auto;
-	    padding-left: auto;
-	    padding-right: auto;
-	}
-    }
-
-    .main-center .container {
-	float: left;
-	width: 100%;
-	h4 {
-	    line-height: 60px;
-	    margin: 0;
-	    padding-left: 20px;
-	}
-	.fanto-store {
-	    height: 40px;
-	    line-height: 40px;
-	    padding-top: 0;
-	    padding-bottom: 0;
-	    margin-bottom: 0;
-	    margin-top: 10px;
-	}
-    }
-
-    .main-right {
-	.container {
-	    .facebook-search, .memo-search, .email-invitation {
-		height: 40px;
-		line-height: 40px;
-		padding: 0;
-		margin-bottom: 10px;
-	    }
-	}
-
-	.social-bar {
-	    margin-top: 10px;
-	    padding: 5px;
-	    li {
-		background-color: $white;
-		border-radius: 10px;
-		width: 80px;
-		margin-left: 5px;
-		margin-right: 5px;
-		min-height: 40px;
-	    }
-	}
-    }
-}
-
 #search-friend {
     border-radius: 10px;
     padding: 10px;

@@ -3,10 +3,11 @@
 angular.module('login.services', [])
     .factory('AuthService', [
 	'$rootScope',
+	'$localStorage',
 	'Facebook',
 	'GooglePlus',
 	'LoginService',
-	function($rootScope, Facebook, GooglePlus, LoginService) {
+	function($rootScope, $localStorage, Facebook, GooglePlus, LoginService) {
 	    var AuthService = function() {};
 	    AuthService.prototype.register = function(data) {
 		LoginService.register(data).then(loginCallback);
@@ -63,6 +64,7 @@ angular.module('login.services', [])
 
 	    AuthService.prototype.logout = function() {
 		$rootScope.$broadcast('event:auth-logoutConfirmed');
+		$localStorage.$reset();
 	    };
 
 	    function getFbInfo(data) {

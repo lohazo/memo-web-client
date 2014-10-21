@@ -53,13 +53,21 @@
     }
     &.profile-embed, &.profile-page {
         .username {
-            h3 {
+            h4 {
                 line-height: 60px;
+		width: 140px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
                 margin: 0;
             }
         }
         .fullname, .location {
             margin-top: 15px;
+	    width: 140px;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
         }
         .streak, .memos, .exp, .known-words {
             padding: 0;

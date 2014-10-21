@@ -11,12 +11,18 @@
 }
 
 .course-page {
+    &.main {
+	margin-top: 40px;
+    }
     .container {
+	background-color: $white;
+	border-radius: 15px;
+	padding: 20px;
 	min-height: 300px;
     }
     h3.title {
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 30px;
 	margin-bottom: 30px;
     }
     .course {
