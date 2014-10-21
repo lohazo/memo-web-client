@@ -50,8 +50,8 @@ function AppConfig($routeProvider, $locationProvider,
     });
 
     GooglePlusProvider.init({
-	clientId: '76466559980-s5se51atvu7oubctg2afjqkugh1rm65k.apps.googleusercontent.com',
-	apiKey: 'AIzaSyAFZYZEDMa92M5x4AywBm_axZC0O2Nr9Dc',
+	clientId: '968128090898-e768ucu099tgsn5sli4nms46pp6jttt7.apps.googleusercontent.com',
+	apiKey: 'AIzaSyAgi3H6TUcL_3lo6YL4YtZ1HWau0Fs8eog',
 	scopes: 'https://www.googleapis.com/auth/plus.login ' +
 	    'https://www.googleapis.com/auth/userinfo.email ' +
 	    'https://www.googleapis.com/auth/userinfo.profile'
