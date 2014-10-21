@@ -15,12 +15,14 @@ angular.module('landingpage.directives', [])
         return {
             strict: 'EA',
 	    scope: true,
+	    controller: 'LpHeadCtrl',
             templateUrl: 'components/landingpage/_head.html'
         };
     })
     .directive('landingInfo', function() {
         return {
             strict: 'EA',
+	    controller: 'LpInfoCtrl',
             link: function($scope, $element, $attr) {
             },
             templateUrl: 'components/landingpage/_info.html'
@@ -97,6 +99,7 @@ angular.module('landingpage.directives', [])
     .directive('landingFooter', function() {
         return {
             strict: 'EA',
+	    controller: 'LpFooterCtrl',
             templateUrl: 'components/landingpage/_footer.html'
         };
     })
