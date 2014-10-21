@@ -25,6 +25,9 @@
             height: 540px;
         }
         .appear {
+	    .button.link {
+		border-radius: $global-radius;
+	    }
             &.sb-1 {
                 .image-1 {
                     background: url('assets/img/landingpage/4-top-1.png') no-repeat;
