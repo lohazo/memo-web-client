@@ -37,11 +37,4 @@ angular.module('home.directives', [])
 	    scope: true,
 	    templateUrl: 'home/_main-right.html'
 	};
-    })
-    .directive('leaderboard', function() {
-	return {
-	    strict: 'EA',
-	    scope: true,
-	    templateUrl: 'home/_leaderboard.html'
-	};
     });

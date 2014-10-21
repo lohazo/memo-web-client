@@ -1,0 +1,28 @@
+<h4>Mời bạn Facebook</h4>
+<div class="row">
+  <div class="small-16 columns">
+    <input type="text" ng-model="search.name" class="search-box" placeholder="Tìm bạn" />
+  </div>
+</div>
+<div class="row facebook-friend-list">
+  <div class="row friend" ng-repeat="friend in fbFriends | filter:search.name">
+    <div class="small-16 columns">
+      <div class="row">
+	<div class="small-3 columns avatar">
+	  <img ng-src="{{friend.picture.data.url}} " />
+	</div>
+	<div class="small-7 columns nickname">{{friend.name}}</div>
+	<div class="small-5 columns buttons">
+	  <div class="row">
+	    <a class="small-16 small secondary memo-button invite">Mời</a>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="small-16 columns">
+    <a href="" class="small-16 secondary show-leaderboard memo-button" ng-click="showTheLeaderboard()">Trở về</a>
+  </div>
+</div>
