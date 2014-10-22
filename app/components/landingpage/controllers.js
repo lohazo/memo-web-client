@@ -26,8 +26,13 @@ angular.module('landingpage.controllers', [])
     .controller('LpHeaderCtrl', [
 	'$scope',
 	'$location',
-	'$http',
-	function($scope, $location, $http) {}
+	'$routeParams',
+	'MolServices',
+	function($scope, $location, $routeParams, MolServices) {
+	    var data = $routeParams;
+	    mixpanel.track('Web Landingpage page view', data);
+	    MolServices.saveC2(data);
+	}
     ])
     .controller('LpHeadCtrl', [
 	'$scope',

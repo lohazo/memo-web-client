@@ -78,6 +78,12 @@ angular.module('login.services', [])
 	    }
 
 	    function loginCallback(response) {
+		mixpanel.identify(response.data._id);
+		var data = angular.fromJson(angular.toJson(response.data));
+		data.name = data.username;
+		delete data.auth_token;
+		mixpanel.people.set(data);
+		mixpanel.track('Web Login');
 		$rootScope.$broadcast('event:auth-loginConfirmed', {
 		    user: response.data
 		});
