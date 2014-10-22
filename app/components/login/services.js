@@ -55,7 +55,8 @@ angular.module('login.services', [])
 		});
 	    };
 
-	    AuthService.prototype.checkAuth = function(data) {
+	    AuthService.prototype.checkAuth = function() {
+		console.log($localStorage.auth);
 		LoginService.checkAuth(data).then(function(response) {
 		    if (response.data.response_code === 401) {
 			$rootScope.$broadcast('event:auth-invalidToken');
@@ -85,7 +86,6 @@ angular.module('login.services', [])
 		delete data.auth_token;
 		mixpanel.people.set(data);
 		var molData = {};
-		console.log($routeParams);
 		molData.code_channel = $routeParams.code_channel;
 		molData.id_landingpage = $routeParams.id_ladingpage;
 		molData.id_campaign = $routeParams.id_campaign;

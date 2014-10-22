@@ -60,6 +60,7 @@ angular.module('landingpage.login', [])
 	'$routeParams',
 	'AuthService',
 	function($rootScope, $scope, $modalInstance, $routeParams, AuthService) {
+	    $scope.user = {};
 	    $scope.registerModal = function() {
 		$modalInstance.close('openRegister');
 	    };
@@ -71,11 +72,19 @@ angular.module('landingpage.login', [])
 	    $scope.FbLogin = function() {
 		AuthService.FbLogin();
 	    };
-	    
+
 	    $scope.GLogin = function() {
 		AuthService.GLogin();
 	    };
-	    
+
+	    $scope.register = function() {
+		AuthService.register($scope.user);
+	    };
+
+	    $scope.login = function() {
+		AuthService.login($scope.user);
+	    };
+
 	    $rootScope.$on('event:auth-loginConfirmed', function(e, data) {
 		$modalInstance.close();
 	    });
