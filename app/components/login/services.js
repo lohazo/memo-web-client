@@ -4,10 +4,11 @@ angular.module('login.services', [])
     .factory('AuthService', [
 	'$rootScope',
 	'$localStorage',
+	'$routeParams',
 	'Facebook',
 	'GooglePlus',
 	'LoginService',
-	function($rootScope, $localStorage, Facebook, GooglePlus, LoginService) {
+	function($rootScope, $localStorage, $routeParams, Facebook, GooglePlus, LoginService) {
 	    var AuthService = function() {};
 	    AuthService.prototype.register = function(data) {
 		LoginService.register(data).then(loginCallback);
@@ -83,7 +84,13 @@ angular.module('login.services', [])
 		data.name = data.username;
 		delete data.auth_token;
 		mixpanel.people.set(data);
-		mixpanel.track('Web Login');
+		var molData = {};
+		console.log($routeParams);
+		molData.code_channel = $routeParams.code_channel;
+		molData.id_landingpage = $routeParams.id_ladingpage;
+		molData.id_campaign = $routeParams.id_campaign;
+		molData.id_link = $routeParams.id;
+		// mixpanel.track('Web Login', molData);
 		$rootScope.$broadcast('event:auth-loginConfirmed', {
 		    user: response.data
 		});

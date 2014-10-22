@@ -57,8 +57,9 @@ angular.module('landingpage.login', [])
 	'$rootScope',
 	'$scope',
 	'$modalInstance',
+	'$routeParams',
 	'AuthService',
-	function($rootScope, $scope, $modalInstance, AuthService) {
+	function($rootScope, $scope, $modalInstance, $routeParams, AuthService) {
 	    $scope.registerModal = function() {
 		$modalInstance.close('openRegister');
 	    };

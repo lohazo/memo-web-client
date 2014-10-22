@@ -16,7 +16,8 @@ angular.module('app', [
     'login',
     'home',
     'course',
-    'profile'
+    'profile',
+    'skill'
 ]).config([
     '$routeProvider',
     '$locationProvider',

@@ -1,0 +1,15 @@
+<div class="skill-row skill-block-{{row.length}}" ng-repeat="row in skillTree track by $index">
+  <div ng-if="!row.isCheckpoint && skill != 'null'"
+       class="{{skill.theme_color === '#99cc00' ? 'green' : (skill.theme_color === '#ff4444' ? 'red' : 'blue')}} {{skill.unlocked ? 'unlocked' : 'locked'}} 
+	      skill skill-{{skill.order + 1}} skill-offset-{{skill.isFirstInRow ? $index : 0}}" ng-repeat="skill in row track by $index">
+    <a ng-href="{{skill.unlocked ? '/skill/' + skill._id : ''}}">
+      <div class="icon"></div>
+      <div class="name">{{skill.slug}}</div>
+      <div class="level">{{skill.finished_lesson || 0}} / {{skill.lessons.length || 0}}</div>
+    </a>
+  </div>
+  <a ng-if="row.isCheckpoint" href="smt/{{row[0].highest_skill_id}}" class="secondary test-out hex-memo-button">
+    <i class="icon-lock"></i>
+    Kiểm tra rút gọn kĩ năng
+  </a>
+</div>

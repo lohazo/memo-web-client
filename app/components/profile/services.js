@@ -25,8 +25,8 @@ angular.module('profile.services', [])
 		.then(function(response) {
 		    Profile.data = response.data;
 		    $localStorage.auth.user = Profile.data.user_info;
-		    $localStorage.auth.skills_tree = Profile.data.skill_tree;
-		    $localStorage.auth.check_points = Profile.data.check_points;
+		    $localStorage.auth.skills_tree = Profile.data.skills_tree;
+		    $localStorage.auth.checkpoints = Profile.data.checkpoints;
 		    $localStorage.auth.skills = Profile.data.skills;
 		});
 	};

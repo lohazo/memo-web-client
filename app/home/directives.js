@@ -28,7 +28,7 @@ angular.module('home.directives', [])
 	return {
 	    strict: 'EA',
 	    scope: true,
-	    template: '<div>place skill tree here</div>'
+	    templateUrl: 'home/_main-center.html'
 	};
     })
     .directive('mainRight', function() {
