@@ -1,0 +1,20 @@
+<div class="small-8 small-centered columns judge question" answer="exam.currentQuestion.userAnswer">
+  <div class="row">
+    <h4 class="name">Đánh dấu <u>tất cả</u> đáp án đúng</h4>
+  </div>
+  <div class="row">
+    <div class="small-8 columns content">
+      {{question.question}}
+    </div>
+    <div class="small-8 columns answers">
+      <div class="row" ng-repeat="option in question.options">
+        <div class="answer answer-{{$index + 1}}" ng-click="selectAnswer(option)">
+          <div class="small-2 columns">
+            <input type="checkbox" ng-checked="answer.indexOf(option) > -1"  name="answer-{{$index + 1}}" />
+          </div>
+          <div class="small-14 columns"><label for="answer-{{$index + 1}}"><span></span>{{$index + 1}}. {{option}}</label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

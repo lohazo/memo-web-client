@@ -1,0 +1,23 @@
+<div class="small-12 small-centered columns translate question" answer="exam.currentQuestion.userAnswer">
+  <div class="row">
+    <h4 class="name">Dịch nội dung này</h4>
+  </div>
+  <div class="row">
+    <div class="small-7 columns text-to-translate">
+      <div class="row">
+        <div class="small-3 columns">
+          <span class="speaker" ng-click="speaker.play()"></span>
+        </div>
+        <div class="small-13 columns">
+          <span class="text">{{question.question}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="small-1 columns">
+      <h2 class="icon-arrow-right"></h2>
+    </div>
+    <div class="small-7 columns answer">
+      <textarea class="translate-area" ng-model="answer"></textarea>
+    </div>
+  </div>
+</div>

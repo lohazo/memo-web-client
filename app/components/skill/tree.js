@@ -61,33 +61,6 @@ angular.module('skill.tree', [])
 	return {
 	    strict: 'EA',
 	    scope: true,
-	    controller: ['$scope', 'TreeBuilder', function($scope, TreeBuilder) {
-		TreeBuilder.getCheckpoints();
-		TreeBuilder.getSkills();
-		TreeBuilder.getTree();
-		$scope.skillTree = TreeBuilder.build();
-	    }],
 	    templateUrl: 'skill/_skill-tree.html'
 	};
     });
-    // .directive('skillRow', function() {
-    //	return {
-    //	    strict: 'EA',
-    //	    scope: true,
-    //	    template: '<div class="skill-row"></div>'
-    //	};
-    // })
-    // .directive('skillCell', function() {
-    //	return {
-    //	    strict: 'EA',
-    //	    scope: true,
-    //	    templateUrl: 'skill/_skill-cell.html'
-    //	};
-    // })
-    // .directive('skillCheckpoint', function() {
-    //	return {
-    //	    strict: 'EA',
-    //	    scope: true,
-    //	    templateUrl: 'skill/_skill-checkpoint.html'
-    //	};
-    // });

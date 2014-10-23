@@ -4,11 +4,17 @@ angular.module('home.controller', [])
     .controller('HomeCtrl', ['$scope', function($scope) {
     }])
     .controller('HomeMainCtrl', [
-	'$scope', 'Profile', 'Course',
-	function($scope, Profile, Course) {
+	'$scope', 'Profile', 'Course', 'TreeBuilder',
+	function($scope, Profile, Course, TreeBuilder) {
 	    Profile.getProfile($scope.auth.user)
 		.then(function() {
 		    $scope.profile = Profile.getData().user_info;
+		})
+		.then(function() {
+		    TreeBuilder.getCheckpoints();
+		    TreeBuilder.getSkills();
+		    TreeBuilder.getTree();
+		    $scope.skillTree = TreeBuilder.build();
 		});
 
 	    Profile.getProfileDetail($scope.auth.user)

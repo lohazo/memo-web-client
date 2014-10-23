@@ -56,8 +56,8 @@ angular.module('login.services', [])
 	    };
 
 	    AuthService.prototype.checkAuth = function() {
-		console.log($localStorage.auth);
-		LoginService.checkAuth(data).then(function(response) {
+		var data = $localStorage.auth.user;
+		return LoginService.checkAuth(data).then(function(response) {
 		    if (response.data.response_code === 401) {
 			$rootScope.$broadcast('event:auth-invalidToken');
 		    }

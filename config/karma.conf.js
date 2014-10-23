@@ -8,6 +8,8 @@ module.exports = function(config){
             'app/vendors/angular-route/angular-route.js',
             'app/vendors/angular-mocks/angular-mocks.js',
             'app/*.js',
+	    'app/placement/**/*.js',
+	    'app/components/placement/**/*.js',
             'app/home/**/*.js'
         ],
 

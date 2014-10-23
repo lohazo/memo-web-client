@@ -13,7 +13,6 @@ angular.module('landingpage.services', [])
 		    var deferred = $q.defer();
 		    var endpoint = "/save_c2.php";
 		    $http.post(HOST + endpoint, data).then(function(c2Response) {
-			console.log(c2Response);
 			deferred.resolve(c2Response);
 		    });
 		    return deferred.promise;
