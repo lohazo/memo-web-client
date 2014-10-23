@@ -8,7 +8,8 @@ angular.module('login.services', [])
 	'Facebook',
 	'GooglePlus',
 	'LoginService',
-	function($rootScope, $localStorage, $routeParams, Facebook, GooglePlus, LoginService) {
+	'MolServices',
+	function($rootScope, $localStorage, $routeParams, Facebook, GooglePlus, LoginService, MolServices) {
 	    var AuthService = function() {};
 	    AuthService.prototype.register = function(data) {
 		LoginService.register(data).then(loginCallback);
@@ -86,11 +87,16 @@ angular.module('login.services', [])
 		delete data.auth_token;
 		mixpanel.people.set(data);
 		var molData = {};
-		molData.code_channel = $routeParams.code_channel;
+		console.log($routeParams);
+		molData.code_chanel = $routeParams.code_chanel;
 		molData.id_landingpage = $routeParams.id_ladingpage;
 		molData.id_campaign = $routeParams.id_campaign;
-		molData.id_link = $routeParams.id;
+		molData.id = $routeParams.id;
 		// mixpanel.track('Web Login', molData);
+		molData.name = data.name;
+		molData.email = data.email;
+		molData.phone = '0918537799';
+		MolServices.saveC3(molData);
 		$rootScope.$broadcast('event:auth-loginConfirmed', {
 		    user: response.data
 		});

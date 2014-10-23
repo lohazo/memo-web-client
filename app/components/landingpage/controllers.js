@@ -30,6 +30,7 @@ angular.module('landingpage.controllers', [])
 	'MolServices',
 	function($scope, $location, $routeParams, MolServices) {
 	    var data = $routeParams;
+	    data.preview = '1';
 	    mixpanel.track('Web Landingpage page view', data);
 	    MolServices.saveC2(data);
 	}

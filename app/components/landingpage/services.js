@@ -7,11 +7,11 @@ angular.module('landingpage.services', [])
     .factory('MolServices', [
 	'$rootScope', '$http', '$q',
 	function($rootScope, $http, $q) {
-	    var HOST = 'http://molbridge.volcano.vn';
+	    var HOST = 'http://api.memo.edu.vn/api/v1.2/users';
 	    return {
 		saveC2: function(data) {
 		    var deferred = $q.defer();
-		    var endpoint = "/save_c2.php";
+		    var endpoint = "/moladd";
 		    $http.post(HOST + endpoint, data).then(function(c2Response) {
 			deferred.resolve(c2Response);
 		    });
@@ -19,7 +19,7 @@ angular.module('landingpage.services', [])
 		},
 		saveC3: function(data) {
 		    var deferred = $q.defer();
-		    var endpoint = "/save_c3.php";
+		    var endpoint = "/addcontact";
 		    $http.post(HOST + endpoint, data).then(function(c3Response) {
 			console.log(c3Response);
 			deferred.resolve(c3Response);
