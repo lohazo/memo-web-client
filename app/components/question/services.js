@@ -20,6 +20,14 @@ angular.module('question.services', [])
 	    if (question.type === 'judge') {
 		return checkJudge(question, userAnswer);
 	    }
+
+	    if (question.type === 'name') {
+		return checkName(question, userAnswer);
+	    }
+
+	    if (question.type === 'form') {
+		return checkForm(question, userAnswer);
+	    }
 	    // {
 	    //	result: false,
 	    //	correctAnswer:
@@ -39,6 +47,10 @@ angular.module('question.services', [])
 		result = checkSelect(question, userAnswer);
 	    } else if (question.type === 'judge') {
 		result = checkJudge(question, userAnswer);
+	    } else if (question.type === 'name') {
+		result = checkName(question, userAnswer);
+	    } else if (question.type === 'form'){
+		result = checkForm(question, userAnswer);
 	    }
 
 	    result.result = false;
@@ -78,7 +90,13 @@ angular.module('question.services', [])
 	}
 
 	function checkSelect(question, userAnswer) {
+	    var result = {
+		result: false,
+		userAnswer: userAnswer,
+		correctAnswer: question.translation
+	    };
 
+	    return result;
 	}
 
 	function checkJudge(question, userAnswer) {
@@ -87,7 +105,7 @@ angular.module('question.services', [])
 		correctAnswer: question.hints[0],
 		answerOptions: []
 	    };
-	    
+
 	    if (userAnswer.length === question.hints.length
 		      && userAnswer[0] === question.hints[0]) {
 		result.result = true;
@@ -95,5 +113,25 @@ angular.module('question.services', [])
 	    return result;
 	}
 
+	function checkName(question, userAnswer) {
+	    var result = {
+		result: false,
+		userAnswer: userAnswer,
+		correctAnswer: question.translation
+	    };
+
+	    return result;
+	}
+	
+	function checkForm(question, userAnswer) {
+	    var result = {
+		result: false,
+		userAnswer: userAnswer,
+		correctAnswer: question.translation
+	    };
+
+	    return result;
+	}
+	
 	return new Question();
     }]);
