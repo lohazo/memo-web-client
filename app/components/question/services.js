@@ -84,12 +84,12 @@ angular.module('question.services', [])
 	function checkJudge(question, userAnswer) {
 	    var result = {
 		result: false,
-		correctAnswer: question.question.hints[0],
+		correctAnswer: question.hints[0],
 		answerOptions: []
 	    };
 	    
-	    if (userAnswer.length === question.question.hints.length
-		      && userAnswer[0] === question.question.hints[0]) {
+	    if (userAnswer.length === question.hints.length
+		      && userAnswer[0] === question.hints[0]) {
 		result.result = true;
 	    }
 	    return result;

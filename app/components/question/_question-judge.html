@@ -8,8 +8,8 @@
 	{{judge.question.question}}
       </div>
       <div class="small-8 columns answers">
-	<div class="row" ng-repeat="option in judge.question.options">
-          <label><input type="checkbox" value="{{option}}" ng-click="updateUserAnswer(option)" ng-model="option" ng-required="userAnswer.length == 0">{{option}}</label>
+	<div class="row" ng-repeat="option in options">
+          <label><input type="checkbox" value="{{option.text}}" ng-click="updateUserAnswer(option)" ng-model="option.checked" ng-required="userAnswer.length > 0"> {{option.text}}</label>
 	</div>	
       </div>
     </div>

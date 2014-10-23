@@ -66,12 +66,6 @@ angular.module('placement.controllers', [])
 		    $scope.result = Question.check($scope.question.question, $scope.question.userAnswer);
 		    $scope.footerTpl = "footerResult";
 		}
-
-		// if ($scope.result.result) {
-		//     $scope.footerTpl = "footerFailure";
-		// } else {
-		//     $scope.footerTpl = "footerResult";
-		// }
 	    };
 
 	    $scope.nextQuestion = function() {

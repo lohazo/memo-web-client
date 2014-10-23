@@ -9,14 +9,19 @@ angular.module('question.judge', [])
 	'$attrs',
 	function($scope, $attrs) {
 	    $scope.judge = $scope.$parent.question;
+	    $scope.options = $scope.judge.question.options.map(function(o) {
+		return {text: o, checked: false};
+	    });
 	    $scope.userAnswer = [];
 	    $scope.updateUserAnswer = function(option) {
 		$scope.userAnswer = $scope.userAnswer || [];
-		if (option) {
-		    if ($scope.userAnswer.indexOf(option) < 0) {
-			$scope.userAnswer.push(option.userAnswer);
-		    }
+		var idx = $scope.userAnswer.indexOf(option);
+		if (option.checked) {
+		    $scope.userAnswer.push(option.text);
+		} else {
+		    $scope.userAnswer.splice(idx, 1);
 		}
+		$scope.$parent.question.userAnswer = $scope.userAnswer;
 	    };
 	}
     ])
