@@ -9,17 +9,17 @@ angular.module('question.listen', [])
 	'$attrs',
 	'ngAudio',
 	function($scope, $attrs, ngAudio) {
-	    $scope.listen = $scope.$parent.exam.currentQuestion;
+	    $scope.listen = $scope.$parent.question;
 	    var normalFile = ngAudio.load($scope.listen.question.normal_question_audio),
-	    	slowFile = ngAudio.load($scope.listen.question.slow_question_audio);
-	    
+		slowFile = ngAudio.load($scope.listen.question.slow_question_audio);
+
 	    $scope.speaker = {
-	    	play: function() {
-	    	    normalFile.play();
-	    	},
-	    	slowPlay: function() {
-	    	    slowFile.play();
-	    	}
+		play: function() {
+		    normalFile.play();
+		},
+		slowPlay: function() {
+		    slowFile.play();
+		}
 	    };
 
 	    $scope.speaker.play();
@@ -29,11 +29,11 @@ angular.module('question.listen', [])
 	    strict: 'EA',
 	    replace: true,
 	    scope: {
-		answer: '=answer'
+		answer: "=answer"
 	    },
 	    controller: 'QuestionListenCtrl',
 	    link: function($scope) {
 	    },
-	    templateUrl: 'skill/lesson/question/question_listen.html'
+	    templateUrl: 'components/question/_question-listen.html'
 	};
     });

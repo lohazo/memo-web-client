@@ -20,12 +20,17 @@ angular.module('placement.services', [])
 
 	    };
 
-	    Placement.prototype.skip = function() {
-	    };
-
-	    Placement.prototype.nextQuestion = function(data) {
+	    Placement.prototype.skip = function(data) {
 		return PlacementServices.submitAnswer(data)
 		    .then(function(response) {
+			Placement.currentQuestion = response.data;
+		    });
+	    };
+
+	    Placement.prototype.submitAnswer = function(data) {
+		return PlacementServices.submitAnswer(data)
+		    .then(function(response) {
+			Placement.currentQuestion = response.data;
 		    });
 	    };
 	    return new Placement();
@@ -39,10 +44,13 @@ angular.module('placement.services', [])
 	    start: function(data) {
 		var deferred = $q.defer();
 
-		data.device = 'web';
-		data.speake_enable = false;
+		var requestData = {
+		    device: 'web',
+		    auth_token: data.auth_token,
+		    speak_enabled: false
+		};
 
-		$http.post(BASE_URL + '/placement_test/start', data)
+		$http.post(BASE_URL + '/placement_test/start', requestData)
 		    .then(function(response) {
 			deferred.resolve(response);
 		    });
@@ -53,7 +61,7 @@ angular.module('placement.services', [])
 		var deferred = $q.defer();
 
 		data.device = 'web';
-		data.speake_enable = false;
+		data.speak_enabled = false;
 
 		$http.post(BASE_URL + '/placement_test/submit_answer', data)
 		    .then(function(response) {

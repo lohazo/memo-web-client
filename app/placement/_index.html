@@ -1,10 +1,29 @@
 <header app-header></header>
 <section class="app">
-  <div class="player placement-test">
+  <div class="row player placement-test">
     <section class="container">
-      <header placement-test-header></header>
-      <div class="question" placement-test-question></div>
-      <footer placement-test-footer></footer>
+      <header>
+	<div class="small-3 columns text-center track">
+	  <div class="row">
+            <div class="small-8 columns">
+              <a href="" ng-click="quit()">Thoát</a>
+            </div>
+	  </div>
+	</div>
+      </header>
+      <div class="question">	
+	<question-form ng-if="questionTpl == 'questionForm'"></question-form>  
+	<question-judge ng-if="questionTpl == 'questionJudge'"></question-judge>  
+	<question-listen ng-if="questionTpl == 'questionListen'" answer="question.userAnswer"></question-listen>  
+	<question-name ng-if="questionTpl == 'questionName'"></question-name>  
+	<question-select ng-if="questionTpl == 'questionSelect'" answer="question.userAnswer"></question-select>  
+	<question-translate ng-if="questionTpl == 'questionTranslate'" answer="question.userAnswer"></question-translate>
+      </div>
+      <footer>
+	<footer-question ng-if="footerTpl == 'footer'"></footer-question>
+	<footer-failure ng-if="footerTpl == 'footerFailure'"></footer-failure>
+	<footer-result ng-if="footerTpl == 'footerResult'"></footer-result>
+      </footer>
     </section>
   </div>
 </section>

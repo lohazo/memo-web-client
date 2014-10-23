@@ -1,22 +1,24 @@
-<div class="small-12 small-centered columns name question" answer="exam.currentQuestion.userAnswer">
-  <div class="row">
-    <h4 class="name">Dịch "{{question.question}}"</h4>
-  </div>
-  <div class="row">
-    <div class="small-8 columns content">
-      <div class="image image-1">
-        <img src="{{question.question_images[0]}}" />
-      </div>
-      <div class="image image-2">
-        <img src="{{question.question_images[1]}}" />
-      </div>
-      <div class="image image-3">
-        <img src="{{question.question_images[2]}}" />
-      </div>
+<div class="question-inner">
+  <div class="small-12 small-centered columns name question" answer="exam.currentQuestion.userAnswer">
+    <div class="row">
+      <h4 class="name">Dịch "{{question.question}}"</h4>
     </div>
-    <div class="small-8 columns answers">
-      <div class="row postfix-round">
-        <input type="text" class="radius answer" ng-model="answer" id="answer-1" placeholder="Gõ tiếng Anh..."/>
+    <div class="row">
+      <div class="small-8 columns content">
+	<div class="image image-1">
+          <img src="{{question.question_images[0]}}" />
+	</div>
+	<div class="image image-2">
+          <img src="{{question.question_images[1]}}" />
+	</div>
+	<div class="image image-3">
+          <img src="{{question.question_images[2]}}" />
+	</div>
+      </div>
+      <div class="small-8 columns answers">
+	<div class="row postfix-round">
+          <input type="text" class="radius answer" ng-model="answer" id="answer-1" placeholder="Gõ tiếng Anh..."/>
+	</div>
       </div>
     </div>
   </div>

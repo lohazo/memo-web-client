@@ -77,10 +77,16 @@ $include-html-global-classes: $include-html-classes;
 $primary-color: #810c15;
 $secondary-color: #aa0013;
 $alert-color: #f04124;
-$success-color: #43AC6A;
-$warning-color: #f08a24;
-$info-color: #a0d3e8;
 $transparent: transparent;
+$secondary-color: #aa0013;
+$alert-color: #f04124;
+$success-color: #99cc00;
+$success-bg-color: #ebffaa;
+$success-font-color: #669900;
+$warning-color: #ffc8c8;
+$warning-bg-color: #ffc8c8;
+$warning-font-color: #810c15;
+$info-color: #a0d3e8;
 
 $white       : #FFFFFF;
 $ghost       : #FAFAFA;
@@ -127,7 +133,7 @@ $font-weight-normal: normal !default;
 $font-weight-bold: bold !default;
 
 // We use these to control various global styles
-$body-bg: $gainsboro;
+$body-bg: $iron;
 // $body-font-color: $jet;
 $body-font-family: "Clear Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $font-weight-normal: normal;

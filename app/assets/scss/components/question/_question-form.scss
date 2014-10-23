@@ -1,13 +1,15 @@
-.lesson-page .question.form {
-    span {
-	margin: 5px;
-    }
-    select {
-	border-radius: $global-radius;
-	width: auto;
-	margin: 5px 10px 5px 5px;
-	option {
+.lesson-page, .placement-test {
+    .question.form {
+	span {
+	    margin: 5px;
+	}
+	select {
 	    border-radius: $global-radius;
+	    width: auto;
+	    margin: 5px 10px 5px 5px;
+	    option {
+		border-radius: $global-radius;
+	    }
 	}
     }
 }

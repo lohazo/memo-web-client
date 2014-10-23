@@ -8,8 +8,16 @@ angular.module('question.judge', [])
 	'$scope',
 	'$attrs',
 	function($scope, $attrs) {
-	    $scope.question = $scope.$parent.exam.currentQuestion.question;
+	    $scope.judge = $scope.$parent.question;
 	    $scope.userAnswer = [];
+	    $scope.updateUserAnswer = function(option) {
+		$scope.userAnswer = $scope.userAnswer || [];
+		if (option) {
+		    if ($scope.userAnswer.indexOf(option) < 0) {
+			$scope.userAnswer.push(option.userAnswer);
+		    }
+		}
+	    };
 	}
     ])
     .directive('questionJudge', function() {
@@ -22,23 +30,9 @@ angular.module('question.judge', [])
 	    controller: 'QuestionJudgeCtrl',
 	    link: function($scope) {
 		$scope.selectAnswer = function(option) {
-		    var index = $scope.userAnswer.indexOf(option);
-
-		    index > -1 ? $scope.userAnswer.splice(index, 1)
-			       : $scope.userAnswer.push(option);
-
-		    // DOM manipulation
-		    var idx, element;
-		    idx = $scope.question.options.indexOf(option);
-		    element = document.querySelector('.answer.answer-' + (idx + 1));
-
-		    (index > -1) ? angular.element(element).removeClass('checked')
-				 : angular.element(element).addClass('checked');
-
-		    $scope.$parent.exam.currentQuestion.userAnswer = $scope.userAnswer;
 
 		};
 	    },
-	    templateUrl: 'skill/lesson/question/question_judge.html'
+	    templateUrl: 'components/question/_question-judge.html'
 	};
     });

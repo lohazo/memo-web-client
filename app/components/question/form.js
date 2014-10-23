@@ -30,6 +30,6 @@ angular.module('question.form', [])
 	    strict: 'EA',
 	    scope: {},
 	    controller: 'QuestionFormCtrl',
-	    templateUrl: 'skill/lesson/question/question_form.html'
+	    templateUrl: 'components/question/_question-form.html'
 	};
     });

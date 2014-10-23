@@ -9,27 +9,29 @@ angular.module('question.translate', [])
 	'$attrs',
 	'ngAudio',
 	function($scope, $attrs, ngAudio) {
-	    $scope.question = $scope.$parent.exam.currentQuestion.question;
-	    var normalFile = ngAudio.load($scope.question.normal_question_audio);
-	    $scope.speaker = {
-		play: function() {
-		    normalFile.play();
-		}
-	    };
+	    $scope.translate = $scope.$parent.question;
+	    if ($scope.translate.question.normal_question_audio) {
+		var normalFile = ngAudio.load($scope.translate.question.normal_question_audio);
 
-	    $scope.speaker.play();
+		$scope.speaker = {
+		    play: function() {
+			normalFile.play();
+		    }
+		};
+		$scope.speaker.play();
+	    }
 	}])
     .directive('questionTranslate', function() {
 	return {
 	    strict: 'EA',
 	    replace: true,
 	    scope: {
-		answer: '=answer'
+		answer: '='
 	    },
 	    link: function($scope) {
 
 	    },
 	    controller: 'QuestionTranslateCtrl',
-	    templateUrl: 'skill/lesson/question/question_translate.html'
+	    templateUrl: 'components/question/_question-translate.html'
 	};
     });

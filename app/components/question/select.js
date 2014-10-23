@@ -35,6 +35,6 @@ angular.module('question.select', [])
 		    $scope.answer = $scope.select.userAnswer;
 		};
 	    },
-	    templateUrl: 'skill/lesson/question/question_select.html'
+	    templateUrl: 'components/question/_question-select.html'
 	};
     });

@@ -3,6 +3,7 @@
 angular.module('placement', [
     'placement.controllers',
     'placement.services',
+    'placement.directives',
     'question'
 ]).config(['$routeProvider', '$locationProvider', PlacementConfig]);
 

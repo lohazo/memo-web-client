@@ -20,6 +20,6 @@ angular.module('question.name', [])
             controller: 'QuestionNameCtrl',
             link: function($scope) {
             },
-            templateUrl: 'skill/lesson/question/question_name.html'
+            templateUrl: 'components/question/_question-name.html'
         };
     });

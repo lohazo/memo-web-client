@@ -10,5 +10,6 @@ angular.module('question', [
     'question.name',
     'question.listen',
     'question.form',
-    'question.speak'
+    'question.speak',
+    'question.services'
 ]);

@@ -1,17 +1,19 @@
-<div class="small-12 small-centered columns select question" answer="exam.currentQuestion.userAnswer">
-  <div class="row">
-    <h4 class="name">Chọn nghĩa của từ "{{question.question}}"</h4>
-  </div>
-  <div class="row">
-    <div class="small-16 columns answers">
-      <div class="row">
-	<form>
-        <div class="image image-{{$index + 1}}" ng-repeat="option in question.options | limitTo: 3" ng-click="selectAnswer($index + 1)">
-          <img ng-src="{{option.image_file}}" />
-          <input type="radio" name="answer" value="{{option.text}}" ng-model="select.userAnswer" />
-          <label>{{option.text}}</label>
-        </div>
-	</form>
+<div class="question-inner">
+  <div class="small-12 small-centered columns select question" answer="exam.currentQuestion.userAnswer">
+    <div class="row">
+      <h4 class="name">Chọn nghĩa của từ "{{question.question}}"</h4>
+    </div>
+    <div class="row">
+      <div class="small-16 columns answers">
+	<div class="row">
+	  <form>
+            <div class="image image-{{$index + 1}}" ng-repeat="option in question.options | limitTo: 3" ng-click="selectAnswer($index + 1)">
+              <img ng-src="{{option.image_file}}" />
+              <input type="radio" name="answer" value="{{option.text}}" ng-model="select.userAnswer" />
+              <label>{{option.text}}</label>
+            </div>
+	  </form>
+	</div>
       </div>
     </div>
   </div>
