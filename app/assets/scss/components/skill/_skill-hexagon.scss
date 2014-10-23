@@ -36,6 +36,7 @@
             margin: 27px auto 54px;
         }
         .skill {
+	    background: url('assets/img/hex-units.png') no-repeat;
             position: relative;
             float: left;
             display: inline-block;
@@ -59,20 +60,15 @@
                 height: 70px;
                 width: 70px;
             }
-            &.unlocked, &.success, &.locked {
-                background: url('assets/img/hex-units.png') no-repeat;
-            }
-            &.unlocked, &.success {
-                .strength-bar {
+            &.unlocked {
+                color: $white;
+		.strength-bar {
                     height: 41px;
                     background: url('assets/img/hex-strength.png') no-repeat;
                 }
                 .icon {
                     background: url('assets/img/skills-pack-unlocked-70.png') no-repeat;
                 }
-            }
-            &.unlocked {
-                color: $white;
                 &.red {
                     background-position: -140px 0;
                 }
@@ -81,7 +77,10 @@
                 }
                 &.blue {
                     background-position: -420px 0;
-                }
+                }		
+		&.success {
+                    background-position: -560px 0;
+		}
                 .level-2 .strength-bar {
                     background-position: 0 -123px;
                 }
@@ -91,9 +90,6 @@
                 .level-4 .strength-bar {
                     background-position: 0 -41px;
                 }
-            }
-            &.success {
-                background-position: -560px 0;
             }
             &.locked {
                 background-position: 0 0;
