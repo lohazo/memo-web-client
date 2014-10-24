@@ -16,10 +16,6 @@ angular.module('placement.services', [])
 		return Placement.currentQuestion;
 	    };
 
-	    Placement.prototype.finish = function(data) {
-
-	    };
-
 	    Placement.prototype.skip = function(data) {
 		return PlacementServices.submitAnswer(data)
 		    .then(function(response) {

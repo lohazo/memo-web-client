@@ -6,6 +6,18 @@
             margin-bottom: 70px;
             text-align: center;
         }
+	.lesson-finish-ant {
+	    margin: 0 auto;
+	    display: block;
+	    background: url('assets/img/lesson-finish-ant.png') no-repeat;
+	    width: 250px;
+	    height: 315px;
+	}
+	&.failure {
+	    .lesson-finish-ant {
+		background-position: 0 -314px;
+	    }
+	}
     }
 }
 

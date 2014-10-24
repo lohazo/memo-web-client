@@ -10,7 +10,7 @@
     </div>
     <div class="row">
       <div class="small-2 columns"></div>
-      <div class="small-14 columns"><h4 class="correct answer">{{answer.correct}}</h4></div>
+      <div class="small-14 columns"><h4 class="correct answer">{{result.correctAnswer}}</h4></div>
     </div>
     <div class="row">
       <div class="small-2 columns"></div>
@@ -30,6 +30,6 @@
   <div class="small-4 columns">
   </div>
   <div class="small-4 columns">
-    <a href="/" class="right small-11 memo-button continue">Trở về trang chủ</a>
+    <a class="right small-11 memo-button continue" ng-click="quit()">Trở về trang chủ</a>
   </div>
 </div>

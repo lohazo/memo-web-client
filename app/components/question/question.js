@@ -12,4 +12,11 @@ angular.module('question', [
     'question.form',
     'question.speak',
     'question.services'
-]);
+])
+    .directive('questionFailure', function() {
+	return {
+	    restrict: 'EA',
+	    scope: true,
+	    templateUrl: 'components/question/_question-failure.html'
+	};
+    });

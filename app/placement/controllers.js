@@ -20,12 +20,15 @@ angular.module('placement.controllers', [])
 		name: 'questionName',
 		select: 'questionSelect',
 		speak: 'questionSpeak',
-		translate: 'questionTranslate'
+		translate: 'questionTranslate',
+		failure: 'questionFailure',
+		success: 'questionSuccess'
 	    };
 
 	    var footerTplId = {
 		footer: 'footer',
 		failure: 'footerFailure',
+		success: 'footerSuccess',
 		result: 'footerResult'
 	    };
 
@@ -51,6 +54,7 @@ angular.module('placement.controllers', [])
 	    $scope.question = { };
 	    $scope.result = { };
 	    $scope.userAnswer = '';
+
 	    $scope.quit = function() {
 		delete $scope.exam;
 		$location.path('/');
@@ -70,11 +74,6 @@ angular.module('placement.controllers', [])
 
 	    $scope.nextQuestion = function() {
 
-
-		$scope.footerTpl = "footer";
-		$scope.result = { };
-		$scope.questionTpl = "";
-
 		var requestData = {
 		    auth_token: $scope.auth.user.auth_token,
 		    exam_token: $scope.question.exam_token
@@ -84,11 +83,29 @@ angular.module('placement.controllers', [])
 		tmp[$scope.question.question.question_log_id] = $scope.result.result;
 		requestData.answer = angular.toJson(tmp);
 
+		$scope.footerTpl = "footer";
+		$scope.questionTpl = "";
+
 		PlacementTest.submitAnswer(requestData)
 		    .then(function() {
-			$scope.question = PlacementTest.getCurrentQuestion();
+			// $scope.question = PlacementTest.getCurrentQuestion();
+			$scope.question = {finish_exam_bonus_exp: 0, num_affected_skills: []};
 			$scope.question.userAnswer = "";
-			$scope.questionTpl = questionTplId[$scope.question.question.type];
+			if ($scope.question.question) {
+			    $scope.questionTpl = questionTplId[$scope.question.question.type];
+			    $scope.result = { };
+			} else {
+			    if ($scope.question.finish_exam_bonus_exp === 0 &&
+				$scope.question.num_affected_skills.length === 0) {
+
+				$scope.questionTpl = 'questionFailure';
+				$scope.footerTpl = 'footerFailure';
+			    } else {
+				$scope.questionTpl = 'questionSuccess';
+				$scope.footerTpl = 'footerSuccess';
+				$scope.result = { };
+			    }
+			}
 		    });
 	    };
 
