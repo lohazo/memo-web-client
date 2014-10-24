@@ -1,0 +1,38 @@
+<div class="question-inner">
+  <div class="small-16 small-centered columns success question">
+    <div class="slider">
+      <input type="radio" id="control1" name="controls" checked="checked"/>
+      <label for="control1"><span></span></label>
+      <input type="radio" id="control2" name="controls"/>
+      <label for="control2"></label>
+      <div class="sliderinner">
+	<ul>
+	  <li>
+	    <div class="description-text">
+	      <h3 class="end-test">Bạn đã hoàn thành bài kiểm tra</h3>
+	      <div class="chart">
+		<div class="chart-left"></div>
+		<div class="boder-center"></div>
+		<div class="chart-right">
+		  <canvas linechart options="chartOptions" data="expChart" width="350" height="280"></canvas>
+		</div>
+	      </div>
+	    </div>
+	  </li>
+	  <li>
+	    <div class="description-text">
+	      <h3 class="end-test">Hoàn thành kỹ năng</h3>
+	      <p class="end-test">{{question.affected_skill.title}}</p>
+	      <p class="end-test">và {{question.num_affected_skills}} kỹ năng khác</p>
+	    </div>
+	    <div class="basic-ex">
+	      <span class=""></span>
+	      <p class="text-basic">Cố giữ những thanh hiển thị độ mạnh của từ luôn đầy vì qua thời gian các thanh sẽ giảm dần khi bạn quên từ vựng</p>
+	      <a href="#" class="facebook share button">Chia sẻ</a>
+	    </div>
+	  </li>
+	</ul>
+      </div>
+    </div>
+  </div>
+</div>

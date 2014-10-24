@@ -1,31 +1,253 @@
 .lesson-page, .placement-test {
     .question {
-        margin-top: 70px;
-        h4.name {
-            font-weight: 700;
-            margin-bottom: 70px;
-            text-align: center;
-        }
+	margin-top: 70px;
+	h4.name {
+	    font-weight: 700;
+	    margin-bottom: 70px;
+	    text-align: center;
+	}
 	.lesson-finish-ant {
-	    margin: 0 auto;
-	    display: block;
 	    background: url('assets/img/lesson-finish-ant.png') no-repeat;
-	    width: 250px;
-	    height: 315px;
 	}
 	&.failure {
 	    .lesson-finish-ant {
 		background-position: 0 -314px;
+		margin: 0 auto;
+		display: block;
+		width: 250px;
+		height: 315px;
+	    }
+	}
+	&.success {
+	    margin-top: auto;
+	    .slider {
+		display: block;
+		margin: 20px auto auto;
+		position: relative;
+	    }
+	    .sliderinner {
+		background: none repeat scroll 0 0 #fff;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+		height: 100%;
+		overflow: hidden;
+		position: relative;
+		width: 100%;
+	    }
+	    .sliderinner>ul {
+		list-style: none;
+		height: 100%;
+		width: 500%;
+		overflow: hidden;
+		position: relative;
+		left: 0px;
+		-webkit-transition: left .8s cubic-bezier(0.77, 0, 0.175, 1);
+		-moz-transition: left .8s cubic-bezier(0.77, 0, 0.175, 1);
+		-o-transition: left .8s cubic-bezier(0.77, 0, 0.175, 1);
+		transition: left .8s cubic-bezier(0.77, 0, 0.175, 1);
+	    }
+
+	    .sliderinner>ul>li {
+		width: 20%;
+		float: left;
+		position: relative;
+	    }
+
+	    .sliderinner>ul>li>img {
+		margin: auto;
+		height: 100%;
+	    }
+
+	    .slider input[type=radio] {
+		position: absolute;
+		left: 50%;
+		bottom: 15px;
+		z-index: 100;
+		visibility: hidden;
+	    }
+
+	    .slider label {
+		box-sizing: border-box;
+		border: solid 2px #fff;
+		position: absolute;
+		left: 55%;
+		bottom: -90px;
+		z-index: 100;
+		width: 20px;
+		height: 20px;
+		background-color:#fff;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		border-radius: 50%;
+		cursor: pointer;
+		-webkit-transition: background-color .2s;
+		-moz-transition: background-color .2s;
+		-o-transition: background-color .2s;
+		transition: background-color .2s;
+	    }
+
+	    .slider input[type=radio]#control1:checked~label[for=control1] { background-color: #810c15; }
+	    .slider input[type=radio]#control2:checked~label[for=control2] { background-color: #810c15; }
+	    .slider input[type=radio]#control3:checked~label[for=control3] { background-color: #810c15; }
+	    .slider input[type=radio]#control4:checked~label[for=control4] { background-color: #810c15; }
+	    .slider input[type=radio]#control5:checked~label[for=control5] { background-color: #810c15; }
+	    .slider label[for=control1] { margin-left: -88px }
+	    .slider label[for=control2] { margin-left: -43px }
+	    .slider label[for=control4] { margin-left: 18px }
+	    .slider label[for=control5] { margin-left: 36px }
+	    .slider input[type=radio]#control1:checked~.sliderinner>ul { left: 0 }
+	    .slider input[type=radio]#control2:checked~.sliderinner>ul { left: -100% }
+	    .slider input[type=radio]#control3:checked~.sliderinner>ul { left: -200% }
+	    .slider input[type=radio]#control4:checked~.sliderinner>ul { left: -300% }
+	    .slider input[type=radio]#control5:checked~.sliderinner>ul { left: -400% }
+
+	    .description {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		z-index: 1000;
+	    }
+	    .description-text {
+		padding: 10px;
+		-webkit-transition: opacity .2s;
+		-moz-transition: opacity .2s;
+		-o-transition: opacity .2s;
+		transition: opacity .2s;
+		color: #999;
+	    }
+
+	    .end-test {
+		color: #333333;
+		font-weight: bold;
+		text-align: center;
+	    }
+	    .end-test span {
+		font-weight: normal;
+	    }
+	    .chart {
+		margin: 50px auto 0;
+		width: 100%;
+		float: left;
+	    }
+	    .chart-left {
+		float: left;
+		width: 509px;
+	    }
+	    .boder-center {
+		background: none repeat scroll 0 0 #cccccc;
+		float: left;
+		height: 255px;
+		width: 2px;
+	    }
+	    .chart-right {
+		float: left;
+		width: 509px;
+	    }
+	    .image-chart-left {
+		height: 279px;
+		margin-left: 150px;
+		width: 283px;
+	    }
+	    .image-chart-right {
+		height: 281px;
+		margin-left: 75px;
+		width: 345px;
+	    }
+
+	    .basic-ex {
+		margin: 0 auto;
+		text-align: center;
+		width: 865px;
+	    }
+	    .image-basic {
+		background: url("images/basic.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+		height: 200px;
+		margin: 15px auto 20px;
+		width: 140px;
+	    }
+	    .basic-ex > p {
+		color: #666666;
+		font-size: 24px;
+	    }
+	    .text-basic {
+		margin-bottom: 45px;
+	    }
+	    a.basic-share {
+		background: none repeat scroll 0 0 #33b5e5;
+		border-radius: 5px;
+		color: #fff;
+		font-size: 18px;
+		font-weight: bold;
+		padding: 12px 45px;
+		text-align: center;
+		text-decoration: none;
+
+	    }
+	    .image-memos {
+		background: url("images/memo.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+		height: 151px;
+		width: 130px;
+	    }
+	    .endtestmark {
+		border-radius: 9px;
+		box-shadow: 0 0 10px 8px #f2f2f2;
+		height: 188px;
+		margin: 0 auto;
+		width: 400px;
+	    }
+	    .ex-daytime {
+		color: #666666;
+		float: left;
+		font-size: 16px;
+		font-weight: bold;
+		margin-left: 22px;
+		margin-top: 20px;
+	    }
+	    .ex-daytime.rowtwo {
+		margin-top: 10px;
+	    }
+	    .numbertest {
+		color: #666666;
+		float: right;
+		font-size: 16px;
+		font-weight: bold;
+		margin-right: 25px;
+		margin-top: 20px;
+	    }
+	    .numbertest.numsecond {
+		margin-top: 10px;
+	    }
+	    .user-fantos {
+		color: #666;
+		font-size: 18px;
+		margin-left: 19px;
+		margin-right: 20px;
+		margin-top: 15px;
+	    }
+	    .user-fantos > a {
+		color: #810c15;
+		font-size: 17px;
+		font-weight: bold;
+		text-decoration: none;
+	    }
+
+	    .lesson-finish-ant {
+		background-postition: 0 0;
+		background-size: contain;
+		display: block;
+		width: 165px;
+		height: 138px;
 	    }
 	}
     }
 }
 
 @import
-    "question-select",
-    "question-translate",
-    "question-form",
-    "question-judge",
-    "question-listen",
-    "question-name",
-    "question-speak";
+"question-select",
+"question-translate",
+"question-form",
+"question-judge",
+"question-listen",
+"question-name",
+"question-speak";

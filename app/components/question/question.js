@@ -19,4 +19,11 @@ angular.module('question', [
 	    scope: true,
 	    templateUrl: 'components/question/_question-failure.html'
 	};
+    })
+    .directive('questionSuccess', function() {
+	return {
+	    restrict: 'EA',
+	    scope: true,
+	    templateUrl: 'components/question/_question-success.html'
+	};
     });
