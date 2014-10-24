@@ -1,8 +1,28 @@
 .app-top-bar {
+    
     .top-bar {
 	min-width: $row-width;
 	.name {
             line-height: $topbar-height;
+	}
+	.top-bar-section {
+	    font-family: $topbar-link-font-family;
+	    ul li:not(.has-form) {
+		a:not(.button) {
+		    border-radius: $global-radius;
+		    @extend %anim-button !optional;
+		}
+		&.active > a:not(.button) {
+		    background-color: $secondary-color;
+		    border-radius: $global-radius;
+		    &:after {
+			color: #FFF;
+		    }
+		}
+		.dropdown .active > a:not(.button) {
+		    background-color: rgba(0,0,0,.2);
+		}
+	    }
 	}
 	.top-bar-section {
             ul.left {
