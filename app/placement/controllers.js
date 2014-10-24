@@ -70,6 +70,11 @@ angular.module('placement.controllers', [])
 
 	    $scope.nextQuestion = function() {
 
+
+		$scope.footerTpl = "footer";
+		$scope.result = { };
+		$scope.questionTpl = "";
+
 		var requestData = {
 		    auth_token: $scope.auth.user.auth_token,
 		    exam_token: $scope.question.exam_token
@@ -81,11 +86,8 @@ angular.module('placement.controllers', [])
 
 		PlacementTest.submitAnswer(requestData)
 		    .then(function() {
-			$scope.footerTpl = "footer";
-			$scope.result = { };
 			$scope.question = PlacementTest.getCurrentQuestion();
 			$scope.question.userAnswer = "";
-			$scope.questionTpl = "";
 			$scope.questionTpl = questionTplId[$scope.question.question.type];
 		    });
 	    };

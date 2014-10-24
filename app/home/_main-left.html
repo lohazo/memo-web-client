@@ -8,34 +8,32 @@
     </div>
     <div class="row">
       <div class="large-10 columns fullname">
-        {{profile.name}}
+        {{profileDetail.level_title}}
       </div>
       <div class="large-6 columns location">
-        <i class="icon-map-marker"></i>
-        {{profile.location}}
       </div>
     </div>
     <hr/>
     <div class="row">
       <div class="large-8 columns streak">
-	<i class="icon"></i><span class="text">{{profile.streak}} Streak</span>
+	<i class="icon"></i><span class="text">{{profileDetail.combo_days}} Streak</span>
       </div>
       <div class="large-8 columns memos">
-	<i class="icon"></i><span class="text">{{auth.current_course.virtual_money}} Memos</span>
+	<i class="icon"></i><span class="text">{{profileDetail.virtual_money}} Memos</span>
       </div>
     </div>
     <div class="row">
       <div class="large-16 columns memo-progress">
-	<span class="current-level">{{auth.current_course.level}}</span>
+	<span class="current-level">{{profileDetail.level}}</span>
 	<div class="padder">
 	  <div class="bar"></div>
 	</div>
-	<span class="next-level">{{auth.current_course.level + 1}}</span>
+	<span class="next-level">{{profileDetail.level + 1}}</span>
       </div>
     </div>
     <div class="row">
       <div class="large-8 columns exp">
-	<i class="icon"></i><span class="text">{{auth.current_course.exp}} XP</span>
+	<i class="icon"></i><span class="text">{{profileDetail.exp}} XP</span>
       </div>
       <div class="large-8 columns known-words">
 	<i class="left icon"></i><span class="text">{{auth.current_course.known_words}} từ</span>
