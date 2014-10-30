@@ -66,8 +66,8 @@ angular.module('login.services', [])
 	    };
 
 	    AuthService.prototype.logout = function() {
-		$rootScope.$broadcast('event:auth-logoutConfirmed');
 		$localStorage.$reset();
+		$rootScope.$broadcast('event:auth-logoutConfirmed');
 	    };
 
 	    function getFbInfo(data) {
