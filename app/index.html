@@ -26,7 +26,7 @@ for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElemen
 mixpanel.init("067076d37e3b2608d1c7668122fd4bcc");</script><!-- end Mixpanel -->
   <script src="vendors/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body>
+<body ng-controller="AppCtrl">
   <div ng-view></div>
 
   <script src="vendors/angular/angular.js"></script>
@@ -93,6 +93,11 @@ mixpanel.init("067076d37e3b2608d1c7668122fd4bcc");</script><!-- end Mixpanel -->
   <script src="placement/controllers.js"></script>
   <script src="components/placement/services.js"></script>
   <script src="components/placement/directives.js"></script>
+
+  <!-- Exam -->
+  <script src="exam/exam.js"></script>
+  <script src="exam/controllers.js"></script>
+  <script src="components/exam/services.js"></script>
 
   <!-- Question -->
   <script src="components/question/question.js"></script>

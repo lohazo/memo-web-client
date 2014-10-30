@@ -19,7 +19,8 @@ angular.module('app', [
     'profile',
     'skill',
     'placement',
-    'report'
+    'report',
+    'exam'
 ]).config([
     '$routeProvider',
     '$locationProvider',

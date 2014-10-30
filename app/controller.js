@@ -8,7 +8,8 @@ angular.module('app.controllers', ['ngStorage'])
 	'$scope',
 	'$rootScope',
 	'$localStorage',
-	function($scope, $rootScope, $localStorage) {
+	'$location',
+	function($scope, $rootScope, $localStorage, $location) {
 	    $scope.auth = $localStorage.auth || {
 		loggedIn: false,
 		trial: false
@@ -70,6 +71,12 @@ angular.module('app.controllers', ['ngStorage'])
 
 	    $rootScope.$on('event:auth-logoutConfirmed', function(e, data) {
 		$scope.auth = { loggedIn: false, trial: false };
+		$localStorage.auth = $scope.auth;
+		$location.path('/');
 	    });
+
+	    if (!$scope.auth.loggedIn) {
+		$location.path('/');
+	    }
 	}
     ]);
