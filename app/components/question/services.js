@@ -117,21 +117,35 @@ angular.module('question.services', [])
 	    var result = {
 		result: false,
 		userAnswer: userAnswer,
-		correctAnswer: question.translation
+		correctAnswer: question.hint
 	    };
+
+	    if (userAnswer === question.hint) {
+		result.result = true;
+	    }
 
 	    return result;
 	}
-	
+
 	function checkForm(question, userAnswer) {
 	    var result = {
 		result: false,
 		userAnswer: userAnswer,
-		correctAnswer: question.translation
+		correctAnswer: question.hint
 	    };
+
+	    var tokens = angular.fromJson(angular.toJson(question.tokens));
+	    var options = tokens.filter(function(token) {
+		return (token instanceof Array);
+	    })[0];
+	    var index = tokens.indexOf(options);
+	    tokens[index] = userAnswer;
+	    if (tokens.join(' ') === question.hint) {
+		result.result = true;
+	    }
 
 	    return result;
 	}
-	
+
 	return new Question();
     }]);

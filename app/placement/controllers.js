@@ -63,24 +63,24 @@ angular.module('placement.controllers', [])
 
 		PlacementTest.submitAnswer(requestData)
 		    .then(function() {
-			// $scope.question = PlacementTest.getCurrentQuestion();
-			$scope.question = {
-			    "finish_exam_bonus_exp": 0,
-			    "leveled_up": false,
-			    "exp_chart": {
-				"days": ["Sa","Su","Mo","Tu","We","Th","Fr"],
-				"exp": [0,0,0,0,1010,0,0]
-			    },
-			    "combo_days": 1,
-			    "affected_skill": {
-				"_id": "en-vi_dai_tu_quan_he",
-				"order": 1,
-				"title": "Đại từ quan hệ",
-				"slug": "Đại từ Q.hệ",
-				"theme_color": "#99cc00"
-			    },
-			    "num_affected_skills": 37
-			};
+			$scope.question = PlacementTest.getCurrentQuestion();
+			// $scope.question = {
+			//     "finish_exam_bonus_exp": 0,
+			//     "leveled_up": false,
+			//     "exp_chart": {
+			// 	"days": ["Sa","Su","Mo","Tu","We","Th","Fr"],
+			// 	"exp": [0,0,0,0,1010,0,0]
+			//     },
+			//     "combo_days": 1,
+			//     "affected_skill": {
+			// 	"_id": "en-vi_dai_tu_quan_he",
+			// 	"order": 1,
+			// 	"title": "Đại từ quan hệ",
+			// 	"slug": "Đại từ Q.hệ",
+			// 	"theme_color": "#99cc00"
+			//     },
+			//     "num_affected_skills": 37
+			// };
 			$scope.question.userAnswer = "";
 			if ($scope.question.question) {
 			    $scope.questionTpl = questionTplId[$scope.question.question.type];
@@ -113,12 +113,10 @@ angular.module('placement.controllers', [])
 		    });
 	    };
 
-	    // if ($scope.auth.loggedIn) {
-		PlacementTest.start($scope.auth.user)
-		    .then(function() {
-			$scope.question = PlacementTest.getCurrentQuestion();
-			$scope.question.userAnswer = "";
-			$scope.questionTpl = questionTplId[$scope.question.question.type];
-		    });
-	    // }
+	    PlacementTest.start($scope.auth.user)
+		.then(function() {
+		    $scope.question = PlacementTest.getCurrentQuestion();
+		    $scope.question.userAnswer = "";
+		    $scope.questionTpl = questionTplId[$scope.question.question.type];
+		});
 	}]);
