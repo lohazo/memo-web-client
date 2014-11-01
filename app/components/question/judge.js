@@ -9,7 +9,7 @@ angular.module('question.judge', [])
 	'$attrs',
 	function($scope, $attrs) {
 	    $scope.judge = $scope.$parent.question;
-	    $scope.options = $scope.judge.question.options.map(function(o) {
+	    $scope.options = $scope.judge.options.map(function(o) {
 		return {text: o, checked: false};
 	    });
 	    $scope.userAnswer = [];

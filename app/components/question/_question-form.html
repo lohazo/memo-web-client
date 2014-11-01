@@ -1,12 +1,12 @@
 <div class="question-inner">
-  <div class="small-8 small-centered columns form question">
+  <div class="small-8 small-centered columns form">
     <div class="row">
       <h4 class="name">Chọn từ còn thiếu</h4>
     </div>
     <div class="row">
       <div class="small-16 small-centered columns text-center">
-	<span ng-repeat="word in question track by $index">
-	  <select ng-if="$index === position" ng-model="answer.selected" ng-options="token for token in tokens"></select>
+	<span ng-repeat="word in tokens track by $index">
+	  <select ng-if="$index === position" ng-model="answer.selected" ng-options="option for option in options"></select>
 	  {{word}}
 	</span>
       </div>

@@ -8,7 +8,7 @@ angular.module('question.name', [])
         '$scope',
         '$attrs',
         function($scope, $attrs) {
-	    $scope.question = $scope.$parent.exam.currentQuestion.question;
+	    $scope.question = $scope.$parent.question;
         }])
     .directive('questionName', function() {
         return {
