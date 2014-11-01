@@ -1,0 +1,16 @@
+.player {
+    margin-top: 40px;
+    .container {
+	header, div.question, footer {
+	    @include grid-row();
+	}
+    }
+}
+
+@import
+    "header",
+    "progress-bar",
+    "hearts",
+    "question",
+    "footer",
+    "buttons";
