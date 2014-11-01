@@ -78,5 +78,9 @@ angular.module('app.controllers', ['ngStorage'])
 	    if (!$scope.auth.loggedIn) {
 		$location.path('/');
 	    }
+
+	    $scope.getNumber = function(num) {
+		return new Array(num);
+	    };
 	}
     ]);
