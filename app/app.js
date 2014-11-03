@@ -9,6 +9,7 @@ angular.module('app', [
     'angles',
     'facebook',
     'googleplus',
+    'angular-loading-bar',
     'app.controllers',
     'app.directives',
     'header',
