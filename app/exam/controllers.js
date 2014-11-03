@@ -77,7 +77,7 @@ angular.module('exam.controllers', [])
 		    $scope.ant = Exam.questionPosition();
 		    $scope.question.userAnswer = "";
 		    $scope.questionTpl = questionTplId[$scope.question.type];
-		}, 200);
+		}, 1);
 	    };
 
 	    Exam.start(requestData).then(function(response) {
@@ -88,6 +88,7 @@ angular.module('exam.controllers', [])
 		$scope.hearts = Exam.hearts();
 		$scope.question.userAnswer = "";
 		$scope.questionTpl = questionTplId[$scope.question.type];
+		$scope.test = Exam.test;
 	    });
 	}
     ]);

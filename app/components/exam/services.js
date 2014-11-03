@@ -3,7 +3,7 @@
 angular.module('exam.services', [])
     .factory('Exam', ['ExamServices', 'Question', function(ExamServices, Question) {
 	var exam, questions, answered, wrongAnswers, question, questionPosition,
-	    hearts, availableItems, examToken;
+	    hearts, availableItems, examToken, test = 1;
 
 	function start(data) {
 	    return ExamServices.start(data).then(function(response) {
@@ -12,7 +12,7 @@ angular.module('exam.services', [])
 	}
 
 	function init(data) {
-	    // questions = data.questions.filter(function(q) {return q.type === 'form';});
+	   //  questions = data.questions.filter(function(q) {return q.type === 'translate';});
 	    questions = data.questions;
 	    hearts = {
 		remaining: data.max_hearts_count,
@@ -62,7 +62,6 @@ angular.module('exam.services', [])
 	    hearts.remaining = hearts.remaining - 1;
 	    hearts.lost += 1;
 	    answered += 1;
-	    next();
 	}
 
 	function finish(data) {
@@ -81,7 +80,8 @@ angular.module('exam.services', [])
 	    questions: getQuestions,
 	    question: getQuestion,
 	    questionPosition: getQuestionPosition,
-	    hearts: getHearts
+	    hearts: getHearts,
+	    test: test
 	};
     }])
     .factory('ExamServices', [
@@ -105,11 +105,6 @@ angular.module('exam.services', [])
 		};
 
 		$http.post(BASE_URL + '/exam/start', requestData)
-		    .then(function(response) {
-			deferred.resolve(response);
-		    });
-
-		$http.get('/assets/data/exam_1.json')
 		    .then(function(response) {
 			deferred.resolve(response);
 		    });
