@@ -13,16 +13,6 @@ angular.module('question.judge', [])
 		return {text: o, checked: false};
 	    });
 	    $scope.userAnswer = [];
-	    $scope.updateUserAnswer = function(option) {
-		$scope.userAnswer = $scope.userAnswer || [];
-		var idx = $scope.userAnswer.indexOf(option);
-		if (option.checked) {
-		    $scope.userAnswer.push(option.text);
-		} else {
-		    $scope.userAnswer.splice(idx, 1);
-		}
-		$scope.$parent.question.userAnswer = $scope.userAnswer;
-	    };
 	}
     ])
     .directive('questionJudge', function() {
@@ -34,8 +24,15 @@ angular.module('question.judge', [])
 	    },
 	    controller: 'QuestionJudgeCtrl',
 	    link: function($scope) {
-		$scope.selectAnswer = function(option) {
-
+		$scope.updateUserAnswer = function(option) {
+		    $scope.userAnswer = $scope.userAnswer || [];
+		    var idx = $scope.userAnswer.indexOf(option);
+		    if (option.checked) {
+			$scope.userAnswer.push(option.text);
+		    } else {
+			$scope.userAnswer.splice(idx, 1);
+		    }
+		    $scope.$parent.question.userAnswer = $scope.userAnswer;
 		};
 	    },
 	    templateUrl: 'components/question/_question-judge.html'

@@ -8,8 +8,11 @@
 	{{judge.question}}
       </div>
       <div class="small-8 columns answers">
-	<div class="row" ng-repeat="option in options">
-          <label><input type="checkbox" value="{{option.text}}" ng-click="updateUserAnswer(option)" ng-model="option.checked" ng-required="userAnswer.length > 0"> {{option.text}}</label>
+	<div class="row" ng-repeat="option in options track by $index">
+	  <div class="answer">
+	    <input type="checkbox" value="{{option.text}}" ng-click="updateUserAnswer(option)" ng-model="option.checked" ng-required="userAnswer.length > 0" id="option-{{$index}}">
+	    <label for="option-{{$index}}"><span class="box icon-checkmark"></span>{{$index + 1}}. {{option.text}}</label>
+	  </div>
 	</div>	
       </div>
     </div>
