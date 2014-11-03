@@ -3,7 +3,7 @@
 angular.module('exam.services', [])
     .factory('Exam', ['ExamServices', 'Question', function(ExamServices, Question) {
 	var exam, questions, answered, wrongAnswers, question, questionPosition,
-	    hearts, availableItems, examToken, test = 1;
+	    hearts, availableItems, examToken;
 
 	function start(data) {
 	    return ExamServices.start(data).then(function(response) {
@@ -80,8 +80,7 @@ angular.module('exam.services', [])
 	    questions: getQuestions,
 	    question: getQuestion,
 	    questionPosition: getQuestionPosition,
-	    hearts: getHearts,
-	    test: test
+	    hearts: getHearts
 	};
     }])
     .factory('ExamServices', [
@@ -91,14 +90,13 @@ angular.module('exam.services', [])
 		API_VERSION = '/v1.3',
 		BASE_URL = HOST + API_VERSION;
 
-	    var user = $localStorage.auth.user;
-
 	    function start(data) {
 		var deferred = $q.defer();
+		var auth_token = $localStorage.auth.user.auth_token;
 
 		var requestData = {
 		    type: 'lesson',
-		    auth_token: user.auth_token,
+		    auth_token: auth_token,
 		    lesson_number: data.lesson_number,
 		    skill_id: data.skill_id,
 		    device: 'web'
@@ -124,4 +122,5 @@ angular.module('exam.services', [])
 		start: start,
 		finish: finish
 	    };
-	}]);
+	}
+    ]);
