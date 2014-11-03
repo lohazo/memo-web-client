@@ -3,37 +3,40 @@
 angular.module('placement.services', [])
     .factory('Placement', [
 	'PlacementServices', function(PlacementServices) {
-	    var Placement = function() {};
-
-	    Placement.prototype.start = function(data) {
+	    var question;
+	    function start(data) {
 		return PlacementServices.start(data)
 		    .then(function(response) {
-			Placement.currentQuestion = response.data;
+			question = response.data;
 		    });
-	    };
-
-	    Placement.prototype.getCurrentQuestion = function() {
-		return Placement.currentQuestion;
-	    };
-
-	    Placement.prototype.skip = function(data) {
+	    }
+	    function getQuestion() {
+		return question;
+	    }
+	    
+	    function skip(data) {
 		return PlacementServices.submitAnswer(data)
 		    .then(function(response) {
-			Placement.currentQuestion = response.data;
+			question = response.data;
 		    });
-	    };
+	    }
 
-	    Placement.prototype.submitAnswer = function(data) {
+	    function submitAnswer(data) {
 		return PlacementServices.submitAnswer(data)
 		    .then(function(response) {
-			Placement.currentQuestion = response.data;
+			question = response.data;
 		    });
+	    }
+	    return {
+		start: start,
+		skip: skip,
+		submitAnswer: submitAnswer,
+		question: getQuestion
 	    };
-	    return new Placement();
 	}])
     .factory('PlacementServices', ['$http', '$q', function($http, $q) {
 	var HOST = 'http://api.memo.edu.vn/api',
-	    API_VERSION = '/v1.2',
+	    API_VERSION = '/v1.3',
 	    BASE_URL = HOST + API_VERSION;
 
 	return {

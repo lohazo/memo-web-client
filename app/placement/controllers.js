@@ -29,20 +29,21 @@ angular.module('placement.controllers', [])
 	    $scope.question = { };
 	    $scope.result = { };
 	    $scope.userAnswer = '';
+	    $scope.exam_token = '';
 
 	    $scope.quit = function() {
-		delete $scope.exam;
+		delete $scope.question;
 		$location.path('/');
 	    };
 
 	    $scope.skip = function() {
-		$scope.result = Question.skip($scope.question.question, '');
+		$scope.result = Question.skip($scope.question, '');
 		$scope.footerTpl = "footerResult";
 	    };
 
 	    $scope.check = function() {
 		if ($scope.question.userAnswer && $scope.question.userAnswer.length > 0) {
-		    $scope.result = Question.check($scope.question.question, $scope.question.userAnswer);
+		    $scope.result = Question.check($scope.question, $scope.question.userAnswer);
 		    $scope.footerTpl = "footerResult";
 		}
 	    };
@@ -51,11 +52,11 @@ angular.module('placement.controllers', [])
 
 		var requestData = {
 		    auth_token: $scope.auth.user.auth_token,
-		    exam_token: $scope.question.exam_token
+		    exam_token: $scope.exam_token
 		};
 
 		var tmp = {};
-		tmp[$scope.question.question.question_log_id] = $scope.result.result;
+		tmp[$scope.question.question_log_id] = $scope.result.result;
 		requestData.answer = angular.toJson(tmp);
 
 		$scope.footerTpl = "footer";
@@ -63,27 +64,10 @@ angular.module('placement.controllers', [])
 
 		PlacementTest.submitAnswer(requestData)
 		    .then(function() {
-			$scope.question = PlacementTest.getCurrentQuestion();
-			// $scope.question = {
-			//     "finish_exam_bonus_exp": 0,
-			//     "leveled_up": false,
-			//     "exp_chart": {
-			// 	"days": ["Sa","Su","Mo","Tu","We","Th","Fr"],
-			// 	"exp": [0,0,0,0,1010,0,0]
-			//     },
-			//     "combo_days": 1,
-			//     "affected_skill": {
-			// 	"_id": "en-vi_dai_tu_quan_he",
-			// 	"order": 1,
-			// 	"title": "Đại từ quan hệ",
-			// 	"slug": "Đại từ Q.hệ",
-			// 	"theme_color": "#99cc00"
-			//     },
-			//     "num_affected_skills": 37
-			// };
+			$scope.question = PlacementTest.question().question;
 			$scope.question.userAnswer = "";
-			if ($scope.question.question) {
-			    $scope.questionTpl = questionTplId[$scope.question.question.type];
+			if ($scope.question) {
+			    $scope.questionTpl = questionTplId[$scope.question.type];
 			    $scope.result = { };
 			} else {
 			    if ($scope.question.finish_exam_bonus_exp === 0 &&
@@ -115,8 +99,26 @@ angular.module('placement.controllers', [])
 
 	    PlacementTest.start($scope.auth.user)
 		.then(function() {
-		    $scope.question = PlacementTest.getCurrentQuestion();
+		    $scope.question = PlacementTest.question().question;
+		    $scope.exam_token = PlacementTest.question().exam_token;
 		    $scope.question.userAnswer = "";
-		    $scope.questionTpl = questionTplId[$scope.question.question.type];
+		    $scope.questionTpl = questionTplId[$scope.question.type];
 		});
 	}]);
+			// $scope.question = {
+			//     "finish_exam_bonus_exp": 0,
+			//     "leveled_up": false,
+			//     "exp_chart": {
+			// 	"days": ["Sa","Su","Mo","Tu","We","Th","Fr"],
+			// 	"exp": [0,0,0,0,1010,0,0]
+			//     },
+			//     "combo_days": 1,
+			//     "affected_skill": {
+			// 	"_id": "en-vi_dai_tu_quan_he",
+			// 	"order": 1,
+			// 	"title": "Đại từ quan hệ",
+			// 	"slug": "Đại từ Q.hệ",
+			// 	"theme_color": "#99cc00"
+			//     },
+			//     "num_affected_skills": 37
+			// };
