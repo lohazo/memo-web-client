@@ -23,10 +23,12 @@
 	  </div>
 	</div>
 	<div class="small-4 columns">
-	  <div class="inventory"></div>
-	  <div class="hearts">
-	    <span class="heart" ng-repeat="x in getNumber(hearts.remaining) track by $index"></span>
-	    <span class="lost heart" ng-repeat="y in getNumber(hearts.lost) track by $index"></span>
+	  <div class="row">
+	    <div class="small-5 columns inventory"></div>
+	    <div class="small-11 columns hearts">
+	      <span class="heart" ng-repeat="x in getNumber(hearts.remaining) track by $index"></span>
+	      <span class="lost heart" ng-repeat="y in getNumber(hearts.lost) track by $index"></span>
+	    </div>
 	  </div>
 	</div>
       </header>
