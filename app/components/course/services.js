@@ -24,6 +24,7 @@ angular.module('course.services', [])
 	};
 
 	Course.prototype.selectCourse = function(data) {
+	    data.auth_token = $localStorage.auth.user.auth_token;
 	    return CourseServices.selectCourse(data)
 		.then(function(response) {
 		    Course.course = response.data.current_course;
@@ -35,7 +36,7 @@ angular.module('course.services', [])
     }])
     .factory('CourseServices', [ '$http', '$q', function($http, $q) {
 	var HOST = "http://api.memo.edu.vn/api",
-	    API_VERSION = "/v1.2",
+	    API_VERSION = "/v1.3",
 	    BASE_URL = HOST + API_VERSION;
 
 	return {

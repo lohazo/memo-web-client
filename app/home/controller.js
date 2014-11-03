@@ -46,7 +46,6 @@ angular.module('home.controller', [])
 
 	    $scope.selectCourse = function(courseId) {
 		var requestData = {
-		    auth_token: $scope.auth.user.auth_token,
 		    base_course_id: courseId
 		};
 
