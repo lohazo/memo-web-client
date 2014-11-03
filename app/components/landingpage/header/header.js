@@ -78,15 +78,17 @@ angular.module('landingpage.login', [])
 	    };
 
 	    $scope.register = function() {
-		AuthService.register($scope.user);
+		AuthService.register($scope.user)
+		    .then(function() {
+			$modalInstance.close();
+		    });
 	    };
 
 	    $scope.login = function() {
-		AuthService.login($scope.user);
+		AuthService.login($scope.user)
+		    .then(function() {
+			$modalInstance.close();
+		    });
 	    };
-
-	    $rootScope.$on('event:auth-loginConfirmed', function(e, data) {
-		$modalInstance.close();
-	    });
 	}
     ]);

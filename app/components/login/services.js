@@ -12,11 +12,11 @@ angular.module('login.services', [])
 	function($rootScope, $localStorage, $routeParams, Facebook, GooglePlus, LoginService, MolServices) {
 	    var AuthService = function() {};
 	    AuthService.prototype.register = function(data) {
-		LoginService.register(data).then(loginCallback);
+		return LoginService.register(data).then(loginCallback);
 	    };
 
 	    AuthService.prototype.login = function(data) {
-		LoginService.login(data).then(loginCallback);
+		return LoginService.login(data).then(loginCallback);
 	    };
 
 	    AuthService.prototype.FbLogin = function() {
@@ -87,7 +87,6 @@ angular.module('login.services', [])
 		delete data.auth_token;
 		mixpanel.people.set(data);
 		var molData = {};
-		console.log($routeParams);
 		molData.code_chanel = $routeParams.code_chanel;
 		molData.id_landingpage = $routeParams.id_ladingpage;
 		molData.id_campaign = $routeParams.id_campaign;
