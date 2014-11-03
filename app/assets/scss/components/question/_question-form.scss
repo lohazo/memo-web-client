@@ -3,12 +3,20 @@
 	span {
 	    margin: 5px;
 	}
+	label {
+	    display: inline-block;
+	    position: relative;
+	}
 	select {
 	    border-radius: $global-radius;
 	    width: auto;
-	    margin: 5px 10px 5px 5px;
+	    margin: 5px;
+	    -webkit-appearance: none;
+	    -moz-appearance: none;
+	    appearance: none;
+	    outline: none;
+	    
 	    option {
-		border-radius: $global-radius;
 	    }
 	}
     }

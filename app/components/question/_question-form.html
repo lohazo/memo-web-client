@@ -6,7 +6,7 @@
     <div class="row">
       <div class="small-16 small-centered columns text-center">
 	<span ng-repeat="word in tokens track by $index">
-	  <select ng-if="$index === position" ng-model="answer.selected" ng-options="option for option in options"></select>
+	  <label ng-if="$index === position"><select ng-model="answer.selected" ng-options="option for option in options"></select></label>
 	  {{word}}
 	</span>
       </div>
