@@ -10,8 +10,8 @@ angular.module('question.translate', [])
 	'ngAudio',
 	function($scope, $attrs, ngAudio) {
 	    $scope.translate = $scope.$parent.question;
-	    if ($scope.translate.question.normal_question_audio) {
-		var normalFile = ngAudio.load($scope.translate.question.normal_question_audio);
+	    if ($scope.translate.normal_question_audio) {
+		var normalFile = ngAudio.load($scope.translate.normal_question_audio);
 
 		$scope.speaker = {
 		    play: function() {

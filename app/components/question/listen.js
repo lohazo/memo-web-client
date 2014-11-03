@@ -10,8 +10,8 @@ angular.module('question.listen', [])
 	'ngAudio',
 	function($scope, $attrs, ngAudio) {
 	    $scope.listen = $scope.$parent.question;
-	    var normalFile = ngAudio.load($scope.listen.question.normal_question_audio),
-		slowFile = ngAudio.load($scope.listen.question.slow_question_audio);
+	    var normalFile = ngAudio.load($scope.listen.normal_question_audio),
+		slowFile = ngAudio.load($scope.listen.slow_question_audio);
 
 	    $scope.speaker = {
 		play: function() {
