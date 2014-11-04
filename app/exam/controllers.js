@@ -6,7 +6,8 @@ angular.module('exam.controllers', [])
 	function($scope, $timeout, $routeParams, $location, Exam, Question) {
 	    var requestData = {
 		skill_id: $routeParams.id,
-		lesson_number: $routeParams.lesson_number
+		lesson_number: $routeParams.lesson_number,
+		type: 'lesson'
 	    };
 
 	    $scope.questionTpl = '';
@@ -40,28 +41,73 @@ angular.module('exam.controllers', [])
 	    $scope.userAnswer = '';
 
 	    $scope.quit = function() {
+		// Call Feedback API
 		delete $scope.exam;
 		$location.path('/');
 	    };
 
+	    $scope.finish = function() {
+		Exam.finish(requestData).then(function(response) {
+		    $scope.quit();
+		});
+	    };
+
+	    $scope.checkState = function() {
+		if (Exam.checkState().isFinished) {
+		    if (Exam.checkState().isFail) {
+			$scope.questionTpl = questionTplId.failure;
+			$scope.footerTpl = "footerFailure";
+
+			// Call feedback API
+			Exam.sendFeedbackLogs();
+		    } else {
+			// Call finish API
+			Exam.finish(requestData).then(function(response) {
+			    $scope.questionTpl = questionTplId.success;
+			    $scope.footerTpl = "footerSuccess";
+			}).then(function() {
+			    Exam.sendFeedbackLogs();
+			});
+		    }
+		}
+	    };
+
 	    $scope.skip = function() {
 		$scope.result = Question.skip($scope.question, '');
+
 		Exam.skip();
+		Exam.logFeedback({
+		    question_log_id: $scope.question.question_log_id,
+		    user_input: '',
+		    is_auto: true
+		});
+
 		$scope.hearts = Exam.hearts();
 		$scope.footerTpl = "footerResult";
+
+		$scope.checkState();
 	    };
 
 	    $scope.check = function() {
 		if ($scope.question.userAnswer && $scope.question.userAnswer.length > 0) {
 		    $scope.result = Question.check($scope.question, $scope.question.userAnswer);
 		    $scope.footerTpl = "footerResult";
+
 		    if (!$scope.result.result) {
 			Exam.skip();
+			Exam.logFeedback({
+			    question_log_id: $scope.question.question_log_id,
+			    user_input: $scope.question.userAnswer,
+			    is_auto: true
+			});
+
 			$scope.hearts = Exam.hearts();
 		    } else {
 			Exam.check();
 		    }
 		    $scope.answered = Exam.answered();
+
+		    $scope.checkState();
 		}
 	    };
 

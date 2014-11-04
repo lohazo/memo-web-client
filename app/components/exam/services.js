@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('exam.services', [])
-    .factory('Exam', ['ExamServices', 'Question', function(ExamServices, Question) {
+    .factory('Exam', ['ExamServices', 'Feedback', function(ExamServices, Feedback) {
 	var exam, questions, answered, wrongAnswers, question, questionPosition,
-	    hearts, availableItems, examToken;
+	    hearts, availableItems, examToken, logs;
 
 	function start(data) {
 	    return ExamServices.start(data).then(function(response) {
@@ -23,6 +23,7 @@ angular.module('exam.services', [])
 	    answered = 0;
 	    questionPosition = 0;
 	    question = questions[questionPosition];
+	    logs = [];
 	}
 
 	function getQuestions() {
@@ -51,6 +52,12 @@ angular.module('exam.services', [])
 
 	function check(isCorrect) {
 	    answered += 1;
+
+	    log({
+		question_log_id: question.question_log_id,
+		result: true,
+		last_exam_token: examToken
+	    });
 	}
 
 	function next() {
@@ -62,11 +69,37 @@ angular.module('exam.services', [])
 	    hearts.remaining = hearts.remaining - 1;
 	    hearts.lost += 1;
 	    answered += 1;
+
+	    log({
+		question_log_id: question.question_log_id,
+		result: false,
+		last_exam_token: examToken
+	    });
+	}
+
+	function log(data) {
+	    // data = {question_log_id, result, exam_token};
+	    logs.push(data);
+	}
+
+	function logFeedback(data) {
+	    // data = {question_log_id, user_input, is_auto=true}
+	    Feedback.list.push(data);
+	}
+
+	function sendFeedbackLogs() {
+	    Feedback.create();
+	}
+
+	function checkState() {
+	    if (hearts.remaining < 0) return {isFinished: true, isFail: true};
+	    if (answered === questions.length) return {isFinished: true, isFail: false};
+	    return {isFinished: false, isFail: false};
 	}
 
 	function finish(data) {
-	    return ExamServices.finish(data).then(function(response) {
-	    });
+	    data.logs = JSON.stringify(logs);
+	    return ExamServices.finish(data);
 	}
 
 	return {
@@ -80,7 +113,10 @@ angular.module('exam.services', [])
 	    questions: getQuestions,
 	    question: getQuestion,
 	    questionPosition: getQuestionPosition,
-	    hearts: getHearts
+	    hearts: getHearts,
+	    checkState: checkState,
+	    logFeedback: logFeedback,
+	    sendFeedbackLogs: sendFeedbackLogs
 	};
     }])
     .factory('ExamServices', [
@@ -95,7 +131,7 @@ angular.module('exam.services', [])
 		var auth_token = $localStorage.auth.user.auth_token;
 
 		var requestData = {
-		    type: 'lesson',
+		    type: data.type,
 		    auth_token: auth_token,
 		    lesson_number: data.lesson_number,
 		    skill_id: data.skill_id,
@@ -112,8 +148,21 @@ angular.module('exam.services', [])
 
 	    function finish(data) {
 		var deferred = $q.defer();
+		var auth_token = $localStorage.auth.user.auth_token;
 
+		var requestData = {
+		    type: data.type,
+		    auth_token: auth_token,
+		    lesson_number: data.lesson_number,
+		    skill_id: data.skill_id,
+		    device: 'web',
+		    answers: data.logs
+		};
 
+		$http.post(BASE_URL + '/exam/finish', requestData)
+		    .then(function(response) {
+			deferred.resolve(response);
+		    });
 
 		return deferred.promise;
 	    }

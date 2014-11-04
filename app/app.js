@@ -2,26 +2,13 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('app', [
-    'ngRoute',
-    'ngStorage',
-    'ngAudio',
-    'mm.foundation',
-    'angles',
-    'facebook',
-    'googleplus',
+    'ngRoute', 'ngStorage', 'ngAudio',
+    'mm.foundation', 'angles', 'facebook','googleplus',
     'angular-loading-bar',
-    'app.controllers',
-    'app.directives',
-    'header',
-    'landingpage',
-    'login',
-    'home',
-    'course',
-    'profile',
-    'skill',
-    'placement',
-    'report',
-    'exam'
+    'app.controllers', 'app.directives',
+    'header', 'landingpage', 'login', 'home', 'course',
+    'profile', 'skill', 'placement', 'report', 'exam',
+    'feedback'
 ]).config([
     '$routeProvider',
     '$locationProvider',
