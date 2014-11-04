@@ -55,8 +55,7 @@ angular.module('exam.services', [])
 
 	    log({
 		question_log_id: question.question_log_id,
-		result: true,
-		last_exam_token: examToken
+		result: true
 	    });
 	}
 
@@ -72,13 +71,12 @@ angular.module('exam.services', [])
 
 	    log({
 		question_log_id: question.question_log_id,
-		result: false,
-		last_exam_token: examToken
+		result: false
 	    });
 	}
 
 	function log(data) {
-	    // data = {question_log_id, result, exam_token};
+	    // data = {question_log_id, result};
 	    logs.push(data);
 	}
 
@@ -98,6 +96,7 @@ angular.module('exam.services', [])
 	}
 
 	function finish(data) {
+	    data.examToken = examToken;
 	    data.logs = JSON.stringify(logs);
 	    return ExamServices.finish(data);
 	}
@@ -156,7 +155,8 @@ angular.module('exam.services', [])
 		    lesson_number: data.lesson_number,
 		    skill_id: data.skill_id,
 		    device: 'web',
-		    answers: data.logs
+		    answers: data.logs,
+		    exam_token: data.examToken
 		};
 
 		$http.post(BASE_URL + '/exam/finish', requestData)
