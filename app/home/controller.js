@@ -54,4 +54,31 @@ angular.module('home.controller', [])
 			$scope.auth.current_course = Course.getCourse();
 		    });
 	    };
-	}]);
+	}])
+    .controller('PlacementTestModalCtrl', [
+	'$scope', '$modal', '$localStorage',
+	function($scope, $modal, $localStorage) {
+	    function open() {
+		var modalInstance = $modal.open({
+		    templateUrl: 'home/_placement-test-modal.html',
+		    controller: 'PlacementTestModalInstanceCtrl',
+		    windowClass: 'placement-test-modal',
+		    backdrop: 'static'
+		});
+
+		modalInstance.result.then(function(msg) {
+		});
+	    }
+
+	    if ($scope.auth.loggedIn && $scope.auth.user.is_beginner) {
+		open();
+	    }
+	}])
+    .controller('PlacementTestModalInstanceCtrl', [
+	'$scope', '$modalInstance',
+	function($scope, $modalInstance) {
+	    $scope.close = function() {
+		$modalInstance.close();
+	    };
+	}
+    ]);

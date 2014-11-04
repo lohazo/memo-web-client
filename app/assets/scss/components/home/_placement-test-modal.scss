@@ -1,0 +1,32 @@
+.placement-test-modal {
+    width: 410px;
+    min-height: 370px !important;
+    max-height: 370px;
+    padding-top: 0;
+    top: 145px !important;
+
+    h3, p {
+	text-align: center;
+    }
+
+    h3.title {
+	margin-top: 20px;
+    }
+
+    .ant {
+	background: url('assets/img/login-ant.png') no-repeat;
+	display: block;
+	position: absolute;
+	width: 126px;
+	height: 147px;
+	top: -140px;
+	left: 50%;
+	z-index: 1;
+    }
+
+    .skills {
+	margin-top: 25px;
+	margin-left: 15px;
+	float: left;
+    }
+}
