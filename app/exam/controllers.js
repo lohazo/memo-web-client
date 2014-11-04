@@ -88,7 +88,6 @@ angular.module('exam.controllers', [])
 		$scope.hearts = Exam.hearts();
 		$scope.question.userAnswer = "";
 		$scope.questionTpl = questionTplId[$scope.question.type];
-		$scope.test = Exam.test;
 	    });
 	}
     ]);
