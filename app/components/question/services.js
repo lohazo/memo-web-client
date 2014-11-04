@@ -80,7 +80,7 @@ angular.module('question.services', [])
 		correctAnswer: question.translation
 	    };
 
-	    var translations = question.compact_translations.splice(0);
+	    var translations = question.alternative_answers.slice(0);
 	    translations.push(question.translation);
 	    result.result = translations.some(function(obj) {
 		return userAnswer === obj[0];

@@ -122,7 +122,7 @@ angular.module('exam.services', [])
 	'$http', '$q', '$localStorage',
 	function($http, $q, $localStorage) {
 	    var HOST = 'http://api.memo.edu.vn/api',
-		API_VERSION = '/v1.3',
+		API_VERSION = '/v1.4',
 		BASE_URL = HOST + API_VERSION;
 
 	    function start(data) {
