@@ -70,11 +70,15 @@ angular.module('landingpage.login', [])
 	    };
 
 	    $scope.FbLogin = function() {
-		AuthService.FbLogin();
+		AuthService.FbLogin().then(function() {
+		    $modalInstance.close();
+		});
 	    };
 
 	    $scope.GLogin = function() {
-		AuthService.GLogin();
+		AuthService.GLogin().then(function() {
+		    $modalInstance.close();
+		});
 	    };
 
 	    $scope.register = function() {
