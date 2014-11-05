@@ -8,7 +8,7 @@ angular.module('question.select', [])
 	'$scope',
 	'$attrs',
 	function($scope, $attrs) {
-	    $scope.question = $scope.$parent.exam.currentQuestion.question;
+	    $scope.question = $scope.$parent.question;
 	    $scope.select = {
 		userAnswer: ''
 	    };
@@ -32,7 +32,7 @@ angular.module('question.select', [])
 
 		    // FIXME: No two-way binding
 		    $scope.select.userAnswer = $scope.question.options[number - 1].text;
-		    $scope.answer = $scope.select.userAnswer;
+		    $scope.question.userAnswer = $scope.select.userAnswer;
 		};
 	    },
 	    templateUrl: 'components/question/_question-select.html'
