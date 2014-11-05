@@ -10,6 +10,9 @@ module.exports = function(config){
             'app/*.js',
 	    'app/placement/**/*.js',
 	    'app/components/placement/**/*.js',
+	    'app/components/question/**/*.js',
+	    'app/components/dmp/**/*.js',
+	    'app/vendors/google-diff-match-patch/diff_match_patch.js',
             'app/home/**/*.js'
         ],
 
