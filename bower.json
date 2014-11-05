@@ -15,7 +15,8 @@
     "angular-google-plus": "https://github.com/hainp/angular-google-plus.git#master",
     "angular-foundation": "https://github.com/hainp/angular-foundation.git#master",
     "angular-audio": "https://github.com/hainp/ngAudio.git#master",
-    "angular-loading-bar": "https://github.com/hainp/angular-loading-bar.git#master"
+    "angular-loading-bar": "https://github.com/hainp/angular-loading-bar.git#master",
+    "google-diff-match-patch": "~0.1.0"
   },
   "resolutions": {
     "angular": "1.3.x"
