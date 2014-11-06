@@ -109,18 +109,18 @@ angular.module('question.services', ['diff-match-patch'])
 	    }
 
 	    // Typo
-	    var typoString = translations.filter(function(trans) {
+	    var typos = translations.filter(function(trans) {
 		return wordCount(stripSpecialCharacters(userAnswer))
 		    === wordCount(stripSpecialCharacters(trans));
+	    }).map(function(typoString) {
+		return [checkTypoOnString(userAnswer, typoString), typoString];
+	    }).filter(function(checkedTypos) {
+		return checkedTypos[0] instanceof Array;
 	    })[0];
 
-	    var typos;
-	    if (typoString) {
-		typos = checkTypoOnString(userAnswer, typoString);
-		if (typos) {
-		    result.result = true;
-		    result.answerOptions = createHtmlForTypoAnswer(typoString, typos);
-		}
+	    if (typos) {
+		result.result = true;
+		result.answerOptions = createHtmlForTypoAnswer(typos[1], typos[0]);
 	    }
 
 	    return result;
@@ -155,10 +155,6 @@ angular.module('question.services', ['diff-match-patch'])
 	    test = typoCheckedWords.filter(function(word, i) {
 		return word[0].isTypo === true;
 	    });
-
-	    // if (test.length <= 0) {
-	    //	return false;
-	    // }
 
 	    return test.map(function(element) {
 		return [element[2], correctWords[element[2]].length];
