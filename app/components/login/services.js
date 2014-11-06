@@ -95,7 +95,7 @@ angular.module('login.services', [])
 		molData.name = data.name;
 		molData.email = data.email;
 		molData.phone = '0918537799';
-		MolServices.saveC3(molData);
+		// MolServices.saveC3(molData);
 		$rootScope.$broadcast('event:auth-loginConfirmed', {
 		    user: response.data
 		});
