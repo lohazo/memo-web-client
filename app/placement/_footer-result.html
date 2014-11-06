@@ -5,12 +5,17 @@
         <h3 class="icon-{{result.result ? 'checkmark' : 'close'}}"></h3>
       </div>
       <div class="small-14 columns">
-	<h4 class="result">{{result.result ? 'Chính xác' : 'Đáp án đúng'}}</h4>
+	<h4 class="result" ng-if="result.result && result.answerOptions">Bạn có lỗi nhỏ</h4>
+	<h4 class="result" ng-if="!result.result">Đáp án đúng</h4>
+	<h4 class="result" ng-if="result.result && !result.answerOptions">Chính xác</h4>
       </div>
     </div>
     <div class="row">
       <div class="small-2 columns"></div>
-      <div class="small-14 columns"><h4 ng-if="!result.result" class="correct answer">{{result.correctAnswer}}</h4></div>
+      <div class="small-14 columns">
+	<h4 ng-if="!result.result" class="correct answer">{{result.correctAnswer}}</h4>
+	<h4 ng-if="result.result && result.answerOptions" ng-bind-html="result.answerOptions"></h4>
+      </div>
     </div>
     <div class="row">
       <div class="small-2 columns"></div>

@@ -17,6 +17,34 @@ describe('Service', function() {
 	});
     });
 
+    describe('Question.check Translate', function() {
+	var service, scope;
+	beforeEach(inject(function($rootScope, Question) {
+	    scope = $rootScope.$new();
+	    service = Question;
+	}));
+
+	it('check if check exists', function() {
+	    expect(service.check).toBeDefined();
+	});
+    });
+
+    describe('Question.createHtmlForTypoAnswer', function() {
+	var service, scope;
+	beforeEach(inject(function($rootScope, Question) {
+	    scope = $rootScope.$new();
+	    service = Question;
+	}));
+
+	it('check if createHtmlForTypoAnswer exists', function() {
+	    expect(service.createHtmlForTypoAnswer).toBeDefined();
+	});
+
+	it('should have correct format', function() {
+	    expect(service.createHtmlForTypoAnswer('He eats', [[1, 4]])).toBe('He <u>eats</u>');
+	});
+    });
+
     describe('Question.checkTypoOnString', function() {
 	var service, scope;
 	beforeEach(inject(function($rootScope, Question) {
@@ -37,6 +65,8 @@ describe('Service', function() {
 	    expect(service.checkTypoOnString('He eat an apple', 'He eats an aple')).toContain([1, 4]);
 	    expect(service.checkTypoOnString('cau be', 'Cậu bé')).toContain([0, 3]);
 	    expect(service.checkTypoOnString('cau be', 'Cậu bé')).toContain([1, 2]);
+	    expect(service.checkTypoOnString('Tôi là một nguời đàn ông', 'Tôi là một người đàn ông')).toContain([3, 5]);
+	    expect(service.checkTypoOnString('Tôi là một chu bé', 'Tôi là một chú bé.')).toContain([3, 3]);
 	});
     });
 

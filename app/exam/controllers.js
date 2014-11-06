@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('exam.controllers', [])
+angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
 	'$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question',
 	function($scope, $timeout, $routeParams, $location, Exam, Question) {
@@ -65,6 +65,19 @@ angular.module('exam.controllers', [])
 			Exam.finish(requestData).then(function(response) {
 			    $scope.questionTpl = questionTplId.success;
 			    $scope.footerTpl = "footerSuccess";
+			    $scope.expChart = {
+				    labels: $scope.question.exp_chart.days,
+				    datasets: [{
+					label: "",
+					fillColor : "rgba(220,220,220,0.2)",
+					strokeColor : "#848484",
+					pointColor : "#810c15",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(220,220,220,1)",
+					data : $scope.question.exp_chart.exp
+				    }]
+				};
 			}).then(function() {
 			    Exam.sendFeedbackLogs();
 			});
@@ -104,6 +117,7 @@ angular.module('exam.controllers', [])
 			$scope.hearts = Exam.hearts();
 		    } else {
 			Exam.check();
+			console.log($scope.result);
 		    }
 		    $scope.answered = Exam.answered();
 

@@ -12,8 +12,8 @@ angular.module('exam.services', [])
 	}
 
 	function init(data) {
-	   //  questions = data.questions.filter(function(q) {return q.type === 'translate';});
-	    questions = data.questions;
+	    questions = data.questions.filter(function(q) {return q.type === 'translate';});
+	    // questions = data.questions;
 	    hearts = {
 		remaining: data.max_hearts_count,
 		lost: 0
@@ -137,7 +137,7 @@ angular.module('exam.services', [])
 		    device: 'web'
 		};
 
-		$http.post(BASE_URL + '/exam/start', requestData)
+		$http.get('/assets/data/exam_1.json', requestData)
 		    .then(function(response) {
 			deferred.resolve(response);
 		    });
