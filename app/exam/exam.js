@@ -6,12 +6,12 @@ angular.module('exam', [
 ]).config(['$routeProvider', '$locationProvider', ExamConfig]);
 
 function ExamConfig($routeProvider, $locationProvider) {
-    $routeProvider.when('/skill/:id/:lesson_number', {
+    $routeProvider.when('/checkpoint/:id', {
 	templateUrl: 'exam/_index.html',
 	controller: 'ExamCtrl'
     });
-    $routeProvider.when('/shortcut/:id', {
+    $routeProvider.when('/skill/:id/:lesson_number', {
 	templateUrl: 'exam/_index.html',
-	controller: 'ShorcutCtrl'
+	controller: 'ExamCtrl'
     });
 }

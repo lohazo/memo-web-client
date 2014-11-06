@@ -4,11 +4,18 @@ angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
 	'$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question',
 	function($scope, $timeout, $routeParams, $location, Exam, Question) {
+	    var examType = $location.path().split('/')[1].trim();
+
 	    var requestData = {
 		skill_id: $routeParams.id,
-		lesson_number: $routeParams.lesson_number,
-		type: 'lesson'
+		type: examType === 'skill' ? 'lesson' : examType
 	    };
+
+	    if (examType === 'skill') {
+		requestData.lesson_number = $routeParams.lesson_number;
+	    }
+
+	    console.log(requestData);
 
 	    $scope.questionTpl = '';
 	    $scope.footerTpl = 'footer';

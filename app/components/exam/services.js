@@ -132,15 +132,22 @@ angular.module('exam.services', [])
 		var requestData = {
 		    type: data.type,
 		    auth_token: auth_token,
-		    lesson_number: data.lesson_number,
 		    skill_id: data.skill_id,
 		    device: 'web'
 		};
+
+		if (data.type === "lesson") {
+		    requestData.lesson_number = data.lesson_number;
+		}
 
 		$http.post(BASE_URL + '/exam/start', requestData)
 		    .then(function(response) {
 			deferred.resolve(response);
 		    });
+
+		// $http.get('/assets/data/exam_1.json').then(function(response) {
+		//     deferred.resolve(response);
+		// });
 
 		return deferred.promise;
 	    }
