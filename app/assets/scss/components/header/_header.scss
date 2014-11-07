@@ -74,10 +74,22 @@
 }
 
 #dropdown-setting {
-    border-radius: $global-radius;
+    border-radius: 10px;
     min-width: 220px;
     left: 895px !important;
     > li {
+	&:first-child {
+	    border-radius: 10px 10px 0 0;
+	    a:not(.button) {
+		border-radius: 10px 10px 0 0;
+	    }
+	}
+	&:last-child {
+	    border-radius: 0 0 10px 10px;
+	    a:not(.button) {
+		border-radius: 0 0 10px 10px;
+	    }
+	}
 	> a {
 	    min-width: 220px;
 	    background: $white;
