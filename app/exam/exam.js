@@ -6,7 +6,7 @@ angular.module('exam', [
 ]).config(['$routeProvider', '$locationProvider', ExamConfig]);
 
 function ExamConfig($routeProvider, $locationProvider) {
-    $routeProvider.when('/checkpoint/:id', {
+    $routeProvider.when('/checkpoint/:checkpoint_position', {
 	templateUrl: 'exam/_index.html',
 	controller: 'ExamCtrl'
     });

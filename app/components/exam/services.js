@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('exam.services', [])
-    .factory('Exam', ['ExamServices', 'Feedback', function(ExamServices, Feedback) {
+    .factory('Exam', [
+	'ExamServices', 'Feedback', '$localStorage',
+	function(ExamServices, Feedback, $localStorage) {
 	var exam, questions, answered, wrongAnswers, question, questionPosition,
 	    hearts, availableItems, examToken, logs;
 
@@ -24,6 +26,7 @@ angular.module('exam.services', [])
 	    questionPosition = 0;
 	    question = questions[questionPosition];
 	    logs = [];
+	    Feedback.list = [];
 	}
 
 	function getQuestions() {
@@ -50,13 +53,16 @@ angular.module('exam.services', [])
 	    return hearts;
 	}
 
+	function getIsAutoFeedback() {
+	    if ($localStorage.appSetting.auto_feedback_types.indexOf(question.type) >= 0) {
+		return true;
+	    }
+	    
+	    return false;
+	}
+
 	function check(isCorrect) {
 	    answered += 1;
-
-	    log({
-		question_log_id: question.question_log_id,
-		result: true
-	    });
 	}
 
 	function next() {
@@ -68,21 +74,12 @@ angular.module('exam.services', [])
 	    hearts.remaining = hearts.remaining - 1;
 	    hearts.lost += 1;
 	    answered += 1;
-
-	    log({
-		question_log_id: question.question_log_id,
-		result: false
-	    });
-	}
-
-	function log(data) {
-	    // data = {question_log_id, result};
-	    logs.push(data);
 	}
 
 	function logFeedback(data) {
 	    // data = {question_log_id, user_input, is_auto=true}
 	    Feedback.list.push(data);
+	    console.log(Feedback.list);
 	}
 
 	function sendFeedbackLogs() {
@@ -115,7 +112,8 @@ angular.module('exam.services', [])
 	    hearts: getHearts,
 	    checkState: checkState,
 	    logFeedback: logFeedback,
-	    sendFeedbackLogs: sendFeedbackLogs
+	    sendFeedbackLogs: sendFeedbackLogs,
+	    isAutoFeedback: getIsAutoFeedback
 	};
     }])
     .factory('ExamServices', [
@@ -132,12 +130,14 @@ angular.module('exam.services', [])
 		var requestData = {
 		    type: data.type,
 		    auth_token: auth_token,
-		    skill_id: data.skill_id,
 		    device: 'web'
 		};
 
 		if (data.type === "lesson") {
 		    requestData.lesson_number = data.lesson_number;
+		    requestData.skill_id = data.skill_id;
+		} else if (data.type === "checkpoint") {
+		    requestData.checkpoint_position = data.checkpoint_position;
 		}
 
 		$http.post(BASE_URL + '/exam/start', requestData)

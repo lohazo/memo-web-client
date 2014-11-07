@@ -91,7 +91,7 @@ angular.module('landingpage.login', [])
 	    $rootScope.$on('event:auth-loginConfirmed', function() {
 		$timeout(function() {
 		    $modalInstance.close();
-		}, 0);
+		}, 10);
 	    });
 	}
     ]);

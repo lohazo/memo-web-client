@@ -7,18 +7,19 @@ angular.module('exam.controllers', ['ngSanitize'])
 	    var examType = $location.path().split('/')[1].trim();
 
 	    var requestData = {
-		skill_id: $routeParams.id,
 		type: examType === 'skill' ? 'lesson' : examType
 	    };
 
 	    if (examType === 'skill') {
 		requestData.lesson_number = $routeParams.lesson_number;
+		requestData.skill_id = $routeParams.id;
+	    } else if (examType === 'checkpoint') {
+		requestData.checkpoint_position = $routeParams.checkpoint_position;
 	    }
-
-	    console.log(requestData);
 
 	    $scope.questionTpl = '';
 	    $scope.footerTpl = 'footer';
+	    $scope.isAutoFeedback = false;
 
 	    var questionTplId = {
 		form: 'questionForm',
@@ -47,15 +48,18 @@ angular.module('exam.controllers', ['ngSanitize'])
 	    };
 	    $scope.userAnswer = '';
 
-	    $scope.quit = function() {
+	    $scope.quit = function(afterDoingTest) {
 		// Call Feedback API
+		if (afterDoingTest) {
+		    Exam.sendFeedbackLogs();
+		}
 		delete $scope.exam;
 		$location.path('/');
 	    };
 
 	    $scope.finish = function() {
 		Exam.finish(requestData).then(function(response) {
-		    $scope.quit();
+		    $scope.quit(true);
 		});
 	    };
 
@@ -64,9 +68,6 @@ angular.module('exam.controllers', ['ngSanitize'])
 		    if (Exam.checkState().isFail) {
 			$scope.questionTpl = questionTplId.failure;
 			$scope.footerTpl = "footerFailure";
-
-			// Call feedback API
-			Exam.sendFeedbackLogs();
 		    } else {
 			// Call finish API
 			Exam.finish(requestData).then(function(response) {
@@ -85,22 +86,36 @@ angular.module('exam.controllers', ['ngSanitize'])
 					data : $scope.question.exp_chart.exp
 				    }]
 				};
-			}).then(function() {
-			    Exam.sendFeedbackLogs();
 			});
 		    }
 		}
+	    };
+
+	    $scope.autoFeedback = function() {
+		Exam.logFeedback({
+		    question_log_id: $scope.question.question_log_id,
+		    user_answer: $scope.question.userAnswer || '',
+		    user_note: '',
+		    feedback_type_ids: [],
+		    auto_feedback: true
+		});
+	    };
+
+	    $scope.userFeedback = function(userNote, feedbackTypeIds) {
+		$scope.isAutoFeedback = false;
+		Exam.logFeedback({
+		    question_log_id: $scope.question.question_log_id,
+		    user_answer: $scope.question.userAnswer || '',
+		    user_note: userNote,
+		    feedback_type_ids: feedbackTypeIds,
+		    auto_feedback: false
+		});
 	    };
 
 	    $scope.skip = function() {
 		$scope.result = Question.skip($scope.question, '');
 
 		Exam.skip();
-		Exam.logFeedback({
-		    question_log_id: $scope.question.question_log_id,
-		    user_input: '',
-		    is_auto: true
-		});
 
 		$scope.hearts = Exam.hearts();
 		$scope.footerTpl = "footerResult";
@@ -115,16 +130,9 @@ angular.module('exam.controllers', ['ngSanitize'])
 
 		    if (!$scope.result.result) {
 			Exam.skip();
-			Exam.logFeedback({
-			    question_log_id: $scope.question.question_log_id,
-			    user_input: $scope.question.userAnswer,
-			    is_auto: true
-			});
-
 			$scope.hearts = Exam.hearts();
 		    } else {
 			Exam.check();
-			console.log($scope.result);
 		    }
 		    $scope.answered = Exam.answered();
 
@@ -135,6 +143,9 @@ angular.module('exam.controllers', ['ngSanitize'])
 	    $scope.nextQuestion = function() {
 		$scope.questionTpl = "";
 		$scope.footerTpl = "footer";
+		if ($scope.isAutoFeedback) {
+		    $scope.autoFeedback();
+		}
 
 		// Aggressively update
 		$timeout(function() {
@@ -144,6 +155,7 @@ angular.module('exam.controllers', ['ngSanitize'])
 		    $scope.ant = Exam.questionPosition();
 		    $scope.question.userAnswer = "";
 		    $scope.questionTpl = questionTplId[$scope.question.type];
+		    $scope.isAutoFeedback = Exam.isAutoFeedback();
 		}, 1);
 	    };
 
@@ -155,6 +167,7 @@ angular.module('exam.controllers', ['ngSanitize'])
 		$scope.hearts = Exam.hearts();
 		$scope.question.userAnswer = "";
 		$scope.questionTpl = questionTplId[$scope.question.type];
+		$scope.isAutoFeedback = Exam.isAutoFeedback();
 	    });
 	}
     ]);

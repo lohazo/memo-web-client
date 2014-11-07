@@ -98,14 +98,16 @@ angular.module('question.services', ['diff-match-patch'])
 	    if (result.result) return result;
 
 	    // Group 3 check
-	    var test = question.common_errors.some(function(obj) {
-		return stripSpecialCharacters(userAnswer).toLowerCase()
-		    === stripSpecialCharacters(obj).toLowerCase();
-	    });
+	    if (question.common_errors && question.common_errors.length > 0) {
+		var test = question.common_errors.some(function(obj) {
+		    return stripSpecialCharacters(userAnswer).toLowerCase()
+			=== stripSpecialCharacters(obj).toLowerCase();
+		});
 
-	    if (test) {
-		result.result = false;
-		return result;
+		if (test) {
+		    result.result = false;
+		    return result;
+		}
 	    }
 
 	    // Typo
