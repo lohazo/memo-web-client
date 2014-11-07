@@ -67,10 +67,11 @@ angular.module('question.services', ['diff-match-patch'])
 		result: false,
 		userAnswer: userAnswer,
 		correctAnswer: question.question,
-		answerOptions: []
+		answerOptions: false
 	    };
 
-	    if (userAnswer === question.question) {
+	    if (stripSpecialCharacters(userAnswer).toLowerCase()
+		=== stripSpecialCharacters(question.question).toLowerCase()) {
 		result.result = true;
 	    }
 
@@ -214,7 +215,7 @@ angular.module('question.services', ['diff-match-patch'])
 	    var result = {
 		result: false,
 		correctAnswer: question.hints[0],
-		answerOptions: []
+		answerOptions: false
 	    };
 
 	    if (userAnswer.length === question.hints.length
@@ -231,7 +232,8 @@ angular.module('question.services', ['diff-match-patch'])
 		correctAnswer: question.hint
 	    };
 
-	    if (userAnswer === question.hint) {
+	    if (stripSpecialCharacters(userAnswer).toLowerCase()
+		=== stripSpecialCharacters(question.hint).toLowerCase()) {
 		result.result = true;
 	    }
 

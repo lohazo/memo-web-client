@@ -10,6 +10,10 @@ function ExamConfig($routeProvider, $locationProvider) {
 	templateUrl: 'exam/_index.html',
 	controller: 'ExamCtrl'
     });
+    $routeProvider.when('/shortcut/:id', {
+	templateUrl: 'exam/_index.html',
+	controller: 'ExamCtrl'
+    });
     $routeProvider.when('/skill/:id/:lesson_number', {
 	templateUrl: 'exam/_index.html',
 	controller: 'ExamCtrl'

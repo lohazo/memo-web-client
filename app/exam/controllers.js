@@ -15,6 +15,8 @@ angular.module('exam.controllers', ['ngSanitize'])
 		requestData.skill_id = $routeParams.id;
 	    } else if (examType === 'checkpoint') {
 		requestData.checkpoint_position = $routeParams.checkpoint_position;
+	    } else if (examType === 'shortcut') {
+		requestData.skill_id = $routeParams.id;
 	    }
 
 	    $scope.questionTpl = '';
@@ -88,7 +90,9 @@ angular.module('exam.controllers', ['ngSanitize'])
 				};
 			});
 		    }
+		    return true;
 		}
+		return false;
 	    };
 
 	    $scope.autoFeedback = function() {
@@ -131,32 +135,34 @@ angular.module('exam.controllers', ['ngSanitize'])
 		    if (!$scope.result.result) {
 			Exam.skip();
 			$scope.hearts = Exam.hearts();
+			$scope.checkState();
 		    } else {
 			Exam.check();
 		    }
 		    $scope.answered = Exam.answered();
-
-		    $scope.checkState();
 		}
 	    };
 
 	    $scope.nextQuestion = function() {
-		$scope.questionTpl = "";
-		$scope.footerTpl = "footer";
 		if ($scope.isAutoFeedback) {
 		    $scope.autoFeedback();
 		}
 
-		// Aggressively update
-		$timeout(function() {
-		    Exam.next();
-		    $scope.question = Exam.question();
-		    $scope.answered = Exam.answered();
-		    $scope.ant = Exam.questionPosition();
-		    $scope.question.userAnswer = "";
-		    $scope.questionTpl = questionTplId[$scope.question.type];
-		    $scope.isAutoFeedback = Exam.isAutoFeedback();
-		}, 1);
+		if (!$scope.checkState()) {
+		    $scope.questionTpl = "";
+		    $scope.footerTpl = "footer";
+
+		    // Aggressively update
+		    $timeout(function() {
+			Exam.next();
+			$scope.question = Exam.question();
+			$scope.answered = Exam.answered();
+			$scope.ant = Exam.questionPosition();
+			$scope.question.userAnswer = "";
+			$scope.questionTpl = questionTplId[$scope.question.type];
+			$scope.isAutoFeedback = Exam.isAutoFeedback();
+		    }, 1);
+		}
 	    };
 
 	    Exam.start(requestData).then(function(response) {

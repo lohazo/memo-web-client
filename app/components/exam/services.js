@@ -5,7 +5,7 @@ angular.module('exam.services', [])
 	'ExamServices', 'Feedback', '$localStorage',
 	function(ExamServices, Feedback, $localStorage) {
 	var exam, questions, answered, wrongAnswers, question, questionPosition,
-	    hearts, availableItems, examToken, logs;
+	    hearts, availableItems, examToken, answersLog;
 
 	function start(data) {
 	    return ExamServices.start(data).then(function(response) {
@@ -25,7 +25,7 @@ angular.module('exam.services', [])
 	    answered = 0;
 	    questionPosition = 0;
 	    question = questions[questionPosition];
-	    logs = [];
+	    answersLog = [];
 	    Feedback.list = [];
 	}
 
@@ -57,12 +57,15 @@ angular.module('exam.services', [])
 	    if ($localStorage.appSetting.auto_feedback_types.indexOf(question.type) >= 0) {
 		return true;
 	    }
-	    
+
 	    return false;
 	}
 
 	function check(isCorrect) {
 	    answered += 1;
+	    var log = {};
+	    log[question.question_log_id] = true;
+	    answersLog.push(JSON.stringify(log));
 	}
 
 	function next() {
@@ -74,6 +77,10 @@ angular.module('exam.services', [])
 	    hearts.remaining = hearts.remaining - 1;
 	    hearts.lost += 1;
 	    answered += 1;
+
+	    var log = {};
+	    log[question.question_log_id] = false;
+	    answersLog.push(JSON.stringify(log));
 	}
 
 	function logFeedback(data) {
@@ -94,7 +101,7 @@ angular.module('exam.services', [])
 
 	function finish(data) {
 	    data.examToken = examToken;
-	    data.logs = JSON.stringify(logs);
+	    data.logs = JSON.stringify(answersLog);
 	    return ExamServices.finish(data);
 	}
 
@@ -159,12 +166,17 @@ angular.module('exam.services', [])
 		var requestData = {
 		    type: data.type,
 		    auth_token: auth_token,
-		    lesson_number: data.lesson_number,
-		    skill_id: data.skill_id,
+		    exam_token: data.examToken,
 		    device: 'web',
-		    answers: data.logs,
-		    exam_token: data.examToken
+		    answers: data.logs
 		};
+
+		if (data.type === "lesson") {
+		    requestData.lesson_number = data.lesson_number;
+		    requestData.skill_id = data.skill_id;
+		} else if (data.type === "checkpoint") {
+		    requestData.checkpoint_position = data.checkpoint_position;
+		}
 
 		$http.post(BASE_URL + '/exam/finish', requestData)
 		    .then(function(response) {
