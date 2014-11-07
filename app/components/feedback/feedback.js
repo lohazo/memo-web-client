@@ -1,5 +1,6 @@
 'use strict';
 
 angular.module('feedback', [
-   'feedback.services' 
+    'feedback.services',
+    'feedback.reportModal'
 ]);

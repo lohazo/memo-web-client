@@ -4,7 +4,13 @@ angular.module('feedback.services', [])
     .factory('Feedback', ['FeedbackServices', function(FeedbackServices) {
 	var Feedback = {};
 
-	/* A feedback is like {question_log_id, user_input, is_auto} */
+	/* A feedback is like {
+		    question_log_id: $scope.question.question_log_id,
+		    user_answer: $scope.question.userAnswer || '',
+		    user_note: userNote,
+		    feedback_type_ids: feedbackTypeIds,
+		    auto_feedback: false
+		} */
 	Feedback.list = [];
 
 	Feedback.create = function() {
