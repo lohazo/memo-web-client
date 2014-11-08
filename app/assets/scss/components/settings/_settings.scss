@@ -1,0 +1,39 @@
+.setting-page {
+    @include grid-row();
+    margin-top: 40px;
+    .main-left {
+	@include grid-column($columns: 12);
+	.large-5 {
+	    text-align: right;
+	}
+
+	.save.button {
+	    font-size: 1rem;
+	}
+    }
+
+    .main-right {
+	@include grid-column($columns: 4);
+    }
+
+    .container {
+	float: left;
+	background: $white;
+	border-radius: 10px;
+	width: 100%;
+	padding: 20px;
+    }
+
+    .setting-side-nav {
+	@include side-nav(
+	    // Border color of divider
+	    $divider-color: '#ccc',
+	    // Font size of nav items
+	    $font-size:1.2em,
+	    // Color of navigation links
+	    $link-color: $steel,
+	    // Color of navigation links on hover
+	    $link-color-hover: $primary-color
+	);
+    }
+}
