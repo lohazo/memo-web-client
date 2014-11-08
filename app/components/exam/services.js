@@ -144,6 +144,8 @@ angular.module('exam.services', [])
 		    requestData.skill_id = data.skill_id;
 		} else if (data.type === "checkpoint") {
 		    requestData.checkpoint_position = data.checkpoint_position;
+		} else if (data.type === 'shortcut') {
+		    requestData.skill_id = data.skill_id;
 		}
 
 		$http.post(BASE_URL + '/exam/start', requestData)
@@ -175,6 +177,8 @@ angular.module('exam.services', [])
 		    requestData.skill_id = data.skill_id;
 		} else if (data.type === "checkpoint") {
 		    requestData.checkpoint_position = data.checkpoint_position;
+		} else if (data.type === 'shortcut') {
+		    requestData.skill_id = data.skill_id;
 		}
 
 		$http.post(BASE_URL + '/exam/finish', requestData)
