@@ -2,7 +2,7 @@
   <top-bar>
     <ul class="columns small-4 title-area">
       <li class="name">
-        <img src="assets/img/logo-beta-web.png">
+	<a href="/"><img src="assets/img/logo-beta-web.png"></a>
       </li>
     </ul>
     <top-bar-section ng-if="auth.loggedIn">
@@ -27,7 +27,7 @@
           <ul id="dropdown-setting" class="f-dropdown" dropdown-align="right">
             <li><a href="/profile">Hồ sơ cá nhân</a></li>
             <li><a href="/setting/account">Cài đặt</a></li>
-            <li><a ng-click="showShortcutPopup()">Thiết lập phím tắt</a></li>
+            <li><a ng-click="showShortcutPopup()">Phím tắt bàn phím</a></li>
             <li><a ng-click="logout()">Logout</a></li>
           </ul>
         </li>
