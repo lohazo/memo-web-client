@@ -4,9 +4,9 @@ angular.module('home.controller', ['app.services'])
     .controller('HomeCtrl', ['$scope', function($scope) {
     }])
     .controller('HomeMainCtrl', [
-	'$scope', 'Profile', 'Course', 'TreeBuilder',
+	'$scope', 'Profile', 'TreeBuilder',
 	'AppSetting',
-	function($scope, Profile, Course, TreeBuilder, AppSetting) {
+	function($scope, Profile, TreeBuilder, AppSetting) {
 	    Profile.getProfile($scope.auth.user)
 		.then(function() {
 		    $scope.profile = Profile.getData().user_info;
@@ -38,29 +38,10 @@ angular.module('home.controller', ['app.services'])
 		});
 	}
     ])
-    .controller('HomeCourseCtrl', [
-	'$scope',
-	'Course',
-	function($scope, Course) {
-	    Course.list($scope.auth.user).then(function() {
-		$scope.courses = Course.getData();
-	    });
-
-	    $scope.selectCourse = function(courseId) {
-		var requestData = {
-		    base_course_id: courseId
-		};
-
-		Course.selectCourse(requestData)
-		    .then(function() {
-			$scope.auth.current_course = Course.getCourse();
-		    });
-	    };
-	}])
     .controller('PlacementTestModalCtrl', [
 	'$scope', '$modal', '$localStorage',
 	function($scope, $modal, $localStorage) {
-	    function open() {
+	    $scope.open = function() {
 		var modalInstance = $modal.open({
 		    templateUrl: 'home/_placement-test-modal.html',
 		    controller: 'PlacementTestModalInstanceCtrl',
@@ -70,11 +51,13 @@ angular.module('home.controller', ['app.services'])
 
 		modalInstance.result.then(function(msg) {
 		});
-	    }
+	    };
 
-	    if ($scope.auth.loggedIn && $scope.auth.user.is_beginner) {
-		open();
-	    }
+	    $scope.$watch('auth.user', function() {
+		if ($localStorage.auth.user.is_beginner) {
+		    $scope.open();
+		}
+	    });
 	}])
     .controller('PlacementTestModalInstanceCtrl', [
 	'$scope', '$modalInstance',

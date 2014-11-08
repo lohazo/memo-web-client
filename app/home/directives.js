@@ -1,14 +1,6 @@
 'use strict';
 
 angular.module('home.directives', [])
-    .directive('appCourses', function() {
-	return {
-	    strict: 'EA',
-	    scope: true,
-	    controller: 'HomeCourseCtrl',
-	    templateUrl: 'home/_courses.html'
-	};
-    })
     .directive('appMain', function() {
 	return {
 	    strict: 'EA',
@@ -36,5 +28,11 @@ angular.module('home.directives', [])
 	    strict: 'EA',
 	    scope: true,
 	    templateUrl: 'home/_main-right.html'
+	};
+    })
+    .directive('placementTestModal', function() {
+	return {
+	    strict: 'EA',
+	    controller: 'PlacementTestModalCtrl'
 	};
     });

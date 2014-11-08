@@ -8,7 +8,7 @@ angular.module('app', [
     'app.controllers', 'app.directives',
     'header', 'landingpage', 'login', 'home', 'course',
     'profile', 'skill', 'placement', 'report', 'exam',
-    'feedback'
+    'feedback', 'settings'
 ]).config([
     '$routeProvider',
     '$locationProvider',

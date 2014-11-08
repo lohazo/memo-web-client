@@ -1,4 +1,3 @@
 <header app-header></header>
-<section class="app" ng-if="auth.user.current_course_id || auth.user.current_course_name" app-main></section>
-<section class="app" ng-if="!auth.user.current_course_id && !auth.user.current_course_name" app-courses></section>
+<section class="app" app-main></section>
 <footer app-footer></footer>

@@ -41,7 +41,7 @@ angular.module('profile.services', [])
 
 	return new Profile();
     }])
-    .factory('ProfileServices', ['$http', '$q', function($http, $q) {
+    .factory('ProfileServices', ['$http', '$q', '$location', function($http, $q, $location) {
 	var HOST = "http://api.memo.edu.vn/api",
 	    API_VERSION = "/v1.4",
 	    BASE_URL = HOST + API_VERSION;
@@ -51,6 +51,9 @@ angular.module('profile.services', [])
 		var deferred = $q.defer();
 
 		$http.get(BASE_URL + '/users/' + data._id + '?auth_token=' + data.auth_token)
+		    .error(function(data, status, headers, config) {
+			$location.path('/course');
+		    })
 		    .then(function(response) {
 			deferred.resolve(response);
 		    });
@@ -62,6 +65,9 @@ angular.module('profile.services', [])
 
 		$http.get(BASE_URL + '/users/profile_details'
 			  + '?device=web&auth_token=' + data.auth_token)
+		    .error(function(data, status, headers, config) {
+			$location.path('/course');
+		    })
 		    .then(function(response) {
 			deferred.resolve(response);
 		    });

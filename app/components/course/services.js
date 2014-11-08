@@ -16,7 +16,9 @@ angular.module('course.services', [])
 	    return Course.course;
 	};
 
-	Course.prototype.list = function(data) {
+	Course.prototype.list = function() {
+	    var data = {};
+	    data.auth_token = $localStorage.auth.user.auth_token;
 	    return CourseServices.courses(data)
 		.then(function(response) {
 		    Course.list = response.data;
@@ -34,7 +36,7 @@ angular.module('course.services', [])
 
 	return new Course();
     }])
-    .factory('CourseServices', [ '$http', '$q', function($http, $q) {
+    .factory('CourseServices', [ '$http', '$q', '$location', function($http, $q, $location) {
 	var HOST = "http://api.memo.edu.vn/api",
 	    API_VERSION = "/v1.4",
 	    BASE_URL = HOST + API_VERSION;
@@ -54,7 +56,12 @@ angular.module('course.services', [])
 		var deferred = $q.defer();
 
 		$http.post(BASE_URL + '/users/select_course', data)
-		    .then(function(response) {
+		    .error(function(data, status, headers, config) {
+			console.log(status);
+			if (status === 400) {
+			    $location.path('/course');
+			}
+		    }).then(function(response) {
 			deferred.resolve(response);
 		    });
 
