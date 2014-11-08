@@ -86,7 +86,6 @@ angular.module('exam.services', [])
 	function logFeedback(data) {
 	    // data = {question_log_id, user_input, is_auto=true}
 	    Feedback.list.push(data);
-	    console.log(Feedback.list);
 	}
 
 	function sendFeedbackLogs() {
