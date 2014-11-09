@@ -11,4 +11,8 @@ function SettingConfig($routeProvider, $locationProvider) {
 	templateUrl: 'settings/_account.html',
 	controller: 'SettingAccountCtrl'
     });
+    $routeProvider.when('/setting/notification', {
+	templateUrl: 'settings/_notification.html',
+	controller: 'SettingNotificationCtrl'
+    });
 }
