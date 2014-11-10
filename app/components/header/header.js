@@ -17,7 +17,6 @@ angular.module('header.controllers', [])
 	    };
 	    $scope.menus = [
 		{'title': 'Trang chủ', 'link': '/'},
-		{'title': 'Hoạt động', 'link': '/activity'},
 		{'title': 'Thảo luận', 'link': '/discussion'}
 	    ];
 	}
