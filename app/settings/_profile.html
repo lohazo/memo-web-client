@@ -1,0 +1,71 @@
+<header app-header></header>
+<section class="app">
+  <div class="setting-page">
+    <div class="main-left">
+      <div class="container">
+	<section class="setting-profile">
+	  <div class="row">
+	    <h3 class="title left">Hồ sơ</h3>
+	    <a class="small radius button right" ng-click="saveChanges()">Lưu thay đổi</a>
+	  </div>
+	  <div class="row">
+	    <div class="large-12 columns large-centered">
+	      <div class="row">
+		<div class="large-6 columns">Tên đầy đủ</div>
+		<div class="large-10 columns">
+		  <input type="text" ng-model="settingProfile.name"/>
+		</div>
+	      </div>
+	      <div class="row">
+		<div class="large-6 columns">Địa chỉ</div>
+		<div class="large-10 columns">
+		  <input type="text" ng-model="settingProfile.address" id="" />
+		</div>
+	      </div>
+	      <div class="row">
+		<div class="large-6 columns">Tiểu sử</div>
+		<div class="large-10 columns">
+		  <textarea ng-model="settingProfile.content"></textarea>
+		</div>
+	      </div>
+	      <div class="row">
+		<div class="large-6 columns">Học tập từ</div>
+		<div class="large-10 columns"><span></span></div>
+	      </div>
+	      <div class="row">
+		<div class="large-6 columns">Kết nối Facebook</div>
+		<div class="large-10 columns">
+		  <p>Bạn đã được kết nối dưới tên</p>
+		  <a href="" class="radius facebook button" ng-click="linkFb()">Kết nối</a>
+		</div>
+	      </div>
+	      <div class="row">
+		<div class="large-6 columns">Tự động chia sẻ Facebook</div>
+		<div class="large-10 columns">		  
+		  <input type="radio" name="fb-share" id="fb-enable"/>
+		  <label for="fb-enable">Mở</label>
+		  <input type="radio" name="fb-share" id="fb-disable" />
+		  <label for="fb-disable">Tắt</label>
+		</div>
+	      </div>
+	      <div class="row">
+		<div class="large-6 columns">Kết nối Google+</div>
+		<div class="large-10 columns">
+		  <div class="large-10 columns">
+		    <p>Bạn đã được kết nối dưới tên</p>
+		    <a href="" class="radius google button" ng-click="linkGoogle()">Kết nối</a>
+		  </div>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	</section>
+      </div>
+    </div>
+    <div class="main-right">
+      <side-nav></side-nav>
+      <app-version></app-version>
+    </div>
+  </div>
+</section>
+<footer app-footer></footer>

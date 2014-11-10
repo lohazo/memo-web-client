@@ -3,7 +3,7 @@
     margin-top: 40px;
     .main-left {
 	@include grid-column($columns: 12);
-	.large-5 {
+	.large-5, .large-6 {
 	    text-align: right;
 	}
 
