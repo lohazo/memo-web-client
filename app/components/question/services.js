@@ -218,10 +218,14 @@ angular.module('question.services', ['diff-match-patch'])
 		answerOptions: false
 	    };
 
-	    if (userAnswer.length === question.hints.length
-		&& userAnswer[0] === question.hints[0]) {
-		result.result = true;
+	    if (userAnswer.length === question.hints.length) {
+		var test = question.hints.some(function(hint) {
+		    return stripSpecialCharacters(userAnswer[0]) === stripSpecialCharacters(hint);
+		});
+
+		if (test) result.result = true;
 	    }
+
 	    return result;
 	}
 
