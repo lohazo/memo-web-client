@@ -17,6 +17,26 @@ describe('Service', function() {
 	});
     });
 
+    describe('Question.checkListen', function() {
+	var service, scope;
+	beforeEach(inject(function($rootScope, Question) {
+	    scope = $rootScope.$new();
+	    service = Question;
+	}));
+
+	it('check if checkListen exists', function() {
+	    expect(service.checkListen).toBeDefined();
+	});
+
+	it('should return true', function() {
+	    var question = {
+		question: 'Which secretary?'
+	    };
+	    var answer = 'Which secretary';
+	    expect(service.checkListen(question, answer).result).toBe(true);
+	});
+    });
+
     describe('Question.check Translate', function() {
 	var service, scope;
 	beforeEach(inject(function($rootScope, Question) {

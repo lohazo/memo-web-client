@@ -58,6 +58,7 @@ angular.module('question.services', ['diff-match-patch'])
 	    return result;
 	};
 
+	Question.prototype.checkListen = checkListen;
 	Question.prototype.checkTypoOnWord = checkTypoOnWord;
 	Question.prototype.checkTypoOnString = checkTypoOnString;
 	Question.prototype.createHtmlForTypoAnswer = createHtmlForTypoAnswer;
@@ -70,6 +71,8 @@ angular.module('question.services', ['diff-match-patch'])
 		answerOptions: false
 	    };
 
+	    console.log(stripSpecialCharacters(userAnswer).toLowerCase());
+	    console.log(stripSpecialCharacters(question.question).toLowerCase());
 	    if (stripSpecialCharacters(userAnswer).toLowerCase()
 		=== stripSpecialCharacters(question.question).toLowerCase()) {
 		result.result = true;
@@ -270,6 +273,7 @@ angular.module('question.services', ['diff-match-patch'])
 	function stripSpecialCharacters(input) {
 	    var output = input.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g," ");
 	    output = output.replace(/\s+/g, ' ');
+	    output = output.replace('?', ' ');
 	    return output.trim();
 	}
 
