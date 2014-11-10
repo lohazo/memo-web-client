@@ -3,7 +3,8 @@
 angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
 	'$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question',
-	function($scope, $timeout, $routeParams, $location, Exam, Question) {
+	'Sound',
+	function($scope, $timeout, $routeParams, $location, Exam, Question, Sound) {
 	    var examType = $location.path().split('/')[1].trim();
 
 	    var requestData = {
@@ -70,6 +71,7 @@ angular.module('exam.controllers', ['ngSanitize'])
 		    if (Exam.checkState().isFail) {
 			$scope.questionTpl = questionTplId.failure;
 			$scope.footerTpl = "footerFailure";
+			Sound.playFailSound();
 		    } else {
 			// Call finish API
 			Exam.finish(requestData).then(function(response) {
@@ -89,6 +91,7 @@ angular.module('exam.controllers', ['ngSanitize'])
 				    }]
 				};
 			});
+			Sound.playFinishSound();
 		    }
 		    return true;
 		}
@@ -120,6 +123,7 @@ angular.module('exam.controllers', ['ngSanitize'])
 		$scope.result = Question.skip($scope.question, '');
 
 		Exam.skip();
+		Sound.playHeartLostSound();
 
 		$scope.hearts = Exam.hearts();
 		$scope.footerTpl = "footerResult";
@@ -134,10 +138,12 @@ angular.module('exam.controllers', ['ngSanitize'])
 
 		    if (!$scope.result.result) {
 			Exam.skip();
+			Sound.playHeartLostSound();
 			$scope.hearts = Exam.hearts();
 			$scope.checkState();
 		    } else {
 			Exam.check();
+			Sound.playCorrectSound();
 		    }
 		    $scope.answered = Exam.answered();
 		}
