@@ -11,10 +11,6 @@ angular.module('gamification.sound', [])
 	    'heart_lost': ngAudio.load('/assets/sound/sound-fx-heart_lost.mp3')
 	};
 
-	Sound.load = function() {
-
-	};
-
 	Sound.playCorrectSound = function() {
 	    Sound.files.correct.play();
 	};
