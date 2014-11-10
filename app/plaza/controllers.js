@@ -28,11 +28,20 @@ angular.module('plaza.controllers', [])
 		});
 
 	    Plaza.get().then(function(response) {
-		$scope.plaza = response.data;
+		$scope.plaza = Plaza.data;
 	    });
 
 	    $scope.buy = function(id) {
-		
+		var data = {};
+		var item = $scope.plaza.items.filter(function(item) {
+		    return item._id === id;
+		})[0];
+
+		if (item) {
+		    data.base_item_id = id;
+		    data.quantity = 1;
+		    Plaza.buy(data);
+		}
 	    };
 	}
     ]);

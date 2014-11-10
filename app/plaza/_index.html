@@ -21,7 +21,7 @@
 		<p class="info">{{item.info}}</p>
 	      </div>
 	      <div class="large-4 columns">
-		<a class="radius {{item.can_by ? '' : 'disabled'}} button" ng-click="buy(item._id)">
+		<a class="radius {{item.can_buy ? '' : 'disabled'}} button" ng-click="buy(item._id)">
 		  {{item.price}} 
 		  <img style="display:inline-block;" src="assets/img/lesson-memos-big.png" width="20"/>
 		</a>
