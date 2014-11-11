@@ -23,11 +23,11 @@ angular.module('question.judge', [])
 		answer: "=answer"
 	    },
 	    controller: 'QuestionJudgeCtrl',
-	    link: function($scope) {
+	    link: function($scope, $element) {
 		$scope.updateUserAnswer = function(option) {
 		    $scope.userAnswer = $scope.userAnswer || [];
-		    var idx = $scope.userAnswer.indexOf(option);
-		    if (option.checked) {
+		    var idx = $scope.userAnswer.indexOf(option.text);
+		    if (option.checked && idx < 0) {
 			$scope.userAnswer.push(option.text);
 		    } else {
 			$scope.userAnswer.splice(idx, 1);
