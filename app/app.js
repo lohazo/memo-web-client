@@ -4,7 +4,7 @@
 angular.module('app', [
     'ngRoute', 'ngStorage', 'ngAudio',
     'mm.foundation', 'angles', 'facebook','googleplus',
-    'angular-loading-bar',
+    // 'angular-loading-bar',
     'app.controllers', 'app.directives',
     'header', 'landingpage', 'login', 'home', 'course',
     'profile', 'skill', 'placement', 'report', 'exam',
@@ -35,6 +35,9 @@ function AppConfig($routeProvider, $locationProvider,
 	    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
 	return str.join("&");
     }];
+
+    $httpProvider.defaults.useXDomain = true;
+    $httpProvider.interceptors.push('HttpInterceptor');
 
     FacebookProvider.init({
 	appId: '856714854352716',
