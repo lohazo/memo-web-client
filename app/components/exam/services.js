@@ -25,7 +25,7 @@ angular.module('exam.services', [])
 	    answered = 0;
 	    questionPosition = 0;
 	    question = questions[questionPosition];
-	    answersLog = [];
+	    answersLog = {};
 	    Feedback.list = [];
 	}
 
@@ -65,7 +65,7 @@ angular.module('exam.services', [])
 	    answered += 1;
 	    var log = {};
 	    log[question.question_log_id] = true;
-	    answersLog.push(JSON.stringify(log));
+	    answersLog[question.question_log_id] = true;
 	}
 
 	function next() {
@@ -80,7 +80,7 @@ angular.module('exam.services', [])
 
 	    var log = {};
 	    log[question.question_log_id] = false;
-	    answersLog.push(JSON.stringify(log));
+	    answersLog[question.question_log_id] = false;
 	}
 
 	function logFeedback(data) {
