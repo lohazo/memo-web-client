@@ -3,9 +3,15 @@ footer {
 	&.skip {
 	    background-color: #ededed;
 	    color: $steel;
+	    &:hover {
+		background-color: scale-color(#ededed, $lightness: 20%);
+	    }
 	}
 	&.check, &.continue {
 	    background-color: $success-color;
+	    &:hover {
+		background-color: scale-color($success-color, $lightness: 5%);
+	    }
 	}
     }
     .success {
@@ -16,6 +22,9 @@ footer {
 		border: 2px $success-color solid;
 		color: $success-font-color;
 		padding-top: 0.5rem;
+		&:hover {
+		    background-color: scale-color($success-bg-color, $lightness: 20%);
+		}
 	    }
 	}	    
     }
@@ -27,6 +36,9 @@ footer {
 		border: 2px $white solid;
 		color: $warning-font-color;
 		padding-top: 0.5rem;
+		&:hover {
+		    background-color: scale-color($warning-bg-color, $lightness: 66%);
+		}
 	    }
 	}
     }
