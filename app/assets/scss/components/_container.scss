@@ -3,6 +3,11 @@ html, body {
     width: 100%;
 }
 
+body {
+    background: url('assets/img/bg-bottom-repeat.png') repeat-x fixed center bottom $gainsboro;
+    background-size: 280px 320px;
+}
+
 .full {
     display: block;
     float: left;
@@ -19,6 +24,10 @@ html, body {
 
 .top-bar {
     min-width: $row-width;
+}
+
+.app {
+    margin-bottom: 100px;
 }
 
 .container {
