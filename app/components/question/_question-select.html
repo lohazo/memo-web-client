@@ -7,7 +7,7 @@
       <div class="small-16 columns answers">
 	<div class="row">
 	  <form>
-            <div class="image image-{{$index + 1}}" ng-repeat="option in question.options | limitTo: 3" ng-click="selectAnswer($index + 1)">
+            <div class="image image-{{$index + 1}}" ng-repeat="option in options track by $index" ng-click="selectAnswer($index + 1)">
               <img ng-src="{{option.image_file}}" />
               <input type="radio" name="answer" value="{{option.text}}" ng-model="select.userAnswer" />
               <label>{{option.text}}</label>
