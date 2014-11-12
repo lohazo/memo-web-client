@@ -4,124 +4,124 @@ angular.module('exam.services', [])
     .factory('Exam', [
 	'ExamServices', 'Feedback', '$localStorage',
 	function(ExamServices, Feedback, $localStorage) {
-	var exam, questions, answered, wrongAnswers, question, questionPosition,
-	    hearts, availableItems, examToken, answersLog;
+	    var exam, questions, answered, wrongAnswers, question, questionPosition,
+		hearts, availableItems, examToken, answersLog;
 
-	function start(data) {
-	    return ExamServices.start(data).then(function(response) {
-		init(response.data);
-	    });
-	}
-
-	function init(data) {
-	    // questions = data.questions.filter(function(q) {return q.type === 'translate';});
-	    questions = data.questions;
-	    hearts = {
-		remaining: data.max_hearts_count,
-		lost: 0
-	    };
-	    availableItems = data.available_item;
-	    examToken = data.exam_token;
-	    answered = 0;
-	    questionPosition = 0;
-	    question = questions[questionPosition];
-	    answersLog = {};
-	    Feedback.list = [];
-	}
-
-	function getQuestions() {
-	    return questions;
-	}
-
-	function getQuestion() {
-	    return question;
-	}
-
-	function getQuestionPosition() {
-	    return questionPosition;
-	}
-
-	function getWrongAnswers() {
-	    return wrongAnswers;
-	}
-
-	function getAnswered() {
-	    return answered;
-	}
-
-	function getHearts() {
-	    return hearts;
-	}
-
-	function getIsAutoFeedback() {
-	    if ($localStorage.appSetting.auto_feedback_types.indexOf(question.type) >= 0) {
-		return true;
+	    function start(data) {
+		return ExamServices.start(data).then(function(response) {
+		    init(response.data);
+		});
 	    }
 
-	    return false;
-	}
+	    function init(data) {
+		// questions = data.questions.filter(function(q) {return q.type === 'translate';});
+		questions = data.questions;
+		hearts = {
+		    remaining: data.max_hearts_count,
+		    lost: 0
+		};
+		availableItems = data.available_item;
+		examToken = data.exam_token;
+		answered = 0;
+		questionPosition = 0;
+		question = questions[questionPosition];
+		answersLog = {};
+		Feedback.list = [];
+	    }
 
-	function check(isCorrect) {
-	    answered += 1;
-	    var log = {};
-	    log[question.question_log_id] = true;
-	    answersLog[question.question_log_id] = true;
-	}
+	    function getQuestions() {
+		return questions;
+	    }
 
-	function next() {
-	    questionPosition += 1;
-	    question = questions[questionPosition];
-	}
+	    function getQuestion() {
+		return question;
+	    }
 
-	function skip() {
-	    hearts.remaining = hearts.remaining - 1;
-	    hearts.lost += 1;
-	    answered += 1;
+	    function getQuestionPosition() {
+		return questionPosition;
+	    }
 
-	    var log = {};
-	    log[question.question_log_id] = false;
-	    answersLog[question.question_log_id] = false;
-	}
+	    function getWrongAnswers() {
+		return wrongAnswers;
+	    }
 
-	function logFeedback(data) {
-	    // data = {question_log_id, user_input, is_auto=true}
-	    Feedback.list.push(data);
-	}
+	    function getAnswered() {
+		return answered;
+	    }
 
-	function sendFeedbackLogs() {
-	    Feedback.create();
-	}
+	    function getHearts() {
+		return hearts;
+	    }
 
-	function checkState() {
-	    if (hearts.remaining < 0) return {isFinished: true, isFail: true};
-	    if (answered === questions.length) return {isFinished: true, isFail: false};
-	    return {isFinished: false, isFail: false};
-	}
+	    function getIsAutoFeedback() {
+		if ($localStorage.appSetting.auto_feedback_types.indexOf(question.type) >= 0) {
+		    return true;
+		}
 
-	function finish(data) {
-	    data.examToken = examToken;
-	    data.logs = JSON.stringify(answersLog);
-	    return ExamServices.finish(data);
-	}
+		return false;
+	    }
 
-	return {
-	    start: start,
-	    skip: skip,
-	    finish: finish,
-	    next: next,
-	    check: check,
-	    answered: getAnswered,
-	    wrongAnswers: getWrongAnswers,
-	    questions: getQuestions,
-	    question: getQuestion,
-	    questionPosition: getQuestionPosition,
-	    hearts: getHearts,
-	    checkState: checkState,
-	    logFeedback: logFeedback,
-	    sendFeedbackLogs: sendFeedbackLogs,
-	    isAutoFeedback: getIsAutoFeedback
-	};
-    }])
+	    function check(isCorrect) {
+		answered += 1;
+		var log = {};
+		log[question.question_log_id] = true;
+		answersLog[question.question_log_id] = true;
+	    }
+
+	    function next() {
+		questionPosition += 1;
+		question = questions[questionPosition];
+	    }
+
+	    function skip() {
+		hearts.remaining = hearts.remaining - 1;
+		hearts.lost += 1;
+		answered += 1;
+
+		var log = {};
+		log[question.question_log_id] = false;
+		answersLog[question.question_log_id] = false;
+	    }
+
+	    function logFeedback(data) {
+		// data = {question_log_id, user_input, is_auto=true}
+		Feedback.list.push(data);
+	    }
+
+	    function sendFeedbackLogs() {
+		Feedback.create();
+	    }
+
+	    function checkState() {
+		if (hearts.remaining < 0) return {isFinished: true, isFail: true};
+		if (answered === questions.length) return {isFinished: true, isFail: false};
+		return {isFinished: false, isFail: false};
+	    }
+
+	    function finish(data) {
+		data.examToken = examToken;
+		data.logs = JSON.stringify(answersLog);
+		return ExamServices.finish(data);
+	    }
+
+	    return {
+		start: start,
+		skip: skip,
+		finish: finish,
+		next: next,
+		check: check,
+		answered: getAnswered,
+		wrongAnswers: getWrongAnswers,
+		questions: getQuestions,
+		question: getQuestion,
+		questionPosition: getQuestionPosition,
+		hearts: getHearts,
+		checkState: checkState,
+		logFeedback: logFeedback,
+		sendFeedbackLogs: sendFeedbackLogs,
+		isAutoFeedback: getIsAutoFeedback
+	    };
+	}])
     .factory('ExamServices', [
 	'$http', '$q', '$localStorage',
 	function($http, $q, $localStorage) {
