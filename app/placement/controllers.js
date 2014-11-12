@@ -2,8 +2,8 @@
 
 angular.module('placement.controllers', [])
     .controller('PlacementCtrl', [
-	'$scope', '$rootScope', '$location', 'Placement', 'Question',
-	function($scope, $rootScope, $location, PlacementTest, Question) {
+	'$scope', '$rootScope', '$location', 'Placement', 'Question', 'Sound',
+	function($scope, $rootScope, $location, PlacementTest, Question, Sound) {
 	    $scope.questionTpl = '';
 	    $scope.footerTpl = 'footer';
 
@@ -37,6 +37,7 @@ angular.module('placement.controllers', [])
 	    };
 
 	    $scope.skip = function() {
+		Sound.playHeartLostSound();
 		$scope.result = Question.skip($scope.question, '');
 		$scope.footerTpl = "footerResult";
 	    };
@@ -45,6 +46,11 @@ angular.module('placement.controllers', [])
 		if ($scope.question.userAnswer && $scope.question.userAnswer.length > 0) {
 		    $scope.result = Question.check($scope.question, $scope.question.userAnswer);
 		    $scope.footerTpl = "footerResult";
+		    if ($scope.result.result) {
+			Sound.playCorrectSound();
+		    } else {
+			Sound.playHeartLostSound();
+		    }
 		}
 	    };
 
@@ -64,18 +70,22 @@ angular.module('placement.controllers', [])
 
 		PlacementTest.submitAnswer(requestData)
 		    .then(function() {
-			$scope.question = PlacementTest.question().question;
-			$scope.question.userAnswer = "";
-			if ($scope.question) {
+			var responseData = PlacementTest.question();
+			if (responseData.question) {
+			    $scope.question = responseData.question;
+			    $scope.question.userAnswer = "";
 			    $scope.questionTpl = questionTplId[$scope.question.type];
 			    $scope.result = { };
 			} else {
+			    $scope.question = responseData;
 			    if ($scope.question.finish_exam_bonus_exp === 0 &&
 				$scope.question.num_affected_skills.length === 0) {
 
+				Sound.playFailSound();
 				$scope.questionTpl = 'questionFailure';
 				$scope.footerTpl = 'footerFailure';
 			    } else {
+				Sound.playFinishSound();
 				$scope.questionTpl = 'questionSuccess';
 				$scope.footerTpl = 'footerSuccess';
 				$scope.expChart = {
@@ -105,20 +115,3 @@ angular.module('placement.controllers', [])
 		    $scope.questionTpl = questionTplId[$scope.question.type];
 		});
 	}]);
-			// $scope.question = {
-			//     "finish_exam_bonus_exp": 0,
-			//     "leveled_up": false,
-			//     "exp_chart": {
-			// 	"days": ["Sa","Su","Mo","Tu","We","Th","Fr"],
-			// 	"exp": [0,0,0,0,1010,0,0]
-			//     },
-			//     "combo_days": 1,
-			//     "affected_skill": {
-			// 	"_id": "en-vi_dai_tu_quan_he",
-			// 	"order": 1,
-			// 	"title": "Đại từ quan hệ",
-			// 	"slug": "Đại từ Q.hệ",
-			// 	"theme_color": "#99cc00"
-			//     },
-			//     "num_affected_skills": 37
-			// };
