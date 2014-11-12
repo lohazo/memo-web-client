@@ -10,6 +10,11 @@ angular.module('landingpage.login', [])
 	    scope: true,
 	    replace: true,
 	    link: function($scope, $ele) {
+		$ele.bind('keypress', function(e) {
+		    if (e.keyCode === 13) {
+			$scope.login();
+		    }
+		});
 	    },
 	    templateUrl: 'components/landingpage/header/_login-modal.html'
 	};
@@ -20,6 +25,11 @@ angular.module('landingpage.login', [])
 	    scope: true,
 	    replace: true,
 	    link: function($scope, $ele) {
+		$ele.bind('keypress', function(e) {
+		    if (e.keyCode === 13) {
+			$scope.login();
+		    }
+		});
 	    },
 	    templateUrl: 'components/landingpage/header/_register-modal.html'
 	};
