@@ -125,6 +125,8 @@ describe('Service', function() {
 	    expect(service.checkTypoOnWord('fundamental', 'fandemetel').isDifferent).toBe(true);
 	    expect(service.checkTypoOnWord('fundamental', 'fandemetal').isDifferent).toBe(true);
 	    expect(service.checkTypoOnWord('fundamental', 'fandametal').isDifferent).toBe(true);
+	    expect(service.checkTypoOnWord('enter', 'antor').isDifferent).toBe(true);
+	    expect(service.checkTypoOnWord('milestone', 'mylestane').isDifferent).toBe(true);
 	});
     });
 });

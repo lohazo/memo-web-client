@@ -71,8 +71,6 @@ angular.module('question.services', ['diff-match-patch'])
 		answerOptions: false
 	    };
 
-	    console.log(stripSpecialCharacters(userAnswer).toLowerCase());
-	    console.log(stripSpecialCharacters(question.question).toLowerCase());
 	    if (stripSpecialCharacters(userAnswer).toLowerCase()
 		=== stripSpecialCharacters(question.question).toLowerCase()) {
 		result.result = true;
@@ -189,8 +187,12 @@ angular.module('question.services', ['diff-match-patch'])
 		return diff[0] === dmp.DIFF_DELETE || diff[0] === dmp.DIFF_INSERT;
 	    }).length;
 
-	    if ((word.length >= 2 && word.length <= 4 && numberOfDiffs > 1)
-		|| (word.length > 4 && numberOfDiffs > 2)) {
+	    // if ((word.length >= 2 && word.length <= 4 && numberOfDiffs > 1)
+	    //	|| (word.length > 4 && numberOfDiffs > 2)) {
+	    //	result.isDifferent = true;
+	    //	return result;
+	    // }
+	    if (numberOfDiffs > 1) {
 		result.isDifferent = true;
 		return result;
 	    }
