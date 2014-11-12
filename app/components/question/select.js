@@ -47,7 +47,7 @@ angular.module('question.select', [])
 		    angular.element(element).addClass('selected');
 
 		    // FIXME: No two-way binding
-		    $scope.select.userAnswer = $scope.question.options[number - 1].text;
+		    $scope.select.userAnswer = $scope.options[number - 1].text;
 		    $scope.question.userAnswer = $scope.select.userAnswer;
 		};
 	    },
