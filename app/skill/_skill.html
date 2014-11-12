@@ -18,14 +18,14 @@
 	    Ngữ pháp và ghi chú
 	  </div>
 	</div>
-	<div class="row" ng-repeat="lesson in skill.lessons track by $index" ng-if="$index%3==0">
-	  <div class="{{$index < skill.finished_lesson ? 'past' : ($index == skill.finished_lesson ? 'unlocked' : 'locked')}} lesson text-center" ng-repeat="i in [$index,$index + 1, $index +2]">
-	    <h4 class="name">Bài học {{i + 1}}</h4>
+	<div class="row">
+	  <div class="{{$index < skill.finished_lesson ? 'past' : ($index == skill.finished_lesson ? 'unlocked' : 'locked')}} lesson text-center" ng-repeat="lesson in skill.lessons track by $index">
+	    <h4 class="name">Bài học {{$index + 1}}</h4>
 	    <div class="small-16 small-centered columns objectives">
 	      {{skill.lessons[$index].objectives.join(', ')}}
 	    </div>
-	    <a ng-if="$index < skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{i + 1}}" class="memo-button">Làm lại</a>
-	    <a ng-if="$index == skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{i + 1}}" class="memo-button">Bắt đầu</a>
+	    <a ng-if="$index < skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button">Làm lại</a>
+	    <a ng-if="$index == skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button">Bắt đầu</a>
 	    <a ng-if="$index > skill.finished_lesson" class="disabled memo-button"><i class="icon-lock"></i> Khóa</a>
 	  </div>
 	</div>
