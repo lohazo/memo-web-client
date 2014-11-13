@@ -4,8 +4,8 @@
     <label for="control-1"></label>
     <input type="radio" id="control-2" name="controls"/>
     <label for="control-2"></label>
-    <input type="radio" id="control-3" name="controls"/>
-    <label for="control-3"></label>
+    <input type="radio" id="control-3" name="controls" ng-if="question.bonus_coin"/>
+    <label for="control-3" ng-if="question.bonus_coin"></label>
     <div class="slider-inner">
       <ul>
 	<li>
@@ -26,7 +26,11 @@
 	<li>
 	  <div class="slide slide-2">
 	    <h4 class="text-center">Hoàn thành kỹ năng</h4>
-	    <h4>{{question.affected_skill.title}}</h4>
+	    <h4>{{question.affected_skill.title}}
+	      <span ng-show="{{question.num_affected_skills && question.num_affected_skills > 0}}">
+		và {{question.num_affected_skills}} kỹ năng khác
+	      </span>
+	    </h4>
 	    <div class="row">
 	      <div class="large-16 columns">
 		<div class="skill-row">
@@ -49,8 +53,30 @@
 	  </div>
 	</li>
 	<li>
-	  <div class="slide slide-3">
-
+	  <div class="slide slide-3 reward" ng-if="question.bonus_coin">
+	    <h4 class="text-center">Bạn đã nhận được {{question.bonus_coin}} Memo Coin!</h4>
+	    <div class="row">
+	      <div class="large-16 columns">
+		<div class="big-memo-coin">
+		  <div class="quantity">{{question.bonus_coin}}</div>
+		</div>
+		<div class="detail-box">
+		  <div class="row item">
+		    <div class="large-12 columns text">Hoàn tất kỹ năng {{question.affected_skill.title}}</div>
+		    <div class="large-4 columns quantity">1</div>
+		  </div>
+		  <div class="row item">
+		    <div class="large-12 columns text">Hoàn thành bài học với đủ trái tim</div>
+		    <div class="large-4 columns quantity">1</div>
+		  </div>
+		  <hr />
+		  <div>
+		    Sử dụng Memo Coin để mua những vật phẩm từ
+		    <a ng-href="/plaza">Memo Plaza</a>
+		  </div>
+		</div>
+	      </div>
+	    </div>
 	  </div>
 	</li>
       </ul>
