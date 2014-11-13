@@ -43,15 +43,11 @@ angular.module('login.services', [])
 
 	    AuthService.prototype.GLogin = function() {
 		var requestData = {};
-		GooglePlus.login().then(function(gAuthResult) {
+		return GooglePlus.login().then(function(gAuthResult) {
 		    requestData.g_access_token = gAuthResult.access_token;
 		    GooglePlus.getUser().then(function(response) {
 			requestData.gmail = response.result.email;
 			LoginService.login(requestData).then(loginCallback);
-		    });
-		}, function(err) {
-		    $rootScope.$broadcast('event:auth-loginFailed', {
-			error: "Có lỗi khi đăng nhập bằng Google"
 		    });
 		});
 	    };

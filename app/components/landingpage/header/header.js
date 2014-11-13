@@ -80,10 +80,13 @@ angular.module('landingpage.login', [])
 
 	    $scope.FbLogin = function() {
 		AuthService.FbLogin();
+		$rootScope.$on('event:auth-loginConfirmed', function() {
+		    $timeout(closeModal, 10);
+		});
 	    };
 
 	    $scope.GLogin = function() {
-		AuthService.GLogin();
+		AuthService.GLogin().then(closeModal, displayMessageOnFail);
 	    };
 
 	    $scope.register = function() {
@@ -95,10 +98,6 @@ angular.module('landingpage.login', [])
 		AuthService.login($scope.user)
 		    .then(closeModal, displayMessageOnFail);
 	    };
-
-	    $rootScope.$on('event:auth-loginConfirmed', function() {
-		$timeout(closeModal, 10);
-	    });
 
 	    function closeModal(data) {
 		if ($modalInstance) {
