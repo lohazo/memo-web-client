@@ -3,9 +3,9 @@
 angular.module('course.controllers', [])
     .controller('CourseCtrl', [
 	'$scope',
-	'$location',
+	'$window',
 	'Course',
-	function($scope, $location, Course) {
+	function($scope, $window, Course) {
 	    Course.list().then(function() {
 		$scope.courses = Course.getData();
 	    });
@@ -17,7 +17,7 @@ angular.module('course.controllers', [])
 
 		Course.selectCourse(requestData)
 		    .then(function() {
-		    	$location.path('/');
+		    	$window.location.href = '/';
 		    });
 	    };
 	}]);

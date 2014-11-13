@@ -2,8 +2,8 @@
 
 angular.module('exam.services', [])
     .factory('Exam', [
-	'ExamServices', 'Feedback', '$localStorage', '$location',
-	function(ExamServices, Feedback, $localStorage, $location) {
+	'ExamServices', 'Feedback', '$localStorage', '$window',
+	function(ExamServices, Feedback, $localStorage, $window) {
 	    var exam, questions, answered, wrongAnswers, question, questionPosition,
 		hearts, availableItems, examToken, answersLog;
 
@@ -13,7 +13,7 @@ angular.module('exam.services', [])
 			init(response.data);
 		    }, function(response) {
 			if (response.status == 422) {
-			    $location.path('/');
+			    $window.location = "/";
 			}
 		    });
 	    }

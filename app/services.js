@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app.services', [])
-    .factory('HttpInterceptor', function($q, $location, $localStorage) {
+    .factory('HttpInterceptor', function($rootScope, $q, $window, $localStorage) {
 	return {
 	    // optional method
 	    'request': function(config) {
@@ -22,15 +22,21 @@ angular.module('app.services', [])
 	    // optional method
 	    'response': function(response) {
 		// do something on success
+		if (response.status === 401) {
+		    $localStorage.$reset();
+		    alert(response.data.error);
+		    $window.reload();
+		}
 		return response;
 	    },
 
 	    // optional method
 	    'responseError': function(rejection) {
 		// do something on error
-		if(rejection.status === 401) {
+		if (rejection.status === 401) {
 		    $localStorage.$reset();
-		    $location.path('/');
+		    alert(rejection.data.error);
+		    $window.location = '/';
 		}
 		return $q.reject(rejection);
 	    }

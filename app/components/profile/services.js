@@ -53,6 +53,11 @@ angular.module('profile.services', [])
 		$http.get(BASE_URL + '/users/' + data._id + '?auth_token=' + data.auth_token)
 		    .then(function(response) {
 			deferred.resolve(response);
+		    }, function(response) {
+			if (response.status == 400) {
+			    $location.path('/course');
+			}
+			deferred.reject(response);
 		    });
 
 		return deferred.promise;
