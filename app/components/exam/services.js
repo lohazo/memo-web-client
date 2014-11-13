@@ -2,15 +2,20 @@
 
 angular.module('exam.services', [])
     .factory('Exam', [
-	'ExamServices', 'Feedback', '$localStorage',
-	function(ExamServices, Feedback, $localStorage) {
+	'ExamServices', 'Feedback', '$localStorage', '$location',
+	function(ExamServices, Feedback, $localStorage, $location) {
 	    var exam, questions, answered, wrongAnswers, question, questionPosition,
 		hearts, availableItems, examToken, answersLog;
 
 	    function start(data) {
-		return ExamServices.start(data).then(function(response) {
-		    init(response.data);
-		});
+		return ExamServices.start(data)
+		    .then(function(response) {
+			init(response.data);
+		    }, function(response) {
+			if (response.status == 422) {
+			    $location.path('/');
+			}
+		    });
 	    }
 
 	    function init(data) {
@@ -151,6 +156,8 @@ angular.module('exam.services', [])
 		$http.post(BASE_URL + '/exam/start', requestData)
 		    .then(function(response) {
 			deferred.resolve(response);
+		    }, function(response) {
+			deferred.reject(response);
 		    });
 
 		// $http.get('/assets/data/exam_1.json').then(function(response) {
