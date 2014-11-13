@@ -28,12 +28,13 @@
 }
 
 .login-modal, .register-modal {
-    @include reveal-modal-base (
-        $base-style: false,
-        $width: rem-calc(400)
-    );
+    /* @include reveal-modal-base ( */
+    /*     $base-style: false, */
+    /*     $width: rem-calc(400) */
+    /* ); */
+    background: $white;
+    border: none;
     max-width: rem-calc(400);
-    top: 190px;
     .ant {
 	background: url('assets/img/login-ant.png') no-repeat;
 	display: block;
@@ -50,10 +51,10 @@
 }
 
 .login-modal, .register-modal {
-    @include reveal-modal-style (
-        $bg: $white,
-        $border: false
-    );
+    /* @include reveal-modal-style ( */
+    /*     $bg: $white, */
+    /*     $border: false */
+    /* ); */
 }
 
 .login-modal, .register-modal {
@@ -61,28 +62,25 @@
     text-align: center;
     min-height: 1px;
     position: fixed;
+    top: 153px !important;
+
+    input[type="text"], input[type="email"], input[type="password"] {
+	margin-bottom: 10px;
+    }
 
     .modal-title {
-        font-size: 1.2em;
+	font-size: 1.2em;
     }
-    
+
     .modal-footer {
-        background-color: $gainsboro;
-        border-radius: 0 0 10px 10px;
-        height: 64px;
-        text-align: center;
+	background-color: $gainsboro;
+	border-radius: 0 0 10px 10px;
+	height: 64px;
+	text-align: center;
 
-        p {
-            line-height: 64px;
-        }
-    }
-
-    .fields {
-        margin-bottom: 16px;
-        input {
-            margin-bottom: 0;
-        }
-        
+	p {
+	    line-height: 64px;
+	}
     }
     .error {
 	color: $warning-font-color;
