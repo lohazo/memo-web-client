@@ -21,9 +21,16 @@
 	    margin-top: auto;
 	    .slider {
 		.slide {
-		    h3 {
+		    h4 {
 			text-align: center;
-			margin-bottom: 30px;
+			margin-bottom: 20px;
+			font-weight: 700;
+		    }
+		    p {
+			width: 600px;
+			font-size: 18px;
+			color: $steel;
+			margin: 0 auto;
 		    }
 		}
 	    }
@@ -42,6 +49,10 @@
 		width: 110px;
 		height: 138px;
 		margin: 30px auto;
+	    }
+	    .facebook.share.button {
+		background-color: #33b5e5;
+		margin-top: 40px;
 	    }
 	    .skill-row {
 		@include grid-row();
@@ -93,6 +104,51 @@
 			    $x : $x + 1;
 			}
 		    }
+		}
+	    }
+	}
+	
+	.reward {
+	    .big-memo-coin {
+		position: relative;
+		background: url('assets/img/lesson-memos-big.png') no-repeat;
+		width: 130px;
+		height: 150px;
+		margin: 0 auto;
+		.quantity {
+		    display: block;
+		    position: absolute;
+		    right: -10px;
+		    top: 25px;
+		    background-color: red;
+		    color: $white;
+		    border-radius: 50%;
+		    width: 30px;
+		    height: 30px;
+		    font-weight: 700;
+		    padding: 2px;
+		}
+	    }
+	    .detail-box {
+		display: block;
+		width: 400px;
+		min-height: 200px;
+		padding: 20px;
+		margin: 30px auto;
+		border: 1px solid $gainsboro;
+		border-radius: 10px;
+		box-shadow: 0 0 10px 4px $gainsboro;
+		color: $steel;
+		.text {
+		    @include grid-column($columns: 12);
+		    font-weight: 700;
+		    text-align: left;
+		    margin-bottom: 1rem;
+		}
+		.quantity {
+		    @include grid-column($columns: 4);
+		    font-weight: 700;
+		    text-align: right
 		}
 	    }
 	}
