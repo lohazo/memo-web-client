@@ -28,36 +28,9 @@
 }
 
 .login-modal, .register-modal {
-    /* @include reveal-modal-base ( */
-    /*     $base-style: false, */
-    /*     $width: rem-calc(400) */
-    /* ); */
     background: $white;
     border: none;
     max-width: rem-calc(400);
-    .ant {
-	background: url('assets/img/login-ant.png') no-repeat;
-	display: block;
-	position: absolute;
-	width: 126px;
-	height: 147px;
-	top: -160px;
-	left: 50%;
-	z-index: 1;
-    }
-    .forgot-password {
-	margin-bottom: 20px;
-    }
-}
-
-.login-modal, .register-modal {
-    /* @include reveal-modal-style ( */
-    /*     $bg: $white, */
-    /*     $border: false */
-    /* ); */
-}
-
-.login-modal, .register-modal {
     padding: 20px;
     text-align: center;
     min-height: 1px;
@@ -70,6 +43,20 @@
 
     .modal-title {
 	font-size: 1.2em;
+    }
+
+    .ant {
+	background: url('assets/img/login-ant.png') no-repeat;
+	display: block;
+	position: absolute;
+	width: 126px;
+	height: 147px;
+	top: -160px;
+	left: 50%;
+	z-index: 1;
+    }
+    .forgot-password {
+	margin-bottom: 20px;
     }
 
     .modal-footer {
