@@ -4,7 +4,7 @@
 angular.module('app', [
     'ngRoute', 'ngStorage', 'ngAudio',
     'mm.foundation', 'angles', 'facebook','googleplus',
-    // 'angular-loading-bar',
+    'angular-loading-bar',
     'app.controllers', 'app.directives',
     'header', 'landingpage', 'login', 'home', 'course',
     'profile', 'skill', 'placement', 'report', 'exam',
