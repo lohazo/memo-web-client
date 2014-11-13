@@ -74,9 +74,10 @@ angular.module('exam.controllers', ['ngSanitize'])
 			Sound.playFailSound();
 		    } else {
 			// Call finish API
-			Exam.finish(requestData).then(function(response) {
+			Exam.finish(requestData).then(function() {
 			    $scope.questionTpl = questionTplId.success;
 			    $scope.footerTpl = "footerSuccess";
+			    $scope.question = Exam.question();
 			    $scope.expChart = {
 				    labels: $scope.question.exp_chart.days,
 				    datasets: [{

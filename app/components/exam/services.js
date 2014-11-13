@@ -106,7 +106,9 @@ angular.module('exam.services', [])
 	    function finish(data) {
 		data.examToken = examToken;
 		data.logs = JSON.stringify(answersLog);
-		return ExamServices.finish(data);
+		return ExamServices.finish(data).then(function(response) {
+		    question = response.data;
+		});
 	    }
 
 	    return {
