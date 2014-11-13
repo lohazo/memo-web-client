@@ -115,6 +115,8 @@ angular.module('login.services', [])
 		$http.post(BASE_URL + '/users', data)
 		    .then(function(authData) {
 			deferred.resolve(authData);
+		    }, function(authData) {
+			deferred.reject(authData);
 		    });
 		return deferred.promise;
 	    },
@@ -123,6 +125,8 @@ angular.module('login.services', [])
 		$http.post(BASE_URL + '/users/login', data)
 		    .then(function(authData) {
 			deferred.resolve(authData);
+		    }, function(authData) {
+			deferred.reject(authData);
 		    });
 		return deferred.promise;
 	    },

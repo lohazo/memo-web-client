@@ -36,8 +36,9 @@ angular.module('landingpage.login', [])
     })
     .controller('LoginModalCtrl', [
 	'$scope',
+	'$rootScope',
 	'$modal',
-	function($scope, $modal) {
+	function($scope, $rootScope, $modal) {
 	    $scope.open = function() {
 		var modalInstance = $modal.open({
 		    template: '<div login-modal></div>',
@@ -68,6 +69,7 @@ angular.module('landingpage.login', [])
 	'$modalInstance', '$routeParams', 'AuthService',
 	function($rootScope, $scope, $timeout, $modalInstance, $routeParams, AuthService) {
 	    $scope.user = {};
+	    $scope.error = '';
 	    $scope.registerModal = function() {
 		$modalInstance.close('openRegister');
 	    };
@@ -86,22 +88,26 @@ angular.module('landingpage.login', [])
 
 	    $scope.register = function() {
 		AuthService.register($scope.user)
-		    .then(function() {
-			$modalInstance.close();
-		    });
+		    .then(closeModal, displayMessageOnFail);
 	    };
 
 	    $scope.login = function() {
 		AuthService.login($scope.user)
-		    .then(function() {
-			$modalInstance.close();
-		    });
+		    .then(closeModal, displayMessageOnFail);
 	    };
 
 	    $rootScope.$on('event:auth-loginConfirmed', function() {
-		$timeout(function() {
-		    $modalInstance.close();
-		}, 10);
+		$timeout(closeModal, 10);
 	    });
+
+	    function closeModal(data) {
+		if ($modalInstance) {
+		    $modalInstance.close();
+		}
+	    }
+
+	    function displayMessageOnFail(response) {
+		$scope.error = response.data.error;
+	    }
 	}
     ]);
