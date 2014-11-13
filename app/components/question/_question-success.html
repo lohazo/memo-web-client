@@ -1,50 +1,59 @@
-<div class="question-inner">
-  <div class="small-16 small-centered columns success question">
-    <div class="slider text-center">
-      <input type="radio" id="control-1" name="controls" checked="checked"/>
-      <label for="control-1"></label>
-      <input type="radio" id="control-2" name="controls"/>
-      <label for="control-2"></label>
-      <div class="slider-inner">
-        <ul>
-          <li>
-	    <div class="slide slide-1">
-	      <h3>Bạn đã hoàn thành bài kiểm tra</h3>
-	      <div class="row">
-		<div class="large-8 columns col-left">
-		  <span class="lesson-finish-ant"></span>
+<div class="small-16 small-centered columns success question">
+  <div class="slider text-center">
+    <input type="radio" id="control-1" name="controls" checked="checked"/>
+    <label for="control-1"></label>
+    <input type="radio" id="control-2" name="controls"/>
+    <label for="control-2"></label>
+    <input type="radio" id="control-3" name="controls"/>
+    <label for="control-3"></label>
+    <div class="slider-inner">
+      <ul>
+	<li>
+	  <div class="slide slide-1">
+	    <h4>Bài học kết thúc! + {{question.finish_exam_bonus_exp}} XP</h4>
+	    <h4>Thưởng thêm trái tim + {{question.heart_bonus_exp}} XP</h4>
+	    <div class="row">
+	      <div class="large-8 columns col-left">
+		<span class="lesson-finish-ant"></span>
+	      </div>
+	      <div class="large-8 columns col-right">
+		<canvas linechart options="chartOptions" data="expChart" width="320" height="280">
+		</canvas>
+	      </div>
+	    </div>
+	  </div>
+	</li>
+	<li>
+	  <div class="slide slide-2">
+	    <h4 class="text-center">Hoàn thành kỹ năng</h4>
+	    <h4>{{question.affected_skill.title}}</h4>
+	    <div class="row">
+	      <div class="large-16 columns">
+		<div class="skill-row">
+		  <div class="success skill skill-{{question.affected_skill.order}}">
+		    <div class="icon"></div>
+		    <div class="name">{{question.affected_skill.slug}}</div>
+		    <div class="level level-5">
+		      <div class="strength-bar"></div>
+		    </div>
+		  </div>
 		</div>
-		<div class="large-8 columns col-right">
-		  <canvas linechart options="chartOptions" data="expChart" width="400" height="280"></canvas>
+		<div class="row">
+		  <p>Cố giữ những thanh hiển thị độ mạnh luôn đầy vì qua thời gian các thanh sẽ giảm dần khi quên từ vựng</p>
+		</div>
+		<div class="row">
+		  <a href="" class="small radius facebook share button">Chia sẻ</a>
 		</div>
 	      </div>
 	    </div>
-          </li>
-          <li>
-	    <div class="slide slide-2">
-	      <h3 class="text-center">Hoàn thành kỹ năng</h3>
-	      <h3>{{question.affected_skill.title}}</h3>
-	      <div class="row">
-		<div class="large-16 columns">
-		  <div class="skill-row">
-		    <div class="success skill skill-{{question.affected_skill.order}}">
-		      <div class="icon"></div>
-		      <div class="name">{{question.affected_skill.slug}}</div>
-		      <div class="level level-5">
-			<div class="strength-bar"></div>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="row">Cố giữ những thanh hiển thị độ mạnh luôn đầy vì qua thời gian các thanh sẽ giảm dần khi quên từ vựng</div>
-		  <div class="row">
-		    <a href="" class="small radius facebook share button">Chia sẻ</a>
-		  </div>
-		</div>
-	      </div>
-            </div>               
-          </li>
-        </ul>
-      </div>
+	  </div>
+	</li>
+	<li>
+	  <div class="slide slide-3">
+
+	  </div>
+	</li>
+      </ul>
     </div>
   </div>
 </div>
