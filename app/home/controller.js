@@ -53,7 +53,7 @@ angular.module('home.controller', ['app.services'])
 		});
 	    };
 
-	    $scope.$watch('auth.user.is_beginner', function() {
+	    $scope.$watch('$localStorage.auth.user.is_beginner', function() {
 		if ($localStorage.auth.user.is_beginner) {
 		    $scope.open();
 		}

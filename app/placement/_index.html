@@ -3,11 +3,23 @@
   <div class="row player placement-test">
     <section class="container">
       <header ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess'">
-	<div class="small-3 columns text-center track">
+	<div class="small-4 columns text-center track">
 	  <div class="row">
             <div class="small-8 columns">
               <a href="" ng-click="quit()">Thoát</a>
+            </div>  
+            <div class="small-8 columns">
+              {{num_questions || 0}} / {{total_num_questions || 0}}
             </div>
+	  </div>
+	</div>
+	<div class="small-8 columns" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess'">
+	  <div class="distinct progress question-{{questions.length}}" >
+	    <span class="ant jump-{{ant}}"></span>
+	    <span class="done meter" ng-repeat="i in getNumber(answered) track by $index">
+	    </span>
+	    <span class="nothing meter" ng-repeat="j in getNumber(questions.length - answered) track by $index">
+	    </span>
 	  </div>
 	</div>
       </header>

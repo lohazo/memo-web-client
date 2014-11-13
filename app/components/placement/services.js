@@ -25,6 +25,25 @@ angular.module('placement.services', [])
 		return PlacementServices.submitAnswer(data)
 		    .then(function(response) {
 			question = response.data;
+			// question = {
+			//     "finish_exam_bonus_exp": 0,
+			//     "leveled_up": false,
+			//     "heart_bonus_exp": 3,
+			//     "exp_chart": {
+			// 	"days": ["Sa","Su","Mo","Tu","We","Th","Fr"],
+			// 	"exp": [0,0,0,0,1010,0,0]
+			//     },
+			//     "combo_days": 1,
+			//     "affected_skill": {
+			// 	"_id": "en-vi_dai_tu_quan_he",
+			// 	"order": 1,
+			// 	"title": "Đại từ quan hệ",
+			// 	"slug": "Đại từ Q.hệ",
+			// 	"theme_color": "#99cc00"
+			//     },
+			//     "num_affected_skills": 37,
+			//     "bonus_coin": 2
+			// };
 		    });
 	    }
 	    return {

@@ -11,11 +11,11 @@ angular.module('profile.services', [])
 	Profile.prototype.getData = function() {
 	    return Profile.data;
 	};
-	
+
 	Profile.prototype.setDetail = function(data) {
 	    Profile.detail = data;
 	};
-	
+
 	Profile.prototype.getDetail = function() {
 	    return Profile.detail;
 	};
@@ -30,7 +30,7 @@ angular.module('profile.services', [])
 		    $localStorage.auth.skills = Profile.data.skills;
 		});
 	};
-	
+
 	Profile.prototype.getProfileDetail = function(data) {
 	    return ProfileServices.profileDetail(data)
 		.then(function(response) {
@@ -51,9 +51,6 @@ angular.module('profile.services', [])
 		var deferred = $q.defer();
 
 		$http.get(BASE_URL + '/users/' + data._id + '?auth_token=' + data.auth_token)
-		    .error(function(data, status, headers, config) {
-			$location.path('/course');
-		    })
 		    .then(function(response) {
 			deferred.resolve(response);
 		    });
@@ -65,9 +62,6 @@ angular.module('profile.services', [])
 
 		$http.get(BASE_URL + '/users/profile_details'
 			  + '?device=web&auth_token=' + data.auth_token)
-		    .error(function(data, status, headers, config) {
-			$location.path('/course');
-		    })
 		    .then(function(response) {
 			deferred.resolve(response);
 		    });
