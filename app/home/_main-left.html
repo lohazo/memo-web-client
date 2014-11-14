@@ -15,11 +15,15 @@
     </div>
     <hr/>
     <div class="row">
-      <div class="large-8 columns streak">
-	<i class="icon"></i><span class="text">{{profileDetail.combo_days}} Combo</span>
+      <div class="large-4 columns streak">
+	<i tooltip="Combo" class="icon"></i><span class="text">{{profileDetail.combo_days}}</span>
       </div>
-      <div class="large-8 columns memos">
-	<i class="icon"></i><span class="text">{{profileDetail.virtual_money}} Memos</span>
+      <div class="large-6 columns exp">
+	<i tooltip="Kinh nghiệm" class="icon"></i>
+	<span class="text">{{profileDetail.exp}}</span>
+      </div>
+      <div class="large-6 columns memos">
+	<i tooltip="Combo" class="icon"></i><span class="text">{{profileDetail.virtual_money}}</span>
       </div>
     </div>
     <div class="row">
@@ -32,12 +36,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="large-8 columns exp">
-	<i class="icon"></i><span class="text">{{profileDetail.exp}} XP</span>
-      </div>
-      <div class="large-8 columns known-words">
-	<i class="left icon"></i><span class="text">{{auth.current_course.known_words}} từ</span>
-      </div>
+      <!-- <div class="large-8 columns known-words"> -->
+      <!-- 	<i class="left icon"></i><span class="text">{{auth.current_course.known_words}} từ</span> -->
+      <!-- </div> -->
     </div>
     <hr />
     <div class="row">
