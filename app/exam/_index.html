@@ -24,7 +24,11 @@
 	</div>
 	<div class="small-4 columns" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess'">
 	  <div class="row">
-	    <div class="small-5 columns inventory"></div>
+	    <div class="small-5 columns inventory">
+	      <span class="item" ng-repeat="(key, val) in availableItems">
+		<img ng-src="assets/img/{{key}}.png" style="width:25px;height:35px;" ng-click="useItem(key)" />
+	      </span>
+	    </div>
 	    <div class="small-11 columns hearts">
 	      <span class="heart" ng-repeat="x in getNumber(hearts.remaining) track by $index"></span>
 	      <span class="lost heart" ng-repeat="y in getNumber(hearts.lost) track by $index"></span>
@@ -32,7 +36,7 @@
 	  </div>
 	</div>
       </header>
-      <div class="question">	
+      <div class="question" ng-keypress="keyHandler(event=$event)">	
 	<question-form ng-if="questionTpl == 'questionForm'"></question-form>  
 	<question-judge ng-if="questionTpl == 'questionJudge'"></question-judge>  
 	<question-listen ng-if="questionTpl == 'questionListen'" answer="question.userAnswer"></question-listen>  

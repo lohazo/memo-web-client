@@ -4,31 +4,34 @@
 var angular = window.angular || angular;
 
 angular.module('leaderboard.controllers', [])
-    .controller('LeaderboardCtrl', ['$scope', 'Leaderboard', function($scope, Leaderboard) {
-	$scope.search = {
-	    name: ''
-	};
-	$scope.showTheLeaderboard = function() {
-	    $scope.showLeaderboard = true;
-	    $scope.showFbFriends = false;
-	    $scope.showFriends = false;
-	};
-	$scope.searchFbFriends = function() {
-	    Leaderboard.fbFriends().then(function(response) {
-		$scope.fbFriends = response.data.data;
-	    });
-	    $scope.showLeaderboard = false;
-	    $scope.showFbFriends = true;
-	    $scope.showFriends = false;
-	};
-	$scope.searchFriends = function() {
-	    $scope.showLeaderboard = false;
-	    $scope.showFbFriends = false;
-	    $scope.showFriends = true;
-	};
-	$scope.showTheLeaderboard();
+    .controller('LeaderboardCtrl', [
+	'$scope', '$localStorage', 'Leaderboard',
+	function($scope, $localStorage, Leaderboard) {
+	    $scope.profile = $localStorage.auth.profile_detail;
+	    $scope.search = {
+		name: ''
+	    };
+	    $scope.showTheLeaderboard = function() {
+		$scope.showLeaderboard = true;
+		$scope.showFbFriends = false;
+		$scope.showFriends = false;
+	    };
+	    $scope.searchFbFriends = function() {
+		Leaderboard.fbFriends().then(function(response) {
+		    $scope.fbFriends = response.data.data;
+		});
+		$scope.showLeaderboard = false;
+		$scope.showFbFriends = true;
+		$scope.showFriends = false;
+	    };
+	    $scope.searchFriends = function() {
+		$scope.showLeaderboard = false;
+		$scope.showFbFriends = false;
+		$scope.showFriends = true;
+	    };
+	    $scope.showTheLeaderboard();
 
-    }])
+	}])
     .controller('LeaderboardHomeCtrl', ['$scope', function($scope) {
 	// dirty checking
 	$scope.$watch('profile', function() {
