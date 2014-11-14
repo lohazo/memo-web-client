@@ -40,7 +40,9 @@ angular.module('plaza.controllers', [])
 		if (item) {
 		    data.base_item_id = id;
 		    data.quantity = 1;
-		    Plaza.buy(data);
+		    Plaza.buy(data).then(function() {
+			$scope.plaza = Plaza.data;
+		    });
 		}
 	    };
 	}

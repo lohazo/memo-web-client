@@ -16,7 +16,8 @@ angular.module('plaza.services', [])
 	    return PlazaServices.buy(data)
 		.then(function(response) {
 		    $localStorage.auth.profile_detail.virtual_money = response.data.virtual_money;
-		});
+		})
+		.then(Plaza.get);
 	};
 
 	Plaza.use = function(data) {
