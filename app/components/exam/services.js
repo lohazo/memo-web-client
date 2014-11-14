@@ -2,8 +2,8 @@
 
 angular.module('exam.services', [])
     .factory('Exam', [
-	'ExamServices', 'Feedback', '$localStorage', '$window',
-	function(ExamServices, Feedback, $localStorage, $window) {
+	'ExamServices', 'Feedback', 'PlazaServices', '$localStorage', '$window',
+	function(ExamServices, Feedback, PlazaServices, $localStorage, $window) {
 	    var exam, questions, answered, wrongAnswers, question, questionPosition,
 		hearts, availableItems, examToken, answersLog;
 
@@ -25,7 +25,7 @@ angular.module('exam.services', [])
 		    remaining: data.max_hearts_count,
 		    lost: 0
 		};
-		availableItems = data.available_item;
+		availableItems = data.available_items;
 		examToken = data.exam_token;
 		answered = 0;
 		questionPosition = 0;
@@ -66,6 +66,10 @@ angular.module('exam.services', [])
 		return false;
 	    }
 
+	    function getAvailableItems() {
+		return availableItems;
+	    }
+
 	    function check(isCorrect) {
 		answered += 1;
 		var log = {};
@@ -97,6 +101,21 @@ angular.module('exam.services', [])
 		Feedback.create();
 	    }
 
+	    function useItem(item) {
+		var requestData = {'base_item_id': item};
+
+		if (item === 'health_potion') {
+		    if (hearts.lost > 0) {
+			hearts.lost = hearts.lost - 1;
+			hearts.remaining = hearts.remaining + 1;
+			PlazaServices.use(requestData)
+			    .then(function(response) {
+				delete availableItems[item];
+			    });
+		    }
+		}
+	    }
+
 	    function checkState() {
 		if (hearts.remaining < 0) return {isFinished: true, isFail: true};
 		if (answered === questions.length) return {isFinished: true, isFail: false};
@@ -126,7 +145,9 @@ angular.module('exam.services', [])
 		checkState: checkState,
 		logFeedback: logFeedback,
 		sendFeedbackLogs: sendFeedbackLogs,
-		isAutoFeedback: getIsAutoFeedback
+		isAutoFeedback: getIsAutoFeedback,
+		availableItems: getAvailableItems,
+		useItem: useItem
 	    };
 	}])
     .factory('ExamServices', [

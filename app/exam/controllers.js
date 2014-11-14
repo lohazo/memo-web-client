@@ -51,6 +51,11 @@ angular.module('exam.controllers', ['ngSanitize'])
 	    };
 	    $scope.userAnswer = '';
 
+	    $scope.useItem = function(item) {
+		Exam.useItem(item);
+		$scope.availableItems = Exam.availableItems();
+	    };
+
 	    $scope.quit = function(afterDoingTest) {
 		// Call Feedback API
 		if (afterDoingTest) {
@@ -181,6 +186,7 @@ angular.module('exam.controllers', ['ngSanitize'])
 		$scope.question.userAnswer = "";
 		$scope.questionTpl = questionTplId[$scope.question.type];
 		$scope.isAutoFeedback = Exam.isAutoFeedback();
+		$scope.availableItems = Exam.availableItems();
 	    });
 	}
     ]);
