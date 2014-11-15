@@ -39,22 +39,28 @@ angular.module('home.controller', ['app.services'])
 	}
     ])
     .controller('PlacementTestModalCtrl', [
-	'$scope', '$modal', '$localStorage',
-	function($scope, $modal, $localStorage) {
+	'$scope', '$modal', '$rootScope',
+	function($scope, $modal, $rootScope) {
+	    $scope.profile = {};
 	    $scope.open = function() {
 		var modalInstance = $modal.open({
 		    templateUrl: 'home/_placement-test-modal.html',
 		    controller: 'PlacementTestModalInstanceCtrl',
 		    windowClass: 'placement-test-modal',
-		    backdrop: 'static'
+		    backdrop: 'static',
+		    resolve: {
+			profile: function() {
+			    return $scope.profile;
+			}
+		    }
 		});
 
 		modalInstance.result.then(function(msg) {
 		});
 	    };
 
-	    $scope.$watch('$localStorage.auth.user.is_beginner', function() {
-		if ($localStorage.auth.user.is_beginner) {
+	    $scope.$watch('profile', function() {
+		if ($scope.profile.is_beginner) {
 		    $scope.open();
 		}
 	    });
