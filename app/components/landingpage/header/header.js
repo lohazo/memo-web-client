@@ -27,7 +27,7 @@ angular.module('landingpage.login', [])
 	    link: function($scope, $ele) {
 		$ele.bind('keypress', function(e) {
 		    if (e.keyCode === 13) {
-			$scope.login();
+			$scope.register();
 		    }
 		});
 	    },
