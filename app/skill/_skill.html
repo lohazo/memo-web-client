@@ -9,7 +9,9 @@
 	  <div class="level level-5">
             <div class="strength-bar"></div>
 	  </div>
-	  <a ng-href="/shortcut/{{skill._id}}" class="test-out memo-button">Kiểm tra</a>
+	  <a ng-href="/shortcut/{{skill._id}}" class="test-out memo-button">
+	    {{skill.finished_lesson == skill.lessons.length ? 'Củng cố' : 'Kiểm tra' }}
+	  </a>
 	</div>
       </div>
       <div class="small-12 columns lessons">
