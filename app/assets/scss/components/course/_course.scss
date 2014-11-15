@@ -35,9 +35,15 @@
 	color: $primary-color;
 	font-size: $button-font-med;
 	width: 100%;
+	text-align: left;
 	&:hover {
 	    background-color: $primary-color;
 	    border-radius: $global-radius;
+	    color: $white;
+	}
+
+	&.disabled {
+	    background-color: $iron;
 	    color: $white;
 	}
 	img {
