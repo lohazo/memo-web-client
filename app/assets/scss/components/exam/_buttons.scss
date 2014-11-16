@@ -12,6 +12,13 @@ footer {
 	    &:hover {
 		background-color: scale-color($success-color, $lightness: 5%);
 	    }
+	    &.disabled {
+		background-color: $aluminum;
+		&:hover {
+		    background-color: $aluminum;
+		    cursor: none;
+		}
+	    }
 	}
     }
     .success {

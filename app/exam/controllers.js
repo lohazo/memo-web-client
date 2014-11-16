@@ -188,5 +188,9 @@ angular.module('exam.controllers', ['ngSanitize'])
 		$scope.isAutoFeedback = Exam.isAutoFeedback();
 		$scope.availableItems = Exam.availableItems();
 	    });
+
+	    $scope.keyUpHandler = function(e) {
+		
+	    };
 	}
     ]);

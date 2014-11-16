@@ -36,7 +36,7 @@
 	  </div>
 	</div>
       </header>
-      <div class="question">
+      <div class="question" tabindex="0" ng-keyup="keyUpHandler(event=$event)">
 	<question-form ng-if="questionTpl == 'questionForm'"></question-form>
 	<question-judge ng-if="questionTpl == 'questionJudge'"></question-judge>
 	<question-listen ng-if="questionTpl == 'questionListen'" answer="question.userAnswer"></question-listen>
