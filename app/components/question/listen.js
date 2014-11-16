@@ -32,7 +32,16 @@ angular.module('question.listen', [])
 		answer: "=answer"
 	    },
 	    controller: 'QuestionListenCtrl',
-	    link: function($scope) {
+	    link: function($scope, $element) {
+		$element[0].querySelector('input[type="text"]').focus();
+		$element.on('keydown', function(e) {
+		    if (e.keyCode === 13) {
+			if ($scope.answer && $scope.answer.length > 0) {
+			    e.preventDefault();
+			    $element[0].querySelector('input[type="text"]').setAttribute('readonly', 'readonly');
+			}
+		    }
+		});
 	    },
 	    templateUrl: 'components/question/_question-listen.html'
 	};

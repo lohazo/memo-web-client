@@ -34,6 +34,18 @@ angular.module('question.judge', [])
 		    }
 		    $scope.$parent.question.userAnswer = $scope.userAnswer;
 		};
+
+		$element.attr('tabindex', '0');
+		$element[0].focus();
+		$element.on('keyup', function(event) {
+		    if (event.keyCode === 97) {
+			$scope.updateUserAnswer($scope.options[0]);
+		    } else if (event.keyCode === 98) {
+			$scope.updateUserAnswer($scope.options[1]);
+		    } else if (event.keyCode === 99) {
+			$scope.updateUserAnswer($scope.options[2]);
+		    }
+		});
 	    },
 	    templateUrl: 'components/question/_question-judge.html'
 	};

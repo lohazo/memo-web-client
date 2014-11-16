@@ -134,6 +134,7 @@ angular.module('exam.controllers', ['ngSanitize'])
 		$scope.hearts = Exam.hearts();
 		$scope.footerTpl = "footerResult";
 
+		$scope.questionState = 'answered';
 		$scope.checkState();
 	    };
 
@@ -152,6 +153,7 @@ angular.module('exam.controllers', ['ngSanitize'])
 			Sound.playCorrectSound();
 		    }
 		    $scope.answered = Exam.answered();
+		    $scope.questionState = 'answered';
 		}
 	    };
 
@@ -163,6 +165,7 @@ angular.module('exam.controllers', ['ngSanitize'])
 		if (!$scope.checkState()) {
 		    $scope.questionTpl = "";
 		    $scope.footerTpl = "footer";
+		    $scope.questionState = "";
 
 		    // Aggressively update
 		    $timeout(function() {
@@ -190,7 +193,16 @@ angular.module('exam.controllers', ['ngSanitize'])
 	    });
 
 	    $scope.keyUpHandler = function(e) {
-		
+		if (e.keyCode === 13) {
+		    if ($scope.question.userAnswer && $scope.question.userAnswer.length > 0) {
+			if ($scope.questionState && $scope.questionState === 'answered') {
+			    // $scope.check();
+			    $scope.nextQuestion();
+			} else {
+			    $scope.check();
+			}
+		    }
+		}
 	    };
 	}
     ]);

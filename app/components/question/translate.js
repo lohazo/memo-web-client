@@ -28,8 +28,16 @@ angular.module('question.translate', [])
 	    scope: {
 		answer: '='
 	    },
-	    link: function($scope) {
-
+	    link: function($scope, $element) {
+		$element.find('textarea').eq(0)[0].focus();
+		$element.on('keydown', function(e) {
+		    if (e.keyCode === 13) {
+			if ($scope.answer && $scope.answer.length > 0) {
+			    e.preventDefault();
+			    $element.find('textarea').eq(0).attr('readonly', 'readonly');
+			}
+		    }
+		});
 	    },
 	    controller: 'QuestionTranslateCtrl',
 	    templateUrl: 'components/question/_question-translate.html'

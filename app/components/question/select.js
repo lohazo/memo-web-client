@@ -37,7 +37,7 @@ angular.module('question.select', [])
 		answer: "=answer"
 	    },
 	    controller: 'QuestionSelectCtrl',
-	    link: function($scope) {
+	    link: function($scope, $element) {
 		$scope.selectAnswer = function(number) {
 		    // DOM manipulation
 
@@ -50,6 +50,18 @@ angular.module('question.select', [])
 		    $scope.select.userAnswer = $scope.options[number - 1].text;
 		    $scope.question.userAnswer = $scope.select.userAnswer;
 		};
+
+		$element.attr('tabindex', '0');
+		$element[0].focus();
+		$element.on('keyup', function(event) {
+		    if (event.keyCode === 97) {
+			$scope.selectAnswer(1);
+		    } else if (event.keyCode === 98) {
+			$scope.selectAnswer(2);
+		    } else if (event.keyCode === 99) {
+			$scope.selectAnswer(3);
+		    }
+		});
 	    },
 	    templateUrl: 'components/question/_question-select.html'
 	};
