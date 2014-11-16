@@ -5,12 +5,12 @@
       <header ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess'">
 	<div class="small-4 columns text-center track">
 	  <div class="row">
-            <div class="small-8 columns">
-              <a href="" ng-click="quit()">Thoát</a>
-            </div>  
-            <div class="small-8 columns">
-              {{num_questions || 0}} / {{total_num_questions || 0}}
-            </div>
+	    <div class="small-8 columns">
+	      <a href="" ng-click="quit()">Thoát</a>
+	    </div>
+	    <div class="small-8 columns">
+	      {{num_questions || 0}} / {{total_num_questions || 0}}
+	    </div>
 	  </div>
 	</div>
 	<div class="small-8 columns" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess'">
@@ -23,12 +23,12 @@
 	  </div>
 	</div>
       </header>
-      <div class="question">	
-	<question-form ng-if="questionTpl == 'questionForm'"></question-form>  
-	<question-judge ng-if="questionTpl == 'questionJudge'"></question-judge>  
-	<question-listen ng-if="questionTpl == 'questionListen'" answer="question.userAnswer"></question-listen>  
-	<question-name ng-if="questionTpl == 'questionName'"></question-name>  
-	<question-select ng-if="questionTpl == 'questionSelect'" answer="question.userAnswer"></question-select>  
+      <div class="question" ng-keyup="keyUpHandler(event=$event)">
+	<question-form ng-if="questionTpl == 'questionForm'"></question-form>
+	<question-judge ng-if="questionTpl == 'questionJudge'"></question-judge>
+	<question-listen ng-if="questionTpl == 'questionListen'" answer="question.userAnswer"></question-listen>
+	<question-name ng-if="questionTpl == 'questionName'"></question-name>
+	<question-select ng-if="questionTpl == 'questionSelect'" answer="question.userAnswer"></question-select>
 	<question-translate ng-if="questionTpl == 'questionTranslate'" answer="question.userAnswer"></question-translate>
 	<question-failure ng-if="questionTpl == 'questionFailure'" answer="question.userAnswer"></question-failure>
 	<question-success ng-if="questionTpl == 'questionSuccess'" answer="question.userAnswer"></question-success>

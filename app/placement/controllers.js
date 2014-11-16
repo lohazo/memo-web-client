@@ -39,6 +39,7 @@ angular.module('placement.controllers', [])
 	    $scope.skip = function() {
 		Sound.playHeartLostSound();
 		$scope.result = Question.skip($scope.question, '');
+		$scope.questionState = 'answered';
 		$scope.footerTpl = "footerResult";
 	    };
 
@@ -51,6 +52,7 @@ angular.module('placement.controllers', [])
 		    } else {
 			Sound.playHeartLostSound();
 		    }
+		    $scope.questionState = 'answered';
 		}
 	    };
 
@@ -71,6 +73,7 @@ angular.module('placement.controllers', [])
 		PlacementTest.submitAnswer(requestData)
 		    .then(function() {
 			var responseData = PlacementTest.question();
+			$scope.questionState = '';
 			if (responseData.question) {
 			    $scope.question = responseData.question;
 			    $scope.question.userAnswer = "";
@@ -114,4 +117,17 @@ angular.module('placement.controllers', [])
 		    $scope.question.userAnswer = "";
 		    $scope.questionTpl = questionTplId[$scope.question.type];
 		});
+
+	    $scope.keyUpHandler = function(e) {
+		if (e.keyCode === 13) {
+		    if ($scope.question.userAnswer && $scope.question.userAnswer.length > 0) {
+			if ($scope.questionState && $scope.questionState === 'answered') {
+			    // $scope.check();
+			    $scope.nextQuestion();
+			} else {
+			    $scope.check();
+			}
+		    }
+		}
+	    };
 	}]);
