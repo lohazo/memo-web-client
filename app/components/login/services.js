@@ -88,7 +88,7 @@ angular.module('login.services', [])
 		molData.code_chanel = $routeParams.code_chanel || -100;
 		molData.id_landingpage = $routeParams.id_landingpage || -100;
 		molData.id_campaign = $routeParams.id_campaign || -100;
-		molData.id = $routeParams.id || -100;
+		molData.id_camp_landingpage = $routeParams.id || -100;
 
 		mixpanel.track('Web 1.0.2 user logged in', molData);
 
