@@ -123,9 +123,11 @@ a.reverse.button {
 	color: $primary-color;
 	&:hover {
 	    background-position: -300px 0;
+	    color: $white;
+	    font-weight: 700;
 	    .icon-lock {
 		color: $white;
-	    }
+	    } 
 	}
 	.icon-lock {
 	    color: $gold;
@@ -133,6 +135,8 @@ a.reverse.button {
     }
     &.disabled {
 	background-position: -600px 0;
+	color: $white;
+	font-weight: 700;
 	&:hover {
 	    background-position: -600px 0;
 	}
