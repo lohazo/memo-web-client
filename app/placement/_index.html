@@ -13,15 +13,6 @@
 	    </div>
 	  </div>
 	</div>
-	<div class="small-8 columns" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess'">
-	  <div class="distinct progress question-{{questions.length}}" >
-	    <span class="ant jump-{{ant}}"></span>
-	    <span class="done meter" ng-repeat="i in getNumber(answered) track by $index">
-	    </span>
-	    <span class="nothing meter" ng-repeat="j in getNumber(questions.length - answered) track by $index">
-	    </span>
-	  </div>
-	</div>
       </header>
       <div class="question" ng-keyup="keyUpHandler(event=$event)">
 	<question-form ng-if="questionTpl == 'questionForm'"></question-form>

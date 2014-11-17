@@ -78,6 +78,7 @@ angular.module('placement.controllers', [])
 			    $scope.question = responseData.question;
 			    $scope.question.userAnswer = "";
 			    $scope.questionTpl = questionTplId[$scope.question.type];
+			    $scope.num_questions = responseData.num_questions;
 			    $scope.result = { };
 			} else {
 			    $scope.question = responseData;
@@ -114,6 +115,8 @@ angular.module('placement.controllers', [])
 		.then(function() {
 		    $scope.question = PlacementTest.question().question;
 		    $scope.exam_token = PlacementTest.question().exam_token;
+		    $scope.num_questions = PlacementTest.question().num_questions;
+		    $scope.total_num_questions = PlacementTest.question().total_num_questions;
 		    $scope.question.userAnswer = "";
 		    $scope.questionTpl = questionTplId[$scope.question.type];
 		});
