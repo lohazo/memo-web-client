@@ -38,13 +38,13 @@ angular.module('question.judge', [])
 		$element.attr('tabindex', '0');
 		$element[0].focus();
 		$element.on('keyup', function(event) {
-		    if (event.keyCode === 97) {
+		    if (event.keyCode === 97 || event.keyCode === 49) {
 			$scope.options[0].checked = !$scope.options[0].checked;
 			$scope.updateUserAnswer($scope.options[0]);
-		    } else if (event.keyCode === 98) {
+		    } else if (event.keyCode === 98 || event.keyCode === 50) {
 			$scope.options[1].checked = !$scope.options[1].checked;
 			$scope.updateUserAnswer($scope.options[1]);
-		    } else if (event.keyCode === 99) {
+		    } else if (event.keyCode === 99 || event.keyCode === 51) {
 			$scope.options[2].checked = !$scope.options[2].checked;
 			$scope.updateUserAnswer($scope.options[2]);
 		    }

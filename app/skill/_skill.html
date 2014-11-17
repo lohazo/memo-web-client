@@ -16,9 +16,9 @@
       </div>
       <div class="small-12 columns lessons">
 	<div class="row">
-	  <!-- <div class="small-4 columns right grammar-note"> -->
-	  <!--   Ngữ pháp và ghi chú -->
-	  <!-- </div> -->
+	  <div class="small-4 columns right grammar-note">
+	    &nbsp;
+	  </div>
 	</div>
 	<div class="row">
 	  <div class="{{$index < skill.finished_lesson ? 'past' : ($index == skill.finished_lesson ? 'unlocked' : 'locked')}} lesson text-center" ng-repeat="lesson in skill.lessons track by $index">

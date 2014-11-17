@@ -54,11 +54,12 @@ angular.module('question.select', [])
 		$element.attr('tabindex', '0');
 		$element[0].focus();
 		$element.on('keyup', function(event) {
-		    if (event.keyCode === 97) {
+		    console.log(event);
+		    if (event.keyCode === 97 || event.keyCode === 49) {
 			$scope.selectAnswer(1);
-		    } else if (event.keyCode === 98) {
+		    } else if (event.keyCode === 98 || event.keyCode === 50) {
 			$scope.selectAnswer(2);
-		    } else if (event.keyCode === 99) {
+		    } else if (event.keyCode === 99 || event.keyCode === 51) {
 			$scope.selectAnswer(3);
 		    }
 		});
