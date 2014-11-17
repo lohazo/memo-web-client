@@ -86,7 +86,7 @@ angular.module('login.services', [])
 
 		var molData = {};
 		molData.code_chanel = $routeParams.code_chanel || -100;
-		molData.id_landingpage = $routeParams.id_ladingpage || -100;
+		molData.id_landingpage = $routeParams.id_landingpage || -100;
 		molData.id_campaign = $routeParams.id_campaign || -100;
 		molData.id = $routeParams.id || -100;
 

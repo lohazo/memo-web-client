@@ -1,30 +1,31 @@
 'use strict';
 
 angular.module('tracking.services', [])
-    .factory('Mixpanel', ['$http', '$q', function() {
-	var Mixpanel = function() {};
+    .factory('Mixpanel', function() {
+	var Mixpanel = {};
 
-	Mixpanel.prototype.trackSignup = function(data) {
+	Mixpanel.trackSignup = function(data) {
 	    var user = data;
 	    mixpanel.alias(user.id);
 	    mixpanel.people.set(data);
-	    mixpanel.track('Web Signup');
+	    mixpanel.track('Web 1.0.2 signup');
 	};
 
-	Mixpanel.prototype.trackSignin = function(data) {
+	Mixpanel.trackSignin = function(data) {
 	    mixpanel.identify(data.id);
 	    mixpanel.people.set(data);
-	    mixpanel.track('Web Signin');
+	    mixpanel.track('Web 1.0.2 signin');
 	};
 
-	Mixpanel.prototype.track = function(eventName, data) {
+	Mixpanel.track = function(eventName, data) {
+	    eventName = "Web 1.0.2 " + eventName;
 	    mixpanel.track(eventName, data);
 	};
 
-	Mixpanel.prototype.register = function(data) {
+	Mixpanel.register = function(data) {
 	    // Register wrapper
 	    mixpanel.register(data);
 	};
 
-	return new Mixpanel();
-    }]);
+	return Mixpanel;
+    });

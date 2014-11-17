@@ -21,7 +21,6 @@ angular.module('landingpage.services', [])
 		    var deferred = $q.defer();
 		    var endpoint = "/addcontact";
 		    $http.post(HOST + endpoint, data).then(function(c3Response) {
-			console.log(c3Response);
 			deferred.resolve(c3Response);
 		    });
 		    return deferred.promise;
