@@ -18,6 +18,8 @@ angular.module('feedback.reportModal', [])
 		    var checkedOptions = $scope.options.filter(function(option) {
 			if (option.text) userNote = option.text;
 			return option.checked === true;
+		    }).map(function(option) {
+			return option.id;
 		    });
 
 		    $scope.$parent.userFeedback(userNote, checkedOptions);

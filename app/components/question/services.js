@@ -74,6 +74,13 @@ angular.module('question.services', ['diff-match-patch'])
 	    if (stripSpecialCharacters(userAnswer).toLowerCase()
 		=== stripSpecialCharacters(question.question).toLowerCase()) {
 		result.result = true;
+	    } else {
+		var typos = [checkTypoOnString(stripSpecialCharacters(userAnswer), question.question), question.question];
+
+		if (typos) {
+		    result.result = true;
+		    result.answerOptions = createHtmlForTypoAnswer(typos[1], typos[0]);
+		}
 	    }
 
 	    return result;
@@ -241,9 +248,29 @@ angular.module('question.services', ['diff-match-patch'])
 		correctAnswer: question.hint
 	    };
 
-	    if (stripSpecialCharacters(userAnswer).toLowerCase()
-		=== stripSpecialCharacters(question.hint).toLowerCase()) {
+	    var translations = question.definitions || [];
+	    translations.push(question.hint);
+
+	    result.result = translations.some(function(translation) {
+		return stripSpecialCharacters(userAnswer).toLowerCase()
+		    === stripSpecialCharacters(translation).toLowerCase();
+	    });
+
+	    if (result.result) return result;
+
+	    // Typo
+	    var typos = translations.filter(function(trans) {
+		return wordCount(stripSpecialCharacters(userAnswer))
+		    === wordCount(stripSpecialCharacters(trans));
+	    }).map(function(typoString) {
+		return [checkTypoOnString(userAnswer, typoString), typoString];
+	    }).filter(function(checkedTypos) {
+		return checkedTypos[0] instanceof Array;
+	    })[0];
+
+	    if (typos) {
 		result.result = true;
+		result.answerOptions = createHtmlForTypoAnswer(typos[1], typos[0]);
 	    }
 
 	    return result;
