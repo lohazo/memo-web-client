@@ -283,3 +283,12 @@
 .past .tick-lesson{
     display:block;
 }
+.question, .question-inner{
+    outline: none;
+}
+.answers{
+    margin-bottom:30px;
+}
+.player .question .select{
+    margin-bottom: 0px;
+}
