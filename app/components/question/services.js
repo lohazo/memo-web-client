@@ -241,10 +241,13 @@ angular.module('question.services', ['diff-match-patch'])
 		correctAnswer: question.hint
 	    };
 
-	    if (stripSpecialCharacters(userAnswer).toLowerCase()
-		=== stripSpecialCharacters(question.hint).toLowerCase()) {
-		result.result = true;
-	    }
+	    var translations = question.definitions || [];
+	    translations.push(question.hint);
+
+	    result.result = translations.some(function(translation) {
+		return stripSpecialCharacters(userAnswer).toLowerCase()
+		    === stripSpecialCharacters(translation).toLowerCase();
+	    });
 
 	    return result;
 	}
