@@ -31,7 +31,7 @@ angular.module('landingpage.controllers', [])
 	function($scope, $location, $routeParams, MolServices) {
 	    var data = $routeParams;
 	    data.preview = '1';
-	    mixpanel.track('Web Landingpage page view', data);
+	    mixpanel.track('Web 1.0.2 Landingpage page view', data);
 	    MolServices.saveC2(data);
 	}
     ])
@@ -40,13 +40,13 @@ angular.module('landingpage.controllers', [])
 	'$window',
 	function($scope, $window) {
 	    $scope.toAppStore = function() {
-		mixpanel.track('Web iOS CTA 1 to AppStore', {}, function() {
+		mixpanel.track('Web 1.0.2 iOS CTA 1 to AppStore', {}, function() {
 		    $window.location.href ='http://appvn.com/ios/tai-game-iphone/topica-memo-hoc-ngoai-ngu-mien-phi/30762';
 		});
 	    };
 
 	    $scope.toPlayStore = function() {
-		mixpanel.track('Web Android CTA 1 to PlayStore', {}, function() {
+		mixpanel.track('Web 1.0.2 Android CTA 1 to PlayStore', {}, function() {
 		    $window.location.href = 'https://play.google.com/store/apps/details?id=vn.topica.memo';
 		});
 	    };
@@ -54,13 +54,13 @@ angular.module('landingpage.controllers', [])
     ])
     .controller('LpInfoCtrl', [ '$scope', '$window', function($scope, $window) {
 	$scope.toAppStore1 = function() {
-	    mixpanel.track('Web iOS CTA 2 to AppStore', {}, function() {
+	    mixpanel.track('Web 1.0.2 iOS CTA 2 to AppStore', {}, function() {
 		$window.location.href = 'http://appvn.com/ios/tai-game-iphone/topica-memo-hoc-ngoai-ngu-mien-phi/30762';
 	    });
 	};
 
 	$scope.toPlayStore1 = function() {
-	    mixpanel.track('Web Android CTA 2 to PlayStore', {}, function() {
+	    mixpanel.track('Web 1.0.2 Android CTA 2 to PlayStore', {}, function() {
 		$window.location.href = 'https://play.google.com/store/apps/details?id=vn.topica.memo';
 	    });
 	};
@@ -81,13 +81,13 @@ angular.module('landingpage.controllers', [])
     ])
     .controller('LpFooterCtrl',	[ '$scope', '$window', function($scope, $window) {
 	$scope.toAppStore2 = function() {
-	    mixpanel.track('Web iOS CTA 5 to AppStore', {}, function() {
+	    mixpanel.track('Web 1.0.2 iOS CTA 5 to AppStore', {}, function() {
 		$window.location.href = 'http://appvn.com/ios/tai-game-iphone/topica-memo-hoc-ngoai-ngu-mien-phi/30762';
 	    });
 	};
 
 	$scope.toPlayStore2 = function() {
-	    mixpanel.track('Web Android CTA 5 to PlayStore', {}, function() {
+	    mixpanel.track('Web 1.0.2 Android CTA 5 to PlayStore', {}, function() {
 		$window.location.href = 'https://play.google.com/store/apps/details?id=vn.topica.memo';
 	    });
 	};
