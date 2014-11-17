@@ -79,6 +79,7 @@ angular.module('landingpage.login', [])
 	    };
 
 	    $scope.FbLogin = function() {
+		mixpanel.track('Web 1.0.2 button click FbLogin');
 		AuthService.FbLogin();
 		$rootScope.$on('event:auth-loginConfirmed', function() {
 		    $timeout(closeModal, 10);
@@ -86,15 +87,24 @@ angular.module('landingpage.login', [])
 	    };
 
 	    $scope.GLogin = function() {
+		mixpanel.track('Web 1.0.2 button click GLogin');
 		AuthService.GLogin().then(closeModal, displayMessageOnFail);
 	    };
 
 	    $scope.register = function() {
+		var user = angular.fromJson(angular.toJson($scope.user));
+		delete user.password;
+
+		mixpanel.track('Web 1.0.2 button click Register', user);
 		AuthService.register($scope.user)
 		    .then(closeModal, displayMessageOnFail);
 	    };
 
 	    $scope.login = function() {
+		var user = angular.fromJson(angular.toJson($scope.user));
+		delete user.password;
+
+		mixpanel.track('Web 1.0.2 button click Login', user);
 		AuthService.login($scope.user)
 		    .then(closeModal, displayMessageOnFail);
 	    };
