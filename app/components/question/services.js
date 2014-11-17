@@ -74,14 +74,15 @@ angular.module('question.services', ['diff-match-patch'])
 	    if (stripSpecialCharacters(userAnswer).toLowerCase()
 		=== stripSpecialCharacters(question.question).toLowerCase()) {
 		result.result = true;
-	    } else {
-		var typos = [checkTypoOnString(stripSpecialCharacters(userAnswer), question.question), question.question];
-
-		if (typos) {
-		    result.result = true;
-		    result.answerOptions = createHtmlForTypoAnswer(typos[1], typos[0]);
-		}
 	    }
+	    // else {
+	    // 	var typos = [checkTypoOnString(stripSpecialCharacters(userAnswer), question.question), question.question];
+
+	    // 	if (typos) {
+	    // 	    result.result = true;
+	    // 	    result.answerOptions = createHtmlForTypoAnswer(typos[1], typos[0]);
+	    // 	}
+	    // }
 
 	    return result;
 	}
