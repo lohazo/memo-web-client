@@ -92,7 +92,7 @@ angular.module('login.services', [])
 
 		mixpanel.track('Web 1.0.2 user logged in', molData);
 
-		molData.name = data.name;
+		molData.name = data.name || data.username;
 		molData.email = data.email;
 		molData.phone = '0918537799';
 
