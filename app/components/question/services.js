@@ -59,6 +59,7 @@ angular.module('question.services', ['diff-match-patch'])
 	};
 
 	Question.prototype.checkListen = checkListen;
+	Question.prototype.checkTranslate = checkTranslate;
 	Question.prototype.checkTypoOnWord = checkTypoOnWord;
 	Question.prototype.checkTypoOnString = checkTypoOnString;
 	Question.prototype.createHtmlForTypoAnswer = createHtmlForTypoAnswer;

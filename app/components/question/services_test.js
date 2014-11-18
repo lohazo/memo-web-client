@@ -47,6 +47,15 @@ describe('Service', function() {
 	it('check if check exists', function() {
 	    expect(service.check).toBeDefined();
 	});
+
+	it('should return true', function() {
+	    var question = {
+		translation: 'Cái quần, làm ơn.',
+		alternative_answers: ['Cái quần dài, làm ơn.'],
+		common_errors: []
+	    };
+	    expect(service.checkTranslate(question, 'Cái quần dài, làm ơn.').result).toBe(true);
+	});
     });
 
     describe('Question.createHtmlForTypoAnswer', function() {
