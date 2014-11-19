@@ -9,7 +9,7 @@ angular.module('home.controller', ['app.services'])
 	function($scope, Profile, TreeBuilder, AppSetting) {
 	    Profile.getProfile($scope.auth.user)
 		.then(function() {
-		    $scope.profile = Profile.getData().user_info;
+		    $scope.profile = Profile.data.user_info;
 		})
 		.then(AppSetting.get)
 		.then(function() {
@@ -20,7 +20,7 @@ angular.module('home.controller', ['app.services'])
 		}).then(function() {
 		    Profile.getProfileDetail($scope.auth.user)
 			.then(function() {
-			    $scope.profileDetail = Profile.getDetail();
+			    $scope.profileDetail = Profile.detail;
 			    $scope.expChart = {
 				labels: $scope.profileDetail.exp_chart.days,
 				datasets: [{
