@@ -9,7 +9,8 @@ angular.module('app.controllers', ['ngStorage'])
 	'$rootScope',
 	'$localStorage',
 	'$location',
-	function($scope, $rootScope, $localStorage, $location) {
+	'EcoTracking',
+	function($scope, $rootScope, $localStorage, $location, EcoTracker) {
 	    $scope.auth = $localStorage.auth || {
 		loggedIn: false,
 		trial: false
@@ -82,5 +83,7 @@ angular.module('app.controllers', ['ngStorage'])
 	    $scope.getNumber = function(num) {
 		return new Array(num);
 	    };
+
+	    EcoTracker.init();
 	}
     ]);

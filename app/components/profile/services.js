@@ -2,25 +2,12 @@
 
 angular.module('profile.services', [])
     .factory('Profile', ['ProfileServices', '$localStorage', function(ProfileServices, $localStorage) {
-	var Profile = function() {};
+	var Profile = {};
 
-	Profile.prototype.setData = function(data) {
-	    Profile.data = data;
-	};
+	Profile.data = {};
+	Profile.detail = {};
 
-	Profile.prototype.getData = function() {
-	    return Profile.data;
-	};
-
-	Profile.prototype.setDetail = function(data) {
-	    Profile.detail = data;
-	};
-
-	Profile.prototype.getDetail = function() {
-	    return Profile.detail;
-	};
-
-	Profile.prototype.getProfile = function(data) {
+	Profile.getProfile = function(data) {
 	    return ProfileServices.profile(data)
 		.then(function(response) {
 		    Profile.data = response.data;
@@ -31,7 +18,7 @@ angular.module('profile.services', [])
 		});
 	};
 
-	Profile.prototype.getProfileDetail = function(data) {
+	Profile.getProfileDetail = function(data) {
 	    return ProfileServices.profileDetail(data)
 		.then(function(response) {
 		    Profile.detail = response.data;
@@ -39,7 +26,7 @@ angular.module('profile.services', [])
 		});
 	};
 
-	return new Profile();
+	return Profile;
     }])
     .factory('ProfileServices', ['$http', '$q', '$location', function($http, $q, $location) {
 	var HOST = "http://api.memo.edu.vn/api",

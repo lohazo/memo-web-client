@@ -2,14 +2,12 @@
 
 angular.module('login.services', [])
     .factory('AuthService', [
-	'$rootScope',
-	'$localStorage',
-	'$routeParams',
-	'Facebook',
-	'GooglePlus',
-	'LoginService',
-	'MolServices',
-	function($rootScope, $localStorage, $routeParams, Facebook, GooglePlus, LoginService, MolServices) {
+	'$rootScope', '$localStorage', '$routeParams',
+	'Facebook', 'GooglePlus', 'EcoTracking',
+	'LoginService', 'MolServices',
+	function($rootScope, $localStorage, $routeParams,
+		 Facebook, GooglePlus, EcoTracker,
+		 LoginService, MolServices) {
 	    var AuthService = function() {};
 	    AuthService.prototype.register = function(data) {
 		return LoginService.register(data).then(loginCallback);
@@ -83,6 +81,7 @@ angular.module('login.services', [])
 		data.name = data.username;
 		delete data.auth_token;
 		mixpanel.people.set(data);
+		EcoTracker.track('User Login', data);
 
 		var molData = {};
 		molData.code_chanel = $routeParams.code_chanel || -100;
