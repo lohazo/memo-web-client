@@ -2,8 +2,9 @@
 
 angular.module('exam.services', [])
     .factory('Exam', [
-	'ExamServices', 'Feedback', 'PlazaServices', '$localStorage', '$window',
-	function(ExamServices, Feedback, PlazaServices, $localStorage, $window) {
+	'$localStorage', '$window',
+	'ExamServices', 'Feedback', 'PlazaServices', 'Mixpanel',
+	function($localStorage, $window, ExamServices, Feedback, PlazaServices, Mixpanel) {
 	    var exam, questions, answered, wrongAnswers, question, questionPosition,
 		hearts, availableItems, examToken, answersLog;
 
@@ -32,6 +33,8 @@ angular.module('exam.services', [])
 		question = questions[questionPosition];
 		answersLog = {};
 		Feedback.list = [];
+
+		Mixpanel.track('screen Exam');
 	    }
 
 	    function getQuestions() {
@@ -117,12 +120,18 @@ angular.module('exam.services', [])
 	    }
 
 	    function checkState() {
-		if (hearts.remaining < 0) return {isFinished: true, isFail: true};
+		if (hearts.remaining < 0) {
+		    Mixpanel.track('screen FailLesson');
+		    return {isFinished: true, isFail: true};
+		}
+
 		if (answered === questions.length) return {isFinished: true, isFail: false};
+
 		return {isFinished: false, isFail: false};
 	    }
 
 	    function finish(data) {
+		Mixpanel.track('screen FinishLesson');
 		data.examToken = examToken;
 		data.logs = JSON.stringify(answersLog);
 		return ExamServices.finish(data).then(function(response) {

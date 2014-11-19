@@ -2,21 +2,22 @@
 
 angular.module('skill.services', [])
     .factory('Skill', [
-	'$localStorage',
-	function($localStorage) {
-	    function getSkills() {
-		return $localStorage.auth.skills;
-	    }
+	'$localStorage', 'Mixpanel',
+	function($localStorage, Mixpanel) {
+	    var Skill = {};
 
-	    function getSkill(skillId) {
+	    Skill.skills = function() {
+		Mixpanel.track('screen SkillList');
+		return $localStorage.auth.skills;
+	    };
+
+	    Skill.skill = function(skillId) {
+		Mixpanel.track('screen HexagonLessonList');
 		return $localStorage.auth.skills.filter(function(skill) {
 		    return skill._id === skillId;
 		})[0];
-	    }
-
-	    return {
-		skills: getSkills,
-		skill: getSkill
 	    };
+
+	    return Skill;
 	}
     ]);

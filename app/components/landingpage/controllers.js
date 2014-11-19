@@ -24,23 +24,21 @@ angular.module('landingpage.controllers', [])
 	}
     ])
     .controller('LpHeaderCtrl', [
-	'$scope',
-	'$location',
-	'$routeParams',
-	'MolServices',
-	function($scope, $location, $routeParams, MolServices) {
+	'$scope', '$location', '$routeParams',
+	'MolServices', 'Mixpanel',
+	function($scope, $location, $routeParams, MolServices, Mixpanel) {
 	    var data = $routeParams;
 	    data.preview = '1';
-	    mixpanel.track('Web 1.0.2 Landingpage page view', data);
+	    Mixpanel.track('Web 1.0.2 Landingpage page view', data);
 	    MolServices.saveC2(data);
 	}
     ])
     .controller('LpHeadCtrl', [
-	'$scope',
-	'$window',
-	function($scope, $window) {
+	'$scope', '$window',
+	'Mixpanel',
+	function($scope, $window, Mixpanel) {
 	    $scope.toAppStore = function() {
-		mixpanel.track('Web 1.0.2 iOS CTA 1 to AppStore', {}, function() {
+		Mixpanel.track('Web 1.0.2 iOS CTA 1 to AppStore', {}, function() {
 		    $window.location.href ='http://appvn.com/ios/tai-game-iphone/topica-memo-hoc-ngoai-ngu-mien-phi/30762';
 		});
 	    };

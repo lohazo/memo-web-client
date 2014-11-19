@@ -2,9 +2,10 @@
 
 angular.module('skill.controllers', [])
     .controller('SkillCtrl', [
-	'$scope', '$rootScope', '$location', '$localStorage', '$routeParams', 'AuthService',
-	'Skill',
-	function($scope, $rootScope, $location, $localStorage, $routeParams, AuthService, Skill) {
+	'$scope', '$rootScope', '$location', '$localStorage', '$routeParams',
+	'AuthService', 'Skill',
+	function($scope, $rootScope, $location, $localStorage, $routeParams,
+		 AuthService, Skill) {
 	    $scope.auth = $localStorage.auth || {
 		loggedIn: false,
 		trial: false

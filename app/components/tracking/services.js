@@ -1,6 +1,6 @@
 'use strict';
 
-(function(angular, mixpanel, localStorage) {
+(function(angular, localStorage) {
     function EcoTracking($http, $q, $routeParams, $cookies, $localStorage) {
 	var BASE_URL = 'http://eco-tracking.memo.edu.vn';
 	var tracker = {};
@@ -96,9 +96,9 @@
 	    mixpanel.track('Web 1.0.2 signin');
 	};
 
-	Mixpanel.track = function(eventName, data) {
+	Mixpanel.track = function(eventName, data, callback) {
 	    eventName = "Web 1.0.2 " + eventName;
-	    mixpanel.track(eventName, data);
+	    mixpanel.track(eventName, data, callback);
 	};
 
 	Mixpanel.register = function(data) {
@@ -114,4 +114,4 @@
 	    '$http', '$q', '$routeParams', '$cookies', '$localStorage', EcoTracking])
 	.factory('Mixpanel', MixpanelFactory);
 
-})(window.angular, window.mixpanel, window.localStorage);
+})(window.angular, window.localStorage);

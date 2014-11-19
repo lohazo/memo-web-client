@@ -2,12 +2,14 @@
 
 angular.module('placement.services', [])
     .factory('Placement', [
-	'PlacementServices', function(PlacementServices) {
+	'PlacementServices', 'Mixpanel',
+	function(PlacementServices, Mixpanel) {
 	    var question;
 	    function start(data) {
 		return PlacementServices.start(data)
 		    .then(function(response) {
 			question = response.data;
+			Mixpanel.track('screen PlacementTest');
 		    });
 	    }
 	    function getQuestion() {
@@ -25,6 +27,9 @@ angular.module('placement.services', [])
 		return PlacementServices.submitAnswer(data)
 		    .then(function(response) {
 			question = response.data;
+			if (question.exp_chart) {
+			    Mixpanel.track('screen FinishPlacementTest');
+			}
 			// question = {
 			//     "finish_exam_bonus_exp": 0,
 			//     "leveled_up": false,
