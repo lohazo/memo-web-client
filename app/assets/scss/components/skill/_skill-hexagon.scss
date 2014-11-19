@@ -292,3 +292,37 @@
 .player .question .select{
     margin-bottom: 0px;
 }
+button.small, .button.small{
+    font-size: 16px;
+}
+.home-page.main .main-right .container .facebook-search, .home-page.main .main-right .container .memo-search, .home-page.main .main-right .container .email-invitation, .plaza.main .main-right .container .facebook-search, .plaza.main .main-right .container .memo-search, .plaza.main .main-right .container .email-invitation{
+    line-height: 36px;
+    font-size: 14px;
+}
+.icon-arrow-right:before{
+    margin-top: 41px;
+    display: block;
+    margin-left: 5px;
+}
+#report-dropdown{
+    margin-top: 8px;
+}
+#report-dropdown textarea{
+    outline: none;
+    margin-top: 5px;
+}
+.profile .memo-progress .next-level{
+    font-size: 16px;
+}
+.player .question .translate .text{
+    line-height:0 !important;
+}
+.right{
+    text-align:right;
+}
+.memo-button{
+    text-align: center;
+}
+#report-dropdown .button.close{
+    margin-right: 15px;
+}
