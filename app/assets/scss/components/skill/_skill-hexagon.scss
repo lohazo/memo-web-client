@@ -300,7 +300,6 @@ button.small, .button.small{
     font-size: 14px;
 }
 .icon-arrow-right:before{
-    margin-top: 41px;
     display: block;
     margin-left: 5px;
 }
@@ -310,9 +309,6 @@ button.small, .button.small{
 #report-dropdown textarea{
     outline: none;
     margin-top: 5px;
-}
-.profile .memo-progress .next-level{
-    font-size: 16px;
 }
 .player .question .translate .text{
     line-height:0 !important;
@@ -325,4 +321,7 @@ button.small, .button.small{
 }
 #report-dropdown .button.close{
     margin-right: 15px;
+}
+.app-top-bar .top-bar .top-bar-section ul.left li.menu-item{
+    margin-left: 10px;
 }
