@@ -34,6 +34,20 @@ angular.module('landingpage.login', [])
 	    templateUrl: 'components/landingpage/header/_register-modal.html'
 	};
     })
+    .directive('forgetPasswordModal', function() {
+	return {
+	    restrict: 'EA',
+	    scope: true,
+	    replace: true,
+	    link: function($scope, $ele) {
+		$ele.bind('keypress', function(e) {
+		    if (e.keyCode === 13) {
+			$scope.forgotPassword();
+		    }
+		});
+	    }
+	};
+    })
     .controller('LoginModalCtrl', [
 	'$scope',
 	'$rootScope',
@@ -119,4 +133,23 @@ angular.module('landingpage.login', [])
 		$scope.error = response.data.error;
 	    }
 	}
+    ])
+    .controller('ForgetPasswordModalCtrl', [
+	'$scope', '$modal',
+	function($scope, $modal) {
+	    $scope.open = function() {
+		var modalInstance = $modal.open({
+		    template: '<div forget-password-modal></div>',
+		    controller: 'ForgetPasswordModalInstanceCtrl',
+		    windowClass: 'forget-password-modal'
+		});
+
+		modalInstance.result.then(function(msg) {
+		    if ($scope[msg] instanceof Function) $scope[msg]();
+		});
+	    };
+	}
+    ])
+    .controller('ForgetPasswordModalInstanceCtrl', [
+	
     ]);
