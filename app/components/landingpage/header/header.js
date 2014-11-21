@@ -34,6 +34,23 @@ angular.module('landingpage.login', [])
 	    templateUrl: 'components/landingpage/header/_register-modal.html'
 	};
     })
+    .directive('forgotPassword', function() {
+	return {
+	    restrict: 'EA',
+	    scope: true,
+	    replace: true,
+	    link: function($scope, $ele) {
+		$ele.bind('keypress', function(e) {
+		    if (e.keyCode === 13) {
+			$scope.register();
+		    }
+		});
+	    },
+	    templateUrl: 'components/landingpage/header/_forget-modal.html'
+	};
+    })
+
+
     .controller('LoginModalCtrl', [
 	'$scope',
 	'$rootScope',
@@ -62,6 +79,19 @@ angular.module('landingpage.login', [])
 		    if ($scope[msg] instanceof Function) $scope[msg]();
 		});
 	    };
+
+	    $scope.openForgot = function() {
+		var modalInstance = $modal.open({
+		    template: '<div forget-modal></div>',
+		    controller: 'LoginModalInstanceCtrl',
+		    windowClass: 'forget-modal'
+		});
+
+		modalInstance.result.then(function(msg) {
+		    if ($scope[msg] instanceof Function) $scope[msg]();
+		});
+	    };
+
 	}
     ])
     .controller('LoginModalInstanceCtrl', [
@@ -76,6 +106,10 @@ angular.module('landingpage.login', [])
 
 	    $scope.loginModal = function() {
 		$modalInstance.close('open');
+	    };
+
+	    $scope.forgotPassword = function() {
+		$modalInstance.close('openForgot');
 	    };
 
 	    $scope.FbLogin = function() {
@@ -106,6 +140,15 @@ angular.module('landingpage.login', [])
 
 		mixpanel.track('Web 1.0.2 button click Login', user);
 		AuthService.login($scope.user)
+		    .then(closeModal, displayMessageOnFail);
+	    };
+
+	    $scope.forgot = function() {
+		var user = angular.fromJson(angular.toJson($scope.user));
+		delete user.password;
+
+		mixpanel.track('Web 1.0.2 button click forgot password', user);
+		AuthService.forgot($scope.user)
 		    .then(closeModal, displayMessageOnFail);
 	    };
 

@@ -20,11 +20,11 @@
 		<h5 class="name">{{item.name}}</h5>
 		<p class="info">{{item.info}}</p>
 	      </div>
-	      <div class="large-4 columns">
-		<a tooltip="{{item.can_not_buy_message}}" class="radius {{item.can_buy ? '' : 'disabled'}} button" ng-click="buy(item._id)">
-		  {{item.price}} 
-		  <img style="display:inline-block;" src="assets/img/lesson-memos-big.png" width="20"/>
-		</a>
+	      <div class="large-4 columns vp-tl">
+			<a id="vp" tooltip="{{item.can_not_buy_message}}" class="radius {{item.can_buy ? '' : 'disabled'}} button" ng-click="buy(item._id)">
+			  {{item.price}} 
+			  <img class="rb" style="display:inline-block;" src="assets/img/lesson-memos-big.png" width="20"/>
+			</a>
 	      </div>
 	    </div>
 	  </div>

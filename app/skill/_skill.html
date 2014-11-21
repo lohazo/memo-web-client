@@ -27,7 +27,7 @@
 	      {{skill.lessons[$index].objectives.join(', ')}}
 	    </div>
 	    <a ng-if="$index < skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button">Làm lại</a>
-	    <a ng-if="$index == skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button">Bắt đầu</a>
+	    <a ng-if="$index == skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button memo-1 memo-2 memo-3 memo-4 memo-5 ">Bắt đầu</a>
 	    <a ng-if="$index > skill.finished_lesson" class="disabled memo-button"><i class="icon-lock"></i> Khóa</a>
 	  </div>
 	</div>

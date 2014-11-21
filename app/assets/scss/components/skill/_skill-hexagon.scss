@@ -325,3 +325,34 @@ button.small, .button.small{
 .app-top-bar .top-bar .top-bar-section ul.left li.menu-item{
     margin-left: 10px;
 }
+span.tooltip{
+    width:95px !important;
+    margin:0 !important;
+    padding:5px 5px !important; 
+    text-align: center;
+}
+a.close, a.send{
+    margin-bottom: 0 !important;
+}
+.hexagon .skill-row .test-out{
+    font-weight: bold;
+}
+a.memo-1 {
+    background-position: 0px -40px !important;
+}
+a.memo-2 {
+    background-position: 0px -120px;
+}
+.plaza .item img{
+    padding: 0 !important;
+}
+.vp-tl {
+    padding: 0;
+}
+a#vp{
+    font-size: 19px;
+    font-weight:bold;
+    img.rb{
+        margin-top: -4px;
+    }
+}
