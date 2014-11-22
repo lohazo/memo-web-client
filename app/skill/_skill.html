@@ -3,34 +3,34 @@
   <div class="row main hexagon">
     <div class="skill-page container">
       <div class="small-4 columns text-center">
-	<div class="{{skill.finished_lesson == skill.lessons.length ? 'success' : '' }} {{skill.theme_color === '#99cc00' ? 'green' : (skill.theme_color === '#ff4444' ? 'red' : 'blue')}} skill skill-{{skill.order + 1}}">
-	  <div class="icon"></div>
-	  <h4 class="name">{{skill.title}}</h4>
-	  <div class="level level-5">
-            <div class="strength-bar"></div>
-	  </div>
-	  <a ng-href="/shortcut/{{skill._id}}" class="test-out memo-button">
-	    {{skill.finished_lesson == skill.lessons.length ? 'Củng cố' : 'Vượt rào' }}
-	  </a>
-	</div>
+		<div class="{{skill.finished_lesson == skill.lessons.length ? 'success' : '' }} {{skill.theme_color === '#99cc00' ? 'green' : (skill.theme_color === '#ff4444' ? 'red' : 'blue')}} skill skill-{{skill.order + 1}}">
+		  <div class="icon"></div>
+		  <h4 class="name">{{skill.title}}</h4>
+		  <div class="level level-5">
+	            <div class="strength-bar"></div>
+		  </div>
+		  <a ng-href="/shortcut/{{skill._id}}" class="test-out memo-button">
+		    {{skill.finished_lesson == skill.lessons.length ? 'Củng cố' : 'Vượt rào' }}
+		  </a>
+		</div>
       </div>
       <div class="small-12 columns lessons">
-	<div class="row">
-	  <div class="small-4 columns right grammar-note">
-	    &nbsp;
-	  </div>
-	</div>
-	<div class="row">
-	  <div class="{{$index < skill.finished_lesson ? 'past' : ($index == skill.finished_lesson ? 'unlocked' : 'locked')}} lesson text-center" ng-repeat="lesson in skill.lessons track by $index">
-	    <h4 class="name">Bài học {{$index + 1}} <img class="tick-lesson" ng-src="/assets/img/tick.png" alt=""></h4>
-	    <div class="small-16 small-centered columns objectives">
-	      {{skill.lessons[$index].objectives.join(', ')}}
-	    </div>
-	    <a ng-if="$index < skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button">Làm lại</a>
-	    <a ng-if="$index == skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button memo-1 memo-2 memo-3 memo-4 memo-5 ">Bắt đầu</a>
-	    <a ng-if="$index > skill.finished_lesson" class="disabled memo-button"><i class="icon-lock"></i> Khóa</a>
-	  </div>
-	</div>
+		<div class="row">
+		  <div class="small-4 columns right grammar-note">
+		    &nbsp;
+		  </div>
+		</div>
+		<div class="row skill-blue skill-bl skill-red skill-orange skill-yellow skill-green">
+		  <div class="{{$index < skill.finished_lesson ? 'past' : ($index == skill.finished_lesson ? 'unlocked' : 'locked')}} lesson text-center" ng-repeat="lesson in skill.lessons track by $index">
+		    <h4 class="name">Bài học {{$index + 1}} <img class="tick-lesson" ng-src="/assets/img/tick.png" alt=""></h4>
+		    <div class="small-16 small-centered columns objectives">
+		      {{skill.lessons[$index].objectives.join(', ')}}
+		    </div>
+		    <a ng-if="$index < skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button">Làm lại</a>
+		    <a ng-if="$index == skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button memo-1 memo-2 memo-3 memo-4 memo-5 ">Bắt đầu</a>
+		    <a ng-if="$index > skill.finished_lesson" class="disabled memo-button"><i class="icon-lock"></i> Khóa</a>
+		  </div>
+		</div>
       </div>
     </div>    
   </div>

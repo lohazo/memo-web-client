@@ -337,11 +337,14 @@ a.close, a.send{
 .hexagon .skill-row .test-out{
     font-weight: bold;
 }
-a.memo-1 {
+.skill-blue .lesson a.memo-1{
     background-position: 0px -40px !important;
 }
-a.memo-2 {
+.skill-bl .lesson a.memo-2 {
     background-position: 0px -120px;
+}
+.memo-3 {
+    background-position: 0px -80px;
 }
 .plaza .item img{
     padding: 0 !important;
@@ -364,8 +367,20 @@ a#vp{
     width: auto !important;
 }
 .report{
-    padding: 0 !important;
+    
 }
 #dropdown-setting > li > a:hover{
     background-color:#810c15;
+}
+.report a.button{
+    margin-bottom: 5px;
+}
+.course-page .course img{
+    float: left;
+}
+.row .columns .reverse .ng-binding {
+    margin-top:10px !important;
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
 }
