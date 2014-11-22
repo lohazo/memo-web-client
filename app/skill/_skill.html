@@ -20,14 +20,14 @@
 		    &nbsp;
 		  </div>
 		</div>
-		<div class="row skill-blue skill-bl skill-red skill-orange skill-yellow skill-green">
+		<div class="row skill-blue skill-red skill-orange skill-yellow skill-green">
 		  <div class="{{$index < skill.finished_lesson ? 'past' : ($index == skill.finished_lesson ? 'unlocked' : 'locked')}} lesson text-center" ng-repeat="lesson in skill.lessons track by $index">
 		    <h4 class="name">Bài học {{$index + 1}} <img class="tick-lesson" ng-src="/assets/img/tick.png" alt=""></h4>
 		    <div class="small-16 small-centered columns objectives">
 		      {{skill.lessons[$index].objectives.join(', ')}}
 		    </div>
 		    <a ng-if="$index < skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button">Làm lại</a>
-		    <a ng-if="$index == skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button memo-1 memo-2 memo-3 memo-4 memo-5 ">Bắt đầu</a>
+		    <a ng-if="$index == skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button memo-1 memo-2 memo-3 memo-4 memo-5">Bắt đầu</a>
 		    <a ng-if="$index > skill.finished_lesson" class="disabled memo-button"><i class="icon-lock"></i> Khóa</a>
 		  </div>
 		</div>

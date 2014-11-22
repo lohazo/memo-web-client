@@ -337,13 +337,13 @@ a.close, a.send{
 .hexagon .skill-row .test-out{
     font-weight: bold;
 }
-.skill-blue .lesson a.memo-1{
+.hexagon .lessons .skill-blue .lesson a.memo-1 {
     background-position: 0px -40px !important;
 }
-.skill-bl .lesson a.memo-2 {
+.hexagon .lessons .skill-green .lesson a.memo-2 {
     background-position: 0px -120px;
 }
-.memo-3 {
+.hexagon .lessons .skill-red .lesson a.memo-3 {
     background-position: 0px -80px;
 }
 .plaza .item img{
@@ -366,8 +366,8 @@ a#vp{
     margin-left:15px;
     width: auto !important;
 }
-.report{
-    
+.main-right .report {
+    padding: 0 !important;
 }
 #dropdown-setting > li > a:hover{
     background-color:#810c15;
