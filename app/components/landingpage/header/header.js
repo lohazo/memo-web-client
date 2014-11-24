@@ -145,13 +145,21 @@ angular.module('landingpage.login', [])
 		    .then(closeModal, displayMessageOnFail);
 	    };
 
+	    $scope.forgetPassword = function() {
+		var user = angular.fromJson(angular.toJson($scope.user));
+		delete user.password;
+
+		mixpanel.track('Web 1.0.2 button click forgetPassword', user);
+		AuthService.forgetPassword($scope.user)
+		    .then(closeModal, displayMessageOnFail);
+	    };
 
 	    function closeModal(data) {
 		if ($modalInstance) {
 		    $modalInstance.close();
 		}
 	    }
-
+	    
 	    function displayMessageOnFail(response) {
 		$scope.error = response.data.error;
 	    }
