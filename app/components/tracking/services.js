@@ -105,7 +105,6 @@
 	    // Register wrapper
 	    mixpanel.register(data);
 	};
-
 	return Mixpanel;
     }
 

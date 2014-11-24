@@ -104,3 +104,20 @@
 	}
     }
 }
+
+li.name > a > img {
+    height: 25px;
+}
+
+ul.f-dropdown li{
+	text-align: left !important;
+}
+.version {
+    background: #810C15 !important;
+    color: #FFF;
+    font-weight: bold;
+    float: left;
+    margin-top: 25px;
+    text-transform: uppercase;
+    margin-right: 5px;
+}
