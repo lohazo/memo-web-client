@@ -1,41 +1,41 @@
-<body>
-    <div class="row">
+<div class="row">
   <div class="large-16 columns">
     <div class="row"><span class="ant"></span></div>
     <div class="container">
-      <h3 class="title">Quên mật khẩu</h3>
+      <h3 class="title forget-password">Quên mật khẩu</h3>
       <p class="error">{{error}}</p>
-      <form>
+      <form class="ng-pristine ng-valid-email ng-invalid ng-invalid-required">  
         <div class="row">
-          <div class="large-16 columns text-center forgot-password">
-            <a ng-click="forgotPassword()">Quên mật khẩu</a>
+          <div class="large-16 columns text-center forget password">
+            <input class="email text-email" ng-model="user.email" type="email" placeholder="Nhập email của bạn vào" required>
+          </div>
+          <div class="large-16 columns text-center send-email forget password">
+            <a href="#" title="">Gửi</a>
           </div>
         </div>
-        <div class="row fields">
-          <div class="small-16 columns">
-            <input class="email" ng-model="user.email" type="email" placeholder="Nhap email cua ban" required>
+        <div class="row">
+          <div class="large-16 columns text-center forget password">
+          <a ng-click="forgetPassword()"></a>
           </div>
         </div>
         <div class="row">
           <div class="large-8 columns">
             <a class="large-16 small radius facebook button" ng-click="FbLogin()">
-              Facebook
+            Facebook
             </a>
           </div>
           <div class="large-8 columns">
             <a class="large-16 small radius google button" ng-click="GLogin()">
-              Google+
+            Google+
             </a>
           </div>
         </div>
       </form>
       <div class="row">
         <div class="large-16 columns">
-          <a ng-click="registerModal()">Tạo tài khoản</a>
+          <span>Bạn đã có tài khoản? <a ng-click="loginModal()">Đăng nhập</a></span>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-</body>

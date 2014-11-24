@@ -34,7 +34,7 @@ angular.module('landingpage.login', [])
 	    templateUrl: 'components/landingpage/header/_register-modal.html'
 	};
     })
-    .directive('forgotPassword', function() {
+    .directive('forgetModal', function() {
 	return {
 	    restrict: 'EA',
 	    scope: true,
@@ -42,7 +42,7 @@ angular.module('landingpage.login', [])
 	    link: function($scope, $ele) {
 		$ele.bind('keypress', function(e) {
 		    if (e.keyCode === 13) {
-			$scope.register();
+			$scope.forgetPassword();
 		    }
 		});
 	    },
@@ -51,7 +51,7 @@ angular.module('landingpage.login', [])
     })
 
 
-    .controller('LoginModalCtrl', [
+    .controller('LoginModalCtrl',[
 	'$scope',
 	'$rootScope',
 	'$modal',
@@ -80,7 +80,8 @@ angular.module('landingpage.login', [])
 		});
 	    };
 
-	    $scope.openForgot = function() {
+
+	    $scope.openForgetPassword = function() {
 		var modalInstance = $modal.open({
 		    template: '<div forget-modal></div>',
 		    controller: 'LoginModalInstanceCtrl',
@@ -94,7 +95,8 @@ angular.module('landingpage.login', [])
 
 	}
     ])
-    .controller('LoginModalInstanceCtrl', [
+
+    .controller('LoginModalInstanceCtrl',[
 	'$rootScope', '$scope',	'$timeout',
 	'$modalInstance', '$routeParams', 'AuthService',
 	function($rootScope, $scope, $timeout, $modalInstance, $routeParams, AuthService) {
@@ -108,8 +110,8 @@ angular.module('landingpage.login', [])
 		$modalInstance.close('open');
 	    };
 
-	    $scope.forgotPassword = function() {
-		$modalInstance.close('openForgot');
+	    $scope.forgetModal = function() {
+		$modalInstance.close('openForgetPassword');
 	    };
 
 	    $scope.FbLogin = function() {
@@ -143,14 +145,6 @@ angular.module('landingpage.login', [])
 		    .then(closeModal, displayMessageOnFail);
 	    };
 
-	    $scope.forgot = function() {
-		var user = angular.fromJson(angular.toJson($scope.user));
-		delete user.password;
-
-		mixpanel.track('Web 1.0.2 button click forgot password', user);
-		AuthService.forgot($scope.user)
-		    .then(closeModal, displayMessageOnFail);
-	    };
 
 	    function closeModal(data) {
 		if ($modalInstance) {
