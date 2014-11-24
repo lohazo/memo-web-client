@@ -26,6 +26,5 @@ angular.module('tracking.services', [])
 	    // Register wrapper
 	    mixpanel.register(data);
 	};
-
 	return Mixpanel;
     });

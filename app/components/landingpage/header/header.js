@@ -34,7 +34,24 @@ angular.module('landingpage.login', [])
 	    templateUrl: 'components/landingpage/header/_register-modal.html'
 	};
     })
-    .controller('LoginModalCtrl', [
+    .directive('forgetModal', function() {
+	return {
+	    restrict: 'EA',
+	    scope: true,
+	    replace: true,
+	    link: function($scope, $ele) {
+		$ele.bind('keypress', function(e) {
+		    if (e.keyCode === 13) {
+			$scope.forgetPassword();
+		    }
+		});
+	    },
+	    templateUrl: 'components/landingpage/header/_forget-modal.html'
+	};
+    })
+
+
+    .controller('LoginModalCtrl',[
 	'$scope',
 	'$rootScope',
 	'$modal',
@@ -62,9 +79,24 @@ angular.module('landingpage.login', [])
 		    if ($scope[msg] instanceof Function) $scope[msg]();
 		});
 	    };
+
+
+	    $scope.openForgetPassword = function() {
+		var modalInstance = $modal.open({
+		    template: '<div forget-modal></div>',
+		    controller: 'LoginModalInstanceCtrl',
+		    windowClass: 'forget-modal'
+		});
+
+		modalInstance.result.then(function(msg) {
+		    if ($scope[msg] instanceof Function) $scope[msg]();
+		});
+	    };
+
 	}
     ])
-    .controller('LoginModalInstanceCtrl', [
+
+    .controller('LoginModalInstanceCtrl',[
 	'$rootScope', '$scope',	'$timeout',
 	'$modalInstance', '$routeParams', 'AuthService',
 	function($rootScope, $scope, $timeout, $modalInstance, $routeParams, AuthService) {
@@ -76,6 +108,10 @@ angular.module('landingpage.login', [])
 
 	    $scope.loginModal = function() {
 		$modalInstance.close('open');
+	    };
+
+	    $scope.forgetModal = function() {
+		$modalInstance.close('openForgetPassword');
 	    };
 
 	    $scope.FbLogin = function() {
@@ -109,12 +145,21 @@ angular.module('landingpage.login', [])
 		    .then(closeModal, displayMessageOnFail);
 	    };
 
+	    $scope.forgetPassword = function() {
+		var user = angular.fromJson(angular.toJson($scope.user));
+		delete user.password;
+
+		mixpanel.track('Web 1.0.2 button click forgetPassword', user);
+		AuthService.forgetPassword($scope.user)
+		    .then(closeModal, displayMessageOnFail);
+	    };
+
 	    function closeModal(data) {
 		if ($modalInstance) {
 		    $modalInstance.close();
 		}
 	    }
-
+	    
 	    function displayMessageOnFail(response) {
 		$scope.error = response.data.error;
 	    }

@@ -1,47 +1,47 @@
 <div class="row">
-  <div class="large-16 columns">
-    <div class="row"><span class="ant"></span></div>
-    <div class="container">
-      <h3 class="title">Đăng ký tài khoản</h3>
-      <p class="error">{{error}}</p>
-      <form>
-	<div class="row">
-	  <div class="small-16 columns">
-	    <input class="name" ng-model="user.name" type="text" placeholder="Tên đầy đủ (không bắt buộc)">
-	  </div>          
-	  <div class="small-16 columns">
-            <input class="email" ng-model="user.email" type="email" placeholder="Email: example@gmail.com" required>
-          </div>
-          <div class="small-16 columns">
-            <input class="username" ng-model="user.username" type="text" placeholder="Tên đăng nhập" required>
-          </div>
-          <div class="small-16 columns">
-            <input class="password" ng-model="user.password" type="password" placeholder="Mật khẩu" required>
-          </div>
-	</div>	
-	<div class="row">
-	  <div class="large-16 columns">
-	    <a class="large-16 small radius login button" ng-click="register()">Đăng ký</a>
-	  </div>
-	</div>
-	<div class="row">
-	  <div class="large-8 columns">
-	    <a class="large-16 small radius facebook button" ng-click="FbLogin()">
-	      Facebook
-	    </a>
-	  </div>
-	  <div class="large-8 columns">
-	    <a class="large-16 small radius google button" ng-click="GLogin()">
-	      Google+
-	    </a>
-	  </div>
-	</div>
-      </form>
-      <div class="row">
-	<div class="large-16 columns">
-	  <span>Bạn đã có tài khoản? <a ng-click="loginModal()">Đăng nhập</a></span>
-	</div>
-      </div>
+    <div class="large-16 columns">
+        <div class="row"><span class="ant"></span></div>
+        <div class="container">
+            <h3 class="title">Đăng ký tài khoản</h3>
+            <p class="error">{{error}}</p>
+            <form>
+                <div class="row">
+                    <div class="small-16 columns">
+                        <input class="name" ng-model="user.name" type="text" placeholder="Tên đầy đủ (không bắt buộc)">
+                    </div>          
+                    <div class="small-16 columns">
+                        <input class="email" ng-model="user.email" type="email" placeholder="Email: example@gmail.com" required>
+                    </div>
+                    <div class="small-16 columns">
+                        <input class="username" ng-model="user.username" type="text" placeholder="Tên đăng nhập" required>
+                    </div>
+                    <div class="small-16 columns">
+                        <input class="password" ng-model="user.password" type="password" placeholder="Mật khẩu" required>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="large-16 columns">
+                        <a class="large-16 small radius login button" ng-click="register()">Đăng ký</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <a class="large-16 small radius facebook button" ng-click="FbLogin()">
+                        Facebook
+                        </a>
+                    </div>
+                    <div class="large-8 columns">
+                        <a class="large-16 small radius google button" ng-click="GLogin()">
+                        Google+
+                        </a>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="large-16 columns">
+                    <span>Bạn đã có tài khoản? <a ng-click="loginModal()">Đăng nhập</a></span>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

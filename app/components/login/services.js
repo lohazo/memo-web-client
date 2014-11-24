@@ -19,6 +19,11 @@ angular.module('login.services', [])
 		return LoginService.login(data).then(loginCallback);
 	    };
 
+	    AuthService.prototype.forgetPassword = function(data) {
+		return LoginService.forgetPassword(data).then(loginCallback);
+	    };
+
+
 	    AuthService.prototype.FbLogin = function() {
 		Facebook.getLoginStatus(function(loginStatusResponse) {
 		    if(loginStatusResponse.status === 'connected') {
@@ -125,6 +130,16 @@ angular.module('login.services', [])
 	    login: function(data) {
 		var deferred = $q.defer();
 		$http.post(BASE_URL + '/users/login', data)
+		    .then(function(authData) {
+			deferred.resolve(authData);
+		    }, function(authData) {
+			deferred.reject(authData);
+		    });
+		return deferred.promise;
+	    },
+	    forgetPassword: function(data) {
+		var deferred = $q.defer();
+		$http.post(BASE_URL + '/users/forgetPassword', data)
 		    .then(function(authData) {
 			deferred.resolve(authData);
 		    }, function(authData) {

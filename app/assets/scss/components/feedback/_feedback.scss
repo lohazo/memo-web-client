@@ -48,6 +48,7 @@
 
     textarea {
 	resize: none;
+	font-size: 15px;
     }
 
     span.box {
@@ -73,6 +74,7 @@
 	display: inline-block;
 	&.close {
 	    background-color: $gainsboro;
+	    color: #666;
 	}
 	&.send {
 	    background-color: $success-color;

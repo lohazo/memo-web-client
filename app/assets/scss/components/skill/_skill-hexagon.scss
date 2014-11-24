@@ -325,3 +325,62 @@ button.small, .button.small{
 .app-top-bar .top-bar .top-bar-section ul.left li.menu-item{
     margin-left: 10px;
 }
+span.tooltip{
+    width:95px !important;
+    margin:0 !important;
+    padding:5px 5px !important; 
+    text-align: center;
+}
+a.close, a.send{
+    margin-bottom: 0 !important;
+}
+.hexagon .skill-row .test-out{
+    font-weight: bold;
+}
+.hexagon .lessons .skill-blue .lesson a.memo-1 {
+    background-position: 0px -40px !important;
+}
+.hexagon .lessons .skill-green .lesson a.memo-2 {
+    background-position: 0px -120px;
+}
+.hexagon .lessons .skill-red .lesson a.memo-3 {
+    background-position: 0px -80px;
+}
+.plaza .item img{
+    padding: 0 !important;
+}
+.vp-tl {
+    padding: 0;
+}
+a#vp{
+    font-size: 19px;
+    font-weight:bold;
+    img.rb{
+        margin-top: -4px;
+    }
+}
+.memos {
+    width: auto !important;
+}
+.exp{
+    margin-left:15px;
+    width: auto !important;
+}
+.main-right .report {
+    padding: 0 !important;
+}
+#dropdown-setting > li > a:hover{
+    background-color:#810c15;
+}
+.report a.button{
+    margin-bottom: 5px;
+}
+.course-page .course img{
+    float: left;
+}
+.row .columns .reverse .ng-binding {
+    margin-top:10px !important;
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+}
