@@ -111,6 +111,10 @@ angular.module('landingpage.login', [])
         $modalInstance.close('open');
         };
 
+        $scope.forgetModal = function() {
+        $modalInstance.close('openForgetPassword');
+        };
+
         $scope.FbLogin = function() {
         //mixpanel.track('Web 1.0.2 button click FbLogin');
         AuthService.FbLogin();
@@ -162,7 +166,8 @@ angular.module('landingpage.login', [])
         $scope.user = {};
         $scope.error = '';
 
-        $scope.forgetPassword = function() {
+
+        $scope.forgetModal = function() {
         var user = angular.fromJson(angular.toJson($scope.user));
         delete user.password;
 
