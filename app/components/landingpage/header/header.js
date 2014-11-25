@@ -34,7 +34,7 @@ angular.module('landingpage.login', [])
         templateUrl: 'components/landingpage/header/_register-modal.html'
     };
     })
-    
+
     .directive('forgetModal', function() {
     return {
         restrict: 'EA',
@@ -105,6 +105,10 @@ angular.module('landingpage.login', [])
 
         $scope.registerModal = function() {
         $modalInstance.close('openRegister');
+        };
+
+        $scope.loginModal = function() {
+        $modalInstance.close('open');
         };
 
         $scope.FbLogin = function() {
