@@ -34,6 +34,7 @@ angular.module('landingpage.login', [])
         templateUrl: 'components/landingpage/header/_register-modal.html'
     };
     })
+
     .directive('forgetModal', function() {
     return {
         restrict: 'EA',
@@ -106,8 +107,12 @@ angular.module('landingpage.login', [])
         $modalInstance.close('openRegister');
         };
 
+        $scope.loginModal = function() {
+        $modalInstance.close('open');
+        };
+
         $scope.FbLogin = function() {
-        mixpanel.track('Web 1.0.2 button click FbLogin');
+        //mixpanel.track('Web 1.0.2 button click FbLogin');
         AuthService.FbLogin();
         $rootScope.$on('event:auth-loginConfirmed', function() {
             $timeout(closeModal, 10);
@@ -115,7 +120,7 @@ angular.module('landingpage.login', [])
         };
 
         $scope.GLogin = function() {
-        mixpanel.track('Web 1.0.2 button click GLogin');
+        //mixpanel.track('Web 1.0.2 button click GLogin');
         AuthService.GLogin().then(closeModal, displayMessageOnFail);
         };
 
@@ -123,7 +128,7 @@ angular.module('landingpage.login', [])
         var user = angular.fromJson(angular.toJson($scope.user));
         delete user.password;
 
-        mixpanel.track('Web 1.0.2 button click Register', user);
+        //mixpanel.track('Web 1.0.2 button click Register', user);
         AuthService.register($scope.user)
             .then(closeModal, displayMessageOnFail);
         };
@@ -132,7 +137,7 @@ angular.module('landingpage.login', [])
         var user = angular.fromJson(angular.toJson($scope.user));
         delete user.password;
 
-        mixpanel.track('Web 1.0.2 button click Login', user);
+        //mixpanel.track('Web 1.0.2 button click Login', user);
         AuthService.login($scope.user)
             .then(closeModal, displayMessageOnFail);
         };

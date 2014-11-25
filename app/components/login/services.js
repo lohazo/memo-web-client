@@ -82,11 +82,9 @@ angular.module('login.services', [])
 	    function loginCallback(response) {
 		var data = angular.fromJson(angular.toJson(response.data));
 
-		mixpanel.identify(response.data._id);
+		//mixpanel.identify(response.data._id);
 		data.name = data.username;
 		delete data.auth_token;
-		mixpanel.people.set(data);
-		EcoTracker.track('User Login', data);
 
 		var molData = {};
 		molData.code_chanel = $routeParams.code_chanel || -100;
@@ -94,7 +92,7 @@ angular.module('login.services', [])
 		molData.id_campaign = $routeParams.id_campaign || -100;
 		molData.id_camp_landingpage = $routeParams.id || -100;
 
-		mixpanel.track('Web 1.0.2 user logged in', molData);
+		//mixpanel.track('Web 1.0.2 user logged in', molData);
 
 		molData.name = data.name || data.username;
 		molData.email = data.email;
