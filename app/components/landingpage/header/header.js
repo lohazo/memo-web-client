@@ -34,6 +34,7 @@ angular.module('landingpage.login', [])
         templateUrl: 'components/landingpage/header/_register-modal.html'
     };
     })
+    
     .directive('forgetModal', function() {
     return {
         restrict: 'EA',
