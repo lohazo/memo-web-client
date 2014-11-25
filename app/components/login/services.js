@@ -84,10 +84,10 @@ angular.module('login.services', [])
 	    function loginCallback(response) {
 		var data = angular.fromJson(angular.toJson(response.data));
 
-		mixpanel.identify(response.data._id);
+		//mixpanel.identify(response.data._id);
 		data.name = data.username;
 		delete data.auth_token;
-		mixpanel.people.set(data);
+		//mixpanel.people.set(data);
 
 		var molData = {};
 		molData.code_chanel = $routeParams.code_chanel || -100;
@@ -95,7 +95,7 @@ angular.module('login.services', [])
 		molData.id_campaign = $routeParams.id_campaign || -100;
 		molData.id = $routeParams.id || -100;
 
-		mixpanel.track('Web 1.0.2 user logged in', molData);
+		//mixpanel.track('Web 1.0.2 user logged in', molData);
 
 		molData.name = data.name;
 		molData.email = data.email;
