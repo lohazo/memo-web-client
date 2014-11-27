@@ -29,6 +29,7 @@ angular.module('landingpage.controllers', [])
   function($scope, $location, $routeParams, MolServices, Mixpanel) {
     var data = $routeParams;
     data.preview = '1';
+    mixpanel.track('Web 1.0.2 Landingpage view', data)
   }
   ])
 .controller('LpHeadCtrl', [
