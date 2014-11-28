@@ -82,6 +82,7 @@
 
   function MixpanelFactory() {
     var Mixpanel = {};
+    var APP_VERSION = '1.0.2';
 
     Mixpanel.trackSignin = function(data) {
       mixpanel.identify(data.id);
