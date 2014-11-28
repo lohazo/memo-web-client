@@ -18,7 +18,7 @@ angular.module('login.services', [])
 	    };
 
 	    AuthService.prototype.forgetPassword = function(data) {
-		return LoginService.forgetPassword(data).then(loginCallback);
+		return LoginService.forgetPassword(data);
 	    };
 
 
@@ -136,7 +136,7 @@ angular.module('login.services', [])
 	    },
 	    forgetPassword: function(data) {
 		var deferred = $q.defer();
-		$http.post(BASE_URL + '/users/forgetPassword', data)
+		$http.post(BASE_URL + '/users/forget_password', data)
 		    .then(function(authData) {
 			deferred.resolve(authData);
 		    }, function(authData) {
