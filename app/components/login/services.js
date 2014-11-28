@@ -3,10 +3,10 @@
 angular.module('login.services', [])
     .factory('AuthService', [
         '$rootScope', '$localStorage', '$routeParams',
-        'Facebook', 'GooglePlus', 'EcoTracking',
+        'Facebook', 'GooglePlus', 'EcoTracking', 'MemoTracking',
         'LoginService', 'MolServices',
         function($rootScope, $localStorage, $routeParams,
-            Facebook, GooglePlus, EcoTracker,
+            Facebook, GooglePlus, EcoTracker, MemoTracker,
             LoginService, MolServices) {
             var AuthService = function() {};
             AuthService.prototype.register = function(data) {
@@ -79,8 +79,19 @@ angular.module('login.services', [])
             }
 
             function loginCallback(response) {
+                $localStorage.auth = {
+                    loggedIn: true,
+                    user: response.data,
+                    trial: response.data.is_trial
+                };
+
                 var data = angular.fromJson(angular.toJson(response.data));
 
+                if (response.data.is_newly_sign_up) {
+                    MemoTracker.track('sign up');
+                } else {
+                    MemoTracker.track('login');    
+                }
                 mixpanel.identify(response.data._id);
                 // data.name = data.username;
                 data.name = "memo_" + data._id;
