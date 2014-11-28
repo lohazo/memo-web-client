@@ -5,8 +5,8 @@ angular.module('home.controller', ['app.services'])
     }])
     .controller('HomeMainCtrl', [
 	'$scope', 'Profile', 'TreeBuilder',
-	'AppSetting', 'Mixpanel',
-	function($scope, Profile, TreeBuilder, AppSetting, Mixpanel) {
+	'AppSetting', 'Mixpanel', 'MemoTracking',
+	function($scope, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker) {
 	    Profile.getProfile($scope.auth.user)
 		.then(function() {
 		    $scope.profile = Profile.data.user_info;
@@ -18,7 +18,7 @@ angular.module('home.controller', ['app.services'])
 		    TreeBuilder.getTree();
 		    $scope.skillTree = TreeBuilder.build();
 
-		    Mixpanel.track('screen SkillList');
+		    MemoTracker.track('skills tree');
 		}).then(function() {
 		    Profile.getProfileDetail($scope.auth.user)
 			.then(function() {
