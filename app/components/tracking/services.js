@@ -11,7 +11,7 @@
       var requestData = {
         event_name: 'Web ' + APP_VERSION + ' ' + eventName,
         user_id: $localStorage.auth.user._id,
-        unique_id: localStorage.eco_user.user_id
+        unique_id: localStorage.eco_user ? JSON.parse(localStorage.eco_user).user_id : ''
       };
 
       $http.post(BASE_URL, requestData)
