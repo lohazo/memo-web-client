@@ -1,6 +1,30 @@
 'use strict';
 
 (function(angular, localStorage) {
+  function MemoTracking($http, $q, $localStorage) {
+    var BASE_URL = 'http://services.memo.edu.vn/trackings/track';
+    var APP_VERSION = '1.0.2';
+    var tracker = {};
+
+    tracker.track = function(eventName, data, callback) {
+      var deferred = $q.defer();
+      var requestData = {
+        event_name: 'Web ' + APP_VERSION + ' ' + eventName,
+        user_id: $localStorage.auth.user._id,
+        unique_id: localStorage.eco_user.user_id
+      };
+
+      $http.post(BASE_URL, requestData)
+        .then(function(response) {
+          deferred.resolve(response);
+        });
+
+      return deferred.promise;
+    };
+
+    return tracker;
+  }
+
   function EcoTracking($http, $q, $routeParams, $cookies, $localStorage) {
     var BASE_URL = 'http://eco-tracking.memo.edu.vn';
     var tracker = {};
@@ -108,6 +132,7 @@
   }
 
   angular.module('tracking.services', ['ngCookies'])
+  .factory('MemoTracking', ['$http', '$q', '$localStorage', MemoTracking])
   .factory('EcoTracking', [
     '$http', '$q', '$routeParams', '$cookies', '$localStorage', EcoTracking])
   .factory('Mixpanel', MixpanelFactory);
