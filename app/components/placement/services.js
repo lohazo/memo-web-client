@@ -16,14 +16,13 @@ angular.module('placement.services', [])
 		function getQuestion() {
 			return question;
 		}
-
 		function skip(data) {
 			return PlacementServices.submitAnswer(data)
 			.then(function(response) {
 				question = response.data;
+
 			});
 		}
-
 		function submitAnswer(data) {
 			return PlacementServices.submitAnswer(data)
 			.then(function(response) {
@@ -33,7 +32,8 @@ angular.module('placement.services', [])
 					MemoTracker.track('finish exam placement test')
 				}
 				else{
-					mixpanel.track('Web 1.0.2 fail exam placement test');	
+					mixpanel.track('Web 1.0.2 fail exam placement test');
+					MemoTracker.track('quick exam placement test');	
 				}
 			// question = {
 			//     "finish_exam_bonus_exp": 0,
