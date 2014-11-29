@@ -30,6 +30,7 @@ angular.module('landingpage.controllers', [])
     var data = $routeParams;
     data.preview = '1';
     mixpanel.track('Web 1.0.2 Landingpage view', data);
+    MolServices.saveC2(data);
   }
   ])
 .controller('LpHeadCtrl', [
