@@ -19,6 +19,7 @@ angular.module('home.controller', ['app.services'])
 		    $scope.skillTree = TreeBuilder.build();
 
 		    MemoTracker.track('skills tree');
+		    
 		}).then(function() {
 		    Profile.getProfileDetail($scope.auth.user)
 			.then(function() {

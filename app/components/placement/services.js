@@ -30,6 +30,7 @@ angular.module('placement.services', [])
 				question = response.data;
 				if (question.exp_chart) {
 					mixpanel.track('Web 1.0.2 finish exam placement test');
+					MemoTracker.track('finish exam placement test')
 				}
 				else{
 					mixpanel.track('Web 1.0.2 fail exam placement test');	
