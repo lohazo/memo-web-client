@@ -3,8 +3,8 @@
 angular.module('exam.services', [])
     .factory('Exam', [
 	'$localStorage', '$window',
-	'ExamServices', 'Feedback', 'PlazaServices', 'Mixpanel',
-	function($localStorage, $window, ExamServices, Feedback, PlazaServices, Mixpanel) {
+	'ExamServices', 'Feedback', 'PlazaServices', 'Mixpanel', 'MemoTracking',
+	function($localStorage, $window, ExamServices, Feedback, PlazaServices, Mixpanel, MemoTracker) {
 	    var exam, questions, answered, wrongAnswers, question, questionPosition,
 		hearts, availableItems, examToken, answersLog;
 
@@ -35,6 +35,7 @@ angular.module('exam.services', [])
 		Feedback.list = [];
 
 		Mixpanel.track('screen Exam');
+		MemoTracker.track('Web 1.0.2 start exam lesson')
 	    }
 
 	    function getQuestions() {
@@ -121,7 +122,8 @@ angular.module('exam.services', [])
 
 	    function checkState() {
 		if (hearts.remaining < 0) {
-		    Mixpanel.track('screen FailLesson');
+		    //Mixpanel.track('screen FailLesson');
+		    MemoTracker.track('Web 1.0.2 fail exam lesson')
 		    return {isFinished: true, isFail: true};
 		}
 
@@ -131,7 +133,8 @@ angular.module('exam.services', [])
 	    }
 
 	    function finish(data) {
-		Mixpanel.track('screen FinishLesson');
+		//Mixpanel.track('screen FinishLesson');
+		MemoTracker.track('Web 1.0.2 finish exam lesson')
 		data.examToken = examToken;
 		data.logs = JSON.stringify(answersLog);
 		return ExamServices.finish(data).then(function(response) {
