@@ -74,7 +74,8 @@
                     answerOptions: false
                 };
 
-                if (stripSpecialCharacters(userAnswer).toLowerCase() === stripSpecialCharacters(question.question).toLowerCase()) {
+                if (stripSpecialCharacters(userAnswer).toLowerCase()
+                    .localeCompare(stripSpecialCharacters(question.question).toLowerCase()) === 0) {
                     result.result = true;
                 }
                 // else {
@@ -102,7 +103,8 @@
 
                 // Group 1, 2 check case-insensitivity
                 result.result = translations.some(function(obj) {
-                    return stripSpecialCharacters(userAnswer).toLowerCase() === stripSpecialCharacters(obj).toLowerCase();
+                    return stripSpecialCharacters(userAnswer).toLowerCase()
+                        .localeCompare(stripSpecialCharacters(obj).toLowerCase()) === 0;
                 });
 
                 if (result.result) return result;
@@ -270,7 +272,8 @@
                 translations.push(question.hint);
 
                 result.result = translations.some(function(translation) {
-                    return stripSpecialCharacters(userAnswer).toLowerCase() === stripSpecialCharacters(translation).toLowerCase();
+                    return stripSpecialCharacters(userAnswer).toLowerCase()
+                        .localeCompare(stripSpecialCharacters(translation).toLowerCase()) === 0;
                 });
 
                 if (result.result) return result;
