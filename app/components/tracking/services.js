@@ -68,7 +68,7 @@
     tracker.getUserId = function(data, callback) {
       data.name = "Enter page";
       data.browsing_domain = document.URL;
-      data.referrer_url = document.referrer_url;
+      data.referrer_url = document.referrer;
 
       return $http.post(BASE_URL + '/users/track', data)
       .success(function(response) {
