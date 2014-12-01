@@ -123,7 +123,7 @@ angular.module('exam.services', [])
 	    function checkState() {
 		if (hearts.remaining < 0) {
 		    Mixpanel.track('screen FailLesson');
-		    MemoTracker.track('Web 1.0.2 fail exam lesson')
+		    MemoTracker.track('fail exam lesson')
 		    return {isFinished: true, isFail: true};
 		}
 
