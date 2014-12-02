@@ -21,7 +21,6 @@
 
       return deferred.promise;
     };
-
     return tracker;
   }
 
@@ -43,7 +42,6 @@
         isCalled += 1;
       }
     };
-
     tracker.createFrame = function() {
       var ifrm = document.createElement('iframe');
       ifrm.setAttribute('src', BASE_URL + '/tracking_frame/index');
@@ -123,7 +121,6 @@
       eventName = "Web 1.0.2 " + eventName;
       mixpanel.track(eventName, data, callback);
     };
-
     Mixpanel.register = function(data) {
       // Register wrapper
       mixpanel.register(data);
@@ -132,8 +129,8 @@
   }
 
   angular.module('tracking.services', ['ngCookies'])
-  .factory('MemoTracking', ['$http', '$q', '$localStorage', MemoTracking])
-  .factory('EcoTracking', [
+  .factory('MemoTracking', ['$http', '$q', '$localStorage', MemoTracking ])
+  .factory('EcoTracking',[
     '$http', '$q', '$routeParams', '$cookies', '$localStorage', EcoTracking])
   .factory('Mixpanel', MixpanelFactory);
 
