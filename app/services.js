@@ -1,141 +1,132 @@
 'use strict';
 
 angular.module('app.services', [])
-.factory('HttpInterceptor', function($rootScope, $q, $window, $localStorage) {
-        
-    return {
-        // optional method
-        'request': function(config) {
-        // do something on success
-        return config;
-    },
+    .factory('HttpInterceptor', function($rootScope, $q, $window, $localStorage) {
+        return {
+            // optional method
+            'request': function(config) {
+                // do something on success
+                return config;
+            },
 
-        // optional method
-        'requestError': function(rejection) {
-        // do something on error
+            // optional method
+            'requestError': function(rejection) {
+                // do something on error
 
-        // if (canRecover(rejection)) {
-        //     return responseOrNewPromise
-        // }
-        return $q.reject(rejection);
-    },
+                // if (canRecover(rejection)) {
+                //     return responseOrNewPromise
+                // }
+                return $q.reject(rejection);
+            },
 
-        // optional method
-        'response': function(response) {
-        // do something on success
-        if (response.status === 401) {
-            $localStorage.$reset();
-            alert(response.data.error);
-            $window.reload();
-        }
-        return response;
-    },
+            // optional method
+            'response': function(response) {
+                // do something on success
+                if (response.status === 401) {
+                    $localStorage.$reset();
+                    alert(response.data.error);
+                    $window.reload();
+                }
+                return response;
+            },
 
-        // optional method
-        'responseError': function(rejection) {
-        // do something on error
-        if (rejection.status === 401) {
-            $localStorage.$reset();
-            alert(rejection.data.error);
-            $window.location = '/';
-        }
-        return $q.reject(rejection);
-    }
-};
-})
-.factory('AppSetting', [
-    'AppServices', '$localStorage',
-    function(AppServices, $localStorage) {
-        var Setting = {};
-        Setting.get = function() {
-            return AppServices.get().then(function(response) {
-                $localStorage.appSetting = response.data;
-            });
+            // optional method
+            'responseError': function(rejection) {
+                // do something on error
+                if (rejection.status === 401) {
+                    $localStorage.$reset();
+                    alert(rejection.data.error);
+                    $window.location = '/';
+                }
+                return $q.reject(rejection);
+            }
         };
-        return Setting;
-    }
+    })
+    .factory('AppSetting', [
+        'AppServices', '$localStorage',
+        function(AppServices, $localStorage) {
+            var Setting = {};
+            Setting.get = function() {
+                return AppServices.get().then(function(response) {
+                    $localStorage.appSetting = response.data;
+                });
+            };
+            return Setting;
+        }
     ])
+    .factory('AppServices', [
+        '$http', '$q', '$localStorage',
+        function($http, $q, $localStorage) {
+            var HOST = 'http://api.memo.edu.vn/api',
+                API_VERSION = '/v1.4',
+                BASE_URL = HOST + API_VERSION;
 
-.factory('AppServices', [
-    '$http', '$q', '$localStorage',
-    function($http, $q, $localStorage) {
-        var HOST = 'http://api.memo.edu.vn/api',
-        API_VERSION = '/v1.4',
-        BASE_URL = HOST + API_VERSION;
+            var AppServices = {};
+            AppServices.get = function(data) {
+                var deferred = $q.defer();
+                var authToken = $localStorage.auth.user.auth_token;
 
-        var AppServices = {};
-        AppServices.get = function(data) {
-            var deferred = $q.defer();
-            var authToken = $localStorage.auth.user.auth_token;
+                $http.get(BASE_URL + '/appsettings?auth_token=' + authToken + '&device=web')
+                    .then(function(response) {
+                        deferred.resolve(response);
+                    });
+                return deferred.promise;
+            };
 
-            $http.get(BASE_URL + '/appsettings?auth_token=' + authToken + '&device=web')
-            .then(function(response) {
-                deferred.resolve(response);
-            });
-            return deferred.promise;
-        };
-
-        return AppServices;
-    }
+            return AppServices;
+        }
     ])
-
-.factory('MessageList', [
-    'GetListMessage', '$localStorage', 
-    function(GetListMessage, $localStorage){
+    .factory('Message', ['MessageService', function(MessageService) {
         var Message = {};
-        Message.get = function(){
-            return GetListMessage.get().then(function(response){
-                $localStorage.getListMessage = response.data;
+
+        Message.list = function() {
+            return MessageService.list().then(function(response) {
+                Message.messages = response.data;
             });
         };
+
+        Message.open = function(data) {
+            // data = {message_ids=[]}
+            return MessageService.openMessage(data);
+        };
+
         return Message;
     }])
+    .factory('MessageService', ['$http', '$q', '$localStorage', function($http, $q, $localStorage) {
+        var BASE_URL = 'http://services.memo.edu.vn/api',
+            MessageService = {};
 
-.factory('GetListMessage', ['$http', '$q', '$localStorage' ,
-    function($http, $q, $localStorage){
-        var HOST = 'http://services.memo.edu.vn/api',
-        API_VERSION =  '',
-        BASE_URL = HOST + API_VERSION;
-        
-        var GetListMessage = {};
-        GetListMessage.get = function(data){
+        MessageService.list = function() {
             var deferred = $q.defer();
             var authToken = $localStorage.auth.user.auth_token;
+
             $http.get(BASE_URL + '/messages?auth_token=' + authToken)
-            .then(function(response){
-                deferred.resolve(response); 
-            });
+                .then(function(response) {
+                    $localStorage.messages = response.data;
+                    deferred.resolve(response);
+                });
+
             return deferred.promise;
         };
-        return GetListMessage;
-    }])
 
-.factory('OpenMessage', [
-    'GetOpenMessage', '$localStorage', 
-    function(GetOpenMessage, $localStorage){
-        var openMessage = {};
-        openMessage.get = function(){
-            return GetOpenMessage.get().then(function(response){
-                $localStorage.getOpenMessage = response.data;
-            });
-        };
-        return openMessage;
-    }])
-.factory('GetOpenMessage', ['$http', '$q', '$localStorage' ,
-    function($http, $q, $localStorage){
-        var HOST = 'http://services.memo.edu.vn/api',
-        API_VERSION =  '',
-        BASE_URL = HOST + API_VERSION;
-        
-        var GetOpenMessage = {};
-        GetOpenMessage.get = function(data){
+        MessageService.openMessage = function(data) {
             var deferred = $q.defer();
             var authToken = $localStorage.auth.user.auth_token;
-            $http.post(BASE_URL + '/messages/open_messages',{message_ids:'["547beca664656267a5540100", "547bef236465624870240000"]',auth_token:authToken})
-            .then(function(response){
-                deferred.resolve(response); 
-            });
+
+            var requestData = {
+                message_ids: JSON.stringify(data.message_ids),
+                auth_token: authToken
+            };
+
+            $http.post(BASE_URL + '/messages/open_messages', requestData)
+                .then(function(response) {
+                    $localStorage.messages = null;
+                    delete $localStorage.messages;
+                    deferred.resolve(response);
+                });
+
             return deferred.promise;
         };
-        return GetOpenMessage;
+
+        return MessageService;
     }]);

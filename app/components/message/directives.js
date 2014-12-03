@@ -5,8 +5,8 @@ angular.module('message.directives', [])
             strict: 'EA',
             scope: true,
             link: function($scope, $element, $attr) {
-                var getListMessage = $localStorage.getListMessage;
-                $scope.shouldOpen = getListMessage && getListMessage.message_ids.length > 0;
+                var messages = $localStorage.messages;
+                $scope.shouldOpen = messages && messages.length > 0;
                 $scope.closeMessageList = function() {
                     $scope.shouldOpen = false;
                 }
