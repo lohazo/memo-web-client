@@ -131,7 +131,7 @@ angular.module('app.services', [])
         GetOpenMessage.get = function(data){
             var deferred = $q.defer();
             var authToken = $localStorage.auth.user.auth_token;
-            $http.post(BASE_URL + '/messages/open_messages',{message_ids:'["547bec7d64656267a52c0100"]',auth_token:authToken})
+            $http.post(BASE_URL + '/messages/open_messages',{message_ids:'["547beca664656267a5540100", "547bef236465624870240000"]',auth_token:authToken})
             .then(function(response){
                 deferred.resolve(response); 
             });
