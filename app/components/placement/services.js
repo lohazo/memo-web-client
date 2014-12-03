@@ -1,35 +1,40 @@
 'use strict';
 
 angular.module('placement.services', [])
-    .factory('Placement', [
-	'PlacementServices', 'Mixpanel',
-	function(PlacementServices, Mixpanel) {
-	    var question;
-	    function start(data) {
-		return PlacementServices.start(data)
-		    .then(function(response) {
-			question = response.data;
-			Mixpanel.track('screen PlacementTest');
-		    });
-	    }
-	    function getQuestion() {
-		return question;
-	    }
-	    
-	    function skip(data) {
-		return PlacementServices.submitAnswer(data)
-		    .then(function(response) {
-			question = response.data;
-		    });
-	    }
+.factory('Placement', [
+	'PlacementServices', 'Mixpanel', 'MemoTracking',
+	function(PlacementServices, Mixpanel, MemoTracker) {
+		var question;
+		function start(data) {
+			return PlacementServices.start(data)
+			.then(function(response) {
+				question = response.data;
+				mixpanel.track('Web 1.0.2 start exam placement test');
+				MemoTracker.track('start exam placemanet test');
+			});
+		}
+		function getQuestion() {
+			return question;
+		}
+		function skip(data) {
+			return PlacementServices.submitAnswer(data)
+			.then(function(response) {
+				question = response.data;
 
-	    function submitAnswer(data) {
-		return PlacementServices.submitAnswer(data)
-		    .then(function(response) {
-			question = response.data;
-			if (question.exp_chart) {
-			    Mixpanel.track('screen FinishPlacementTest');
-			}
+			});
+		}
+		function submitAnswer(data) {
+			return PlacementServices.submitAnswer(data)
+			.then(function(response) {
+				question = response.data;
+				if (question.exp_chart) {
+					mixpanel.track('Web 1.0.2 finish exam placement test');
+					MemoTracker.track('finish exam placement test')
+				}
+				else{
+					mixpanel.track('Web 1.0.2 fail exam placement test');
+					MemoTracker.track('quick exam placement test');	
+				}
 			// question = {
 			//     "finish_exam_bonus_exp": 0,
 			//     "leveled_up": false,
@@ -49,49 +54,49 @@ angular.module('placement.services', [])
 			//     "num_affected_skills": 37,
 			//     "bonus_coin": 2
 			// };
-		    });
-	    }
-	    return {
-		start: start,
-		skip: skip,
-		submitAnswer: submitAnswer,
-		question: getQuestion
-	    };
+		});
+		}
+		return {
+			start: start,
+			skip: skip,
+			submitAnswer: submitAnswer,
+			question: getQuestion
+		};
 	}])
-    .factory('PlacementServices', ['$http', '$q', function($http, $q) {
+.factory('PlacementServices', ['$http', '$q', function($http, $q) {
 	var HOST = 'http://api.memo.edu.vn/api',
-	    API_VERSION = '/v1.4',
-	    BASE_URL = HOST + API_VERSION;
+	API_VERSION = '/v1.4',
+	BASE_URL = HOST + API_VERSION;
 
 	return {
-	    start: function(data) {
-		var deferred = $q.defer();
+		start: function(data) {
+			var deferred = $q.defer();
 
-		var requestData = {
-		    device: 'web',
-		    auth_token: data.auth_token,
-		    speak_enabled: false
-		};
+			var requestData = {
+				device: 'web',
+				auth_token: data.auth_token,
+				speak_enabled: false
+			};
 
-		$http.post(BASE_URL + '/placement_test/start', requestData)
-		    .then(function(response) {
-			deferred.resolve(response);
-		    });
+			$http.post(BASE_URL + '/placement_test/start', requestData)
+			.then(function(response) {
+				deferred.resolve(response);
+			});
 
-		return deferred.promise;
-	    },
-	    submitAnswer: function(data) {
-		var deferred = $q.defer();
+			return deferred.promise;
+		},
+		submitAnswer: function(data) {
+			var deferred = $q.defer();
 
-		data.device = 'web';
-		data.speak_enabled = false;
+			data.device = 'web';
+			data.speak_enabled = false;
 
-		$http.post(BASE_URL + '/placement_test/submit_answer', data)
-		    .then(function(response) {
-			deferred.resolve(response);
-		    });
+			$http.post(BASE_URL + '/placement_test/submit_answer', data)
+			.then(function(response) {
+				deferred.resolve(response);
+			});
 
-		return deferred.promise;
-	    }
+			return deferred.promise;
+		}
 	};
-    }]);
+}]);

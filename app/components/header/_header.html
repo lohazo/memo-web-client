@@ -5,10 +5,12 @@
 	       <a href="/"><img src="assets/img/logo-beta-web.png"></a>
       </li>
     </ul>
+    <div class="version-top">
+      <span class="version">v1.0.2</span>
+    </div>
     <top-bar-section ng-if="auth.loggedIn">
       <!-- Left Nav Section -->
       <ul class="left menus">
-        <li class="version">v1.0.2</li>
         <li class="menu-item" ng-class="getActiveItem(item.link)" ng-repeat="item in menus">
           <a href="{{item.link}}">{{item.title}}</a>
         </li>

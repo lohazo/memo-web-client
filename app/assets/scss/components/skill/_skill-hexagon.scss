@@ -337,6 +337,7 @@ a.close, a.send{
 .hexagon .skill-row .test-out{
     font-weight: bold;
 }
+/*
 .hexagon .lessons .skill-blue .lesson a.memo-1 {
     background-position: 0px -40px !important;
 }
@@ -344,6 +345,16 @@ a.close, a.send{
     background-position: 0px -120px;
 }
 .hexagon .lessons .skill-red .lesson a.memo-3 {
+    background-position: 0px -80px;
+}
+*/
+.hexagon .skill-page .blue1 .unlocked a.memo-1{
+    background-position: 0px -40px;
+}
+.hexagon .skill-page .green1 .unlocked a.memo-2{
+    background-position: 0px -120px;
+}
+.hexagon .skill-page .red1 .unlocked a.memo-3{
     background-position: 0px -80px;
 }
 .plaza .item img{
@@ -383,4 +394,7 @@ a#vp{
     float: left;
     font-size: 16px;
     font-weight: bold;
+}
+#report-dropdown textarea{
+    color: #9D9D9D;
 }

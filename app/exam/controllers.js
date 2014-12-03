@@ -3,8 +3,8 @@
 angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
 	'$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question',
-	'Sound',
-	function($scope, $timeout, $routeParams, $location, Exam, Question, Sound) {
+	'Sound','MemoTracking',
+	function($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker) {
 	    var examType = $location.path().split('/')[1].trim();
 
 	    var requestData = {
@@ -58,6 +58,7 @@ angular.module('exam.controllers', ['ngSanitize'])
 
 	    $scope.quit = function(afterDoingTest) {
 		// Call Feedback API
+		MemoTracker.track('quit exam lesson');
 		if (afterDoingTest) {
 		    Exam.sendFeedbackLogs();
 		}
@@ -67,7 +68,7 @@ angular.module('exam.controllers', ['ngSanitize'])
 
 	    $scope.finish = function() {
 		Exam.finish(requestData).then(function(response) {
-		    $scope.quit(true);
+		    $scope.quit(true); 
 		});
 	    };
 
