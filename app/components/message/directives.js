@@ -1,10 +1,16 @@
 'use strict';
 angular.module('message.directives', [])
-    .directive('appMain', function() {
-	return {
-	    strict: 'EA',
-	    scope: true,
-	    controller: 'HomeMainCtrl',
-	    templateUrl: 'message/_messages.html'
-	};
+    .directive('messageList', function($localStorage) {
+        return {
+            strict: 'EA',
+            scope: true,
+            link: function($scope, $element, $attr) {
+                var getListMessage = $localStorage.getListMessage;
+                $scope.shouldOpen = getListMessage && getListMessage.message_ids.length > 0;
+                $scope.closeMessageList = function() {
+                    $scope.shouldOpen = false;
+                }
+            },
+            templateUrl: 'components/message/_messages.html'
+        };
     });

@@ -105,7 +105,6 @@ angular.module('app.services', [])
             .then(function(response){
                 deferred.resolve(response); 
             });
-            console.log(deferred.promise);
             return deferred.promise;
         };
         return GetListMessage;

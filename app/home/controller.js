@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('home.controller', ['app.services'])
+angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', function($scope) {
     }])
     .controller('HomeMainCtrl', [
