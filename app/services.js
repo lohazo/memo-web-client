@@ -2,6 +2,7 @@
 
 angular.module('app.services', [])
 .factory('HttpInterceptor', function($rootScope, $q, $window, $localStorage) {
+        
     return {
         // optional method
         'request': function(config) {
@@ -104,6 +105,7 @@ angular.module('app.services', [])
             .then(function(response){
                 deferred.resolve(response); 
             });
+            console.log(deferred.promise);
             return deferred.promise;
         };
         return GetListMessage;
@@ -130,7 +132,7 @@ angular.module('app.services', [])
         GetOpenMessage.get = function(data){
             var deferred = $q.defer();
             var authToken = $localStorage.auth.user.auth_token;
-            $http.post(BASE_URL + '/messages/open_messages',{message_ids:'["547bec7d64656267a52c0100", "abc"]',auth_token:authToken})
+            $http.post(BASE_URL + '/messages/open_messages',{message_ids:'["547bec7d64656267a52c0100"]',auth_token:authToken})
             .then(function(response){
                 deferred.resolve(response); 
             });
@@ -138,3 +140,46 @@ angular.module('app.services', [])
         };
         return GetOpenMessage;
     }]);
+
+// .factory('GetMessages', [
+//     '$http', '$q', '$localStorage', 'GetMessages',
+//     function($http, $q, $localStorage, GetMessages){
+//         var getMessages;
+//         function GetMessages(data) {
+//             return GetOpenMessage.GetMessages(data)
+//             .then(function(response) {
+//                 init(response.data);
+//             }, function(response) {
+//                 if (response.status == 422) {
+//                     $window.location = "/";
+//                 }
+//             });
+//         };
+//         return getMessages;
+//     }
+//     ])
+// .factory('GetOpenMessage', [
+//     '$http', '$q', '$localStorage', 'GetOpenMessage',
+//     function($http, $q, $localStorage, GetMessages){
+//         var HOST = 'http://services.memo.edu.vn/api',
+//         API_VERSION = '',
+//         BASE_URL = HOST + API_VERSION;
+
+//         function GetMessages(data) {
+//             var deferred = $q.defer();
+//             var auth_token = $localStorage.auth.user.auth_token;
+//         var requestData = {
+//             type: data.type,
+//             auth_token: auth_token,
+//             device: 'web'
+//         };
+//         $http.post(BASE_URL + '/messages/open_messages', requestData)
+//         .then(function(response) {
+//             deferred.resolve(response);
+//         }, function(response) {
+//             deferred.reject(response);
+//         });
+//         return deferred.promise;
+//     };
+//     return GetOpenMessage;
+// }]);

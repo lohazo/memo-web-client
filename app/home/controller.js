@@ -5,14 +5,17 @@ angular.module('home.controller', ['app.services'])
     }])
     .controller('HomeMainCtrl', [
 	'$scope', 'Profile', 'TreeBuilder',
-	'AppSetting', 'Mixpanel', 'MemoTracking', 'MessageList', 'OpenMessage',
-	function($scope, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker, MessageList, OpenMessage) {
+	'AppSetting', 'Mixpanel', 'MemoTracking', 'MessageList', 'OpenMessage','$localStorage',
+	function($scope, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker, MessageList, OpenMessage,$localStorage) {
 	    Profile.getProfile($scope.auth.user)
 		.then(function() {
 		    $scope.profile = Profile.data.user_info;
 		})
 		.then(AppSetting.get)
 		.then(MessageList.get)
+		.then(function(){
+			$scope.messageList = $localStorage.getListMessage;
+		})
 		.then(OpenMessage.get)
 		.then(function() {
 		    TreeBuilder.getCheckpoints();
