@@ -3,9 +3,10 @@
 angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
 	'$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question',
-	'Sound','MemoTracking',
-	function($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker) {
+	'Sound','MemoTracking', 'Skill',
+	function($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker, Skill) {
 	    var examType = $location.path().split('/')[1].trim();
+	    var skill = Skill.skill($routeParams.id);
 
 	    var requestData = {
 		type: examType === 'skill' ? 'lesson' : examType
@@ -17,6 +18,9 @@ angular.module('exam.controllers', ['ngSanitize'])
 	    } else if (examType === 'checkpoint') {
 		requestData.checkpoint_position = $routeParams.checkpoint_position;
 	    } else if (examType === 'shortcut') {
+	    	if (!skill.allow_shortcut) {
+	    		$location.path('/');
+	    	}
 		requestData.skill_id = $routeParams.id;
 	    }
 
