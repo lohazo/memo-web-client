@@ -17,9 +17,6 @@ angular.module('home.controller', ['app.services', 'message.directives'])
 			$scope.messages = Message.messages
 		})
 		.then(function() {
-			Message.open($scope.messages);
-		})
-		.then(function() {
 		    TreeBuilder.getCheckpoints();
 		    TreeBuilder.getSkills();
 		    TreeBuilder.getTree();
