@@ -120,8 +120,7 @@ angular.module('app.services', [])
 
             $http.post(BASE_URL + '/messages/open_messages', requestData)
                 .then(function(response) {
-                    $localStorage.messages = null;
-                    delete $localStorage.messages;
+                    $localStorage.messages = [];
                     deferred.resolve(response);
                 });
 
