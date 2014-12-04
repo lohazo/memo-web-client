@@ -21,7 +21,8 @@ angular.module('course.services', [])
 	    data.auth_token = $localStorage.auth.user.auth_token;
 	    return CourseServices.courses(data)
 		.then(function(response) {
-		    Course.list = response.data;
+		    // Course.list = response.data;
+		    Course.list = $localStorage.auth.user.list_courses;
 		});
 	};
 
@@ -37,8 +38,8 @@ angular.module('course.services', [])
 	return new Course();
     }])
     .factory('CourseServices', [ '$http', '$q', '$location', function($http, $q, $location) {
-	var HOST = "http://api.memo.edu.vn/api",
-	    API_VERSION = "/v1.4",
+	var HOST = "http://french.memo.edu.vn/api",
+	    API_VERSION = "/v1.5",
 	    BASE_URL = HOST + API_VERSION;
 
 	return {
