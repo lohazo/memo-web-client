@@ -1,75 +1,75 @@
 .app-top-bar {
-
     .top-bar {
-	min-width: $row-width;
-	.name {
-	    line-height: $topbar-height;
-	}
-	.top-bar-section {
-	    font-family: $topbar-link-font-family;
-	    ul li:not(.has-form) {
-		&.active > a:not(.button) {
-		    background-color: $secondary-color;
-		    border-radius: $global-radius;
-		    &:after {
-			color: #FFF;
-		    }
-		}
-		.dropdown .active > a:not(.button) {
-		    background-color: rgba(0,0,0,.2);
-		}
+    min-width: $row-width;
+    .name {
+        line-height: $topbar-height;
+    }
+    .top-bar-section {
+        font-family: $topbar-link-font-family;
+        ul li:not(.has-form) {
+            &.active > a:not(.button) {
+                background-color: $secondary-color;
+                border-radius: $global-radius;
+                min-width: 130px;
+                &:after {
+                    color: $white;
+                }
+            }
+            .dropdown .active > a:not(.button) {
+                background-color: rgba(0,0,0,.2);
+            }
 
-		.f-dropdown > li > a:not(.button) {
-		    border-radius: 0;
-		}
-	    }
-	}
-	.top-bar-section {
-	    ul.left {
-		li.menu-item {
-		    background-color: $primary-color;
-		    margin-right: 5px;
-		    margin-left: 5px;
-		    padding-top: $topbar-height / 4;
-		    a {
-			border-radius: $global-radius;
-			line-height: 40px;
-		    }
-		}
-	    }
-	    ul.right {
-		li {
-		    padding-left: 0px;
-		    padding-right: 0px;
-		    a.button {
-			line-height: $topbar-height;
-			margin: 0;
-			padding: 0 20px;
-			top: 0;
-		    }
-		}
-		.notification {
-		    position: relative;
-		    &.has-notification {
-			.indicator {
-			    top: 10px;
-			    left: -5px;
-			}
-		    }
-		    .indicator {
-			background-color: $gold;
-			border-radius: 50%;
-			font-size: .9em;
-			line-height: 20px;
-			position: absolute;
-			text-align: center;
-			top: -1000px;
-			height: 20px;
-			width: 20px;
-		    }
-		}
-	    }
-	}
+            .f-dropdown > li > a:not(.button) {
+                border-radius: 0;
+            }
+        }
+    }
+    .top-bar-section {
+        ul.left {
+        li.menu-item {
+            background-color: $primary-color;
+            margin-right: 5px;
+            margin-left: 5px;
+            padding-top: $topbar-height / 4;
+            a {
+            border-radius: $global-radius;
+            line-height: 40px;
+            }
+        }
+        }
+        ul.right {
+        li {
+            padding-left: 0px;
+            padding-right: 0px;
+            a.button {
+            line-height: $topbar-height;
+            margin: 0;
+            padding: 0 20px;
+            top: 0;
+            }
+        }
+        .notification {
+            position: relative;
+            &.has-notification {
+            .indicator {
+                top: 10px;
+                left: -5px;
+            }
+            }
+            .indicator {
+            background-color: $gold;
+            border-radius: 50%;
+            font-size: .9em;
+            line-height: 20px;
+            position: absolute;
+            text-align: center;
+            top: -1000px;
+            height: 20px;
+            width: 20px;
+            }
+        }
+        }
+    }
     }
 }
 
@@ -78,30 +78,30 @@
     min-width: 220px;
     left: 895px !important;
     > li {
-	&:first-child {
-	    border-radius: 10px 10px 0 0;
-	    a:not(.button) {
-		border-radius: 10px 10px 0 0;
-	    }
-	}
-	&:last-child {
-	    border-radius: 0 0 10px 10px;
-	    a:not(.button) {
-		border-radius: 0 0 10px 10px;
-	    }
-	}
-	> a {
-	    min-width: 220px;
-	    background: $white;
-	    color: $jet;
-	    &:hover {
-		background-color: $secondary-color;
-		color: $white;
-	    }
-	    &:not(.button) {
-		line-height: 50px;
-	    }
-	}
+    &:first-child {
+        border-radius: 10px 10px 0 0;
+        a:not(.button) {
+        border-radius: 10px 10px 0 0;
+        }
+    }
+    &:last-child {
+        border-radius: 0 0 10px 10px;
+        a:not(.button) {
+        border-radius: 0 0 10px 10px;
+        }
+    }
+    > a {
+        min-width: 220px;
+        background: $white;
+        color: $jet;
+        &:hover {
+        background-color: $secondary-color;
+        color: $white;
+        }
+        &:not(.button) {
+        line-height: 50px;
+        }
+    }
     }
 }
 
@@ -110,13 +110,9 @@ li.name > a > img {
 }
 
 ul.f-dropdown li{
-	text-align: left !important;
+    text-align: left !important;
 }
 span.version {
-    background: #810C15 !important;
-    color: #FFF;
-    font-weight: bold;
-    float: left;
-    text-transform: uppercase;
-    margin-right: 5px;
+    color: $white;
+    margin-left: 5px;
 }
