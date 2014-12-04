@@ -29,8 +29,8 @@ angular.module('profile.services', [])
 	return Profile;
     }])
     .factory('ProfileServices', ['$http', '$q', '$location', function($http, $q, $location) {
-	var HOST = "http://api.memo.edu.vn/api",
-	    API_VERSION = "/v1.4",
+	var HOST = "http://french.memo.edu.vn/api",
+	    API_VERSION = "/v1.5",
 	    BASE_URL = HOST + API_VERSION;
 
 	return {
