@@ -11,14 +11,14 @@ angular.module('home.controller', ['app.services', 'message.directives'])
 		.then(function() {
 		    $scope.profile = Profile.data.user_info;
 		})
-		// .then(AppSetting.get)
-		// .then(Message.list)
-		// .then(function() {
-		// 	$scope.messages = Message.messages
-		// })
-		// .then(function() {
-		// 	Message.open($scope.messages);
-		// })
+		.then(AppSetting.get)
+		.then(Message.list)
+		.then(function() {
+			$scope.messages = Message.messages
+		})
+		.then(function() {
+			Message.open($scope.messages);
+		})
 		.then(function() {
 		    TreeBuilder.getCheckpoints();
 		    TreeBuilder.getSkills();

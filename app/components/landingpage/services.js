@@ -7,7 +7,7 @@ angular.module('landingpage.services', [])
     .factory('MolServices', [
 	'$rootScope', '$http', '$q',
 	function($rootScope, $http, $q) {
-	    var HOST = 'http://api.memo.edu.vn/api/v1.4/users';
+	    var HOST = 'http://api.memo.edu.vn/api/v1.5/users';
 	    return {
 		saveC2: function(data) {
 		    var deferred = $q.defer();

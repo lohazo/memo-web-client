@@ -23,7 +23,6 @@ angular.module('plaza.services', [])
 	Plaza.use = function(data) {
 	    return PlazaServices.use(data)
 		.then(function(response) {
-		    console.log(response);
 		});
 	};
 
@@ -33,7 +32,7 @@ angular.module('plaza.services', [])
 	'$http', '$q', '$localStorage',
 	function($http, $q, $localStorage) {
 	    var HOST = "http://api.memo.edu.vn/api",
-		API_VERSION = "/v1.4",
+		API_VERSION = "/v1.5",
 		BASE_URL = HOST + API_VERSION;
 
 	    var Services = {};

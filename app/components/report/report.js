@@ -6,7 +6,7 @@ angular.module('report', [])
 	function($http, $q, $localStorage) {
 
 	    var HOST = "http://api.memo.edu.vn/api",
-		API_VERSION = "/v1.4",
+		API_VERSION = "/v1.5",
 		BASE_URL = HOST + API_VERSION;
 
 	    return {
