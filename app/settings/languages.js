@@ -1,18 +1,23 @@
-(function(angular) {
+(function (angular) {
 
   'use strict';
 
-  function SettingLanguageService($http, $q, $localStorage) {
-    var Setting = {};
+  function SettingLanguageCtrl($scope, Course) {
 
-    return Setting;
-  }
+    Course.listUserCourses().then(function () {
+      $scope.userCourses = Course.userCourses;
+      $scope.course = $scope.userCourses.filter(function (course) {
+        return Course.getCurrentCourse() === course._id;
+      })[0] || {};
+      console.log($scope.course);
+    });
 
-  function SettingLanguageCtrl($scope, SettingLanguageService) {
+    $scope.saveChanges = function() {
+      Course.selectCourse({base_course_id: $scope.course._id});
+    };
   }
 
   angular.module('settings.languages', [])
-    .controller('SettingLanguageCtrl', ['$scope', 'SettingLanguageService', SettingLanguageCtrl])
-    .factory('SettingLanguageService', ['$http', '$q', '$localStorage', SettingLanguageService]);
+    .controller('SettingLanguageCtrl', ['$scope', 'Course', SettingLanguageCtrl]);
 
-})(window.angular);
+}(window.angular));
