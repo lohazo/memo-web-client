@@ -1,72 +1,86 @@
-'use strict';
+(function (angular) {
+  'use strict';
 
-angular.module('course.services', [])
-    .factory('Course', ['CourseServices', '$localStorage', function(CourseServices, $localStorage) {
-	var Course = function() {};
+  function CourseServices($http, $q, $location, $localStorage) {
+    var HOST = "http://api.memo.edu.vn/api",
+      API_VERSION = "/v1.5",
+      BASE_URL = HOST + API_VERSION;
 
-	Course.prototype.setData = function(data) {
-	    Course.list = data;
-	};
+    var Services = {};
 
-	Course.prototype.getData = function(data) {
-	    return Course.list;
-	};
+    Services.listCourses = function () {
+      var deferred = $q.defer();
 
-	Course.prototype.getCourse = function(data) {
-	    return Course.course;
-	};
+      $http.get(BASE_URL + '/courses')
+        .then(function (response) {
+          deferred.resolve(response);
+        });
 
-	Course.prototype.list = function() {
-	    var data = {};
-	    data.auth_token = $localStorage.auth.user.auth_token;
-	    return CourseServices.courses(data)
-		.then(function(response) {
-		    // Course.list = response.data;
-		    Course.list = $localStorage.auth.user.list_courses;
-		});
-	};
+      return deferred.promise;
+    };
 
-	Course.prototype.selectCourse = function(data) {
-	    data.auth_token = $localStorage.auth.user.auth_token;
-	    return CourseServices.selectCourse(data)
-		.then(function(response) {
-		    Course.course = response.data.current_course;
-		    $localStorage.auth.current_course = Course.course;
-		});
-	};
+    Services.listUserCourses = function () {
+      var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
+      $http.get(BASE_URL + '/courses?auth_token=' + authToken)
+        .then(function (response) {
+          deferred.resolve(response);
+        });
 
-	return new Course();
-    }])
-    .factory('CourseServices', [ '$http', '$q', '$location', function($http, $q, $location) {
-	var HOST = "http://api.memo.edu.vn/api",
-	    API_VERSION = "/v1.5",
-	    BASE_URL = HOST + API_VERSION;
+      return deferred.promise;
+    };
 
-	return {
-	    courses: function(data) {
-		var deferred = $q.defer();
+    Services.selectCourse = function (data) {
+      var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
 
-		$http.get(BASE_URL + '/courses?auth_token=' + data.auth_token)
-		    .then(function(response) {
-			deferred.resolve(response);
-		    });
+      // data = {base_course_id: 1254}
+      data.auth_token = authToken;
 
-		return deferred.promise;
-	    },
-	    selectCourse: function(data) {
-		var deferred = $q.defer();
+      $http.post(BASE_URL + '/users/select_course', data)
+        .error(function (data, status, headers, config) {
+          if (status === 400) {
+            $location.path('/course');
+          }
+        }).then(function (response) {
+          deferred.resolve(response);
+        });
 
-		$http.post(BASE_URL + '/users/select_course', data)
-		    .error(function(data, status, headers, config) {
-			console.log(status);
-			if (status === 400) {
-			    $location.path('/course');
-			}
-		    }).then(function(response) {
-			deferred.resolve(response);
-		    });
+      return deferred.promise;
+    };
 
-		return deferred.promise;
-	    }
-	};
-    }]);
+    return Services;
+  }
+
+  function CourseFactory(CourseServices, $localStorage) {
+    var Course = {};
+
+    Course.listCourses = function () {
+      return CourseServices.listCourses()
+        .then(function (response) {
+          Course.courses = response.data;
+        });
+    };
+
+    Course.listUserCourses = function () {
+      return CourseServices.listUserCourses()
+        .then(function (response) {
+          Course.userCourses = $localStorage.auth.user.list_courses;
+        });
+    };
+
+    Course.selectCourse = function (data) {
+      return CourseServices.selectCourse(data)
+        .then(function (response) {
+          Course.course = response.data.current_course;
+          $localStorage.auth.current_course = Course.course;
+        });
+    };
+
+    return Course;
+  }
+
+  angular.module('course.services', [])
+    .factory('Course', ['CourseServices', '$localStorage', CourseFactory])
+    .factory('CourseServices', ['$http', '$q', '$location', '$localStorage', CourseServices]);
+}(window.angular));
