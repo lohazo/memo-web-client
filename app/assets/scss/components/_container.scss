@@ -58,10 +58,10 @@ body {
     width: 230px !important;
 
     h4 {
-	font-weight: bold;
+    font-weight: bold;
     }
     textarea {
-	resize: none;
+    resize: none;
     }
 }
 
@@ -72,40 +72,40 @@ a.reverse.button {
     color: $primary-color;
     font-weight: 600;
     &:hover {
-	background-color: $primary-color;
-	color: $white;
+        background-color: $primary-color;
+        color: $white;
     }
 }
 
 .memo-button {
     @include button(
-	$padding: $button-tny,
-	$radius: $global-radius
+    $padding: $button-tny,
+    $radius: $global-radius
     );
     font-size: $button-font-med;
     font-weight: $font-weight-bold;
     margin-bottom: 0;
     &.secondary {
-	@include button(
-	    $padding: $button-tny,
-	    $bg: $white,
-	    $radius: $global-radius
-	);
-	border: 2px solid $gold;
-	color: $primary-color;
-	font-size: $button-font-med;
-	font-weight: $font-weight-bold;
-	margin-bottom: 0;
-	&:hover {
-	    background-color: $gold;
-	    color: $primary-color;
-	}
+    @include button(
+        $padding: $button-tny,
+        $bg: $white,
+        $radius: $global-radius
+    );
+    border: 2px solid $gold;
+    color: $primary-color;
+    font-size: $button-font-med;
+    font-weight: $font-weight-bold;
+    margin-bottom: 0;
+    &:hover {
+        background-color: $gold;
+        color: $primary-color;
+    }
     }
 }
 
 .hex-memo-button {
     @include button(
-	$padding: $button-med
+    $padding: $button-med
     );
     background: url('assets/img/button-checkpoint-bg.png') no-repeat;
     background-position: -300px 0;
@@ -118,30 +118,30 @@ a.reverse.button {
     vertical-algin: middle;
     width: 300px;
     &.secondary {
-	background-position: 0 0;
-	background-color: transparent;
-	color: $primary-color;
-	&:hover {
-	    background-position: -300px 0;
-	    color: $white;
-	    font-weight: 700;
-	    .icon-lock {
-		color: $white;
-	    } 
-	}
-	.icon-lock {
-	    color: $gold;
-	}
+    background-position: 0 0;
+    background-color: transparent;
+    color: $primary-color;
+    &:hover {
+        background-position: -300px 0;
+        color: $white;
+        font-weight: 700;
+        .icon-lock {
+        color: $white;
+        } 
+    }
+    .icon-lock {
+        color: $gold;
+    }
     }
     &.disabled {
-	background-position: -600px 0;
-	color: $white;
-	font-weight: 700;
-	&:hover {
-	    background-position: -600px 0;
-	}
-	.icon-lock {
-	    color: $white;
-	}
+    background-position: -600px 0;
+    color: $white;
+    font-weight: 700;
+    &:hover {
+        background-position: -600px 0;
+    }
+    .icon-lock {
+        color: $white;
+    }
     }
 }
