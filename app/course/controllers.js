@@ -1,23 +1,21 @@
-'use strict';
+(function (angular) {
+  'use strict';
 
-angular.module('course.controllers', [])
-    .controller('CourseCtrl', [
-	'$scope',
-	'$window',
-	'Course',
-	function($scope, $window, Course) {
-	    Course.list().then(function() {
-		$scope.courses = Course.getData();
-	    });
+  function CourseCtrl($scope, $window, Course) {
 
-	    $scope.selectCourse = function(courseId) {
-		var requestData = {
-		    base_course_id: courseId
-		};
+    Course.listCourses().then(function () {
+      $scope.courses = Course.courses;
+    });
 
-		Course.selectCourse(requestData)
-		    .then(function() {
-		    	$window.location.href = '/';
-		    });
-	    };
-	}]);
+    $scope.selectCourse = function (courseId) {
+      var requestData = { base_course_id: courseId };
+      Course.selectCourse(requestData)
+        .then(function () {
+          $window.location.href = '/';
+        });
+    };
+  }
+
+  angular.module('course.controllers', [])
+    .controller('CourseCtrl', ['$scope', '$window', 'Course', CourseCtrl]);
+}(window.angular));
