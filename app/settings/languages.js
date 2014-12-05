@@ -1,3 +1,7 @@
-'use strict';
+(function(angular) {
 
-angular.module('settings.languages', []);
+    'use strict';
+
+    angular.module('settings.languages', []);
+    
+})(window.angular);

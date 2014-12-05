@@ -1,6 +1,11 @@
-'use strict';
+(function(angular) {
+    'use strict';
 
-angular.module('settings.account', [])
-    .controller('SettingAccountCtrl', ['$scope', function($scope) {
-	
-    }]);
+    function SettingAccountCtrl($scope) {
+
+    }
+
+    angular.module('settings.account', [])
+        .controller('SettingAccountCtrl', ['$scope', SettingAccountCtrl]);
+
+})(window.angular);

@@ -1,7 +1,11 @@
-'use strict';
+(function(angular) {
+    'use strict';
 
-angular.module('settings.profile', [])
-    .controller('SettingProfileCtrl', ['$scope', function($scope) {
-	$scope.settingProfile = {
-	};
-    }]);
+    function SettingProfileCtrl($scope) {
+
+    }
+
+    angular.module('settings.profile', [])
+        .controller('SettingProfileCtrl', ['$scope', SettingProfileCtrl]);
+
+})(window.angular);
