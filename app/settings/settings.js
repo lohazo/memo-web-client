@@ -4,7 +4,7 @@
   function SettingConfig($routeProvider) {
     $routeProvider.when('/setting/account', {
       templateUrl: 'settings/_account.html',
-      controller: 'SettingAccountCtrl'
+      controller: 'AccountSettingCtrl'
     });
     $routeProvider.when('/setting/profile', {
       templateUrl: 'settings/_profile.html',
