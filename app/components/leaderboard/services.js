@@ -1,67 +1,74 @@
-'use strict';
+(function (angular) {
+  'use strict';
 
-// Bypass jslint
-var angular = window.angular || angular;
+  function LeaderboardServices($http, $q, $localStorage) {
+    var HOST = "http://api.memo.edu.vn/api",
+      API_VERSION = "/v1.5",
+      BASE_URL = HOST + API_VERSION;
+    var Services = {};
 
-angular.module('leaderboard.services', [])
-    .factory('Leaderboard', ['LeaderboardServices', function(LeaderboardServices) {
-	var Leaderboard = {};
+    Services.fbFriends = function (data) {
+      var deferred = $q.defer();
 
-	Leaderboard.fbFriends = function(data) {
-	    return LeaderboardServices.fbFriends(data);
-	};
-	Leaderboard.friends = function(data) {
-	    return LeaderboardServices.friends(data);
-	};
+      $http.get('/assets/data/fb_friends.json')
+        .then(function (fbFriends) {
+          deferred.resolve(fbFriends);
+        });
 
-	return Leaderboard;
-    }])
-    .factory('LeaderboardServices', [
-	'$http', '$q', '$localStorage',
-	function($http, $q, $localStorage) {
-	    var HOST = "http://api.memo.edu.vn/api",
-		API_VERSION = "/v1.5",
-		BASE_URL = HOST + API_VERSION;
-	    return {
-		fbFriends: function(data) {
-		    var deferred = $q.defer();
+      return deferred.promise;
+    };
 
-		    $http.get('/assets/data/fb_friends.json')
-			.then(function(fbFriends) {
-			    deferred.resolve(fbFriends);
-			});
+    Services.friends = function (data) {
+      var deferred = $q.defer();
 
-		    return deferred.promise;
-		},
-		friends: function(data) {
-		    var deferred = $q.defer();
+      $http.post(BASE_URL + '/users/search_friends', data)
+        .then(function (response) {
+          deferred.resolve(response);
+        });
 
-		    $http.post(BASE_URL + '/users/search_friends', data)
-			.then(function(response) {
-			    deferred.resolve(response);
-			});
+      return deferred.promise;
+    };
 
-		    return deferred.promise;
-		},
-		follow: function(data) {
-		    var deferred = $q.defer();
+    Services.follow = function (data) {
+        var deferred = $q.defer();
 
-		    $http.post(BASE_URL + '/users/follow', data)
-			.then(function(response) {
-			    deferred.resolve(response);
-			});
+        $http.post(BASE_URL + '/users/follow', data)
+          .then(function (response) {
+            deferred.resolve(response);
+          });
 
-		    return deferred.promise;
-		},
-		unfollow: function(data) {
-		    var deferred = $q.defer();
+        return deferred.promise;
+    };
 
-		    $http.post(BASE_URL + '/users/unfollow', data)
-			.then(function(response) {
-			    deferred.resolve(response);
-			});
+    Services.unfollow = function (data) {
+      var deferred = $q.defer();
 
-		    return deferred.promise;
-		}
-	    };
-	}]);
+        $http.post(BASE_URL + '/users/unfollow', data)
+          .then(function (response) {
+            deferred.resolve(response);
+          });
+
+        return deferred.promise;
+    };
+
+    return Services;
+  }
+
+  function LeaderboardFactory(LeaderboardServices) {
+      var Leaderboard = {};
+
+      Leaderboard.fbFriends = function(data) {
+        return LeaderboardServices.fbFriends(data);
+      };
+      Leaderboard.friends = function(data) {
+        return LeaderboardServices.friends(data);
+      };
+
+      return Leaderboard;
+  }
+
+  angular.module('leaderboard.services', [])
+    .factory('Leaderboard', ['LeaderboardServices', LeaderboardFactory])
+    .factory('LeaderboardServices', ['$http', '$q', '$localStorage', LeaderboardServices]);
+
+}(window.angular));
