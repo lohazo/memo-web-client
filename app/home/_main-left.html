@@ -1,7 +1,9 @@
 <div class="container">
   <section class="profile profile-embed">
     <div class="row">
-      <div class="large-6 columns avatar small"></div>
+      <div class="large-6 columns avatar small">
+        <img ng-src="{{ profile.url_avatar || 'assets/img/profile-avatar-big.png' }}" style="width:60px;height:60px;border-radius:50%;"/>
+      </div>
       <div class="large-10 columns username">
         <h4>{{profile.username}}</h4>
       </div>
