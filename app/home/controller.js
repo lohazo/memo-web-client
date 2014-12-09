@@ -40,9 +40,10 @@
     // Chain calls
     Profile.getProfile($scope.auth.user)
       .then(getProfile)
-      .then(AppSetting.get)
       .then(buildTree)
-      .then(getProfileDetail);
+      .then(getProfileDetail)
+      .then(AppSetting.get)
+      .then(Message.list);
   }
 
   function PlacementTestModalCtrl($scope, $modal, $rootScope) {
