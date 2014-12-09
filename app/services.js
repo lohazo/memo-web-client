@@ -100,8 +100,7 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
-      // $http.get(BASE_URL + '/messages?auth_token=' + authToken)
-      $http.get(BASE_URL + '/404.html')
+      $http.get(BASE_URL + '/messages?auth_token=' + authToken)
         .then(function(response) {
           $localStorage.messages = response.data;
           deferred.resolve(response);
