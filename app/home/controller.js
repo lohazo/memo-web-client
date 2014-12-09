@@ -12,10 +12,6 @@ angular.module('home.controller', ['app.services', 'message.directives'])
 		    $scope.profile = Profile.data.user_info;
 		})
 		.then(AppSetting.get)
-		.then(Message.list)
-		.then(function() {
-			$scope.messages = Message.messages
-		})
 		.then(function() {
 		    TreeBuilder.getCheckpoints();
 		    TreeBuilder.getSkills();
