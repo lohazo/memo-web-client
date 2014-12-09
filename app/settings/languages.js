@@ -9,7 +9,6 @@
       $scope.course = $scope.userCourses.filter(function (course) {
         return Course.getCurrentCourse() === course._id;
       })[0] || {};
-      console.log($scope.course);
     });
 
     $scope.saveChanges = function() {
