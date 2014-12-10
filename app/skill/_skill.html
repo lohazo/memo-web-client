@@ -22,7 +22,7 @@
 				</div>
 				<div class="row {{skill.theme_color === '#99cc00' ? 'green1' : (skill.theme_color === '#ff4444' ? 'red1' : 'blue1')}} skill-{{skill.order + 1}}">
 					<div class="{{$index < skill.finished_lesson ? 'past' : ($index == skill.finished_lesson ? 'unlocked' : 'locked')}} lesson text-center" ng-repeat="lesson in skill.lessons track by $index">
-						<h4 class="name">Bài học {{$index + 1}} <img class="tick-lesson" ng-src="/assets/img/tick.png" alt=""></h4>
+						<h4 class="name name-lesson">Bài học {{$index + 1}} <img class="tick-lesson" ng-src="/assets/img/tick.png" alt=""></h4>
 						<div class="small-16 small-centered columns objectives">
 							{{skill.lessons[$index].objectives.join(', ')}}
 						</div>
