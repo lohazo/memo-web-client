@@ -20,6 +20,8 @@
 
     Services.friends = function (data) {
       var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
+      data.auth_token = authToken;
 
       $http.post(BASE_URL + '/users/search_friends', data)
         .then(function (response) {
@@ -31,6 +33,8 @@
 
     Services.follow = function (data) {
         var deferred = $q.defer();
+        var authToken = $localStorage.auth.user.auth_token;
+        data.auth_token = authToken;
 
         $http.post(BASE_URL + '/users/follow', data)
           .then(function (response) {
@@ -42,6 +46,8 @@
 
     Services.unfollow = function (data) {
       var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
+      data.auth_token = authToken;
 
         $http.post(BASE_URL + '/users/unfollow', data)
           .then(function (response) {
@@ -60,10 +66,18 @@
       Leaderboard.fbFriends = function(data) {
         return LeaderboardServices.fbFriends(data);
       };
+
       Leaderboard.friends = function(data) {
         return LeaderboardServices.friends(data);
       };
 
+      Leaderboard.follow = function (data) {
+        return LeaderboardServices.follow(data);
+      }
+
+      Leaderboard.unfollow = function (data) {
+        return LeaderboardServices.unfollow(data);
+      }
       return Leaderboard;
   }
 

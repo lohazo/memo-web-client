@@ -3,7 +3,6 @@
   'use strict';
 
   function LeaderboardCtrl($scope, $localStorage, Leaderboard) {
-    $scope.profile = $localStorage.auth.profile_detail; 
     $scope.search = {
       name: ''
     };
@@ -13,7 +12,6 @@
       $scope.showFriends = false;
     };
     $scope.searchFbFriends = function () {
-      console.log('hit');
       Leaderboard.fbFriends().then(function (response) {
         $scope.fbFriends = response.data.data;
       });
@@ -27,27 +25,27 @@
       $scope.showFriends = true;
     };
     $scope.showTheLeaderboard();
-    // dirty checking
-    $scope.$watch('profile', function () {
-      if ($scope.profile) {
-        $scope.tabs = [{
-          'title': "Tuần này",
-          'users': $scope.profile.followings_leaderboard_by_week,
-          'active': true
-        }, {
-          'title': "Tháng này",
-          'users': $scope.profile.followings_leaderboard_by_month,
-          'active': false
-        }, {
-          'title': "Tổng cộng",
-          'users': $scope.profile.followings_leaderboard_all_time,
-          'active': false
-        }];
-      }
+  }
+
+  function LeaderboardHomeCtrl($scope, $rootScope) {
+    $rootScope.$on('event-profileLoaded', function(e, data) {
+      $scope.tabs = [{
+        'title': "Tuần này",
+        'users': data.followings_leaderboard_by_week,
+        'active': true
+      }, {
+        'title': "Tháng này",
+        'users': data.followings_leaderboard_by_month,
+        'active': false
+      }, {
+        'title': "Tổng cộng",
+        'users': data.followings_leaderboard_all_time,
+        'active': false
+      }];
     });
   }
 
-  function LeaderboardFbFriendsCtrl() { }
+  function LeaderboardFbFriendsCtrl($scope) { }
 
   function LeaderboardFriendsCtrl($scope, Leaderboard) {
 
@@ -57,15 +55,14 @@
     $scope.searchMemoFriends = function () {
       var reqData = {
         keywords: $scope.search.keywords,
-        auth_token: $scope.user.user_info.auth_token
       };
-      Leaderboard.friends(reqData).then(function (response) {
-        $scope.friends = response.data;
-      });
+      Leaderboard.friends(reqData)
+        .then(function (response) {
+          $scope.friends = response.data;
+        });
     };
     $scope.follow = function (id) {
       var reqData = {
-        auth_token: $scope.user.user_info.auth_token,
         friend_id: id
       };
       Leaderboard.follow(reqData).then(function () {
@@ -77,7 +74,6 @@
     };
     $scope.unfollow = function (id) {
       var reqData = {
-        auth_token: $scope.user.user_info.auth_token,
         friend_id: id
       };
       Leaderboard.unfollow(reqData).then(function () {
@@ -91,6 +87,7 @@
 
   angular.module('leaderboard.controllers', [])
     .controller('LeaderboardCtrl', ['$scope', '$localStorage', 'Leaderboard', LeaderboardCtrl])
+    .controller('LeaderboardHomeCtrl', ['$scope', '$rootScope', LeaderboardHomeCtrl])
     .controller('LeaderboardFbFriendsCtrl', ['$scope', LeaderboardFbFriendsCtrl])
     .controller('LeaderboardFriendsCtrl', ['$scope', 'Leaderboard', LeaderboardFriendsCtrl]);
 }(window.angular));

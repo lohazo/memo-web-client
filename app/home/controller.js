@@ -3,7 +3,7 @@
 
   function HomeCtrl($scope) {}
 
-  function HomeMainCtrl($scope, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker, Message) {
+  function HomeMainCtrl($scope, $rootScope, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker, Message) {
     function getProfile() {
       $scope.profile = Profile.data.user_info;
     }
@@ -34,6 +34,7 @@
               data: $scope.profileDetail.exp_chart.exp
             }]
           };
+          $rootScope.$broadcast('event-profileLoaded', Profile.detail);
         });
     }
 
@@ -80,7 +81,7 @@
 
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
-    .controller('HomeMainCtrl', ['$scope', 'Profile', 'TreeBuilder', 'AppSetting', 'Mixpanel', 'MemoTracking', 'Message', HomeMainCtrl])
+    .controller('HomeMainCtrl', ['$scope', '$rootScope', 'Profile', 'TreeBuilder', 'AppSetting', 'Mixpanel', 'MemoTracking', 'Message', HomeMainCtrl])
     .controller('PlacementTestModalCtrl', ['$scope', '$modal', '$rootScope', PlacementTestModalCtrl])
     .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance', PlacementTestModalInstanceCtrl]);
 
