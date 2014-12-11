@@ -10,7 +10,7 @@ angular.module('placement.services', [])
 			.then(function(response) {
 				question = response.data;
 				mixpanel.track('Web 1.0.2 start exam placement test');
-				MemoTracker.track('start exam placemanet test');
+				MemoTracker.track('start exam placement test');
 			});
 		}
 		function getQuestion() {
@@ -33,7 +33,7 @@ angular.module('placement.services', [])
 				}
 				else{
 					mixpanel.track('Web 1.0.2 fail exam placement test');
-					MemoTracker.track('quick exam placement test');	
+					MemoTracker.track('quit exam placement test');	
 				}
 			// question = {
 			//     "finish_exam_bonus_exp": 0,

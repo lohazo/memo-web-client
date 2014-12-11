@@ -14,7 +14,7 @@
     <div class="small-16 columns">
       <div class="row">
 	<div class="small-3 columns avatar">
-	  <img ng-src="{{user.url_avatar}} " />
+	  <img ng-src="{{user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
 	</div>
 	<div class="small-7 columns nickname">{{user.username}}</div>
 	<div class="small-5 columns buttons">

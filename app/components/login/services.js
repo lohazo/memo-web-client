@@ -83,16 +83,17 @@ angular.module('login.services', [])
             };
 
             var data = angular.fromJson(angular.toJson(response.data));
+                // data.name = data.username;
+                data.name = "memo_" + data._id;
+                delete data.auth_token;
 
             if (response.data.is_newly_sign_up) {
                 MemoTracker.track('sign up');
+                EcoTracker.track('Web 1.0.2 user logged in', data);
             } else {
                 MemoTracker.track('login');    
             }
             mixpanel.identify(response.data._id);
-                // data.name = data.username;
-                data.name = "memo_" + data._id;
-                delete data.auth_token;
 
                 var molData = {};
                 molData.code_chanel = $routeParams.code_chanel || -100;
@@ -101,7 +102,6 @@ angular.module('login.services', [])
                 molData.id_camp_landingpage = $routeParams.id || -100;
 
                 mixpanel.track('Web 1.0.2 user logged in', molData);
-                EcoTracker.track('Web 1.0.2 user logged in', data);
 
                 molData.name = data.name || data.username;
                 molData.email = data.email;
