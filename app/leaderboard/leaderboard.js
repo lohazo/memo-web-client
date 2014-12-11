@@ -1,10 +1,8 @@
-'use strict';
+(function (angular) {
+  'use strict';
 
-// Bypass jslint
-var angular = window.angular || angular;
+  angular.module('leaderboard', [
+    'leaderboard.directives', 'leaderboard.controllers', 'leaderboard.services'
+  ]);
 
-angular.module('leaderboard', [
-    'leaderboard.directives',
-    'leaderboard.controllers',
-    'leaderboard.services'
-]);
+}(window.angular));

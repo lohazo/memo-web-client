@@ -4,12 +4,12 @@
 var angular = window.angular || angular;
 
 angular.module('leaderboard.directives', [])
-    .directive('leaderboard', function() {
+    .directive('leaderboardHome', function() {
 	return {
 	    restrict: 'EA',
 	    scope: true,
 	    link: function($scope, $ele, $attrs) { },
-	    controller: 'LeaderboardCtrl',
+	    controller: 'LeaderboardHomeCtrl',
 	    templateUrl: 'leaderboard/_leaderboard.html'
 	};
     })
@@ -19,7 +19,7 @@ angular.module('leaderboard.directives', [])
 	    link: function($scope, $ele) { },
 	    scope: true,
 	    controller: 'LeaderboardFbFriendsCtrl',
-	    templateUrl: 'leaderboard/_facebook-search.html'
+	    templateUrl: 'leaderboard/_search-facebook.html'
 	};
     })
     .directive('leaderboardFriends', function() {
@@ -30,5 +30,4 @@ angular.module('leaderboard.directives', [])
 	    controller: 'LeaderboardFriendsCtrl',
 	    templateUrl: 'leaderboard/_search.html'
 	};
-    })
-;
+    });
