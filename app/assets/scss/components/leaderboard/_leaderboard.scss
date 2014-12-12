@@ -91,3 +91,52 @@
     }
   }
 }
+.tabbable{
+  overflow-x:hidden !important;
+}
+.box-list-top {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+.leaderboard .tabs-content{
+  margin-left: 0 !important;
+  width: 240px !important;
+}
+.leaderboard h4{
+  padding-left: 20px;
+}
+.text-center h4{
+  padding-left: 0px;
+}
+.leaderboard .tabs dd{
+  text-align: center;
+}
+dl{
+  line-height: 0 !important;
+}
+.nickname {
+  padding-left: 5px !important;
+}
+.avt-friend {
+  margin-left: 10px;
+}
+.btn-friend {
+    font-size: 13px !important;
+    line-height: 0 !important;
+    width: 69px !important;
+    margin-top: 8px !important;
+}
+.add-friend{
+  margin-top: 10px !important;
+}
+.btn-back-leaderboard .show-leaderboard {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+#search-friend{
+  margin-top: 5px;
+}
+.search-frid{
+     padding-top: 8px !important;
+    padding-bottom:8px !important; 
+}
