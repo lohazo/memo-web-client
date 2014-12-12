@@ -18,37 +18,37 @@
     <hr/>
     <div class="row">
       <div class="large-4 columns streak">
-	<i tooltip="Combo" class="icon"></i><span class="text">{{profileDetail.combo_days}}</span>
-      </div>
-      <div class="large-6 columns exp">
-	<i tooltip="Kinh nghiệm" class="icon"></i>
-	<span class="text">{{profileDetail.exp}}</span>
-      </div>
-      <div class="large-6 columns memos">
-	<i tooltip="Memo coin" class="icon"></i><span class="text">{{profileDetail.virtual_money}}</span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="large-16 columns memo-progress">
-	<span class="current-level">{{profileDetail.level}}</span>
-	<div class="padder">
-	  <div class="bar" style="width: {{(profileDetail.next_level - profileDetail.previous_level) / (profileDetail.exp - profileDetail.previous_level)}}%;"></div>
-	</div>
-	<span class="next-level">{{profileDetail.level + 1}}</span>
-      </div>
-    </div>
-    <div class="row">
-      <!-- <div class="large-8 columns known-words"> -->
-      <!-- 	<i class="left icon"></i><span class="text">{{auth.current_course.known_words}} từ</span> -->
-      <!-- </div> -->
-    </div>
-    <hr />
-    <div class="row">
-      <canvas linechart options="chartOptions" data="expChart" width="220" height="150"></canvas>
-    </div>
-    <!-- <hr /> -->
-    <!-- <div class="row"> -->
-    <!--   <a href="#" class="small-16 memo-button">Nâng cao kĩ năng</a> -->
-    <!-- </div> -->
-  </section>
+       <i tooltip="Combo" class="icon"></i><span class="text">{{profileDetail.combo_days}}</span>
+     </div>
+     <div class="large-6 columns exp">
+       <i tooltip="Kinh nghiệm" class="icon"></i>
+       <span class="text">{{profileDetail.exp}}</span>
+     </div>
+     <div class="large-6 columns memos">
+       <i tooltip="Memo coin" class="icon"></i><span class="text">{{profileDetail.virtual_money}}</span>
+     </div>
+   </div>
+   <div class="row">
+    <div class="large-16 columns memo-progress">
+     <span class="current-level">{{profileDetail.level}}</span>
+     <div class="padder">
+       <div class="bar" style="width: {{(profileDetail.next_level - profileDetail.previous_level) / (profileDetail.exp - profileDetail.previous_level)}}%;"></div>
+     </div>
+     <span class="next-level">{{profileDetail.level + 1}}</span>
+   </div>
+ </div>
+ <div class="row">
+  <!-- <div class="large-8 columns known-words"> -->
+  <!-- 	<i class="left icon"></i><span class="text">{{auth.current_course.known_words}} từ</span> -->
+  <!-- </div> -->
+</div>
+<hr />
+<div class="row">
+  <canvas linechart options="chartOptions" data="expChart" width="220" height="150"></canvas>
+</div>
+<!-- <hr /> -->
+<!-- <div class="row"> -->
+<!--   <a href="#" class="small-16 memo-button">Nâng cao kĩ năng</a> -->
+<!-- </div> -->
+</section>
 </div>
