@@ -10,7 +10,7 @@
     Services.fbFriends = function() {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
-      var fbAccessToken = $localStorage.auth.fbAccessToken;
+      var fbAccessToken = $localStorage.auth.facebook.accessToken;
 
       var data = {
         auth_token: authToken,
@@ -87,15 +87,14 @@
     };
 
 
-    Leaderboard.fbLogin = function(data) {
+    Leaderboard.fbLogin = function() {
       var deferred = $q.defer();
 
       Facebook.getLoginStatus(facebookLoginStatusReceived);
 
       function facebookLoginStatusReceived(response) {
         if (response.status === 'connected') {
-          console.log('Eh');
-          $localStorage.auth.fbAccessToken = response.authResponse.accessToken;
+          $localStorage.auth.facebook = response.authResponse;
           deferred.resolve(response);
         } else {
           Facebook.login(facebookLoginCallback)
@@ -104,7 +103,7 @@
 
       function facebookLoginCallback(response) {
         if (response.status != 'unknown' || response.status != 'not_authorized') {
-          $localStorage.auth.fbAccessToken = response.authResponse.accessToken;
+          $localStorage.auth.facebook = response.authResponse.accessToken;
           deferred.resolve(response);
         } else {
           deferred.reject(response);

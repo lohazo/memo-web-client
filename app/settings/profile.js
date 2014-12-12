@@ -7,12 +7,15 @@
       BASE_URL = HOST + API_VERSION;
     var Services = {};
 
-    Services.linkFb = function(data) {
-      // data = {fb_Id: 'asoetunh', fb_access_token: ''}
+    Services.linkFb = function() {
       var deferred = $q.defer();
-      var authToken = $localStorage.auth.user.auth_token;
 
-      data.auth_token = authToken;
+      var data = {
+        auth_token: $localStorage.auth.user.auth_token,
+        fb_Id: $localStorage.auth.facebook.userID,
+        fb_access_token: $localStorage.auth.facebook.accessToken
+      };
+
       $http.post(BASE_URL + '/users/link_facebook', data)
         .then(function(response) {
           deferred.resolve(response);
@@ -38,11 +41,14 @@
     };
 
     Services.linkGoogle = function() {
-      // data = {gmail: 'asoetunh', fb_access_token: ''}
       var deferred = $q.defer();
-      var authToken = $localStorage.auth.user.auth_token;
 
-      data.auth_token = authToken;
+      var data = {
+        auth_token: $localStorage.auth.user.auth_token,
+        gmail: $localStorage.auth.facebook.userID,
+        g_access_token: $localStorage.auth.facebook.accessToken
+      };
+
       $http.post(BASE_URL + '/users/link_google', data)
         .then(function(response) {
           deferred.resolve(response);
@@ -70,10 +76,27 @@
     return Services;
   }
 
-  function SettingProfile(SettingProfileService) {
+  function SettingProfileFactory(SettingProfileService, Leaderboard) {
+    var SettingProfile = {};
+
+    SettingProfile.linkFb = function (data) {
+      return Leaderboard.fbLogin().then(SettingProfileService.linkFb)
+        .then(function (response) {
+          console.log(response);
+        });
+    };
+
+    SettingProfile.linkGoogle = function (data) {
+      return SettingProfileService.linkGoogle(data)
+        .then(function (response) {
+          console.log(response);
+        });
+    };
+
+    return SettingProfile;
   }
 
-  function SettingProfileCtrl($scope, Profile) {
+  function SettingProfileCtrl($scope, Profile, SettingProfile) {
     $scope.profile = Profile.detail;
     $scope.user = Profile.user;
     $scope.user.created_at.date = convertCreatedAtTime($scope.user.created_at.sec);
@@ -83,15 +106,17 @@
     }
 
     $scope.linkFb = function() {
-      console.log('Implementing');
+      SettingProfile.linkFb();
     };
+
     $scope.linkGoogle = function() {
       console.log('Implementing');
     };
   }
 
   angular.module('settings.profile', [])
-    .controller('SettingProfileCtrl', ['$scope', 'Profile', SettingProfileCtrl])
-    .factory('SettingProfile', [SettingProfile]);
+    .controller('SettingProfileCtrl', ['$scope', 'Profile', 'SettingProfile', SettingProfileCtrl])
+    .factory('SettingProfileService', ['$http', '$q', '$localStorage', SettingProfileService])
+    .factory('SettingProfile', ['SettingProfileService', 'Leaderboard', SettingProfileFactory]);
 
 }(window.angular));

@@ -58,7 +58,8 @@
     var Profile = {};
 
     Profile.data = {};
-    Profile.detail = {};
+    Profile.user = $localStorage.auth.user || {};
+    Profile.detail = $localStorage.auth.profile_detail || {};
 
     Profile.getProfile = function (data) {
       return ProfileServices.profile(data)

@@ -56,20 +56,21 @@
       $scope.profile = data;
     });
     $scope.$watch('profile', function() {
-      $scope.tabs = [{
-        'title': "Tuần này",
-        'users': $scope.profile.followings_leaderboard_by_week,
-        'active': true
-      }, {
-        'title': "Tháng này",
-        'users': $scope.profile.followings_leaderboard_by_month,
-        'active': false
-      }, {
-        'title': "Tổng cộng",
-        'users': $scope.profile.followings_leaderboard_all_time,
-        'active': false
-      }];
-
+      if ($scope.profile) {
+        $scope.tabs = [{
+          'title': "Tuần này",
+          'users': $scope.profile.followings_leaderboard_by_week,
+          'active': true
+        }, {
+          'title': "Tháng này",
+          'users': $scope.profile.followings_leaderboard_by_month,
+          'active': false
+        }, {
+          'title': "Tổng cộng",
+          'users': $scope.profile.followings_leaderboard_all_time,
+          'active': false
+        }];
+      }
     });
   }
 
