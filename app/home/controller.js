@@ -5,7 +5,7 @@
 
   function HomeMainCtrl($scope, $rootScope, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker, Message) {
     function getProfile() {
-      $scope.profile = Profile.data.user_info;
+      $scope.profile = Profile.user;
     }
 
     function buildTree() {
@@ -39,7 +39,7 @@
     }
 
     // Chain calls
-    Profile.getProfile($scope.auth.user)
+    Profile.getProfile()
       .then(getProfile)
       .then(buildTree)
       .then(getProfileDetail)

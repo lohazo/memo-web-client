@@ -36,7 +36,8 @@
               <div class="large-6 columns">Kết nối Facebook</div>
               <div class="large-10 columns">
                 <!-- <p>Bạn đã được kết nối dưới tên</p> -->
-                <a href="" class="radius facebook button" ng-click="linkFb()">Kết nối</a>
+                <a href="" ng-if="user.fb_Id == ''" class="radius facebook button" ng-click="linkFb()">Kết nối</a>
+                <a href="" ng-if="user.fb_Id != ''" class="radius facebook button" ng-click="unlinkFb()">Ngắt kết nối</a>
               </div>
             </div>
             <!-- <div class="row">
@@ -53,7 +54,8 @@
               <div class="large-10 columns connection-google">
                 <div class="large-10 columns">
                   <!-- <p>Bạn đã được kết nối dưới tên</p> -->
-                  <a href="" class="radius google button" ng-click="linkGoogle()">Kết nối</a>
+                  <a href="" ng-if="user.gmail == ''" class="radius google button" ng-click="linkGoogle()">Kết nối</a>
+                <a href="" ng-if="user.gmail != ''" class="radius google button" ng-click="unlinkGoogle()">Ngắt kết nối</a>
                 </div>
               </div>
             </div>

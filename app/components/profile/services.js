@@ -8,10 +8,13 @@
 
     var Services = {};
 
-    Services.profile = function (data) {
+    Services.profile = function () {
       var deferred = $q.defer();
+      var data = {
+        '_id': $localStorage.auth.user._id,
+        'auth_token': $localStorage.auth.user.auth_token
+      };
 
-      // data = {_id: 120, auth_token: asoentuhasetu};
       $http.get(BASE_URL + '/users/' + data._id + '?auth_token=' + data.auth_token)
         .then(function (response) {
           deferred.resolve(response);
@@ -57,18 +60,17 @@
   function ProfileFactory(ProfileServices, $localStorage) {
     var Profile = {};
 
-    Profile.data = {};
     Profile.user = $localStorage.auth.user || {};
     Profile.detail = $localStorage.auth.profile_detail || {};
 
-    Profile.getProfile = function (data) {
-      return ProfileServices.profile(data)
+    Profile.getProfile = function () {
+      return ProfileServices.profile()
         .then(function (response) {
-          Profile.data = response.data;
-          $localStorage.auth.user = Profile.data.user_info;
-          $localStorage.auth.skills_tree = Profile.data.skills_tree;
-          $localStorage.auth.checkpoints = Profile.data.checkpoints;
-          $localStorage.auth.skills = Profile.data.skills;
+          $localStorage.auth.user = response.data.user_info;
+          $localStorage.auth.skills_tree = response.data.skills_tree;
+          $localStorage.auth.checkpoints = response.data.checkpoints;
+          $localStorage.auth.skills = response.data.skills;
+          Profile.user = response.data.user_info;
         });
     };
 
