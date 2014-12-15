@@ -23,13 +23,12 @@
   <link rel="stylesheet" href="vendors/angular-loading-bar/src/loading-bar.css">
   <link rel="stylesheet" href="app.css"/>
   <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("067076d37e3b2608d1c7668122fd4bcc");</script><!-- end Mixpanel -->
+  for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+  mixpanel.init("067076d37e3b2608d1c7668122fd4bcc");</script><!-- end Mixpanel -->
   <script src="vendors/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body ng-controller="AppCtrl">
   <div ng-view></div>
-
   <script src="vendors/angular/angular.min.js"></script>
   <script src="vendors/angular-cookies/angular-cookies.min.js"></script>
   <script src="vendors/angular-route/angular-route.js"></script>
@@ -43,70 +42,57 @@ mixpanel.init("067076d37e3b2608d1c7668122fd4bcc");</script><!-- end Mixpanel -->
   <script src="vendors/ngStorage/ngStorage.min.js"></script>
   <script src="vendors/angular-loading-bar/build/loading-bar.min.js"></script>
   <script src="vendors/google-diff-match-patch/diff_match_patch.js"></script>
-
   <!-- App -->
   <script src="app.js"></script>
   <script src="controller.js"></script>
   <script src="directives.js"></script>
   <script src="services.js"></script>
-
   <!-- Landing page -->
   <script src="components/landingpage/landingpage.js"></script>
   <script src="components/landingpage/controllers.js"></script>
   <script src="components/landingpage/directives.js"></script>
   <script src="components/landingpage/services.js"></script>
   <script src="components/landingpage/header/header.js"></script>
-
   <!-- Mixpanel -->
   <script src="components/tracking/tracking.js"></script>
   <script src="components/tracking/services.js"></script>
-
   <!-- Header -->
   <script src="components/header/header.js"></script>
-
   <!-- Home -->
   <script src="home/home.js"></script>
   <script src="home/controller.js"></script>
   <script src="home/directives.js"></script>
-
   <!-- Login -->
   <script src="login/login.js"></script>
   <script src="components/login/services.js"></script>
-
   <!-- Course -->
   <script src="course/course.js"></script>
   <script src="course/controllers.js"></script>
   <script src="course/directives.js"></script>
   <script src="components/course/services.js"></script>
-
   <!-- Profile -->
   <script src="profile/profile.js"></script>
   <script src="components/profile/services.js"></script>
-
   <!-- Leaderboard -->
   <script src="leaderboard/leaderboard.js"></script>
   <script src="leaderboard/controllers.js"></script>
   <script src="components/leaderboard/directives.js"></script>
   <script src="components/leaderboard/services.js"></script>
-
   <!-- Skill -->
   <script src="skill/skill.js"></script>
   <script src="skill/controllers.js"></script>
   <script src="components/skill/services.js"></script>
   <script src="components/skill/directives.js"></script>
   <script src="components/skill/tree.js"></script>
-
   <!-- Placement Test -->
   <script src="placement/placement.js"></script>
   <script src="placement/controllers.js"></script>
   <script src="components/placement/services.js"></script>
   <script src="components/placement/directives.js"></script>
-
   <!-- Exam -->
   <script src="exam/exam.js"></script>
   <script src="exam/controllers.js"></script>
   <script src="components/exam/services.js"></script>
-
   <!-- Question -->
   <script src="components/question/question.js"></script>
   <script src="components/question/services.js"></script>
@@ -117,18 +103,14 @@ mixpanel.init("067076d37e3b2608d1c7668122fd4bcc");</script><!-- end Mixpanel -->
   <script src="components/question/select.js"></script>
   <script src="components/question/translate.js"></script>
   <script src="components/question/speak.js"></script>
-
   <!-- Report -->
   <script src="components/report/report.js"></script>
-
   <!-- Feeback -->
   <script src="components/feedback/feedback.js"></script>
   <script src="components/feedback/services.js"></script>
   <script src="components/feedback/report_modal.js"></script>
-
   <!-- DMP -->
   <script src="components/dmp/dmp.js"></script>
-
   <!-- Setting -->
   <script src="settings/settings.js"></script>
   <script src="settings/account.js"></script>
@@ -136,28 +118,22 @@ mixpanel.init("067076d37e3b2608d1c7668122fd4bcc");</script><!-- end Mixpanel -->
   <script src="settings/notification.js"></script>
   <script src="settings/profile.js"></script>
   <script src="settings/languages.js"></script>
-
   <!-- Plaza -->
   <script src="plaza/plaza.js"></script>
   <script src="plaza/controllers.js"></script>
   <script src="components/plaza/services.js"></script>
-
   <!-- Gamification -->
   <script src="components/gamification/gamification.js"></script>
   <script src="components/gamification/sound.js"></script>
-  
   <!-- Message -->
   <script src="components/message/directives.js"></script>
-
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
   ga('create', 'UA-57229832-1', 'auto');
   ga('send', 'pageview');
-
-</script>
+  </script>
 </body>
 </html>
