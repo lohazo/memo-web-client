@@ -50,12 +50,12 @@
     Setting.get = function() {
       return AppServices.get().then(function(response) {
         $localStorage.appSetting = response.data;
-      });
+      }).then(AppServices.getSharedSettings);
     };
     return Setting;
   }
 
-  function AppServices($http, $q, $localStorage) {
+  function AppServices($http, $q, $localStorage, API) {
     var HOST = 'http://api.memo.edu.vn/api',
       API_VERSION = '/v1.5',
       BASE_URL = HOST + API_VERSION;
@@ -65,10 +65,24 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
-      $http.get(BASE_URL + '/appsettings?auth_token=' + authToken + '&device=web')
+      $http.get(BASE_URL + '/appsettings?device=web&auth_token=' + authToken )
         .then(function(response) {
           deferred.resolve(response);
         });
+      return deferred.promise;
+    };
+
+    AppServices.getSharedSettings = function (data) {
+      var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
+
+      $http.get(API + '/shared_settings?device=web&resolution=all&auth_token=' + authToken)
+        .then(function (response) {
+          deferred.resolve(response);
+        }, function (response) {
+          deferred.reject(response);
+        });
+
       return deferred.promise;
     };
 
@@ -92,15 +106,14 @@
     return Message;
   }
 
-  function MessageService($http, $q, $localStorage) {
-    var BASE_URL = 'http://services.memo.edu.vn/api',
+  function MessageService($http, $q, $localStorage, API) {
       MessageService = {};
 
     MessageService.list = function() {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
-      $http.get(BASE_URL + '/messages?auth_token=' + authToken)
+      $http.get(API + '/messages?auth_token=' + authToken)
         .then(function(response) {
           $localStorage.messages = response.data;
           deferred.resolve(response);
@@ -118,7 +131,7 @@
         auth_token: authToken
       };
 
-      $http.post(BASE_URL + '/messages/open_messages', requestData)
+      $http.post(API + '/messages/open_messages', requestData)
         .then(function(response) {
           $localStorage.messages = [];
           deferred.resolve(response);
@@ -128,10 +141,14 @@
     };
     return MessageService;
   }
+
   angular.module('app.services', [])
+    .constant('API_PHP', 'http://api.memo.edu.vn/api')
+    .constant('API_VERSION', '/v1.5')
+    .constant('API', 'http://services.memo.edu.vn/api')
     .factory('HttpInterceptor', ['$rootScope', '$q', '$window', '$localStorage', HttpInterceptor])
     .factory('AppSetting', ['AppServices', '$localStorage', AppSetting])
-    .factory('AppServices', ['$http', '$q', '$localStorage', AppServices])
+    .factory('AppServices', ['$http', '$q', '$localStorage', 'API', AppServices])
     .factory('Message', ['MessageService', Message])
-    .factory('MessageService', ['$http', '$q', '$localStorage', MessageService]);
+    .factory('MessageService', ['$http', '$q', '$localStorage', 'API', MessageService])
 }(window.angular));
