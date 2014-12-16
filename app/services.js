@@ -47,10 +47,20 @@
 
   function AppSetting(AppServices, $localStorage) {
     var Setting = {};
+    Setting.sharedSettings = $localStorage.appSharedSettings || null;
     Setting.get = function() {
-      return AppServices.get().then(function(response) {
-        $localStorage.appSetting = response.data;
-      }).then(AppServices.getSharedSettings);
+      return AppServices.get()
+        .then(function(response) {
+          $localStorage.appSetting = response.data;
+        });
+    };
+
+    Setting.getSharedSettings = function() {
+      return AppServices.getSharedSettings()
+        .then(function(response) {
+          $localStorage.appSharedSettings = response.data;
+          Setting.sharedSettings = response.data;
+        });
     };
     return Setting;
   }

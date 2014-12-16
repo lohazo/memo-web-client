@@ -3,7 +3,7 @@
 
   function HomeCtrl($scope) {}
 
-  function HomeMainCtrl($scope, $rootScope, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker, Message) {
+  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker, Message) {
     function getProfile() {
       $scope.profile = Profile.user;
     }
@@ -44,7 +44,13 @@
       .then(buildTree)
       .then(getProfileDetail)
       .then(AppSetting.get)
-      .then(Message.list);
+      .then(Message.list)
+      .then(AppSetting.getSharedSettings)
+      .then(function () {
+        if (AppSetting.sharedSettings && AppSetting.sharedSettings.take_a_tour) {
+          $location.path('/welcome');
+        } 
+      });
   }
 
   function PlacementTestModalCtrl($scope, $modal, $rootScope) {
@@ -81,7 +87,7 @@
 
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
-    .controller('HomeMainCtrl', ['$scope', '$rootScope', 'Profile', 'TreeBuilder', 'AppSetting', 'Mixpanel', 'MemoTracking', 'Message', HomeMainCtrl])
+    .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder', 'AppSetting', 'Mixpanel', 'MemoTracking', 'Message', HomeMainCtrl])
     .controller('PlacementTestModalCtrl', ['$scope', '$modal', '$rootScope', PlacementTestModalCtrl])
     .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance', PlacementTestModalInstanceCtrl]);
 

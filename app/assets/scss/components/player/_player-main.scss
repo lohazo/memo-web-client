@@ -1,0 +1,41 @@
+.new-player {
+  
+  .player-container {
+    
+    .carousel {
+      .carousel-inner {
+        position: relative;
+        overflow: hidden;
+        > .item {
+          display: none;
+          position: relative;
+          transition: all .7s ease-in-out 0;
+          text-align: center;
+        }
+        > .active {
+          left: 0;
+          display: block !important;
+        }
+      }
+    }
+
+    .player-main {
+      min-height: 400px;
+      padding-bottom: 40px;
+    }
+
+    .player-carousel {
+      .player-carousel-slider {
+        list-style: outside none none;
+        min-height: 380px;
+        margin: 0 -40px;
+        position: relative;
+        > li {
+          margin: 0;
+          width: 100%;
+        }
+      }
+    
+    }
+  }
+}

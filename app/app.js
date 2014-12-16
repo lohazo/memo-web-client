@@ -47,7 +47,7 @@
     'app.controllers', 'app.directives',
     'header', 'landingpage', 'login', 'home', 'course',
     'profile', 'skill', 'placement', 'report', 'exam',
-    'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking'
+    'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome'
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider', 'GooglePlusProvider', AppConfig]);
 
 }(window.angular));
