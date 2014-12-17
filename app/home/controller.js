@@ -47,9 +47,9 @@
       .then(Message.list)
       .then(AppSetting.getSharedSettings)
       .then(function () {
-        if (AppSetting.sharedSettings && AppSetting.sharedSettings.take_a_tour) {
+        if (AppSetting.sharedSettings && AppSetting.sharedSettings.take_a_tour.images.length > 0) {
           $location.path('/welcome');
-        } 
+        }
       });
   }
 
