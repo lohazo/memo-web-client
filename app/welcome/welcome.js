@@ -11,13 +11,15 @@
 
   function WelcomeCtrl($scope) {}
 
-  function PlayerCarouselCtrl($scope, $location, AppSetting, MemoTraker) {
+  function PlayerCarouselCtrl($scope, $location, AppSetting, MemoTracker) {
     $scope.slideIndex = 0;
     if (AppSetting.sharedSettings) {
       $scope.slides = AppSetting.sharedSettings.take_a_tour;
+      MemoTracker.track('take a tour slide 1');
     } else {
       AppSetting.getSharedSettings().then(function(response) {
         $scope.slides = AppSetting.sharedSettings.take_a_tour;
+        MemoTracker.track('take a tour slide 1');
       });
     }
 
@@ -34,12 +36,14 @@
     }
 
     function skip() {
+      MemoTracker.track('skip take a tour ' + $scope.slide.order);
       $location.path('/');
     }
 
     function goToSlide(index) {
       $scope.slideIndex = index;
       $scope.slide = $scope.slides[$scope.slideIndex];
+      MemoTracker.track('take a tour slide ' + $scope.slide.order);
     }
 
     $scope.control = {
@@ -50,7 +54,7 @@
     };
   }
 
-  angular.module('welcome', []).config(['$routeProvider', WelcomeConfig]);
+  angular.module('welcome', ['app.services']).config(['$routeProvider', WelcomeConfig]);
   angular.module('welcome')
     .controller('WelcomeCtrl', ['$scope', WelcomeCtrl])
     .controller('PlayerCarouselCtrl', ['$scope', '$location', 'AppSetting', 'MemoTracking', PlayerCarouselCtrl]);
