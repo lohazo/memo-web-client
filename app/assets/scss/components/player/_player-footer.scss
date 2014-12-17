@@ -29,29 +29,30 @@
             }
           }
         }
+      }
+    }
 
-        .carousel-container {
-          position: relative;
-          display: table;
-          margin: 0 auto;
-          width: auto;
-          .carousel-dots {
-            display: inline-block;
-            position: relative;
-            margin: 5px 0px 0px;
-            list-style: outside none none;
-            .carousel-dot {
-              margin: 0px 7px;
-              float: left;
-              height: 25px;
-              width: 25px;
-              border-radius: 50%;
-              background: none repeat scroll 0% 0% $white;
-              cursor: pointer;
-              &.active {
-                background: none repeat scroll 0% 0% $primary-color;
-              }
-            }
+    .carousel-container {
+      position: relative;
+      display: table;
+      margin: 0 auto -36px;
+      width: auto;
+      bottom: 60px;
+      .carousel-dots {
+        display: inline-block;
+        position: relative;
+        margin: 5px 0px 0px;
+        list-style: outside none none;
+        .carousel-dot {
+          margin: 0px 7px;
+          float: left;
+          height: 25px;
+          width: 25px;
+          border-radius: 50%;
+          background: none repeat scroll 0% 0% $white;
+          cursor: pointer;
+          &.active {
+            background: none repeat scroll 0% 0% $primary-color;
           }
         }
       }
