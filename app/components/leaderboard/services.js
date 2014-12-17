@@ -63,6 +63,22 @@
       return deferred.promise;
     };
 
+    Services.inviteMail = function (data) {
+      // data = {email: 'aoesnuth'}
+      var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
+      data.auth_token = authToken;
+
+      $http.post(BASE_URL + '/users/invite_by_email', data)
+        .then(function (response) {
+          deferred.resolve(response);
+        }, function (response) {
+          deferred.reject(response);
+        });
+
+      return deferred.promise;
+    };
+
     return Services;
   }
 
@@ -86,6 +102,9 @@
       return LeaderboardServices.unfollow(data);
     };
 
+    Leaderboard.inviteMail = function(data) {
+      return LeaderboardServices.inviteMail(data);
+    };
 
     Leaderboard.fbLogin = function() {
       var deferred = $q.defer();
