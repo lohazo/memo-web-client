@@ -95,6 +95,15 @@
         strict: 'EA',
         scope: true,
         controller: 'PlayerCarouselCtrl',
+        link: function($scope, $element, $attr) {
+          $element[0].focus();
+          $element.bind('keyup', function (e) {
+            if (e.keyCode === 13) {
+              $scope.control.next();
+              $scope.$apply();
+            }
+          });
+        },
         templateUrl: 'components/player/_player-container-carousel.html'
       };
     });
