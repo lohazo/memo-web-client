@@ -48,6 +48,7 @@
   function AppSetting(AppServices, $localStorage) {
     var Setting = {};
     Setting.sharedSettings = $localStorage.appSharedSettings || null;
+
     Setting.get = function() {
       return AppServices.get()
         .then(function(response) {
@@ -62,6 +63,17 @@
           Setting.sharedSettings = response.data;
         });
     };
+
+    Setting.shouldDisplayTour = function () {
+      Setting.displayTour = $localStorage.displayTour || false;
+      return Setting.displayTour;
+    };
+
+    Setting.disableTour = function () {
+      Setting.displayTour = false;
+      $localStorage.displayTour = false;
+    };
+
     return Setting;
   }
 

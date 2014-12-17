@@ -17,6 +17,7 @@
 
     function init() {
       $scope.slides = AppSetting.sharedSettings.take_a_tour.images;
+      $scope.slide = $scope.slides[$scope.slideIndex];
       trackingText = trackingText.replace('{0}', AppSetting.sharedSettings.take_a_tour.version);
       MemoTracker.track(trackingText.replace('{1}', 1));
     }
@@ -42,6 +43,7 @@
       if ($scope.slideIndex < $scope.slides.length - 1) {
         goToSlide($scope.slideIndex + 1);
       } else {
+        AppSetting.disableTour();
         $location.path('/');
       }
     }
@@ -51,6 +53,7 @@
     }
 
     function skip() {
+      AppSetting.disableTour();
       MemoTracker.track('skip ' + trackingText.replace('{1}', $scope.slide.order));
       $location.path('/');
     }

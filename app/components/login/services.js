@@ -62,6 +62,7 @@ angular.module('login.services', [])
 
         AuthService.prototype.logout = function() {
             $localStorage.$reset();
+            delete $localStorage.displayTour;
             $rootScope.$broadcast('event:auth-logoutConfirmed');
         };
 
@@ -90,8 +91,9 @@ angular.module('login.services', [])
             if (response.data.is_newly_sign_up) {
                 MemoTracker.track('sign up');
                 EcoTracker.track('Web 1.0.2 user logged in', data);
+                $localStorage.displayTour = true;
             } else {
-                MemoTracker.track('login');    
+                MemoTracker.track('login');
             }
             mixpanel.identify(response.data._id);
 

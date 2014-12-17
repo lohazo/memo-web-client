@@ -38,6 +38,13 @@
         });
     }
 
+    function takeATour() {
+      if (AppSetting.shouldDisplayTour()) {
+        $scope.displayTour = AppSetting.displayTour;
+        $location.path('/welcome');
+      }
+    }
+
     // Chain calls
     Profile.getProfile()
       .then(getProfile)
@@ -46,16 +53,13 @@
       .then(AppSetting.get)
       .then(Message.list)
       .then(AppSetting.getSharedSettings)
-      .then(function () {
-        if (AppSetting.sharedSettings && AppSetting.sharedSettings.take_a_tour.images.length > 0) {
-          $location.path('/welcome');
-        }
-      });
+      .then(takeATour);
   }
 
   function PlacementTestModalCtrl($scope, $modal, $rootScope) {
 
     $scope.profile = {};
+    $scope.displayTour = false;
     $scope.open = function() {
       var modalInstance = $modal.open({
         templateUrl: 'home/_placement-test-modal.html',
@@ -65,11 +69,18 @@
         resolve: {
           profile: function() {
             return $scope.profile;
+          },
+          displayTour: function() {
+            return $scope.displayTour;
           }
         }
       });
 
       modalInstance.result.then(function(msg) {});
+      
+      $scope.$watch('displayTour', function() {
+        if ($scope.displayTour) modalInstance.close();
+      });
     };
 
     $scope.$watch('profile', function() {
