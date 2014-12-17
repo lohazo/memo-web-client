@@ -153,6 +153,7 @@
   }
 
   angular.module('app.services', [])
+    .constant('APP_VERSION', '1.0.2')
     .constant('API_PHP', 'http://api.memo.edu.vn/api')
     .constant('API_VERSION', '/v1.5')
     .constant('API', 'http://services.memo.edu.vn/api')
