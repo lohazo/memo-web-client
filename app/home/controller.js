@@ -51,6 +51,7 @@
       .then(buildTree)
       .then(getProfileDetail)
       .then(AppSetting.get)
+      .then(AppSetting.getWords)
       .then(Message.list)
       .then(AppSetting.getSharedSettings)
       .then(takeATour);
