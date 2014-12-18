@@ -13,7 +13,7 @@
         unique_id: localStorage.eco_user ? JSON.parse(localStorage.eco_user).user_id : ''
       };
 
-      $http.post(BASE_URL, requestData)
+      $http.post(BASE_URL, requestData, {ignoreLoadingBar: true})
         .then(function(response) {
           deferred.resolve(response);
         });
@@ -27,6 +27,7 @@
     var BASE_URL = 'http://eco-tracking.memo.edu.vn';
     var tracker = {};
     var isCalled = 0;
+    var httpConfig = {ignoreLoadingBar: true};
 
     tracker.init = function() {
       if (isCalled < 1) {
@@ -67,7 +68,7 @@
       data.browsing_domain = document.URL;
       data.referrer_url = document.referrer;
 
-      return $http.post(BASE_URL + '/users/track', data)
+      return $http.post(BASE_URL + '/users/track', data, httpConfig)
       .success(function(response) {
         localStorage.eco_user = JSON.stringify(response);
         if (callback instanceof Function) callback(response);
@@ -89,7 +90,7 @@
         submitted_form_data: JSON.stringify(data)
       };
 
-      $http.post(BASE_URL + '/users/track', requestData)
+      $http.post(BASE_URL + '/users/track', requestData, httpConfig)
       .success(function(response) {
         $cookies.eco_uuid = response;
         if (callback instanceof Function) callback(response);
