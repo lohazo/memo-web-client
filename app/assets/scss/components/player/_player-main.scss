@@ -9,12 +9,12 @@
         > .item {
           display: none;
           position: relative;
-          transition: all .7s ease-in-out 0;
           text-align: center;
         }
         > .active {
           left: 0;
           display: block !important;
+          @include animation(fadeIn 1s);
         }
       }
     }

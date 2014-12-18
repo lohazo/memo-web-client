@@ -1,4 +1,4 @@
-<div class="player-carousel carousel slide" player-carousel ng-keyup="event=$event">
+<div class="player-carousel carousel" player-carousel>
   <ul class="carousel-inner player-carousel-slider">
     <li class="item" ng-class="{active:slideIndex == $index}" ng-repeat="slide in slides track by $index">
       <img ng-src="{{slide.image_url}}" />
