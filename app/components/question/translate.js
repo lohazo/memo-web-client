@@ -28,7 +28,7 @@
     }
   }
 
-  function QuestionTranslateDirective() {
+  function QuestionTranslateDirective($timeout) {
     return {
       strict: 'EA',
       replace: true,
@@ -46,17 +46,23 @@
           }
         });
 
+        // FIXME: Good enough code
         $scope.showDefinitionDropdown = function (e) {
           var element = angular.element(e.target);
-          element.triggerHandler('click');
 
-          var wordSound = $scope.ngAudio.load(element.attr('data-sound'));
-          wordSound.play();
+          $timeout(function() {
+            element.triggerHandler('click');
+
+            var wordSound = $scope.ngAudio.load(element.attr('data-sound'));
+            wordSound.play();
+          }, 300);
         };
 
         $scope.closeDefinitionDropdown = function (e) {
           var element = angular.element(e.target);
-          element.triggerHandler('click');
+          $timeout(function() {
+            element.triggerHandler('click');
+          }, 300);
         };
       },
       controller: 'QuestionTranslateCtrl',
