@@ -5,20 +5,28 @@
     </div>
     <div class="row">
       <div class="small-7 columns text-to-translate">
-	<div class="row">
+        <div class="row">
           <div class="small-3 columns" ng-if="translate.normal_question_audio">
             <span class="speaker" ng-click="speaker.play()"></span>
           </div>
           <div class="small-13 columns">
-            <span class="text">{{translate.question}}</span>
+            <bdi>
+            <span class="text" ng-repeat="token in translate_tokens track by $index">
+              <span class="token has-definition" ng-if="token.definitions" dropdown-toggle="#token-dropdown-{{$index}}" ng-mouseover="showDefinitionDropdown(event=$event)" data-sound="{{token.sound}}">{{token.text}}</span>
+              <ul id="token-dropdown-{{$index}}" class="f-dropdown dropdown-definition">
+                <li ng-repeat="def in token.definitions" class="definition">{{def}}</li>
+              </ul>
+              <span class="token" ng-if="!token.definitions">{{token.text}}</span>
+            </span>
+            </bdi>
           </div>
-	</div>
+        </div>
       </div>
       <div class="small-1 columns">
-	<h2 class="icon-arrow-right"></h2>
+        <h2 class="icon-arrow-right"></h2>
       </div>
       <div class="small-7 columns answer">
-	<textarea class="translate-area" ng-model="answer"></textarea>
+        <textarea class="translate-area" ng-model="answer"></textarea>
       </div>
     </div>
   </div>
