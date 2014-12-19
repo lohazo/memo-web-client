@@ -53,6 +53,11 @@
           var wordSound = $scope.ngAudio.load(element.attr('data-sound'));
           wordSound.play();
         };
+
+        $scope.closeDefinitionDropdown = function (e) {
+          var element = angular.element(e.target);
+          element.triggerHandler('click');
+        };
       },
       controller: 'QuestionTranslateCtrl',
       templateUrl: 'components/question/_question-translate.html'

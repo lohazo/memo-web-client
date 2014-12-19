@@ -1,4 +1,8 @@
 .text {
+  .token {
+    line-height: 40px !important;
+  }
+
   .token.has-definition {
     border-bottom: 1px dotted #FFA500;
     color: #FFA500;
@@ -13,6 +17,7 @@
     min-width: 50px;
     width: auto;
     max-width: auto;
+    top: 40px !important;
 
     .definition {
       line-height: 30px;
