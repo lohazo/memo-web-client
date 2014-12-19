@@ -1,0 +1,27 @@
+.text {
+  .token.has-definition {
+    border-bottom: 1px dotted #FFA500;
+    color: #FFA500;
+    cursor: pointer;
+  }
+
+  .dropdown-definition {
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    min-width: 50px;
+    width: auto;
+    max-width: auto;
+
+    .definition {
+      line-height: 30px;
+      border-bottom: .5px solid grey;
+      vertical-align: bottom;
+      text-align: center !important;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
