@@ -45,22 +45,29 @@
     };
   }
 
-  function AppSetting(AppServices, $localStorage) {
+  function AppSetting($localStorage, AppServices, WordsFactory) {
     var Setting = {};
     Setting.sharedSettings = $localStorage.appSharedSettings || null;
 
-    Setting.get = function() {
+    Setting.get = function () {
       return AppServices.get()
         .then(function(response) {
           $localStorage.appSetting = response.data;
         });
     };
 
-    Setting.getSharedSettings = function() {
+    Setting.getSharedSettings = function () {
       return AppServices.getSharedSettings()
         .then(function(response) {
           $localStorage.appSharedSettings = response.data;
           Setting.sharedSettings = response.data;
+        });
+    };
+
+    Setting.getWords = function () {
+      return WordsFactory.getWords()
+        .then(function () {
+          Setting.words = $localStorage.words;
         });
     };
 
@@ -169,7 +176,7 @@
     .constant('API_PHP', 'http://api.memo.edu.vn/api/v1.5')
     .constant('API', 'http://services.memo.edu.vn/api')
     .factory('HttpInterceptor', ['$rootScope', '$q', '$window', '$localStorage', HttpInterceptor])
-    .factory('AppSetting', ['AppServices', '$localStorage', AppSetting])
+    .factory('AppSetting', ['$localStorage', 'AppServices', 'Words', AppSetting])
     .factory('AppServices', ['$http', '$q', '$localStorage', 'API', AppServices])
     .factory('Message', ['MessageService', Message])
     .factory('MessageService', ['$http', '$q', '$localStorage', 'API', MessageService])
