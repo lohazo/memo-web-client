@@ -174,7 +174,7 @@
 
   function ExamServices($http, $q, $localStorage, API_PHP) {
     var HOST = 'http://api.memo.edu.vn/api',
-        API_VERSION = '/v1.5',
+        API_VERSION = '/v1.7',
         BASE_URL = HOST + API_VERSION;
     
     var Services = {};
