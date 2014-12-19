@@ -1,239 +1,253 @@
-'use strict';
+(function (angular) {
 
-angular.module('exam.services', [])
-    .factory('Exam', [
-	'$localStorage', '$window',
-	'ExamServices', 'Feedback', 'PlazaServices', 'Mixpanel', 'MemoTracking',
-	function($localStorage, $window, ExamServices, Feedback, PlazaServices, Mixpanel, MemoTracker) {
-	    var exam, questions, answered, wrongAnswers, question, questionPosition,
-		hearts, availableItems, examToken, answersLog;
+  'use strict';
 
-	    function start(data) {
-		return ExamServices.start(data)
-		    .then(function(response) {
-			init(response.data);
-		    }, function(response) {
-			if (response.status == 422) {
-			    $window.location = "/";
-			}
-		    });
-	    }
+  function ExamFactory($localStorage, $window, ExamServices, Feedback, PlazaServices, Mixpanel, MemoTracker) {
+    var exam, questions, answered, wrongAnswers, question, questionPosition,
+        hearts, availableItems, examToken, answersLog;
 
-	    function init(data) {
-		// questions = data.questions.filter(function(q) {return q.type === 'translate';});
-		questions = data.questions;
-		hearts = {
-		    remaining: data.max_hearts_count,
-		    lost: 0
-		};
-		availableItems = data.available_items;
-		examToken = data.exam_token;
-		answered = 0;
-		questionPosition = 0;
-		question = questions[questionPosition];
-		answersLog = {};
-		Feedback.list = [];
+      function start(data) {
+        return ExamServices.start(data)
+          .then(function(response) {
+            init(response.data);
+          }, function(response) {
+            if (response.status == 422) {
+              $window.location = "/";
+            }
+          });
+      }
 
-		Mixpanel.track('screen Exam');
-		MemoTracker.track('start exam lesson')
-	    }
+      function init(data) {
+        // questions = data.questions.filter(function(q) {return q.type === 'translate';});
+        questions = data.questions;
+        hearts = {
+          remaining: data.max_hearts_count,
+          lost: 0
+        };
+        availableItems = data.available_items;
+        examToken = data.exam_token;
+        answered = 0;
+        questionPosition = 0;
+        question = questions[questionPosition];
+        answersLog = {};
+        Feedback.list = [];
 
-	    function getQuestions() {
-		return questions;
-	    }
+        Mixpanel.track('screen Exam');
+        MemoTracker.track('start exam lesson')
+      }
 
-	    function getQuestion() {
-		return question;
-	    }
+      function getQuestions() {
+        return questions;
+      }
 
-	    function getQuestionPosition() {
-		return questionPosition;
-	    }
+      function getQuestion() {
+        return question;
+      }
 
-	    function getWrongAnswers() {
-		return wrongAnswers;
-	    }
+      function getQuestionPosition() {
+        return questionPosition;
+      }
 
-	    function getAnswered() {
-		return answered;
-	    }
+      function getWrongAnswers() {
+        return wrongAnswers;
+      }
 
-	    function getHearts() {
-		return hearts;
-	    }
+      function getAnswered() {
+        return answered;
+      }
 
-	    function getIsAutoFeedback() {
-		if ($localStorage.appSetting.auto_feedback_types.indexOf(question.type) >= 0) {
-		    return true;
-		}
+      function getHearts() {
+        return hearts;
+      }
 
-		return false;
-	    }
+      function getIsAutoFeedback() {
+        if ($localStorage.appSetting.auto_feedback_types.indexOf(question.type) >= 0) {
+          return true;
+        }
 
-	    function getAvailableItems() {
-		return availableItems;
-	    }
+        return false;
+      }
 
-	    function check(isCorrect) {
-		answered += 1;
-		var log = {};
-		log[question.question_log_id] = true;
-		answersLog[question.question_log_id] = true;
-	    }
+      function getAvailableItems() {
+        return availableItems;
+      }
 
-	    function next() {
-		questionPosition += 1;
-		question = questions[questionPosition];
-	    }
+      function check(isCorrect) {
+        answered += 1;
+        var log = {};
+        log[question.question_log_id] = true;
+        answersLog[question.question_log_id] = true;
+      }
 
-	    function skip() {
-		hearts.remaining = hearts.remaining - 1;
-		hearts.lost += 1;
-		answered += 1;
+      function next() {
+        questionPosition += 1;
+        question = questions[questionPosition];
+      }
 
-		var log = {};
-		log[question.question_log_id] = false;
-		answersLog[question.question_log_id] = false;
-	    }
+      function skip() {
+        hearts.remaining = hearts.remaining - 1;
+        hearts.lost += 1;
+        answered += 1;
 
-	    function logFeedback(data) {
-		// data = {question_log_id, user_input, is_auto=true}
-		Feedback.list.push(data);
-	    }
+        var log = {};
+        log[question.question_log_id] = false;
+        answersLog[question.question_log_id] = false;
+      }
 
-	    function sendFeedbackLogs() {
-		Feedback.create();
-	    }
+      function logFeedback(data) {
+        // data = {question_log_id, user_input, is_auto=true}
+        Feedback.list.push(data);
+      }
 
-	    function useItem(item) {
-		var requestData = {'base_item_id': item};
+      function sendFeedbackLogs() {
+        Feedback.create();
+      }
 
-		if (item === 'health_potion') {
-		    if (hearts.lost > 0) {
-			hearts.lost = hearts.lost - 1;
-			hearts.remaining = hearts.remaining + 1;
-			PlazaServices.use(requestData)
-			    .then(function(response) {
-				delete availableItems[item];
-			    });
-		    }
-		}
-	    }
+      function useItem(item) {
+        var requestData = {
+          'base_item_id': item
+        };
 
-	    function checkState() {
-		if (hearts.remaining < 0) {
-		    Mixpanel.track('screen FailLesson');
-		    MemoTracker.track('fail exam lesson')
-		    return {isFinished: true, isFail: true};
-		}
+        if (item === 'health_potion') {
+          if (hearts.lost > 0) {
+            hearts.lost = hearts.lost - 1;
+            hearts.remaining = hearts.remaining + 1;
+            PlazaServices.use(requestData)
+              .then(function(response) {
+                delete availableItems[item];
+              });
+          }
+        }
+      }
 
-		if (answered === questions.length) return {isFinished: true, isFail: false};
+      function checkState() {
+        if (hearts.remaining < 0) {
+          Mixpanel.track('screen FailLesson');
+          MemoTracker.track('fail exam lesson')
+          return {
+            isFinished: true,
+            isFail: true
+          };
+        }
 
-		return {isFinished: false, isFail: false};
-	    }
+        if (answered === questions.length) return {
+          isFinished: true,
+          isFail: false
+        };
 
-	    function finish(data) {
-		//Mixpanel.track('screen FinishLesson');
-		MemoTracker.track('finish exam lesson')
-		data.examToken = examToken;
-		data.logs = JSON.stringify(answersLog);
-		return ExamServices.finish(data).then(function(response) {
-		    question = response.data;
-		});
-	    }
+        return {
+          isFinished: false,
+          isFail: false
+        };
+      }
 
-	    return {
-		start: start,
-		skip: skip,
-		finish: finish,
-		next: next,
-		check: check,
-		answered: getAnswered,
-		wrongAnswers: getWrongAnswers,
-		questions: getQuestions,
-		question: getQuestion,
-		questionPosition: getQuestionPosition,
-		hearts: getHearts,
-		checkState: checkState,
-		logFeedback: logFeedback,
-		sendFeedbackLogs: sendFeedbackLogs,
-		isAutoFeedback: getIsAutoFeedback,
-		availableItems: getAvailableItems,
-		useItem: useItem
-	    };
-	}])
-    .factory('ExamServices', [
-	'$http', '$q', '$localStorage',
-	function($http, $q, $localStorage) {
-	    var HOST = 'http://api.memo.edu.vn/api',
-		API_VERSION = '/v1.5',
-		BASE_URL = HOST + API_VERSION;
+      function finish(data) {
+        //Mixpanel.track('screen FinishLesson');
+        MemoTracker.track('finish exam lesson')
+        data.examToken = examToken;
+        data.logs = JSON.stringify(answersLog);
+        return ExamServices.finish(data).then(function(response) {
+          question = response.data;
+        });
+      }
 
-	    function start(data) {
-		var deferred = $q.defer();
-		var auth_token = $localStorage.auth.user.auth_token;
+      return {
+        start: start,
+        skip: skip,
+        finish: finish,
+        next: next,
+        check: check,
+        answered: getAnswered,
+        wrongAnswers: getWrongAnswers,
+        questions: getQuestions,
+        question: getQuestion,
+        questionPosition: getQuestionPosition,
+        hearts: getHearts,
+        checkState: checkState,
+        logFeedback: logFeedback,
+        sendFeedbackLogs: sendFeedbackLogs,
+        isAutoFeedback: getIsAutoFeedback,
+        availableItems: getAvailableItems,
+        useItem: useItem
+      };
+  }
 
-		var requestData = {
-		    type: data.type,
-		    auth_token: auth_token,
-		    device: 'web'
-		};
+  function ExamServices($http, $q, $localStorage, API_PHP) {
+    var HOST = 'http://api.memo.edu.vn/api',
+        API_VERSION = '/v1.5',
+        BASE_URL = HOST + API_VERSION;
+    
+    var Services = {};
 
-		if (data.type === "lesson") {
-		    requestData.lesson_number = data.lesson_number;
-		    requestData.skill_id = data.skill_id;
-		} else if (data.type === "checkpoint") {
-		    requestData.checkpoint_position = data.checkpoint_position;
-		} else if (data.type === 'shortcut') {
-		    requestData.skill_id = data.skill_id;
-		}
+    Services.start = function(data) {
+      var deferred = $q.defer();
+      var auth_token = $localStorage.auth.user.auth_token;
 
-		$http.post(BASE_URL + '/exam/start', requestData)
-		    .then(function(response) {
-			deferred.resolve(response);
-		    }, function(response) {
-			deferred.reject(response);
-		    });
+      var requestData = {
+        type: data.type,
+        auth_token: auth_token,
+        device: 'web'
+      };
 
-		// $http.get('/assets/data/exam_1.json').then(function(response) {
-		//     deferred.resolve(response);
-		// });
+      if (data.type === "lesson") {
+        requestData.lesson_number = data.lesson_number;
+        requestData.skill_id = data.skill_id;
+      } else if (data.type === "checkpoint") {
+        requestData.checkpoint_position = data.checkpoint_position;
+      } else if (data.type === 'shortcut') {
+        requestData.skill_id = data.skill_id;
+      }
 
-		return deferred.promise;
-	    }
+      $http.post(BASE_URL + '/exam/start', requestData)
+        .then(function(response) {
+          deferred.resolve(response);
+        }, function(response) {
+          deferred.reject(response);
+        });
 
-	    function finish(data) {
-		var deferred = $q.defer();
-		var auth_token = $localStorage.auth.user.auth_token;
+      // $http.get('/assets/data/exam_1.json').then(function(response) {
+      //     deferred.resolve(response);
+      // });
 
-		var requestData = {
-		    type: data.type,
-		    auth_token: auth_token,
-		    exam_token: data.examToken,
-		    device: 'web',
-		    answers: data.logs
-		};
+      return deferred.promise;
+    };
 
-		if (data.type === "lesson") {
-		    requestData.lesson_number = data.lesson_number;
-		    requestData.skill_id = data.skill_id;
-		} else if (data.type === "checkpoint") {
-		    requestData.checkpoint_position = data.checkpoint_position;
-		} else if (data.type === 'shortcut') {
-		    requestData.skill_id = data.skill_id;
-		}
+    Services.finish = function(data) {
+      var deferred = $q.defer();
+      var auth_token = $localStorage.auth.user.auth_token;
 
-		$http.post(BASE_URL + '/exam/finish', requestData)
-		    .then(function(response) {
-			deferred.resolve(response);
-		    });
+      var requestData = {
+        type: data.type,
+        auth_token: auth_token,
+        exam_token: data.examToken,
+        device: 'web',
+        answers: data.logs
+      };
 
-		return deferred.promise;
-	    }
+      if (data.type === "lesson") {
+        requestData.lesson_number = data.lesson_number;
+        requestData.skill_id = data.skill_id;
+      } else if (data.type === "checkpoint") {
+        requestData.checkpoint_position = data.checkpoint_position;
+      } else if (data.type === 'shortcut') {
+        requestData.skill_id = data.skill_id;
+      }
 
-	    return {
-		start: start,
-		finish: finish
-	    };
-	}
-    ]);
+      $http.post(BASE_URL + '/exam/finish', requestData)
+        .then(function(response) {
+          deferred.resolve(response);
+        });
+
+      return deferred.promise;
+
+    };
+
+    return Services;
+  }
+
+  angular.module('exam.services', []);
+  angular.module('exam.services')
+    .factory('Exam', ['$localStorage', '$window', 
+      'ExamServices', 'Feedback', 'PlazaServices', 'Mixpanel', 'MemoTracking', ExamFactory])
+    .factory('ExamServices', ['$http', '$q', '$localStorage', 'API_PHP', ExamServices]);
+}(window.angular));

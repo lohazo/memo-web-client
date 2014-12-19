@@ -1,29 +1,36 @@
-'use strict';
+(function(angular) {
 
-//Bypass jslint
-var angular = window.angular || angular;
+  'use strict';
 
-angular.module('question', [
-    'question.select',
-    'question.translate',
-    'question.judge',
-    'question.name',
-    'question.listen',
-    'question.form',
-    'question.speak',
-    'question.services'
-])
-    .directive('questionFailure', function() {
-	return {
-	    restrict: 'EA',
-	    scope: true,
-	    templateUrl: 'components/question/_question-failure.html'
-	};
-    })
-    .directive('questionSuccess', function() {
-	return {
-	    restrict: 'EA',
-	    scope: true,
-	    templateUrl: 'components/question/_question-success.html'
-	};
-    });
+  function questionFailure() {
+    return {
+      restrict: 'EA',
+      scope: true,
+      templateUrl: 'components/question/_question-failure.html'
+    };
+  }
+
+  function questionSuccess() {
+    return {
+      restrict: 'EA',
+      scope: true,
+      templateUrl: 'components/question/_question-success.html'
+    };
+  }
+
+  angular.module('question', [
+      'question.select',
+      'question.translate',
+      'question.judge',
+      'question.name',
+      'question.listen',
+      'question.form',
+      'question.speak',
+      'question.services'
+    ]);
+  angular.module('question')
+    .directive('questionFailure', questionFailure)
+    .directive('questionSuccess', questionSuccess);
+  
+
+}(window.angular));
