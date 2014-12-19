@@ -4,6 +4,14 @@
   function WordsFactory($http, $q, $localStorage, API) {
     var Factory = {};
 
+    Factory.getWord = function (wordToSearch) {
+      var words = $localStorage.words.words;
+      var lang = $localStorage.auth.user.current_course_id;
+      return words.filter(function (word) {
+        return (lang + '_' + wordToSearch) === word._id;
+      })[0];
+    };
+
     Factory.getWords = function () {
 
       var deferred = $q.defer();
