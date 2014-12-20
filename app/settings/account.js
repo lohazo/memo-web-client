@@ -43,6 +43,12 @@
         data.username = $scope.user.username;
         AccountSetting.saveChanges(data);
       }
+
+      if ($scope.user.mobile && $scope.user.mobile.length > 0) {
+        data = {};
+        data.mobile = $scope.user.mobile;
+        AccountSetting.saveChanges(data);
+      }
     };
   }
 

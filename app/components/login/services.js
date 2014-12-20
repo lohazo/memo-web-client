@@ -107,7 +107,7 @@ angular.module('login.services', [])
 
                 molData.name = data.name || data.username;
                 molData.email = data.email;
-                molData.phone = '0918537799';
+                molData.phone = data.mobile || '';
 
                 MolServices.saveC3(molData);
 
