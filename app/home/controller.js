@@ -48,13 +48,13 @@
     // Chain calls
     Profile.getProfile()
       .then(getProfile)
-      .then(buildTree)
       .then(getProfileDetail)
+      .then(buildTree)
       .then(AppSetting.get)
-      .then(AppSetting.getWords)
-      .then(Message.list)
       .then(AppSetting.getSharedSettings)
-      .then(takeATour);
+      .then(takeATour)
+      .then(Message.list)
+      .then(AppSetting.getWords);
   }
 
   function PlacementTestModalCtrl($scope, $modal, $rootScope) {
