@@ -142,7 +142,6 @@
       }
 
       function finish(data) {
-        //Mixpanel.track('screen FinishLesson');
         MemoTracker.track('finish exam lesson')
         data.examToken = examToken;
         data.logs = JSON.stringify(answersLog);
@@ -151,10 +150,17 @@
         });
       }
 
+      function fail(data) {
+        data.examToken = examToken;
+        data.logs = JSON.stringify(answersLog);
+        return ExamServices.fail(data);
+      }
+
       return {
         start: start,
         skip: skip,
         finish: finish,
+        fail: fail,
         next: next,
         check: check,
         answered: getAnswered,
@@ -173,10 +179,6 @@
   }
 
   function ExamServices($http, $q, $localStorage, API_PHP) {
-    var HOST = 'http://api.memo.edu.vn/api',
-        API_VERSION = '/v1.5',
-        BASE_URL = HOST + API_VERSION;
-    
     var Services = {};
 
     Services.start = function(data) {
@@ -198,7 +200,7 @@
         requestData.skill_id = data.skill_id;
       }
 
-      $http.post(BASE_URL + '/exam/start', requestData)
+      $http.post(API_PHP + '/exam/start', requestData)
         .then(function(response) {
           deferred.resolve(response);
         }, function(response) {
@@ -233,13 +235,34 @@
         requestData.skill_id = data.skill_id;
       }
 
-      $http.post(BASE_URL + '/exam/finish', requestData)
+      $http.post(API_PHP + '/exam/finish', requestData)
         .then(function(response) {
           deferred.resolve(response);
         });
 
       return deferred.promise;
 
+    };
+
+    Services.fail = function(data) {
+      var deferred = $q.defer();
+      var auth_token = $localStorage.auth.user.auth_token;
+
+      var requestData = {
+        type: data.type,
+        auth_token: auth_token,
+        exam_token: data.examToken,
+        device: 'web',
+        answers: data.logs,
+        checkpoint_position: data.checkpoint_position
+      };
+
+      $http.post(API_PHP + '/exam/fail', requestData)
+        .then(function(response) {
+          deferred.resolve(response);
+        });
+
+      return deferred.promise;
     };
 
     return Services;
