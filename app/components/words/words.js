@@ -32,13 +32,13 @@
     };
 
     Factory.revealWords = function (data) {
-      // data = {words: ['a', 'x']}
+      // data = {words: ['en-vi_a', 'en-vi_x']}
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
       data.auth_token = authToken;
 
-      $http.post(API + '/words?', data)
+      $http.post(API + '/words?', data, {ignoreLoadingBar: true})
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
