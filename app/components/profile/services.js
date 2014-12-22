@@ -1,11 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function ProfileServices($http, $q, $location, $localStorage) {
-    var HOST = "http://api.memo.edu.vn/api",
-      API_VERSION = "/v1.5",
-      BASE_URL = HOST + API_VERSION;
-
+  function ProfileServices($http, $q, $location, $localStorage, API_PHP) {
     var Services = {};
 
     Services.profile = function () {
@@ -15,7 +11,7 @@
         'auth_token': $localStorage.auth.user.auth_token
       };
 
-      $http.get(BASE_URL + '/users/' + data._id + '?auth_token=' + data.auth_token)
+      $http.get(API_PHP + '/users/' + data._id + '?auth_token=' + data.auth_token)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -32,7 +28,7 @@
     Services.profileDetail = function (data) {
       var deferred = $q.defer();
 
-      $http.get(BASE_URL + '/users/profile_details' + '?device=web&auth_token=' + data.auth_token)
+      $http.get(API_PHP + '/users/profile_details' + '?device=web&auth_token=' + data.auth_token)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -46,7 +42,7 @@
       // data = {username: 'asonetuh'/ password: 'anoethuasto'/ email: 'asoentuh'}
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      $http.post(BASE_URL + '/users/edit', data)
+      $http.post(API_PHP + '/users/edit', data)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -91,6 +87,6 @@
   }
 
   angular.module('profile.services', [])
-    .factory('ProfileServices', ['$http', '$q', '$location', '$localStorage', ProfileServices])
+    .factory('ProfileServices', ['$http', '$q', '$location', '$localStorage', 'API_PHP', ProfileServices])
     .factory('Profile', ['ProfileServices', '$localStorage', ProfileFactory]);
 }(window.angular));

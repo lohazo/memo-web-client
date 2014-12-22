@@ -1,53 +1,53 @@
-'use strict';
+(function (angular) {
+  'use strict';
 
-angular.module('feedback.services', [])
-    .factory('Feedback', ['FeedbackServices', function(FeedbackServices) {
-	var Feedback = {};
+  function FeedbackServices($http, $q, $localStorage, API_PHP) {
+    var Services = {};
 
-	/* A feedback is like {
-		    question_log_id: $scope.question.question_log_id,
-		    user_answer: $scope.question.userAnswer || '',
-		    user_note: userNote,
-		    feedback_type_ids: feedbackTypeIds,
-		    auto_feedback: false
-		} */
-	Feedback.list = [];
+    Services.create = function (data) {
+      var auth_token = $localStorage.auth.user.auth_token;
+      data.auth_token = auth_token;
+      // data = {auth_token, feedbacks: [{
+      // "question_log_id":"544f488248177e4c0c8b456f",
+      // "user_input":"Test thoi nhe!",
+      // "is_auto":true}]}
+      var deferred = $q.defer();
 
-	Feedback.create = function() {
-	    var data = {
-		feedbacks: JSON.stringify(Feedback.list)
-	    };
-	    return FeedbackServices.create(data);
-	};
+      $http.post(API_PHP + '/feedback/create', data)
+        .then(function(response) {
+          deferred.resolve(response);
+        });
 
-	return Feedback;
-    }])
-    .factory('FeedbackServices', [
-	'$http', '$q', '$localStorage',
-	function($http, $q, $localStorage) {
-	    var HOST = "http://api.memo.edu.vn/api",
-		API_VERSION = "/v1.5",
-		BASE_URL = HOST + API_VERSION;
+      return deferred.promise;
+    };
 
-	    var Feedback = {};
+    return Services;
+  }
 
-	    Feedback.create = function(data) {
-		var auth_token = $localStorage.auth.user.auth_token;
-		data.auth_token = auth_token;
-		// data = {auth_token, feedbacks: [{
-		// "question_log_id":"544f488248177e4c0c8b456f",
-		// "user_input":"Test thoi nhe!",
-		// "is_auto":true}]}
-		var deferred = $q.defer();
+  function FeedbackFactory(FeedbackServices) {
+    var Feedback = {};
 
-		$http.post(BASE_URL + '/feedback/create', data)
-		    .then(function(response) {
-			deferred.resolve(response);
-		    });
+    /* A feedback is like {
+          question_log_id: $scope.question.question_log_id,
+          user_answer: $scope.question.userAnswer || '',
+          user_note: userNote,
+          feedback_type_ids: feedbackTypeIds,
+          auto_feedback: false
+      } */
+    Feedback.list = [];
 
-		return deferred.promise;
-	    };
+    Feedback.create = function () {
+      var data = {
+        feedbacks: JSON.stringify(Feedback.list)
+      };
+      return FeedbackServices.create(data);
+    };
 
-	    return Feedback;
-	}
-    ]);
+    return Feedback;
+  }
+
+  angular.module('feedback.services', []);
+  angular.module('feedback.services')
+    .factory('FeedbackServices', ['$http', '$q', '$localStorage', 'API_PHP', FeedbackServices])
+    .factory('Feedback', ['FeedbackServices', FeedbackFactory]);
+}(window.angular));

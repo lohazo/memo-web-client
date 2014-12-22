@@ -1,10 +1,7 @@
 (function(angular) {
   'use strict';
 
-  function LeaderboardServices($http, $q, $localStorage) {
-    var HOST = "http://api.memo.edu.vn/api",
-      API_VERSION = "/v1.5",
-      BASE_URL = HOST + API_VERSION;
+  function LeaderboardServices($http, $q, $localStorage, API_PHP) {
     var Services = {};
 
     Services.fbFriends = function() {
@@ -16,7 +13,7 @@
         auth_token: authToken,
         fb_access_token: fbAccessToken
       };
-      $http.post(BASE_URL + '/users/search_fb_friend', data)
+      $http.post(API_PHP + '/users/search_fb_friend', data)
         .then(function(response) {
           deferred.resolve(response);
         });
@@ -29,7 +26,7 @@
       var authToken = $localStorage.auth.user.auth_token;
       data.auth_token = authToken;
 
-      $http.post(BASE_URL + '/users/search_friends', data)
+      $http.post(API_PHP + '/users/search_friends', data)
         .then(function(response) {
           deferred.resolve(response);
         });
@@ -42,7 +39,7 @@
       var authToken = $localStorage.auth.user.auth_token;
       data.auth_token = authToken;
 
-      $http.post(BASE_URL + '/users/follow', data)
+      $http.post(API_PHP + '/users/follow', data)
         .then(function(response) {
           deferred.resolve(response);
         });
@@ -55,7 +52,7 @@
       var authToken = $localStorage.auth.user.auth_token;
       data.auth_token = authToken;
 
-      $http.post(BASE_URL + '/users/unfollow', data)
+      $http.post(API_PHP + '/users/unfollow', data)
         .then(function(response) {
           deferred.resolve(response);
         });
@@ -69,7 +66,7 @@
       var authToken = $localStorage.auth.user.auth_token;
       data.auth_token = authToken;
 
-      $http.post(BASE_URL + '/users/invite_by_email', data)
+      $http.post(API_PHP + '/users/invite_by_email', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -137,6 +134,6 @@
 
   angular.module('leaderboard.services', [])
     .factory('Leaderboard', ['$q', '$localStorage', 'LeaderboardServices', 'Facebook', LeaderboardFactory])
-    .factory('LeaderboardServices', ['$http', '$q', '$localStorage', LeaderboardServices]);
+    .factory('LeaderboardServices', ['$http', '$q', '$localStorage', 'API_PHP', LeaderboardServices]);
 
 }(window.angular));
