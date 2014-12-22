@@ -5,6 +5,7 @@
     var Service = {};
 
     Service.register = function (data) {
+      var deferred = $q.defer();
       $http.post(API_PHP + '/users', data)
         .then(function(response) {
           deferred.resolve(response);

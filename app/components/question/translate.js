@@ -28,7 +28,7 @@
     }
   }
 
-  function QuestionTranslateDirective($timeout) {
+  function QuestionTranslateDirective($timeout, ngAudio, Words) {
     return {
       strict: 'EA',
       replace: true,
@@ -53,8 +53,9 @@
           $timeout(function() {
             element.triggerHandler('click');
 
-            var wordSound = $scope.ngAudio.load(element.attr('data-sound'));
+            var wordSound = ngAudio.load(element.attr('data-sound'));
             wordSound.play();
+            Words.revealWords({words: JSON.stringify([element.attr('data-word-id')])});
           }, 300);
         };
 
