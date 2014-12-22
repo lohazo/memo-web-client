@@ -1,10 +1,7 @@
 (function(angular) {
   'use strict';
 
-  function SettingProfileService($http, $q, $localStorage) {
-    var HOST = "http://api.memo.edu.vn/api",
-      API_VERSION = "/v1.5",
-      BASE_URL = HOST + API_VERSION;
+  function SettingProfileService($http, $q, $localStorage, API_PHP) {
     var Services = {};
 
     Services.linkFb = function() {
@@ -16,7 +13,7 @@
         fb_access_token: $localStorage.auth.facebook.accessToken
       };
 
-      $http.post(BASE_URL + '/users/link_facebook', data)
+      $http.post(API_PHP + '/users/link_facebook', data)
         .then(function(response) {
           deferred.resolve(response);
         }, function(response) {
@@ -30,7 +27,7 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
-      $http.post(BASE_URL + '/users/unlink_facebook', {
+      $http.post(API_PHP + '/users/unlink_facebook', {
           auth_token: authToken
         })
         .then(function(response) {
@@ -49,7 +46,7 @@
         g_access_token: $localStorage.auth.google.accessToken
       };
 
-      $http.post(BASE_URL + '/users/link_google', data)
+      $http.post(API_PHP + '/users/link_google', data)
         .then(function(response) {
           deferred.resolve(response);
         }, function(response) {
@@ -63,7 +60,7 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
-      $http.post(BASE_URL + '/users/unlink_google', {
+      $http.post(API_PHP + '/users/unlink_google', {
           auth_token: authToken
         })
         .then(function(response) {
@@ -150,7 +147,7 @@
 
   angular.module('settings.profile', [])
     .controller('SettingProfileCtrl', ['$scope', 'Profile', 'SettingProfile', SettingProfileCtrl])
-    .factory('SettingProfileService', ['$http', '$q', '$localStorage', SettingProfileService])
+    .factory('SettingProfileService', ['$http', '$q', '$localStorage', 'API_PHP', SettingProfileService])
     .factory('SettingProfile', ['$localStorage', 'SettingProfileService', 'Leaderboard', 'GooglePlus', SettingProfileFactory]);
 
 }(window.angular));
