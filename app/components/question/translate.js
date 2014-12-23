@@ -3,8 +3,7 @@
   'use strict';
 
   function QuestionTranslateCtrl($scope, ngAudio, Words) {
-    $scope.ngAudio = ngAudio;
-    
+
     function tokenize(inputString) {
       var tokens = inputString.split(' ');
       return tokens.map(function (token) {
