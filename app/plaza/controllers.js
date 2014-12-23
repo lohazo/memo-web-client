@@ -6,7 +6,7 @@ angular.module('plaza.controllers', [])
         function($scope, Plaza, Profile) {
             Profile.getProfile($scope.auth.user)
                 .then(function() {
-                    $scope.profile = Profile.data.user_info;
+                    $scope.profile = Profile.user;
                 }).then(function() {
                     Profile.getProfileDetail($scope.auth.user)
                         .then(function() {
@@ -46,4 +46,5 @@ angular.module('plaza.controllers', [])
                 }
             };
         }
+
     ]);

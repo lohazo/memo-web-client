@@ -2,7 +2,8 @@
 
 angular.module('plaza', [
     'plaza.services',
-    'plaza.controllers'
+    'plaza.controllers',
+
 ]).config(['$routeProvider', PlazaConfig]);
 
 function PlazaConfig($routeProvider) {
