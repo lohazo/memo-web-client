@@ -14,6 +14,6 @@
   </div>
   <a ng-if="row.isCheckpoint" href="{{row[0].remaining_test_times != 0 ? 'checkpoint/' + row[0].row : ''}}" class="{{row[0].remaining_test_times == 0 ? 'disabled' : ''}} secondary test-out hex-memo-button">
     <i class="icon-lock"></i>
-    {{row[0].remaining_test_times == 0 ? 'Đã vượt qua một checkpoint' : 'Kiểm tra rút ngắn kĩ năng'}}
+    {{row[0].title}}
   </a>
 </div>
