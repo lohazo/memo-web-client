@@ -2,8 +2,9 @@
 
 angular.module('plaza.controllers', [])
     .controller('PlazaCtrl', [
-        '$scope', 'Plaza', 'Profile',
-        function($scope, Plaza, Profile) {
+        '$scope', 'Plaza', 'Profile','$rootScope',
+
+        function($scope, Plaza, Profile,$rootScope) {
             Profile.getProfile($scope.auth.user)
                 .then(function() {
                     $scope.profile = Profile.user;
@@ -24,6 +25,7 @@ angular.module('plaza.controllers', [])
                                     data: $scope.profileDetail.exp_chart.exp
                                 }]
                             };
+                            $rootScope.$broadcast('event-profileLoaded', Profile.detail);
                         });
                 });
 
@@ -45,6 +47,7 @@ angular.module('plaza.controllers', [])
                     });
                 }
             };
+            $scope.showLead
         }
 
     ]);
