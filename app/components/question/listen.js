@@ -21,8 +21,11 @@ angular.module('question.listen', [])
 		    slowFile.play();
 		}
 	    };
-
-	    $scope.speaker.play();
+		if(!$scope.$parent.shouldPlaySlow){
+	        $scope.speaker.slowPlay();
+		} else {
+			$scope.speaker.play();
+		}
 	}])
     .directive('questionListen', function() {
 	return {

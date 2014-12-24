@@ -11,7 +11,7 @@
         return (Words.getWord(currentToken) || {text: currentToken});
       });
     }
-    
+
     $scope.translate = $scope.$parent.question;
     $scope.translate_tokens = tokenize($scope.translate.question);
 
