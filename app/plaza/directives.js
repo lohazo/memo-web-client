@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('plaza.directives', []);
+angular.module('plaza.directives', [])
