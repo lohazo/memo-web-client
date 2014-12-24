@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function WordsFactory($http, $q, $localStorage, API) {
+  function WordsFactory($http, $q, $localStorage, API, API_PHP) {
     var Factory = {};
 
     Factory.getWord = function (wordToSearch) {
@@ -18,7 +18,7 @@
       var words = $localStorage.words || {};
       var version = words.version || 0;
 
-      $http.get(API + '/words?version=' + version, {ignoreLoadingBar: true})
+      $http.get(API + '/shared_settings/all_words.json?version=' + version, {ignoreLoadingBar: true})
         .then(function (response) {
           if (version != response.data.version) {
             $localStorage.words = response.data;
@@ -38,7 +38,7 @@
 
       data.auth_token = authToken;
 
-      $http.post(API + '/words?', data, {ignoreLoadingBar: true})
+      $http.post(API_PHP + '/words?', data, {ignoreLoadingBar: true})
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -53,5 +53,5 @@
 
   angular.module('words', []);
   angular.module('words')
-    .factory('Words', ['$http', '$q', '$localStorage', 'API_PHP', WordsFactory]);
+    .factory('Words', ['$http', '$q', '$localStorage', 'API', 'API_PHP', WordsFactory]);
 }(window.angular));
