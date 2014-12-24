@@ -12,7 +12,7 @@ angular.module('exam.controllers', ['ngSanitize'])
       var requestData = {
         type: examType === 'skill' ? 'lesson' : examType
       };
-      if ( threeFirstSkills.indexOf(skill.id)){
+      if (threeFirstSkills.indexOf(skill._id) >= 0){
         $scope.shouldPlaySlow = true;
       }
       if (examType === 'skill') {
