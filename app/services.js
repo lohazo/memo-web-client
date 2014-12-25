@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function HttpInterceptor($rootScope, $q, $window, $localStorage) {
+  function HttpInterceptor($rootScope, $q, $location, $localStorage) {
     return {
       // optional method
       'request': function(config) {
@@ -26,9 +26,9 @@
         if (response.status === 401) {
           $localStorage.$reset();
           alert(response.data.error);
-          $window.location = '/';
+          $location.path('/');
         }
-        return response;
+        return response || $q.when(response);
       },
 
       // optional method
@@ -38,7 +38,7 @@
           $localStorage.$reset();
           $rootScope.$broadcast('event:auth-logoutConfirmed')
           alert(rejection.data.error);
-          $window.location = '/';
+          $location.path('/');
         }
         return $q.reject(rejection);
       }
@@ -171,7 +171,7 @@
     .constant('APP_VERSION', '1.0.2')
     .constant('API_PHP', 'http://api.memo.edu.vn/api/v1.6')
     .constant('API', 'http://services.memo.edu.vn/api')
-    .factory('HttpInterceptor', ['$rootScope', '$q', '$window', '$localStorage', HttpInterceptor])
+    .factory('HttpInterceptor', ['$rootScope', '$q', '$location', '$localStorage', HttpInterceptor])
     .factory('AppSetting', ['$localStorage', 'AppServices', 'Words', AppSetting])
     .factory('AppServices', ['$http', '$q', '$localStorage', 'API', 'API_PHP', AppServices])
     .factory('Message', ['MessageService', Message])
