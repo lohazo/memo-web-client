@@ -121,11 +121,25 @@
 
       $scope.register = function() {
         var user = angular.fromJson(angular.toJson($scope.user));
-        delete user.password;
-
-        AuthService.register($scope.user)
-          .then(closeModal, displayMessageOnFail);
-      };
+        if (user.mobile && user.mobile.length > 0) {
+          if (user.mobile.match(/^\+?\d{2}?\d{3}?\d{5}$/)) {
+          delete user.password;
+          AuthService.register($scope.user)
+              .then(closeModal, displayMessageOnFail);
+          }
+        }else {
+            $scope.error = 'Bạn chưa nhập số điện thoại';
+            return false;
+          }
+        if (user.mobile.length > 11){
+          $scope.error = 'Số điện thoại quá dài';
+          return false;
+        }
+        if (! user.mobile.match(/[0-9]{11}/) ){
+          $scope.error = 'Số điện thoại không được chứa kí tự';
+          return false;
+        }
+      }
 
       $scope.login = function() {
         var user = angular.fromJson(angular.toJson($scope.user));
@@ -144,6 +158,7 @@
       function displayMessageOnFail(response) {
         $scope.error = response.data.error;
       }
+
   }
 
   function ForgetPasswordModalInstanceCtrl($scope, $rootScope, $timeout, $modalInstance, $routeParams, AuthService) {
