@@ -79,6 +79,13 @@ angular.module('exam.controllers', ['ngSanitize'])
         });
       };
 
+      $scope.replay = function(){
+          $timeout(function(){
+              $location.path($location.path());
+          }, 1 );
+      };
+
+
       $scope.checkState = function() {
         if (Exam.checkState().isFinished) {
           if (Exam.checkState().isFail) {
