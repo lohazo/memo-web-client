@@ -7,11 +7,14 @@ angular.module('exam.controllers', ['ngSanitize'])
     function($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker, Skill) {
       var examType = $location.path().split('/')[1].trim();
       var skill = Skill.skill($routeParams.id);
-
+      $scope.shouldPlaySlow = false;
+      var threeFirstSkills = [ 'en-vi_co_ban_1', 'en-vi_co_ban_2','en-vi_nhung_nhom_tu_thong_dung'];
       var requestData = {
         type: examType === 'skill' ? 'lesson' : examType
       };
-
+      if (threeFirstSkills.indexOf(skill._id) >= 0){
+        $scope.shouldPlaySlow = true;
+      }
       if (examType === 'skill') {
         requestData.lesson_number = $routeParams.lesson_number;
         requestData.skill_id = $routeParams.id;
