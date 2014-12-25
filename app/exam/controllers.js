@@ -12,12 +12,12 @@ angular.module('exam.controllers', ['ngSanitize'])
       var requestData = {
         type: examType === 'skill' ? 'lesson' : examType
       };
-      if (threeFirstSkills.indexOf(skill._id) >= 0) {
-        $scope.shouldPlaySlow = true;
-      }
       if (examType === 'skill') {
         requestData.lesson_number = $routeParams.lesson_number;
         requestData.skill_id = $routeParams.id;
+        if (threeFirstSkills.indexOf(skill._id) >= 0) {
+          $scope.shouldPlaySlow = true;
+        }
       } else if (examType === 'checkpoint') {
         requestData.checkpoint_position = $routeParams.checkpoint_position;
       } else if (examType === 'shortcut') {
