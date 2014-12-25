@@ -2,6 +2,7 @@
   'use strict';
 
   function WordsFactory($http, $q, $localStorage, API, API_PHP) {
+    var httpConfig = {ignoreLoadingBar: true};
     var Factory = {};
 
     Factory.getWord = function (wordToSearch) {
@@ -18,7 +19,7 @@
       var words = $localStorage.words || {};
       var version = words.version || 0;
 
-      $http.get(API + '/shared_settings/all_words.json?version=' + version, {ignoreLoadingBar: true})
+      $http.get(API + '/shared_settings/all_words.json?version=' + version, httpConfig)
         .then(function (response) {
           if (version != response.data.version) {
             $localStorage.words = response.data;
@@ -38,7 +39,7 @@
 
       data.auth_token = authToken;
 
-      $http.post(API_PHP + '/words?', data, {ignoreLoadingBar: true})
+      $http.post(API_PHP + '/words?', data, httpConfig)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
