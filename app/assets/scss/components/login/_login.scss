@@ -78,3 +78,29 @@
 .top-bar-section ul li > a.button{
 	border:none !important;
 }
+.day_divider hr{
+  position:absolute;
+  border-top:1px solid #DDD;
+  width:100%;
+  top:.6rem;
+  margin:0
+}
+.day_divider_label{
+  background:white;
+  padding:0 1rem;
+  display:inline-block;
+  margin:0 auto;
+  position:relative;
+}
+.day_divider{
+  background:white;
+  margin:1.5rem 0;
+  line-height:1.6;
+  color:#555459;
+  text-align:center;
+  cursor:default;
+  clear:both;
+  position:relative
+
+}
+
