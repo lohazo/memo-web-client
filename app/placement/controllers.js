@@ -125,6 +125,10 @@ angular.module('placement.controllers', [])
         });
 
       $scope.keyUpHandler = function(e) {
+        if (e.keyCode === 8) {
+          return false;
+        }
+
         if (e.keyCode === 13) {
           if ($scope.question.userAnswer && $scope.question.userAnswer.length > 0) {
             if ($scope.questionState && $scope.questionState === 'answered') {
