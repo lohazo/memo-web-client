@@ -74,9 +74,9 @@
           $localStorage.auth.facebook = response.authResponse;
         }
 
-        // Facebook.login(facebookLoginCallback, {
-        //   scope: 'public_profile, email, user_friends'
-        // });
+        Facebook.login(facebookLoginCallback, {
+          scope: 'public_profile, email, user_friends'
+        });
       }
 
       function facebookLoginCallback(response) {
