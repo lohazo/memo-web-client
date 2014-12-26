@@ -1,10 +1,31 @@
-<div class="row">
+<div class="row" xmlns="http://www.w3.org/1999/html">
     <div class="large-16 columns">
         <div class="row"><span class="ant"></span></div>
         <div class="container">
             <h3 class="title">Đăng nhập</h3>
             <p class="error">{{error}}</p>
             <form>
+                <div class="row">
+                        <div class="large-16 columns">
+                            <p>Đăng nhập chỉ với 1 click qua</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-16 columns">
+                        <a class="large-16 small radius facebook button" ng-click="FbLogin()">
+                            Facebook
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-16 columns">
+                        <p>Để dễ dàng tìm và thi đua với bạn bè mình </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="day_divider"><hr role="separator" aria-hidden="true"><div class="day_divider_label">hoặc</div>
+                    </div>
+                </div>
                 <div class="row fields">
                     <div class="small-16 columns">
                         <input class="username" ng-model="user.username" type="text" placeholder="Tên đăng nhập/Email">
@@ -20,29 +41,13 @@
                         <a class="large-16 small radius login button" ng-click="login()">Đăng nhập</a>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="large-16 columns text-center forgot-password">
-                        <a ng-click="forgetModal()">Quên mật khẩu</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-8 columns">
-                        <a class="large-16 small radius facebook button" ng-click="FbLogin()">
-                        Facebook
-                        </a>
-                    </div>
-                    <div class="large-8 columns">
-                        <a class="large-16 small radius google button" ng-click="GLogin()">
-                        Google+
-                        </a>
+                <div class="text">
+                    <div class="large-16 columns" align="center">
+                        <span>Chưa có tài khoản ?</span>
+                        <a  ng-click="registerModal()">Đăng ký ngay</a>
                     </div>
                 </div>
             </form>
-            <div class="row">
-                <div class="large-16 columns">
-                    <a ng-click="registerModal()">Tạo tài khoản</a>
-                </div>
-            </div>
         </div>
     </div>
 </div>
