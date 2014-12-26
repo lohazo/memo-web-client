@@ -223,6 +223,10 @@ angular.module('exam.controllers', ['ngSanitize'])
       };
 
       $scope.keyUpHandler = function(e) {
+        if (e.keyCode === 8) {
+          return false;
+        }
+
         if (e.keyCode === 13) {
           if ($scope.question.userAnswer && $scope.question.userAnswer.length > 0) {
             e.preventDefault();
