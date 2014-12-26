@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('exam.controllers', ['ngSanitize', 'ngAnimate'])
+angular.module('exam.controllers', ['ngSanitize'])
   .controller('ExamCtrl', [
     '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question',
     'Sound', 'MemoTracking', 'Skill',
