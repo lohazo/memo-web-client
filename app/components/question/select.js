@@ -41,13 +41,21 @@
 
       $element.attr('tabindex', '0');
       $element[0].focus();
-      $element.on('keyup', function(event) {
-        // console.log(event);
-        if (event.keyCode === 97 || event.keyCode === 49) {
+
+      $element.on('keydown', function(e) {
+        if (e.keyCode === 8) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        }
+      });
+
+      $element.on('keyup', function(e) {
+        if (e.key == "1") {
           $scope.selectAnswer(1);
-        } else if (event.keyCode === 98 || event.keyCode === 50) {
+        } else if (e.key == "2") {
           $scope.selectAnswer(2);
-        } else if (event.keyCode === 99 || event.keyCode === 51) {
+        } else if (e.key == "3") {
           $scope.selectAnswer(3);
         }
       });

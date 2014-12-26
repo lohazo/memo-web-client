@@ -1,7 +1,6 @@
-(function (angular) {
+(function(angular) {
   'use strict';
 }(window.angular));
-
 angular.module('placement.controllers', [])
   .controller('PlacementCtrl', [
     '$scope', '$location', 'PlacementTestFactory', 'Question', 'Sound',

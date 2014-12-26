@@ -1,14 +1,17 @@
 'use strict';
 
-angular.module('exam.controllers', ['ngSanitize'])
+angular.module('exam.controllers', ['ngSanitize', 'ngAnimate'])
   .controller('ExamCtrl', [
     '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question',
     'Sound', 'MemoTracking', 'Skill',
-    function($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker, Skill) {
+    function($scope, $timeout, $routeParams, $location, Exam, Question, Sound,
+      MemoTracker, Skill) {
       var examType = $location.path().split('/')[1].trim();
       var skill = Skill.skill($routeParams.id);
       $scope.shouldPlaySlow = false;
-      var threeFirstSkills = ['en-vi_co_ban_1', 'en-vi_co_ban_2', 'en-vi_nhung_nhom_tu_thong_dung'];
+      var threeFirstSkills = ['en-vi_co_ban_1', 'en-vi_co_ban_2',
+        'en-vi_nhung_nhom_tu_thong_dung'
+      ];
       var requestData = {
         type: examType === 'skill' ? 'lesson' : examType
       };
@@ -89,7 +92,7 @@ angular.module('exam.controllers', ['ngSanitize'])
         };
         $scope.questions = [];
         $scope.answered = 0;
-        $timeout(function () {
+        $timeout(function() {
           $scope.start();
         }, 1);
       };
@@ -167,7 +170,8 @@ angular.module('exam.controllers', ['ngSanitize'])
       };
 
       $scope.check = function() {
-        if ($scope.question.userAnswer && $scope.question.userAnswer.length > 0) {
+        if ($scope.question.userAnswer && $scope.question.userAnswer.length >
+          0) {
           $scope.result = Question.check($scope.question, $scope.question.userAnswer);
           $scope.footerTpl = "footerResult";
 
@@ -208,7 +212,7 @@ angular.module('exam.controllers', ['ngSanitize'])
         }
       };
 
-      $scope.start = function () {
+      $scope.start = function() {
         Exam.start(requestData).then(function(response) {
           $scope.questions = Exam.questions();
           $scope.question = Exam.question();
@@ -223,10 +227,6 @@ angular.module('exam.controllers', ['ngSanitize'])
       };
 
       $scope.keyUpHandler = function(e) {
-        if (e.keyCode === 8) {
-          return false;
-        }
-
         if (e.keyCode === 13) {
           if ($scope.question.userAnswer && $scope.question.userAnswer.length > 0) {
             e.preventDefault();
