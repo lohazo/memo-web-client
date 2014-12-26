@@ -25,8 +25,12 @@
 
     };
 
-    Services.profileDetail = function (data) {
+    Services.profileDetail = function () {
       var deferred = $q.defer();
+      var data = {
+        '_id': $localStorage.auth.user._id,
+        'auth_token': $localStorage.auth.user.auth_token
+      };
 
       $http.get(API_PHP + '/users/profile_details' + '?device=web&auth_token=' + data.auth_token)
         .then(function (response) {
@@ -70,8 +74,8 @@
         });
     };
 
-    Profile.getProfileDetail = function (data) {
-      return ProfileServices.profileDetail(data)
+    Profile.getProfileDetail = function () {
+      return ProfileServices.profileDetail()
         .then(function (response) {
           Profile.detail = response.data;
           $localStorage.auth.profile_detail = Profile.detail;

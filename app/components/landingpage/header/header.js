@@ -107,15 +107,12 @@
       };
 
       $scope.FbLogin = function() {
-        //mixpanel.track('Web 1.0.2 button click FbLogin');
-        AuthService.FbLogin();
-        $rootScope.$on('event:auth-loginConfirmed', function() {
-          $timeout(closeModal, 10);
-        });
+        AuthService.FbLogin()
+          .then(AuthService.login)
+          .then(closeModal, displayMessageOnFail);
       };
 
       $scope.GLogin = function() {
-        //mixpanel.track('Web 1.0.2 button click GLogin');
         AuthService.GLogin().then(closeModal, displayMessageOnFail);
       };
 

@@ -1,6 +1,3 @@
 'use strict';
 
-angular.module('home', [
-    'home.controller',
-    'home.directives'
-]);
+angular.module('home', ['home.controller', 'home.directives']);
