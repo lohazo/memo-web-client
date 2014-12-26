@@ -8,16 +8,16 @@ angular.module('exam.controllers', ['ngSanitize'])
       var examType = $location.path().split('/')[1].trim();
       var skill = Skill.skill($routeParams.id);
       $scope.shouldPlaySlow = false;
-      var threeFirstSkills = [ 'en-vi_co_ban_1', 'en-vi_co_ban_2','en-vi_nhung_nhom_tu_thong_dung'];
+      var threeFirstSkills = ['en-vi_co_ban_1', 'en-vi_co_ban_2', 'en-vi_nhung_nhom_tu_thong_dung'];
       var requestData = {
         type: examType === 'skill' ? 'lesson' : examType
       };
-      if (threeFirstSkills.indexOf(skill._id) >= 0){
-        $scope.shouldPlaySlow = true;
-      }
       if (examType === 'skill') {
         requestData.lesson_number = $routeParams.lesson_number;
         requestData.skill_id = $routeParams.id;
+        if (threeFirstSkills.indexOf(skill._id) >= 0) {
+          $scope.shouldPlaySlow = true;
+        }
       } else if (examType === 'checkpoint') {
         requestData.checkpoint_position = $routeParams.checkpoint_position;
       } else if (examType === 'shortcut') {
@@ -79,14 +79,30 @@ angular.module('exam.controllers', ['ngSanitize'])
         });
       };
 
+      $scope.replay = function() {
+        $scope.questionTpl = "";
+        $scope.footerTpl = "footer";
+        $scope.questionState = "";
+        $scope.hearts = {
+          remaining: 0,
+          lost: 0
+        };
+        $scope.questions = [];
+        $scope.answered = 0;
+        $timeout(function () {
+          $scope.start();
+        }, 1);
+      };
+
+
       $scope.checkState = function() {
-        if (Exam.checkState().isFinished) {
-          if (Exam.checkState().isFail) {
+        var examState = Exam.checkState();
+        if (examState.isFinished) {
+          if (examState.isFail) {
             $scope.questionTpl = questionTplId.failure;
             $scope.footerTpl = "footerFailure";
             Sound.playFailSound();
             if (examType === 'checkpoint') {
-              console.log('Hit');
               Exam.fail(requestData);
             }
           } else {
@@ -192,17 +208,19 @@ angular.module('exam.controllers', ['ngSanitize'])
         }
       };
 
-      Exam.start(requestData).then(function(response) {
-        $scope.questions = Exam.questions();
-        $scope.question = Exam.question();
-        $scope.answered = Exam.answered();
-        $scope.ant = 0;
-        $scope.hearts = Exam.hearts();
-        $scope.question.userAnswer = "";
-        $scope.questionTpl = questionTplId[$scope.question.type];
-        $scope.isAutoFeedback = Exam.isAutoFeedback();
-        $scope.availableItems = Exam.availableItems();
-      });
+      $scope.start = function () {
+        Exam.start(requestData).then(function(response) {
+          $scope.questions = Exam.questions();
+          $scope.question = Exam.question();
+          $scope.answered = Exam.answered();
+          $scope.ant = 0;
+          $scope.hearts = Exam.hearts();
+          $scope.question.userAnswer = "";
+          $scope.questionTpl = questionTplId[$scope.question.type];
+          $scope.isAutoFeedback = Exam.isAutoFeedback();
+          $scope.availableItems = Exam.availableItems();
+        });
+      };
 
       $scope.keyUpHandler = function(e) {
         if (e.keyCode === 13) {
@@ -218,5 +236,7 @@ angular.module('exam.controllers', ['ngSanitize'])
           }
         }
       };
+
+      $scope.start();
     }
   ]);

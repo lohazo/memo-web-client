@@ -1,102 +1,99 @@
-'use strict';
+(function(angular) {
 
-angular.module('placement.services', [])
-.factory('Placement', [
-	'PlacementServices', 'Mixpanel', 'MemoTracking',
-	function(PlacementServices, Mixpanel, MemoTracker) {
-		var question;
-		function start(data) {
-			return PlacementServices.start(data)
-			.then(function(response) {
-				question = response.data;
-				mixpanel.track('Web 1.0.2 start exam placement test');
-				MemoTracker.track('start exam placement test');
-			});
-		}
-		function getQuestion() {
-			return question;
-		}
-		function skip(data) {
-			return PlacementServices.submitAnswer(data)
-			.then(function(response) {
-				question = response.data;
+  'use strict';
 
-			});
-		}
-		function submitAnswer(data) {
-			return PlacementServices.submitAnswer(data)
-			.then(function(response) {
-				question = response.data;
-				if (question.exp_chart) {
-					mixpanel.track('Web 1.0.2 finish exam placement test');
-					MemoTracker.track('finish exam placement test')
-				}
-				else{
-					mixpanel.track('Web 1.0.2 fail exam placement test');
-					MemoTracker.track('quit exam placement test');	
-				}
-			// question = {
-			//     "finish_exam_bonus_exp": 0,
-			//     "leveled_up": false,
-			//     "heart_bonus_exp": 3,
-			//     "exp_chart": {
-			// 	"days": ["Sa","Su","Mo","Tu","We","Th","Fr"],
-			// 	"exp": [0,0,0,0,1010,0,0]
-			//     },
-			//     "combo_days": 1,
-			//     "affected_skill": {
-			// 	"_id": "en-vi_dai_tu_quan_he",
-			// 	"order": 1,
-			// 	"title": "Đại từ quan hệ",
-			// 	"slug": "Đại từ Q.hệ",
-			// 	"theme_color": "#99cc00"
-			//     },
-			//     "num_affected_skills": 37,
-			//     "bonus_coin": 2
-			// };
-		});
-		}
-		return {
-			start: start,
-			skip: skip,
-			submitAnswer: submitAnswer,
-			question: getQuestion
-		};
-	}])
-.factory('PlacementServices', ['$http', '$q', function($http, $q) {
-	var HOST = 'http://api.memo.edu.vn/api',
-	API_VERSION = '/v1.5',
-	BASE_URL = HOST + API_VERSION;
+  function PlacementTestFactory(PlacementServices, Mixpanel, MemoTracker) {
+    var PlacementTest = {};
 
-	return {
-		start: function(data) {
-			var deferred = $q.defer();
+    PlacementTest.start = function (data) {
+      return PlacementServices.start(data)
+        .then(function (response) {
+          PlacementTest.question = response.data;
+          mixpanel.track('Web 1.0.2 start exam placement test');
+          MemoTracker.track('start exam placement test');
+        });
+    };
 
-			var requestData = {
-				device: 'web',
-				auth_token: data.auth_token,
-				speak_enabled: false
-			};
+    PlacementTest.skip = function (data) {
+      return PlacementServices.submitAnswer(data)
+        .then(function(response) {
+          PlacementTest.question = response.data;
+        });
+    };
 
-			$http.post(BASE_URL + '/placement_test/start', requestData)
-			.then(function(response) {
-				deferred.resolve(response);
-			});
+    PlacementTest.submitAnswer = function (data) {
+      return PlacementServices.submitAnswer(data)
+        .then(function(response) {
+          PlacementTest.question = response.data;
+          if (PlacementTest.question.exp_chart) {
+            mixpanel.track('Web 1.0.2 finish exam placement test');
+            MemoTracker.track('finish exam placement test')
+          } else {
+            mixpanel.track('Web 1.0.2 fail exam placement test');
+            MemoTracker.track('quit exam placement test');
+          }
+          // question = {
+          //     "finish_exam_bonus_exp": 0,
+          //     "leveled_up": false,
+          //     "heart_bonus_exp": 3,
+          //     "exp_chart": {
+          //  "days": ["Sa","Su","Mo","Tu","We","Th","Fr"],
+          //  "exp": [0,0,0,0,1010,0,0]
+          //     },
+          //     "combo_days": 1,
+          //     "affected_skill": {
+          //  "_id": "en-vi_dai_tu_quan_he",
+          //  "order": 1,
+          //  "title": "Đại từ quan hệ",
+          //  "slug": "Đại từ Q.hệ",
+          //  "theme_color": "#99cc00"
+          //     },
+          //     "num_affected_skills": 37,
+          //     "bonus_coin": 2
+          // };
+        });
+    }
 
-			return deferred.promise;
-		},
-		submitAnswer: function(data) {
-			var deferred = $q.defer();
+    return PlacementTest;
+  }
 
-			data.device = 'web';
-			data.speak_enabled = false;
+  function PlacementTestServices($http, $q, API_PHP) {
+    return {
+      start: function(data) {
+        var deferred = $q.defer();
 
-			$http.post(BASE_URL + '/placement_test/submit_answer', data)
-			.then(function(response) {
-				deferred.resolve(response);
-			});
+        var requestData = {
+          device: 'web',
+          auth_token: data.auth_token,
+          speak_enabled: false
+        };
 
-			return deferred.promise;
-		}
-	};
-}]);
+        $http.post(API_PHP + '/placement_test/start', requestData)
+          .then(function(response) {
+            deferred.resolve(response);
+          });
+
+        return deferred.promise;
+      },
+      submitAnswer: function(data) {
+        var deferred = $q.defer();
+
+        data.device = 'web';
+        data.speak_enabled = false;
+
+        $http.post(API_PHP + '/placement_test/submit_answer', data)
+          .then(function(response) {
+            deferred.resolve(response);
+          });
+
+        return deferred.promise;
+      }
+    };
+  }
+
+  angular.module('placement.services', [])
+  angular.module('placement.services')
+    .factory('PlacementTestFactory', ['PlacementTestServices', 'Mixpanel', 'MemoTracking', PlacementTestFactory])
+    .factory('PlacementTestServices', ['$http', '$q', 'API_PHP', PlacementTestServices]);
+
+}(window.angular));
