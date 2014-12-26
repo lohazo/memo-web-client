@@ -28,8 +28,12 @@
   mixpanel.init("067076d37e3b2608d1c7668122fd4bcc");</script><!-- end Mixpanel -->
   <script src="vendors/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body ng-controller="AppCtrl">
+<body ng-class="{landingpage: !auth.loggedIn}" ng-controller="AppCtrl">
+  <header ng-if="auth.loggedIn || auth.trial" app-header></header>
+  <header ng-if="!auth.loggedIn" class="fixed contain-to-grid" landing-header></header>
   <div ng-view></div>
+  <footer app-footer></footer>
+
   <script src="vendors/angular/angular.min.js"></script>
   <script src="vendors/angular-cookies/angular-cookies.min.js"></script>
   <script src="vendors/angular-animate/angular-animate.min.js"></script>
@@ -141,5 +145,14 @@
   ga('create', 'UA-57229832-1', 'auto');
   ga('send', 'pageview');
   </script>
+  <!-- Google Tag Manager -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N6X84R"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N6X84R');</script>
+  <!-- End Google Tag Manager -->
 </body>
 </html>

@@ -92,7 +92,10 @@
     };
 
     Leaderboard.follow = function(data) {
-      return LeaderboardServices.follow(data);
+      return LeaderboardServices.follow(data)
+        .then(function (response) {
+          $localStorage.auth.profile_detail.following_user_ids = response.data.following_user_ids;
+        });
     };
 
     Leaderboard.unfollow = function(data) {

@@ -51,8 +51,9 @@
     $scope.showTheLeaderboard();
   }
 
-  function LeaderboardHomeCtrl($scope, $rootScope, Leaderboard) {
-    $rootScope.$on('event-profileLoaded', function(e, data) {
+  function LeaderboardHomeCtrl($scope, Profile) {
+    $scope.profile = Profile.detail;
+    $scope.$on('event-profileLoaded', function(e, data) {
       $scope.profile = data;
     });
     $scope.$watch('profile', function() {
@@ -98,7 +99,7 @@
 
   angular.module('leaderboard.controllers', [])
     .controller('LeaderboardCtrl', ['$scope', '$localStorage', 'Leaderboard', LeaderboardCtrl])
-    .controller('LeaderboardHomeCtrl', ['$scope', '$rootScope', LeaderboardHomeCtrl])
+    .controller('LeaderboardHomeCtrl', ['$scope', 'Profile', LeaderboardHomeCtrl])
     .controller('LeaderboardFbFriendsCtrl', ['$scope', LeaderboardFbFriendsCtrl])
     .controller('LeaderboardFriendsCtrl', ['$scope', 'Leaderboard', LeaderboardFriendsCtrl]);
 }(window.angular));
