@@ -35,8 +35,9 @@
   text-align: center;
   min-height: 1px;
   position: fixed;
-  top: 35px !important;
+  top: 15px !important;
   outline: none;
+
   input[type="text"], input[type="email"], input[type="password"] {
     margin-bottom: 10px;
   }
@@ -100,4 +101,5 @@
   cursor: default;
   clear: both;
   position: relative;
+  margin-bottom: 18px;
 }
