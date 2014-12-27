@@ -51,11 +51,11 @@
       });
 
       $element.on('keyup', function(e) {
-        if (e.key == "1") {
+        if (e.key == "1" || e.keyCode === 49) {
           $scope.selectAnswer(1);
-        } else if (e.key == "2") {
+        } else if (e.key == "2" || e.keyCode === 50) {
           $scope.selectAnswer(2);
-        } else if (e.key == "3") {
+        } else if (e.key == "3" || e.keyCode === 51) {
           $scope.selectAnswer(3);
         }
       });
