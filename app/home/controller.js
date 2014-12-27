@@ -3,7 +3,8 @@
 
   function HomeCtrl($scope) {}
 
-  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker, Message) {
+  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker,
+    Message) {
     function getProfile() {
       $scope.profile = Profile.user;
     }
@@ -78,7 +79,7 @@
       });
 
       modalInstance.result.then(function(msg) {});
-      
+
       $scope.$watch('displayTour', function() {
         if ($scope.displayTour) modalInstance.close();
       });
@@ -99,7 +100,9 @@
 
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
-    .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder', 'AppSetting', 'Mixpanel', 'MemoTracking', 'Message', HomeMainCtrl])
+    .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder', 'AppSetting',
+      'Mixpanel', 'MemoTracking', 'Message', HomeMainCtrl
+    ])
     .controller('PlacementTestModalCtrl', ['$scope', '$modal', '$rootScope', PlacementTestModalCtrl])
     .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance', PlacementTestModalInstanceCtrl]);
 
