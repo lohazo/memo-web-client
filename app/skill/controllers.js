@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('skill.controllers', [])
-    .controller('SkillCtrl', [
-        '$scope', '$rootScope', '$location', '$localStorage', '$routeParams',
-        'AuthService', 'Skill', 'MemoTracking',
-        function($scope, $rootScope, $location, $localStorage, $routeParams,
-            AuthService, Skill, MemoTracker) {
+  .controller('SkillCtrl', [
+    '$scope', '$rootScope', '$location', '$localStorage', '$routeParams',
+    'AuthService', 'Skill', 'MemoTracking',
+    function($scope, $rootScope, $location, $localStorage, $routeParams,
+      AuthService, Skill, MemoTracker) {
 
-            $scope.skill = Skill.skill($routeParams.id);
-            MemoTracker.track('lessons list');
-        }
-    ]);
+      $scope.skill = Skill.skill($routeParams.id);
+      MemoTracker.track('lessons list');
+      $scope.showGrammar = $scope.skill._id;
+    }
+  ]);

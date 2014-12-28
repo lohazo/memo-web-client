@@ -1,5 +1,6 @@
 (function(angular) {
   'use strict';
+
   function LoginModalDirective() {
     function linkFn($scope, $element) {
       $element.bind('keypress', function(e) {
@@ -92,84 +93,103 @@
 
   function LoginModalInstanceCtrl($scope, $rootScope, $timeout, $modalInstance, $routeParams, AuthService) {
     $scope.user = {};
-      $scope.error = '';
+    $scope.error = '';
 
-      $scope.registerModal = function() {
-        $modalInstance.close('openRegister');
-      };
+    $scope.registerModal = function() {
+      $modalInstance.close('openRegister');
+    };
 
-      $scope.loginModal = function() {
-        $modalInstance.close('open');
-      };
+    $scope.loginModal = function() {
+      $modalInstance.close('open');
+    };
 
-      $scope.forgetModal = function() {
-        $modalInstance.close('openForgetPassword');
-      };
+    $scope.forgetModal = function() {
+      $modalInstance.close('openForgetPassword');
+    };
 
-      $scope.FbLogin = function() {
-        AuthService.FbLogin()
-          .then(AuthService.login)
-          .then(closeModal, displayMessageOnFail);
-      };
+    $scope.FbLogin = function() {
+      AuthService.FbLogin()
+        .then(AuthService.login)
+        .then(closeModal, displayMessageOnFail);
+    };
 
-      $scope.GLogin = function() {
-        AuthService.GLogin().then(closeModal, displayMessageOnFail);
-      };
+    $scope.GLogin = function() {
+      AuthService.GLogin().then(closeModal, displayMessageOnFail);
+    };
 
-      $scope.register = function() {
-        var user = angular.fromJson(angular.toJson($scope.user));
-        delete user.password;
+    $scope.register = function() {
+      var user = angular.fromJson(angular.toJson($scope.user));
+      // if (user.mobile && user.mobile.length > 0) {
+      //   if (user.mobile.match(/^\+?\d{2}?\d{3}?\d{5}$/)) {
+      delete user.password;
+      AuthService.register($scope.user)
+        .then(closeModal, displayMessageOnFail);
+      //   }
+      // } else {
+      //   $scope.error = 'Bạn chưa nhập số điện thoại';
+      //   return false;
+      // }
+      // if (user.mobile.length > 11) {
+      //   $scope.error = 'Số điện thoại quá dài';
+      //   return false;
+      // }
+      // if (!user.mobile.match(/[0-9]{11}/)) {
+      //   $scope.error = 'Số điện thoại không được chứa kí tự';
+      //   return false;
+      // }
+    }
 
-        AuthService.register($scope.user)
-          .then(closeModal, displayMessageOnFail);
-      };
+    $scope.login = function() {
+      var user = angular.fromJson(angular.toJson($scope.user));
+      delete user.password;
 
-      $scope.login = function() {
-        var user = angular.fromJson(angular.toJson($scope.user));
-        delete user.password;
+      AuthService.login($scope.user)
+        .then(closeModal, displayMessageOnFail);
+    };
 
-        AuthService.login($scope.user)
-          .then(closeModal, displayMessageOnFail);
-      };
-
-      function closeModal(data) {
-        if ($modalInstance) {
-          $modalInstance.close();
-        }
+    function closeModal(data) {
+      if ($modalInstance) {
+        $modalInstance.close();
       }
+    }
 
-      function displayMessageOnFail(response) {
-        $scope.error = response.data.error;
-      }
+    function displayMessageOnFail(response) {
+      $scope.error = response.data.error;
+    }
+
   }
 
   function ForgetPasswordModalInstanceCtrl($scope, $rootScope, $timeout, $modalInstance, $routeParams, AuthService) {
     $scope.user = {};
-      $scope.error = '';
+    $scope.error = '';
 
 
-      $scope.forgetPassword = function() {
-        var user = angular.fromJson(angular.toJson($scope.user));
+    $scope.forgetPassword = function() {
+      var user = angular.fromJson(angular.toJson($scope.user));
 
-        AuthService.forgetPassword($scope.user)
-          .then(closeModal, displayMessageOnFail);
-      };
+      AuthService.forgetPassword($scope.user)
+        .then(closeModal, displayMessageOnFail);
+    };
 
-      function closeModal(data) {
-        if ($modalInstance) {
-          $modalInstance.close();
-        }
+    function closeModal(data) {
+      if ($modalInstance) {
+        $modalInstance.close();
       }
+    }
 
-      function displayMessageOnFail(response) {
-        $scope.error = response.data.error;
-      }
+    function displayMessageOnFail(response) {
+      $scope.error = response.data.error;
+    }
   }
   angular.module('landingpage.login', [])
     .directive('loginModal', LoginModalDirective)
     .directive('registerModal', RegisterModalDirective)
     .directive('forgetModal', ForgetPasswordModalDirective)
     .controller('LoginModalCtrl', ['$scope', '$rootScope', '$modal', LoginModalCtrl])
-    .controller('LoginModalInstanceCtrl', ['$scope', '$rootScope', '$timeout', '$modalInstance', '$routeParams', 'AuthService', LoginModalInstanceCtrl])
-    .controller('ForgetPasswordModalInstanceCtrl', ['$scope', '$rootScope', '$timeout', '$modalInstance', '$routeParams', 'AuthService', ForgetPasswordModalInstanceCtrl]);
+    .controller('LoginModalInstanceCtrl', ['$scope', '$rootScope', '$timeout', '$modalInstance', '$routeParams',
+      'AuthService', LoginModalInstanceCtrl
+    ])
+    .controller('ForgetPasswordModalInstanceCtrl', ['$scope', '$rootScope', '$timeout', '$modalInstance',
+      '$routeParams', 'AuthService', ForgetPasswordModalInstanceCtrl
+    ]);
 }(window.angular));
