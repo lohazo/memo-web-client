@@ -49,14 +49,14 @@
     var Setting = {};
     Setting.sharedSettings = $localStorage.appSharedSettings || null;
 
-    Setting.get = function () {
+    Setting.get = function() {
       return AppServices.get()
         .then(function(response) {
           $localStorage.appSetting = response.data;
         });
     };
 
-    Setting.getSharedSettings = function () {
+    Setting.getSharedSettings = function() {
       return AppServices.getSharedSettings()
         .then(function(response) {
           $localStorage.appSharedSettings = response.data;
@@ -64,19 +64,31 @@
         });
     };
 
-    Setting.getWords = function () {
+    Setting.getWords = function() {
       return WordsFactory.getWords()
-        .then(function () {
+        .then(function() {
           Setting.words = $localStorage.words;
         });
     };
 
-    Setting.shouldDisplayTour = function () {
+    Setting.getFinishSkillFacebookContent = function(skillId) {
+      return AppServices.getFacebookSharedContent({
+        skill_id: skillId
+      });
+    };
+
+    Setting.getLevelUpFacebookContent = function() {
+      return AppServices.getFacebookSharedContent({
+        level_up: true
+      });
+    };
+
+    Setting.shouldDisplayTour = function() {
       Setting.displayTour = $localStorage.displayTour || false;
       return Setting.displayTour;
     };
 
-    Setting.disableTour = function () {
+    Setting.disableTour = function() {
       Setting.displayTour = false;
       $localStorage.displayTour = false;
     };
@@ -90,21 +102,40 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
-      $http.get(API_PHP + '/appsettings?device=web&auth_token=' + authToken )
+      $http.get(API_PHP + '/appsettings?device=web&auth_token=' + authToken)
         .then(function(response) {
           deferred.resolve(response);
         });
       return deferred.promise;
     };
 
-    AppServices.getSharedSettings = function (data) {
+    AppServices.getSharedSettings = function(data) {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
       $http.get(API + '/shared_settings?device=web&resolution=all&auth_token=' + authToken)
-        .then(function (response) {
+        .then(function(response) {
           deferred.resolve(response);
-        }, function (response) {
+        }, function(response) {
+          deferred.reject(response);
+        });
+
+      return deferred.promise;
+    };
+
+    AppServices.getFacebookSharedContent = function(data) {
+      // data = {skill_id: 'aoheusantheu' / level_up: true};
+      var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
+
+      var endpoint = API + '/shared_settings/facebook_share_content?device=web&auth_token=' + authToken;
+      endpoint += data.skill_id ? '&skill_id=' + data.skill_id : '&level_up=' + data.level_up;
+
+      $http.get(endpoint)
+        .then(function(response) {
+          deferred.resolve(response);
+        })
+        .then(function(response) {
           deferred.reject(response);
         });
 
@@ -132,7 +163,7 @@
   }
 
   function MessageService($http, $q, $localStorage, API) {
-      MessageService = {};
+    MessageService = {};
 
     MessageService.list = function() {
       var deferred = $q.defer();
