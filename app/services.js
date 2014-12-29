@@ -133,6 +133,7 @@
 
       $http.get(endpoint)
         .then(function(response) {
+          // response = {caption:, description:, link:};
           deferred.resolve(response);
         })
         .then(function(response) {
