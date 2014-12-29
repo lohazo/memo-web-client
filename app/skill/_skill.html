@@ -16,7 +16,7 @@
       <div class="small-12 columns lessons">
         <div class="row">
           <div class="small-16 columns right grammar-note">
-            <!--&nbsp;-->
+            &nbsp;
         </div>
         <div class="row {{skill.theme_color === '#99cc00' ? 'green1' : (skill.theme_color === '#ff4444' ? 'red1' : 'blue1')}} skill-{{skill.order + 1}}">
           <div class="{{$index < skill.finished_lesson ? 'past' : ($index == skill.finished_lesson ? 'unlocked' : 'locked')}} lesson text-center" ng-repeat="lesson in skill.lessons track by $index">
