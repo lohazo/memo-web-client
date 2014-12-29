@@ -10,9 +10,10 @@ angular.module('skill', [
     '$locationProvider',
     SkillConfig]);
 
+
 function SkillConfig($routeProvider, $locationProvider) {
     $routeProvider.when('/skill/:id', {
 	templateUrl: 'skill/_skill.html',
 	controller: 'SkillCtrl'
     });
-}
+};

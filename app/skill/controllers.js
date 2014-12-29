@@ -9,6 +9,6 @@ angular.module('skill.controllers', [])
 
       $scope.skill = Skill.skill($routeParams.id);
       MemoTracker.track('lessons list');
-      $scope.showGrammar = $scope.skill._id;
+      $scope.showGrammar = ($routeParams.id);
     }
   ]);
