@@ -63,9 +63,6 @@
           height: 41px;
           background: url("assets/img/hex-strength.png") no-repeat;
         }
-        .icon {
-          background: url("assets/img/skills-pack-unlocked-70.png") no-repeat;
-        }
         &.red {
           background-position: -140px 0;
         }
@@ -95,9 +92,6 @@
         }
         .name, .level {
           color: $aluminum;
-        }
-        .icon {
-          background: url("assets/img/skills-pack-locked-70.png") no-repeat;
         }
       }
       $x: 1;
@@ -175,7 +169,6 @@
         }
       }
       .icon {
-        background: url("assets/img/skill-pack.png") no-repeat;
         margin: 0 auto 30px;
         height: 120px;
         width: 120px;

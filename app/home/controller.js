@@ -15,6 +15,7 @@
       TreeBuilder.getTree();
       $scope.skillTree = TreeBuilder.build();
 
+      $scope.iconSets = TreeBuilder.iconSets;
       MemoTracker.track('skills tree');
     }
 
@@ -47,15 +48,16 @@
     }
 
     // Chain calls
+    AppSetting.getWords();
     Profile.getProfile()
       .then(getProfile)
-      .then(getProfileDetail)
-      .then(buildTree)
       .then(AppSetting.get)
-      // .then(AppSetting.getSharedSettings)
-      // .then(takeATour)
-      // .then(Message.list)
-      .then(AppSetting.getWords);
+      .then(Message.list)
+      .then(getProfileDetail)
+      .then(AppSetting.getSharedSettings)
+      .then(TreeBuilder.getIconSets)
+      .then(buildTree)
+      .then(takeATour);
   }
 
   function PlacementTestModalCtrl($scope, $modal, $rootScope) {
