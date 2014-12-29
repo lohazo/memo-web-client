@@ -20,3 +20,4 @@ angular.module('skill.services', [])
 		return Skill;
 	}
 	]);
+
