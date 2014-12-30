@@ -128,10 +128,10 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
-      var endpoint = API + '/shared_settings/facebook_share_content?device=web&auth_token=' + authToken;
-      endpoint += data.skill_id ? '&skill_id=' + data.skill_id : '&level_up=' + data.level_up;
+      //var endpoint = API + '/shared_settings/facebook_share_content?device=web&auth_token' + authToken;
+      ////endpoint += data.skill_id ? '&skill_id=' + data.skill_id : '&level_up=' + data.level_up;
 
-      $http.get(endpoint)
+      $http.get(API + '/shared_settings/facebook_share_content?device=web&auth_token')
         .then(function(response) {
           // response = {caption:, description:, link:};
           deferred.resolve(response);

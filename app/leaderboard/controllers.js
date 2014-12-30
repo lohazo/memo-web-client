@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function LeaderboardCtrl($scope, $localStorage, Leaderboard) {
+  function LeaderboardCtrl($scope, $localStorage, Leaderboard, AppServices) {
     $scope.follow = function(id) {
       var reqData = {
         friend_id: id
@@ -48,9 +48,11 @@
       $scope.showFriends = true;
     };
 
+    $scope.shareFb = function(){
+    }
+
     $scope.showTheLeaderboard();
   }
-
   function LeaderboardHomeCtrl($scope, Profile) {
     $scope.profile = Profile.detail;
     $scope.$on('event-profileLoaded', function(e, data) {
@@ -88,7 +90,7 @@
     };
     $scope.searchMemoFriends = function() {
       var reqData = {
-        keywords: $scope.search.keywords,
+        keywords: $scope.search.keywords
       };
       Leaderboard.friends(reqData)
         .then(function(response) {
