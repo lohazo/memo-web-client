@@ -20,6 +20,19 @@ angular.module('app.directives', [])
       templateUrl: 'components/header/_header.html'
     };
   })
+  .directive('appFacebookShareContent', function(){
+    return {
+      restrict: 'EA',
+      link: function($scope, $element, $attr){
+        $element.bind('click', function(data){
+          FB.ui({
+            method: 'share',
+            href: 'http://memo.edu.vn'
+          }, function(response){});
+        })
+      }
+        };
+  })
   .directive('landingpage', function() {
     return {
       restrict: 'EA',
