@@ -1,92 +1,94 @@
 .landingpage {
-.head {
-background: url('assets/img/landingpage/pattern01.png') repeat;
-min-height: 600px;
-&.appear {
-.ant {
-background: url('assets/img/landingpage/1-ant.png') no-repeat;
-left: 580px;
-bottom: 80px;
-width: 540px;
-height: 335px;
-position: absolute;
-z-index: 1;
-@include animation(bounceInUp 1s);
-}
-.chat-1 {
-background: url('assets/img/landingpage/01a_06.png') no-repeat;
-height: 111px;
-width: 149px;
-top: 115px;
-left: 625px;
-@include animation(bounceInUp 1.3s);
-}
-.chat-2 {
-background: url('assets/img/landingpage/01a_03.png') no-repeat;
-width: 172px;
-height: 135px;
-top: 40px;
-left: 780px;
-@include animation(bounceInUp 1.6s);
-}
-.chat-3 {
-background: url('assets/img/landingpage/01a_09.png') no-repeat;
-width: 103px;
-height: 103px;
-top: 120px;
-left: 1007px;
-@include animation(bounceInUp 2.1s);
-}
-}
-.container {
-height: 600px;
-.sa {
-margin-top: 170px;
-text-align: center;
-.sa-1, .sa-2 {
-font-weight: 700;
-}
-.sa-2 {
-text-transform: uppercase;
-color: $primary-color;
-}
-.register.button {
-margin-top: 20px;
-margin-bottom: 20px;
-font-weight: 700;
-}
-ul.inline-list {
-padding-left: -20px;
-> li {
-margin-left: 0;
-}
-}
-.ios, .android, .window {
-width: 150px;
-height: 59px;
-opacity: 0.7;
-&:hover {
-opacity: 1;
-}
-}
-.ios {
-background: url('assets/img/landingpage/icon-dl-asvn.png') no-repeat;
-background-size: contain;
-}
-.android {
-background: url('assets/img/landingpage/icon-dl-android.png') no-repeat;
-background-size: contain;
-}
-.window {
-background: url('assets/img/landingpage/icon-dl-wp.png') no-repeat;
-background-size: contain;
-}
-}
-.chat {
-position: absolute;
-text-align: center;
-line-height: 66px;
-}
-}
-}
+  .head {
+    background: url("assets/img/landingpage/pattern01.png") repeat;
+    min-height: 600px;
+    &.appear {
+      .ant {
+        background: url("assets/img/landingpage/1-ant.png") no-repeat;
+        left: 580px;
+        bottom: 80px;
+        width: 540px;
+        height: 335px;
+        position: absolute;
+        z-index: 1;
+        @include animation(bounceInUp 1s);
+      }
+      .chat-1 {
+        background: url("assets/img/landingpage/01a_06.png") no-repeat;
+        height: 111px;
+        width: 149px;
+        top: 115px;
+        left: 625px;
+        @include animation(bounceInUp 1.3s);
+      }
+      .chat-2 {
+        background: url("assets/img/landingpage/01a_03.png") no-repeat;
+        width: 172px;
+        height: 135px;
+        top: 40px;
+        left: 780px;
+        @include animation(bounceInUp 1.6s);
+      }
+      .chat-3 {
+        background: url("assets/img/landingpage/01a_09.png") no-repeat;
+        width: 103px;
+        height: 103px;
+        top: 120px;
+        left: 1007px;
+        @include animation(bounceInUp 2.1s);
+      }
+    }
+    .container {
+      height: 600px;
+      .sa {
+        margin-top: 170px;
+        text-align: center;
+        .sa-1, .sa-2 {
+          font-weight: 700;
+        }
+        .sa-2 {
+          text-transform: uppercase;
+          color: $primary-color;
+        }
+        .register.button {
+          margin-top: 20px;
+          margin-bottom: 20px;
+          font-weight: 700;
+        }
+        ul.inline-list {
+          padding-left: -20px;
+          > li {
+            margin-left: 0;
+          }
+        }
+        .ios, .android, .window {
+          width: 150px;
+          height: 59px;
+          opacity: 0.7;
+        }
+        .ios, .android {
+          &:hover {
+            opacity: 1;
+          }
+        }
+        .ios {
+          background: url("assets/img/landingpage/1-adr.png") no-repeat;
+          background-size: contain;
+        }
+        .android {
+          background: url("assets/img/landingpage/1-ios.png") no-repeat;
+          background-size: contain;
+        }
+        .window {
+          background: url("assets/img/landingpage/1-wp.png") no-repeat;
+          background-size: contain;
+        }
+      }
+      .chat {
+        position: absolute;
+        text-align: center;
+        line-height: 66px;
+      }
+    }
+  }
 }

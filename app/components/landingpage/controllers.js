@@ -38,18 +38,17 @@ angular.module('landingpage.controllers', [])
     'Mixpanel',
     function($scope, $window, Mixpanel) {
       $scope.toAppStore = function() {
-        $window.location.href = 'http://cleverstore.vn/ung-dung/topica-memo-hoc-ngoai-ngu-mien-phi-81580.html';
+        $window.location.href = 'https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls=1&mt=8';
       };
 
       $scope.toPlayStore = function() {
         $window.location.href = 'https://play.google.com/store/apps/details?id=vn.topica.memo';
-
       };
     }
   ])
   .controller('LpInfoCtrl', ['$scope', '$window', 'Mixpanel', function($scope, $window, Mixpanel) {
     $scope.toAppStore1 = function() {
-      $window.location.href = 'http://cleverstore.vn/ung-dung/topica-memo-hoc-ngoai-ngu-mien-phi-81580.html';
+      $window.location.href = 'https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls=1&mt=8';
     };
 
     $scope.toPlayStore1 = function() {
@@ -71,6 +70,9 @@ angular.module('landingpage.controllers', [])
   ])
   .controller('LpFooterCtrl', ['$scope', '$window', 'Mixpanel', function($scope, $window, Mixpanel) {
     $scope.toAppStore2 = function() {
+      $window.location.href = 'https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls=1&mt=8';
+    };
+    $scope.toWP2 = function() {
       $window.location.href = 'http://cleverstore.vn/ung-dung/topica-memo-hoc-ngoai-ngu-mien-phi-81580.html';
     };
 
