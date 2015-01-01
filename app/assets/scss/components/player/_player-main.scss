@@ -48,34 +48,38 @@
   padding-top: 20px;
   overflow-y: scroll;
   .student-memo{
-    background: #999;
+    background: url("assets/img/referral/bg3.png") center no-repeat;
     min-height: 380px;
     p{
       color: #fff;
       text-align: center;
       font-size: 23px;
       font-weight: 600;
-      padding-top: 10px;
+      height: 60px;
+      line-height: 60px;
+      margin: 0;
+      background: url("assets/img/referral/bg4.png") center no-repeat;
       strong{
         font-size: 35px;
       }
     }
     .date-time-memo{
       text-align: center;
-      margin-top: 235px;  
-      span{
-        font-size: 28px;
-        color: #fff;
-        font-weight: 600;
-      }
+      margin-top: 220px;
+      margin-left: 15px;
       p{
+        background: #ff4444;
+        width: 320px;
+        height: 60px;
+        line-height: 1.2;
         margin: 0px;
-        padding: 0;
-        font-size: 18px;
+        font-size: 15px;
+        padding-top: 12px;
         font-weight: normal;
       }
-    }
+    }    
   }
+
   .friend-join {
     margin-top: 40px;
     .left-friend{
@@ -116,7 +120,8 @@
         color: #810c15;
         font-size: 19px;
         font-weight: 600;
-        margin-top: 10px;
+        margin-top: 20px;
+        display: block;
       }
       p{
         text-align: left;
@@ -133,7 +138,8 @@
         color: #810c15;
         font-size: 19px;
         font-weight: 600;
-        margin-top: 10px;
+        margin-top: 20px;
+        display: block;
       }
       p{
         text-align: left;
@@ -150,7 +156,8 @@
         color: #810c15;
         font-size: 19px;
         font-weight: 600;
-        margin-top: 10px;
+        margin-top: 20px;
+        display: block;
       }
       p{
         text-align: left;
