@@ -39,9 +39,11 @@
     }
   }
 }
-
+.header{
+  height: 80px;
+}
 .page-referral{
-  height: 470px;
+  height: 370px;
   background: none repeat scroll 0% 0% #FFF;
   padding-left: 40px !important;
   padding-right: 40px !important;
@@ -49,20 +51,6 @@
   overflow-y: scroll;
   .student-memo{
     background: url("assets/img/referral/bg3.png") center no-repeat;
-    min-height: 380px;
-    p{
-      color: #fff;
-      text-align: center;
-      font-size: 23px;
-      font-weight: 600;
-      height: 60px;
-      line-height: 60px;
-      margin: 0;
-      background: url("assets/img/referral/bg4.png") center no-repeat;
-      strong{
-        font-size: 35px;
-      }
-    }
     .date-time-memo{
       text-align: center;
       margin-top: 220px;
@@ -205,4 +193,24 @@
       text-align: right;
     }
   }
+}
+.footer{
+  background: #fff;
+  height: 80px;
+  a{
+    background: #810C15;
+    color: #fff;
+    border-radius: 5px;
+    padding: 0 15px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 5px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 20px;
+    display: inline-block;
+  }  
+}
+.button-register-foter{
+  text-align: right;
 }
