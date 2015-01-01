@@ -17,38 +17,35 @@
     left: auto !important;
   }
   .dropdown-notification-inner {
-    float: left;
+    max-height: 350px;
+    overflow-y: auto;
   }
   .noti-list {
     width: 350px;
-    max-height: 420px;
-    overflow-y: auto;
     margin: 0 auto;
-    padding-left: 10px;
-    padding-right: 10px;
+    display: block;
     .noti-item {
+      @include grid-row;
       background-color: $white;
       border-bottom: 1px solid $steel;
-      width: 100%;
       text-align: left;
       padding-top: 20px;
       padding-bottom: 20px;
       .noti-item-image {
-        display: inline-block;
+        @include grid-column($columns: 3);
         text-align: center;
-        width: 50px;
         img {
           background-color: $iron;
           border-radius: 50%;
-          display: block;
           width: 40px;
           height: 40px;
+          margin: 0 auto;
+          display: block;
         }
       }
       .noti-item-content {
-        display: inline-block;
+        @include grid-column($columns: 13);
         color: #333;
-        width: 280px;
       }
     }
   }
