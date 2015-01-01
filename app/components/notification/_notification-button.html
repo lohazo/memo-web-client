@@ -2,6 +2,13 @@
   <img src="assets/img/button-03.png" />
   <div class="indicator has-notification">{{notification.is_new_count}}</div>
 </a>
-<ul id="dropdown-notification" class="f-dropdown" notification-dropdown>
-  <li ng-repeat="noti in notification.notifications">{{noti.content}}</li>
-</ul>
+<div id="dropdown-notification" class="f-dropdown" notification-dropdown>
+  <div class="dropdown-notification-inner">
+    <ul class="noti-list">
+      <li class="noti-item" ng-repeat="noti in notification.notifications">
+        <div class="noti-item-image"><img /></div>
+        <div class="noti-item-content">{{noti.content}}</div>
+      </li>
+    </ul>
+  </div>
+</div>  
