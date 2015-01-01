@@ -34,6 +34,8 @@
     height: 430px;
     width: 808px;
     right: 12px;
+    padding: 0px;
+    margin:0px
   }
 
   .circle {
@@ -44,8 +46,39 @@
     background:#810c15;
     display: inherit;
     transition:1s;
-    border:3px solid #fff;
+    border:2px solid #fff;
   }
+
+  .circle-disable {
+    border-radius: 50%;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    background:#999999;
+    display: inherit;
+    transition:1s;
+    border:2px solid #fff;
+}
+
+  .button-screen-2 {
+    background-color: #810c15;
+    color: #ffffff;
+    height: 140px;
+    width: 240px;
+    margin-bottom: 5px;
+    padding: 0px;
+    font-size: 18px
+  }
+
+.button-screen-2-disable {
+  background-color: #999 !important;
+  color: #ffffff;
+  height: 140px;
+  width: 240px;
+  margin-bottom: 5px;
+  padding: 0px;
+  font-size: 18px
+}
 
 @import
   "player-header",
