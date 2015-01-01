@@ -1,24 +1,25 @@
 @import "settings";
 @import "foundation";
-@import
-    "components/animation",
-    "components/container",
-    "components/landingpage/landingpage",
-    "components/login/login",
-    "components/header/header",
-    "components/course/course",
-    "components/home/home",
-    "components/profile/profile",
-    "components/skill/skill",
-    "components/question/question",
-    "components/exam/exam",
-    "components/feedback/feedback",
-    "components/settings/settings",
-    "components/plaza/plaza",
-    "components/leaderboard/leaderboard",
-    "components/font",
-    "components/slider/slider",
-    "components/player/player";
+
+@import "components/animation";
+@import "components/container";
+@import "components/landingpage/landingpage";
+@import "components/login/login";
+@import "components/header/header";
+@import "components/course/course";
+@import "components/home/home";
+@import "components/profile/profile";
+@import "components/skill/skill";
+@import "components/question/question";
+@import "components/exam/exam";
+@import "components/feedback/feedback";
+@import "components/settings/settings";
+@import "components/plaza/plaza";
+@import "components/leaderboard/leaderboard";
+@import "components/font";
+@import "components/slider/slider";
+@import "components/player/player";
+@import "components/notification/notification";
 
 // Or selectively include components
 // @import

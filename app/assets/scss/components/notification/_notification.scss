@@ -1,0 +1,21 @@
+#dropdown-notification {
+  background-color: $white;
+  border-radius: 10px;
+  border: 0;
+  padding: 10px;
+  min-width: 400px !important;
+  left: auto !important;
+  right: -60px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  &::before {
+    right: 88px !important;
+    left: auto !important;
+  }
+  &::after {
+    right: 87px !important;
+    left: auto !important;
+  }
+  > li {
+    background-color: $white;
+  }
+}
