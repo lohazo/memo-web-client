@@ -1,63 +1,56 @@
 .app-top-bar {
-    .top-bar {
+  .top-bar {
     min-width: $row-width;
     .name {
-        line-height: $topbar-height;
+      line-height: $topbar-height;
     }
     .top-bar-section {
-        font-family: $topbar-link-font-family;
-        ul li:not(.has-form) {
-            &.active > a:not(.button) {
-                background-color: $secondary-color;
-                border-radius: $global-radius;
-                min-width: 130px;
-                text-align: center;
-                &:after {
-                    color: $white;
-                }
-            }
-            .dropdown .active > a:not(.button) {
-                background-color: rgba(0,0,0,.2);
-            }
-
-            .f-dropdown > li > a:not(.button) {
-                border-radius: 0;
-            }
+      font-family: $topbar-link-font-family;
+      ul li:not(.has-form) {
+        &.active > a:not(.button) {
+          background-color: $secondary-color;
+          border-radius: $global-radius;
+          min-width: 130px;
+          text-align: center;
+          &:after {
+            color: $white;
+          }
         }
+        .dropdown .active > a:not(.button) {
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+        .f-dropdown > li > a:not(.button) {
+          border-radius: 0;
+        }
+      }
     }
     .top-bar-section {
-        ul.left {
+      ul.left {
         li.menu-item {
-            background-color: $primary-color;
-            margin-right: 5px;
-            margin-left: 5px;
-            padding-top: $topbar-height / 4;
-            a {
+          background-color: $primary-color;
+          margin-right: 5px;
+          margin-left: 5px;
+          padding-top: $topbar-height / 4;
+          a {
             border-radius: $global-radius;
             line-height: 40px;
-            }
+          }
         }
-        }
-        ul.right {
+      }
+      ul.right {
         li {
-            padding-left: 0px;
-            padding-right: 0px;
-            a.button {
+          padding-left: 0px;
+          padding-right: 0px;
+          a.button {
             line-height: $topbar-height;
             margin: 0;
             padding: 0 20px;
             top: 0;
-            }
+          }
         }
         .notification {
-            position: relative;
-            &.has-notification {
-            .indicator {
-                top: 10px;
-                left: -5px;
-            }
-            }
-            .indicator {
+          position: relative;
+          .indicator {
             background-color: $gold;
             border-radius: 50%;
             font-size: .9em;
@@ -67,53 +60,58 @@
             top: -1000px;
             height: 20px;
             width: 20px;
+            &.has-notification {
+              top: 15px;
+              left: 10px;
             }
+          }
         }
-        }
+      }
     }
-    }
+  }
 }
 
 #dropdown-setting {
-    border-radius: 10px;
-    min-width: 220px;
-    left: 895px !important;
-    > li {
+  border-radius: 10px;
+  min-width: 220px;
+  left: 895px !important;
+  > li {
     &:first-child {
+      border-radius: 10px 10px 0 0;
+      a:not(.button) {
         border-radius: 10px 10px 0 0;
-        a:not(.button) {
-        border-radius: 10px 10px 0 0;
-        }
+      }
     }
     &:last-child {
+      border-radius: 0 0 10px 10px;
+      a:not(.button) {
         border-radius: 0 0 10px 10px;
-        a:not(.button) {
-        border-radius: 0 0 10px 10px;
-        }
+      }
     }
     > a {
-        min-width: 220px;
-        background: $white;
-        color: $jet;
-        &:hover {
+      min-width: 220px;
+      background: $white;
+      color: $jet;
+      &:hover {
         background-color: $secondary-color;
         color: $white;
-        }
-        &:not(.button) {
+      }
+      &:not(.button) {
         line-height: 50px;
-        }
+      }
     }
-    }
+  }
 }
 
 li.name > a > img {
-    height: 25px;
+  height: 25px;
 }
 
-ul.f-dropdown li{
-    text-align: left !important;
+ul.f-dropdown li {
+  text-align: left !important;
 }
+
 span.version {
-    color: $white;
-    margin-left: 5px;
+  color: $white;
+  margin-left: 5px;
 }

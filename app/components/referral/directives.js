@@ -8,7 +8,28 @@
     .directive('status', function(){
       return {
         strict: 'EA',
-        controller: 'ReferralStatusCtrl'
+        controller: 'ReferralCtrl'
+        // templateUrl: 'components/landingpage/_header.html'
+      };
+    })
+    .directive('referralHeader', function(){
+      return {
+        strict: 'EA',
+        controller: 'ReferralHeaderCtrl'
+        // templateUrl: 'components/landingpage/_header.html'
+      };
+    })
+    .directive('referralBody', function(){
+      return {
+        strict: 'EA',
+        controller: 'ReferralBodyCtrl'
+        // templateUrl: 'components/landingpage/_header.html'
+      };
+    })
+    .directive('referralFooter', function(){
+      return {
+        strict: 'EA',
+        controller: 'ReferralFooterCtrl'
         // templateUrl: 'components/landingpage/_header.html'
       };
     })

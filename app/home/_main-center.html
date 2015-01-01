@@ -8,6 +8,16 @@
         <img ng-src="assets/img/cart.png" />
         Memo Plaza
       </a>
+      <div status>
+        <div class="form-group has-warning">
+          <input type="text" class="form-control" id="inputWarning1" ng-model="ref_code" />
+          <span class="help-block text-warning">{{error}}</span>
+        </div>
+        <a class="small-14 secondary memo-button right" ng-click="submitCode()">
+          <img ng-src="assets/img/cart.png" />
+          Referral
+        </a>
+      </div>
     </div>
   </div>
   <div class="hexagon skills" skill-tree></div>
