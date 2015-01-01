@@ -60,5 +60,34 @@
           strict: 'EA',
           templateUrl: 'components/referral/_main-bottom-Screen-2.html'
         }
-      });
+      })
+
+    .directive('referralMainScreen3', function(){
+          return {
+              strict: 'EA',
+              templateUrl: 'components/referral/_screen-3-main.html'
+          }
+      })
+
+    .directive('referralTopScreen3', function(){
+          return {
+              strict: 'EA',
+              templateUrl: 'components/referral/_screen-3-top.html'
+          }
+      })
+
+    .directive('referralCenterScreen3', function(){
+          return {
+              strict: 'EA',
+              templateUrl: 'components/referral/_screen-3-center.html'
+          }
+      })
+
+    .directive('referralBottomScreen3', function(){
+        return {
+            strict: 'EA',
+            templateUrl: 'components/referral/_screen-3-bottom.html'
+        }
+    })
+
 })(window.angular);
