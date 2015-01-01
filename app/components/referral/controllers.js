@@ -2,7 +2,7 @@
  * Referral Controllers
  */
 
-(function(angular){
+(function(angular) {
   'use strict';
 
   function ReferralCtrl($scope, service) {
