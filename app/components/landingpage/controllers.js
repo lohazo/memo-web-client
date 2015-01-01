@@ -7,7 +7,8 @@ angular.module('landingpage.controllers', [])
   .controller('LpCtrl', [
     '$scope',
     '$modal',
-    function($scope, $modal) {
+    'AuthService',
+    function($scope, $modal, AuthService) {
       $scope.courseModal = function() {
         var modalInstance = $modal.open({
           template: '<div courses-modal></div>',
@@ -15,6 +16,7 @@ angular.module('landingpage.controllers', [])
           windowClass: 'course-modal'
         });
       };
+      AuthService.FbCheckAuth();
     }
   ])
   .controller('CourseModalInstanceCtrl', [

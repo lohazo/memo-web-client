@@ -48,11 +48,9 @@
       $scope.showFriends = true;
     };
 
-    $scope.shareFb = function(){
-    }
-
     $scope.showTheLeaderboard();
   }
+
   function LeaderboardHomeCtrl($scope, Profile) {
     $scope.profile = Profile.detail;
     $scope.$on('event-profileLoaded', function(e, data) {
