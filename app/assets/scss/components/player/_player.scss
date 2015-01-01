@@ -36,10 +36,11 @@
   .native-page2 {
     overflow-y: scroll;
     height: 430px;
-    width: 808px;
+    width: 780px;
     right: 12px;
     padding: 0px;
-    margin-right:20px
+    margin-right:20px;
+    padding-left: 15px;
   }
 
   .circle {
@@ -101,7 +102,7 @@
     margin-right: 50px;
     font-size: 18px;
     text-align: center;
-    padding: 0px
+    padding: 0px;
   }
 
 @import
