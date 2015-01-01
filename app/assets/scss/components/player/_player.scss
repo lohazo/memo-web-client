@@ -6,6 +6,7 @@
     padding-left: 10px;
     padding-right: 10px;
     min-height: 500px;
+    background-color: #ffffff;
   }
 
   .player-container {
@@ -18,6 +19,33 @@
     outline: none;
   }
 }
+  .topicanative {
+    text-align: center;
+    background: url("assets/img/bg2.png") center ;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+
+  .native-page2 {
+    overflow-y: scroll;
+    height: 430px;
+    width: 808px;
+    right: 12px;
+  }
+
+  .circle {
+    border-radius: 50%;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    background:#810c15;
+    display: inherit;
+    transition:1s;
+    border:3px solid #fff;
+  }
 
 @import
   "player-header",
