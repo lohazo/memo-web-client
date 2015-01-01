@@ -4,12 +4,20 @@
 
 (function(angular){
   'use strict';
-  function ReferralStatusCtrl(service) {
-    service.getStatus().then(function(res){
-      console.log(res.data);
-    });
-  }
+
+  function ReferralCtrl($scope, service) {
+    $scope.submitCode = function(){
+      var ref_code = $scope.ref_code;
+
+      service.verifyRewards(ref_code).then(function(res){
+        console.log(res.data);
+      }, function(res){
+        $scope.error = res.data.message;
+        console.log(res.data.message);
+      });
+    };
+  };
 
   angular.module('referral.controllers', [])
-        .controller('ReferralStatusCtrl', ['ReferralService', ReferralStatusCtrl])
+        .controller('ReferralCtrl', ['$scope', 'ReferralService', ReferralCtrl])
 })(window.angular);
