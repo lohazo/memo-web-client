@@ -27,6 +27,10 @@
     color: #fff;
     font-size: 25px;
     margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
   }
 
   .native-page2 {
@@ -35,7 +39,7 @@
     width: 808px;
     right: 12px;
     padding: 0px;
-    margin:0px
+    margin-right:20px
   }
 
   .circle {
@@ -60,25 +64,45 @@
     border:2px solid #fff;
 }
 
-  .button-screen-2 {
+  .button-screen-2-center {
     background-color: #810c15;
     color: #ffffff;
     height: 140px;
     width: 240px;
     margin-bottom: 5px;
-    padding: 0px;
+    margin-left: 20px;
     font-size: 18px
   }
 
-.button-screen-2-disable {
-  background-color: #999 !important;
-  color: #ffffff;
-  height: 140px;
-  width: 240px;
-  margin-bottom: 5px;
-  padding: 0px;
-  font-size: 18px
-}
+  .button-screen-2-center-disable {
+    background-color: #999 !important;
+    color: #ffffff;
+    height: 140px;
+    width: 240px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    font-size: 18px
+  }
+
+  .button-screen-2-bottom-left {
+    width: 100px;
+    height: 50px;
+    margin-right: 150px;
+    margin-left: 40px;
+    font-size: 18px;
+    text-align: center;
+    padding: 0px;
+    background-color: #999999
+  }
+
+  .button-screen-2-bottom-right {
+    width: 160px;
+    height: 50px;
+    margin-right: 50px;
+    font-size: 18px;
+    text-align: center;
+    padding: 0px
+  }
 
 @import
   "player-header",
