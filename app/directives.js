@@ -20,18 +20,47 @@ angular.module('app.directives', [])
       templateUrl: 'components/header/_header.html'
     };
   })
-  .directive('appFacebookShareContent', function(){
+  .directive('facebookShareButton', function(AppSetting) {
+    function displayFeedDialog(response) {
+      FB.ui({
+        method: 'feed',
+        caption: response.data.caption,
+        description: response.data.description,
+        link: response.data.link
+      }, function(response) {});
+    }
+
+    function displayDefaultFeedDialog() {
+      FB.ui({
+        method: 'share',
+        href: 'http://memo.edu.vn'
+      }, function(response) {});
+    }
+
     return {
       restrict: 'EA',
-      link: function($scope, $element, $attr){
-        $element.bind('click', function(data){
-          FB.ui({
-            method: 'share',
-            href: 'http://memo.edu.vn'
-          }, function(response){});
+      link: function($scope, $element, $attr) {
+        $element.bind('click', function() {
+          if ($attr.levelUp === "") {
+            AppSetting.getLevelUpFacebookContent()
+              .then(displayFeedDialog, displayDefaultFeedDialog);
+          } else if ($attr.finishSkill === "") {
+            AppSetting.getFinishSkillFacebookContent()
+              .then(displayFeedDialog, displayDefaultFeedDialog);
+          }
         })
       }
-        };
+    };
+  })
+  .directive('facebookLoginButton', function() {
+    return {
+      strict: 'EA',
+      link: function($scope, $element) {
+        $element.bind('click', function() {
+          $scope.FbLogin();
+        });
+      }
+    };
   })
   .directive('landingpage', function() {
     return {
