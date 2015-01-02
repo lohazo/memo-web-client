@@ -370,8 +370,31 @@ span.border{
   margin-top: 40px;
   .left-intro-topica-native{
     float:left;
+    width: 400px;
+  }
+  .right-intro-topica-native{
+    width: 400px;
+    float: left;
   }
 }
+.box-tab-infor{
+  .box1{
+    float: left;
+    width: 240px;
+  }
+}
+
+.intro-topica-edu{
+  .left-intro-topica-edu{
+    float: left;
+    width: 325px;
+  }
+  .right-intro-topica-edu{
+    float: left;
+    width: 400px;
+  }
+}
+
 /*-----------------------------END--------------------------------*/
 
 
