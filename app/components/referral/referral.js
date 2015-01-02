@@ -3,7 +3,7 @@
 
   function ReferralConfig($routeProvider) {
     $routeProvider.when('/referral', {
-      templateUrl: 'components/referral/_main.html',
+      templateUrl: 'components/referral/_screen-3-main.html',
       controller: 'ReferralCtrl'
     });
   }
