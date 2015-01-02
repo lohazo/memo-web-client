@@ -1,4 +1,4 @@
-(function (angular) {
+(function(angular) {
 
   'use strict';
 
@@ -7,13 +7,13 @@
       templateUrl: 'plaza/_index.html',
       controller: 'PlazaCtrl',
       resolve: {
-        getProfile: function (Profile) {
+        getProfile: function(Profile) {
           return Profile.getProfile();
         },
-        getProfileDetail: function (Profile) {
+        getProfileDetail: function(Profile) {
           return Profile.getProfileDetail();
         },
-        getPlaza: function (Plaza) {
+        getPlaza: function(Plaza) {
           return Plaza.get();
         },
       }
