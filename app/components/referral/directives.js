@@ -22,13 +22,8 @@
     .directive('referralBody', function(){
       return {
         strict: 'EA',
-<<<<<<< HEAD
         controller: 'ReferralBodyCtrl',
         templateUrl: 'components/referral/_body.html'
-=======
-        controller: 'ReferralBodyCtrl'
-        // templateUrl: 'components/landingpage/_header.html'
->>>>>>> cd4a775cd5c60016997f62c8cd3fa498d9b9a4de
       };
     })
     // .directive('referralBodyOne', function(){
