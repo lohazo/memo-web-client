@@ -8,7 +8,7 @@
     .directive('status', function(){
       return {
         strict: 'EA',
-        controller: 'ReferralStatusCtrl',
+        controller: 'ReferralCtrl',
         // templateUrl: 'components/landingpage/_header.html'
       };
     });
