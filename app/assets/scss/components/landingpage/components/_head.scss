@@ -39,7 +39,7 @@
       }
     }
     .container {
-      height: 600px;
+      min-height: 600px;
       .sa {
         margin-top: 170px;
         text-align: center;
@@ -88,6 +88,33 @@
         position: absolute;
         text-align: center;
         line-height: 66px;
+      }
+    }
+    .advertise-box {
+      background-color: #fffbc6;
+      display: block;
+      border: 2px dashed #c69c6d;
+      border-radius: 10px;
+      width: 350px;
+      height: 175px;
+      margin: 0 auto 20px;
+      padding: 10px;
+      text-align: left;
+      .advertise-box-text {
+        margin: 0;
+        &.red {
+          color: #ff4444;
+        }
+        &.big {
+          font-weight: 700;
+          font-size: 1.6em;
+        }
+        &.small {
+          font-size: .8em;
+        }
+      }
+      .memo-button {
+        margin-left: 10px;
       }
     }
   }
