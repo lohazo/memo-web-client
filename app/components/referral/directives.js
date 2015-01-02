@@ -40,15 +40,13 @@
         // templateUrl: 'components/landingpage/_header.html'
       };
     })
-<<<<<<< HEAD
     .directive('referralEntercodeCtrl', function(){
       return {
         strict: 'EA',
         controller: 'ReferralEntercodeCtrl',
         //templateUrl: 'components/landingpage/_entercode.html'
       };
-    });
-=======
+    })
 
      .directive('referralMain', function(){
         return {
@@ -105,6 +103,5 @@
             templateUrl: 'components/referral/_screen-3-bottom.html'
         }
     })
->>>>>>> 34e491ac1e3659587f6bc40bf172cf51d8fb35ea
 
 })(window.angular);
