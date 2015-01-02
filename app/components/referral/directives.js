@@ -8,14 +8,14 @@
     .directive('status', function(){
       return {
         strict: 'EA',
-        controller: 'ReferralCtrl',
+        controller: 'ReferralCtrl'
         // templateUrl: 'components/landingpage/_header.html'
       };
     })
     .directive('referralHeader', function(){
       return {
         strict: 'EA',
-        controller: 'ReferralHeaderCtrl',
+        controller: 'ReferralHeaderCtrl'
         // templateUrl: 'components/landingpage/_header.html'
       };
     })
@@ -23,16 +23,24 @@
       return {
         strict: 'EA',
         controller: 'ReferralBodyCtrl',
-        // templateUrl: 'components/landingpage/_header.html'
+        templateUrl: 'components/referral/_body.html'
       };
     })
+    // .directive('referralBodyOne', function(){
+    //   return {
+    //     strict: 'EA',
+    //     controller: 'ReferralBodyCtrl',
+    //     templateUrl: 'components/referral/_step_one.html'
+    //   };
+    // })
     .directive('referralFooter', function(){
       return {
         strict: 'EA',
-        controller: 'ReferralFooterCtrl',
+        controller: 'ReferralFooterCtrl'
         // templateUrl: 'components/landingpage/_header.html'
       };
     })
+<<<<<<< HEAD
     .directive('referralEntercodeCtrl', function(){
       return {
         strict: 'EA',
@@ -40,5 +48,63 @@
         //templateUrl: 'components/landingpage/_entercode.html'
       };
     });
+=======
+
+     .directive('referralMain', function(){
+        return {
+          strict: 'EA',
+          templateUrl: 'components/referral/_main.html'
+        }
+      })
+
+    .directive('screenTop', function(){
+        return {
+          strict: 'EA',
+          templateUrl: 'components/referral/_main-top-Screen-2.html'
+        }
+      })
+
+    .directive('screenCenter', function(){
+        return {
+          strict: 'EA',
+          templateUrl: 'components/referral/_main-center-Screen-2.html'
+        }
+      })
+
+    .directive('screenBottom', function(){
+        return {
+          strict: 'EA',
+          templateUrl: 'components/referral/_main-bottom-Screen-2.html'
+        }
+      })
+
+    .directive('referralMainScreen3', function(){
+          return {
+              strict: 'EA',
+              templateUrl: 'components/referral/_screen-3-main.html'
+          }
+      })
+
+    .directive('referralTopScreen3', function(){
+          return {
+              strict: 'EA',
+              templateUrl: 'components/referral/_screen-3-top.html'
+          }
+      })
+
+    .directive('referralCenterScreen3', function(){
+          return {
+              strict: 'EA',
+              templateUrl: 'components/referral/_screen-3-center.html'
+          }
+      })
+
+    .directive('referralBottomScreen3', function(){
+        return {
+            strict: 'EA',
+            templateUrl: 'components/referral/_screen-3-bottom.html'
+        }
+    })
+>>>>>>> 34e491ac1e3659587f6bc40bf172cf51d8fb35ea
 
 })(window.angular);

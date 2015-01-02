@@ -6,6 +6,7 @@
     padding-left: 10px;
     padding-right: 10px;
     min-height: 500px;
+    background-color: #ffffff;
   }
 
   .player-container {
@@ -18,6 +19,91 @@
     outline: none;
   }
 }
+  .topicanative {
+    text-align: center;
+    background: url("assets/img/bg2.png") center ;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    font-size: 25px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
+  }
+
+  .native-page2 {
+    overflow-y: scroll;
+    height: 430px;
+    width: 780px;
+    right: 12px;
+    padding: 0px;
+    margin-right:20px;
+    padding-left: 15px;
+  }
+
+  .circle {
+    border-radius: 50%;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    background:#810c15;
+    display: inherit;
+    transition:1s;
+    border:2px solid #fff;
+  }
+
+  .circle-disable {
+    border-radius: 50%;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    background:#999999;
+    display: inherit;
+    transition:1s;
+    border:2px solid #fff;
+}
+
+  .button-screen-2-center {
+    background-color: #810c15;
+    color: #ffffff;
+    height: 140px;
+    width: 240px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    font-size: 18px
+  }
+
+  .button-screen-2-center-disable {
+    background-color: #999 !important;
+    color: #ffffff;
+    height: 140px;
+    width: 240px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    font-size: 18px
+  }
+
+  .button-screen-2-bottom-left {
+    width: 100px;
+    height: 50px;
+    margin-right: 150px;
+    margin-left: 40px;
+    font-size: 18px;
+    text-align: center;
+    padding: 0px;
+    background-color: #999999
+  }
+
+  .button-screen-2-bottom-right {
+    width: 160px;
+    height: 50px;
+    margin-right: 50px;
+    font-size: 18px;
+    text-align: center;
+    padding: 0px;
+  }
 
 /*----------------------------ENTERCODE---------------------------------*/
 .clear{
