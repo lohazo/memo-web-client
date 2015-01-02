@@ -8,64 +8,19 @@
     this.index = 0;
     // this.items = items;
   }
- 
-  PlayerView.prototype = {
-    first: function() {
-      this.reset();
-      return this.current();
-    },
-    next: function() {
-      return this.items[this.index++];
-    },
-    hasNext: function() {
-      return this.index <= this.items.length;
-    },
-    reset: function() {
-      this.index = 0;
-    },
-    last: function() {
-      this.index = this.items.length;
-      return this.current();
-    },
-    current: function() {
-      return this.items[this.index];
-    },
-    each: function(callback) {
-      for (var item = this.first(); this.hasNext(); item = this.next()) {
-        callback(item);
-      }
-    },
-    init: function(items) {
-      this.items = items;
-    }
-  }
 
-  var PlayerControl = (function () {
+    var Singleton = (function () {
     var instance,
         view;
  
     function createInstance() {
-      var object = new Object();
+      var object = new PlayerControl();
       return object;
     }
 
     function createView() {
       var view = new PlayerView();
       return view;
-    }
-
-    function next() {}
-
-    function goto(index) {
-      //
-    }
-
-    function gotoFirst() {
-      //
-    }
-
-    function gotoLast() {
-      //
     }
  
     return {
@@ -83,12 +38,88 @@
       }
     };
   })();
+ 
+  PlayerView.prototype = {
+    first: function() {
+      this.reset();
+      // return this.current();
+    },
+    next: function() {
+      this.index++;
+    },
+    hasNext: function() {
+      return this.index < this.items.length;
+    },
+    hasPrev: function() {
+      return this.index >= 0;
+    },
+    prev: function() {
+      this.index--;
+    },
+    reset: function() {
+      this.index = 0;
+    },
+    last: function() {
+      this.index = this.items.length;
+      return this.current();
+    },
+    current: function() {
+      var cur = this.items[this.index];
+      return cur;
+    },
+    each: function(callback) {
+      for (var item = this.first(); this.hasNext(); this.next()) {
+        callback(this.current());
+      }
+    },
+    init: function(items) {
+      this.items = items;
+    }
+  }
 
-  PlayerControl.getView().init([
-    'components/referral/_step_one.html',
-    'components/referral/_step_two.html',
-    'components/referral/_step_three.html'
+  Singleton.getView().init([
+    'referral-body-one',
+    'referral-body-two',
+    'referral-body-three'
   ]);
+
+  var PlayerControl = function() {}
+
+  PlayerControl.prototype = {
+    next: function() {
+      
+      var cur = Singleton.getView().current();
+      Singleton.getView().next();
+      return cur;
+    },
+
+    prev: function() {
+      Singleton.getView().prev();
+      Singleton.getView().prev();
+      return Singleton.getView().current();
+      // return cur;
+    },
+
+    hasNext: function() {
+      return Singleton.getView().hasNext();
+    },
+
+    hasPrev: function() {
+      return Singleton.getView().hasPrev();
+    },
+
+    goto: function(index) {
+      //
+    },
+
+    gotoFirst: function() {
+      //
+    },
+
+    gotoLast: function() {
+      //
+    }
+  }
 
   function ReferralCtrl($scope, service) {
     $scope.submitCode = function(){
@@ -105,23 +136,51 @@
 
   function ReferralHeaderCtrl($scope, service) {}
 
-  function ReferralBodyCtrl($scope, service) {}
+  function ReferralBodyCtrl($scope, service) {
+    $scope.$on('referral:body-next', function(){
+      if (Singleton.getView().hasNext()) {
+        Singleton.getView().next();
+        $scope.directive = Singleton.getView().current();
+        // console.log(direc);
+        // $scope.directive = direc;
+      };
+    });
+    $scope.$on('referral:body-prev', function(){
+      if (Singleton.getView().hasPrev()) {
+        Singleton.getView().prev();
+        $scope.directive = Singleton.getView().current();
+        // console.log(direc);
+        // $scope.directive = direc;
+      };
+    });
+  }
 
   function ReferralFooterCtrl($scope, service) {
     function next() {
-      PlayerControl.getInstance().next();
+      // PlayerControl.getInstance().next();
       $scope.$broadcast('referral:body-next');
     }
 
     function gotoLast() {
-      PlayerControl.getInstance().gotoLast();
+      // PlayerControl.getInstance().gotoLast();
       $scope.$broadcast('referral:body-last');
     }
 
     function gotoFirst() {
-      PlayerControl.getInstance().gotoFirst();
+      // PlayerControl.getInstance().gotoFirst();
       $scope.$broadcast('referral:body-first');
     }
+
+    function prev() {
+      $scope.$broadcast('referral:body-prev');
+    }
+
+    $scope.control = {
+      next: next,
+      prev: prev,
+      last: gotoLast,
+      first: gotoFirst,
+    };
   }
 
   angular.module('referral.controllers', [])
@@ -129,4 +188,5 @@
         .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
         .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
         .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', ReferralFooterCtrl])
+        .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', ReferralEntercodeCtrl])
 })(window.angular);
