@@ -103,5 +103,10 @@
             templateUrl: 'components/referral/_screen-3-bottom.html'
         }
     })
-
+    .directive('submitcodeModal', function() {
+        return {
+            strict: 'EA',
+            templateUrl: 'components/referral/_submitcode_modal.html'
+        }
+    })
 })(window.angular);

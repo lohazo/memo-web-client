@@ -60,8 +60,8 @@
       this.index = 0;
     },
     last: function() {
-      this.index = this.items.length;
-      return this.current();
+      this.index = this.items.length-1;
+      // return this.current();
     },
     current: function() {
       var cur = this.items[this.index];
@@ -121,17 +121,25 @@
     }
   }
 
-  function ReferralCtrl($scope, service) {
-    $scope.submitCode = function(){
-      var ref_code = $scope.ref_code;
-
-      service.verifyRewards(ref_code).then(function(res){
-        console.log(res.data);
-      }, function(res){
-        $scope.error = res.data.message;
-        console.log(res.data.message);
-      });
+  function ReferralCtrl($scope, service, getStatus, getDetail) {
+    // console.log(getDetail);
+    $scope.combo_days = getDetail.combo_days;
+    $scope.invite_count = getStatus.data.record.invited_count;
+    $scope.code = getStatus.data.referral_code;
+    $scope.expChart = {
+      labels: getDetail.exp_chart.days,
+      datasets: [{
+        label: "",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "#848484",
+        pointColor: "#810c15",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: getDetail.exp_chart.exp
+      }]
     };
+    
   }
 
   function ReferralHeaderCtrl($scope, service) {}
@@ -183,10 +191,35 @@
     };
   }
 
+  function ReferralEntercodeCtrl($scope, ReferralService, $modal) {
+    $scope.submitCode = function(){
+      var ref_code = $scope.refCode;
+
+      ReferralService.submitCode(ref_code).then(function(res){
+        (function() {
+          var modalInstance = $modal.open({
+            template: '<div submitcode-modal></div>',
+            windowClass: 'submitcode-modal'
+          });
+
+          modalInstance.result.then(function(msg) {
+            if ($scope[msg] instanceof Function) $scope[msg]();
+          });
+        })();
+      }, function(res){
+        $scope.error = res.data.message;
+        
+      });
+    };
+    // $scope.getCode = function(){
+    //   var ref_code = $scope.refCode;
+    //   // ReferralService.
+    // };
+  }
   angular.module('referral.controllers', [])
-        .controller('ReferralCtrl', ['$scope', 'ReferralService', ReferralCtrl])
+        .controller('ReferralCtrl', ['$scope', 'ReferralService','getStatus', 'getDetail', ReferralCtrl])
         .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
         .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
         .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', ReferralFooterCtrl])
-        .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', ReferralEntercodeCtrl])
+        .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', '$modal', ReferralEntercodeCtrl])
 })(window.angular);
