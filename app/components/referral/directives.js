@@ -23,9 +23,16 @@
       return {
         strict: 'EA',
         controller: 'ReferralBodyCtrl',
-        // templateUrl: 'components/landingpage/_header.html'
+        templateUrl: 'components/referral/_body.html'
       };
     })
+    // .directive('referralBodyOne', function(){
+    //   return {
+    //     strict: 'EA',
+    //     controller: 'ReferralBodyCtrl',
+    //     templateUrl: 'components/referral/_step_one.html'
+    //   };
+    // })
     .directive('referralFooter', function(){
       return {
         strict: 'EA',
