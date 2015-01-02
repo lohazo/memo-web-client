@@ -45,10 +45,16 @@
       // return this.current();
     },
     next: function() {
-      return this.items[this.index++];
+      this.index++;
     },
     hasNext: function() {
       return this.index < this.items.length;
+    },
+    hasPrev: function() {
+      return this.index >= 0;
+    },
+    prev: function() {
+      this.index--;
     },
     reset: function() {
       this.index = 0;
@@ -59,7 +65,6 @@
     },
     current: function() {
       var cur = this.items[this.index];
-      this.index++;
       return cur;
     },
     each: function(callback) {
@@ -73,7 +78,7 @@
   }
 
   Singleton.getView().init([
-    // 'referral-body-one',
+    'referral-body-one',
     'referral-body-two',
     'referral-body-three'
   ]);
@@ -82,13 +87,25 @@
 
   PlayerControl.prototype = {
     next: function() {
-      // var cur = Singleton.getView().current();
+      
+      var cur = Singleton.getView().current();
+      Singleton.getView().next();
+      return cur;
+    },
+
+    prev: function() {
+      Singleton.getView().prev();
+      Singleton.getView().prev();
       return Singleton.getView().current();
       // return cur;
     },
 
     hasNext: function() {
       return Singleton.getView().hasNext();
+    },
+
+    hasPrev: function() {
+      return Singleton.getView().hasPrev();
     },
 
     goto: function(index) {
@@ -121,12 +138,21 @@
 
   function ReferralBodyCtrl($scope, service) {
     $scope.$on('referral:body-next', function(){
-      if (Singleton.getInstance().hasNext()) {
-        var direc = Singleton.getInstance().next();
-        console.log(direc);
-        $scope.directive = direc;
+      if (Singleton.getView().hasNext()) {
+        Singleton.getView().next();
+        $scope.directive = Singleton.getView().current();
+        // console.log(direc);
+        // $scope.directive = direc;
       };
-    })
+    });
+    $scope.$on('referral:body-prev', function(){
+      if (Singleton.getView().hasPrev()) {
+        Singleton.getView().prev();
+        $scope.directive = Singleton.getView().current();
+        // console.log(direc);
+        // $scope.directive = direc;
+      };
+    });
   }
 
   function ReferralFooterCtrl($scope, service) {
@@ -145,8 +171,13 @@
       $scope.$broadcast('referral:body-first');
     }
 
+    function prev() {
+      $scope.$broadcast('referral:body-prev');
+    }
+
     $scope.control = {
       next: next,
+      prev: prev,
       last: gotoLast,
       first: gotoFirst,
     };

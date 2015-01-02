@@ -4,9 +4,24 @@
     </div>
     <div class="footer" referral-footer>
       <div class="row">
-        <div class="large-16 columns button-register-foter">
-          <a href="#" title="" ng-click="control.last()">Tham gia ngay</a>
-          <a href="#" title="" ng-click="control.next()">Tìm hiểu về Topica Native</a>
+        <div class="large-16 columns button-register-foter" ng-switch on="directive">
+          
+          <div ng-switch-default="referral-body-one">
+            <a href="#" title="" ng-click="control.last()">Tham gia ngay</a>
+            <a href="#" title="" ng-click="control.next()">Tìm hiểu về Topica Native</a>
+          </div>
+          <div ng-switch-when="referral-body-two">
+            <a href="#" title="" ng-click="control.prev()" class="button-screen-2-bottom-left ng-scope small-16 columns radius disabled">Quay lại
+            </a>
+            <a href="#" title="" ng-click="control.last()" class="button-screen-2-bottom-right ng-scope small-16 columns radius">Tham gia ngay
+            </a>
+            <!-- <div class="slide-animate" ng-include src="'components/referral/_step_two.html'"></div> -->
+          </div>
+          <div ng-switch-when="referral-body-three">
+            <!-- <div class="slide-animate" ng-include src="'components/referral/_step_three.html'"></div> -->
+            <a href="#" title="" ng-click="control.prev()" class="button-screen-2-bottom-left ng-scope small-16 columns radius disabled">Quay lại
+            </a>
+          </div>
         </div>
       </div>
     </div>
