@@ -75,9 +75,13 @@ p.top-english {
   height: 60px;
   line-height: 60px;
   text-align: center;
-  color: #fff;
+  color: #FFF;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 20px;
+  margin: 0;
+  strong{
+    font-size: 40px;
+  }
 }
   .friend-join {
     margin-top: 10px;
