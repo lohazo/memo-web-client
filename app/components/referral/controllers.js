@@ -129,4 +129,5 @@
         .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
         .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
         .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', ReferralFooterCtrl])
+        .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', ReferralEntercodeCtrl])
 })(window.angular);

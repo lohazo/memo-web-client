@@ -32,5 +32,13 @@
         controller: 'ReferralFooterCtrl',
         // templateUrl: 'components/landingpage/_header.html'
       };
+    })
+    .directive('referralEntercodeCtrl', function(){
+      return {
+        strict: 'EA',
+        controller: 'ReferralEntercodeCtrl',
+        //templateUrl: 'components/landingpage/_entercode.html'
+      };
     });
+
 })(window.angular);
