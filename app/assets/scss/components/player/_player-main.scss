@@ -43,7 +43,7 @@ padding-top: 10px !important;
 //   height: 80px;
 // }
 .page-referral{
-  height:505px;
+  height:480px;
   background: none repeat scroll 0% 0% #FFF;
   padding-left: 40px !important;
   padding-right: 40px !important;
@@ -84,8 +84,9 @@ p.top-english {
   }
 }
   .friend-join {
-    margin-top: 10px;
-    height: 100px;
+   margin-top: 20px;
+  height: 100px;
+  margin-bottom: 10px;
     .left-friend{
       text-align: right;
       img{
@@ -235,4 +236,6 @@ p.top-english {
 }
 .button-register-foter{
   text-align: right;
+  margin-top: 5px;
+  padding-right: 15px;
 }
