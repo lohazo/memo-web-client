@@ -179,15 +179,40 @@
 
   .columns-screen-3-first {
     margin-left: 60px;
-    font-size: 20px
+    font-size: 18px
   }
 
-  .columns-screen-3-center {
-    font-size: 20px
+  .columns-screen-3-second {
+    font-size: 18px;
+    position: absolute;
+    left: 365px;
+    top: 327px;
+  }
+
+  .columns-screen-3-third {
+    font-size: 18px;
+    position: absolute;
+    left: 560px;
+    top: 327px;
+    height: 80px;
+    width: 170px;
+  }
+
+  .columns-screen-3-fourth {
+  font-size: 18px;
+  position: absolute;
+  left: 560px;
+  top: 327px;
+  height: 80px;
+  width: 200px;
   }
 
   .columns-screen-3-last {
+    font-size: 18px;
+  }
 
+  .text-memo {
+    color: #810c15;
   }
 
 @import
