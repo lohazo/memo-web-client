@@ -20,6 +20,23 @@
       return deferred.promise;
     };
 
+    Service.checkAll = function() {
+      var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
+
+      $http.post(API + '/in_app_notifications/check_all', {
+          auth_token: authToken
+        }, {
+          ignoreLoadingBar: true
+        })
+        .then(function(response) {
+          deferred.resolve(response);
+        }, function(response) {
+          deferred.reject(response);
+        });
+
+      return deferred.promise;
+    };
     return Service;
   }
 
@@ -35,14 +52,16 @@
         })
     }
 
+    $scope.checkAll = function() {
+      $scope.notification.is_new_count = 0;
+      NotificationService.checkAll();
+    };
     getInAppNotifications();
-    // $interval(getInAppNotifications, 30 * 1000);
+    $interval(getInAppNotifications, 30 * 1000);
   }
 
-  function NotificationDropdownCtrl($scope, NotificationService) {
-    // $scope.watch('notification', function() {
-    //   console.log($scope.notification);
-    // });
+  function NotificationDropdownItemCtrl($scope, NotificationService) {
+
   }
 
   function NotificationDropdownButton($timeout, $rootScope) {
@@ -50,14 +69,23 @@
       restrict: 'EA',
       scope: {},
       controller: 'NotificationDropdownButtonCtrl',
+      link: function($scope, $element) {
+        angular.element($element).find('a').bind('click', function() {
+          $scope.checkAll();
+          $scope.$apply();
+        });
+      },
       templateUrl: 'components/notification/_notification-button.html'
     };
   }
 
-  function NotificationDropdown() {
+  function NotificationDropdownItem() {
     return {
       restrict: 'EA',
-      controller: 'NotificationDropdownCtrl'
+      replace: true,
+      controller: 'NotificationDropdownItemCtrl',
+      link: function($scope, $element, $attr) {},
+      templateUrl: 'components/notification/_notification-dropdown-item.html'
     };
   }
 
@@ -67,9 +95,9 @@
     .controller('NotificationDropdownButtonCtrl', ['$scope', '$interval', 'NotificationService',
       NotificationDropdownButtonCtrl
     ])
-    .controller('NotificationDropdownCtrl', ['$scope', 'NotificationService',
-      NotificationDropdownCtrl
+    .controller('NotificationDropdownItemCtrl', ['$scope', 'NotificationService',
+      NotificationDropdownItemCtrl
     ])
     .directive('notificationDropdownButton', NotificationDropdownButton)
-    .directive('notificationDropdown', [NotificationDropdown]);
+    .directive('notificationDropdownItem', [NotificationDropdownItem]);
 }(window.angular));
