@@ -1,5 +1,18 @@
 <section class="app new-player">
   <div class="player-inner content-event" status>
+    <div ng-switch on="directive">
+      <div ng-switch-default="referral-body-one">
+        
+      </div>
+      <div ng-switch-when="referral-body-two">
+        <div class="row top-screen-2" >
+          <p class="topicanative">TOPICA NATIVE LÀ GÌ ?</p>
+        </div>
+      </div>
+      <div ng-switch-when="referral-body-three">
+        
+      </div>
+    </div>
     <div class="page-referral" referral-body>
     </div>
     <div class="footer-referral-event" referral-footer>
