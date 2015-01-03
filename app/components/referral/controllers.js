@@ -193,8 +193,15 @@
       ReferralService.verifyRewards().then(function(res){
         (function() {
           var modalInstance = $modal.open({
-            template: '<div verifyRewards-modal></div>',
-            windowClass: 'verifyRewards-modal'
+            // template: '<div verifyRewards-modal></div>',
+            windowClass: 'verify-rewards-modal',
+            templateUrl: 'components/referral/_verify_Rewards.html',
+            controller: 'ReferralRewardsCtrl',
+            resolve: {
+              getRewardsCode: function() {
+                return res.data.rewards_verification_code;
+              }
+            }
           });
 
           modalInstance.result.then(function(msg) {
@@ -204,10 +211,14 @@
       });
     }
   }
+
   angular.module('referral.controllers', [])
     .controller('ReferralCtrl', ['$scope', 'ReferralService', 'Profile', ReferralCtrl])
     .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
     .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
     .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', ReferralFooterCtrl])
     .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal', ReferralEntercodeCtrl])
+    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', function($scope, code){
+      $scope.reward_code = code;
+    }])
 })(window.angular);
