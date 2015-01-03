@@ -19,7 +19,9 @@
     outline: none;
   }
 }
-
+.content-event{
+  border-radius: 10px;
+}
 .topicanative {
   text-align: center;
   background: url("assets/img/bg2.png") center ;
@@ -35,11 +37,11 @@
 }
 
 .native-page2 {
-  overflow-y: scroll;
   height: 430px;
   width: 813px;
-  margin-right:28px;
+  overflow-y: scroll;
   padding:0;
+  margin-right: 15px;
 }
 
 .circle {
@@ -455,7 +457,7 @@ span.border{
 .menu-left{
   padding-right: 0px;
   padding-left: 0;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 .inner-topica-native{
   background: none repeat scroll 0% 0% #FFF;
@@ -644,6 +646,10 @@ span.border{
     padding: 0 20px;
     margin-left: 5px;
   }
+}
+.page-step-one{
+  overflow-y: scroll;
+  height: 480px;
 }
 
 @import

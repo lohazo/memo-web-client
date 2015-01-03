@@ -45,10 +45,10 @@ padding-top: 10px !important;
 .page-referral{
   height:480px;
   background: none repeat scroll 0% 0% #FFF;
-  padding-left: 40px !important;
-  padding-right: 40px !important;
+  // padding-left: 40px !important;
+  // padding-right: 40px !important;
   padding-top: 20px;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   .student-memo{
@@ -66,6 +66,7 @@ padding-top: 10px !important;
         padding-top: 12px;
         font-weight: 600;
         margin-bottom: 20px;
+        margin-left: 30px;
         color: #fff;
       }
     }    
@@ -78,7 +79,8 @@ p.top-english {
   color: #FFF;
   font-weight: 600;
   font-size: 20px;
-  margin: 0;
+  margin-left:33px;
+  margin-right:34px;
   strong{
     font-size: 40px;
   }
@@ -108,6 +110,8 @@ p.top-english {
   }
   .communication{
     text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
     p{
       margin-bottom: 0;
       color: #810c15;
@@ -134,7 +138,7 @@ p.top-english {
       }
       p{
         text-align: left;
-        padding-left: 10px;
+        padding-left: 32px;
         color: #666;
         font-size: 15px;
         margin-bottom: 0;
@@ -152,7 +156,7 @@ p.top-english {
       }
       p{
         text-align: left;
-        padding-left: 35px;
+        padding-left: 75px;
         color: #666;
         font-size: 15px;
         margin-bottom: 0;
@@ -170,7 +174,7 @@ p.top-english {
       }
       p{
         text-align: left;
-        padding-left: 10px;
+        padding-left:26px;
         color: #666;
         font-size: 15px;
         margin-bottom: 0;
@@ -180,6 +184,9 @@ p.top-english {
   }
   .topica-ads{
     margin-top: 30px;
+    margin-top: 30px;
+    padding-left: 35px;
+    padding-right: 36px;
     .topica-edu span{
       color: #810C15;
       font-weight: 600;
@@ -194,6 +201,9 @@ p.top-english {
   }
   .logo-funding{
     margin-top: 10px;
+    margin-top: 10px;
+    padding-left: 33px;
+    padding-right: 33px;
     .join-dev{
       text-align: left;
       margin-bottom: 40px;
@@ -220,13 +230,13 @@ p.top-english {
   height:65px;
   border-bottom-left-radius:5px;
   border-bottom-right-radius:5px;
+  margin-top: 22px;
   a{
     background: #810C15;
     color: #fff;
     border-radius: 5px;
     padding: 0 15px;
     font-size: 18px;
-    font-weight: 600;
     margin-left: 5px;
     height: 40px;
     line-height: 40px;
