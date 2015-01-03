@@ -453,7 +453,9 @@ span.border{
   }
 }
 .menu-left{
-  padding-right: 0;
+  padding-right: 0px;
+  padding-left: 0;
+  margin-left: 20px;
 }
 .inner-topica-native{
   background: none repeat scroll 0% 0% #FFF;
@@ -462,6 +464,7 @@ span.border{
   margin-top: 20px;
   padding-top: 10px;
   border-radius:10px;
+  padding-bottom: 15px;
 }
 .native-conversation{
   background: url("assets/img/referral/nt.png") no-repeat scroll center center transparent;
@@ -624,6 +627,22 @@ span.border{
   img{
     float: left;
     margin-left: 25px;
+  }
+}
+
+.join-referral-native{
+  text-align: right;
+  padding-right: 43px;
+  a{
+    height: 50px;
+    line-height: 50px;
+    background: none repeat scroll 0% 0% #810C15;
+    color: #FFF;
+    font-weight: 600;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0 20px;
+    margin-left: 5px;
   }
 }
 
