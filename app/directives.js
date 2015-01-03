@@ -15,7 +15,10 @@ angular.module('app.directives', [])
     return {
       restrict: 'EA',
       replace: true,
-      scope: true,
+      scope: {
+        shareType: '@',
+        shareData: '@'
+      },
       controller: 'HeaderCtrl',
       templateUrl: 'components/header/_header.html'
     };
@@ -41,11 +44,14 @@ angular.module('app.directives', [])
       restrict: 'EA',
       link: function($scope, $element, $attr) {
         $element.bind('click', function() {
-          if ($attr.levelUp === "") {
+          if ($scope.shareType === "level-up") {
             AppSetting.getLevelUpFacebookContent()
               .then(displayFeedDialog, displayDefaultFeedDialog);
-          } else if ($attr.finishSkill === "") {
-            AppSetting.getFinishSkillFacebookContent()
+          } else if ($scope.shareType === "finish-skill") {
+            AppSetting.getFinishSkillFacebookContent($scope.shareData)
+              .then(displayFeedDialog, displayDefaultFeedDialog);
+          } else if ($scope.shareType === "referral-code") {
+            AppSetting.getReferralShareFacebookContent($scope.shareData)
               .then(displayFeedDialog, displayDefaultFeedDialog);
           } else {
             displayDefaultFeedDialog();

@@ -83,6 +83,12 @@
       });
     };
 
+    Setting.getReferralShareFacebookContent = function(referralCode) {
+      return AppServices.getFacebookSharedContent({
+        referral_code: referralCode
+      });
+    };
+
     Setting.shouldDisplayTour = function() {
       Setting.displayTour = $localStorage.displayTour || false;
       return Setting.displayTour;
@@ -129,7 +135,13 @@
       var authToken = $localStorage.auth.user.auth_token;
 
       var endpoint = API + '/shared_settings/facebook_share_content?device=web&auth_token=' + authToken;
-      endpoint += data.skill_id ? '&skill_id=' + data.skill_id : '&level_up=' + data.level_up;
+      if (data.skill_id) {
+        endpoint += '&skill_id=' + data.skill_id;
+      } else if (data.level_up) {
+        endpoint += '&level_up=' + data.level_up;
+      } else if (data.referral_code) {
+        endpoint += '&referral_code=' + data.referral_code;
+      }
 
       $http.get(endpoint)
         .then(function(response) {
