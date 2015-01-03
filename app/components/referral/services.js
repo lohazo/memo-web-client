@@ -16,16 +16,13 @@
           verify_rewards: '/referral/verify_rewards'
         },
         Referral = {};
-    console.log(authToken);
     Referral.getStatus = function() {
       var deferred = $q.defer();
 
       $http.get(API + Apis.status + authToken)
           .then(function(res) {
-            $localStorage.messages = res.data;
             deferred.resolve(res);
           }, function(res){
-            $localStorage.messages = res.data;
             deferred.reject(res);
           });
 
@@ -41,10 +38,8 @@
 
       $http.post(API + Apis.submit_code, data)
           .then(function(res){
-            $localStorage.messages = res.data;
             deferred.resolve(res);
           }, function(res){
-            $localStorage.messages = res.data;
             deferred.reject(res);
           });
 
@@ -60,10 +55,8 @@
 
       $http.post(API + Apis.check_code, data)
           .then(function(res){
-            $localStorage.messages = res.data;
             deferred.resolve(res);
           }, function(res){
-            $localStorage.messages = res.data;
             deferred.reject(res);
           });
 
@@ -75,15 +68,12 @@
           data = {
             auth_token: authToken,
             verify_rewards: ref_code
-          },
-          returned = null;
+          };
 
       $http.post(API + Apis.verify_rewards, data)
           .then(function(res){
-            $localStorage.messages = res.data;
             deferred.resolve(res);
           }, function(res){
-            $localStorage.messages = res.data;
             deferred.reject(res);
           });
 

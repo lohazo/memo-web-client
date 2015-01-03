@@ -19,7 +19,9 @@
     outline: none;
   }
 }
-
+.content-event{
+  border-radius: 10px;
+}
 .topicanative {
   text-align: center;
   background: url("assets/img/bg2.png") center ;
@@ -35,11 +37,11 @@
 }
 
 .native-page2 {
-  overflow-y: scroll;
   height: 430px;
   width: 813px;
-  margin-right:28px;
+  overflow-y: scroll;
   padding:0;
+  margin-right: 15px;
 }
 
 .circle {
@@ -186,7 +188,6 @@
   }
 
   .columns-screen-3-first {
-    margin-left: 60px;
     font-size: 20px;
     float: left;
   }
@@ -204,6 +205,7 @@
   .columns-screen-3-fourth {
     font-size: 20px;
     float: left;
+    height: 190px;
   }
 
   .columns-screen-3-last {
@@ -217,11 +219,15 @@
 
   .row-screen-3 {
     width: 1060px;
+    margin-left: 20px;
+    margin-bottom: 18px;
   }
 
   .row-text-screen-3 {
     width: 1060px;
     margin-bottom: 98px;
+    padding-left: 20px;
+    padding-bottom: 98px;
   }
 
 .clear{
@@ -449,7 +455,8 @@ span.border{
   }
 }
 .menu-left{
-  padding-right: 0;
+  padding-right: 0px;
+  padding-left: 0;
 }
 .inner-topica-native{
   background: none repeat scroll 0% 0% #FFF;
@@ -458,6 +465,7 @@ span.border{
   margin-top: 20px;
   padding-top: 10px;
   border-radius:10px;
+  padding-bottom: 15px;
 }
 .native-conversation{
   background: url("assets/img/referral/nt.png") no-repeat scroll center center transparent;
@@ -621,6 +629,26 @@ span.border{
     float: left;
     margin-left: 25px;
   }
+}
+
+.join-referral-native{
+  text-align: right;
+  padding-right: 43px;
+  a{
+    height: 50px;
+    line-height: 50px;
+    background: none repeat scroll 0% 0% #810C15;
+    color: #FFF;
+    font-weight: 600;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0 20px;
+    margin-left: 5px;
+  }
+}
+.page-step-one{
+  overflow-y: scroll;
+  height: 480px;
 }
 
 @import
