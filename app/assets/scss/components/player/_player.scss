@@ -260,14 +260,15 @@
   h4{
     font-size: 23px;
   }
-  p{
+  a{
     margin: 0px;
     color: #666;
     font-size: 14px;
     background: url("assets/img/referral/bl.png") left 7px no-repeat;
     padding-left: 25px;
+    display: block;
   }
-  p.topica-active{
+  a.topica-active{
     color: #810C15;
     text-decoration: underline;
     font-size: 15px;
