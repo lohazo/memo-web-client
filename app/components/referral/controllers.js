@@ -83,72 +83,8 @@
     'referral-body-three'
   ]);
 
-  var PlayerControl = function() {}
-
-  PlayerControl.prototype = {
-    next: function() {
-
-      var cur = Singleton.getView().current();
-      Singleton.getView().next();
-      return cur;
-    },
-
-    prev: function() {
-      Singleton.getView().prev();
-      Singleton.getView().prev();
-      return Singleton.getView().current();
-      // return cur;
-    },
-
-    hasNext: function() {
-      return Singleton.getView().hasNext();
-    },
-
-    hasPrev: function() {
-      return Singleton.getView().hasPrev();
-    },
-
-    goto: function(index) {
-      //
-    },
-
-    gotoFirst: function() {
-      //
-    },
-
-    gotoLast: function() {
-      //
-    }
-  }
-
   function ReferralCtrl($scope, service, profile) {
-    $scope.shareType = 'referral-code';
-    service.getStatus().then(function(res) {
-      $scope.code = res.data.referral_code || 0;
-      $scope.invite_count = res.data.record.invited_count || 0;
-      $scope.shareData = $scope.code;
-    });
-    $scope.combo_days = profile.detail.combo_days;
-
-    profile.getProfileDetail().then(function() {
-      // console.log(profile.detail);
-      $scope.expChart = {
-        labels: profile.detail.exp_chart.days,
-        datasets: [{
-          label: "",
-          fillColor: "rgba(220,220,220,0.2)",
-          strokeColor: "#848484",
-          pointColor: "#810c15",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(220,220,220,1)",
-          data: profile.detail.exp_chart.exp
-        }]
-      };
-    });
-
-    // console.log(profile.getProfile());
-
+    //
   }
 
   function ReferralHeaderCtrl($scope, service) {}
@@ -158,21 +94,21 @@
       if (Singleton.getView().hasNext()) {
         Singleton.getView().next();
         $scope.directive = Singleton.getView().current();
-        // console.log(direc);
-        // $scope.directive = direc;
       };
     });
     $scope.$on('referral:body-prev', function() {
       if (Singleton.getView().hasPrev()) {
         Singleton.getView().prev();
         $scope.directive = Singleton.getView().current();
-        // console.log(direc);
-        // $scope.directive = direc;
       };
+    });
+    $scope.$on('referral:body-last', function() {
+      Singleton.getView().last();
+      $scope.directive = Singleton.getView().current();
     });
   }
 
-  function ReferralFooterCtrl($scope, service) {
+  function ReferralFooterCtrl($scope, service, $location) {
     function next() {
       // PlayerControl.getInstance().next();
       $scope.$broadcast('referral:body-next');
@@ -192,19 +128,53 @@
       $scope.$broadcast('referral:body-prev');
     }
 
+    function gotoProfile() {
+      $location.path('/referral/profile');
+    }
+
     $scope.control = {
       next: next,
       prev: prev,
       last: gotoLast,
       first: gotoFirst,
+      gotoProfile: gotoProfile
     };
   }
 
-  function ReferralEntercodeCtrl($scope, ReferralService, $modal) {
+  function ReferralEntercodeCtrl($scope, ReferralService, profile, $location, $modal) {
+    if (!profile.user.auth_token) {
+      $location.path('/');
+    };
+
+    $scope.shareType = 'referral-code';
+    ReferralService.getStatus().then(function(res) {
+      $scope.code = res.data.referral_code || 0;
+      $scope.invite_count = res.data.record.invited_count || 0;
+      $scope.shareData = $scope.code;
+    });
+    $scope.combo_days = profile.detail.combo_days;
+
+    profile.getProfileDetail().then(function() {
+      $scope.expChart = {
+        labels: profile.detail.exp_chart.days,
+        datasets: [{
+          label: "",
+          fillColor: "rgba(220,220,220,0.2)",
+          strokeColor: "#848484",
+          pointColor: "#810c15",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          data: profile.detail.exp_chart.exp
+        }]
+      };
+    });
+
     $scope.submitCode = function() {
       var ref_code = $scope.refCode;
 
       ReferralService.submitCode(ref_code).then(function(res) {
+        $scope.error = '';
         (function() {
           var modalInstance = $modal.open({
             template: '<div submitcode-modal></div>',
@@ -217,18 +187,13 @@
         })();
       }, function(res) {
         $scope.error = res.data.message;
-
       });
     };
-    // $scope.getCode = function(){
-    //   var ref_code = $scope.refCode;
-    //   // ReferralService.
-    // };
   }
   angular.module('referral.controllers', [])
     .controller('ReferralCtrl', ['$scope', 'ReferralService', 'Profile', ReferralCtrl])
     .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
     .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
-    .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', ReferralFooterCtrl])
-    .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', '$modal', ReferralEntercodeCtrl])
+    .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', ReferralFooterCtrl])
+    .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal', ReferralEntercodeCtrl])
 })(window.angular);
