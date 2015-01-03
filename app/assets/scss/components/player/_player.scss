@@ -19,6 +19,7 @@
     outline: none;
   }
 }
+
 .topicanative {
   text-align: center;
   background: url("assets/img/bg2.png") center ;
@@ -111,7 +112,122 @@
   padding: 0px;
 }
 
-/*----------------------------ENTERCODE---------------------------------*/
+  .screen-3-top {
+    text-align: center;
+    background: url("assets/img/bg2.png") center ;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    font-size: 25px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
+  }
+
+  .button-screen-3-bottom-left {
+    width: 100px;
+    height: 50px;
+    margin-right: 150px;
+    margin-left: 40px;
+    font-size: 22px;
+    text-align: center;
+    padding: 0px;
+    background-color: #999 !important;
+  }
+
+  .button-screen-3-bottom-right {
+    width: 195px;
+    height: 50px;
+    margin-right: 50px;
+    font-size: 22px;
+    text-align: center;
+    padding: 0px;
+  }
+
+  .text-screen-3-center {
+    font-size: 17px;
+    color: #666666;
+    text-align: right;
+  }
+
+  .text-bold-screen-3-center {
+    font-size: 17px;
+    color: #333333;
+    text-align: right;
+  }
+
+  .image-screen-3-step-1 {
+    background: url("assets/img/referral/step-1.png") center no-repeat ;
+    height: 60px;
+    width: 242px;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .image-screen-3-step-2 {
+    background: url("assets/img/referral/step-2.png") center no-repeat ;
+    height: 60px;
+    width: 242px;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .text-screen-3-button {
+    position: absolute;
+    top: 15px;
+    right: 80px;
+    height: 20px;
+    width: 80px;
+    font-size: 20px;
+    color: $white;
+  }
+
+  .columns-screen-3-first {
+    margin-left: 60px;
+    position: absolute;
+    left: 110px;
+    top: 327px;
+    font-size: 20px
+  }
+
+  .columns-screen-3-second {
+    font-size: 20px;
+    position: absolute;
+    left: 375px;
+    top: 327px;
+  }
+
+  .columns-screen-3-third {
+    font-size: 20px;
+    position: absolute;
+    left: 580px;
+    top: 327px;
+    height: 80px;
+    width: 170px;
+  }
+
+  .columns-screen-3-fourth {
+    font-size: 20px;
+    position: absolute;
+    left: 775px;
+    top: 327px;
+    height: 80px;
+    width: 200px;
+  }
+
+  .columns-screen-3-last {
+    font-size: 20px;
+    position: absolute;
+    left: 975px;
+    top: 327px;
+  }
+
+  .text-memo {
+    color: #810c15;
+  }
+
 .clear{
   clear: both;
 }
@@ -323,22 +439,19 @@ span.border{
   margin: 20px 28px 0px 0px;
   display: block;
 }
-.contact{
- text-align: right;
- padding-right: 26px;
- padding-top: 5px;
- p{
-  margin: 0;
-  color: #666;
-  font-size: 15px;
-  strong {
-    color:#444;
+.contact {
+  text-align: right;
+  padding-right: 26px;
+  padding-top: 5px;
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 15px;
+    strong {
+      color: #444;
+    }
   }
 }
-}
-/*----------------------------END---------------------------------*/
-
-/*-----------------------------SCREEN--------------------------*/
 .menu-left{
   padding-right: 0;
 }
@@ -480,7 +593,7 @@ span.border{
   margin-bottom: 35px;
 }
 .topica-edu-asian{
-  margin-top:45 px;
+  margin-top: 45px;
   margin-bottom: 20px;
 }
 .mark p.text-mark {
@@ -513,9 +626,6 @@ span.border{
     margin-left: 25px;
   }
 }
-/*-----------------------------END--------------------------------*/
-
-
 
 @import
 "player-header",
