@@ -13,7 +13,7 @@
           // console.log(Profile);
           return Profile.detail;
         }
-    }
+      }
     });
   }
 
