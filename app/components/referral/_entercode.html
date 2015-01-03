@@ -31,38 +31,41 @@
         <div class="clear"></div>
         <div class="code-share">
           <p>Đã mời được:</p>
-          <span>5 bạn</span>
+          <span>{{invite_count}} bạn</span>
         </div>
         <div class="code-share code-share-2">
           <p>Số ngày combo:</p>
-          <span>3 ngày</span>
+          <span>{{combo_days}} ngày</span>
         </div>
         <div class="code-share code-share-3">
           <p>Code chia sẻ:</p>
-          <a class="create-code" href="" title="">Tạo mã code</a>
+          <a class="create-code" href="" title="">{{code}}</a>
           <a class="question-hover" href="#" title=""><img src="assets/img/referral/q.png" alt=""></a>
         </div>
         <div class="code-share code-share-4">
           <p>Nhập code từ bạn bè:</p>
           <form>
-            <input type="text" name="" value="" placeholder="">
-            <a href="" title=""><img src="assets/img/referral/arrow.png" alt=""></a>
+            <input type="text" name="" value="" placeholder="" ng-model='refCode'>
+            <a href="" title=""><img src="assets/img/referral/arrow.png" alt="" ng-click='submitCode()'></a>
           </form>
           <a class="question-hover" href="#" title=""><img src="assets/img/referral/q.png" alt=""></a>
         </div>
-        <p class="code-error">Bạn đã nhập code không có thực !</p>
-        <div class="chart-memo">
+        <p class="code-error">{{error}}</p>
+        <!-- <div class="chart-memo">
           <img src="assets/img/referral/chart.png" alt="">
+        </div> -->
+        <div class="row">
+          <canvas linechart="" options="chartOptions" data="expChart" width="220" height="150" class="ng-isolate-scope" style="width: 220px; height: 150px;"></canvas>
         </div>
         <div class="clear"></div>
         <div class="share-social">
-          <p>Chia sẽ mã code HB123456 tới những người bạn của mình nhé!</p>
+          <p>Chia sẽ mã code {{code}} tới những người bạn của mình nhé!</p>
           <a href="#" title="">Share</a>
         </div>
         <div class="clear"></div>
         <div class="share-social">
-          <p>Bạn đã mời được 5 người bạn và thực hiện được 3 ngày học liên tiếp!</p>
-          <a class="confirm" href="#" title="">Xác minh</a>
+          <p>Bạn đã mời được {{invite_count}} người bạn và thực hiện được {{combo_days}} ngày học liên tiếp!</p>
+          <a class="confirm" href="#" title="" style='display:none' >Xác minh</a>
         </div>
         <span class="border"></span>
         <div class="contact">
