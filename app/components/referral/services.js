@@ -63,11 +63,11 @@
       return deferred.promise;
     };
 
-    Referral.verifyRewards = function(ref_code) {
+    Referral.verifyRewards = function() {
       var deferred = $q.defer(),
           data = {
             auth_token: authToken,
-            verify_rewards: ref_code
+            // verify_rewards: ref_code
           };
 
       $http.post(API + Apis.verify_rewards, data)

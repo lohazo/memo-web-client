@@ -144,13 +144,20 @@
   function ReferralEntercodeCtrl($scope, ReferralService, profile, $location, $modal) {
     if (!profile.user.auth_token) {
       $location.path('/');
+    } else {
+      // console.log(profile.detail);
+      $scope.isReferral = profile.detail.referral_user || '';
+      $scope.userName = profile.detail.referral_user;
+    }
+
+    $scope.FBShare = {
+      shareType: 'referral-code'
     };
 
-    $scope.shareType = 'referral-code';
     ReferralService.getStatus().then(function(res) {
       $scope.code = res.data.referral_code || 0;
       $scope.invite_count = res.data.record.invited_count || 0;
-      $scope.shareData = $scope.code;
+      $scope.FBShare.shareData = res.data.referral_code;
     });
     $scope.combo_days = profile.detail.combo_days;
 
@@ -171,29 +178,56 @@
     });
 
     $scope.submitCode = function() {
-      var ref_code = $scope.refCode;
-
-      ReferralService.submitCode(ref_code).then(function(res) {
+      // var ref_code = $scope.refCode;
+      // console.log(ref_code);
+      ReferralService.submitCode($scope.refCode).then(function(res) {
         $scope.error = '';
+        // console.log(res);
+        $scope.isReferral = res.data.code || '';
+        // (function() {
+        //   var modalInstance = $modal.open({
+        //     template: '<div submitcode-modal></div>',
+        //     windowClass: 'submitcode-modal'
+        //   });
+
+        //   modalInstance.result.then(function(msg) {
+        //     if ($scope[msg] instanceof Function) $scope[msg]();
+        //   });
+        // })();
+      }, function(res) {
+        $scope.error = res.data.message;
+      });
+    };
+    $scope.verifyRewards = function() {
+      ReferralService.verifyRewards().then(function(res){
         (function() {
           var modalInstance = $modal.open({
-            template: '<div submitcode-modal></div>',
-            windowClass: 'submitcode-modal'
+            // template: '<div verifyRewards-modal></div>',
+            windowClass: 'verify-rewards-modal',
+            templateUrl: 'components/referral/_verify_Rewards.html',
+            controller: 'ReferralRewardsCtrl',
+            resolve: {
+              getRewardsCode: function() {
+                return res.data.rewards_verification_code;
+              }
+            }
           });
 
           modalInstance.result.then(function(msg) {
             if ($scope[msg] instanceof Function) $scope[msg]();
           });
         })();
-      }, function(res) {
-        $scope.error = res.data.message;
       });
-    };
+    }
   }
+
   angular.module('referral.controllers', [])
     .controller('ReferralCtrl', ['$scope', 'ReferralService', 'Profile', ReferralCtrl])
     .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
     .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
     .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', ReferralFooterCtrl])
     .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal', ReferralEntercodeCtrl])
+    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', function($scope, code) {
+      $scope.reward_code = code;
+    }])
 })(window.angular);
