@@ -37,34 +37,6 @@ angular.module('landingpage.directives', [])
     return {
       strict: 'EA',
       controller: 'LpStatCtrl',
-      link: function($scope, $element) {
-        $scope.users = {
-          ios: 13201,
-          android: 8201,
-          wp: 0,
-          pc: 29257
-        };
-
-        $scope.users.total = $scope.users.ios + $scope.users.android + $scope.users.pc;
-
-        $interval(function() {
-          $scope.users.ios += 1;
-          $scope.users.total += 1;
-          // localStorage.users = angular.toJson($scope.users);
-        }, Math.floor(Math.random() * 10 + 10) * 1000);
-
-        $interval(function() {
-          $scope.users.android += 1;
-          $scope.users.total += 1;
-          // localStorage.users = angular.toJson($scope.users);
-        }, Math.floor(Math.random() * 10 + 10) * 1000);
-
-        $interval(function() {
-          $scope.users.pc += 1;
-          $scope.users.total += 1;
-          // localStorage.users = angular.toJson($scope.users);
-        }, Math.floor(Math.random() * 10 + 10) * 1000);
-      },
       templateUrl: 'components/landingpage/_statistic.html'
     };
   }])

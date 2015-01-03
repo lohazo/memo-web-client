@@ -1,43 +1,43 @@
 @import "animate";
+
 .landingpage {
-    .statistic {
-        background: url('assets/img/landingpage/3-bg.png') repeat;
-        height: 186px;
-        .container {
-            padding-top: 50px;
-            height: 186px;
-        }
-        .icon {
-            background: url('assets/img/landingpage/3-icon-stat.png') no-repeat;
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-        }
-        .android .icon {
-            background-position: -30px 0;
-            width: 26px;
-        }
-        .ios .icon {
-            background-position: -56px 0;
-            width: 25px;
-        }
-        .window .icon {
-            background-position: -81px 0;
-            width: 26px;
-        }
-        .pc .icon {
-            background-position: -107px 0;
-        }
-        .text {
-            text-transform: uppercase;
-            font-weight: 600px;
-            color: $white;
-        }
-        .number {
-            text-transform: uppercase;
-            font-weight: 800;
-            font-size: 24px;
-            color: $white;
-        }
+  .statistic {
+    background: url("assets/img/landingpage/3-bg.png") repeat;
+    height: 186px;
+    .container {
+      padding-top: 50px;
+      height: 186px;
     }
+    .icon {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+    }
+    .android .icon {
+      background: url("assets/img/icon1.png") no-repeat;
+      width: 20px;
+    }
+    .ios .icon {
+      background: url("assets/img/icon2.png") no-repeat;
+      width: 35px;
+    }
+    .window .icon {
+      background: url("assets/img/icon3.png") no-repeat;
+      width: 30px;
+    }
+    .pc .icon {
+      background: url("assets/img/icon4.png") no-repeat;
+    }
+    .text {
+      text-transform: uppercase;
+      font-weight: 700;
+      color: $white;
+    }
+    .number {
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 30px;
+      color: $white;
+    }
+  }
 }
