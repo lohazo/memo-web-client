@@ -47,12 +47,13 @@ padding-top: 10px !important;
   background: none repeat scroll 0% 0% #FFF;
   // padding-left: 40px !important;
   // padding-right: 40px !important;
-  padding-top: 20px;
+  // padding-top: 20px;
   // overflow-y: scroll;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   .student-memo{
     background: url("assets/img/referral/bg3.png") center no-repeat;
+    margin-top: 20px;
     .date-time-memo{
       text-align: center;
       margin-top: 203px;
@@ -80,7 +81,7 @@ p.top-english {
   font-weight: 600;
   font-size: 20px;
   margin-left:33px;
-  margin-right:34px;
+  width: 1020px;
   strong{
     font-size: 40px;
   }
