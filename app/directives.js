@@ -47,6 +47,8 @@ angular.module('app.directives', [])
           } else if ($attr.finishSkill === "") {
             AppSetting.getFinishSkillFacebookContent()
               .then(displayFeedDialog, displayDefaultFeedDialog);
+          } else {
+            displayDefaultFeedDialog();
           }
         })
       }
