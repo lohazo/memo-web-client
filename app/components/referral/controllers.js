@@ -9,10 +9,10 @@
     // this.items = items;
   }
 
-    var Singleton = (function () {
+  var Singleton = (function() {
     var instance,
-        view;
- 
+      view;
+
     function createInstance() {
       var object = new PlayerControl();
       return object;
@@ -22,7 +22,7 @@
       var view = new PlayerView();
       return view;
     }
- 
+
     return {
       getInstance: function() {
         if (!instance) {
@@ -38,7 +38,7 @@
       }
     };
   })();
- 
+
   PlayerView.prototype = {
     first: function() {
       this.reset();
@@ -60,7 +60,7 @@
       this.index = 0;
     },
     last: function() {
-      this.index = this.items.length-1;
+      this.index = this.items.length - 1;
       // return this.current();
     },
     current: function() {
@@ -87,7 +87,7 @@
 
   PlayerControl.prototype = {
     next: function() {
-      
+
       var cur = Singleton.getView().current();
       Singleton.getView().next();
       return cur;
@@ -122,13 +122,15 @@
   }
 
   function ReferralCtrl($scope, service, profile) {
-    service.getStatus().then(function(res){
+    $scope.shareType = 'referral-code';
+    service.getStatus().then(function(res) {
       $scope.code = res.data.referral_code || 0;
       $scope.invite_count = res.data.record.invited_count || 0;
+      $scope.shareData = $scope.code;
     });
     $scope.combo_days = profile.detail.combo_days;
-    
-    profile.getProfileDetail().then(function(){
+
+    profile.getProfileDetail().then(function() {
       // console.log(profile.detail);
       $scope.expChart = {
         labels: profile.detail.exp_chart.days,
@@ -146,13 +148,13 @@
     });
 
     // console.log(profile.getProfile());
-    
+
   }
 
   function ReferralHeaderCtrl($scope, service) {}
 
   function ReferralBodyCtrl($scope, service) {
-    $scope.$on('referral:body-next', function(){
+    $scope.$on('referral:body-next', function() {
       if (Singleton.getView().hasNext()) {
         Singleton.getView().next();
         $scope.directive = Singleton.getView().current();
@@ -160,7 +162,7 @@
         // $scope.directive = direc;
       };
     });
-    $scope.$on('referral:body-prev', function(){
+    $scope.$on('referral:body-prev', function() {
       if (Singleton.getView().hasPrev()) {
         Singleton.getView().prev();
         $scope.directive = Singleton.getView().current();
@@ -199,10 +201,10 @@
   }
 
   function ReferralEntercodeCtrl($scope, ReferralService, $modal) {
-    $scope.submitCode = function(){
+    $scope.submitCode = function() {
       var ref_code = $scope.refCode;
 
-      ReferralService.submitCode(ref_code).then(function(res){
+      ReferralService.submitCode(ref_code).then(function(res) {
         (function() {
           var modalInstance = $modal.open({
             template: '<div submitcode-modal></div>',
@@ -213,9 +215,9 @@
             if ($scope[msg] instanceof Function) $scope[msg]();
           });
         })();
-      }, function(res){
+      }, function(res) {
         $scope.error = res.data.message;
-        
+
       });
     };
     // $scope.getCode = function(){
@@ -224,9 +226,9 @@
     // };
   }
   angular.module('referral.controllers', [])
-        .controller('ReferralCtrl', ['$scope', 'ReferralService', 'Profile', ReferralCtrl])
-        .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
-        .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
-        .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', ReferralFooterCtrl])
-        .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', '$modal', ReferralEntercodeCtrl])
+    .controller('ReferralCtrl', ['$scope', 'ReferralService', 'Profile', ReferralCtrl])
+    .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
+    .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
+    .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', ReferralFooterCtrl])
+    .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', '$modal', ReferralEntercodeCtrl])
 })(window.angular);
