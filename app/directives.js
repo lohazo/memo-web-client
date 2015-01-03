@@ -25,12 +25,9 @@ angular.module('app.directives', [])
   })
   .directive('facebookShareButton', function(AppSetting) {
     function displayFeedDialog(response) {
-      FB.ui({
-        method: 'feed',
-        caption: response.data.caption,
-        description: response.data.description,
-        link: response.data.link
-      }, function(response) {});
+      var data = response.data;
+      data.method = 'feed';
+      FB.ui(data, function(response) {});
     }
 
     function displayDefaultFeedDialog() {

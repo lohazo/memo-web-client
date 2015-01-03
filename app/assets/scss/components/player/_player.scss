@@ -31,8 +31,8 @@
   font-size: 23px;
   margin-bottom: 10px;
   margin-top: 10px;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
   font-weight: 600;
 }
 
@@ -163,71 +163,71 @@
   .image-screen-3-step-1 {
     background: url("assets/img/referral/step-1.png") center no-repeat ;
     height: 60px;
-    width: 242px;
+    width: 212px;
     margin: 0px;
     padding: 0px;
+    float: left;
   }
 
   .image-screen-3-step-2 {
     background: url("assets/img/referral/step-2.png") center no-repeat ;
     height: 60px;
-    width: 242px;
+    width: 212px;
     margin: 0px;
     padding: 0px;
+    float: left;
   }
 
   .text-screen-3-button {
-    position: absolute;
-    top: 15px;
-    right: 80px;
     height: 20px;
     width: 80px;
     font-size: 20px;
     color: $white;
+    margin-left: 60px;
+    margin-top: 18px;
   }
 
   .columns-screen-3-first {
-    margin-left: 60px;
-    position: absolute;
-    left: 110px;
-    top: 327px;
-    font-size: 20px
+    font-size: 20px;
+    float: left;
   }
 
   .columns-screen-3-second {
     font-size: 20px;
-    position: absolute;
-    left: 375px;
-    top: 327px;
+    float: left;
   }
 
   .columns-screen-3-third {
     font-size: 20px;
-    position: absolute;
-    left: 580px;
-    top: 327px;
-    height: 80px;
-    width: 170px;
+    float: left;
   }
 
   .columns-screen-3-fourth {
     font-size: 20px;
-    position: absolute;
-    left: 775px;
-    top: 327px;
-    height: 80px;
-    width: 200px;
+    float: left;
+    height: 190px;
   }
 
   .columns-screen-3-last {
     font-size: 20px;
-    position: absolute;
-    left: 975px;
-    top: 327px;
+    float: left;
   }
 
   .text-memo {
     color: #810c15;
+  }
+
+  .row-screen-3 {
+    width: 1060px;
+    margin-left: 20px;
+    margin-bottom: 18px;
+  }
+
+  .row-text-screen-3 {
+    width: 1060px;
+    margin-bottom: 98px;
+    padding-left: 20px;
+    padding-bottom: 98px;
   }
 
 .clear{
