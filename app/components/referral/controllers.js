@@ -121,24 +121,31 @@
     }
   }
 
-  function ReferralCtrl($scope, service, getStatus, getDetail) {
-    // console.log(getDetail);
-    $scope.combo_days = getDetail.combo_days;
-    $scope.invite_count = getStatus.data.record.invited_count;
-    $scope.code = getStatus.data.referral_code;
-    $scope.expChart = {
-      labels: getDetail.exp_chart.days,
-      datasets: [{
-        label: "",
-        fillColor: "rgba(220,220,220,0.2)",
-        strokeColor: "#848484",
-        pointColor: "#810c15",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(220,220,220,1)",
-        data: getDetail.exp_chart.exp
-      }]
-    };
+  function ReferralCtrl($scope, service, profile) {
+    service.getStatus().then(function(res){
+      $scope.code = res.data.referral_code || 0;
+      $scope.invite_count = res.data.record.invited_count || 0;
+    });
+    $scope.combo_days = profile.detail.combo_days;
+    
+    profile.getProfileDetail().then(function(){
+      // console.log(profile.detail);
+      $scope.expChart = {
+        labels: profile.detail.exp_chart.days,
+        datasets: [{
+          label: "",
+          fillColor: "rgba(220,220,220,0.2)",
+          strokeColor: "#848484",
+          pointColor: "#810c15",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          data: profile.detail.exp_chart.exp
+        }]
+      };
+    });
+
+    // console.log(profile.getProfile());
     
   }
 
@@ -217,7 +224,7 @@
     // };
   }
   angular.module('referral.controllers', [])
-        .controller('ReferralCtrl', ['$scope', 'ReferralService','getStatus', 'getDetail', ReferralCtrl])
+        .controller('ReferralCtrl', ['$scope', 'ReferralService', 'Profile', ReferralCtrl])
         .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
         .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
         .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', ReferralFooterCtrl])
