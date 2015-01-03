@@ -664,6 +664,65 @@ span.border{
   height: 480px;
 }
 
+  .button-slider-entercode {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    background:#810c15;
+    transition:1s;
+    text-align: center;
+    float: left;
+    margin-left: 10px;
+    color: #ffffff;
+  }
+
+  .button-disable-slider-entercode {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    background:#999;
+    transition:1s;
+    text-align: center;
+    float: left;
+    margin-left: 10px;
+    color: #ffffff;
+  }
+
+  .button-of-slider {
+    height: 24px;
+    width: 510px;
+    margin-left: 165px;
+    margin-bottom: 20px;
+    margin-top: 129px;
+    float: left;
+  }
+
+  .arrow-next-slider {
+    width: 35px;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .arrow-pre-slider {
+    width: 35px;
+    margin-left: 10px;
+    float: left;
+  }
+
+  .arrow-of-slider {
+    width: 45px;
+    height:60px;
+    margin-top: 190px;
+    float: left;
+  }
+
+  .slide {
+    height: 300px;
+    width: 400px;
+    margin-left: 55px;
+    margin-top: -150px;
+  }
+
 @import
 "player-header",
 "player-main",

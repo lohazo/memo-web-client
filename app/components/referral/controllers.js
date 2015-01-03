@@ -48,10 +48,10 @@
       this.index++;
     },
     hasNext: function() {
-      return this.index < this.items.length;
+      return this.index < this.items.length - 1;
     },
     hasPrev: function() {
-      return this.index >= 0;
+      return this.index > 0;
     },
     prev: function() {
       this.index--;
@@ -207,6 +207,41 @@
           });
         })();
       });
+    }
+
+    var slide = new PlayerView();
+    slide.init([
+      'assets/img/referral/campaign_guide_1.png',
+      'assets/img/referral/campaign_guide_2.png',
+      'assets/img/referral/campaign_guide_3.png',
+      'assets/img/referral/campaign_guide_4.png',
+      'assets/img/referral/campaign_guide_5.png',
+      'assets/img/referral/campaign_guide_6.png'
+    ]);
+    slide.reset();
+    $scope.image = slide.current();
+    function next() {
+      if (slide.hasNext()) {
+        slide.next();
+      } else {
+        slide.reset();
+      }
+      $scope.image = slide.current();
+    }
+
+    function prev() {
+      if (slide.hasPrev()) {
+        slide.prev();
+
+      } else {
+        slide.last();
+      }
+      $scope.image = slide.current();
+    }
+
+    $scope.slide = {
+      next: next,
+      prev: prev
     }
   }
 
