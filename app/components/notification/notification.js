@@ -57,7 +57,7 @@
       NotificationService.checkAll();
     };
     getInAppNotifications();
-    $interval(getInAppNotifications, 30 * 1000);
+    // $interval(getInAppNotifications, 30 * 1000);
   }
 
   function NotificationDropdownItemCtrl($scope, NotificationService) {
