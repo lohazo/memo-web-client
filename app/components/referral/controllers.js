@@ -192,6 +192,20 @@
         $scope.error = res.data.message;
       });
     };
+    $scope.verifyRewards = function() {
+      ReferralService.verifyRewards().then(function(res){
+        (function() {
+          var modalInstance = $modal.open({
+            template: '<div verifyRewards-modal></div>',
+            windowClass: 'verifyRewards-modal'
+          });
+
+          modalInstance.result.then(function(msg) {
+            if ($scope[msg] instanceof Function) $scope[msg]();
+          });
+        })();
+      });
+    }
   }
   angular.module('referral.controllers', [])
     .controller('ReferralCtrl', ['$scope', 'ReferralService', 'Profile', ReferralCtrl])
