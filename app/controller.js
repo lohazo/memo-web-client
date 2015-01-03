@@ -75,7 +75,10 @@
     };
 
     if (!$scope.auth.loggedIn) {
-      logoutConfirmed();
+      var path = $location.path();
+      if (path.indexOf('/referral') < 0) {
+        logoutConfirmed();
+      }
     }
 
     EcoTracker.init();
