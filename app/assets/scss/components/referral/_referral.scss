@@ -1,4 +1,26 @@
-
-
-@import
-    "components/referral";
+.verify-rewards-modal {
+  position: fixed !important;
+  top: 100px !important;
+  min-height: 480px !important;
+  width: 550px;
+  overflow: hidden;
+  .text-bold {
+    font-weight: bold;
+  }
+  .text-red {
+    color: #810c15;
+  }
+  .verify-reward-container div {
+    margin-bottom: 1.25rem;
+  }
+  .verify-reward-container div p {
+    margin-bottom: 0px;
+  }
+  .verify-reward-container div.guide .sms-guide {
+    width: 350px;
+    margin: 0 auto;
+    text-align: center;
+    background: #FDE598;
+    padding: 15px;
+  }
+}
