@@ -15,10 +15,7 @@ angular.module('app.directives', [])
     return {
       restrict: 'EA',
       replace: true,
-      scope: {
-        shareType: '@',
-        shareData: '@'
-      },
+      scope: true,
       controller: 'HeaderCtrl',
       templateUrl: 'components/header/_header.html'
     };
@@ -39,6 +36,10 @@ angular.module('app.directives', [])
 
     return {
       restrict: 'EA',
+      scope: {
+        shareType: '@',
+        shareData: '@'
+      },
       link: function($scope, $element, $attr) {
         $element.bind('click', function() {
           if ($scope.shareType === "level-up") {

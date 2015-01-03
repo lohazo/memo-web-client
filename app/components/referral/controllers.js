@@ -146,11 +146,14 @@
       $location.path('/');
     };
 
-    $scope.shareType = 'referral-code';
+    $scope.FBShare = {
+      shareType: 'referral-code'
+    };
+
     ReferralService.getStatus().then(function(res) {
       $scope.code = res.data.referral_code || 0;
       $scope.invite_count = res.data.record.invited_count || 0;
-      $scope.shareData = $scope.code;
+      $scope.FBShare.shareData = res.data.referral_code;
     });
     $scope.combo_days = profile.detail.combo_days;
 
@@ -218,7 +221,7 @@
     .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
     .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', ReferralFooterCtrl])
     .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal', ReferralEntercodeCtrl])
-    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', function($scope, code){
+    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', function($scope, code) {
       $scope.reward_code = code;
     }])
 })(window.angular);
