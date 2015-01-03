@@ -42,12 +42,16 @@
           <a class="create-code" href="" title="">{{code}}</a>
           <a class="question-hover" href="#" title=""><img src="assets/img/referral/q.png" alt=""></a>
         </div>
-        <div class="code-share code-share-4">
+        <div class="code-share code-share-4" ng-if='isReferral==""'>
           <p>Nhập code từ bạn bè:</p>
           <form>
             <input type="text" name="" value="" placeholder="" ng-model='refCode'>
             <a href="" title=""><img src="assets/img/referral/arrow.png" alt="" ng-click='submitCode()'></a>
           </form>
+          <a class="question-hover" href="#" title=""><img src="assets/img/referral/q.png" alt=""></a>
+        </div>
+        <div class="code-share code-share-4" ng-if='isReferral!=""'>
+          <p>Bạn đã nhập code của {{userName}}</p>
           <a class="question-hover" href="#" title=""><img src="assets/img/referral/q.png" alt=""></a>
         </div>
         <p class="code-error">{{error}}</p>

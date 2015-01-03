@@ -144,7 +144,11 @@
   function ReferralEntercodeCtrl($scope, ReferralService, profile, $location, $modal) {
     if (!profile.user.auth_token) {
       $location.path('/');
-    };
+    } else {
+      // console.log(profile.detail);
+      $scope.isReferral = profile.detail.referral_user || '';
+      $scope.userName = profile.detail.referral_user;
+    }
 
     $scope.FBShare = {
       shareType: 'referral-code'
@@ -174,20 +178,22 @@
     });
 
     $scope.submitCode = function() {
-      var ref_code = $scope.refCode;
-
-      ReferralService.submitCode(ref_code).then(function(res) {
+      // var ref_code = $scope.refCode;
+      // console.log(ref_code);
+      ReferralService.submitCode($scope.refCode).then(function(res) {
         $scope.error = '';
-        (function() {
-          var modalInstance = $modal.open({
-            template: '<div submitcode-modal></div>',
-            windowClass: 'submitcode-modal'
-          });
+        // console.log(res);
+        $scope.isReferral = res.data.code || '';
+        // (function() {
+        //   var modalInstance = $modal.open({
+        //     template: '<div submitcode-modal></div>',
+        //     windowClass: 'submitcode-modal'
+        //   });
 
-          modalInstance.result.then(function(msg) {
-            if ($scope[msg] instanceof Function) $scope[msg]();
-          });
-        })();
+        //   modalInstance.result.then(function(msg) {
+        //     if ($scope[msg] instanceof Function) $scope[msg]();
+        //   });
+        // })();
       }, function(res) {
         $scope.error = res.data.message;
       });
