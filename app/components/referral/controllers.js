@@ -178,22 +178,11 @@
     });
 
     $scope.submitCode = function() {
-      // var ref_code = $scope.refCode;
-      // console.log(ref_code);
+
       ReferralService.submitCode($scope.refCode).then(function(res) {
         $scope.error = '';
-        // console.log(res);
         $scope.isReferral = res.data.code || '';
-        // (function() {
-        //   var modalInstance = $modal.open({
-        //     template: '<div submitcode-modal></div>',
-        //     windowClass: 'submitcode-modal'
-        //   });
-
-        //   modalInstance.result.then(function(msg) {
-        //     if ($scope[msg] instanceof Function) $scope[msg]();
-        //   });
-        // })();
+        $scope.userName = res.data.referral_user || '';
       }, function(res) {
         $scope.error = res.data.message;
       });
