@@ -220,6 +220,24 @@
             if ($scope[msg] instanceof Function) $scope[msg]();
           });
         })();
+      }, function(res){
+        (function() {
+          var modalInstance = $modal.open({
+            template: '<article class="verify-reward-container"><div class="guide"><div class="sms-guide">{{reward_code}}</div></div></article>',
+            windowClass: 'verify-rewards-modal',
+            // templateUrl: 'components/referral/_verify_Rewards_Error.html',
+            controller: 'ReferralRewardsCtrl',
+            resolve: {
+              getRewardsCode: function() {
+                return res.data.message;
+              }
+            }
+          });
+
+          modalInstance.result.then(function(msg) {
+            if ($scope[msg] instanceof Function) $scope[msg]();
+          });
+        })();
       });
     }
   }
