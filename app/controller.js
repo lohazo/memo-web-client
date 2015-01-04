@@ -1,4 +1,4 @@
-(function (angular) {
+(function(angular) {
   'use strict';
 
   function AppCtrl($scope, $rootScope, $localStorage, $location, EcoTracker) {
@@ -70,14 +70,13 @@
       legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     };
 
-    $scope.getNumber = function (num) {
+    $scope.getNumber = function(num) {
       return new Array(num);
     };
 
     if (!$scope.auth.loggedIn) {
       logoutConfirmed();
     }
-
 
     EcoTracker.init();
     $rootScope.$on('event:auth-loginConfirmed', loginConfirmed);
