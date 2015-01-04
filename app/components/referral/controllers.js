@@ -108,7 +108,21 @@
     });
   }
 
-  function ReferralFooterCtrl($scope, service, $location) {
+  function ReferralFooterCtrl($scope, service, $location, Profile) {
+    getAuthed();
+    $scope.$on('event:auth-loginConfirmed', function() {
+      getAuthed();
+    });
+
+    $scope.$on('event:auth-logoutConfirmed', function() {
+      $scope.isAuthed = false;
+    });
+
+    function getAuthed() {
+      Profile.getUser();
+      $scope.isAuthed = Profile.user ? true : false;
+    }
+
     function next() {
       // PlayerControl.getInstance().next();
       $scope.$broadcast('referral:body-next');
@@ -145,7 +159,6 @@
     if (!profile.user.auth_token) {
       $location.path('/');
     } else {
-      // console.log(profile.detail);
       $scope.isReferral = profile.detail.referral_user || '';
       $scope.userName = profile.detail.referral_user;
     }
@@ -188,7 +201,7 @@
       });
     };
     $scope.verifyRewards = function() {
-      ReferralService.verifyRewards().then(function(res){
+      ReferralService.verifyRewards().then(function(res) {
         (function() {
           var modalInstance = $modal.open({
             // template: '<div verifyRewards-modal></div>',
@@ -214,8 +227,10 @@
     .controller('ReferralCtrl', ['$scope', 'ReferralService', 'Profile', ReferralCtrl])
     .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
     .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
-    .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', ReferralFooterCtrl])
-    .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal', ReferralEntercodeCtrl])
+    .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', 'Profile', ReferralFooterCtrl])
+    .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal',
+      ReferralEntercodeCtrl
+    ])
     .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', function($scope, code) {
       $scope.reward_code = code;
     }])

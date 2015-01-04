@@ -9,18 +9,18 @@
         return "";
       }
     };
+
     $scope.logout = function() {
       AuthService.logout();
     };
+
     $scope.menus = [{
-        'title': 'Trang chủ',
-        'link': '/'
-      }, {
-        'title': 'Học bổng đón xuân',
-        'link': '/referral'
-      }
-      // {'title': 'Thảo luận', 'link': '/discussion'}
-    ];
+      'title': 'Trang chủ',
+      'link': '/'
+    }, {
+      'title': 'Học bổng đón xuân',
+      'link': '/referral'
+    }];
   }
 
   angular.module('header', []);
