@@ -169,6 +169,7 @@
         $scope.isReferral = profile.detail.referral_user || '';
         $scope.userName = profile.detail.referral_user;
         $scope.user = profile.detail || {};
+        $scope.combo_days = profile.detail.combo_days;
       },function(){
       });
       
@@ -184,8 +185,7 @@
       $scope.invite_count = res.data.record.invited_count || 0;
       $scope.FBShare.shareData = res.data.referral_code;
     });
-    $scope.combo_days = profile.detail.combo_days;
-
+    
     profile.getProfileDetail().then(function() {
       $scope.expChart = {
         labels: profile.detail.exp_chart.days,
