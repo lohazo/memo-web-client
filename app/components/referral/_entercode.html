@@ -22,10 +22,11 @@
       <span>Thông tin cá nhân</span>
       <div class="code-user">
         <div class="avatar-memo">
-          <img src="assets/img/profile-avatar-big.png" alt="">
+          <img src="{{user.url_avatar}}" alt="" ng-class="{true: 'display', false: 'hidden'}[user.url_avatar != '']" >
+          <img src="assets/img/profile-avatar-big.png" alt='' ng-class="{true: 'display', false: 'hidden'}[user.url_avatar == '']">
           <div class="memo-user">
-            <p>Kiến Memo</p>
-            <span>Kiến thợ</span>
+            <p>{{user.username}}</p>
+            <span>{{user.level_title}}</span>
           </div>
         </div>
         <div class="clear"></div>

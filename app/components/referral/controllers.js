@@ -145,9 +145,9 @@
     if (!profile.user.auth_token) {
       $location.path('/');
     } else {
-      // console.log(profile.detail);
       $scope.isReferral = profile.detail.referral_user || '';
       $scope.userName = profile.detail.referral_user;
+      $scope.user = profile.detail || {};
     }
 
     $scope.FBShare = {
