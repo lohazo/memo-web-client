@@ -44,53 +44,35 @@
   margin-right: 15px;
 }
 
-.circle {
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  background: #810c15;
-  display: inherit;
-  transition: 1s;
-  border: 2px solid #fff;
-  text-align: center;
-  margin-left: 10px;
-  font-weight: 600;
-}
-
-.circle-disable {
-  border-radius: 50%;
-  text-align: center;
-  width: 30px;
-  height: 30px;
-  background: #999999;
-  display: inherit;
-  transition: 1s;
-  border: 2px solid #fff;
-  margin-left: 10px;
-  font-weight: 600;
-}
-
 .button-screen-2-center {
   background-color: #810c15;
-  color: #ffffff;
+  color: $white;
   height: 140px;
   width: 240px;
   margin-bottom: 5px;
   margin-left: 20px;
   padding: 0;
   text-align: left;
-}
-
-.button-screen-2-center-disable {
-  background-color: #999 !important;
-  color: #ffffff;
-  height: 140px;
-  width: 240px;
-  margin-bottom: 5px;
-  margin-left: 20px;
   font-size: 18px;
-  padding: 0;
-  text-align: left;
+  &.disable {
+    background-color: #999;
+    color: $white;
+  }
+  .circle {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background: #810c15;
+    display: inherit;
+    transition: all .2s ease-in-out 0s;
+    border: 2px solid #fff;
+    text-align: center;
+    margin-left: 10px;
+    font-weight: 600;
+    &.disable {
+      background: #999999;
+    }
+  }
 }
 
 .button-screen-2-bottom-left {
@@ -377,7 +359,7 @@
     background: #cccccc;
     color: #333333;
   }
-  .tooltip.tip-top {
+  tooltip-popup.tooltip.tip-top {
     font-weight: normal !important;
     font-size: 1rem;
   }
