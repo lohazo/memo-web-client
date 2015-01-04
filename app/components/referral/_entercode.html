@@ -40,9 +40,21 @@
         </div>
         <div class="code-share code-share-3">
           <p>Code chia sẻ:</p>
-          <a class="create-code" href="" title="">{{code}}</a>
-          <a class="question-hover" title=""><img src="assets/img/referral/q.png" alt=""></a>
+          <a class="create-code">{{code}}</a>
+          <a class="question-hover" tooltip="Code để gửi bạn bè"><img src="assets/img/referral/q.png" alt=""></a>
         </div>
+        <div class="share-social">
+          <p>Chia sẽ mã code {{code}} tới những người bạn của mình nhé!</p>
+          <a title="" facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">Share</a>
+        </div>
+        <p class="code-error">{{error}}</p>
+        <!-- <div class="chart-memo">
+          <img src="assets/img/referral/chart.png" alt="">
+        </div> -->
+        <div class="row">
+          <canvas linechart="" options="chartOptions" data="expChart" width="230" height="150" style="width: 220px; height: 150px;"></canvas>
+        </div>
+        <div class="clear"></div>
         <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral == '']">
           <p>Nhập code từ bạn bè:</p>
           <form>
@@ -53,19 +65,6 @@
         </div>
         <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral != '']">
           <p>Bạn đã nhập code của {{userName}}!</p>
-          
-        </div>
-        <p class="code-error">{{error}}</p>
-        <!-- <div class="chart-memo">
-          <img src="assets/img/referral/chart.png" alt="">
-        </div> -->
-        <div class="row">
-          <canvas linechart="" options="chartOptions" data="expChart" width="230" height="150" style="width: 220px; height: 150px;"></canvas>
-        </div>
-        <div class="clear"></div>
-        <div class="share-social">
-          <p>Chia sẽ mã code {{code}} tới những người bạn của mình nhé!</p>
-          <a title="" facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">Share</a>
         </div>
         <div class="clear"></div>
         <div class="share-social">
