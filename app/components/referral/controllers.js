@@ -227,18 +227,15 @@
     $scope.readme = function(data) {
       (function() {
         var modalInstance = $modal.open({
-          template: '<div readme-modal></div>',
           windowClass: 'readme-modal',
           controller: 'ReferralReadmeCtrl',
           templateUrl: 'components/referral/_readme-' + data + '.html'
         });
-
         modalInstance.result.then(function(msg) {
           if ($scope[msg] instanceof Function) $scope[msg]();
         });
       })();
     }
-    console.log(data);
     $scope.submitCode = function() {
 
       ReferralService.submitCode($scope.refCode).then(function(res) {
