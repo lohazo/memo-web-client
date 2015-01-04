@@ -5,7 +5,17 @@
     $routeProvider
       .when('/referral', {
         templateUrl: 'components/referral/_index.html',
-        controller: 'ReferralCtrl'
+        controller: 'ReferralCtrl',
+        resolve: {
+          joined: function(ReferralService) {
+            return ReferralService.getStatus().then(function(res) {
+              if (res.data.record) ReferralService.status = 1;
+              else ReferralService.status = 0;
+            }, function(res) {
+              ReferralService.status = 0;
+            });
+          }
+        }
       })
       .when('/referral/profile', {
         templateUrl: 'components/referral/_entercode.html',

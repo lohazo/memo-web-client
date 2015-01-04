@@ -27,7 +27,7 @@ body {
 }
 
 .app {
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 }
 
 .container {
@@ -132,4 +132,8 @@ a.reverse.button {
       color: $white;
     }
   }
+}
+
+.hide {
+  display: none !important;
 }

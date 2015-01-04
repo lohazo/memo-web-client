@@ -83,8 +83,12 @@
     'referral-body-three'
   ]);
 
-  function ReferralCtrl($scope, service, profile) {
-    //
+  function ReferralCtrl($scope, service, $location) {
+    Singleton.getView().reset();
+    if (service.status == 1) {
+      $location.path('/referral/profile');
+
+    } 
   }
 
   function ReferralHeaderCtrl($scope, service) {}
@@ -108,7 +112,21 @@
     });
   }
 
-  function ReferralFooterCtrl($scope, service, $location) {
+  function ReferralFooterCtrl($scope, service, $location, Profile) {
+    getAuthed();
+    $scope.$on('event:auth-loginConfirmed', function() {
+      getAuthed();
+    });
+
+    $scope.$on('event:auth-logoutConfirmed', function() {
+      $scope.isAuthed = false;
+    });
+
+    function getAuthed() {
+      Profile.getUser();
+      $scope.isAuthed = Profile.user ? true : false;
+    }
+
     function next() {
       // PlayerControl.getInstance().next();
       $scope.$broadcast('referral:body-next');
@@ -129,6 +147,7 @@
     }
 
     function gotoProfile() {
+      service.joined();
       $location.path('/referral/profile');
     }
 
@@ -145,9 +164,16 @@
     if (!profile.user.auth_token) {
       $location.path('/');
     } else {
-      // console.log(profile.detail);
-      $scope.isReferral = profile.detail.referral_user || '';
-      $scope.userName = profile.detail.referral_user;
+      // console.log(profile);
+      profile.getProfileDetail().then(function(){
+        $scope.isReferral = profile.detail.referral_user || '';
+        $scope.userName = profile.detail.referral_user;
+        $scope.user = profile.detail || {};
+        $scope.combo_days = profile.detail.combo_days;
+      },function(){
+      });
+      
+      
     }
 
     $scope.FBShare = {
@@ -159,8 +185,7 @@
       $scope.invite_count = res.data.record.invited_count || 0;
       $scope.FBShare.shareData = res.data.referral_code;
     });
-    $scope.combo_days = profile.detail.combo_days;
-
+    
     profile.getProfileDetail().then(function() {
       $scope.expChart = {
         labels: profile.detail.exp_chart.days,
@@ -188,7 +213,7 @@
       });
     };
     $scope.verifyRewards = function() {
-      ReferralService.verifyRewards().then(function(res){
+      ReferralService.verifyRewards().then(function(res) {
         (function() {
           var modalInstance = $modal.open({
             // template: '<div verifyRewards-modal></div>',
@@ -198,6 +223,24 @@
             resolve: {
               getRewardsCode: function() {
                 return res.data.rewards_verification_code;
+              }
+            }
+          });
+
+          modalInstance.result.then(function(msg) {
+            if ($scope[msg] instanceof Function) $scope[msg]();
+          });
+        })();
+      }, function(res){
+        (function() {
+          var modalInstance = $modal.open({
+            template: '<article class="verify-reward-container"><div class="guide"><div class="sms-guide">{{reward_code}}</div></div></article>',
+            windowClass: 'verify-rewards-modal',
+            // templateUrl: 'components/referral/_verify_Rewards_Error.html',
+            controller: 'ReferralRewardsCtrl',
+            resolve: {
+              getRewardsCode: function() {
+                return res.data.message;
               }
             }
           });
@@ -246,11 +289,13 @@
   }
 
   angular.module('referral.controllers', [])
-    .controller('ReferralCtrl', ['$scope', 'ReferralService', 'Profile', ReferralCtrl])
+    .controller('ReferralCtrl', ['$scope', 'ReferralService', '$location', ReferralCtrl])
     .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
     .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
-    .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', ReferralFooterCtrl])
-    .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal', ReferralEntercodeCtrl])
+    .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', 'Profile', ReferralFooterCtrl])
+    .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal',
+      ReferralEntercodeCtrl
+    ])
     .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', function($scope, code) {
       $scope.reward_code = code;
     }])

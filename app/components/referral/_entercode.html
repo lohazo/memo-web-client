@@ -35,10 +35,11 @@
       <span>Thông tin cá nhân</span>
       <div class="code-user">
         <div class="avatar-memo">
-          <img src="assets/img/profile-avatar-big.png" alt="">
+          <img src="{{user.url_avatar}}" alt="" ng-class="{true: 'display', false: 'hidden'}[user.url_avatar != '']" >
+          <img src="assets/img/profile-avatar-big.png" alt='' ng-class="{true: 'display', false: 'hidden'}[user.url_avatar == '']">
           <div class="memo-user">
-            <p>Kiến Memo</p>
-            <span>Kiến thợ</span>
+            <p>{{user.username}}</p>
+            <span>{{user.level_title}}</span>
           </div>
         </div>
         <div class="clear"></div>
@@ -52,20 +53,12 @@
         </div>
         <div class="code-share code-share-3">
           <p>Code chia sẻ:</p>
-          <a class="create-code" href="" title="">{{code}}</a>
-          <a class="question-hover" href="#" title=""><img src="assets/img/referral/q.png" alt=""></a>
+          <a class="create-code">{{code}}</a>
+          <a class="question-hover" tooltip="Code để gửi bạn bè"><img src="assets/img/referral/q.png" alt=""></a>
         </div>
-        <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral == '']">
-          <p>Nhập code từ bạn bè:</p>
-          <form>
-            <input type="text" name="" value="" placeholder="" ng-model='refCode'>
-            <a href="" title=""><img src="assets/img/referral/arrow.png" alt="" ng-click='submitCode()'></a>
-          </form>
-          <a class="question-hover" href="#" title=""><img src="assets/img/referral/q.png" alt=""></a>
-        </div>
-        <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral != '']">
-          <p>Bạn đã nhập code của {{userName}} !</p>
-          
+        <div class="share-social">
+          <p>Chia sẽ mã code {{code}} tới những người bạn của mình nhé!</p>
+          <a title="" facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">Share</a>
         </div>
         <p class="code-error">{{error}}</p>
         <!-- <div class="chart-memo">
@@ -75,14 +68,21 @@
           <canvas linechart="" options="chartOptions" data="expChart" width="230" height="150" style="width: 220px; height: 150px;"></canvas>
         </div>
         <div class="clear"></div>
-        <div class="share-social">
-          <p>Chia sẻ mã code {{code}} tới những người bạn của mình nhé!</p>
-          <a href="#" title="" facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">Share</a>
+        <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral == '']">
+          <p>Nhập code từ bạn bè:</p>
+          <form>
+            <input type="text" name="" value="" placeholder="" ng-model='refCode'>
+            <a href="" title=""><img src="assets/img/referral/arrow.png" alt="" ng-click='submitCode()'></a>
+          </form>
+          <a class="question-hover" title=""><img src="assets/img/referral/q.png" alt=""></a>
+        </div>
+        <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral != '']">
+          <p>Bạn đã nhập code của {{userName}}!</p>
         </div>
         <div class="clear"></div>
         <div class="share-social">
           <p>Bạn đã mời được {{invite_count}} người bạn và thực hiện được {{combo_days}} ngày học liên tiếp!</p>
-          <a class="confirm" href="#" title="" ng-click='verifyRewards()'>Xác minh</a>
+          <a class="confirm" title="" ng-click='verifyRewards()'>Xác minh</a>
         </div>
         <span class="border"></span>
         <div class="contact">
