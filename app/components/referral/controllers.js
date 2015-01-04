@@ -84,7 +84,7 @@
   ]);
 
   function ReferralCtrl($scope, service, $location) {
-
+    Singleton.getView().reset();
     if (service.status == 1) {
       $location.path('/referral/profile');
 
