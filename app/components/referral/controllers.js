@@ -87,7 +87,6 @@
     Singleton.getView().reset();
     if (service.status == 1) {
       $location.path('/referral/profile');
-
     }
   }
 
@@ -191,15 +190,12 @@
     if (!profile.user.auth_token) {
       $location.path('/');
     } else {
-      // console.log(profile);
       profile.getProfileDetail().then(function() {
         $scope.isReferral = profile.detail.referral_user || '';
         $scope.userName = profile.detail.referral_user;
         $scope.user = profile.detail || {};
         $scope.combo_days = profile.detail.combo_days;
       }, function() {});
-
-
     }
 
     $scope.FBShare = {
@@ -227,6 +223,22 @@
         }]
       };
     });
+
+    $scope.readme = function(id) {
+      (function() {
+        var modalInstance = $modal.open({
+          template: '<div readme-modal></div>',
+          windowClass: 'readme-modal',
+          // templateUrl: 'components/referral/_readme_{{id}}.html',
+          // controller: 'ReferralRewardsCtrl',
+
+        });
+
+        modalInstance.result.then(function(msg) {
+          if ($scope[msg] instanceof Function) $scope[msg]();
+        });
+      })();
+    }
 
     $scope.submitCode = function() {
 
