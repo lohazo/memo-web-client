@@ -45,7 +45,7 @@
       // return this.current();
     },
     next: function() {
-      this.index++;
+      return this.index++;
     },
     hasNext: function() {
       return this.index < this.items.length - 1;
@@ -54,10 +54,10 @@
       return this.index > 0;
     },
     prev: function() {
-      this.index--;
+      return this.index--;
     },
     reset: function() {
-      this.index = 0;
+      return this.index = 0;
     },
     last: function() {
       this.index = this.items.length - 1;
@@ -263,28 +263,40 @@
     ]);
     slide.reset();
     $scope.image = slide.current();
+    var indexActive = 0;
+
     function next() {
+      var index = 0;
       if (slide.hasNext()) {
-        slide.next();
+        indexActive = slide.next();
       } else {
-        slide.reset();
+        indexActive = slide.reset();
       }
       $scope.image = slide.current();
     }
 
     function prev() {
       if (slide.hasPrev()) {
-        slide.prev();
+        indexActive = slide.prev();
 
       } else {
-        slide.last();
+        indexActive = slide.last();
       }
       $scope.image = slide.current();
     }
 
+    function getActive(index) {
+      if (index == indexActive) {
+        return 'active';
+      } else {
+        return '';
+      }
+    }
+
     $scope.slide = {
       next: next,
-      prev: prev
+      prev: prev,
+      getActive: getActive
     }
   }
 

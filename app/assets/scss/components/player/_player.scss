@@ -707,13 +707,13 @@ span.border {
   overflow-y: scroll;
   height: 480px;
 }
-
+.all-slider {
   .button-slider-entercode {
     border-radius: 50%;
     width: 24px;
     height: 24px;
-    background:#810c15;
-    transition:1s;
+    background: #810c15;
+    transition: 1s;
     text-align: center;
     float: left;
     margin-left: 10px;
@@ -724,8 +724,8 @@ span.border {
     border-radius: 50%;
     width: 24px;
     height: 24px;
-    background:#999;
-    transition:1s;
+    background: #999;
+    transition: 1s;
     text-align: center;
     float: left;
     margin-left: 10px;
@@ -743,19 +743,23 @@ span.border {
 
   .arrow-next-slider {
     width: 35px;
+    height: 60px;
     float: left;
-    margin-left: 10px;
+    margin-top: -180px;
+    margin-left: 470px;
+    ;
   }
 
   .arrow-pre-slider {
     width: 35px;
+    height: 60px;
     margin-left: 10px;
     float: left;
   }
 
   .arrow-of-slider {
-    width: 45px;
-    height:60px;
+    width: 510px;
+    height: 60px;
     margin-top: 190px;
     float: left;
   }
@@ -764,9 +768,9 @@ span.border {
     height: 300px;
     width: 400px;
     margin-left: 55px;
-    margin-top: -150px;
+    margin-top: -120px;
   }
-
+}
 @import "player-header";
 @import "player-main";
 @import "player-footer";

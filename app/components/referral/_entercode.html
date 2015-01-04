@@ -4,6 +4,7 @@
     <div class="large-8 columns left-slider">
       <span>HƯỚNG DẪN THAM DỰ</span>
       <div class="slider-entercode">
+        <div class="all-slider">
         <div class="arrow-of-slider">
           <div class="arrow-pre-slider"><a ng-click="slide.prev()"><img src="assets/img/referral/arrow_pre.png"></a></div>
           <div class="slide">
@@ -11,24 +12,23 @@
           </div>
           <div class="arrow-next-slider"><a ng-click="slide.next()"><img src="assets/img/referral/arrow_next.png"></a></div>
         </div>
-        <div class="button-of-slider">
+        <div class="button-of-slider" ng-init="items = [0, 1, 2, 3, 4]">
           <div class="button-slider-entercode"><strong>1</strong></div>
           <div class="button-disable-slider-entercode"><strong>2</strong></div>
           <div class="button-disable-slider-entercode"><strong>3</strong></div>
           <div class="button-disable-slider-entercode"><strong>4</strong></div>
           <div class="button-disable-slider-entercode"><strong>5</strong></div>
         </div>
+        </div>
       </div>
       <div class="infor-question">
         <h4>Thông tin liên quan</h4>    
-        <a href="" title="">Làm thế nào để xác minh được tôi đã mời bạn bè mình tham gia?</a>
-        <a href="" title="">Thời gian nhận học bổng là đến bao giờ? có giới hạn số lượng học bổng được nhận hay không?</a>
-        <a href="" title="">Tôi có thể sử dụng nhiều học bổng một lúc được không?</a>
-        <a href="" title="" class="topica-active">Học bổng nhận được có áp dụng cho tất cả các khoá học của TOPICA NATIVE không?</a>
-        <a href="" title="">Tôi phải đến đâu để nhận học bổng?</a>
-        <a href="" title="">Tôi không sinh sống tại Hà Nội, TP. Hồ Chí Minh và Đà Nẵng thì sử dụng học bổng như thế nào?</a>
-        <a href="" title="">Các hình thức thanh toán để nhận học bổng là như thế nào?</a>
-        <a href="" title="">Tôi được mời tối đa bao nhiêu người tham gia?</a>
+        <a href="" title="">Giới thiệu Topica Native</a>
+        <a href="" title="">Hướng dẫn tham dự chương trình</a>
+        <a href="" title="">Cách thức xác minh tài khoản</a>
+        <a href="" title="" class="topica-active">Hướng dẫn cách sử dụng học bổng</a>
+        <a href="" title="">Giá trị quy đổi học bổng</a>
+        <a href="" title="">Khiếu nại, liên hệ</a>
       </div>
     </div>
     <div class="large-8 columns right-infor">
@@ -57,7 +57,7 @@
           <a class="question-hover" tooltip="Code để gửi bạn bè"><img src="assets/img/referral/q.png" alt=""></a>
         </div>
         <div class="share-social">
-          <p>Chia sẽ mã code {{code}} tới những người bạn của mình nhé!</p>
+          <p>Chia sẻ mã code {{code}} tới những người bạn của mình nhé!</p>
           <a title="" facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">Share</a>
         </div>
         <p class="code-error">{{error}}</p>
