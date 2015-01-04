@@ -87,6 +87,7 @@
 
     if (service.status == 1) {
       $location.path('/referral/profile');
+
     } 
   }
 
@@ -163,9 +164,15 @@
     if (!profile.user.auth_token) {
       $location.path('/');
     } else {
-      $scope.isReferral = profile.detail.referral_user || '';
-      $scope.userName = profile.detail.referral_user;
-      $scope.user = profile.detail || {};
+      // console.log(profile);
+      profile.getProfileDetail().then(function(){
+        $scope.isReferral = profile.detail.referral_user || '';
+        $scope.userName = profile.detail.referral_user;
+        $scope.user = profile.detail || {};
+      },function(){
+      });
+      
+      
     }
 
     $scope.FBShare = {
