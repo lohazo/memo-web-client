@@ -161,6 +161,7 @@
     } else {
       $scope.isReferral = profile.detail.referral_user || '';
       $scope.userName = profile.detail.referral_user;
+      $scope.user = profile.detail || {};
     }
 
     $scope.FBShare = {
