@@ -87,8 +87,7 @@
     Singleton.getView().reset();
     if (service.status == 1) {
       $location.path('/referral/profile');
-
-    } 
+    }
   }
 
   function ReferralHeaderCtrl($scope, service) {}
@@ -110,6 +109,33 @@
       Singleton.getView().last();
       $scope.directive = Singleton.getView().current();
     });
+
+    $scope.view = {
+      intro: true,
+      price: false,
+      payment: false
+    };
+    $scope.displayIntro = function() {
+      $scope.view = {
+        intro: true,
+        price: false,
+        payment: false
+      };
+    };
+    $scope.displayPriceScholarship = function() {
+      $scope.view = {
+        intro: false,
+        price: true,
+        payment: false
+      };
+    };
+    $scope.displayPaymentMethod = function() {
+      $scope.view = {
+        intro: false,
+        price: false,
+        payment: true
+      };
+    };
   }
 
   function ReferralFooterCtrl($scope, service, $location, Profile) {
@@ -164,16 +190,12 @@
     if (!profile.user.auth_token) {
       $location.path('/');
     } else {
-      // console.log(profile);
-      profile.getProfileDetail().then(function(){
+      profile.getProfileDetail().then(function() {
         $scope.isReferral = profile.detail.referral_user || '';
         $scope.userName = profile.detail.referral_user;
         $scope.user = profile.detail || {};
         $scope.combo_days = profile.detail.combo_days;
-      },function(){
-      });
-      
-      
+      }, function() {});
     }
 
     $scope.FBShare = {
@@ -185,7 +207,7 @@
       $scope.invite_count = res.data.record.invited_count || 0;
       $scope.FBShare.shareData = res.data.referral_code;
     });
-    
+
     profile.getProfileDetail().then(function() {
       $scope.expChart = {
         labels: profile.detail.exp_chart.days,
@@ -201,6 +223,22 @@
         }]
       };
     });
+
+    $scope.readme = function(id) {
+      (function() {
+        var modalInstance = $modal.open({
+          template: '<div readme-modal></div>',
+          windowClass: 'readme-modal',
+          // templateUrl: 'components/referral/_readme_{{id}}.html',
+          // controller: 'ReferralRewardsCtrl',
+
+        });
+
+        modalInstance.result.then(function(msg) {
+          if ($scope[msg] instanceof Function) $scope[msg]();
+        });
+      })();
+    }
 
     $scope.submitCode = function() {
 
@@ -231,7 +269,7 @@
             if ($scope[msg] instanceof Function) $scope[msg]();
           });
         })();
-      }, function(res){
+      }, function(res) {
         (function() {
           var modalInstance = $modal.open({
             template: '<article class="verify-reward-container"><div class="guide"><div class="sms-guide">{{reward_code}}</div></div></article>',
