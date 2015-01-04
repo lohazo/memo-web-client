@@ -224,14 +224,13 @@
       };
     });
 
-    $scope.readme = function(id) {
+    $scope.readme = function(data) {
       (function() {
         var modalInstance = $modal.open({
           template: '<div readme-modal></div>',
           windowClass: 'readme-modal',
-          // templateUrl: 'components/referral/_readme_{{id}}.html',
-          // controller: 'ReferralRewardsCtrl',
-
+          controller: 'ReferralReadmeCtrl',
+          templateUrl: 'components/referral/_readme-' + data + '.html'
         });
 
         modalInstance.result.then(function(msg) {
@@ -338,6 +337,8 @@
     }
   }
 
+  function ReferralReadmeCtrl($scope, data) {}
+
   angular.module('referral.controllers', [])
     .controller('ReferralCtrl', ['$scope', 'ReferralService', '$location', ReferralCtrl])
     .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
@@ -349,4 +350,5 @@
     .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', function($scope, code) {
       $scope.reward_code = code;
     }])
+    .controller('ReferralReadmeCtrl', ['$scope', ReferralReadmeCtrl]);
 })(window.angular);
