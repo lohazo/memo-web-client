@@ -5,20 +5,11 @@
     $routeProvider
       .when('/referral', {
         templateUrl: 'components/referral/_index.html',
-        controller: 'ReferralCtrl',
-        // resolve: {
-        //   getStatus: function(ReferralService) {
-        //     return ReferralService.getStatus();
-        //   },
-        //   getDetail: function(Profile) {
-        //     // console.log(Profile);
-        //     return Profile.detail;
-        //   }
-        // }
+        controller: 'ReferralCtrl'
       })
       .when('/referral/profile', {
         templateUrl: 'components/referral/_entercode.html',
-        controller: 'ReferralEntercodeCtrl',
+        controller: 'ReferralEntercodeCtrl'
       })
   }
 
