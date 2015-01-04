@@ -43,17 +43,9 @@
           <a class="create-code" href="" title="">{{code}}</a>
           <a class="question-hover" title=""><img src="assets/img/referral/q.png" alt=""></a>
         </div>
-        <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral == '']">
-          <p>Nhập code từ bạn bè:</p>
-          <form>
-            <input type="text" name="" value="" placeholder="" ng-model='refCode'>
-            <a href="" title=""><img src="assets/img/referral/arrow.png" alt="" ng-click='submitCode()'></a>
-          </form>
-          <a class="question-hover" title=""><img src="assets/img/referral/q.png" alt=""></a>
-        </div>
-        <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral != '']">
-          <p>Bạn đã nhập code của {{userName}}!</p>
-          
+        <div class="share-social">
+          <p>Bạn đã mời được {{invite_count}} người bạn và thực hiện được {{combo_days}} ngày học liên tiếp!</p>
+          <a class="confirm" title="" ng-click='verifyRewards()'>Xác minh</a>
         </div>
         <p class="code-error">{{error}}</p>
         <!-- <div class="chart-memo">
@@ -68,9 +60,16 @@
           <a title="" facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">Share</a>
         </div>
         <div class="clear"></div>
-        <div class="share-social">
-          <p>Bạn đã mời được {{invite_count}} người bạn và thực hiện được {{combo_days}} ngày học liên tiếp!</p>
-          <a class="confirm" title="" ng-click='verifyRewards()'>Xác minh</a>
+        <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral == '']">
+          <p>Nhập code từ bạn bè:</p>
+          <form>
+            <input type="text" name="" value="" placeholder="" ng-model='refCode'>
+            <a href="" title=""><img src="assets/img/referral/arrow.png" alt="" ng-click='submitCode()'></a>
+          </form>
+          <a class="question-hover" title=""><img src="assets/img/referral/q.png" alt=""></a>
+        </div>
+        <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral != '']">
+          <p>Bạn đã nhập code của {{userName}}!</p>
         </div>
         <span class="border"></span>
         <div class="contact">
