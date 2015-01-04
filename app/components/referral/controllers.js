@@ -83,8 +83,11 @@
     'referral-body-three'
   ]);
 
-  function ReferralCtrl($scope, service, profile) {
-    //
+  function ReferralCtrl($scope, service, $location) {
+
+    if (service.status == 1) {
+      $location.path('/referral/profile');
+    } 
   }
 
   function ReferralHeaderCtrl($scope, service) {}
@@ -143,6 +146,7 @@
     }
 
     function gotoProfile() {
+      service.joined();
       $location.path('/referral/profile');
     }
 
@@ -243,7 +247,7 @@
   }
 
   angular.module('referral.controllers', [])
-    .controller('ReferralCtrl', ['$scope', 'ReferralService', 'Profile', ReferralCtrl])
+    .controller('ReferralCtrl', ['$scope', 'ReferralService', '$location', ReferralCtrl])
     .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
     .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
     .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', 'Profile', ReferralFooterCtrl])
