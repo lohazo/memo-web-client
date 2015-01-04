@@ -42,7 +42,7 @@
           <a class="create-code" href="" title="">{{code}}</a>
           <a class="question-hover" href="#" title=""><img src="assets/img/referral/q.png" alt=""></a>
         </div>
-        <div class="code-share code-share-4" ng-if='isReferral==""'>
+        <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral == '']">
           <p>Nhập code từ bạn bè:</p>
           <form>
             <input type="text" name="" value="" placeholder="" ng-model='refCode'>
@@ -50,16 +50,16 @@
           </form>
           <a class="question-hover" href="#" title=""><img src="assets/img/referral/q.png" alt=""></a>
         </div>
-        <div class="code-share code-share-4" ng-if='isReferral!=""'>
-          <p>Bạn đã nhập code của {{userName}}</p>
-          <a class="question-hover" href="#" title=""><img src="assets/img/referral/q.png" alt=""></a>
+        <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral != '']">
+          <p>Bạn đã nhập code của {{userName}} !</p>
+          
         </div>
         <p class="code-error">{{error}}</p>
         <!-- <div class="chart-memo">
           <img src="assets/img/referral/chart.png" alt="">
         </div> -->
         <div class="row">
-          <canvas linechart="" options="chartOptions" data="expChart" width="220" height="150" style="width: 220px; height: 150px;"></canvas>
+          <canvas linechart="" options="chartOptions" data="expChart" width="230" height="150" style="width: 220px; height: 150px;"></canvas>
         </div>
         <div class="clear"></div>
         <div class="share-social">
