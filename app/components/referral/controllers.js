@@ -238,7 +238,7 @@
         });
       })();
     }
-
+    console.log(data);
     $scope.submitCode = function() {
 
       ReferralService.submitCode($scope.refCode).then(function(res) {
