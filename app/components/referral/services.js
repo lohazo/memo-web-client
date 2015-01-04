@@ -6,8 +6,7 @@
   'use strict';
 
   function ReferralService($http, $q, $localStorage, API) {
-    var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '',
-      Apis = {
+    var Apis = {
         // GET
         status: '/referral/referral_status?auth_token=',
 
@@ -18,6 +17,7 @@
       },
       Referral = {};
     Referral.getStatus = function() {
+      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var deferred = $q.defer();
 
       $http.get(API + Apis.status + authToken)
@@ -31,6 +31,7 @@
     };
 
     Referral.submitCode = function(ref_code) {
+      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var deferred = $q.defer(),
         data = {
           auth_token: authToken,
@@ -48,6 +49,7 @@
     };
 
     Referral.checkCode = function(ref_code) {
+      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var deferred = $q.defer(),
         data = {
           auth_token: authToken,
@@ -65,6 +67,7 @@
     };
 
     Referral.verifyRewards = function() {
+      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var deferred = $q.defer(),
         data = {
           auth_token: authToken,
