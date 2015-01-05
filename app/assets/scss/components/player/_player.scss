@@ -1,4 +1,4 @@
-.new-player {
+ .new-player {
   padding-top: 40px;
   .player-inner {
     @include grid-row;
@@ -22,11 +22,11 @@
   border-radius: 10px;
 }
 
-  .img-memo-left {
-    height: 80px;
-    width: 62px;
-    margin-left: 190px;
-  }
+.img-memo-left {
+  height: 80px;
+  width: 62px;
+  margin-left: 190px;
+}
 
   .img-memo-right {
     height: 80px;
@@ -696,31 +696,22 @@ span.border {
   overflow-y: scroll;
   height: 480px;
 }
+
 .all-slider {
   .button-slider-entercode {
     border-radius: 50%;
     width: 24px;
     height: 24px;
-    background: #810c15;
-    transition: 1s;
-    text-align: center;
-    float: left;
-    margin-left: 10px;
-    color: #ffffff;
-  }
-
-  .button-disable-slider-entercode {
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
     background: #999;
-    transition: 1s;
     text-align: center;
     float: left;
     margin-left: 10px;
     color: #ffffff;
+    cursor: pointer;
+    &.active {
+      background: #810c15;
+    }
   }
-
   .button-of-slider {
     height: 24px;
     width: 510px;
@@ -729,30 +720,25 @@ span.border {
     margin-top: 129px;
     float: left;
   }
-
   .arrow-next-slider {
     width: 35px;
     height: 60px;
     float: left;
     margin-top: -180px;
     margin-left: 470px;
-    ;
   }
-
   .arrow-pre-slider {
     width: 35px;
     height: 60px;
     margin-left: 10px;
     float: left;
   }
-
   .arrow-of-slider {
     width: 510px;
     height: 60px;
     margin-top: 190px;
     float: left;
   }
-
   .slide {
     height: 300px;
     width: 400px;
@@ -760,6 +746,55 @@ span.border {
     margin-top: -120px;
   }
 }
+
+.price-scholarship{
+  overflow-y: scroll;
+  height: 430px;
+  width: 813px;
+}
+.price-scholarship p > span {
+  font-weight: 600;
+}
+h3.headline-text {
+    text-align: center;
+    color: #810C15;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+.price-scholarship hr{
+  height: 2px;
+  background: #810c15;
+  margin-top: 5px;
+  margin-right: 15px;
+}
+.payment-method{
+  overflow-y: scroll;
+  height: 430px;
+  width: 813px;
+  margin-right: 26px;
+}
+.payment-method hr{
+  height: 2px;
+  background: #810c15;
+  margin-top: 5px;
+  margin-right: 22px;
+}
+.price-scholarship .content p > span {
+  color: #810C15;
+}
+.payment-method p > span{
+  color: #810C15;
+  font-weight: 600;
+}
+.choose-learning{
+  color: #810C15;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+
 @import "player-header";
 @import "player-main";
 @import "player-footer";

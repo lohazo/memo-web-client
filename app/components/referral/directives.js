@@ -24,12 +24,6 @@
         controller: 'ReferralFooterCtrl'
       };
     })
-    .directive('referralEntercodeCtrl', function() {
-      return {
-        strict: 'EA',
-        controller: 'ReferralEntercodeCtrl',
-      };
-    })
     .directive('submitcodeModal', function() {
       return {
         strict: 'EA',
