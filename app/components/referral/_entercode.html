@@ -9,6 +9,7 @@
           <div class="arrow-pre-slider"><a ng-click="slide.prev()"><img src="assets/img/referral/arrow_pre.png"></a></div>
           <div class="slide">
             <div class="slide-img"><img src="{{image}}" alt=""/></div>
+            <div class="text"><p src="{{text}}"></p></div>
           </div>
           <div class="arrow-next-slider"><a ng-click="slide.next()"><img src="assets/img/referral/arrow_next.png"></a></div>
         </div>
@@ -56,7 +57,7 @@
           <p>Chia sẻ mã code {{code}} tới những người bạn của mình nhé!</p>
           <a title="" facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">Share</a>
         </div>
-        <p class="code-error">{{error}}</p>
+        
         <!-- <div class="chart-memo">
           <img src="assets/img/referral/chart.png" alt="">
         </div> -->
@@ -69,22 +70,25 @@
           <form>
             <input type="text" name="" value="" placeholder="" ng-model='refCode'>
             <a href="" title=""><img src="assets/img/referral/arrow.png" alt="" ng-click='submitCode()'></a>
+
           </form>
           <a class="question-hover" title=""><img src="assets/img/referral/q.png" alt=""></a>
+          <p class="code-error">{{error}}</p>
         </div>
         <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral != '']">
           <p>Bạn đã nhập code của {{userName}}!</p>
         </div>
         <div class="clear"></div>
         <div class="share-social">
-          <p>Bạn đã mời được {{invite_count}} người bạn và thực hiện được {{combo_days}} ngày học liên tiếp!</p>
+          <p>Bạn đã mời được {{invite_count}} người bạn và thực hiện được {{combo_days}} ngày học liên tiếp! Kỉ lục combo của bạn là 0 ngày</p>
           <a class="confirm" title="" ng-click='verifyRewards()'>Xác minh</a>
         </div>
         <span class="border"></span>
         <div class="contact">
-          <p>Nếu có thắc mắc bạn có thể liên hệ</p>
-          <p>Hotline: <strong>0972 865 329</strong></p>
-          <p>Email: <strong>memo@memo.edu.vn</strong></p>
+          <p>Nếu có thắc mắc bạn có thể liên hệ </p>
+          <p>Hotline: <strong style="color: #810C15">0972 865 329</strong></p>
+          <p>Email: <strong style="color: #810C15">memo@memo.edu.vn</strong></p>
+          <p>Fanpage:<a href="https://www.facebook.com/topicamemo" target="window_name" style="color: #03c"> https://www.facebook.com/topicamemo</a></p>
         </div>
       </div>
     </div>
