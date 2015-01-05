@@ -1,4 +1,4 @@
-.new-player {
+ .new-player {
   padding-top: 40px;
   .player-inner {
     @include grid-row;
@@ -760,6 +760,53 @@ span.border {
     margin-top: -120px;
   }
 }
+.price-scholarship{
+  overflow-y: scroll;
+  height: 430px;
+  width: 813px;
+}
+.price-scholarship p > span {
+  font-weight: 600;
+}
+h3.headline-text {
+    text-align: center;
+    color: #810C15;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+.price-scholarship hr{
+  height: 2px;
+  background: #810c15;
+  margin-top: 5px;
+  margin-right: 15px;
+}
+.payment-method{
+  overflow-y: scroll;
+  height: 430px;
+  width: 813px;
+  margin-right: 26px;
+}
+.payment-method hr{
+  height: 2px;
+  background: #810c15;
+  margin-top: 5px;
+  margin-right: 22px;
+}
+.price-scholarship .content p > span {
+  color: #810C15;
+}
+.payment-method p > span{
+  color: #810C15;
+  font-weight: 600;
+}
+.choose-learning{
+  color: #810C15;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
 @import "player-header";
 @import "player-main";
 @import "player-footer";
