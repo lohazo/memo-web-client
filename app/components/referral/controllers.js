@@ -344,7 +344,7 @@
         $scope.indexActive = slide.last();
       }
       $scope.image = slide.current().url;
-      $scope.text = slide.curent().url;
+      $scope.text = slide.current().text;
     }
 
     function goTo(index) {
