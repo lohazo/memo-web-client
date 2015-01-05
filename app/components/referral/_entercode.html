@@ -12,12 +12,8 @@
           </div>
           <div class="arrow-next-slider"><a ng-click="slide.next()"><img src="assets/img/referral/arrow_next.png"></a></div>
         </div>
-        <div class="button-of-slider" ng-init="items = [0, 1, 2, 3, 4]">
-          <div class="button-slider-entercode"><strong>1</strong></div>
-          <div class="button-disable-slider-entercode"><strong>2</strong></div>
-          <div class="button-disable-slider-entercode"><strong>3</strong></div>
-          <div class="button-disable-slider-entercode"><strong>4</strong></div>
-          <div class="button-disable-slider-entercode"><strong>5</strong></div>
+        <div class="button-of-slider">
+          <div ng-repeat="item in images track by $index" class="button-slider-entercode" ng-class="{active:indexActive == $index}" ng-click="slide.goTo($index)"><strong>{{$index + 1}}</strong></div>
         </div>
         </div>
       </div>
