@@ -60,6 +60,10 @@
   function ProfileFactory(ProfileServices, $localStorage) {
     var Profile = {};
 
+    if (!$localStorage.auth) {
+      $localStorage.auth = {};
+    };
+
     Profile.user = $localStorage.auth.user || {};
     Profile.detail = $localStorage.auth.profile_detail || {};
 
