@@ -3,6 +3,10 @@
 
   function ReferralConfig($routeProvider) {
     $routeProvider
+      .when('/referral/profile', {
+        templateUrl: 'components/referral/_entercode.html',
+        controller: 'ReferralEntercodeCtrl'
+      })
       .when('/referral', {
         templateUrl: 'components/referral/_index.html',
         controller: 'ReferralCtrl',
@@ -16,11 +20,7 @@
             });
           }
         }
-      })
-      .when('/referral/profile', {
-        templateUrl: 'components/referral/_entercode.html',
-        controller: 'ReferralEntercodeCtrl'
-      })
+      });
   }
 
   angular.module('referral', [

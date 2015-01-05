@@ -195,49 +195,43 @@
         $scope.userName = profile.detail.referral_user;
         $scope.user = profile.detail || {};
         $scope.combo_days = profile.detail.combo_days;
-      }, function() {});
+        $scope.expChart = {
+          labels: profile.detail.exp_chart.days,
+          datasets: [{
+            label: "",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "#848484",
+            pointColor: "#810c15",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: profile.detail.exp_chart.exp
+          }]
+        };
+      }).then(function() {
+        ReferralService.getStatus().then(function(res) {
+          $scope.code = res.data.referral_code || 0;
+          $scope.invite_count = res.data.record.invited_count || 0;
+          $scope.FBShare.shareData = res.data.referral_code;
+        });
+      });
     }
 
     $scope.FBShare = {
       shareType: 'referral-code'
     };
 
-    ReferralService.getStatus().then(function(res) {
-      $scope.code = res.data.referral_code || 0;
-      $scope.invite_count = res.data.record.invited_count || 0;
-      $scope.FBShare.shareData = res.data.referral_code;
-    });
-
-    profile.getProfileDetail().then(function() {
-      $scope.expChart = {
-        labels: profile.detail.exp_chart.days,
-        datasets: [{
-          label: "",
-          fillColor: "rgba(220,220,220,0.2)",
-          strokeColor: "#848484",
-          pointColor: "#810c15",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(220,220,220,1)",
-          data: profile.detail.exp_chart.exp
-        }]
-      };
-    });
-
     $scope.readme = function(data) {
-      (function() {
-        var modalInstance = $modal.open({
-          template: '<div readme-modal></div>',
-          windowClass: 'readme-modal',
-          controller: 'ReferralReadmeCtrl',
-          templateUrl: 'components/referral/_readme-' + data + '.html'
-        });
+      var modalInstance = $modal.open({
+        windowClass: 'readme-modal',
+        controller: 'ReferralReadmeCtrl',
+        templateUrl: 'components/referral/_readme-' + data + '.html'
+      });
 
-        modalInstance.result.then(function(msg) {
-          if ($scope[msg] instanceof Function) $scope[msg]();
-        });
-      })();
-    }
+      modalInstance.result.then(function(msg) {
+        if ($scope[msg] instanceof Function) $scope[msg]();
+      });
+    };
 
     $scope.submitCode = function() {
 
