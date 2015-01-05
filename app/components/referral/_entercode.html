@@ -57,7 +57,7 @@
           <p>Chia sẻ mã code {{code}} tới những người bạn của mình nhé!</p>
           <a title="" facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">Share</a>
         </div>
-        <p class="code-error">{{error}}</p>
+        
         <!-- <div class="chart-memo">
           <img src="assets/img/referral/chart.png" alt="">
         </div> -->
@@ -70,8 +70,10 @@
           <form>
             <input type="text" name="" value="" placeholder="" ng-model='refCode'>
             <a href="" title=""><img src="assets/img/referral/arrow.png" alt="" ng-click='submitCode()'></a>
+
           </form>
           <a class="question-hover" title=""><img src="assets/img/referral/q.png" alt=""></a>
+          <p class="code-error">{{error}}</p>
         </div>
         <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral != '']">
           <p>Bạn đã nhập code của {{userName}}!</p>
