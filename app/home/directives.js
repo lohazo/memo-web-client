@@ -43,4 +43,10 @@ angular.module('home.directives', [])
       controller: 'LeaderboardCtrl',
       templateUrl: 'leaderboard/_index.html'
     };
+  })
+  .directive('campaignRight', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: 'home/_campaign-right.html'
+    };
   });

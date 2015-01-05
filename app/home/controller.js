@@ -4,7 +4,7 @@
   function HomeCtrl($scope) {}
 
   function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker,
-    Message) {
+    Message, ReferralService) {
     function getProfile() {
       $scope.profile = Profile.user;
     }
@@ -47,6 +47,19 @@
       }
     }
 
+    function getStatus() {
+      $scope.FBShare = {
+        shareType: 'referral-code'
+      };
+      ReferralService.getStatus().then(function(res) {
+        $scope.referral = {
+          code: res.data.referral_code || 0,
+          invite_count: res.data.record.invited_count || 0
+        };
+        $scope.FBShare.shareData = res.data.referral_code;
+      });
+    }
+
     // Chain calls
     AppSetting.getWords();
     Profile.getProfile()
@@ -54,6 +67,7 @@
       .then(AppSetting.get)
       .then(Message.list)
       .then(getProfileDetail)
+      .then(getStatus)
       .then(AppSetting.getSharedSettings)
       .then(TreeBuilder.getIconSets)
       .then(buildTree)
@@ -103,7 +117,7 @@
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder', 'AppSetting',
-      'Mixpanel', 'MemoTracking', 'Message', HomeMainCtrl
+      'Mixpanel', 'MemoTracking', 'Message', 'ReferralService', HomeMainCtrl
     ])
     .controller('PlacementTestModalCtrl', ['$scope', '$modal', '$rootScope', PlacementTestModalCtrl])
     .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance', PlacementTestModalInstanceCtrl]);
