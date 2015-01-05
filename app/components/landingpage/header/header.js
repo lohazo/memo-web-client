@@ -119,10 +119,21 @@
 
     $scope.register = function() {
       var user = angular.fromJson(angular.toJson($scope.user));
-      delete user.password;
-      AuthService.register($scope.user)
-        .then(closeModal, displayMessageOnFail);
-    }
+      AuthService.checkCode({
+          referral_code: user.referral_code
+        })
+        .then(function() {
+          delete user.password;
+          delete $scope.user.referral_code;
+          AuthService.register($scope.user)
+            .then(closeModal, displayMessageOnFail)
+            .then(function() {
+              AuthService.submitReferralCode({
+                referral_code: user.referral_code
+              });
+            }, displayMessageOnFail);
+        }, displayMessageOnFail);
+    };
 
     $scope.login = function() {
       var user = angular.fromJson(angular.toJson($scope.user));
@@ -144,7 +155,8 @@
 
   }
 
-  function ForgetPasswordModalInstanceCtrl($scope, $rootScope, $timeout, $modalInstance, $routeParams, AuthService) {
+  function ForgetPasswordModalInstanceCtrl($scope, $rootScope, $timeout, $modalInstance, $routeParams,
+    AuthService) {
     $scope.user = {};
     $scope.error = '';
 
@@ -171,7 +183,8 @@
     .directive('registerModal', RegisterModalDirective)
     .directive('forgetModal', ForgetPasswordModalDirective)
     .controller('LoginModalCtrl', ['$scope', '$rootScope', '$modal', LoginModalCtrl])
-    .controller('LoginModalInstanceCtrl', ['$scope', '$rootScope', '$timeout', '$modalInstance', '$routeParams',
+    .controller('LoginModalInstanceCtrl', ['$scope', '$rootScope', '$timeout', '$modalInstance',
+      '$routeParams',
       'AuthService', LoginModalInstanceCtrl
     ])
     .controller('ForgetPasswordModalInstanceCtrl', ['$scope', '$rootScope', '$timeout', '$modalInstance',

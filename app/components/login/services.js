@@ -50,8 +50,16 @@
   }
 
   function AuthService($q, $rootScope, $localStorage, $routeParams, Facebook, GooglePlus, EcoTracker, MemoTracker,
-    LoginService, MolServices) {
+    LoginService, MolServices, ReferralService) {
     var Service = {};
+
+    Service.checkCode = function(data) {
+      return ReferralService.checkCode(data);
+    };
+
+    Service.submitReferralCode = function(data) {
+      return ReferralService.submitCode(data);
+    }
 
     Service.register = function(data) {
       return LoginService.register(data).then(loginCallback);
@@ -181,6 +189,6 @@
   angular.module('login.services')
     .factory('AuthService', ['$q', '$rootScope', '$localStorage', '$routeParams',
       'Facebook', 'GooglePlus', 'EcoTracking', 'MemoTracking',
-      'LoginService', 'MolServices', AuthService
+      'LoginService', 'MolServices', 'ReferralService', AuthService
     ]);
 }(window.angular));
