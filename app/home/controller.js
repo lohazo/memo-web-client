@@ -54,7 +54,8 @@
       ReferralService.getStatus().then(function(res) {
         $scope.referral = {
           code: res.data.referral_code || 0,
-          invite_count: res.data.record.invited_count || 0
+          invite_count: res.data.record.invited_count || 0,
+          record: res.data.record
         };
         $scope.FBShare.shareData = res.data.referral_code;
       });
