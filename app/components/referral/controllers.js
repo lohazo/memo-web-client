@@ -289,6 +289,10 @@
       });
     }
 
+    $scope.slide = slider($scope);
+  }
+
+  function slider($scope) {
     var slide = new PlayerView();
     slide.init([
       {
@@ -349,14 +353,16 @@
       $scope.text = slide.current().text;
     }
 
-    $scope.slide = {
+    return {
       next: next,
       prev: prev,
       goTo: goTo
     }
   }
 
-  function ReferralReadmeCtrl($scope, data) {}
+  function ReferralReadmeCtrl($scope, data) {
+    $scope.slide = slider($scope);
+  }
 
   angular.module('referral.controllers', [])
     .controller('ReferralCtrl', ['$scope', 'ReferralService', '$location', ReferralCtrl])
