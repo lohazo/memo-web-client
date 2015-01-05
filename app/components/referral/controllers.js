@@ -98,11 +98,16 @@
 
   function ReferralHeaderCtrl($scope, service) {}
 
-  function ReferralBodyCtrl($scope, service) {
+  function ReferralBodyCtrl($scope, service, EcoTracker, $localStorage) {
     $scope.$on('referral:body-next', function() {
       if (Singleton.getView().hasNext()) {
-        Singleton.getView().next();
+        var index = Singleton.getView().next();
         $scope.directive = Singleton.getView().current();
+        EcoTracker.campaignTrack('Web 1.0.2 click event track', {
+          "campaign": 'REFERRAL',
+          "screen": index + 1,
+          "code_channel": $localStorage.auth.user ? 'ADS_E8' : 'ADS_NON_E8'
+        });
       };
     });
     $scope.$on('referral:body-prev', function() {
@@ -241,7 +246,9 @@
 
     $scope.submitCode = function() {
       // console.log()
-      ReferralService.submitCode({referral_code: $scope.refCode}).then(function(res) {
+      ReferralService.submitCode({
+        referral_code: $scope.refCode
+      }).then(function(res) {
         $scope.error = '';
         $scope.isReferral = res.data.code || '';
         $scope.userName = res.data.referral_user || '';
@@ -294,32 +301,25 @@
 
   function slider($scope) {
     var slide = new PlayerView();
-    slide.init([
-      {
-        text: 'Xem Code chia sẻ của bạn tại màn hình trang chủ',
-        url: 'assets/img/referral/campaign_guide_1.png'
-      },
-      {
-        text: 'Gửi Code chia sẻ cho bạn bè của mình bằng rất nhiều hình thức:',
-        url: 'assets/img/referral/campaign_guide_2.png'
-      },
-      {
-        text: 'Hãy nhớ nhắc bạn của bạn nhập code vào đúng vị trí',
-        url: 'assets/img/referral/campaign_guide_3.png'
-      },
-      {
-        text: 'Luôn nhớ cập nhật số bạn đã mời của bản thân',
-        url: 'assets/img/referral/campaign_guide_4.png'
-      },
-      {
-        text: 'Học liên tục 3 ngày để hình thành thói quen chăm chỉ học bài!',
-        url: 'assets/img/referral/campaign_guide_5.png'
-      },
-      {
-        text: 'Khi đã đủ điều kiện, lựa chọn Xác minh để có thể nhận ngay học bổng của bạn!',
-        url: 'assets/img/referral/campaign_guide_6.png'
-      }
-    ]);
+    slide.init([{
+      text: 'Xem Code chia sẻ của bạn tại màn hình đăng ký',
+      url: 'assets/img/referral/campaign_guide_1.png'
+    }, {
+      text: 'Gửi Code chia sẻ cho bạn bè của mình bằng rất nhiều hình thức:',
+      url: 'assets/img/referral/campaign_guide_2.png'
+    }, {
+      text: 'Hãy nhớ nhắc bạn của bạn nhập code vào đúng vị trí',
+      url: 'assets/img/referral/campaign_guide_3.png'
+    }, {
+      text: 'Luôn nhớ cập nhật số bạn đã mời của bản thân',
+      url: 'assets/img/referral/campaign_guide_4.png'
+    }, {
+      text: 'Học liên tục 3 ngày để hình thành thói quen chăm chỉ học bài!',
+      url: 'assets/img/referral/campaign_guide_5.png'
+    }, {
+      text: 'Khi đã đủ điều kiện, lựa chọn Xác minh để có thể nhận ngay học bổng của bạn!',
+      url: 'assets/img/referral/campaign_guide_6.png'
+    }]);
     slide.reset();
     $scope.images = slide.items;
     $scope.image = slide.current().url;
@@ -367,7 +367,7 @@
   angular.module('referral.controllers', [])
     .controller('ReferralCtrl', ['$scope', 'ReferralService', '$location', ReferralCtrl])
     .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
-    .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', ReferralBodyCtrl])
+    .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', 'EcoTracking', '$localStorage', ReferralBodyCtrl])
     .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', 'Profile', ReferralFooterCtrl])
     .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal',
       ReferralEntercodeCtrl

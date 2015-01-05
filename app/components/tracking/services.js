@@ -13,7 +13,9 @@
         unique_id: localStorage.eco_user ? JSON.parse(localStorage.eco_user).user_id : ''
       };
 
-      $http.post(BASE_URL, requestData, {ignoreLoadingBar: true})
+      $http.post(BASE_URL, requestData, {
+          ignoreLoadingBar: true
+        })
         .then(function(response) {
           deferred.resolve(response);
         });
@@ -27,7 +29,9 @@
     var BASE_URL = 'http://eco-tracking.memo.edu.vn';
     var tracker = {};
     var isCalled = 0;
-    var httpConfig = {ignoreLoadingBar: true};
+    var httpConfig = {
+      ignoreLoadingBar: true
+    };
 
     tracker.init = function() {
       if (isCalled < 1) {
@@ -69,12 +73,11 @@
       data.referrer_url = document.referrer;
 
       return $http.post(BASE_URL + '/users/track', data, httpConfig)
-      .success(function(response) {
-        localStorage.eco_user = JSON.stringify(response);
-        if (callback instanceof Function) callback(response);
-      })
-      .error(function(response) {
-      });
+        .success(function(response) {
+          localStorage.eco_user = JSON.stringify(response);
+          if (callback instanceof Function) callback(response);
+        })
+        .error(function(response) {});
     };
 
     tracker.track = function(eventName, data, callback) {
@@ -91,14 +94,34 @@
       };
 
       $http.post(BASE_URL + '/users/track', requestData, httpConfig)
-      .success(function(response) {
-        $cookies.eco_uuid = response;
-        if (callback instanceof Function) callback(response);
-      })
-      .error(function() {
-      });
+        .success(function(response) {
+          $cookies.eco_uuid = response;
+          if (callback instanceof Function) callback(response);
+        })
+        .error(function() {});
     };
 
+    tracker.campaignTrack = function(eventName, data, callback) {
+      // data = {name: eventName, cookie: eco_uuid}
+      var user = JSON.parse(localStorage.eco_user);
+
+      var requestData = {
+        name: eventName,
+        cookie: $cookies.eco_uuid,
+        user_id: user.user_id,
+        browsing_domain: document.URL + '?campaign=' + data.campaign + '&code_channel=' + data.code_channel +
+          '&screen=' + data.screen,
+        referrer_url: document.referrer,
+        submitted_form_data: JSON.stringify(data)
+      };
+
+      $http.post(BASE_URL + '/users/track', requestData, httpConfig)
+        .success(function(response) {
+          $cookies.eco_uuid = response;
+          if (callback instanceof Function) callback(response);
+        })
+        .error(function() {});
+    };
     return tracker;
   }
 
@@ -129,9 +152,10 @@
   }
 
   angular.module('tracking.services', ['ngCookies'])
-  .factory('MemoTracking', ['$http', '$q', '$localStorage', 'APP_VERSION', MemoTracking ])
-  .factory('EcoTracking',[
-    '$http', '$q', '$routeParams', '$cookies', '$localStorage', EcoTracking])
-  .factory('Mixpanel', MixpanelFactory);
+    .factory('MemoTracking', ['$http', '$q', '$localStorage', 'APP_VERSION', MemoTracking])
+    .factory('EcoTracking', [
+      '$http', '$q', '$routeParams', '$cookies', '$localStorage', EcoTracking
+    ])
+    .factory('Mixpanel', MixpanelFactory);
 
 })(window.angular, window.localStorage);

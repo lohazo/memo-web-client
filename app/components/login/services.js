@@ -160,15 +160,12 @@
       } else {
         MemoTracker.track('login');
       }
-      mixpanel.identify(response.data._id);
 
       var molData = {};
       molData.code_chanel = $routeParams.code_chanel || -100;
       molData.id_landingpage = $routeParams.id_landingpage || -100;
       molData.id_campaign = $routeParams.id_campaign || -100;
       molData.id_camp_landingpage = $routeParams.id || -100;
-
-      mixpanel.track('Web 1.0.2 user logged in', molData);
 
       molData.name = data.name || data.username;
       molData.email = data.email;
