@@ -54,7 +54,7 @@
           <a class="question-hover hidden" tooltip="Code để gửi bạn bè"><img src="assets/img/referral/q.png" alt=""></a>
         </div>
         <div class="share-social">
-          <p>Chia sẻ mã code {{code}} tới những người bạn của mình nhé!</p>
+          <p>Chia sẻ mã code <span class="code-shares"> {{code}} </span> tới những người bạn của mình nhé!</p>
           <a title="" facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">Share</a>
         </div>
         
@@ -80,7 +80,7 @@
         </div>
         <div class="clear"></div>
         <div class="share-social">
-          <p>Bạn đã mời được {{invite_count}} người bạn và thực hiện được {{combo_days}} ngày học liên tiếp! Kỉ lục combo của bạn là {{user.highest_combo_days}} ngày</p>
+          <p>Bạn đã mời được <span class="code-shares">{{invite_count}}</span> người bạn và thực hiện được<span class="code-shares"> {{combo_days}}</span> ngày học liên tiếp! Kỉ lục combo của bạn là<span class="code-shares"> {{user.highest_combo_days}}</span> ngày</p>
           <a class="confirm" title="" ng-click='verifyRewards()'>Xác minh</a>
         </div>
         <span class="border"></span>
