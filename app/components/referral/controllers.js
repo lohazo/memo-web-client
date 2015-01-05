@@ -42,10 +42,11 @@
   PlayerView.prototype = {
     first: function() {
       this.reset();
-      // return this.current();
+      return this.index;
     },
     next: function() {
-      return this.index = this.index + 1;
+      this.index = this.index + 1;
+      return this.index;
     },
     hasNext: function() {
       return this.index < this.items.length - 1;
@@ -54,18 +55,19 @@
       return this.index > 0;
     },
     prev: function() {
-      return this.index = this.index - 1;
+      this.index = this.index - 1;
+      return this.index;
     },
     reset: function() {
-      return this.index = 0;
+      this.index = 0;
+      return this.index;
     },
     last: function() {
       this.index = this.items.length - 1;
-      // return this.current();
+      return this.index;
     },
     current: function() {
-      var cur = this.items[this.index];
-      return cur;
+      return this.items[this.index];
     },
     each: function(callback) {
       for (var item = this.first(); this.hasNext(); this.next()) {
@@ -74,7 +76,7 @@
     },
     goTo: function(index) {
       this.index = index;
-      return index;
+      return this.index;
     },
     init: function(items) {
       this.items = items;
@@ -302,7 +304,6 @@
     $scope.indexActive = 0;
 
     function next() {
-      var index = 0;
       if (slide.hasNext()) {
         $scope.indexActive = slide.next();
       } else {
@@ -317,7 +318,6 @@
       } else {
         $scope.indexActive = slide.last();
       }
-      console.log($scope.indexActive);
       $scope.image = slide.current();
     }
 
