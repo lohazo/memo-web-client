@@ -208,18 +208,18 @@
             data: profile.detail.exp_chart.exp
           }]
         };
-      }, function() {});
+      }).then(function() {
+        ReferralService.getStatus().then(function(res) {
+          $scope.code = res.data.referral_code || 0;
+          $scope.invite_count = res.data.record.invited_count || 0;
+          $scope.FBShare.shareData = res.data.referral_code;
+        });
+      });
     }
 
     $scope.FBShare = {
       shareType: 'referral-code'
     };
-
-    ReferralService.getStatus().then(function(res) {
-      $scope.code = res.data.referral_code || 0;
-      $scope.invite_count = res.data.record.invited_count || 0;
-      $scope.FBShare.shareData = res.data.referral_code;
-    });
 
     $scope.readme = function(data) {
       var modalInstance = $modal.open({
