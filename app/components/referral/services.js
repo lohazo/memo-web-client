@@ -19,6 +19,10 @@
       Referral = {};
     Referral.status = 0;
     Referral.getStatus = function() {
+      
+      if (!$localStorage.auth) {
+        $localStorage.auth = {};
+      };
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var deferred = $q.defer();
 
