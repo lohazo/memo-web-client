@@ -51,7 +51,7 @@
         <div class="code-share code-share-3">
           <p>Code chia sẻ:</p>
           <a class="create-code">{{code}}</a>
-          <a class="question-hover" tooltip="Code để gửi bạn bè"><img src="assets/img/referral/q.png" alt=""></a>
+          <a class="question-hover hidden" tooltip="Code để gửi bạn bè"><img src="assets/img/referral/q.png" alt=""></a>
         </div>
         <div class="share-social">
           <p>Chia sẻ mã code {{code}} tới những người bạn của mình nhé!</p>
@@ -72,7 +72,7 @@
             <a href="" title=""><img src="assets/img/referral/arrow.png" alt="" ng-click='submitCode()'></a>
 
           </form>
-          <a class="question-hover" title=""><img src="assets/img/referral/q.png" alt=""></a>
+          <a class="question-hover hidden" title=""><img src="assets/img/referral/q.png" alt=""></a>
           <p class="code-error">{{error}}</p>
         </div>
         <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral != '']">
