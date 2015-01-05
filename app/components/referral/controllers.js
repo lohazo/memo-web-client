@@ -240,8 +240,8 @@
     };
 
     $scope.submitCode = function() {
-
-      ReferralService.submitCode($scope.refCode).then(function(res) {
+      // console.log()
+      ReferralService.submitCode({referral_code: $scope.refCode}).then(function(res) {
         $scope.error = '';
         $scope.isReferral = res.data.code || '';
         $scope.userName = res.data.referral_user || '';
