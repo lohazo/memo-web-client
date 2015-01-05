@@ -32,13 +32,11 @@
       return deferred.promise;
     };
 
-    Referral.submitCode = function(ref_code) {
+    Referral.submitCode = function(data) {
+      // data = {referral_code: ''}
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
-      var deferred = $q.defer(),
-        data = {
-          auth_token: authToken,
-          referral_code: ref_code
-        };
+      var deferred = $q.defer();
+      data.auth_token = authToken;
 
       $http.post(API + Apis.submit_code, data)
         .then(function(res) {
@@ -50,13 +48,9 @@
       return deferred.promise;
     };
 
-    Referral.checkCode = function(ref_code) {
-      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
-      var deferred = $q.defer(),
-        data = {
-          auth_token: authToken,
-          referral_code: ref_code
-        };
+    Referral.checkCode = function(data) {
+      // data = {referral_code: ''}
+      var deferred = $q.defer();
 
       $http.post(API + Apis.check_code, data)
         .then(function(res) {
@@ -89,10 +83,10 @@
     Referral.joined = function() {
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var deferred = $q.defer(),
-      data = {
-        auth_token: authToken,
-        // verify_rewards: ref_code
-      };
+        data = {
+          auth_token: authToken,
+          // verify_rewards: ref_code
+        };
       $http.post(API + Apis.join_campaign, data)
         .then(function(res) {
           deferred.resolve(res);

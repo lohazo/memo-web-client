@@ -11,10 +11,12 @@
       </button>
       <button class="button-screen-2-center" ng-class="{disable: !view.payment}" ng-click="displayPaymentMethod()">
       <span class="circle" ng-class="{disable: !view.payment}">3</span>
-        Các hình thức thanh toán
+      Các hình thức thanh toán
       </button>
     </div>
-    <div ng-show="view.intro" native-page-intro></div>
+    <div class="large-12 columns">
+      <div ng-show="view.intro" native-page-intro></div>
+    </div>
     <div ng-show="view.price" price-scholarship></div>
     <div ng-show="view.payment" payment-method></div>
   </div>

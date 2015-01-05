@@ -802,7 +802,22 @@ h3.headline-text {
     width: 390px;
     font-size: 18px;
   }
+/*--------------------------------------Fix Popup-----------------------------*/
 
+.title-question {
+  text-align: center;
+}
+h2.title-question{
+    font-size: 26px;
+  margin-bottom: 20px;
+  display: block;
+}
+.titile-question h2{
+  text-align: center;
+  display: block;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
 
 @import "player-header";
 @import "player-main";
