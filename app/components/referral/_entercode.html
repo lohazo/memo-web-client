@@ -13,7 +13,7 @@
           </div>
           <div class="arrow-next-slider"><a ng-click="slide.next()"><img src="assets/img/referral/arrow_next.png"></a></div>
         </div>
-        <div class="button-of-slider">
+        <div class="button-of-slider" style="margin-top: 135px;">
           <div ng-repeat="item in images track by $index" class="button-slider-entercode" ng-class="{active:indexActive == $index}" ng-click="slide.goTo($index)"><strong>{{$index + 1}}</strong></div>
         </div>
         </div>
