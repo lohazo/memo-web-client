@@ -318,8 +318,8 @@
 
 .code-share {
   clear: both;
-  margin-top: 5px;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 5px;
   p {
     float: left;
     margin: 0;
@@ -335,6 +335,7 @@
 
 .code-share-2 {
   margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .code-share-2 p {
@@ -439,10 +440,11 @@ p.code-error {
   margin-top: 15px;
   p {
     float: left;
-    margin: 0;
     font-size: 15px;
     width: 310px;
     color: #666;
+    margin-right: 18px;
+    margin-bottom: 10px;
   }
   a {
     float: left;
@@ -466,13 +468,13 @@ span.border {
   clear: both;
   height: 2px;
   background: none repeat scroll 0% 0% rgb(129, 12, 21);
-  margin: 20px 28px 0px 0px;
+  margin: 20px 12px 0px 0px;
   display: block;
 }
 
 .contact {
   text-align: right;
-  padding-right: 26px;
+  padding-right: 10px;
   padding-top: 5px;
   p {
     margin: 0;
