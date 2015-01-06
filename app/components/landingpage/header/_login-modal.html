@@ -39,12 +39,17 @@
             <input class="password" ng-model="user.password" type="password" placeholder="Mật khẩu">
           </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-top: 5px">
           <div class="large-16 columns">
             <a class="large-16 small radius login button" ng-click="login()" style="margin-bottom: 5px;">Đăng nhập</a>
           </div>
         </div>
         <div class="text">
+          <div class="large-16 columns" align="center">
+            <u><a style="color: #999999" ng-click="forgetModal()">Quên mật khẩu</a></u>
+          </div>
+        </div>
+        <div class="text" style="margin-bottom: 10px">
           <div class="large-16 columns" align="center">
             <span>Chưa có tài khoản ?</span>
             <a  ng-click="registerModal()">Đăng ký ngay</a>

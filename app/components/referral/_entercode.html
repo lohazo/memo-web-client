@@ -32,8 +32,8 @@
       <span>Thông tin cá nhân</span>
       <div class="code-user">
         <div class="avatar-memo">
-          <img src="{{user.url_avatar}}" alt="" ng-class="{true: 'display', false: 'hidden'}[user.url_avatar != '']" >
-          <img src="assets/img/profile-avatar-big.png" alt='' ng-class="{true: 'display', false: 'hidden'}[user.url_avatar == '']">
+          <img style="border-radius: 50%" src="{{user.url_avatar}}" alt="" ng-class="{true: 'display', false: 'hidden'}[user.url_avatar != '']" >
+          <img style="border-radius: 50%" src="assets/img/profile-avatar-big.png" alt='' ng-class="{true: 'display', false: 'hidden'}[user.url_avatar == '']">
           <div class="memo-user">
             <p>{{user.username}}</p>
             <span>{{user.level_title}}</span>
@@ -84,7 +84,7 @@
         <div class="clear"></div>
         <div class="row">
           <span class="border" style="height: 1px;background-color: #CCCCCC"></span>
-          <i style="font-size: 12px;">(Sau khi bạn đã đủ điều kiện bấm Xác minh để nhận học bổng)</i>
+          <i style="font-size: 12px;margin-left: 10px">(Sau khi bạn đã đủ điều kiện bấm Xác minh để nhận học bổng)</i>
         </div>
         <div class="share-social">
           <p>Bạn đã mời được <span class="code-shares">{{invite_count}}</span> người bạn và thực hiện được <span class="code-shares"> {{combo_days}}</span> ngày học liên tiếp! Kỉ lục combo của bạn là <span class="code-shares"> {{user.highest_combo_days}}</span> ngày</p>
