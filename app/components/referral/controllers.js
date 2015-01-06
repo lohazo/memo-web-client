@@ -103,6 +103,7 @@
       if (Singleton.getView().hasNext()) {
         var index = Singleton.getView().next();
         $scope.directive = Singleton.getView().current();
+        console.log('Hit');
         EcoTracker.campaignTrack('Web 1.0.2 click event track', {
           "campaign": 'REFERRAL',
           "screen": index + 1,

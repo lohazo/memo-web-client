@@ -5,12 +5,6 @@
 (function(ang) {
   'use strict';
   ang.module('referral.directives', [])
-    .directive('status', function() {
-      return {
-        strict: 'EA',
-        controller: 'ReferralCtrl'
-      };
-    })
     .directive('referralBody', function() {
       return {
         strict: 'EA',

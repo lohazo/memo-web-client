@@ -107,7 +107,9 @@
       var browsingDomain = document.URL;
       browsingDomain += browsingDomain.indexOf('?') > -1 ? '&' : '?';
 
-      data.user_id = 'memo_' + $localStorage.auth.user._id;
+      if ($localStorage.auth.user) {
+        data.user_id = 'memo_' + $localStorage.auth.user._id;
+      }
 
       var requestData = {
         name: eventName,
