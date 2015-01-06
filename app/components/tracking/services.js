@@ -104,12 +104,18 @@
     tracker.campaignTrack = function(eventName, data, callback) {
       // data = {name: eventName, cookie: eco_uuid}
       var user = JSON.parse(localStorage.eco_user);
+      var browsingDomain = document.URL;
+      browsingDomain += browsingDomain.indexOf('?') > -1 ? '&' : '?';
+
+      if ($localStorage.auth.user) {
+        data.user_id = 'memo_' + $localStorage.auth.user._id;
+      }
 
       var requestData = {
         name: eventName,
         cookie: $cookies.eco_uuid,
         user_id: user.user_id,
-        browsing_domain: document.URL + '?campaign=' + data.campaign + '&code_channel=' + data.code_channel +
+        browsing_domain: browsingDomain + 'campaign=' + data.campaign + '&code_channel=' + data.code_channel +
           '&screen=' + data.screen,
         referrer_url: document.referrer,
         submitted_form_data: JSON.stringify(data)
