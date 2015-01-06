@@ -104,12 +104,18 @@
 
       function facebookGetInfo() {
         Facebook.api('/me', function(response) {
-          var data = {
-            fb_access_token: $localStorage.auth.facebook.accessToken,
-            fb_Id: response.id,
-            fb_name: response.name
-          };
-          deferred.resolve(data);
+          var data = {};
+          if (response.error) {
+            delete $localStorage.auth.facebook;
+            deferred.reject(data);
+          } else {
+            data = {
+              fb_access_token: $localStorage.auth.facebook.accessToken,
+              fb_Id: response.id,
+              fb_name: response.name
+            };
+            deferred.resolve(data);
+          }
         });
       }
 
@@ -130,6 +136,7 @@
     Service.logout = function() {
       $localStorage.$reset();
       delete $localStorage.displayTour;
+      delete $localStorage.auth;
       $rootScope.$broadcast('event:auth-logoutConfirmed');
     };
 
