@@ -54,7 +54,7 @@
           <a class="question-hover hidden" tooltip="Code để gửi bạn bè"><img src="assets/img/referral/q.png" alt=""></a>
         </div>
         <div class="share-social">
-          <p>Chia sẻ mã code <span class="code-shares"> {{code}} </span> tới những người bạn của mình nhé!</p>
+          <p>Chia sẻ mã code <span class="code-shares"> {{code}} </span> tới <br>những người bạn của mình nhé!</p>
           <a title="" share-event-track tracking-data='{"memoEnabled":"true","eventName":"viral campaign share"}' facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">Share</a>
         </div>
         
@@ -76,12 +76,12 @@
           <p class="code-error">{{error}}</p>
         </div>
         <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral != '']">
-          <p>Bạn đã nhập code của {{userName}}!</p>
+          <p>Bạn đã nhập code của <span class="code-shares"> {{userName}} </span>!</p>
         </div>
         <div class="clear"></div>
         <div class="share-social">
           <p>Bạn đã mời được <span class="code-shares">{{invite_count}}</span> người bạn và thực hiện được <span class="code-shares"> {{combo_days}}</span> ngày học liên tiếp! Kỉ lục combo của bạn là <span class="code-shares"> {{user.highest_combo_days}}</span> ngày</p>
-          <a class="confirm" title="" ng-click='verifyRewards()'>Xác minh</a>
+          <a class="confirm" title="" ng-click='verifyRewards()' style="margin-left: 15px">Xác minh</a>
         </div>
         <span class="border"></span>
         <div class="contact">
