@@ -302,7 +302,7 @@
   function slider($scope) {
     var slide = new PlayerView();
     slide.init([{
-      text: 'Xem Code chia sẻ của bạn tại màn hình đăng ký',
+      text: 'Xem Code chia sẻ của bạn tại màn hình trang chủ',
       url: 'assets/img/referral/campaign_guide_1.png'
     }, {
       text: 'Gửi Code chia sẻ cho bạn bè của mình bằng rất nhiều hình thức:',
