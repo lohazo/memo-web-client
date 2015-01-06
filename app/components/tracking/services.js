@@ -111,6 +111,10 @@
         data.user_id = 'memo_' + $localStorage.auth.user._id;
       }
 
+      if (data.skip) {
+        browsingDomain += ('skip=' + data.skip + '&');
+      }
+
       var requestData = {
         name: eventName,
         cookie: $cookies.eco_uuid,
