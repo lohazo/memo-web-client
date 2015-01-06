@@ -51,14 +51,16 @@
         <div class="code-share code-share-3">
           <p>Code chia sẻ:</p>
           <a class="create-code">{{code}}</a><br>
-          <i style="font-size: 11px;">(Người bạn nhập code này cũng được tính là mời được 1 người bạn)</i>
+          <i style="font-size: 12px;">(Người bạn nhập code này cũng được tính là mời được 1 người bạn)</i>
           <a class="question-hover hidden" tooltip="Code để gửi bạn bè"><img src="assets/img/referral/q.png" alt=""></a>
         </div>
         <div class="share-social">
           <p>Chia sẻ mã code <span class="code-shares"> {{code}} </span> tới <br>những người bạn của mình nhé!</p>
           <a title="" share-event-track tracking-data='{"memoEnabled":"true","eventName":"viral campaign share"}' facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">Share</a>
         </div>
-        
+        <div class="row">
+          <span class="border" style="height: 1px;background-color: #CCCCCC"></span>
+        </div>
         <!-- <div class="chart-memo">
           <img src="assets/img/referral/chart.png" alt="">
         </div> -->
@@ -80,6 +82,10 @@
           <p>Bạn đã nhập code của <span class="code-shares"> {{userName}} </span>!</p>
         </div>
         <div class="clear"></div>
+        <div class="row">
+          <span class="border" style="height: 1px;background-color: #CCCCCC"></span>
+          <i style="font-size: 12px;">(Sau khi bạn đã đủ điều kiện bấm Xác minh để nhận học bổng)</i>
+        </div>
         <div class="share-social">
           <p>Bạn đã mời được <span class="code-shares">{{invite_count}}</span> người bạn và thực hiện được <span class="code-shares"> {{combo_days}}</span> ngày học liên tiếp! Kỉ lục combo của bạn là <span class="code-shares"> {{user.highest_combo_days}}</span> ngày</p>
           <a class="confirm" title="" ng-click='verifyRewards()' style="margin-left: 15px">Xác minh</a>
