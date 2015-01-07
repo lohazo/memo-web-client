@@ -69,6 +69,7 @@
         </div>
         <div class="clear"></div>
         <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral == '']">
+          <p class="code-error" style="color: #222;font-size: 12px;height: 25px;width: 350px;margin-bottom: 30px;margin-top: -10px"><i>{{notiCode}}</i></p>
           <p>Nhập code từ bạn bè:</p>
           <form>
             <input type="text" name="" value="" placeholder="" ng-model='refCode'>
@@ -76,7 +77,6 @@
           </form>
           <a class="question-hover hidden" title=""><img src="assets/img/referral/q.png" alt=""></a>
           <p class="code-error">{{error}}
-          <i style="color: #222;font-size: 12px;height: 25px;width: 350px;margin-bottom: 10px">{{notiCode}}</i>
           </p>
         </div>
         <div class="code-share code-share-4" ng-class="{true: 'display', false: 'hidden'}[isReferral != '']">
@@ -85,7 +85,7 @@
         <div class="clear"></div>
         <div class="row">
           <span class="border" style="height: 1px;background-color: #CCCCCC"></span>
-          <p style="font-size: 15px;margin-left: 10px;color: #666;margin-bottom: 0px">Khi bạn đã đủ điều kiện, bấm <b style="color: #810C15"> Xác minh </b>để nhận học bổng</p>
+          <p style="font-size: 15px;margin-left: 10px;color: #666;margin-bottom: 0px;margin-top: 10px">Khi bạn đã đủ điều kiện, bấm <b style="color: #810C15"> Xác minh </b>để nhận học bổng</p>
         </div>
         <div class="share-social">
           <p>Bạn đã mời được <span class="code-shares">{{invite_count}}</span> người bạn và thực hiện được <span class="code-shares"> {{combo_days}}</span> ngày học liên tiếp! Kỉ lục combo của bạn là <span class="code-shares"> {{user.highest_combo_days}}</span> ngày</p>
