@@ -38,11 +38,12 @@
       var data = {};
       data.setting = $scope.settings.map(function(userSetting) {
         userSetting.id = userSetting._id;
-        delete userSetting._id;
-        return userSetting;
+        //delete userSetting._id;
+        return userSetting._id;
       });
       data.setting = JSON.stringify($scope.settings);
       SettingNotification.save(data);
+      alert('Bạn đã thay đổi thành công !!!');
     };
   }
 
