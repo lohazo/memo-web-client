@@ -108,7 +108,7 @@
       browsingDomain += browsingDomain.indexOf('?') > -1 ? '&' : '?';
 
       if ($localStorage.auth.user) {
-        data.user_id = 'memo_' + $localStorage.auth.user._id;
+        data.name = 'memo_' + $localStorage.auth.user._id;
       }
 
       if (data.skip) {
