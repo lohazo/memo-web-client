@@ -112,8 +112,14 @@
     });
     $scope.$on('referral:body-prev', function() {
       if (Singleton.getView().hasPrev()) {
-        Singleton.getView().prev();
+        var index = Singleton.getView().prev();
         $scope.directive = Singleton.getView().current();
+        EcoTracker.campaignTrack('Web 1.0.2 click event track', {
+          "campaign": 'REFERRAL',
+          "screen": index + 1,
+          "code_channel": $localStorage.auth.user ? 'ADS_E8' : 'ADS_NON_E8',
+          "back": "true"
+        });
       };
     });
     $scope.$on('referral:body-last', function() {
@@ -249,7 +255,8 @@
         if ($scope[msg] instanceof Function) $scope[msg]();
       });
     };
-    $scope.notiCode = "(Nếu bạn quên chưa nhập code chia sẻ từ bạn bè, hãy điền ngay tại đây để được tính là đã mời thêm 1 bạn)";
+    $scope.notiCode =
+      "(Nếu bạn quên chưa nhập code chia sẻ từ bạn bè, hãy điền ngay tại đây để được tính là đã mời thêm 1 bạn)";
     $scope.submitCode = function() {
       // console.log()
       ReferralService.submitCode({

@@ -115,6 +115,10 @@
         browsingDomain += ('skip=' + data.skip + '&');
       }
 
+      if (data.back) {
+        browsingDomain += ('back=' + data.back + '&');
+      }
+
       var requestData = {
         name: eventName,
         cookie: $cookies.eco_uuid,
