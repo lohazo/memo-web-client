@@ -109,6 +109,11 @@
 
     updateUser();
 
+    $scope.saveChanges = function () {
+      var data = {};
+      alert('Bạn đã thay đổi thành công !!!');
+    }
+
     function convertCreatedAtTime(input) {
       var output = new Date(input * 1000);
       output = output.getFullYear() + '-' + (output.getMonth() + 1) + '-' + output.getDate();
