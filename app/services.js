@@ -140,7 +140,7 @@
       } else if (data.level_up) {
         endpoint += '&level_up=' + data.level_up;
       } else if (data.referral_code) {
-        endpoint += '&referral_code=' + data.referral_code;
+        endpoint += '&referral=true';
       }
 
       $http.get(endpoint)
