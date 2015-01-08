@@ -49,7 +49,8 @@
     return Service;
   }
 
-  function AuthService($q, $rootScope, $localStorage, $routeParams, Facebook, GooglePlus, EcoTracker, MemoTracker, LoginService, MolServices) {
+  function AuthService($q, $rootScope, $localStorage, $routeParams, Facebook, GooglePlus, EcoTracker, MemoTracker,
+    LoginService, MolServices) {
     var Service = {};
 
     Service.register = function(data) {
@@ -64,7 +65,7 @@
       return LoginService.forgetPassword(data);
     };
 
-    Service.FbLogin = function() {
+    Service.FbCheckAuth = function() {
       var deferred = $q.defer();
 
       Facebook.getLoginStatus(facebookLoginStatusReceived);
@@ -72,8 +73,21 @@
       function facebookLoginStatusReceived(response) {
         if (response.status === 'connected') {
           $localStorage.auth.facebook = response.authResponse;
+          deferred.resolve(response);
+        } else {
+          deferred.reject(response);
         }
+      }
 
+      return deferred.promise;
+    };
+
+    Service.FbLogin = function() {
+      var deferred = $q.defer();
+
+      if ($localStorage.auth.facebook) {
+        facebookGetInfo();
+      } else {
         Facebook.login(facebookLoginCallback, {
           scope: 'public_profile, email, user_friends'
         });
@@ -81,7 +95,7 @@
 
       function facebookLoginCallback(response) {
         if (response.status === 'connected') {
-          $localStorage.auth.facebook = response.authResponse.accessToken;
+          $localStorage.auth.facebook = response.authResponse;
           facebookGetInfo();
         } else {
           deferred.reject(response);
@@ -90,12 +104,18 @@
 
       function facebookGetInfo() {
         Facebook.api('/me', function(response) {
-          var data = {
-            fb_access_token: $localStorage.auth.facebook,
-            fb_Id: response.id,
-            fb_name: response.name
-          };
-          deferred.resolve(data);
+          var data = {};
+          if (response.error) {
+            delete $localStorage.auth.facebook;
+            deferred.reject(data);
+          } else {
+            data = {
+              fb_access_token: $localStorage.auth.facebook.accessToken,
+              fb_Id: response.id,
+              fb_name: response.name
+            };
+            deferred.resolve(data);
+          }
         });
       }
 
@@ -116,6 +136,7 @@
     Service.logout = function() {
       $localStorage.$reset();
       delete $localStorage.displayTour;
+      delete $localStorage.auth;
       $rootScope.$broadcast('event:auth-logoutConfirmed');
     };
 

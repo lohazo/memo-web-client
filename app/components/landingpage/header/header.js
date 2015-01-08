@@ -109,8 +109,10 @@
 
     $scope.FbLogin = function() {
       AuthService.FbLogin()
-        .then(AuthService.login)
-        .then(closeModal, displayMessageOnFail);
+        .then(function(response) {
+          AuthService.login(response)
+            .then(closeModal, displayMessageOnFail);
+        }, displayMessageOnFail);
     };
 
     $scope.GLogin = function() {
@@ -139,7 +141,9 @@
     }
 
     function displayMessageOnFail(response) {
-      $scope.error = response.data.error;
+      if (response.data) {
+        $scope.error = response.data.error;
+      }
     }
 
   }
@@ -163,7 +167,9 @@
     }
 
     function displayMessageOnFail(response) {
-      $scope.error = response.data.error;
+      if (response.data) {
+        $scope.error = response.data.error;
+      }
     }
   }
   angular.module('landingpage.login', [])
