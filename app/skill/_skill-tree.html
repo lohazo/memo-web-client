@@ -12,7 +12,7 @@
       </div>
     </a>
   </div>
-  <a ng-if="row.isCheckpoint" href="{{row[0].remaining_test_times != 0 ? 'checkpoint/' + row[0].row : ''}}" class="{{row[0].remaining_test_times == 0 ? 'disabled' : ''}} secondary test-out hex-memo-button">
+  <a ng-if="row.isCheckpoint" href="{{row[0].remaining_test_times != 0 ? 'checkpoint/' + row[0].row : ''}}" class="{{row[0].remaining_test_times == 0 ? 'disabled' : ''}} secondary test-out hex-memo-button" tooltip="Làm bài kiểm tra về kiến thức của tất cả các kĩ năng phía trên để nhanh chóng vượt qua những kĩ năng đó" tooltip-placement="right">
     <i class="icon-lock"></i>
     {{row[0].title}}
   </a>
