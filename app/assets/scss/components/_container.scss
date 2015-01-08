@@ -86,9 +86,11 @@ a.reverse.button {
     font-size: $button-font-med;
     font-weight: $font-weight-bold;
     margin-bottom: 0;
+    background: $white url("assets/img/cart.png") left no-repeat;
     &:hover {
       background-color: $gold;
       color: $primary-color;
+      background: $gold url("assets/img/cart-hover.png") left no-repeat;
     }
   }
 }
