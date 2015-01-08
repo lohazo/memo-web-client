@@ -281,7 +281,7 @@
             controller: 'ReferralRewardsCtrl',
             resolve: {
               getRewardsCode: function() {
-                return res.data.rewards_verification_code;
+                return res.data;
               }
             }
           });
@@ -387,8 +387,8 @@
     .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal',
       ReferralEntercodeCtrl
     ])
-    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', function($scope, code) {
-      $scope.reward_code = code;
+    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', function($scope, data) {
+      $scope.rewards_info = data;
     }])
     .controller('ReferralReadmeCtrl', ['$scope', ReferralReadmeCtrl]);
 })(window.angular);

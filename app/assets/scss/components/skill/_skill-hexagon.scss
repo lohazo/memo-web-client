@@ -327,7 +327,7 @@ button.small, .button.small {
 }
 
 span.tooltip {
-  width: 95px !important;
+  width: 180px !important;
   margin: 0 !important;
   padding: 5px 5px !important;
   text-align: center;
@@ -389,6 +389,7 @@ a.close, a.send {
 
 .hex-memo-button.disabled {
   font-size: 14px;
+  cursor: default;
 }
 
 .player .question .name .content .image {

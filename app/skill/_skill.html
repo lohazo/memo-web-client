@@ -8,7 +8,7 @@
           <div class="level level-5">
             <div class="strength-bar"></div>
           </div>
-          <a ng-if="skill.allow_shortcut && (skill.finished_lesson < skill.lessons.length)" ng-href="/shortcut/{{skill._id}}" class="test-out memo-button">
+          <a ng-if="skill.allow_shortcut && (skill.finished_lesson < skill.lessons.length)" ng-href="/shortcut/{{skill._id}}" class="test-out memo-button" tooltip="Vượt rào để hoàn thành kỹ năng này mà không cần làm từng bài học" tooltip-placement="bottom">
             Vượt rào
           </a>
         </div>
