@@ -19,17 +19,17 @@
           // {'title': 'Thảo luận', 'link': '/discussion'}
         ];
 
-          $scope.showShortcutPopup = function() {
-            var modalInstance = $modal.open({
-              templateUrl: 'components/header/_keyboard.html',
+        $scope.showShortcutPopup = function() {
+          var modalInstance = $modal.open({
+            templateUrl: 'components/header/_keyboard.html',
               // controller: 'LoginModalInstanceCtrl',
               windowClass: 'box-shortcuts"'
             });
 
-            modalInstance.result.then(function(msg) {
-              if ($scope[msg] instanceof Function) $scope[msg]();
-            });
-          };
+          modalInstance.result.then(function(msg) {
+            if ($scope[msg] instanceof Function) $scope[msg]();
+          });
+        };
 
   }
 
