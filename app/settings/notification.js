@@ -43,7 +43,7 @@
       });
       data.setting = JSON.stringify($scope.settings);
       SettingNotification.save(data);
-      alert('Bạn đã thay đổi thành công !!!');
+      //alert('Bạn đã thay đổi thành công !!!');
     };
   }
 

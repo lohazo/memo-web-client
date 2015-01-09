@@ -30,28 +30,28 @@
         data = {};
         data.password = $scope.password;
         AccountSetting.saveChanges(data);
-        alert('Bạn đã thay đổi thành công !!!');
+        //alert('Bạn đã thay đổi thành công !!!');
       }
 
       if ($scope.user.email && $scope.user.email.length > 0) {
         data = {};
         data.email = $scope.user.email;
         AccountSetting.saveChanges(data);
-        alert('Bạn đã thay đổi thành công !!!');
+        //alert('Bạn đã thay đổi thành công !!!');
       }
 
       if ($scope.user.username && $scope.user.username.length > 0) {
         data = {};
         data.username = $scope.user.username;
         AccountSetting.saveChanges(data);
-        alert('Bạn đã thay đổi thành công !!!');
+        //alert('Bạn đã thay đổi thành công !!!');
       }
 
       if ($scope.user.mobile && $scope.user.mobile.length > 0) {
         data = {};
         data.mobile = $scope.user.mobile;
         AccountSetting.saveChanges(data);
-        alert('Bạn đã thay đổi thành công !!!');
+        //alert('Bạn đã thay đổi thành công !!!');
       }
     };
   }

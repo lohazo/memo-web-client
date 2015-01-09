@@ -13,7 +13,7 @@
 
     $scope.saveChanges = function() {
       Course.selectCourse({base_course_id: $scope.course._id});
-      alert('Bạn đã thay đổi thành công !!!');
+      //alert('Bạn đã thay đổi thành công !!!');
     };
   }
 
