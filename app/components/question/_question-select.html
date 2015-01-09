@@ -7,13 +7,10 @@
       <div class="small-16 columns answers">
         <div class="row">
           <form>
-            <div class="image image-{{$index + 1}}" ng-repeat="option in options track by $index" ng-click="selectAnswer($index + 1)" popover="Bạn có thể chọn phím tắt 1, 2 hoặc 3 để lựa chọn câu trả lời!" popover-trigger="mouseenter" popover-placement="bottom" >
+            <div class="image image-{{$index + 1}}" ng-repeat="option in options track by $index" ng-click="selectAnswer($index + 1)" popover="Chọn phím {{$index+1}} để lựa chọn câu trả lời!" popover-trigger="mouseenter" popover-placement="bottom" >
               <img ng-src="{{option.image_file}}" />
               <input type="radio" name="answer" value="{{option.text}}" ng-model="select.userAnswer"/>
               <label>{{option.text}}</label>
-              <!-- <div class="hover-text">
-                <p>Bạn có thể chọn phím tắt 1, 2 hoặc 3 để lựa chọn câu trả lời!</p>
-              </div> -->
             </div>
           </form>
         </div>
