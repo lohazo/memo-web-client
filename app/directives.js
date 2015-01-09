@@ -25,6 +25,7 @@ angular.module('app.directives', [])
       var trackingData = angular.fromJson(trackingData);
       var data = response.data;
       data.method = 'feed';
+      data.message = 'Hello';
       FB.ui(data, function(response) {
         if (response.post_id) {
           MemoTracking.track(trackingData.eventName);
@@ -36,7 +37,11 @@ angular.module('app.directives', [])
       FB.ui({
         method: 'share',
         href: 'http://memo.edu.vn'
-      }, function(response) {});
+      }, function(response) {
+        if (response.post_id) {
+          MemoTracking.track(trackingData.eventName);
+        }
+      });
     }
 
     return {
