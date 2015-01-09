@@ -1,9 +1,11 @@
 .verify-rewards-modal {
   position: fixed !important;
   top: 100px !important;
-  min-height: 480px !important;
+  min-height: 150px !important;
   width: 550px;
   overflow: hidden;
+  outline: none;
+  border: 0;
   .text-bold {
     font-weight: bold;
   }
