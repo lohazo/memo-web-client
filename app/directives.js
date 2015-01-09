@@ -20,11 +20,16 @@ angular.module('app.directives', [])
       templateUrl: 'components/header/_header.html'
     };
   })
-  .directive('facebookShareButton', function(AppSetting) {
-    function displayFeedDialog(response) {
+  .directive('facebookShareButton', function(AppSetting, MemoTracking) {
+    function displayFeedDialog(response, trackingData) {
+      var trackingData = angular.fromJson(trackingData);
       var data = response.data;
       data.method = 'feed';
-      FB.ui(data, function(response) {});
+      FB.ui(data, function(response) {
+        if (response.post_id) {
+          MemoTracking.track(trackingData.eventName);
+        }
+      });
     }
 
     function displayDefaultFeedDialog() {
@@ -38,7 +43,8 @@ angular.module('app.directives', [])
       restrict: 'EA',
       scope: {
         shareType: '@',
-        shareData: '@'
+        shareData: '@',
+        trackingData: '@'
       },
       link: function($scope, $element, $attr) {
         $element.bind('click', function() {
@@ -50,7 +56,9 @@ angular.module('app.directives', [])
               .then(displayFeedDialog, displayDefaultFeedDialog);
           } else if ($scope.shareType === "referral-code") {
             AppSetting.getReferralShareFacebookContent($scope.shareData)
-              .then(displayFeedDialog, displayDefaultFeedDialog);
+              .then(function(response) {
+                displayFeedDialog(response, $scope.trackingData);
+              }, displayDefaultFeedDialog);
           } else {
             displayDefaultFeedDialog();
           }
