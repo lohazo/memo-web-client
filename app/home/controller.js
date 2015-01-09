@@ -98,6 +98,9 @@
     $scope.close = function() {
       $modalInstance.close();
     };
+    $scope.$on('event:auth-logoutConfirmed', function() {
+      $scope.close();
+    })
   }
 
   angular.module('home.controller', ['app.services', 'message.directives'])
