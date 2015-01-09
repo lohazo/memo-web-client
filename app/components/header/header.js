@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  function HeaderCtrl($scope, $rootScope, $location, AuthService) {
+  function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal) {
     $scope.$on('$routeChangeSuccess', function() {
       $scope.path = $location.path();
     });
@@ -11,16 +11,28 @@
     };
 
     $scope.menus = [{
-      'title': 'Trang chủ',
-      'link': '/'
-    }, {
-      'title': 'Học bổng đón xuân',
-      'link': '/referral'
-    }];
+        'title': 'Trang chủ',
+        'link': '/'
+      },
+      // {'title': 'Thảo luận', 'link': '/discussion'}
+    ];
+
+    $scope.showShortcutPopup = function() {
+      var modalInstance = $modal.open({
+        templateUrl: 'components/header/_keyboard.html',
+        // controller: 'LoginModalInstanceCtrl',
+        windowClass: 'box-shortcuts"'
+      });
+
+      modalInstance.result.then(function(msg) {
+        if ($scope[msg] instanceof Function) $scope[msg]();
+      });
+    };
   }
+
 
   angular.module('header', []);
   angular.module('header').controller('HeaderCtrl', [
-    '$rootScope', '$scope', '$location', 'AuthService', HeaderCtrl
+    '$rootScope', '$scope', '$location', 'AuthService', '$modal', HeaderCtrl
   ]);
 }(window.angular));
