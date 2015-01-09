@@ -2,13 +2,9 @@
   'use strict';
 
   function HeaderCtrl($scope, $rootScope, $location, AuthService) {
-    $scope.getActiveItem = function(path) {
-      if ($location.path().substr(0, path.length) == path) {
-        return "active";
-      } else {
-        return "";
-      }
-    };
+    $scope.$on('$routeChangeSuccess', function() {
+      $scope.path = $location.path();
+    });
 
     $scope.logout = function() {
       AuthService.logout();

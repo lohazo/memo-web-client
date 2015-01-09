@@ -1,15 +1,18 @@
-'use strict';
+(function(angular) {
+  'use strict';
 
-angular.module('skill.controllers', [])
-  .controller('SkillCtrl', [
-    '$scope', '$rootScope', '$location', '$localStorage', '$routeParams',
-    'AuthService', 'Skill', 'MemoTracking',
-    function($scope, $rootScope, $location, $localStorage, $routeParams,
-      AuthService, Skill, MemoTracker) {
-
-      $scope.iconSets = $localStorage.appSharedSettings.base_skill_icon_urls;
+  function SkillCtrl($scope, $rootScope, $routeParams, AppSetting, Skill, User) {
+    if (User && User.auth_token) {
+      $scope.iconSets = AppSetting.sharedSettings.base_skill_icon_urls;
       $scope.skill = Skill.skill($routeParams.id);
-      MemoTracker.track('lessons list');
-      $scope.showGrammar = ($routeParams.id);
+      $scope.showGrammar = $routeParams.id;
+    } else {
+      $rootScope.$broadcast('event:auth-logoutConfirmed');
     }
-  ]);
+  }
+
+  angular.module('skill.controllers', [])
+    .controller('SkillCtrl', [
+      '$scope', '$rootScope', '$routeParams', 'AppSetting', 'Skill', 'User', SkillCtrl
+    ]);
+}(window.angular));
