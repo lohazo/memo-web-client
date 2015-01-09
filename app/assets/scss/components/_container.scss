@@ -90,6 +90,23 @@ a.reverse.button {
       background-color: $gold;
       color: $primary-color;
     }
+
+  }
+  &.third {
+    @include button($padding: $button-tny, $bg: $white, $radius: $global-radius);
+    border: 2px solid $gold;
+    color: $primary-color;
+    font-size: $button-font-med;
+    font-weight: $font-weight-bold;
+    margin-bottom: 0;
+    background: $white url("assets/img/cart.png") no-repeat;
+    background-origin: content-box;
+    &:hover {
+      color: $primary-color;
+      background: $gold url("assets/img/cart-hover.png") no-repeat;
+      background-origin: content-box;
+    }
+
   }
 }
 

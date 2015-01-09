@@ -293,9 +293,8 @@
       }, function(res) {
         (function() {
           var modalInstance = $modal.open({
-            template: '<article class="verify-reward-container"><div class="guide"><div class="sms-guide">{{reward_code}}</div></div></article>',
             windowClass: 'verify-rewards-modal',
-            // templateUrl: 'components/referral/_verify_Rewards_Error.html',
+            templateUrl: 'components/referral/_verify_Rewards_Error.html',
             controller: 'ReferralRewardsCtrl',
             resolve: {
               getRewardsCode: function() {
@@ -387,8 +386,12 @@
     .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal',
       ReferralEntercodeCtrl
     ])
-    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', function($scope, data) {
+    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', '$modalInstance', function($scope, data,
+      modalInstance) {
       $scope.rewards_info = data;
+      $scope.close = function() {
+        modalInstance.close();
+      };
     }])
     .controller('ReferralReadmeCtrl', ['$scope', ReferralReadmeCtrl]);
 })(window.angular);
