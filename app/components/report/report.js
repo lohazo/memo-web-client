@@ -14,7 +14,7 @@ angular.module('report', [])
           requestData.device = 'web';
           requestData.version = '1.0.2';
 
-          $http.post(BASE_URL + '/bug_report', requestData)
+          $http.post(API_PHP + '/bug_report', requestData)
             .then(function(response) {
               deferred.resolve(response);
             });
@@ -54,15 +54,16 @@ angular.module('report', [])
         content: ''
       };
       $scope.reportBug = function() {
+        console.log('Hit');
         ReportServices.reportBug($scope.data)
           .then(function() {
             $modalInstance.close();
           });
       };
-      $scope.dismissReport = function () {
+      $scope.dismissReport = function() {
         $modalInstance.dismiss('cancel');
       };
-      $scope.cancel = function () {
+      $scope.cancel = function() {
         document.getElementById("cleartext").value = "";
       };
     }
