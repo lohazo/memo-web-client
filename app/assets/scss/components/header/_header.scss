@@ -126,7 +126,7 @@ span.version {
     width: 620px;
 }
 a.close_keyboard {
-    background: url("../image/close.jpg") no-repeat scroll right center rgba(0, 0, 0, 0);
+    background: url("../assets/img/close.jpg") no-repeat scroll right center rgba(0, 0, 0, 0);
     float: right;
     height: 20px;
     margin-right: 10px;
@@ -196,4 +196,7 @@ ul#guidance li p.row5 {
   width: 50%;
   padding: 0;
   min-height: 100px;
+}
+#box_shortcuts{
+  border: none;
 }
