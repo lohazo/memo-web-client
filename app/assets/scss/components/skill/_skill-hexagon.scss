@@ -265,7 +265,6 @@
   &.hex-memo-button {
     margin-bottom: 47px;
   }
-
 }
 
 .tick-lesson {
@@ -340,7 +339,6 @@ a.close, a.send {
 
 .hexagon .skill-row .test-out {
   font-weight: bold;
-
 }
 
 .hexagon .skill-page .blue1 .unlocked a.memo-1 {
@@ -391,6 +389,7 @@ a.close, a.send {
 
 .hex-memo-button.disabled {
   font-size: 14px;
+  cursor: default;
 }
 
 .player .question .name .content .image {

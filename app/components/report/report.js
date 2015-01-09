@@ -59,5 +59,11 @@ angular.module('report', [])
             $modalInstance.close();
           });
       };
+      $scope.dismissReport = function () {
+        $modalInstance.dismiss('cancel');
+      };
+      $scope.cancel = function () {
+        document.getElementById("cleartext").value = "";
+      };
     }
   ]);
