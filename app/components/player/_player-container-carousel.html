@@ -5,6 +5,12 @@
     </li>
   </ul>
 </div>
+<div class="carousel-container">
+  <ul class="carousel-dots">
+    <li class="carousel-dot" ng-class="{active:slideIndex == $index}" ng-repeat="slide in slides track by $index" ng-click="control.goToSlide($index)">
+    </li>
+  </ul>
+</div>
 <footer class="player-carousel-footer" player-carousel-footer>
   <div class="buttons">
     <div class="left">
@@ -18,9 +24,3 @@
     </div>
   </div>
 </footer>
-<div class="carousel-container">
-  <ul class="carousel-dots">
-    <li class="carousel-dot" ng-class="{active:slideIndex == $index}" ng-repeat="slide in slides track by $index" ng-click="control.goToSlide($index)">
-    </li>
-  </ul>
-</div>

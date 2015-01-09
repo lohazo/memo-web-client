@@ -31,18 +31,18 @@
         }
       }
     }
-
     .carousel-container {
       position: relative;
       display: table;
       margin: 0 auto -36px;
       width: auto;
-      bottom: 60px;
+      bottom: 0;
       .carousel-dots {
         display: inline-block;
         position: relative;
         margin: 5px 0px 0px;
         list-style: outside none none;
+        bottom: -20px;
         .carousel-dot {
           margin: 0px 7px;
           float: left;
