@@ -59,5 +59,8 @@ angular.module('report', [])
             $modalInstance.close();
           });
       };
+      $scope.dismissReport = function () {
+        $modalInstance.dismiss('cancel');
+      };
     }
   ]);
