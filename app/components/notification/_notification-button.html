@@ -7,6 +7,9 @@
     <ul class="noti-list">
       <notification-dropdown-item ng-repeat="noti in notification.notifications" >
       </notification-dropdown-item>
+      <li class="noti-item" noti-id="" ng-class="{'hide': notification.notifications.length > 0}">
+        <div class="noti-item-content">Bạn không có thông báo nào</div>
+      </li>
     </ul>
   </div>
 </div>

@@ -3,7 +3,7 @@
 
   function HeaderCtrl($scope, $rootScope, $location, AuthService) {
     $scope.getActiveItem = function(path) {
-      if ($location.path().substr(0, path.length) == path) {
+      if ('/' + $location.path().split('/')[0] === path) {
         return "active";
       } else {
         return "";

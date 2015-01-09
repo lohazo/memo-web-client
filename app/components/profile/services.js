@@ -68,8 +68,7 @@
     Profile.detail = $localStorage.auth.profile_detail || {};
 
     Profile.getUser = function() {
-      Profile.user = $localStorage.auth.user;
-      return Profile.user;
+      return $localStorage.auth ? ($localStorage.auth.user || {}) : {};
     };
 
     Profile.getProfile = function() {
