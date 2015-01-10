@@ -45,4 +45,11 @@
         templateUrl: 'components/referral/_payment-method.html'
       };
     })
+    .directive('campaignVerifyCode', function() {
+      return {
+        restrict: 'EA',
+        controller: 'CampaignVerifyCodeCtrl',
+        templateUrl: 'home/_campaign-verify-code.html'
+      };
+    })
 })(window.angular);

@@ -32,3 +32,22 @@
   min-height: 480px !important;
   min-width: 550px !important;
 }
+
+.verify-box {
+  @include grid-row;
+  .verify-box-inner {
+    @include grid-column($columns: 16);
+    min-height: 32px;
+    .verify-button {
+      border: 0;
+      height: 40px;
+      margin-top: -2px;
+    }
+    .verify-box-code {
+      &.has-code {
+        margin-left: -10px;
+        margin-right: -10px;
+      }
+    }
+  }
+}

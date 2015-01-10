@@ -378,6 +378,26 @@
     $scope.slide = slider($scope);
   }
 
+  function CampaignVerifyCodeCtrl($scope, ReferralService, Profile) {
+    $scope.submitCode = function() {
+      ReferralService.submitCode({
+        referral_code: $scope.refCode
+      }).then(function(res) {
+        $scope.error = '';
+        $scope.isReferral = res.data.code || '';
+        $scope.userName = res.data.referral_user || '';
+      }, function(res) {
+        $scope.error = res.data.message;
+      });
+    };
+    $scope.$watch('profileDetail', function() {
+      if ($scope.profileDetail) {
+        $scope.isReferral = Profile.detail.referral_user || '';
+        $scope.userName = Profile.detail.referral_user;
+      }
+    });
+  }
+
   angular.module('referral.controllers', [])
     .controller('ReferralCtrl', ['$scope', 'ReferralService', '$location', ReferralCtrl])
     .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
@@ -393,5 +413,6 @@
         modalInstance.close();
       };
     }])
-    .controller('ReferralReadmeCtrl', ['$scope', ReferralReadmeCtrl]);
+    .controller('ReferralReadmeCtrl', ['$scope', ReferralReadmeCtrl])
+    .controller('CampaignVerifyCodeCtrl', ['$scope', 'ReferralService', 'Profile', CampaignVerifyCodeCtrl]);
 })(window.angular);
