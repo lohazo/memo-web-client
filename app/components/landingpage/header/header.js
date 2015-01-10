@@ -89,6 +89,7 @@
         if ($scope[msg] instanceof Function) $scope[msg]();
       });
     };
+
   }
 
   function LoginModalInstanceCtrl($scope, $rootScope, $timeout, $modalInstance, $routeParams, AuthService) {
@@ -150,21 +151,25 @@
         AuthService.checkCode({
             referral_code: user.referral_code
           })
-          .then(function(){
-              delete $scope.user.referral_code;
-              AuthService.login($scope.user)
-                .then(closeModal, displayMessageOnFail)
-                .then(function()  {
-                    AuthService.submitReferralCode({
-                      referral_code: user.referral_code
-                    });
-                  }, displayMessageOnFail);
-            }, displayMessageOnFail);
+          .then(function() {
+            delete $scope.user.referral_code;
+            AuthService.login($scope.user)
+              .then(closeModal, displayMessageOnFail)
+              .then(function() {
+                AuthService.submitReferralCode({
+                  referral_code: user.referral_code
+                });
+              }, displayMessageOnFail);
+          }, displayMessageOnFail);
       } else {
         delete $scope.user.referral_code;
         AuthService.login($scope.user)
           .then(closeModal, displayMessageOnFail);
       }
+    };
+
+    $scope.showReferralInput = function() {
+      return ($routeParams.code_chanel && $routeParams.code_chanel === 'REF001');
     };
 
     function closeModal(data) {
@@ -210,10 +215,9 @@
     .directive('loginModal', LoginModalDirective)
     .directive('registerModal', RegisterModalDirective)
     .directive('forgetModal', ForgetPasswordModalDirective)
-    .controller('LoginModalCtrl', ['$scope', '$rootScope', '$modal', LoginModalCtrl])
+    .controller('LoginModalCtrl', ['$scope', '$rootScope', '$modal', '$routeParams', LoginModalCtrl])
     .controller('LoginModalInstanceCtrl', ['$scope', '$rootScope', '$timeout', '$modalInstance',
-      '$routeParams',
-      'AuthService', LoginModalInstanceCtrl
+      '$routeParams', 'AuthService', LoginModalInstanceCtrl
     ])
     .controller('ForgetPasswordModalInstanceCtrl', ['$scope', '$rootScope', '$timeout', '$modalInstance',
       '$routeParams', 'AuthService', ForgetPasswordModalInstanceCtrl

@@ -173,7 +173,7 @@
 
     function getAuthed() {
       Profile.getUser();
-      $scope.isAuthed = Profile.user ? true : false;
+      $scope.isAuthed = Profile.user.auth_token ? true : false;
     }
 
     function next() {

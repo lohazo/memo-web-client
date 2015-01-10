@@ -24,13 +24,15 @@ angular.module('landingpage.controllers', [])
     }
   ])
   .controller('LpHeaderCtrl', [
-    '$scope', '$location', '$routeParams',
-    'MolServices', 'Mixpanel',
-    function($scope, $location, $routeParams, MolServices, Mixpanel) {
+    '$scope', '$routeParams',
+    'MolServices',
+    function($scope, $routeParams, MolServices) {
       var data = $routeParams;
       data.preview = '1';
-      mixpanel.track('Web 1.0.2 Landingpage view', data);
       MolServices.saveC2(data);
+      $scope.showLoginCTA = function() {
+        return data.code_chanel && data.code_chanel === 'REF001'
+      };
     }
   ])
   .controller('LpHeadCtrl', [
