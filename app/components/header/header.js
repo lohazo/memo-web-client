@@ -20,7 +20,7 @@
     $scope.showShortcutPopup = function() {
       var modalInstance = $modal.open({
         templateUrl: 'components/header/_keyboard.html',
-        // controller: 'LoginModalInstanceCtrl',
+        controller: 'ModalInstanceCtrl',
         windowClass: 'box-shortcuts"'
       });
 
@@ -32,7 +32,11 @@
 
 
   angular.module('header', []);
-  angular.module('header').controller('HeaderCtrl', [
-    '$rootScope', '$scope', '$location', 'AuthService', '$modal', HeaderCtrl
-  ]);
+  angular.module('header').controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'AuthService', '$modal', HeaderCtrl])
+  .controller('ModalInstanceCtrl', ['$scope','$modalInstance', function($scope, $modalInstance) {
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+  }]);
+
 }(window.angular));
