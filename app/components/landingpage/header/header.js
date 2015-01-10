@@ -175,7 +175,7 @@
 
     function displayMessageOnFail(response) {
       if (response.data) {
-        $scope.error = response.data.error;
+        $scope.error = response.data.error || response.data.message;
       }
     }
 
@@ -202,7 +202,7 @@
 
     function displayMessageOnFail(response) {
       if (response.data) {
-        $scope.error = response.data.error;
+        $scope.error = response.data.error || response.data.message;
       }
     }
   }

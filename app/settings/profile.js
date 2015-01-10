@@ -111,7 +111,7 @@
 
     $scope.saveChanges = function () {
       var data = {};
-      alert('Bạn đã thay đổi thành công !!!');
+      //alert('Bạn đã thay đổi thành công !!!');
     }
 
     function convertCreatedAtTime(input) {
