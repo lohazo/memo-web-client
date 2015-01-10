@@ -3,7 +3,7 @@
 
   function ProfileConfig($routeProvider) {
     $routeProvider.when('/user', {
-      templateUrl: 'profile/_index.html',
+      templateUrl: 'profile/_profile.html',
       controller: 'ProfileCtrl',
       resolve: {
         getProfile: function(Profile) {
