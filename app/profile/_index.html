@@ -3,11 +3,11 @@
   <div class="container container-page-profile">
       <div class="row user-info-profile">
         <p>
-          <img src="assets/img/profile-avatar-big.png" alt=""> <br>
-          <strong>ljnkshady</strong>
+          <img ng-src="{{profile.url_avatar || 'assets/img/profile-avatar-big.png'}}" alt=""/> <br>
+          <strong ng-bind="profile.username"></strong>
         </p>
         <div class="row add-user-name">
-          <p><img src="assets/img/005.png" alt="">4 ngày Combo</p>
+          <p><img src="assets/img/005.png" alt="">{{profileDetail.combo_days}} ngày Combo</p>
         </div>
         <div class="row choose-language-profile">
           <div class="small-4 columns"><p style="color:#fff">da</p></div>
