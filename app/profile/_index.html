@@ -1,6 +1,6 @@
 <div class="row main home-page">
   <div class="main-left left-profile">
-  <div class="container container-page-profile">
+    <div class="container container-page-profile">
       <div class="row user-info-profile">
         <p>
           <img ng-src="{{profile.url_avatar || 'assets/img/profile-avatar-big.png'}}" alt=""/> <br>
@@ -10,37 +10,41 @@
           <p><img src="assets/img/005.png" alt="">{{profileDetail.combo_days}} ngày Combo</p>
         </div>
         <div class="row choose-language-profile">
-          <div class="row top-language-profile">
-            <div class="language-profile eng-profile">
-              <img src="assets/img/en-vi.png" alt="">
-              <a href="#" title="">Tiếng Anh</a> <br>
-              <span>Level 10</span>
+          <div class="large-16 columns">
+            <div class="row top-language-profile">
+              <div class="language-profile">
+                <img src="assets/img/en-vi.png" alt="">
+                <a href="#" title="">Tiếng Anh</a> <br>
+                <span>Level 10</span>
+              </div>
+              <div class="language-profile">
+                <img class="" src="assets/img/jp-vi.png" alt="">
+                <a href="#" title="">Tiếng Pháp</a> <br>
+                <span>Level 10</span>
+              </div>
+            </div>  
+            
+            <div class="row top-language-profile">
+              <div class="language-profile">
+                <img class="" src="assets/img/fr-vi.png" alt="">
+                <a href="#" title="">Tiếng Nhật</a> <br>
+                <span>Level 10</span>
+              </div>
+              <div class="language-profile">
+                <img class="" src="assets/img/de-vi.png" alt="">
+                <a href="#" title="">Tiếng Đức</a> <br>
+                <span>Level 10</span>
+              </div>
             </div>
-            <div class="language-profile fr-profile">
-              <img class="" src="assets/img/jp-vi.png" alt="">
-              <a href="#" title="">Tiếng Pháp</a> <br>
-              <span>Level 10</span>
-            </div>
+            
           </div>
-          <div class="row top-language-profile">
-            <div class="language-profile jp-profile">
-            <img class="" src="assets/img/fr-vi.png" alt="">
-            <a href="#" title="">Tiếng Nhật</a> <br>
-            <span>Level 10</span>
-          </div>
-          <div class="language-profile gm-profile">
-            <img class="" src="assets/img/de-vi.png" alt="">
-            <a href="#" title="">Tiếng Đức</a> <br>
-            <span>Level 10</span>
-          </div>
-          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="main-right leaderboard-profile">
-  <div class="container box-list-top">
-    <div class="row leaderboard" leaderboard></div>
-  </div>
-</div>    
+  <div class="main-right leaderboard-profile">
+    <div class="container box-list-top">
+      <div class="row leaderboard" leaderboard></div>
+    </div>
+  </div>    
 </div>
