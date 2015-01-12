@@ -2,6 +2,23 @@
   'use strict';
 
   function ProfileConfig($routeProvider) {
+    $routeProvider.when('/profile/:id', {
+      templateUrl: 'profile/_index.html',
+      controller: 'ProfileCtrl',
+      resolve: {
+        getProfile: function ($route, Profile) {
+          return Profile.getProfile({
+            '_id': $route.current.params.id
+          });
+        },
+        getProfileDetail: function ($route, Profile) {
+          return Profile.getProfileDetail({
+            '_id': $route.current.params.id
+          });
+        }
+      }
+    });
+
     $routeProvider.when('/profile', {
       templateUrl: 'profile/_index.html',
       controller: 'ProfileCtrl',
@@ -16,7 +33,7 @@
     });
   }
 
-  function ProfileCtrl($scope, Profile) {
+  function ProfileCtrl($scope, $routeParams, Profile) {
     $scope.profile = Profile.user;
     $scope.profileDetail = Profile.detail;
     var ownedCourses = $scope.profileDetail.owned_courses;
@@ -28,6 +45,6 @@
   }
 
   angular.module('profile', ['profile.services'])
-    .controller('ProfileCtrl', ['$scope', 'Profile', ProfileCtrl])
+    .controller('ProfileCtrl', ['$scope', '$routeParams', 'Profile', ProfileCtrl])
     .config(['$routeProvider', ProfileConfig]);
 }(window.angular));
