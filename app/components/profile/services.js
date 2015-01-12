@@ -8,7 +8,7 @@
       // data = {_id: }
       var deferred = $q.defer();
       var requestData = {
-        '_id': data._id || $localStorage.auth.user._id,
+        '_id': data ? (data._id || $localStorage.auth.user._id) : $localStorage.auth.user._id,
         'auth_token': $localStorage.auth.user.auth_token
       };
 
@@ -30,7 +30,7 @@
       // data = {_id: }
       var deferred = $q.defer();
       var requestData = {
-        '_id': data._id || $localStorage.auth.user._id,
+        '_id': data ? (data._id || $localStorage.auth.user._id) : $localStorage.auth.user._id,
         'auth_token': $localStorage.auth.user.auth_token
       };
 
