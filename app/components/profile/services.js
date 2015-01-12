@@ -8,7 +8,7 @@
       // data = {_id: }
       var deferred = $q.defer();
       var requestData = {
-        '_id': data._id || $localStorage.auth.user._id,
+        '_id': $localStorage.auth.user._id,
         'auth_token': $localStorage.auth.user.auth_token
       };
 
@@ -30,7 +30,7 @@
       // data = {_id: }
       var deferred = $q.defer();
       var requestData = {
-        '_id': data._id || $localStorage.auth.user._id,
+        '_id': $localStorage.auth.user._id,
         'auth_token': $localStorage.auth.user.auth_token
       };
 
@@ -71,7 +71,8 @@
     Profile.detail = $localStorage.auth.profile_detail || {};
 
     Profile.getUser = function () {
-      return $localStorage.auth ? ($localStorage.auth.user || {}) : {};
+      Profile.user = $localStorage.auth ? ($localStorage.auth.user || {}) : {};
+      return Profile.user;
     };
 
     Profile.getProfile = function (data) {

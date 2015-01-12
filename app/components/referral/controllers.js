@@ -2,14 +2,14 @@
  * Referral Controllers
  */
 
-(function(angular) {
+(function (angular) {
   'use strict';
-  var PlayerView = function() {
+  var PlayerView = function () {
     this.index = 0;
     // this.items = items;
   }
 
-  var Singleton = (function() {
+  var Singleton = (function () {
     var instance,
       view;
 
@@ -24,13 +24,13 @@
     }
 
     return {
-      getInstance: function() {
+      getInstance: function () {
         if (!instance) {
           instance = createInstance();
         }
         return instance;
       },
-      getView: function() {
+      getView: function () {
         if (!view) {
           view = createView();
         }
@@ -40,45 +40,45 @@
   })();
 
   PlayerView.prototype = {
-    first: function() {
+    first: function () {
       this.reset();
       return this.index;
     },
-    next: function() {
+    next: function () {
       this.index = this.index + 1;
       return this.index;
     },
-    hasNext: function() {
+    hasNext: function () {
       return this.index < this.items.length - 1;
     },
-    hasPrev: function() {
+    hasPrev: function () {
       return this.index > 0;
     },
-    prev: function() {
+    prev: function () {
       this.index = this.index - 1;
       return this.index;
     },
-    reset: function() {
+    reset: function () {
       this.index = 0;
       return this.index;
     },
-    last: function() {
+    last: function () {
       this.index = this.items.length - 1;
       return this.index;
     },
-    current: function() {
+    current: function () {
       return this.items[this.index];
     },
-    each: function(callback) {
+    each: function (callback) {
       for (var item = this.first(); this.hasNext(); this.next()) {
         callback(this.current());
       }
     },
-    goTo: function(index) {
+    goTo: function (index) {
       this.index = index;
       return this.index;
     },
-    init: function(items) {
+    init: function (items) {
       this.items = items;
     }
   }
@@ -89,17 +89,32 @@
     'referral-body-three'
   ]);
 
-  function ReferralCtrl($scope, service, $location) {
+  function ReferralCtrl($scope, service, $location, Profile, $localStorage) {
     Singleton.getView().reset();
     if (service.status == 1) {
       $location.path('/referral/profile');
+    }
+
+    getAuthed();
+    $scope.$on('event:auth-loginConfirmed', function () {
+      getAuthed();
+    });
+
+    $scope.$on('event:auth-logoutConfirmed', function () {
+      $scope.isAuthed = false;
+    });
+
+    function getAuthed() {
+      console.log($localStorage.auth);
+      Profile.getUser();
+      $scope.isAuthed = Profile.user.auth_token ? true : false;
     }
   }
 
   function ReferralHeaderCtrl($scope, service) {}
 
   function ReferralBodyCtrl($scope, service, EcoTracker, $localStorage) {
-    $scope.$on('referral:body-next', function() {
+    $scope.$on('referral:body-next', function () {
       if (Singleton.getView().hasNext()) {
         var index = Singleton.getView().next();
         $scope.directive = Singleton.getView().current();
@@ -110,7 +125,7 @@
         });
       };
     });
-    $scope.$on('referral:body-prev', function() {
+    $scope.$on('referral:body-prev', function () {
       if (Singleton.getView().hasPrev()) {
         var index = Singleton.getView().prev();
         $scope.directive = Singleton.getView().current();
@@ -122,7 +137,7 @@
         });
       };
     });
-    $scope.$on('referral:body-last', function() {
+    $scope.$on('referral:body-last', function () {
       var index = Singleton.getView().last();
       $scope.directive = Singleton.getView().current();
       EcoTracker.campaignTrack('Web 1.0.2 click event track', {
@@ -138,21 +153,21 @@
       price: false,
       payment: false
     };
-    $scope.displayIntro = function() {
+    $scope.displayIntro = function () {
       $scope.view = {
         intro: true,
         price: false,
         payment: false
       };
     };
-    $scope.displayPriceScholarship = function() {
+    $scope.displayPriceScholarship = function () {
       $scope.view = {
         intro: false,
         price: true,
         payment: false
       };
     };
-    $scope.displayPaymentMethod = function() {
+    $scope.displayPaymentMethod = function () {
       $scope.view = {
         intro: false,
         price: false,
@@ -162,19 +177,6 @@
   }
 
   function ReferralFooterCtrl($scope, service, $location, Profile) {
-    getAuthed();
-    $scope.$on('event:auth-loginConfirmed', function() {
-      getAuthed();
-    });
-
-    $scope.$on('event:auth-logoutConfirmed', function() {
-      $scope.isAuthed = false;
-    });
-
-    function getAuthed() {
-      Profile.getUser();
-      $scope.isAuthed = Profile.user.auth_token ? true : false;
-    }
 
     function next() {
       // PlayerControl.getInstance().next();
@@ -213,7 +215,7 @@
     if (!profile.user.auth_token) {
       $location.path('/');
     } else {
-      profile.getProfileDetail().then(function() {
+      profile.getProfileDetail().then(function () {
         $scope.isReferral = profile.detail.referral_user || '';
         $scope.userName = profile.detail.referral_user;
         $scope.user = profile.detail || {};
@@ -231,8 +233,8 @@
             data: profile.detail.exp_chart.exp
           }]
         };
-      }).then(function() {
-        ReferralService.getStatus().then(function(res) {
+      }).then(function () {
+        ReferralService.getStatus().then(function (res) {
           $scope.code = res.data.referral_code || 0;
           $scope.invite_count = res.data.record.invited_count || 0;
           $scope.FBShare.shareData = res.data.referral_code;
@@ -244,66 +246,66 @@
       shareType: 'referral-code'
     };
 
-    $scope.readme = function(data) {
+    $scope.readme = function (data) {
       var modalInstance = $modal.open({
         windowClass: 'readme-modal',
         controller: 'ReferralReadmeCtrl',
         templateUrl: 'components/referral/_readme-' + data + '.html'
       });
 
-      modalInstance.result.then(function(msg) {
+      modalInstance.result.then(function (msg) {
         if ($scope[msg] instanceof Function) $scope[msg]();
       });
     };
     $scope.notiCode =
       "(Nếu bạn quên chưa nhập code chia sẻ từ bạn bè, hãy điền ngay tại đây để được tính là đã mời thêm 1 bạn)";
-    $scope.submitCode = function() {
+    $scope.submitCode = function () {
       // console.log()
       ReferralService.submitCode({
         referral_code: $scope.refCode
-      }).then(function(res) {
+      }).then(function (res) {
         $scope.error = '';
         $scope.notiCode = '';
         $scope.isReferral = res.data.code || '';
         $scope.userName = res.data.referral_user || '';
-      }, function(res) {
+      }, function (res) {
         $scope.error = res.data.message;
         $scope.notiCode = ""
       });
     };
-    $scope.verifyRewards = function() {
-      ReferralService.verifyRewards().then(function(res) {
-        (function() {
+    $scope.verifyRewards = function () {
+      ReferralService.verifyRewards().then(function (res) {
+        (function () {
           var modalInstance = $modal.open({
             // template: '<div verifyRewards-modal></div>',
             windowClass: 'verify-rewards-modal',
             templateUrl: 'components/referral/_verify_Rewards.html',
             controller: 'ReferralRewardsCtrl',
             resolve: {
-              getRewardsCode: function() {
+              getRewardsCode: function () {
                 return res.data;
               }
             }
           });
 
-          modalInstance.result.then(function(msg) {
+          modalInstance.result.then(function (msg) {
             if ($scope[msg] instanceof Function) $scope[msg]();
           });
         })();
-      }, function(res) {
-        (function() {
+      }, function (res) {
+        (function () {
           var modalInstance = $modal.open({
             windowClass: 'verify-rewards-modal',
             templateUrl: 'components/referral/_verify_Rewards_Error.html',
             controller: 'ReferralRewardsCtrl',
             resolve: {
-              getRewardsCode: function() {
+              getRewardsCode: function () {
                 return res.data.message;
               }
             }
           });
 
-          modalInstance.result.then(function(msg) {
+          modalInstance.result.then(function (msg) {
             if ($scope[msg] instanceof Function) $scope[msg]();
           });
         })();
@@ -379,18 +381,18 @@
   }
 
   function CampaignVerifyCodeCtrl($scope, ReferralService, Profile) {
-    $scope.submitCode = function() {
+    $scope.submitCode = function () {
       ReferralService.submitCode({
         referral_code: $scope.refCode
-      }).then(function(res) {
+      }).then(function (res) {
         $scope.error = '';
         $scope.isReferral = res.data.code || '';
         $scope.userName = res.data.referral_user || '';
-      }, function(res) {
+      }, function (res) {
         $scope.error = res.data.message;
       });
     };
-    $scope.$watch('profileDetail', function() {
+    $scope.$watch('profileDetail', function () {
       if ($scope.profileDetail) {
         $scope.isReferral = Profile.detail.referral_user || '';
         $scope.userName = Profile.detail.referral_user;
@@ -399,20 +401,31 @@
   }
 
   angular.module('referral.controllers', [])
-    .controller('ReferralCtrl', ['$scope', 'ReferralService', '$location', ReferralCtrl])
+    .controller('ReferralCtrl', ['$scope', 'ReferralService', '$location', 'Profile',
+      '$localStorage',
+      ReferralCtrl
+    ])
     .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
-    .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', 'EcoTracking', '$localStorage', ReferralBodyCtrl])
-    .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', 'Profile', ReferralFooterCtrl])
-    .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location', '$modal',
+    .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', 'EcoTracking', '$localStorage',
+      ReferralBodyCtrl
+    ])
+    .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', 'Profile',
+      ReferralFooterCtrl
+    ])
+    .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location',
+      '$modal',
       ReferralEntercodeCtrl
     ])
-    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', '$modalInstance', function($scope, data,
+    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', '$modalInstance', function (
+      $scope, data,
       modalInstance) {
       $scope.rewards_info = data;
-      $scope.close = function() {
+      $scope.close = function () {
         modalInstance.close();
       };
     }])
     .controller('ReferralReadmeCtrl', ['$scope', ReferralReadmeCtrl])
-    .controller('CampaignVerifyCodeCtrl', ['$scope', 'ReferralService', 'Profile', CampaignVerifyCodeCtrl]);
+    .controller('CampaignVerifyCodeCtrl', ['$scope', 'ReferralService', 'Profile',
+      CampaignVerifyCodeCtrl
+    ]);
 })(window.angular);
