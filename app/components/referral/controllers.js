@@ -105,7 +105,6 @@
     });
 
     function getAuthed() {
-      console.log($localStorage.auth);
       Profile.getUser();
       $scope.isAuthed = Profile.user.auth_token ? true : false;
     }
