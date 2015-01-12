@@ -107,6 +107,14 @@
   function MixpanelFactory() {
     var Mixpanel = {};
     var APP_VERSION = '1.0.2';
+    var mixpanel = {
+      identify: function () {},
+      people: {
+        set: function () {}
+      },
+      register: function () {},
+      track: function () {}
+    };
 
     Mixpanel.trackSignin = function (data) {
       mixpanel.identify(data.id);
