@@ -1,6 +1,6 @@
-'use strict';
-
 (function (angular, localStorage) {
+  'use strict';
+
   function MemoTracking($http, $q, $localStorage, APP_VERSION) {
     var BASE_URL = 'http://services.memo.edu.vn/trackings/track';
     var tracker = {};
