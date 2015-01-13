@@ -52,6 +52,9 @@
       scope: {
         trackingData: "@"
       },
+      link: function ($scope) {
+        $scope.load();
+      },
       controller: 'LoadEventTrackCtrl'
     };
   }
