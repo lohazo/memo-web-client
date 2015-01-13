@@ -102,8 +102,8 @@
               }
             }, {
               "_id": "54b4e78b53616c28f7000000",
-              "type": "someone_subscribe",
-              "content": "{username} đã thêm bạn vào danh sách bạn bè.",
+              "type": "someone_pass_you",
+              "content": "{username} đã vượt qua bạn!",
               "is_new": true,
               "is_read": false,
               "is_opened": false,
@@ -172,7 +172,8 @@
   }
 
   angular.module('notification', [
-    'notification.subscribe'
+    'notification.subscribe',
+    'notification.pass'
   ]);
   angular.module('notification')
     .factory('NotificationService', ['$http', '$q', '$localStorage', 'API', NotificationService])

@@ -15,7 +15,7 @@
   }
 
   function NotificationSubscribeCtrl($scope, $localStorage, LeaderboardServices) {
-    $scope.message = $scope.content.replace('{username}', $scope.friend.username);;
+    $scope.message = $scope.content.replace('{username}', $scope.friend.username);
 
     $scope.follow = function () {
       LeaderboardServices.follow({
