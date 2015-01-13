@@ -138,6 +138,9 @@
     margin-left: 0px;
   margin-top: 20px;
 }
+.sliderinner-landing a img{
+  margin-top: 40px;
+}
 .slider-landingpage {
   float: right;
   min-height: 390px;
@@ -198,21 +201,18 @@
     transition: background-color .2s;
 }
 
+
+.slider-landingpage ul li img {
+animation: floatBubble 2s inifnate;
+-webkit-animation-name: animation-name;
+-webkit-animation-time: 4s;
+}
 .slider-landingpage input[type=radio]#control1:checked~label[for=control1] { background-color: #ffbb33; }
 .slider-landingpage input[type=radio]#control2:checked~label[for=control2] { background-color: #ffbb33; }
-// .slider-landingpage input[type=radio]#control3:checked~label[for=control3] { background-color: #810c15; }
-// .slider-landingpage input[type=radio]#control4:checked~label[for=control4] { background-color: #810c15; }
-// .slider-landingpage input[type=radio]#control5:checked~label[for=control5] { background-color: #810c15; }
 .slider-landingpage label[for=control1] { margin-left: -88px }
 .slider-landingpage label[for=control2] { margin-left: -43px }
-// .slider-landingpage label[for=control4] { margin-left: 18px }
-// .slider-landingpage label[for=control5] { margin-left: 36px }
 .slider-landingpage input[type=radio]#control1:checked~.sliderinner-landing>ul { left: 0 }
 .slider-landingpage input[type=radio]#control2:checked~.sliderinner-landing>ul { left: -100% }
-.slider-landingpage input[type=radio]#control3:checked~.sliderinner>ul { left: -200% }
-.slider-landingpage input[type=radio]#control4:checked~.sliderinner>ul { left: -300% }
-.slider-landingpage input[type=radio]#control5:checked~.sliderinner>ul { left: -400% }
-
 label.control1 {
   left: 648px;
   top: 233px;
