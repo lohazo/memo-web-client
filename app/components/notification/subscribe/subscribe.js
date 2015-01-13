@@ -14,11 +14,17 @@
     };
   }
 
-  function NotificationSubscribeCtrl($scope) {
-    $scope.content = $scope.content.replace('{username}', $scope.friend.username);
-    $scope.notification = {
-      friend: $scope.friend,
-      content: $scope.content
+  function NotificationSubscribeCtrl($scope, $localStorage, LeaderboardServices) {
+    $scope.message = $scope.content.replace('{username}', $scope.friend.username);;
+
+    $scope.follow = function () {
+      LeaderboardServices.follow({
+          friend_id: $scope.friend._id
+        })
+        .then(function (response) {
+          $localStorage.auth.profile_detail.following_user_ids = response.data.following_user_ids;
+          $scope.friend.is_friend = true;
+        });
     };
   }
 
@@ -26,5 +32,7 @@
   angular.module('notification.subscribe')
     .directive('notificationSubscribeItem', NotificationSubscribeItem);
   angular.module('notification.subscribe')
-    .controller('NotificationSubscribeCtrl', ['$scope', NotificationSubscribeCtrl]);
+    .controller('NotificationSubscribeCtrl', ['$scope', '$localStorage', 'LeaderboardServices',
+      NotificationSubscribeCtrl
+    ]);
 }(window.angular));
