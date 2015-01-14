@@ -7,7 +7,8 @@
       replace: true,
       scope: {
         content: "@",
-        friend: "="
+        friend: "=",
+        timeAgo: "="
       },
       templateUrl: 'components/notification/pass/_pass-item.html',
       controller: 'NotificationPassCtrl'
