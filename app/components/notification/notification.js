@@ -119,7 +119,7 @@
             }, {
               "_id": "54b11b7f6d616928fc390300",
               "type": "achieved_new_tier",
-              "content": "Mức học bổng tích lũy của bạn đã tăng lên 500",
+              "content": "Mức học bổng tích lũy của bạn đã tăng lên {new_gift_value}",
               "is_new": false,
               "is_read": false,
               "is_opened": false,
@@ -173,7 +173,8 @@
 
   angular.module('notification', [
     'notification.subscribe',
-    'notification.pass'
+    'notification.pass',
+    'notification.newTier'
   ]);
   angular.module('notification')
     .factory('NotificationService', ['$http', '$q', '$localStorage', 'API', NotificationService])
