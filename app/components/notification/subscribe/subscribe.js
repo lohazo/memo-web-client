@@ -7,7 +7,8 @@
       replace: true,
       scope: {
         content: "@",
-        friend: "="
+        friend: "=",
+        timeAgo: "="
       },
       templateUrl: 'components/notification/subscribe/_subscribe-item.html',
       controller: 'NotificationSubscribeCtrl'

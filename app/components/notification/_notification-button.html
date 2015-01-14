@@ -11,8 +11,8 @@
         </div>
       </li>
       <li class="noti-item" ng-repeat="noti in notification.notifications" ng-switch="noti.type">
-        <notification-pass-item ng-switch-when="someone_pass_you" content="{{noti.content}}" friend="noti.metadata.friend"></notification-pass-item>
-        <notification-subscribe-item ng-switch-when="someone_subscribe" content="{{noti.content}}" friend="noti.metadata.friend"></notification-subscribe-item>
+        <notification-pass-item ng-switch-when="someone_pass_you" content="{{noti.content}}" friend="noti.metadata.friend" time-ago="noti.time_ago"></notification-pass-item>
+        <notification-subscribe-item ng-switch-when="someone_subscribe" content="{{noti.content}}" friend="noti.metadata.friend" time-ago="noti.time_ago"></notification-subscribe-item>
         <notification-dropdown-item ng-switch-default></notification-dropdown-item>
       </li>
     </ul>
