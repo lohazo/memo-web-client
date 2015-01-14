@@ -102,18 +102,17 @@
               }
             }, {
               "_id": "54b4e78b53616c28f7000000",
-              "type": "someone_pass_you",
-              "content": "{username} đã vượt qua bạn!",
+              "type": "ref_code_submitted",
+              "content": "{username} đã tham gia Memo bằng code của bạn",
               "is_new": true,
               "is_read": false,
               "is_opened": false,
               "time_ago": "13 minutes and 56 seconds ago",
               "metadata": {
-                "friend": {
+                "submitted_user": {
                   "_id": "54b4c67d8a8fdbbe230041a7",
                   "username": "Sald11221",
-                  "url_avatar": "",
-                  "is_friend": false
+                  "url_avatar": ""
                 }
               }
             }, {
@@ -174,7 +173,8 @@
   angular.module('notification', [
     'notification.subscribe',
     'notification.pass',
-    'notification.newTier'
+    'notification.newTier',
+    'notification.refCodeSubmitted'
   ]);
   angular.module('notification')
     .factory('NotificationService', ['$http', '$q', '$localStorage', 'API', NotificationService])
