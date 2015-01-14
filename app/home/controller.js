@@ -1,9 +1,10 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function HomeCtrl($scope) {}
 
-  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker,
+  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, Mixpanel,
+    MemoTracker,
     Message) {
     function getProfile() {
       $scope.profile = Profile.user;
@@ -20,8 +21,8 @@
     }
 
     function getProfileDetail() {
-      Profile.getProfileDetail($scope.auth.user)
-        .then(function() {
+      Profile.getProfileDetail()
+        .then(function () {
           $scope.profileDetail = Profile.detail;
           $scope.expChart = {
             labels: $scope.profileDetail.exp_chart.days,
@@ -64,30 +65,30 @@
 
     $scope.profile = {};
     $scope.displayTour = false;
-    $scope.open = function() {
+    $scope.open = function () {
       var modalInstance = $modal.open({
         templateUrl: 'home/_placement-test-modal.html',
         controller: 'PlacementTestModalInstanceCtrl',
         windowClass: 'placement-test-modal',
         backdrop: 'static',
         resolve: {
-          profile: function() {
+          profile: function () {
             return $scope.profile;
           },
-          displayTour: function() {
+          displayTour: function () {
             return $scope.displayTour;
           }
         }
       });
 
-      modalInstance.result.then(function(msg) {});
+      modalInstance.result.then(function (msg) {});
 
-      $scope.$watch('displayTour', function() {
+      $scope.$watch('displayTour', function () {
         if ($scope.displayTour) modalInstance.close();
       });
     };
 
-    $scope.$watch('profile', function() {
+    $scope.$watch('profile', function () {
       if ($scope.profile.is_beginner) {
         $scope.open();
       }
@@ -95,20 +96,25 @@
   }
 
   function PlacementTestModalInstanceCtrl($scope, $modalInstance) {
-    $scope.close = function() {
+    $scope.close = function () {
       $modalInstance.close();
     };
-    $scope.$on('event:auth-logoutConfirmed', function() {
+    $scope.$on('event:auth-logoutConfirmed', function () {
       $scope.close();
     })
   }
 
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
-    .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder', 'AppSetting',
+    .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder',
+      'AppSetting',
       'Mixpanel', 'MemoTracking', 'Message', HomeMainCtrl
     ])
-    .controller('PlacementTestModalCtrl', ['$scope', '$modal', '$rootScope', PlacementTestModalCtrl])
-    .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance', PlacementTestModalInstanceCtrl]);
+    .controller('PlacementTestModalCtrl', ['$scope', '$modal', '$rootScope',
+      PlacementTestModalCtrl
+    ])
+    .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance',
+      PlacementTestModalInstanceCtrl
+    ]);
 
 }(window.angular));
