@@ -144,6 +144,9 @@
   <script src="components/notification/notification.js"></script>
   <!-- Welcome -->
   <script src="welcome/welcome.js"></script>
+  <!--   slider   -->
+  <script src="components/landingpage/slider.js"></script>
+  <!-- end   slider   -->
   <!-- Words -->
   <script src="components/words/words.js"></script>
   <script src="components/referral/services.js"></script>
@@ -158,5 +161,19 @@
   ga('create', 'UA-57229832-1', 'auto');
   ga('send', 'pageview');
   </script>
+
+  <script type="text/javascript">
+        function switchAutoAdvance() {
+            imageSlider.switchAuto();
+            switchPlayPauseClass();
+        }
+        function switchPlayPauseClass() {
+            var auto = document.getElementById('auto');
+            var isAutoPlay = imageSlider.getAuto();
+            auto.className = isAutoPlay ? "group2-Pause" : "group2-Play";
+            auto.title = isAutoPlay ? "Pause" : "Play";
+        }
+        switchPlayPauseClass();
+    </script>
 </body>
 </html>
