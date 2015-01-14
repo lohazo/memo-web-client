@@ -155,6 +155,7 @@
 }
 .sliderinner-landing>ul {
     list-style: none;
+    animation: 10s ease 0s normal none infinite running slide-animation;
     height: 100%;
     width: 500%;
     overflow: hidden;
@@ -200,13 +201,6 @@
     -o-transition: background-color .2s;
     transition: background-color .2s;
 }
-
-
-.slider-landingpage ul li img {
-animation: floatBubble 2s inifnate;
--webkit-animation-name: animation-name;
--webkit-animation-time: 4s;
-}
 .slider-landingpage input[type=radio]#control1:checked~label[for=control1] { background-color: #ffbb33; }
 .slider-landingpage input[type=radio]#control2:checked~label[for=control2] { background-color: #ffbb33; }
 .slider-landingpage label[for=control1] { margin-left: -88px }
@@ -233,4 +227,26 @@ label.control2 {
   border-radius: 0;
   border: none;
 }
+
+@-moz-keyframes slide-animation {
+0% {opacity:0;}
+2% {opacity:1;}
+20% {left:0px; opacity:1;}
+// 22.5% {opacity:0.4;}
+25% {left:-540px; opacity:1;}
+45% {left:-540px; opacity:1;}
+// 47.5% {opacity:0.6;}
+// 50% {left:-540px; opacity:1;}
+// 70% {left:-540px; opacity:1;}
+// 72.5% {opacity:0.6;}
+// 75% {left:-1800px; opacity:1;}
+// 95% {opacity:1;}
+// 98% {left:-1800px; opacity:0;}
+// 100% {left:0px; opacity:0;}
+}
+
+
+
+
+
 /*---------------------------------END SLIDER--------------------------------*/
