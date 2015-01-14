@@ -7,7 +7,8 @@
       replace: true,
       scope: {
         content: '@',
-        gift: "@"
+        gift: "@",
+        timeAgo: "="
       },
       templateUrl: 'components/notification/referral/_new-tier-item.html',
       controller: 'AchieveNewTierCtrl'

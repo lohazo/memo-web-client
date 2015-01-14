@@ -7,7 +7,8 @@
       replace: true,
       scope: {
         content: '@',
-        friend: '@'
+        friend: '@',
+        timeAgo: '='
       },
       templateUrl: 'components/notification/referral/_ref-code-submitted-item.html',
       controller: 'RefCodeSubmittedCtrl'
