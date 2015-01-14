@@ -92,7 +92,9 @@
 
   angular.module('notification', [
     'notification.subscribe',
-    'notification.pass'
+    'notification.pass',
+    'notification.newTier',
+    'notification.refCodeSubmitted'
   ]);
   angular.module('notification')
     .factory('NotificationService', ['$http', '$q', '$localStorage', 'API', NotificationService])
