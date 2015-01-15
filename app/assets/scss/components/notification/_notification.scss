@@ -50,9 +50,10 @@
         color: #333;
       }
       .noti-follow-button {
-        @include button($padding: $button-med, $radius: true);
+        @include button($padding: $button-tny, $radius: true);
         line-height: 1rem;
         margin: 10px 0 0 0;
+        font-size: 14px;
       }
       .noti-time-ago {
         margin-top: 10px;
