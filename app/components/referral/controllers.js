@@ -435,7 +435,8 @@
         })
         .then(function (response) {
           $scope.referral.hasCode = true;
-          $scope.referral.username = response.data.username;
+          $scope.referral.username = response.data.referral_user;
+          $scope.error = '';
         }, function (response) {
           $scope.error = response.data.error || response.data.message;
         });
