@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function clickEventTrack() {
@@ -8,8 +8,8 @@
         trackingData: "@"
       },
       controller: 'ClickEventTrackCtrl',
-      link: function($scope, $element) {
-        $element.bind('click', function() {
+      link: function ($scope, $element) {
+        $element.bind('click', function () {
           $scope.click();
         });
       }
@@ -18,7 +18,7 @@
 
   function ClickEventTrackCtrl($scope, EcoTracker, MemoTracker) {
     var data = angular.fromJson($scope.trackingData);
-    $scope.click = function() {
+    $scope.click = function () {
       if (data.memoEnabled) {
         MemoTracker.track(data.eventName);
       } else {
@@ -30,9 +30,9 @@
   function shareEventTrack() {
     return {
       strict: 'EA',
-      link: function($scope, $element, $attr) {
+      link: function ($scope, $element, $attr) {
         var data = angular.fromJson($attr.trackingData);
-        $element.bind('click', function() {
+        $element.bind('click', function () {
           $scope.click(data);
         });
       },
@@ -41,9 +41,28 @@
   }
 
   function ShareEventTrackCtrl($scope, MemoTracker) {
-    $scope.click = function(data) {
+    $scope.click = function (data) {
       MemoTracker.track(data.eventName);
     };
+  }
+
+  function loadEventTrack() {
+    return {
+      strict: 'EA',
+      scope: {
+        trackingData: "@"
+      },
+      link: function ($scope) {
+        $scope.load();
+      },
+      controller: 'LoadEventTrackCtrl'
+    };
+  }
+
+  function LoadEventTrackCtrl($scope, EcoTracker) {
+    $scope.load = function () {
+      EcoTracker.track("Enter page", $scope.trackingData);
+    }
   }
 
   angular.module('tracking', [
@@ -52,9 +71,15 @@
 
   angular.module('tracking')
     .directive('clickEventTrack', clickEventTrack)
-    .controller('ClickEventTrackCtrl', ['$scope', 'EcoTracking', 'MemoTracking', ClickEventTrackCtrl]);
+    .controller('ClickEventTrackCtrl', ['$scope', 'EcoTracking', 'MemoTracking',
+      ClickEventTrackCtrl
+    ]);
 
   angular.module('tracking')
     .directive('shareEventTrack', shareEventTrack)
     .controller('ShareEventTrackCtrl', ['$scope', 'MemoTracking', ShareEventTrackCtrl]);
+
+  angular.module('tracking')
+    .directive('loadEventTrack', loadEventTrack)
+    .controller('LoadEventTrackCtrl', ['$scope', 'EcoTracking', LoadEventTrackCtrl]);
 }(window.angular));

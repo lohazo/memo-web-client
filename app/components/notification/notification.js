@@ -1,26 +1,27 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function NotificationService($http, $q, $localStorage, API) {
     var Service = {};
 
-    Service.getInAppNotifications = function(data) {
+    Service.getInAppNotifications = function (data) {
       // data = {page: 1};
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
-      $http.get(API + '/in_app_notifications?auth_token=' + authToken + '&page=' + (data.page || 1), {
+      $http.get(API + '/in_app_notifications?auth_token=' + authToken + '&page=' + (data.page ||
+          1), {
           ignoreLoadingBar: true
         })
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
-        }, function(response) {
+        }, function (response) {
           deferred.reject(response);
         });
 
       return deferred.promise;
     };
 
-    Service.checkAll = function() {
+    Service.checkAll = function () {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
@@ -29,9 +30,9 @@
         }, {
           ignoreLoadingBar: true
         })
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
-        }, function(response) {
+        }, function (response) {
           deferred.reject(response);
         });
 
@@ -47,12 +48,12 @@
       NotificationService.getInAppNotifications({
           page: 1
         })
-        .then(function(response) {
+        .then(function (response) {
           $scope.notification = response.data;
-        })
+        });
     }
 
-    $scope.checkAll = function() {
+    $scope.checkAll = function () {
       $scope.notification.is_new_count = 0;
       NotificationService.checkAll();
     };
@@ -69,8 +70,8 @@
       restrict: 'EA',
       scope: {},
       controller: 'NotificationDropdownButtonCtrl',
-      link: function($scope, $element) {
-        angular.element($element).find('a').bind('click', function() {
+      link: function ($scope, $element) {
+        angular.element($element).find('a').bind('click', function () {
           $scope.checkAll();
           $scope.$apply();
         });
@@ -84,12 +85,17 @@
       restrict: 'EA',
       replace: true,
       controller: 'NotificationDropdownItemCtrl',
-      link: function($scope, $element, $attr) {},
+      link: function ($scope, $element, $attr) {},
       templateUrl: 'components/notification/_notification-dropdown-item.html'
     };
   }
 
-  angular.module('notification', []);
+  angular.module('notification', [
+    'notification.subscribe',
+    'notification.pass',
+    'notification.newTier',
+    'notification.refCodeSubmitted'
+  ]);
   angular.module('notification')
     .factory('NotificationService', ['$http', '$q', '$localStorage', 'API', NotificationService])
     .controller('NotificationDropdownButtonCtrl', ['$scope', '$interval', 'NotificationService',

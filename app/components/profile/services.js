@@ -8,7 +8,7 @@
       // data = {_id: }
       var deferred = $q.defer();
       var requestData = {
-        '_id': $localStorage.auth.user._id,
+        '_id': (data && data._id) ? data._id : $localStorage.auth.user._id,
         'auth_token': $localStorage.auth.user.auth_token
       };
 
@@ -30,12 +30,17 @@
       // data = {_id: }
       var deferred = $q.defer();
       var requestData = {
-        '_id': $localStorage.auth.user._id,
+        'friend_id': (data && data.friend_id) ? data.friend_id : false,
         'auth_token': $localStorage.auth.user.auth_token
       };
 
-      $http.get(API_PHP + '/users/profile_details' + '?device=web&auth_token=' + requestData.auth_token +
-          '&id=' + requestData._id)
+      var endpoint = API_PHP + '/users/profile_details?device=web&auth_token=' + requestData.auth_token;
+
+      if (requestData.friend_id) {
+        endpoint += '&friend_id=' + requestData.friend_id;
+      }
+
+      $http.get(endpoint)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -79,11 +84,13 @@
       // data = {_id}
       return ProfileServices.profile(data)
         .then(function (response) {
-          $localStorage.auth.user = response.data.user_info;
-          $localStorage.auth.skills_tree = response.data.skills_tree;
-          $localStorage.auth.checkpoints = response.data.checkpoints;
-          $localStorage.auth.skills = response.data.skills;
-          Profile.user = response.data.user_info;
+          if (!(data && data._id)) {
+            $localStorage.auth.user = response.data.user_info;
+            $localStorage.auth.skills_tree = response.data.skills_tree;
+            $localStorage.auth.checkpoints = response.data.checkpoints;
+            $localStorage.auth.skills = response.data.skills;
+            Profile.user = response.data.user_info;
+          }
         });
     };
 
@@ -91,8 +98,10 @@
       // data = {_id:}
       return ProfileServices.profileDetail(data)
         .then(function (response) {
-          Profile.detail = response.data;
-          $localStorage.auth.profile_detail = Profile.detail;
+          if (!(data && data._id)) {
+            Profile.detail = response.data;
+            $localStorage.auth.profile_detail = Profile.detail;
+          }
         });
     };
 

@@ -89,15 +89,31 @@
     'referral-body-three'
   ]);
 
-  function ReferralCtrl($scope, service, $location, Profile, $localStorage) {
+  function ReferralCtrl($scope, service, $location, Profile, $localStorage, $modal) {
     Singleton.getView().reset();
     if (service.status == 1) {
       $location.path('/referral/profile');
     }
 
+    $scope.openSubmitCodeModal = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'components/referral/_submitcode_modal.html',
+        controller: 'SubmitCodeModalInstanceCtrl',
+        windowClass: 'submit-code-modal',
+        backdrop: 'static'
+      });
+    };
+
     getAuthed();
     $scope.$on('event:auth-loginConfirmed', function () {
       getAuthed();
+      service.getStatus().then(function (response) {
+        var joined = response.data.record.code;
+        var notFilledReferralCode = (joined && response.data.record.can_submit_code);
+        if (!joined || notFilledReferralCode) {
+          $scope.openSubmitCodeModal();
+        }
+      });
     });
 
     $scope.$on('event:auth-logoutConfirmed', function () {
@@ -399,13 +415,39 @@
     });
   }
 
+  function SubmitCodeModalInstanceCtrl($scope, $modalInstance, ReferralService) {
+    $scope.error = '';
+    $scope.referral = {
+      code: '',
+      username: '',
+      hasCode: false
+    };
+    $scope.submitCode = function () {
+      ReferralService.submitCode({
+          referral_code: $scope.referral.code
+        })
+        .then(function (response) {
+          $scope.referral.hasCode = true;
+          $scope.referral.username = response.data.referral_user;
+          $scope.error = '';
+        }, function (response) {
+          $scope.error = response.data.error || response.data.message;
+        });
+    };
+
+    $scope.close = function () {
+      $modalInstance.close();
+    }
+  }
+
   angular.module('referral.controllers', [])
     .controller('ReferralCtrl', ['$scope', 'ReferralService', '$location', 'Profile',
-      '$localStorage',
+      '$localStorage', '$modal',
       ReferralCtrl
     ])
     .controller('ReferralHeaderCtrl', ['$scope', 'ReferralService', ReferralHeaderCtrl])
-    .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', 'EcoTracking', '$localStorage',
+    .controller('ReferralBodyCtrl', ['$scope', 'ReferralService', 'EcoTracking',
+      '$localStorage',
       ReferralBodyCtrl
     ])
     .controller('ReferralFooterCtrl', ['$scope', 'ReferralService', '$location', 'Profile',
@@ -415,16 +457,11 @@
       '$modal',
       ReferralEntercodeCtrl
     ])
-    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', '$modalInstance', function (
-      $scope, data,
-      modalInstance) {
-      $scope.rewards_info = data;
-      $scope.close = function () {
-        modalInstance.close();
-      };
-    }])
     .controller('ReferralReadmeCtrl', ['$scope', ReferralReadmeCtrl])
     .controller('CampaignVerifyCodeCtrl', ['$scope', 'ReferralService', 'Profile',
       CampaignVerifyCodeCtrl
+    ])
+    .controller('SubmitCodeModalInstanceCtrl', ['$scope', '$modalInstance', 'ReferralService',
+      SubmitCodeModalInstanceCtrl
     ]);
 })(window.angular);

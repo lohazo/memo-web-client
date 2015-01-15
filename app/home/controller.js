@@ -1,9 +1,10 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function HomeCtrl($scope) {}
 
-  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, Mixpanel, MemoTracker,
+  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting,
+    MemoTracker,
     Message, ReferralService) {
     function getProfile() {
       $scope.profile = Profile.user;
@@ -20,8 +21,8 @@
     }
 
     function getProfileDetail() {
-      Profile.getProfileDetail($scope.auth.user)
-        .then(function() {
+      Profile.getProfileDetail()
+        .then(function () {
           $scope.profileDetail = Profile.detail;
           $scope.expChart = {
             labels: $scope.profileDetail.exp_chart.days,
@@ -51,12 +52,10 @@
       $scope.FBShare = {
         shareType: 'referral-code'
       };
-      ReferralService.getStatus().then(function(res) {
-        $scope.referral = {
-          code: res.data.referral_code || 0,
-          invite_count: res.data.record.invited_count || 0,
-          record: res.data.record
-        };
+      ReferralService.getStatus().then(function (res) {
+        $scope.referral = res.data;
+        $scope.referral.record.code = res.data.record.code || 0;
+        $scope.referral.record.invited_count = res.data.record.invited_count || 0;
         $scope.FBShare.shareData = res.data.referral_code;
       });
     }
@@ -79,30 +78,30 @@
 
     $scope.profile = {};
     $scope.displayTour = false;
-    $scope.open = function() {
+    $scope.open = function () {
       var modalInstance = $modal.open({
         templateUrl: 'home/_placement-test-modal.html',
         controller: 'PlacementTestModalInstanceCtrl',
         windowClass: 'placement-test-modal',
         backdrop: 'static',
         resolve: {
-          profile: function() {
+          profile: function () {
             return $scope.profile;
           },
-          displayTour: function() {
+          displayTour: function () {
             return $scope.displayTour;
           }
         }
       });
 
-      modalInstance.result.then(function(msg) {});
+      modalInstance.result.then(function (msg) {});
 
-      $scope.$watch('displayTour', function() {
+      $scope.$watch('displayTour', function () {
         if ($scope.displayTour) modalInstance.close();
       });
     };
 
-    $scope.$watch('profile', function() {
+    $scope.$watch('profile', function () {
       if ($scope.profile.is_beginner) {
         $scope.open();
       }
@@ -110,20 +109,26 @@
   }
 
   function PlacementTestModalInstanceCtrl($scope, $modalInstance) {
-    $scope.close = function() {
+    $scope.close = function () {
       $modalInstance.close();
     };
-    $scope.$on('event:auth-logoutConfirmed', function() {
+    $scope.$on('event:auth-logoutConfirmed', function () {
       $scope.close();
     })
   }
 
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
-    .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder', 'AppSetting',
-      'Mixpanel', 'MemoTracking', 'Message', 'ReferralService', HomeMainCtrl
+    .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder',
+      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', HomeMainCtrl
     ])
-    .controller('PlacementTestModalCtrl', ['$scope', '$modal', '$rootScope', PlacementTestModalCtrl])
-    .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance', PlacementTestModalInstanceCtrl]);
+    .controller('PlacementTestModalCtrl', ['$scope', '$modal', '$rootScope',
+      PlacementTestModalCtrl
+    ])
+    .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance',
+      PlacementTestModalInstanceCtrl
+    ]).controller('TourDemoCtrl', function ($scope, $tour) {
+      $tour.start();
+    });
 
 }(window.angular));
