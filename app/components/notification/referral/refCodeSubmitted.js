@@ -17,7 +17,7 @@
 
   function RefCodeSubmittedCtrl($scope) {
     var friend = angular.fromJson($scope.friend);
-    $scope.message = $scope.content.replace('{username}', friend.username);
+    $scope.message = $scope.content.replace(/\{username\}/g, friend.username);
   }
 
   angular.module('notification.refCodeSubmitted', []);
