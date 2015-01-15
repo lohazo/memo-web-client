@@ -16,21 +16,44 @@
     </div>
   </div>
   <div class="large-8 large-offset-1 slider-landingpage">
-        <div id="sliderFrame">
+        <div id="container">
+    <div id="content-slider">
         <div id="slider">
-            <a click-event-track tracking-data='{"campaign":"REFERRAL","code_channel":"ADS_NON_E8","screen":"1"}' ng-href="/referral"><img src="assets/img/landingpage/Ants-campaign.png" class="left"/></a>
-            <img src="assets/img/landingpage/1-ant.png" />
+            <div id="mask">
+            <ul>
+            <li id="first" class="firstanimation">
+            <a href="#">
+            <img src="assets/img/landingpage/1-ant.png" alt=""/>
+            </a>
+            </li>
+            <li id="second" class="secondanimation">
+            <a click-event-track tracking-data='{"campaign":"REFERRAL","code_channel":"ADS_NON_E8","screen":"1"}' ng-href="/referral" class="large-12 small">
+            <img src="assets/img/landingpage/Ants-campaign.png" alt=""/>
+            </a>
+            </li>
+            
+            <li id="third" class="thirdanimation">
+            <a href="#">
+            <img src="assets/img/landingpage/1-ant.png" alt=""/>
+            </a>
+            </li>
+                        
+            <li id="fourth" class="fourthanimation">
+            <a click-event-track tracking-data='{"campaign":"REFERRAL","code_channel":"ADS_NON_E8","screen":"1"}' ng-href="/referral" class="large-12 small">
+            <img src="assets/img/landingpage/Ants-campaign.png" alt=""/>
+            </a>
+            </li>
+                        
+            <li id="fifth" class="fifthanimation">
+            <a href="#">
+            <img src="assets/img/landingpage/1-ant.png" alt=""/>
+            </a>
+            </li>
+            </ul>
+            </div>
+            <div class="progress-bar"></div>
         </div>
-        <div class="group1-Wrapper">
-            <a onclick="imageSlider.previous()" class="group1-Prev"></a>
-            <a onclick="imageSlider.next()" class="group1-Next"></a>
-        </div>
-<!--         <div style="text-align:center;padding:20px;z-index:20;">
-            <a onclick="imageSlider.previous()" class="group2-Prev"></a>
-            <a id='auto' onclick="switchAutoAdvance()"></a>
-            <a onclick="imageSlider.next()" class="group2-Next"></a>
-        </div> -->
     </div>
-
+</div>
     </div>
 </div>
