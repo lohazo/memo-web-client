@@ -53,11 +53,9 @@
         shareType: 'referral-code'
       };
       ReferralService.getStatus().then(function (res) {
-        $scope.referral = {
-          code: res.data.referral_code || 0,
-          invite_count: res.data.record.invited_count || 0,
-          record: res.data.record
-        };
+        $scope.referral = res.data;
+        $scope.referral.record.code = res.data.record.code || 0;
+        $scope.referral.record.invited_count = res.data.record.invited_count || 0;
         $scope.FBShare.shareData = res.data.referral_code;
       });
     }
@@ -129,6 +127,8 @@
     ])
     .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance',
       PlacementTestModalInstanceCtrl
-    ]);
+    ]).controller('TourDemoCtrl', function ($scope, $tour) {
+      $tour.start();
+    });
 
 }(window.angular));
