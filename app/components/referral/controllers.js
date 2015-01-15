@@ -415,13 +415,6 @@
     });
   }
 
-  function ReferralRewardsCtrl($scope, data, modalInstance) {
-    $scope.rewards_info = data;
-    $scope.close = function () {
-      modalInstance.close();
-    };
-  }
-
   function SubmitCodeModalInstanceCtrl($scope, $modalInstance, ReferralService) {
     $scope.error = '';
     $scope.referral = {
@@ -463,9 +456,6 @@
     .controller('ReferralEntercodeCtrl', ['$scope', 'ReferralService', 'Profile', '$location',
       '$modal',
       ReferralEntercodeCtrl
-    ])
-    .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', '$modalInstance',
-      ReferralRewardsCtrl
     ])
     .controller('ReferralReadmeCtrl', ['$scope', ReferralReadmeCtrl])
     .controller('CampaignVerifyCodeCtrl', ['$scope', 'ReferralService', 'Profile',
