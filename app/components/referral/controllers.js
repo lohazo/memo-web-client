@@ -425,14 +425,17 @@
   function SubmitCodeModalInstanceCtrl($scope, $modalInstance, ReferralService) {
     $scope.error = '';
     $scope.referral = {
-      code: ''
+      code: '',
+      username: '',
+      hasCode: false
     };
     $scope.submitCode = function () {
       ReferralService.submitCode({
           referral_code: $scope.referral.code
         })
         .then(function (response) {
-          $scope.close();
+          $scope.referral.hasCode = true;
+          $scope.referral.username = response.data.username;
         }, function (response) {
           $scope.error = response.data.error || response.data.message;
         });
