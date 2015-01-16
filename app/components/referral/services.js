@@ -2,7 +2,7 @@
  * Referral Services
  */
 
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function ReferralService($http, $q, $localStorage, API) {
@@ -14,12 +14,13 @@
         submit_code: '/referral/submit_referral_code',
         check_code: '/referral/check_referral_code',
         verify_rewards: '/referral/verify_rewards',
-        join_campaign: '/referral/join_campaign'
+        join_campaign: '/referral/join_campaign',
+        verify_mobile: '/referral/verify_mobile'
       },
       Referral = {};
     Referral.status = 0;
-    Referral.getStatus = function() {
-      
+    Referral.getStatus = function () {
+
       if (!$localStorage.auth) {
         $localStorage.auth = {};
       };
@@ -27,46 +28,46 @@
       var deferred = $q.defer();
 
       $http.get(API + Apis.status + authToken)
-        .then(function(res) {
+        .then(function (res) {
           deferred.resolve(res);
-        }, function(res) {
+        }, function (res) {
           deferred.reject(res);
         });
 
       return deferred.promise;
     };
 
-    Referral.submitCode = function(data) {
+    Referral.submitCode = function (data) {
       // data = {referral_code: ''}
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var deferred = $q.defer();
       data.auth_token = authToken;
 
       $http.post(API + Apis.submit_code, data)
-        .then(function(res) {
+        .then(function (res) {
           deferred.resolve(res);
-        }, function(res) {
+        }, function (res) {
           deferred.reject(res);
         });
 
       return deferred.promise;
     };
 
-    Referral.checkCode = function(data) {
+    Referral.checkCode = function (data) {
       // data = {referral_code: ''}
       var deferred = $q.defer();
 
       $http.post(API + Apis.check_code, data)
-        .then(function(res) {
+        .then(function (res) {
           deferred.resolve(res);
-        }, function(res) {
+        }, function (res) {
           deferred.reject(res);
         });
 
       return deferred.promise;
     };
 
-    Referral.verifyRewards = function() {
+    Referral.verifyRewards = function () {
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var deferred = $q.defer(),
         data = {
@@ -75,16 +76,33 @@
         };
 
       $http.post(API + Apis.verify_rewards, data)
-        .then(function(res) {
+        .then(function (res) {
           deferred.resolve(res);
-        }, function(res) {
+        }, function (res) {
           deferred.reject(res);
         });
 
       return deferred.promise;
     };
 
-    Referral.joined = function() {
+    Referral.verifyMobile = function (data) {
+      // data = {mobile:}
+      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
+      var deferred = $q.defer();
+      data.auth_token = authToken;
+
+      $http.post('http://api.memo.edu.vn/api/v1.8/users/verify_mobile', data)
+        .then(function (response) {
+          deferred.resolve(response);
+        })
+        .then(function (response) {
+          deferred.reject(response);
+        });
+
+      return deferred.promise;
+    }
+
+    Referral.joined = function () {
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var deferred = $q.defer(),
         data = {
@@ -92,9 +110,9 @@
           // verify_rewards: ref_code
         };
       $http.post(API + Apis.join_campaign, data)
-        .then(function(res) {
+        .then(function (res) {
           deferred.resolve(res);
-        }, function(res) {
+        }, function (res) {
           deferred.reject(res);
         });
 

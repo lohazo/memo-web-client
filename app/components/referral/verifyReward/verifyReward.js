@@ -42,23 +42,38 @@
     };
   }
 
-  function ReferralRewardsCtrl($scope, data, modalInstance) {
+  function ReferralRewardsCtrl($scope, data, modalInstance, ReferralService) {
     var ctrl = this;
-    $scope.rewards_info = data;
     $scope.user = {
       mobile: ''
     };
+    $scope.rewards_info = data;
+    $scope.user.mobile = data.mobile || '';
+    $scope.error = '';
 
     ctrl.validateMobile = function (mobile) {
       // Regex 10-digit phone
       var tenDigitPhoneRegex = /09[0-9]{8}/;
       // Regex 11-digit phone
       var elevenDigitPhoneRegex = /01[0-9]{9}/;
-      return (mobile.match(tenDigitPhoneRegex) || mobile.match(elevenDigitPhoneRegex));
+      return ((mobile.length === 10 && mobile.match(tenDigitPhoneRegex)) || (mobile.length ===
+        11 && mobile.match(elevenDigitPhoneRegex)));
     }
 
     $scope.verifyMobile = function () {
-
+      $scope.user.mobile = $scope.user.mobile.replace(/ /g, '');
+      if (ctrl.validateMobile($scope.user.mobile)) {
+        ReferralService.verifyMobile({
+            mobile: $scope.user.mobile
+          })
+          .then(function (response) {
+            $scope.close();
+          }, function (response) {
+            $scope.error = response.error;
+          });
+      } else {
+        $scope.error = 'Số điện thoại không hợp lệ. Vui lòng nhập lại!';
+      }
     };
 
     $scope.close = function () {
@@ -71,6 +86,7 @@
       VerifyRewardModalCtrl
     ])
     .controller('ReferralRewardsCtrl', ['$scope', 'getRewardsCode', '$modalInstance',
+      'ReferralService',
       ReferralRewardsCtrl
     ]);
 }(window.angular));
