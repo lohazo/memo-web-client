@@ -1,17 +1,17 @@
-(function(angular) {
+(function (angular) {
 
   'use strict';
 
   function HttpInterceptor($rootScope, $q, $location, $localStorage) {
     return {
       // optional method
-      'request': function(config) {
+      'request': function (config) {
         // do something on success
         return config;
       },
 
       // optional method
-      'requestError': function(rejection) {
+      'requestError': function (rejection) {
         // do something on error
 
         // if (canRecover(rejection)) {
@@ -21,7 +21,7 @@
       },
 
       // optional method
-      'response': function(response) {
+      'response': function (response) {
         // do something on success
         if (response.status === 401) {
           $localStorage.$reset();
@@ -32,7 +32,7 @@
       },
 
       // optional method
-      'responseError': function(rejection) {
+      'responseError': function (rejection) {
         // do something on error
         if (rejection.status === 401) {
           $localStorage.$reset();
@@ -49,52 +49,52 @@
     var Setting = {};
     Setting.sharedSettings = $localStorage.appSharedSettings || null;
 
-    Setting.get = function() {
+    Setting.get = function () {
       return AppServices.get()
-        .then(function(response) {
+        .then(function (response) {
           $localStorage.appSetting = response.data;
         });
     };
 
-    Setting.getSharedSettings = function() {
+    Setting.getSharedSettings = function () {
       return AppServices.getSharedSettings()
-        .then(function(response) {
+        .then(function (response) {
           $localStorage.appSharedSettings = response.data;
           Setting.sharedSettings = response.data;
         });
     };
 
-    Setting.getWords = function() {
+    Setting.getWords = function () {
       return WordsFactory.getWords()
-        .then(function() {
+        .then(function () {
           Setting.words = $localStorage.words;
         });
     };
 
-    Setting.getFinishSkillFacebookContent = function(skillId) {
+    Setting.getFinishSkillFacebookContent = function (skillId) {
       return AppServices.getFacebookSharedContent({
         skill_id: skillId
       });
     };
 
-    Setting.getLevelUpFacebookContent = function() {
+    Setting.getLevelUpFacebookContent = function () {
       return AppServices.getFacebookSharedContent({
         level_up: true
       });
     };
 
-    Setting.getReferralShareFacebookContent = function(referralCode) {
+    Setting.getReferralShareFacebookContent = function (referralCode) {
       return AppServices.getFacebookSharedContent({
         referral_code: referralCode
       });
     };
 
-    Setting.shouldDisplayTour = function() {
+    Setting.shouldDisplayTour = function () {
       Setting.displayTour = $localStorage.displayTour || false;
       return Setting.displayTour;
     };
 
-    Setting.disableTour = function() {
+    Setting.disableTour = function () {
       Setting.displayTour = false;
       $localStorage.displayTour = false;
     };
@@ -104,37 +104,38 @@
 
   function AppServices($http, $q, $localStorage, API, API_PHP) {
     var AppServices = {};
-    AppServices.get = function(data) {
+    AppServices.get = function (data) {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
       $http.get(API_PHP + '/appsettings?device=web&auth_token=' + authToken)
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
         });
       return deferred.promise;
     };
 
-    AppServices.getSharedSettings = function(data) {
+    AppServices.getSharedSettings = function (data) {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
       $http.get(API + '/shared_settings?device=web&resolution=all&auth_token=' + authToken)
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
-        }, function(response) {
+        }, function (response) {
           deferred.reject(response);
         });
 
       return deferred.promise;
     };
 
-    AppServices.getFacebookSharedContent = function(data) {
+    AppServices.getFacebookSharedContent = function (data) {
       // data = {skill_id: 'aoheusantheu' / level_up: true};
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
-      var endpoint = API + '/shared_settings/facebook_share_content?device=web&auth_token=' + authToken;
+      var endpoint = API + '/shared_settings/facebook_share_content?device=web&auth_token=' +
+        authToken;
       if (data.skill_id) {
         endpoint += '&skill_id=' + data.skill_id;
       } else if (data.level_up) {
@@ -144,11 +145,11 @@
       }
 
       $http.get(endpoint)
-        .then(function(response) {
+        .then(function (response) {
           // response = {caption:, description:, link:};
           deferred.resolve(response);
         })
-        .then(function(response) {
+        .then(function (response) {
           deferred.reject(response);
         });
 
@@ -161,13 +162,13 @@
   function Message(MessageService) {
     var Message = {};
 
-    Message.list = function() {
-      return MessageService.list().then(function(response) {
+    Message.list = function () {
+      return MessageService.list().then(function (response) {
         Message.messages = response.data;
       });
     };
 
-    Message.open = function(data) {
+    Message.open = function (data) {
       // data = {message_ids=[]}
       return MessageService.openMessage(data);
     };
@@ -178,12 +179,12 @@
   function MessageService($http, $q, $localStorage, API) {
     MessageService = {};
 
-    MessageService.list = function() {
+    MessageService.list = function () {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
       $http.get(API + '/messages?auth_token=' + authToken)
-        .then(function(response) {
+        .then(function (response) {
           $localStorage.messages = response.data;
           deferred.resolve(response);
         });
@@ -191,7 +192,7 @@
       return deferred.promise;
     };
 
-    MessageService.openMessage = function(data) {
+    MessageService.openMessage = function (data) {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
@@ -201,7 +202,7 @@
       };
 
       $http.post(API + '/messages/open_messages', requestData)
-        .then(function(response) {
+        .then(function (response) {
           $localStorage.messages = [];
           deferred.resolve(response);
         });
@@ -215,7 +216,13 @@
     .constant('APP_VERSION', '1.0.2')
     .constant('API_PHP', 'http://api.memo.edu.vn/api/v1.7')
     .constant('API', 'http://services.memo.edu.vn/api')
-    .factory('HttpInterceptor', ['$rootScope', '$q', '$location', '$localStorage', HttpInterceptor])
+    .constant('angularMomentConfig', {
+      preprocess: 'unix',
+      timezone: 'Asia/Ho_Chi_Minh'
+    })
+    .factory('HttpInterceptor', ['$rootScope', '$q', '$location', '$localStorage',
+      HttpInterceptor
+    ])
     .factory('AppSetting', ['$localStorage', 'AppServices', 'Words', AppSetting])
     .factory('AppServices', ['$http', '$q', '$localStorage', 'API', 'API_PHP', AppServices])
     .factory('Message', ['MessageService', Message])

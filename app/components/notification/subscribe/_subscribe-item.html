@@ -2,6 +2,6 @@
   <div class="noti-item-image"><img ng-src="{{friend.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
   <div class="noti-item-content">{{message}}
     <div><a class="noti-follow-button" ng-click="follow()" ng-hide="friend.is_friend">Kết bạn</a></div>
-    <div class="noti-time-ago">{{timeAgo}}</div>
+    <div class="noti-time-ago" am-time-ago="timeAgo"></div>
   </div>
 </div>

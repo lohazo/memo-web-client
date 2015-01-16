@@ -43,7 +43,7 @@
   angular.module('app', [
     'ngRoute', 'ngStorage', 'ngAudio',
     'mm.foundation', 'angles', 'facebook', 'googleplus',
-    'angular-loading-bar',
+    'angular-loading-bar', 'angularMoment',
     'app.controllers', 'app.directives',
     'header', 'landingpage', 'login', 'home', 'course',
     'profile', 'skill', 'placement', 'report', 'exam',
@@ -53,6 +53,8 @@
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
     'GooglePlusProvider',
     AppConfig
-  ]);
+  ]).run(['amMoment', function (amMoment) {
+    amMoment.changeLocale('vi');
+  }]);
 
 }(window.angular));
