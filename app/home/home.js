@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('home', ['home.controller', 'home.directives', 'referral']);
+angular.module('home', ['home.controller', 'home.directives']);
