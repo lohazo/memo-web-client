@@ -15,7 +15,7 @@
         check_code: '/referral/check_referral_code',
         verify_rewards: '/referral/verify_rewards',
         join_campaign: '/referral/join_campaign',
-        verify_mobile: '/referral/verify_mobile'
+        claim_rewards: '/referral/claim_rewards'
       },
       Referral = {};
     Referral.status = 0;
@@ -91,7 +91,7 @@
       var deferred = $q.defer();
       data.auth_token = authToken;
 
-      $http.post('http://api.memo.edu.vn/api/v1.8/users/verify_mobile', data)
+      $http.post(API + Apis.claim_rewards, data)
         .then(function (response) {
           deferred.resolve(response);
         })
