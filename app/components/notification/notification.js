@@ -61,9 +61,7 @@
     // $interval(getInAppNotifications, 30 * 1000);
   }
 
-  function NotificationDropdownItemCtrl($scope, NotificationService) {
-
-  }
+  function NotificationDropdownItemCtrl($scope, NotificationService) {}
 
   function NotificationDropdownButton($timeout, $rootScope) {
     return {
@@ -94,7 +92,8 @@
     'notification.subscribe',
     'notification.pass',
     'notification.newTier',
-    'notification.refCodeSubmitted'
+    'notification.refCodeSubmitted',
+    'notification.eventAlert'
   ]);
   angular.module('notification')
     .factory('NotificationService', ['$http', '$q', '$localStorage', 'API', NotificationService])
