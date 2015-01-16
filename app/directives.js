@@ -4,14 +4,14 @@
 var angular = window.angular;
 
 angular.module('app.directives', [])
-  .directive('home', function() {
+  .directive('home', function () {
     return {
       restrict: 'EA',
       controller: 'HomeCtrl',
       templateUrl: 'home/_index.html'
     };
   })
-  .directive('appHeader', function() {
+  .directive('appHeader', function () {
     return {
       restrict: 'EA',
       replace: true,
@@ -20,13 +20,13 @@ angular.module('app.directives', [])
       templateUrl: 'components/header/_header.html'
     };
   })
-  .directive('facebookShareButton', function(AppSetting, MemoTracking) {
+  .directive('facebookShareButton', function (AppSetting, MemoTracking) {
     function displayFeedDialog(response, trackingData) {
       var trackingData = angular.fromJson(trackingData);
       var data = response.data;
       data.method = 'feed';
 
-      FB.ui(data, function(response) {
+      FB.ui(data, function (response) {
         if (response.post_id) {
           MemoTracking.track(trackingData.eventName);
         }
@@ -37,7 +37,7 @@ angular.module('app.directives', [])
       FB.ui({
         method: 'share',
         href: 'http://memo.edu.vn'
-      }, function(response) {
+      }, function (response) {
         if (response.post_id) {
           MemoTracking.track(trackingData.eventName);
         }
@@ -51,8 +51,8 @@ angular.module('app.directives', [])
         shareData: '@',
         trackingData: '@'
       },
-      link: function($scope, $element, $attr) {
-        $element.bind('click', function() {
+      link: function ($scope, $element, $attr) {
+        $element.bind('click', function () {
           if ($scope.shareType === "level-up") {
             AppSetting.getLevelUpFacebookContent()
               .then(displayFeedDialog, displayDefaultFeedDialog);
@@ -61,7 +61,7 @@ angular.module('app.directives', [])
               .then(displayFeedDialog, displayDefaultFeedDialog);
           } else if ($scope.shareType === "referral-code") {
             AppSetting.getReferralShareFacebookContent($scope.shareData)
-              .then(function(response) {
+              .then(function (response) {
                 displayFeedDialog(response, $scope.trackingData);
               }, displayDefaultFeedDialog);
           } else {
@@ -71,17 +71,17 @@ angular.module('app.directives', [])
       }
     };
   })
-  .directive('facebookLoginButton', function() {
+  .directive('facebookLoginButton', function () {
     return {
       strict: 'EA',
-      link: function($scope, $element) {
-        $element.bind('click', function() {
+      link: function ($scope, $element) {
+        $element.bind('click', function () {
           $scope.FbLogin();
         });
       }
     };
   })
-  .directive('landingpage', function() {
+  .directive('landingpage', function () {
     return {
       restrict: 'EA',
       controller: 'LpCtrl',

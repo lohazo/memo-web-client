@@ -61,6 +61,12 @@
         font-size: .9em;
         color: $iron;
       }
+      .facebook-share {
+        background: url("assets/img/facebook-share.png") center no-repeat;
+        background-size: contain;
+        width: 80px !important;
+        height: 30px !important;
+      }
     }
   }
 }

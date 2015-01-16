@@ -17,6 +17,10 @@
   function EventAlertCtrl($scope, AppSetting) {
     $scope.iconUrl = AppSetting.sharedSettings.notification_icon_urls.referral;
     $scope.message = $scope.content;
+    $scope.FBShare = {
+      shareType: 'referral-code',
+      shareData: 'a'
+    }
   }
 
   angular.module('notification.eventAlert', []);
