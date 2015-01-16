@@ -43,7 +43,24 @@
   }
 
   function ReferralRewardsCtrl($scope, data, modalInstance) {
+    var ctrl = this;
     $scope.rewards_info = data;
+    $scope.user = {
+      mobile: ''
+    };
+
+    ctrl.validateMobile = function (mobile) {
+      // Regex 10-digit phone
+      var tenDigitPhoneRegex = /09[0-9]{8}/;
+      // Regex 11-digit phone
+      var elevenDigitPhoneRegex = /01[0-9]{9}/;
+      return (mobile.match(tenDigitPhoneRegex) || mobile.match(elevenDigitPhoneRegex));
+    }
+
+    $scope.verifyMobile = function () {
+
+    };
+
     $scope.close = function () {
       modalInstance.close();
     };
