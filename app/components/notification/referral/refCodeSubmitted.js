@@ -7,7 +7,7 @@
       replace: true,
       scope: {
         content: '@',
-        friend: '@',
+        friend: '=',
         timeAgo: '='
       },
       templateUrl: 'components/notification/referral/_ref-code-submitted-item.html',
@@ -15,14 +15,26 @@
     };
   }
 
-  function RefCodeSubmittedCtrl($scope) {
+  function RefCodeSubmittedCtrl($scope, $localStorage, LeaderboardServices) {
     var friend = angular.fromJson($scope.friend);
     $scope.message = $scope.content.replace(/\{username\}/g, friend.username);
+
+    $scope.follow = function () {
+      LeaderboardServices.follow({
+          friend_id: $scope.friend._id
+        })
+        .then(function (response) {
+          $localStorage.auth.profile_detail.following_user_ids = response.data.following_user_ids;
+          $scope.friend.is_friend = true;
+        });
+    };
   }
 
   angular.module('notification.refCodeSubmitted', []);
   angular.module('notification.refCodeSubmitted')
-    .controller('RefCodeSubmittedCtrl', ['$scope', RefCodeSubmittedCtrl]);
+    .controller('RefCodeSubmittedCtrl', ['$scope', '$localStorage', 'LeaderboardServices',
+      RefCodeSubmittedCtrl
+    ]);
   angular.module('notification.refCodeSubmitted')
     .directive('notificationRefCodeSubmittedItem', RefCodeSubmittedItem);
 }(window.angular));
