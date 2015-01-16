@@ -7,8 +7,8 @@ angular.module('landingpage.controllers', [])
   .controller('LpCtrl', [
     '$scope',
     '$modal',
-    function($scope, $modal) {
-      $scope.courseModal = function() {
+    function ($scope, $modal) {
+      $scope.courseModal = function () {
         var modalInstance = $modal.open({
           template: '<div courses-modal></div>',
           controller: 'CourseModalInstanceCtrl',
@@ -19,64 +19,67 @@ angular.module('landingpage.controllers', [])
   ])
   .controller('CourseModalInstanceCtrl', [
     '$scope',
-    function($scope, $modalInstance) {
+    function ($scope, $modalInstance) {
 
     }
   ])
   .controller('LpHeaderCtrl', [
     '$scope', '$location', '$routeParams',
     'MolServices', 'Mixpanel',
-    function($scope, $location, $routeParams, MolServices, Mixpanel) {
+    function ($scope, $location, $routeParams, MolServices, Mixpanel) {
       var data = $routeParams;
       data.preview = '1';
-      mixpanel.track('Web 1.0.2 Landingpage view', data);
       MolServices.saveC2(data);
     }
   ])
   .controller('LpHeadCtrl', [
     '$scope', '$window',
     'Mixpanel',
-    function($scope, $window, Mixpanel) {
-      $scope.toAppStore = function() {
-        $window.location.href = 'https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls=1&mt=8';
+    function ($scope, $window, Mixpanel) {
+      $scope.toAppStore = function () {
+        $window.location.href =
+          'https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls=1&mt=8';
       };
 
-      $scope.toPlayStore = function() {
+      $scope.toPlayStore = function () {
         $window.location.href = 'https://play.google.com/store/apps/details?id=vn.topica.memo';
       };
     }
   ])
-  .controller('LpInfoCtrl', ['$scope', '$window', 'Mixpanel', function($scope, $window, Mixpanel) {
-    $scope.toAppStore1 = function() {
-      $window.location.href = 'https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls=1&mt=8';
+  .controller('LpInfoCtrl', ['$scope', '$window', 'Mixpanel', function ($scope, $window, Mixpanel) {
+    $scope.toAppStore1 = function () {
+      $window.location.href =
+        'https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls=1&mt=8';
     };
 
-    $scope.toPlayStore1 = function() {
+    $scope.toPlayStore1 = function () {
       $window.location.href = 'https://play.google.com/store/apps/details?id=vn.topica.memo';
     };
   }])
   .controller('LpStatCtrl', [
     '$scope',
-    function($scope) {}
+    function ($scope) {}
   ])
   .controller('LpCommentsCtrl', [
     '$scope',
-    function($scope) {
+    function ($scope) {
       $scope.comment = {
         user: 'Phương Nguyễn',
         content: 'Ứng dụng quá cool! Ngay cả bé nhà mình cũng thích chơi với kiến Memo :D'
       };
     }
   ])
-  .controller('LpFooterCtrl', ['$scope', '$window', 'Mixpanel', function($scope, $window, Mixpanel) {
-    $scope.toAppStore2 = function() {
-      $window.location.href = 'https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls=1&mt=8';
+  .controller('LpFooterCtrl', ['$scope', '$window', 'Mixpanel', function ($scope, $window, Mixpanel) {
+    $scope.toAppStore2 = function () {
+      $window.location.href =
+        'https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls=1&mt=8';
     };
-    $scope.toWP2 = function() {
-      $window.location.href = 'http://cleverstore.vn/ung-dung/topica-memo-hoc-ngoai-ngu-mien-phi-81580.html';
+    $scope.toWP2 = function () {
+      $window.location.href =
+        'http://cleverstore.vn/ung-dung/topica-memo-hoc-ngoai-ngu-mien-phi-81580.html';
     };
 
-    $scope.toPlayStore2 = function() {
+    $scope.toPlayStore2 = function () {
       $window.location.href = 'https://play.google.com/store/apps/details?id=vn.topica.memo';
     };
   }]);

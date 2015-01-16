@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
 
   'use strict';
 
@@ -9,27 +9,24 @@
       return PlacementServices.start(data)
         .then(function (response) {
           PlacementTest.question = response.data;
-          mixpanel.track('Web 1.0.2 start exam placement test');
           MemoTracker.track('start exam placement test');
         });
     };
 
     PlacementTest.skip = function (data) {
       return PlacementServices.submitAnswer(data)
-        .then(function(response) {
+        .then(function (response) {
           PlacementTest.question = response.data;
         });
     };
 
     PlacementTest.submitAnswer = function (data) {
       return PlacementServices.submitAnswer(data)
-        .then(function(response) {
+        .then(function (response) {
           PlacementTest.question = response.data;
           if (PlacementTest.question.exp_chart) {
-            mixpanel.track('Web 1.0.2 finish exam placement test');
             MemoTracker.track('finish exam placement test')
           } else {
-            mixpanel.track('Web 1.0.2 fail exam placement test');
             MemoTracker.track('quit exam placement test');
           }
           // question = {
@@ -59,7 +56,7 @@
 
   function PlacementTestServices($http, $q, API_PHP) {
     return {
-      start: function(data) {
+      start: function (data) {
         var deferred = $q.defer();
 
         var requestData = {
@@ -69,20 +66,20 @@
         };
 
         $http.post(API_PHP + '/placement_test/start', requestData)
-          .then(function(response) {
+          .then(function (response) {
             deferred.resolve(response);
           });
 
         return deferred.promise;
       },
-      submitAnswer: function(data) {
+      submitAnswer: function (data) {
         var deferred = $q.defer();
 
         data.device = 'web';
         data.speak_enabled = false;
 
         $http.post(API_PHP + '/placement_test/submit_answer', data)
-          .then(function(response) {
+          .then(function (response) {
             deferred.resolve(response);
           });
 
@@ -93,7 +90,9 @@
 
   angular.module('placement.services', [])
   angular.module('placement.services')
-    .factory('PlacementTestFactory', ['PlacementTestServices', 'Mixpanel', 'MemoTracking', PlacementTestFactory])
+    .factory('PlacementTestFactory', ['PlacementTestServices', 'Mixpanel', 'MemoTracking',
+      PlacementTestFactory
+    ])
     .factory('PlacementTestServices', ['$http', '$q', 'API_PHP', PlacementTestServices]);
 
 }(window.angular));

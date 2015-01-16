@@ -1,46 +1,46 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function LoginFactory($http, $q, $localStorage, API_PHP) {
     var Service = {};
 
-    Service.register = function(data) {
+    Service.register = function (data) {
       var deferred = $q.defer();
       $http.post(API_PHP + '/users', data)
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
-        }, function(response) {
+        }, function (response) {
           deferred.reject(response);
         });
       return deferred.promise;
     };
 
-    Service.login = function(data) {
+    Service.login = function (data) {
       var deferred = $q.defer();
       $http.post(API_PHP + '/users/login', data)
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
-        }, function(response) {
+        }, function (response) {
           deferred.reject(response);
         });
       return deferred.promise;
     };
 
-    Service.forgetPassword = function(data) {
+    Service.forgetPassword = function (data) {
       var deferred = $q.defer();
       $http.post(API_PHP + '/users/forget_password', data)
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
-        }, function(response) {
+        }, function (response) {
           deferred.reject(response);
         });
       return deferred.promise;
     };
 
-    Service.profile = function(data) {
+    Service.profile = function (data) {
       var deferred = $q.defer();
       $http.get(API_PHP + '/users/' + data._id + '?auth_token=' + data.auth_token)
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
         });
       return deferred.promise;
@@ -49,23 +49,24 @@
     return Service;
   }
 
-  function AuthService($q, $rootScope, $localStorage, $routeParams, Facebook, GooglePlus, EcoTracker, MemoTracker,
+  function AuthService($q, $rootScope, $localStorage, $routeParams, Facebook, GooglePlus,
+    EcoTracker, MemoTracker,
     LoginService, MolServices) {
     var Service = {};
 
-    Service.register = function(data) {
+    Service.register = function (data) {
       return LoginService.register(data).then(loginCallback);
     };
 
-    Service.login = function(data) {
+    Service.login = function (data) {
       return LoginService.login(data).then(loginCallback);
     };
 
-    Service.forgetPassword = function(data) {
+    Service.forgetPassword = function (data) {
       return LoginService.forgetPassword(data);
     };
 
-    Service.FbCheckAuth = function() {
+    Service.FbCheckAuth = function () {
       var deferred = $q.defer();
 
       Facebook.getLoginStatus(facebookLoginStatusReceived);
@@ -82,7 +83,7 @@
       return deferred.promise;
     };
 
-    Service.FbLogin = function() {
+    Service.FbLogin = function () {
       var deferred = $q.defer();
 
       if ($localStorage.auth.facebook) {
@@ -103,7 +104,7 @@
       }
 
       function facebookGetInfo() {
-        Facebook.api('/me', function(response) {
+        Facebook.api('/me', function (response) {
           var data = {};
           if (response.error) {
             delete $localStorage.auth.facebook;
@@ -122,18 +123,18 @@
       return deferred.promise;
     };
 
-    Service.GLogin = function() {
+    Service.GLogin = function () {
       var requestData = {};
-      return GooglePlus.login().then(function(gAuthResult) {
+      return GooglePlus.login().then(function (gAuthResult) {
         requestData.g_access_token = gAuthResult.access_token;
-        GooglePlus.getUser().then(function(response) {
+        GooglePlus.getUser().then(function (response) {
           requestData.gmail = response.result.email;
           LoginService.login(requestData).then(loginCallback);
         });
       });
     };
 
-    Service.logout = function() {
+    Service.logout = function () {
       $localStorage.$reset();
       delete $localStorage.displayTour;
       delete $localStorage.auth;
@@ -159,15 +160,12 @@
       } else {
         MemoTracker.track('login');
       }
-      mixpanel.identify(response.data._id);
 
       var molData = {};
       molData.code_chanel = $routeParams.code_chanel || -100;
       molData.id_landingpage = $routeParams.id_landingpage || -100;
       molData.id_campaign = $routeParams.id_campaign || -100;
       molData.id_camp_landingpage = $routeParams.id || -100;
-
-      mixpanel.track('Web 1.0.2 user logged in', molData);
 
       molData.name = data.name || data.username;
       molData.email = data.email;

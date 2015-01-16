@@ -1,11 +1,11 @@
 'use strict';
 
-(function(angular, localStorage) {
+(function (angular, localStorage) {
   function MemoTracking($http, $q, $localStorage, APP_VERSION) {
     var BASE_URL = 'http://services.memo.edu.vn/trackings/track';
     var tracker = {};
 
-    tracker.track = function(eventName, data, callback) {
+    tracker.track = function (eventName, data, callback) {
       var deferred = $q.defer();
       var requestData = {
         event_name: 'Web ' + APP_VERSION + ' ' + eventName,
@@ -13,8 +13,10 @@
         unique_id: localStorage.eco_user ? JSON.parse(localStorage.eco_user).user_id : ''
       };
 
-      $http.post(BASE_URL, requestData, {ignoreLoadingBar: true})
-        .then(function(response) {
+      $http.post(BASE_URL, requestData, {
+          ignoreLoadingBar: true
+        })
+        .then(function (response) {
           deferred.resolve(response);
         });
 
@@ -27,9 +29,11 @@
     var BASE_URL = 'http://eco-tracking.memo.edu.vn';
     var tracker = {};
     var isCalled = 0;
-    var httpConfig = {ignoreLoadingBar: true};
+    var httpConfig = {
+      ignoreLoadingBar: true
+    };
 
-    tracker.init = function() {
+    tracker.init = function () {
       if (isCalled < 1) {
         tracker.createFrame();
 
@@ -42,7 +46,7 @@
         isCalled += 1;
       }
     };
-    tracker.createFrame = function() {
+    tracker.createFrame = function () {
       var ifrm = document.createElement('iframe');
       ifrm.setAttribute('src', BASE_URL + '/tracking_frame/index');
       ifrm.setAttribute('style', 'display:none;width:0px;height:0px;');
@@ -50,8 +54,8 @@
       return ifrm;
     };
 
-    tracker.getTrackingCookie = function() {
-      window.addEventListener('message', function(msg) {
+    tracker.getTrackingCookie = function () {
+      window.addEventListener('message', function (msg) {
         if (msg.origin !== BASE_URL) return;
 
         $cookies.eco_uuid = msg.data;
@@ -63,21 +67,20 @@
       }, false);
     };
 
-    tracker.getUserId = function(data, callback) {
+    tracker.getUserId = function (data, callback) {
       data.name = "Enter page";
       data.browsing_domain = document.URL;
       data.referrer_url = document.referrer;
 
       return $http.post(BASE_URL + '/users/track', data, httpConfig)
-      .success(function(response) {
-        localStorage.eco_user = JSON.stringify(response);
-        if (callback instanceof Function) callback(response);
-      })
-      .error(function(response) {
-      });
+        .success(function (response) {
+          localStorage.eco_user = JSON.stringify(response);
+          if (callback instanceof Function) callback(response);
+        })
+        .error(function (response) {});
     };
 
-    tracker.track = function(eventName, data, callback) {
+    tracker.track = function (eventName, data, callback) {
       // data = {name: eventName, cookie: eco_uuid}
       var user = JSON.parse(localStorage.eco_user);
 
@@ -91,12 +94,11 @@
       };
 
       $http.post(BASE_URL + '/users/track', requestData, httpConfig)
-      .success(function(response) {
-        $cookies.eco_uuid = response;
-        if (callback instanceof Function) callback(response);
-      })
-      .error(function() {
-      });
+        .success(function (response) {
+          $cookies.eco_uuid = response;
+          if (callback instanceof Function) callback(response);
+        })
+        .error(function () {});
     };
 
     return tracker;
@@ -105,23 +107,31 @@
   function MixpanelFactory() {
     var Mixpanel = {};
     var APP_VERSION = '1.0.2';
+    var mixpanel = {
+      identify: function () {},
+      people: {
+        set: function () {}
+      },
+      register: function () {},
+      track: function () {}
+    };
 
-    Mixpanel.trackSignin = function(data) {
+    Mixpanel.trackSignin = function (data) {
       mixpanel.identify(data.id);
       mixpanel.people.set(data);
       mixpanel.track('Web 1.0.2 signin');
     };
 
-    Mixpanel.track = function(eventName, data) {
+    Mixpanel.track = function (eventName, data) {
       eventName = "Web 1.0.2 " + eventName;
       mixpanel.track(eventName, data);
     };
 
-    Mixpanel.track = function(eventName, data, callback) {
+    Mixpanel.track = function (eventName, data, callback) {
       eventName = "Web 1.0.2 " + eventName;
       mixpanel.track(eventName, data, callback);
     };
-    Mixpanel.register = function(data) {
+    Mixpanel.register = function (data) {
       // Register wrapper
       mixpanel.register(data);
     };
@@ -129,9 +139,10 @@
   }
 
   angular.module('tracking.services', ['ngCookies'])
-  .factory('MemoTracking', ['$http', '$q', '$localStorage', 'APP_VERSION', MemoTracking ])
-  .factory('EcoTracking',[
-    '$http', '$q', '$routeParams', '$cookies', '$localStorage', EcoTracking])
-  .factory('Mixpanel', MixpanelFactory);
+    .factory('MemoTracking', ['$http', '$q', '$localStorage', 'APP_VERSION', MemoTracking])
+    .factory('EcoTracking', [
+      '$http', '$q', '$routeParams', '$cookies', '$localStorage', EcoTracking
+    ])
+    .factory('Mixpanel', MixpanelFactory);
 
 })(window.angular, window.localStorage);
