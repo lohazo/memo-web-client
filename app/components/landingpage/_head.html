@@ -16,44 +16,35 @@
     </div>
   </div>
   <div class="large-8 large-offset-1 slider-landingpage">
-        <div id="container">
-    <div id="content-slider">
-        <div id="slider">
-            <div id="mask">
-            <ul>
-            <li id="first" class="firstanimation">
-            <a href="#">
-            <img src="assets/img/landingpage/Ants.png" alt=""/>
-            </a>
-            </li>
-            <li  style="margin-top:50px;" id="second" class="secondanimation">
-            <a click-event-track tracking-data='{"campaign":"REFERRAL","code_channel":"ADS_NON_E8","screen":"1"}' ng-href="/referral" class="large-12 small">
-            <img src="assets/img/landingpage/Ants-campaign.png" alt=""/>
-            </a>
-            </li>
-            
-            <li id="third" class="thirdanimation">
-            <a href="#">
-            <img src="assets/img/landingpage/Ants.png" alt=""/>
-            </a>
-            </li>
-                        
-            <li  style="margin-top:50px;" id="fourth" class="fourthanimation">
-            <a click-event-track tracking-data='{"campaign":"REFERRAL","code_channel":"ADS_NON_E8","screen":"1"}' ng-href="/referral" class="large-12 small">
-            <img src="assets/img/landingpage/Ants-campaign.png" alt=""/>
-            </a>
-            </li>
-                        
-            <li id="fifth" class="fifthanimation">
-            <a href="#">
-            <img src="assets/img/landingpage/Ants.png" alt=""/>
-            </a>
-            </li>
-            </ul>
-            </div>
-            <div class="progress-bar"></div>
-        </div>
-    </div>
-</div>
+            <article id="slider">
+    <!-- Slider Setup -->
+    <input checked="" type="radio" name="slider" id="slide1">
+    <input type="radio" name="slider" id="slide2" selected="true">
+    <input type="radio" name="slider" id="slide3" selected="true">
+    <input type="radio" name="slider" id="slide4" selected="true">
+    <input type="radio" name="slider" id="slide5">
+    <!-- The Slider -->
+    <div id="slides">
+      <div id="overflow">
+        <div class="inner">
+          <article>
+          <a click-event-track tracking-data='{"campaign":"REFERRAL","code_channel":"ADS_NON_E8","screen":"1"}' ng-href="/referral" class="large-12 small"><img style="margin-top:50px;" src="assets/img/landingpage/Ants-campaign.png"></a> 
+          </article>
+          <article ng-controller="LoginModalCtrl">
+          <a href="" class="" ng-click="openRegister()"><img src="assets/img/landingpage/Ants.png"></a>
+          </article>
+        </div> <!-- .inner -->
+      </div> <!-- #overflow -->
+    </div> <!-- #slides -->
+    <!-- Controls and Active Slide Display -->
+    <div id="controls">
+      <label for="slide1"></label>
+      <label for="slide2"></label>
+    </div> <!-- #controls -->
+    <div id="active">
+      <label for="slide1"></label>
+      <label for="slide2"></label>
+    </div> <!-- #active -->
+  </article>
     </div>
 </div>
