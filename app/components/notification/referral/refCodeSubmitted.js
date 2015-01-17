@@ -16,7 +16,7 @@
     };
   }
 
-  function RefCodeSubmittedCtrl($scope, $localStorage, LeaderboardServices, NotificationService) {
+  function RefCodeSubmittedCtrl($scope, Profile, LeaderboardServices, NotificationService) {
     var ctrl = this;
     var friend = angular.fromJson($scope.friend);
     $scope.message = $scope.content.replace(/\{username\}/g, friend.username);
@@ -26,25 +26,42 @@
           friend_id: $scope.friend._id
         })
         .then(function (response) {
-          $localStorage.auth.profile_detail.following_user_ids = response.data.following_user_ids;
+          Profile.detail.following_user_ids = response.data.following_user_ids;
           $scope.friend.is_friend = true;
+          $scope.isTemporaryFriend = true;
         })
-        .then(ctrl.open);
+        .then(function () {
+          ctrl.open({
+            is_friend: true
+          });
+        });
     };
 
-    ctrl.open = function () {
-      NotificationService.open({
-        'id': $scope.id,
-        'is_friend': true
-      });
+    $scope.unfollow = function () {
+      LeaderboardServices.unfollow({
+          friend_id: $scope.friend._id
+        })
+        .then(function (response) {
+          $scope.friend.is_friend = false;
+        })
+        .then(function (response) {
+          ctrl.open({
+            is_friend: false
+          });
+        })
+    }
+
+    ctrl.open = function (data) {
+      // data = {is_friend}
+      data.id = $scope.id;
+      NotificationService.open(data);
     };
   }
 
   angular.module('notification.refCodeSubmitted', []);
   angular.module('notification.refCodeSubmitted')
-    .controller('RefCodeSubmittedCtrl', ['$scope', '$localStorage', 'LeaderboardServices',
-      'NotificationService',
-      RefCodeSubmittedCtrl
+    .controller('RefCodeSubmittedCtrl', ['$scope', 'Profile', 'LeaderboardServices',
+      'NotificationService', RefCodeSubmittedCtrl
     ]);
   angular.module('notification.refCodeSubmitted')
     .directive('notificationRefCodeSubmittedItem', RefCodeSubmittedItem);
