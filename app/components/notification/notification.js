@@ -38,6 +38,22 @@
 
       return deferred.promise;
     };
+
+    Service.open = function (data) {
+      // data = {id:, [is_friend]}
+      var deferred = $q.defer();
+      data.auth_token = $localStorage.auth.user.auth_token;
+
+      $http.post(API + '/in_app_notifications/open', data)
+        .then(function (response) {
+          deferred.resolve(response);
+        })
+        .then(function (response) {
+          deferred.reject(response);
+        });
+
+      return deferred.promise;
+    }
     return Service;
   }
 

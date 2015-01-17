@@ -6,6 +6,7 @@
       restrict: 'EA',
       replace: true,
       scope: {
+        id: '@notiId',
         content: '@',
         friend: '=',
         timeAgo: '='
@@ -15,7 +16,8 @@
     };
   }
 
-  function RefCodeSubmittedCtrl($scope, $localStorage, LeaderboardServices) {
+  function RefCodeSubmittedCtrl($scope, $localStorage, LeaderboardServices, NotificationService) {
+    var ctrl = this;
     var friend = angular.fromJson($scope.friend);
     $scope.message = $scope.content.replace(/\{username\}/g, friend.username);
 
@@ -26,13 +28,22 @@
         .then(function (response) {
           $localStorage.auth.profile_detail.following_user_ids = response.data.following_user_ids;
           $scope.friend.is_friend = true;
-        });
+        })
+        .then(ctrl.open);
+    };
+
+    ctrl.open = function () {
+      NotificationService.open({
+        'id': $scope.id,
+        'is_friend': true
+      });
     };
   }
 
   angular.module('notification.refCodeSubmitted', []);
   angular.module('notification.refCodeSubmitted')
     .controller('RefCodeSubmittedCtrl', ['$scope', '$localStorage', 'LeaderboardServices',
+      'NotificationService',
       RefCodeSubmittedCtrl
     ]);
   angular.module('notification.refCodeSubmitted')

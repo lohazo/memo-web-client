@@ -12,10 +12,10 @@
       </li>
       <li class="noti-item" ng-repeat="noti in notification.notifications" ng-switch="noti.type">
         <notification-event-alert-item ng-switch-when="event_alert" content="{{noti.content}}" time-ago="noti.time_ago"></notification-event-alert-item>
-        <notification-ref-code-submitted-item ng-switch-when="ref_code_submitted" content="{{noti.content}}" friend="noti.metadata.submitted_user" time-ago="noti.time_ago"></notification-ref-code-submitted-item>
+        <notification-ref-code-submitted-item ng-switch-when="ref_code_submitted" noti-id="{{noti._id}}" content="{{noti.content}}" friend="noti.metadata.submitted_user" time-ago="noti.time_ago"></notification-ref-code-submitted-item>
         <notification-new-tier ng-switch-when="achieved_new_tier" content="{{noti.content}}" gift="{{noti.metadata}}" time-ago="noti.time_ago"></notification-new-tier>
         <notification-pass-item ng-switch-when="someone_pass_you" content="{{noti.content}}" friend="noti.metadata.friend" time-ago="noti.time_ago"></notification-pass-item>
-        <notification-subscribe-item ng-switch-when="someone_subscribe" content="{{noti.content}}" friend="noti.metadata.friend" time-ago="noti.time_ago"></notification-subscribe-item>
+        <notification-subscribe-item ng-switch-when="someone_subscribe" noti-id="{{noti._id}}" content="{{noti.content}}" friend="noti.metadata.friend" time-ago="noti.time_ago"></notification-subscribe-item>
         <notification-dropdown-item ng-switch-default></notification-dropdown-item>
       </li>
     </ul>
