@@ -50,6 +50,7 @@
     $scope.rewards_info = data;
     $scope.user.mobile = data.mobile || '';
     $scope.error = '';
+    $scope.success = '';
 
     ctrl.validateMobile = function (mobile) {
       // Regex 10-digit phone
@@ -67,7 +68,8 @@
             mobile: $scope.user.mobile
           })
           .then(function (response) {
-            $scope.close();
+            $scope.success = 'Memo đã ghi nhận số điện thoại của bạn.';
+            console.log($scope.success);
           }, function (response) {
             $scope.error = response.error;
           });
