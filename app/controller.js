@@ -1,7 +1,7 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  function AppCtrl($scope, $localStorage, $location, EcoTracker, AuthService) {
+  function AppCtrl($scope, $localStorage, $sessionStorage, $location, EcoTracker, AuthService) {
     $scope.auth = $localStorage.auth || {
       loggedIn: false,
       trial: false
@@ -22,6 +22,7 @@
         trial: false
       };
       $localStorage.auth = $scope.auth;
+      $sessionStorage.$reset();
       $location.path('/');
     }
 
@@ -70,7 +71,7 @@
       legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     };
 
-    $scope.getNumber = function(num) {
+    $scope.getNumber = function (num) {
       return new Array(num);
     };
 
@@ -87,5 +88,7 @@
   }
 
   angular.module('app.controllers', ['ngStorage'])
-    .controller('AppCtrl', ['$scope', '$localStorage', '$location', 'EcoTracking', 'AuthService', AppCtrl]);
+    .controller('AppCtrl', ['$scope', '$localStorage', '$sessionStorage', '$location',
+      'EcoTracking', 'AuthService', AppCtrl
+    ]);
 }(window.angular));

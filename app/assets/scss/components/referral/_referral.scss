@@ -89,3 +89,17 @@
     padding-top: .5rem;
   }
 }
+
+.referral-fb-share-tooltip {
+  right: -330px;
+  width: 330px !important;
+  height: auto !important;
+  text-align: left;
+  .joyride-content-wrapper {
+    padding-top: 30px !important;
+  }
+  .referral-highlight {
+    font-weight: 700;
+    color: #FB3;
+  }
+}

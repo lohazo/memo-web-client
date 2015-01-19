@@ -52,5 +52,5 @@
         controller: 'CampaignVerifyCodeCtrl',
         templateUrl: 'home/_campaign-verify-code.html'
       };
-    })
+    });
 })(window.angular);

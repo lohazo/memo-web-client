@@ -41,9 +41,11 @@
             {{referral.referral_code}}
           </div>
         </div>
-        <div class="row text-center" style="margin-top: 10px;">
-          <a title="" class="radius button share" tracking-data='{"memoEnabled":"true","eventName":"viral campaign share profile"}' facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}">
-          </a>
+        <div class="row" style="margin-top: 10px;">
+          <div class="large-9 columns large-centered text-center" style="position:relative;">
+            <a title="" class="radius button share" tracking-data='{"memoEnabled":"true","eventName":"viral campaign share profile"}' facebook-share-button share-type="{{FBShare.shareType}}" share-data="{{FBShare.shareData}}"></a>
+            <referral-fb-share-tooltip viral-level="referral.viral_level" show-on='["v4", "v5"]'></referral-fb-share-tooltip>
+          </div>
         </div>
         <div class="row text-center">
           <a ng-href="/referral" click-event-track tracking-data='{"campaign":"REFERRAL","code_channel":"PROFILE_E8","screen":""}'><b><u>Xem thông tin học bổng</u></b></a>
@@ -56,8 +58,9 @@
         <p class="text-center">Bạn đã đủ điều kiện nhận được học bổng <b>{{referral.record.bonus_status.total_achieved_gift_value}},000 VNĐ</b></p>
       </div>
       <div class="row">
-        <div class="large-16 columns" ng-controller="VerifyRewardModalCtrl">
+        <div class="large-16 columns" ng-controller="VerifyRewardModalCtrl" style="position: relative;">
           <a class="expand radius button" ng-click="verifyRewards()">Xác minh</a>
+          <referral-fb-share-tooltip viral-level="referral.viral_level" show-on='["v6"]'></referral-fb-share-tooltip>
         </div>
       </div>
     </div>
