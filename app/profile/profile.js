@@ -7,7 +7,6 @@
       controller: 'ProfileFriendCtrl',
       resolve: {
         profileDetail: function ($route, ProfileServices) {
-          console.log($route.current.params.id);
           return ProfileServices.profileDetail({
             'friend_id': $route.current.params.id
           });
