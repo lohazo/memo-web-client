@@ -2,11 +2,14 @@
 
   'use strict';
 
-  function HttpInterceptor($rootScope, $q, $location, $localStorage) {
+  function HttpInterceptor($rootScope, $q, $location, $window, $localStorage) {
+    var canceller = $q.defer();
     return {
       // optional method
       'request': function (config) {
-        // do something on success
+        if (config.url.indexOf('http://') === 0) {
+          config.timeout = canceller.promise;
+        }
         return config;
       },
 
@@ -25,20 +28,20 @@
         // do something on success
         if (response.status === 401) {
           $localStorage.$reset();
-          alert(response.data.error);
-          $location.path('/');
         }
-        return response || $q.when(response);
+        return response;
       },
 
       // optional method
       'responseError': function (rejection) {
         // do something on error
         if (rejection.status === 401) {
-          $localStorage.$reset();
-          $rootScope.$broadcast('event:auth-logoutConfirmed')
-          alert(rejection.data.error);
-          $location.path('/');
+          $rootScope.$broadcast('event:auth-logoutConfirmed', {
+            Unauthorized: true
+          });
+          alert(
+            "Bạn hoặc ai đó đã đăng nhập vào tài khoản này tại một thiết bị khác. Vui lòng đăng nhập lại!"
+          );
         }
         return $q.reject(rejection);
       }
@@ -220,7 +223,7 @@
       preprocess: 'unix',
       timezone: 'Asia/Ho_Chi_Minh'
     })
-    .factory('HttpInterceptor', ['$rootScope', '$q', '$location', '$localStorage',
+    .factory('HttpInterceptor', ['$rootScope', '$q', '$location', '$window', '$localStorage',
       HttpInterceptor
     ])
     .factory('AppSetting', ['$localStorage', 'AppServices', 'Words', AppSetting])

@@ -1,7 +1,8 @@
 (function (angular) {
   'use strict';
 
-  function AppCtrl($scope, $localStorage, $sessionStorage, $location, EcoTracker, AuthService) {
+  function AppCtrl($scope, $localStorage, $sessionStorage, $location, $window, EcoTracker,
+    AuthService) {
     $scope.auth = $localStorage.auth || {
       loggedIn: false,
       trial: false
@@ -16,13 +17,14 @@
       $localStorage.auth = $scope.auth;
     }
 
-    function logoutConfirmed() {
+    function logoutConfirmed(e, data) {
+      $localStorage.$reset();
+      $sessionStorage.$reset();
       $scope.auth = {
         loggedIn: false,
         trial: false
       };
       $localStorage.auth = $scope.auth;
-      $sessionStorage.$reset();
       $location.path('/');
     }
 
@@ -88,7 +90,7 @@
   }
 
   angular.module('app.controllers', ['ngStorage'])
-    .controller('AppCtrl', ['$scope', '$localStorage', '$sessionStorage', '$location',
+    .controller('AppCtrl', ['$scope', '$localStorage', '$sessionStorage', '$location', '$window',
       'EcoTracking', 'AuthService', AppCtrl
     ]);
 }(window.angular));
