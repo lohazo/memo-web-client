@@ -32,7 +32,6 @@
     var specialObjectives = angular.copy($scope.translate.special_objectives);
     var objectives = angular.copy($scope.translate.objectives);
     $scope.translate_tokens = tokenize($scope.translate.question);
-    console.log($scope.translate_tokens);
 
     if ($scope.translate.normal_question_audio) {
       var normalFile = ngAudio.load($scope.translate.normal_question_audio);
