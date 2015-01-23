@@ -8,18 +8,37 @@
       var tokens = inputString.split(' ');
       return tokens.map(function (token) {
         var currentToken = token.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-        return (Words.getWord(currentToken) || {text: currentToken});
+        return (Words.getWord(currentToken) || {
+          text: currentToken
+        });
+      }).map(function (token) {
+        // token = {text}
+        var isObjective = objectives.some(function (objective) {
+          return objective === token.text;
+        });
+
+        var isSpecialObjective = specialObjectives.some(function (objective) {
+          return objective === token.text;
+        })
+
+        token.isObjective = isObjective;
+        token.isSpecialObjective = isSpecialObjective;
+
+        return token;
       });
     }
 
     $scope.translate = $scope.$parent.question;
+    var specialObjectives = angular.copy($scope.translate.special_objectives);
+    var objectives = angular.copy($scope.translate.objectives);
     $scope.translate_tokens = tokenize($scope.translate.question);
+    console.log($scope.translate_tokens);
 
     if ($scope.translate.normal_question_audio) {
       var normalFile = ngAudio.load($scope.translate.normal_question_audio);
 
       $scope.speaker = {
-        play: function() {
+        play: function () {
           normalFile.play();
         }
       };
@@ -49,18 +68,20 @@
         $scope.showDefinitionDropdown = function (e) {
           var element = angular.element(e.target);
 
-          $timeout(function() {
+          $timeout(function () {
             element.triggerHandler('click');
 
             var wordSound = ngAudio.load(element.attr('data-sound'));
             wordSound.play();
-            Words.revealWords({words: JSON.stringify([element.attr('data-word-id')])});
+            Words.revealWords({
+              words: JSON.stringify([element.attr('data-word-id')])
+            });
           }, 300);
         };
 
         $scope.closeDefinitionDropdown = function (e) {
           var element = angular.element(e.target);
-          $timeout(function() {
+          $timeout(function () {
             element.triggerHandler('click');
           }, 300);
         };
