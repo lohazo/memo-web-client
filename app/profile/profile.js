@@ -36,7 +36,7 @@
 
     var i = 0;
     for (i = 0; i < ownedCourses.length; i = i + 2) {
-      $scope.ownedCourses.push([ownedCourses[i], ownedCourses[i + 1]]);
+      $scope.ownedCourses.push([ownedCourses[i], ownedCourses[i + 1] || '']);
     }
   }
 
