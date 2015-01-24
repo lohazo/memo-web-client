@@ -8,23 +8,33 @@
       var tokens = inputString.split(' ');
       return tokens.map(function (token) {
         var currentToken = token.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-        return (Words.getWord(currentToken) || {
+        // token = 'aString'
+        var transformedToken = {
           text: currentToken
-        });
+        };
+        var objective = objectiveIds.filter(function (objective) {
+          return objective.text === currentToken;
+        })[0];
+
+        var specialObjective = specialObjectiveIds.filter(function (objective) {
+          return objective.text === currentToken;
+        })[0];
+
+        transformedToken.isObjective = !!objective;
+        transformedToken.isSpecialObjective = !!specialObjective;
+
+        if (transformedToken.isObjective) {
+          transformedToken._id = objective._id;
+        } else if (transformedToken.isSpecialObjective) {
+          transformedToken._id = specialObjective._id;
+        } else {
+          transformedToken._id = '';
+        }
+
+        return transformedToken; // {_id:, text:, isObjective:, isSpecialObjective:}
       }).map(function (token) {
-        // token = {text}
-        var isObjective = objectiveIds.some(function (objective) {
-          return objective.text === token.text;
-        });
-
-        var isSpecialObjective = specialObjectiveIds.some(function (objective) {
-          return objective.text === token.text;
-        })
-
-        token.isObjective = isObjective;
-        token.isSpecialObjective = isSpecialObjective;
-
-        return token;
+        // {_id:, text:, isObjective:, isSpecialObjective:, definitions,...}
+        return Words.getWord(token);
       });
     }
 
