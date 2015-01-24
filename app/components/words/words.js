@@ -8,14 +8,23 @@
     var Factory = {};
 
     Factory.getWord = function (wordToSearch) {
+      // wordToSearch  = {_id: ,text:, isObjective:, isSpecialObjective:}
       var words = [];
       if ($localStorage.words) {
         words = $localStorage.words.words;
       }
-      var lang = $localStorage.auth.user.current_course_id;
-      return words.filter(function (word) {
-        return (lang + '_' + wordToSearch.toLowerCase()) === word._id;
+
+      var searchedWord = words.filter(function (word) {
+        return wordToSearch._id === word._id;
       })[0];
+
+      if (searchedWord) {
+        wordToSearch.definitions = searchedWord.definitions;
+        wordToSearch.sound = searchedWord.sound;
+      }
+
+      return wordToSearch;
+      // {_id:,text:, isObjective:, isSpecialObjective:, definitions,...}
     };
 
     Factory.getWords = function () {
