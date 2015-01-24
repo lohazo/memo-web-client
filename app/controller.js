@@ -1,7 +1,8 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  function AppCtrl($scope, $localStorage, $location, EcoTracker, AuthService) {
+  function AppCtrl($scope, $localStorage, $sessionStorage, $location, $window, EcoTracker,
+    AuthService) {
     $scope.auth = $localStorage.auth || {
       loggedIn: false,
       trial: false
@@ -16,7 +17,9 @@
       $localStorage.auth = $scope.auth;
     }
 
-    function logoutConfirmed() {
+    function logoutConfirmed(e, data) {
+      $localStorage.$reset();
+      $sessionStorage.$reset();
       $scope.auth = {
         loggedIn: false,
         trial: false
@@ -70,14 +73,16 @@
       legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     };
 
-    $scope.getNumber = function(num) {
+    $scope.getNumber = function (num) {
       return new Array(num);
     };
 
     if (!$scope.auth.loggedIn) {
-      logoutConfirmed();
+      var path = $location.path();
+      if (path.indexOf('/referral') < 0) {
+        logoutConfirmed();
+      }
     }
-
 
     EcoTracker.init();
     $scope.$on('event:auth-loginConfirmed', loginConfirmed);
@@ -85,5 +90,7 @@
   }
 
   angular.module('app.controllers', ['ngStorage'])
-    .controller('AppCtrl', ['$scope', '$localStorage', '$location', 'EcoTracking', 'AuthService', AppCtrl]);
+    .controller('AppCtrl', ['$scope', '$localStorage', '$sessionStorage', '$location', '$window',
+      'EcoTracking', 'AuthService', AppCtrl
+    ]);
 }(window.angular));

@@ -1,9 +1,9 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function LoginModalDirective() {
     function linkFn($scope, $element) {
-      $element.bind('keypress', function(e) {
+      $element.bind('keypress', function (e) {
         if (e.keyCode === 13) {
           $scope.login();
         }
@@ -20,7 +20,7 @@
 
   function RegisterModalDirective() {
     function linkFn($scope, $element) {
-      $element.bind('keypress', function(e) {
+      $element.bind('keypress', function (e) {
         if (e.keyCode === 13) {
           $scope.register();
         }
@@ -38,7 +38,7 @@
 
   function ForgetPasswordModalDirective() {
     function linkFn($scope, $element) {
-      $element.bind('keypress', function(e) {
+      $element.bind('keypress', function (e) {
         if (e.keyCode === 13) {
           $scope.forgetPassword();
         }
@@ -54,84 +54,124 @@
   }
 
   function LoginModalCtrl($scope, $rootScope, $modal) {
-    $scope.open = function() {
+    $scope.open = function () {
       var modalInstance = $modal.open({
         template: '<div login-modal></div>',
         controller: 'LoginModalInstanceCtrl',
         windowClass: 'login-modal'
       });
 
-      modalInstance.result.then(function(msg) {
+      modalInstance.result.then(function (msg) {
         if ($scope[msg] instanceof Function) $scope[msg]();
       });
     };
 
-    $scope.openRegister = function() {
+    $scope.openRegister = function () {
       var modalInstance = $modal.open({
         template: '<div register-modal></div>',
         controller: 'LoginModalInstanceCtrl',
         windowClass: 'register-modal'
       });
 
-      modalInstance.result.then(function(msg) {
+      modalInstance.result.then(function (msg) {
         if ($scope[msg] instanceof Function) $scope[msg]();
       });
     };
 
-    $scope.openForgetPassword = function() {
+    $scope.openForgetPassword = function () {
       var modalInstance = $modal.open({
         template: '<div forget-modal></div>',
         controller: 'ForgetPasswordModalInstanceCtrl',
         windowClass: 'forget-modal'
       });
 
-      modalInstance.result.then(function(msg) {
+      modalInstance.result.then(function (msg) {
         if ($scope[msg] instanceof Function) $scope[msg]();
       });
     };
+
   }
 
-  function LoginModalInstanceCtrl($scope, $rootScope, $timeout, $modalInstance, $routeParams, AuthService) {
+  function LoginModalInstanceCtrl($scope, $location, $timeout, $modalInstance, $routeParams,
+    AuthService) {
     $scope.user = {};
     $scope.error = '';
+    $scope.hideAnt = ($location.path().indexOf('/referral') >= 0);
 
-    $scope.registerModal = function() {
+    $scope.registerModal = function () {
       $modalInstance.close('openRegister');
     };
 
-    $scope.loginModal = function() {
+    $scope.loginModal = function () {
       $modalInstance.close('open');
     };
 
-    $scope.forgetModal = function() {
+    $scope.forgetModal = function () {
       $modalInstance.close('openForgetPassword');
     };
 
-    $scope.FbLogin = function() {
+    $scope.FbLogin = function () {
       AuthService.FbLogin()
-        .then(function(response) {
+        .then(function (response) {
           AuthService.login(response)
             .then(closeModal, displayMessageOnFail);
         }, displayMessageOnFail);
     };
 
-    $scope.GLogin = function() {
+    $scope.GLogin = function () {
       AuthService.GLogin().then(closeModal, displayMessageOnFail);
     };
 
-    $scope.register = function() {
+    $scope.register = function () {
       var user = angular.fromJson(angular.toJson($scope.user));
       delete user.password;
-      AuthService.register($scope.user)
-        .then(closeModal, displayMessageOnFail);
-    }
+      if (user.referral_code && user.referral_code !== "") {
+        AuthService.checkCode({
+            referral_code: user.referral_code
+          })
+          .then(function () {
+            delete $scope.user.referral_code;
+            AuthService.register($scope.user)
+              .then(closeModal, displayMessageOnFail)
+              .then(function () {
+                AuthService.submitReferralCode({
+                  referral_code: user.referral_code
+                });
+              }, displayMessageOnFail);
+          }, displayMessageOnFail);
+      } else {
+        delete $scope.user.referral_code;
+        AuthService.register($scope.user)
+          .then(closeModal, displayMessageOnFail);
+      }
+    };
 
-    $scope.login = function() {
+    $scope.login = function () {
       var user = angular.fromJson(angular.toJson($scope.user));
       delete user.password;
+      if (user.referral_code && user.referral_code !== "") {
+        AuthService.checkCode({
+            referral_code: user.referral_code
+          })
+          .then(function () {
+            delete $scope.user.referral_code;
+            AuthService.login($scope.user)
+              .then(closeModal, displayMessageOnFail)
+              .then(function () {
+                AuthService.submitReferralCode({
+                  referral_code: user.referral_code
+                });
+              }, displayMessageOnFail);
+          }, displayMessageOnFail);
+      } else {
+        delete $scope.user.referral_code;
+        AuthService.login($scope.user)
+          .then(closeModal, displayMessageOnFail);
+      }
+    };
 
-      AuthService.login($scope.user)
-        .then(closeModal, displayMessageOnFail);
+    $scope.showReferralInput = function () {
+      return ($routeParams.code_chanel && $routeParams.code_chanel === 'REF001');
     };
 
     function closeModal(data) {
@@ -142,18 +182,19 @@
 
     function displayMessageOnFail(response) {
       if (response.data) {
-        $scope.error = response.data.error;
+        $scope.error = response.data.error || response.data.message;
       }
     }
 
   }
 
-  function ForgetPasswordModalInstanceCtrl($scope, $rootScope, $timeout, $modalInstance, $routeParams, AuthService) {
+  function ForgetPasswordModalInstanceCtrl($scope, $rootScope, $timeout, $modalInstance,
+    $routeParams,
+    AuthService) {
     $scope.user = {};
     $scope.error = '';
 
-
-    $scope.forgetPassword = function() {
+    $scope.forgetPassword = function () {
       var user = angular.fromJson(angular.toJson($scope.user));
 
       AuthService.forgetPassword($scope.user)
@@ -168,7 +209,7 @@
 
     function displayMessageOnFail(response) {
       if (response.data) {
-        $scope.error = response.data.error;
+        $scope.error = response.data.error || response.data.message;
       }
     }
   }
@@ -176,11 +217,14 @@
     .directive('loginModal', LoginModalDirective)
     .directive('registerModal', RegisterModalDirective)
     .directive('forgetModal', ForgetPasswordModalDirective)
-    .controller('LoginModalCtrl', ['$scope', '$rootScope', '$modal', LoginModalCtrl])
-    .controller('LoginModalInstanceCtrl', ['$scope', '$rootScope', '$timeout', '$modalInstance', '$routeParams',
-      'AuthService', LoginModalInstanceCtrl
+    .controller('LoginModalCtrl', ['$scope', '$rootScope', '$modal', '$routeParams',
+      LoginModalCtrl
     ])
-    .controller('ForgetPasswordModalInstanceCtrl', ['$scope', '$rootScope', '$timeout', '$modalInstance',
+    .controller('LoginModalInstanceCtrl', ['$scope', '$location', '$timeout', '$modalInstance',
+      '$routeParams', 'AuthService', LoginModalInstanceCtrl
+    ])
+    .controller('ForgetPasswordModalInstanceCtrl', ['$scope', '$rootScope', '$timeout',
+      '$modalInstance',
       '$routeParams', 'AuthService', ForgetPasswordModalInstanceCtrl
     ]);
 }(window.angular));

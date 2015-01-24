@@ -38,7 +38,6 @@
         @include grid-column($columns: 3);
         text-align: center;
         img {
-          background-color: $iron;
           border-radius: 50%;
           width: 40px;
           height: 40px;
@@ -51,9 +50,22 @@
         color: #333;
       }
       .noti-follow-button {
-        @include button($padding: $button-med, $radius: true);
+        @include button($padding: $button-tny, $radius: true);
         line-height: 1rem;
         margin: 10px 0 0 0;
+        font-size: 14px;
+      }
+      .noti-time-ago {
+        margin-top: 10px;
+        font-style: italic;
+        font-size: .9em;
+        color: $iron;
+      }
+      .facebook-share {
+        background: url("assets/img/facebook-share.png") center no-repeat;
+        background-size: contain;
+        width: 80px !important;
+        height: 30px !important;
       }
     }
   }

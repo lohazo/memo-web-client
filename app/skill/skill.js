@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function SkillConfig($routeProvider, $locationProvider) {
@@ -6,14 +6,16 @@
       templateUrl: 'skill/_skill.html',
       controller: 'SkillCtrl',
       resolve: {
-        User: function(Profile) {
-          return Profile.getUser();
+        User: function (Profile) {
+          return Profile.getProfile().then(Profile.getProfileDetail).then(Profile.getUser);
         }
       }
     });
   };
 
-  angular.module('skill', ['skill.services', 'skill.directives', 'skill.controllers', 'skill.tree'])
+  angular.module('skill', ['skill.services', 'skill.directives', 'skill.controllers',
+      'skill.tree'
+    ])
     .config(['$routeProvider', '$locationProvider', SkillConfig]);
 
 }(window.angular));

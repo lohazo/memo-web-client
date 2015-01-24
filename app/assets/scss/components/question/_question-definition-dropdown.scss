@@ -2,13 +2,17 @@
   .token {
     line-height: 40px !important;
   }
-
-  .token.has-definition {
-    border-bottom: 1px dotted #FFA500;
-    color: #FFA500;
-    cursor: pointer;
+  .token {
+    &.special-objective {
+      border-bottom: 1px dotted #FFA500;
+      color: #FFA500;
+      cursor: pointer;
+    }
+    &.objective {
+      cursor: pointer;
+      border-bottom: 1px dotted #FFA500;
+    }
   }
-
   .dropdown-definition {
     border-radius: 5px;
     padding: 10px;
@@ -18,7 +22,6 @@
     width: auto;
     max-width: auto;
     top: 40px !important;
-
     .definition {
       line-height: 30px;
       border-bottom: .5px solid grey;

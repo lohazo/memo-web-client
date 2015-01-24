@@ -1,6 +1,6 @@
 <div class="row" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <div class="large-16 columns">
-    <div class="row"><span class="ant"></span></div>
+    <div class="row" ng-hide="hideAnt"><span class="ant"></span></div>
     <div class="container">
       <h4 class="title" style="margin-top: 0px;margin-bottom: 0px">Đăng ký</h4>
       <p class="error"style="margin-bottom: 5px;margin-top: 0px;font-size: 16px" >{{error}}</p>
@@ -42,8 +42,13 @@
           <div class="small-16 columns">
             <input class="mobile" ng-model="user.mobile" style="margin-bottom: 10px" type="tel" placeholder="Điện thoại (không bắt buộc)" tooltip="Nhập số điện thoại chính xác sẽ giúp Memo có thể dễ dàng hỗ trợ bạn hơn"  tooltip-trigger="focus" tooltip-placement="right" class="form-control">
           </div>
-          <div class="small-16 columns">
-            <input class="name" ng-model="user.name" type="text" placeholder="Tên đầy đủ (không bắt buộc)" tooltip="Hãy cho Memo biết tên đầy đủ của bạn nhé ^^"  tooltip-trigger="focus" tooltip-placement="right" class="form-control">
+          <!-- <div class="small-16 columns">
+            <input class="name" ng-model="user.referral_code" type="text" placeholder="Code chia sẻ từ bạn bè (không bắt buộc)" tooltip="Điền code chia sẻ bạn nhận được tại đây"  tooltip-trigger="focus" tooltip-placement="right" class="form-control">
+          </div> -->
+        </div>
+        <div class="row" ng-show="hideAnt">
+          <div class="large-16 columns">
+            <p><i>(Bạn có thể nhập code từ bạn bè ngay sau khi đăng nhập)</i></p>
           </div>
         </div>
         <div class="row">

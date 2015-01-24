@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function AppConfig($routeProvider, $locationProvider,
@@ -15,7 +15,7 @@
     $httpProvider.defaults.headers.post['Content-Type'] =
       'application/x-www-form-urlencoded;charset=utf-8';
 
-    $httpProvider.defaults.transformRequest = [function(obj) {
+    $httpProvider.defaults.transformRequest = [function (obj) {
       var str = [];
       for (var p in obj)
         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
@@ -43,14 +43,18 @@
   angular.module('app', [
     'ngRoute', 'ngStorage', 'ngAudio',
     'mm.foundation', 'angles', 'facebook', 'googleplus',
-    'angular-loading-bar',
+    'angular-loading-bar', 'angularMoment',
     'app.controllers', 'app.directives',
     'header', 'landingpage', 'login', 'home', 'course',
     'profile', 'skill', 'placement', 'report', 'exam',
-    'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome', 'words',
-    'notification'
-  ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider', 'GooglePlusProvider',
+    'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
+    'words', 'referral',
+    'notification', 'download',
+  ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
+    'GooglePlusProvider',
     AppConfig
-  ]);
+  ]).run(['amMoment', function (amMoment) {
+    amMoment.changeLocale('vi');
+  }]);
 
 }(window.angular));

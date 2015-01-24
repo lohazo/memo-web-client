@@ -11,8 +11,8 @@
     <top-bar-section ng-if="auth.loggedIn">
       <!-- Left Nav Section -->
       <ul class="left menus">
-        <li class="menu-item" ng-class="getActiveItem(item.link)" ng-repeat="item in menus">
-          <a href="{{item.link}}">{{item.title}}</a>
+        <li class="menu-item" ng-class="{'active': path == '/'}" style="width: 130px;">
+          <a ng-href="/">Trang chủ</a>
         </li>
       </ul>
       <!-- Right Nav Section -->

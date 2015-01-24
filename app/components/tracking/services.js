@@ -1,6 +1,6 @@
-'use strict';
-
 (function (angular, localStorage) {
+  'use strict';
+
   function MemoTracking($http, $q, $localStorage, APP_VERSION) {
     var BASE_URL = 'http://services.memo.edu.vn/trackings/track';
     var tracker = {};
@@ -101,6 +101,42 @@
         .error(function () {});
     };
 
+    tracker.campaignTrack = function (eventName, data, callback) {
+      // data = {name: eventName, cookie: eco_uuid}
+      var user = JSON.parse(localStorage.eco_user);
+      var browsingDomain = document.URL;
+      browsingDomain += browsingDomain.indexOf('?') > -1 ? '&' : '?';
+
+      if ($localStorage.auth.user) {
+        data.name = 'memo_' + $localStorage.auth.user._id;
+      }
+
+      if (data.skip) {
+        browsingDomain += ('skip=' + data.skip + '&');
+      }
+
+      if (data.back) {
+        browsingDomain += ('back=' + data.back + '&');
+      }
+
+      var requestData = {
+        name: eventName,
+        cookie: $cookies.eco_uuid,
+        user_id: user.user_id,
+        browsing_domain: browsingDomain + 'campaign=' + data.campaign + '&code_channel=' +
+          data.code_channel +
+          '&screen=' + data.screen,
+        referrer_url: document.referrer,
+        submitted_form_data: JSON.stringify(data)
+      };
+
+      $http.post(BASE_URL + '/users/track', requestData, httpConfig)
+        .success(function (response) {
+          $cookies.eco_uuid = response;
+          if (callback instanceof Function) callback(response);
+        })
+        .error(function () {});
+    };
     return tracker;
   }
 
