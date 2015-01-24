@@ -7,9 +7,9 @@ angular.module('question.judge', [])
   .controller('QuestionJudgeCtrl', [
     '$scope',
     '$attrs',
-    function($scope, $attrs) {
+    function ($scope, $attrs) {
       $scope.judge = $scope.$parent.question;
-      $scope.options = $scope.judge.options.map(function(o) {
+      $scope.options = $scope.judge.options.map(function (o) {
         return {
           text: o,
           checked: false
@@ -18,7 +18,7 @@ angular.module('question.judge', [])
       $scope.userAnswer = [];
     }
   ])
-  .directive('questionJudge', function() {
+  .directive('questionJudge', function () {
     return {
       strict: 'EA',
       replace: true,
@@ -26,8 +26,8 @@ angular.module('question.judge', [])
         answer: "=answer"
       },
       controller: 'QuestionJudgeCtrl',
-      link: function($scope, $element) {
-        $scope.updateUserAnswer = function(option) {
+      link: function ($scope, $element) {
+        $scope.updateUserAnswer = function (option) {
           $scope.userAnswer = $scope.userAnswer || [];
           var idx = $scope.userAnswer.indexOf(option.text);
           if (option.checked && idx < 0) {
@@ -41,7 +41,7 @@ angular.module('question.judge', [])
         $element.attr('tabindex', '0');
         $element[0].focus();
 
-        $element.on('keydown', function(e) {
+        $element.on('keydown', function (e) {
           if (e.keyCode === 8) {
             e.preventDefault();
             e.stopPropagation();
@@ -49,14 +49,14 @@ angular.module('question.judge', [])
           }
         });
 
-        $element.on('keyup', function(e) {
-          if (e.key == "1") {
+        $element.on('keyup', function (e) {
+          if (e.key == "1" || e.keyCode === 49) {
             $scope.options[0].checked = !$scope.options[0].checked;
             $scope.updateUserAnswer($scope.options[0]);
-          } else if (e.key == "2") {
+          } else if (e.key == "2" || e.keyCode === 50) {
             $scope.options[1].checked = !$scope.options[1].checked;
             $scope.updateUserAnswer($scope.options[1]);
-          } else if (e.key == "3") {
+          } else if (e.key == "3" || e.keyCode === 51) {
             $scope.options[2].checked = !$scope.options[2].checked;
             $scope.updateUserAnswer($scope.options[2]);
           }
