@@ -1,10 +1,11 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   //+ Jonas Raoni Soares Silva
   //@ http://jsfromhell.com/array/shuffle [v1.0]
   function shuffle(o) { //v1.0
-    for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j],
+      o[j] = x);
     return o;
   };
 
@@ -12,7 +13,7 @@
     $scope.question = $scope.$parent.question;
     $scope.options = [];
     var options = $scope.question.options.slice(0);
-    var target = options.filter(function(option) {
+    var target = options.filter(function (option) {
       return option.text === $scope.question.hint;
     })[0];
     var idx = options.indexOf(target);
@@ -24,25 +25,32 @@
     };
   }
 
-  function QuestionSelectDirective() {
+  function QuestionSelectDirective(Words, ngAudio) {
     function linkFn($scope, $element) {
-      $scope.selectAnswer = function(number) {
+      $scope.selectAnswer = function (number) {
         // DOM manipulation
 
-        var elements = document.querySelectorAll('.selected');
-        var element = document.querySelector('.image.image-' + number);
-        angular.element(elements).removeClass('selected');
-        angular.element(element).addClass('selected');
+        angular.element(document.querySelectorAll('.selected')).removeClass('selected');
+        angular.element(document.querySelector('.image.image-' + number)).addClass(
+          'selected');
 
         // FIXME: No two-way binding
         $scope.select.userAnswer = $scope.options[number - 1].text;
         $scope.question.userAnswer = $scope.select.userAnswer;
+
+        var option = $scope.options[number - 1];
+        var word = Words.getWord(option);
+        var soundFile;
+        if (word && word.sound) {
+          soundFile = ngAudio.load(word.sound);
+          soundFile.play();
+        }
       };
 
       $element.attr('tabindex', '0');
       $element[0].focus();
 
-      $element.on('keydown', function(e) {
+      $element.on('keydown', function (e) {
         if (e.keyCode === 8) {
           e.preventDefault();
           e.stopPropagation();
@@ -50,7 +58,7 @@
         }
       });
 
-      $element.on('keyup', function(e) {
+      $element.on('keyup', function (e) {
         if (e.key == "1" || e.keyCode === 49) {
           $scope.selectAnswer(1);
         } else if (e.key == "2" || e.keyCode === 50) {
@@ -75,6 +83,6 @@
 
   angular.module('question.select', [])
     .controller('QuestionSelectCtrl', ['$scope', '$attrs', QuestionSelectCtrl])
-    .directive('questionSelect', QuestionSelectDirective);
+    .directive('questionSelect', ['Words', 'ngAudio', QuestionSelectDirective]);
 
 }(window.angular));
