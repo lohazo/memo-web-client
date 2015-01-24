@@ -12,6 +12,7 @@
     var requestData = {
       type: examType === 'skill' ? 'lesson' : examType
     };
+    $scope.examType = requestData.type;
     if (examType === 'skill') {
       requestData.lesson_number = $routeParams.lesson_number;
       requestData.skill_id = $routeParams.id;
