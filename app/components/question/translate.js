@@ -13,12 +13,12 @@
         });
       }).map(function (token) {
         // token = {text}
-        var isObjective = objectives.some(function (objective) {
-          return objective === token.text;
+        var isObjective = objectiveIds.some(function (objective) {
+          return objective.text === token.text;
         });
 
-        var isSpecialObjective = specialObjectives.some(function (objective) {
-          return objective === token.text;
+        var isSpecialObjective = specialObjectiveIds.some(function (objective) {
+          return objective.text === token.text;
         })
 
         token.isObjective = isObjective;
@@ -29,8 +29,8 @@
     }
 
     $scope.translate = $scope.$parent.question;
-    var specialObjectives = angular.copy($scope.translate.special_objectives);
-    var objectives = angular.copy($scope.translate.objectives);
+    var specialObjectiveIds = angular.copy($scope.translate.special_objective_ids);
+    var objectiveIds = angular.copy($scope.translate.objective_ids);
     $scope.translate_tokens = tokenize($scope.translate.question);
 
     if ($scope.translate.normal_question_audio) {
