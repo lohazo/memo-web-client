@@ -39,8 +39,8 @@
     }
 
     $scope.translate = $scope.$parent.question;
-    var specialObjectiveIds = angular.copy($scope.translate.special_objective_ids);
-    var objectiveIds = angular.copy($scope.translate.objective_ids);
+    var specialObjectiveIds = angular.copy($scope.translate.special_objective_ids) || [];
+    var objectiveIds = angular.copy($scope.translate.objective_ids) || [];
     $scope.translate_tokens = tokenize($scope.translate.question);
 
     if ($scope.translate.normal_question_audio) {
