@@ -218,7 +218,7 @@
   angular.module('app.services', [])
     .constant('APP_VERSION', '1.0.2')
     .constant('API_PHP', 'http://api.memo.edu.vn/api/v1.7')
-    .constant('API', 'http://services.memo.edu.vn/api')
+    .constant('API', 'http://staging.memo.edu.vn/v2/api')
     .constant('angularMomentConfig', {
       preprocess: 'unix',
       timezone: 'Asia/Ho_Chi_Minh'

@@ -1,12 +1,12 @@
 (function (angular) {
   'use strict';
 
-  function LoginFactory($http, $q, $localStorage, API_PHP) {
+  function LoginFactory($http, $q, $localStorage, API, API_PHP) {
     var Service = {};
 
     Service.register = function (data) {
       var deferred = $q.defer();
-      $http.post(API_PHP + '/users', data)
+      $http.post(API + '/users', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -17,7 +17,7 @@
 
     Service.login = function (data) {
       var deferred = $q.defer();
-      $http.post(API_PHP + '/users/login', data)
+      $http.post(API + '/users/login', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -28,7 +28,7 @@
 
     Service.forgetPassword = function (data) {
       var deferred = $q.defer();
-      $http.post(API_PHP + '/users/forget_password', data)
+      $http.post(API + '/users/forget_password', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -39,7 +39,7 @@
 
     Service.profile = function (data) {
       var deferred = $q.defer();
-      $http.get(API_PHP + '/users/' + data._id + '?auth_token=' + data.auth_token)
+      $http.get(API + '/users/' + data._id + '?auth_token=' + data.auth_token)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -190,7 +190,7 @@
 
   angular.module('login.services', []);
   angular.module('login.services')
-    .factory('LoginService', ['$http', '$q', '$localStorage', 'API_PHP', LoginFactory]);
+    .factory('LoginService', ['$http', '$q', '$localStorage', 'API', 'API_PHP', LoginFactory]);
   angular.module('login.services')
     .factory('AuthService', ['$q', '$rootScope', '$localStorage', '$routeParams',
       'Facebook', 'GooglePlus', 'EcoTracking', 'MemoTracking',

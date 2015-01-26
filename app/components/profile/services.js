@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function ProfileServices($http, $q, $location, $localStorage, API_PHP) {
+  function ProfileServices($http, $q, $location, $localStorage, API) {
     var Services = {};
 
     Services.profile = function (data) {
@@ -12,7 +12,7 @@
         'auth_token': $localStorage.auth.user.auth_token
       };
 
-      $http.get(API_PHP + '/users/' + requestData._id + '?auth_token=' + requestData.auth_token)
+      $http.get(API + '/users?auth_token=' + requestData.auth_token)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -34,7 +34,7 @@
         'auth_token': $localStorage.auth.user.auth_token
       };
 
-      var endpoint = API_PHP + '/users/profile_details?device=web&auth_token=' + requestData.auth_token;
+      var endpoint = API + '/users/profile_details?device=web&auth_token=' + requestData.auth_token;
 
       if (requestData.friend_id) {
         endpoint += '&friend_id=' + requestData.friend_id;
@@ -54,7 +54,7 @@
       // data = {username: 'asonetuh'/ password: 'anoethuasto'/ email: 'asoentuh'}
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      $http.post(API_PHP + '/users/edit', data)
+      $http.post(API + '/users/edit', data)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -114,7 +114,7 @@
   }
 
   angular.module('profile.services', [])
-    .factory('ProfileServices', ['$http', '$q', '$location', '$localStorage', 'API_PHP',
+    .factory('ProfileServices', ['$http', '$q', '$location', '$localStorage', 'API',
       ProfileServices
     ])
     .factory('Profile', ['ProfileServices', '$localStorage', ProfileFactory]);
