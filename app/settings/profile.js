@@ -1,69 +1,72 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  function SettingProfileService($http, $q, $localStorage, API_PHP) {
+  function SettingProfileService($http, $q, $localStorage, API) {
     var Services = {};
 
-    Services.linkFb = function() {
+    Services.linkFb = function () {
       var deferred = $q.defer();
 
+      var userId = $localStorage.auth.user._id;
       var data = {
         auth_token: $localStorage.auth.user.auth_token,
-        fb_Id: $localStorage.auth.facebook.userID,
         fb_access_token: $localStorage.auth.facebook.accessToken
       };
 
-      $http.post(API_PHP + '/users/link_facebook', data)
-        .then(function(response) {
+      $http.post(API + '/users/' + userId + '/link_facebook', data)
+        .then(function (response) {
           deferred.resolve(response);
-        }, function(response) {
+        }, function (response) {
           deferred.reject(response);
-        })
+        });
 
       return deferred.promise;
     };
 
-    Services.unlinkFb = function() {
+    Services.unlinkFb = function () {
       var deferred = $q.defer();
+
+      var userId = $localStorage.auth.user._id;
       var authToken = $localStorage.auth.user.auth_token;
 
-      $http.post(API_PHP + '/users/unlink_facebook', {
+      $http.post(API + '/users/' + userId + '/unlink_facebook', {
           auth_token: authToken
         })
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
         });
 
       return deferred.promise;
     };
 
-    Services.linkGoogle = function() {
+    Services.linkGoogle = function () {
       var deferred = $q.defer();
 
+      var userId = $localStorage.auth.user._id;
       var data = {
         auth_token: $localStorage.auth.user.auth_token,
-        gmail: $localStorage.auth.google.gmail,
         g_access_token: $localStorage.auth.google.accessToken
       };
 
-      $http.post(API_PHP + '/users/link_google', data)
-        .then(function(response) {
+      $http.post(API + '/users/' + userId + '/link_google', data)
+        .then(function (response) {
           deferred.resolve(response);
-        }, function(response) {
+        }, function (response) {
           deferred.reject(response);
-        })
+        });
 
       return deferred.promise;
     };
 
-    Services.unlinkGoogle = function() {
+    Services.unlinkGoogle = function () {
       var deferred = $q.defer();
+      var userId = $localStorage.auth.user._id;
       var authToken = $localStorage.auth.user.auth_token;
 
-      $http.post(API_PHP + '/users/unlink_google', {
+      $http.post(API + '/users/' + userId + '/unlink_google', {
           auth_token: authToken
         })
-        .then(function(response) {
+        .then(function (response) {
           deferred.resolve(response);
         });
 
@@ -125,25 +128,25 @@
       $scope.user.created_at.date = convertCreatedAtTime($scope.user.created_at.sec);
     }
 
-    $scope.linkFb = function() {
+    $scope.linkFb = function () {
       SettingProfile.linkFb()
         .then(Profile.getProfile)
         .then(updateUser);
     };
 
-    $scope.linkGoogle = function() {
+    $scope.linkGoogle = function () {
       SettingProfile.linkGoogle()
         .then(Profile.getProfile)
         .then(updateUser);
     };
 
-    $scope.unlinkFb = function() {
+    $scope.unlinkFb = function () {
       SettingProfile.unlinkFb()
         .then(Profile.getProfile)
         .then(updateUser);
     };
 
-    $scope.unlinkGoogle = function() {
+    $scope.unlinkGoogle = function () {
       SettingProfile.unlinkGoogle()
         .then(Profile.getProfile)
         .then(updateUser);
@@ -152,7 +155,11 @@
 
   angular.module('settings.profile', [])
     .controller('SettingProfileCtrl', ['$scope', 'Profile', 'SettingProfile', SettingProfileCtrl])
-    .factory('SettingProfileService', ['$http', '$q', '$localStorage', 'API_PHP', SettingProfileService])
-    .factory('SettingProfile', ['$localStorage', 'SettingProfileService', 'Leaderboard', 'GooglePlus', SettingProfileFactory]);
+    .factory('SettingProfileService', ['$http', '$q', '$localStorage', 'API',
+      SettingProfileService
+    ])
+    .factory('SettingProfile', ['$localStorage', 'SettingProfileService', 'Leaderboard',
+      'GooglePlus', SettingProfileFactory
+    ]);
 
 }(window.angular));

@@ -30,15 +30,12 @@
       // data = {_id: }
       var deferred = $q.defer();
       var requestData = {
-        'friend_id': (data && data.friend_id) ? data.friend_id : false,
+        '_id': (data && data.friend_id) ? data.friend_id : $localStorage.auth.user._id,
         'auth_token': $localStorage.auth.user.auth_token
       };
 
-      var endpoint = API + '/users/profile_details?device=web&auth_token=' + requestData.auth_token;
-
-      if (requestData.friend_id) {
-        endpoint += '&friend_id=' + requestData.friend_id;
-      }
+      var endpoint = API + '/users/' + requestData._id + '/profile_details?auth_token=' +
+        requestData.auth_token;
 
       $http.get(endpoint)
         .then(function (response) {
@@ -54,7 +51,7 @@
       // data = {username: 'asonetuh'/ password: 'anoethuasto'/ email: 'asoentuh'}
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      $http.post(API + '/users/edit', data)
+      $http.put(API + '/users', data)
         .then(function (response) {
           deferred.resolve(response);
         });
