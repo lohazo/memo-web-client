@@ -6,8 +6,8 @@ module.exports = function (config) {
     files: [
       'app/vendors/angular/angular.js',
       'app/vendors/angular-route/angular-route.js',
-    'app/vendors/angular-mocks/angular-mocks.js',
-    'app/vendors/ngStorage/ngStorage.min.js',
+      'app/vendors/angular-mocks/angular-mocks.js',
+      'app/vendors/ngStorage/ngStorage.min.js',
       'app/*.js',
       'app/placement/**/*.js',
       'app/components/placement/**/*.js',
@@ -22,10 +22,9 @@ module.exports = function (config) {
 
     frameworks: ['jasmine'],
 
-    browsers: ['PhantomJS'],
+    browsers: ['Firfox'],
 
     plugins: [
-      'karma-phantomjs-launcher',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-jasmine',
