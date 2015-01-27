@@ -47,11 +47,11 @@
 
     Services.update = function (data) {
       var deferred = $q.defer();
-
+      var userId = $localStorage.auth.user._id;
       // data = {username: 'asonetuh'/ password: 'anoethuasto'/ email: 'asoentuh'}
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      $http.put(API + '/users', data)
+      $http.put(API + '/users/' + userId, data)
         .then(function (response) {
           deferred.resolve(response);
         });
