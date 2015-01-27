@@ -6,23 +6,26 @@ module.exports = function (config) {
     files: [
       'app/vendors/angular/angular.js',
       'app/vendors/angular-route/angular-route.js',
-      'app/vendors/angular-mocks/angular-mocks.js',
+    'app/vendors/angular-mocks/angular-mocks.js',
+    'app/vendors/ngStorage/ngStorage.min.js',
       'app/*.js',
       'app/placement/**/*.js',
       'app/components/placement/**/*.js',
       'app/components/question/**/*.js',
       'app/components/dmp/**/*.js',
       'app/vendors/google-diff-match-patch/diff_match_patch.js',
-      'app/home/**/*.js'
+      'app/home/**/*.js',
+      'app/components/user/**/*.js'
     ],
 
     autoWatch: true,
 
     frameworks: ['jasmine'],
 
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
     plugins: [
+      'karma-phantomjs-launcher',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-jasmine',
