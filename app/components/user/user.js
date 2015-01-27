@@ -7,16 +7,14 @@
     var apiEndpoint = 'http://staging.memo.edu.vn/v2/api/users';
 
     Services.create = function (data) {
-      var deferred = $q.defer();
+      if (!data) return false;
 
-      $http.post(apiEndpoint, data)
+      return $http.post(apiEndpoint, data)
         .success(function (data, status, headers, config) {
-          deferred.resolve(data);
+          return data;
         }).error(function (data, status, headers, config) {
-          deferred.reject(data);
+          return data;
         });
-
-      return deferred.promise;
     };
 
     return Services;
