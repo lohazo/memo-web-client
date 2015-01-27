@@ -48,10 +48,10 @@ angular.module('skill.tree', [])
           });
         } else {
           var thisRow = checkpoints.filter(function (checkpoint) {
-            return checkpoint.row == (i - rowShift);
+            return checkpoint.checkpoint.row == (i - rowShift);
           })[0];
           rowShift += 1;
-          skillRow.push(thisRow);
+          skillRow.push(thisRow.checkpoint);
           skillRow.isCheckpoint = true;
         }
         skillTree.push(skillRow);
