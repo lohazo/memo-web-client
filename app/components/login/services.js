@@ -119,9 +119,8 @@
             deferred.reject(data);
           } else {
             data = {
-              fb_access_token: $localStorage.auth.facebook.accessToken,
-              fb_Id: response.id,
-              fb_name: response.name
+              access_token: $localStorage.auth.facebook.accessToken,
+              facebook_id: response.id
             };
             deferred.resolve(data);
           }

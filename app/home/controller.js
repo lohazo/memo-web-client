@@ -64,7 +64,7 @@
     AppSetting.getWords();
     Profile.getProfile()
       .then(getProfile)
-      .then(AppSetting.get)
+      // .then(AppSetting.get)
       .then(Message.list)
       .then(getProfileDetail)
       .then(getStatus)

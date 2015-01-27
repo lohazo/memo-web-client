@@ -7,8 +7,9 @@
     Services.listCourses = function () {
       var deferred = $q.defer();
       var userId = $localStorage.auth.user._id;
+      var authToken = $localStorage.auth.user.auth_token;
 
-      $http.get(API + '/users/' + userId + '/available_courses')
+      $http.get(API + '/users/' + userId + '/available_courses?auth_token=' + authToken)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -30,11 +31,12 @@
     Services.selectCourse = function (data) {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
+      var userId = $localStorage.auth.user._id;
 
       // data = {base_course_id: 1254}
       data.auth_token = authToken;
 
-      $http.post(API_PHP + '/users/select_course', data)
+      $http.post(API + '/users/' + userId + '/select_course', data)
         .error(function (data, status, headers, config) {
           if (status === 400) {
             $location.path('/course');
@@ -55,7 +57,7 @@
     Course.listCourses = function () {
       return CourseServices.listCourses()
         .then(function (response) {
-          Course.courses = response.data;
+          Course.courses = response.data.users;
         });
     };
 
