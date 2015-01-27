@@ -50,10 +50,10 @@
       var userId = $localStorage.auth.user._id;
 
       data.auth_token = authToken;
-      data.device = 'web';
+      data.platform = 'web';
       data.localize = 'vi';
 
-      $http.post(API + '/plaza/' + data.base_item_id + 'use', data)
+      $http.post(API + '/plaza_items/' + data.base_item_id + '/use', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
