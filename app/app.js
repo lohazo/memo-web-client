@@ -5,22 +5,11 @@
     $httpProvider, FacebookProvider, GooglePlusProvider) {
     $locationProvider.html5Mode(true).hashPrefix('!');
     $routeProvider.when('/', {
-      templateUrl: '_index.html',
-      controller: 'AppCtrl'
+      templateUrl: '_index.html'
     });
     $routeProvider.otherwise({
       redirectTo: '/'
     });
-
-    $httpProvider.defaults.headers.post['Content-Type'] =
-      'application/x-www-form-urlencoded;charset=utf-8';
-
-    $httpProvider.defaults.transformRequest = [function (obj) {
-      var str = [];
-      for (var p in obj)
-        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-      return str.join("&");
-    }];
 
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.interceptors.push('HttpInterceptor');
