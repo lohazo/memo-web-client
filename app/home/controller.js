@@ -70,8 +70,8 @@
       .then(getStatus)
       .then(AppSetting.getSharedSettings)
       .then(TreeBuilder.getIconSets)
-      .then(buildTree)
-      .then(takeATour);
+      .then(buildTree);
+      // .then(takeATour);
   }
 
   function PlacementTestModalCtrl($scope, $modal, $rootScope) {
