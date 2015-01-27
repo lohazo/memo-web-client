@@ -20,7 +20,8 @@
     Services.listUserCourses = function () {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
-      $http.get(API_PHP + '/courses?auth_token=' + authToken)
+      var userId = $localStorage.auth.user._id;
+      $http.get(API + '/users/' + userId + '/owned_courses?auth_token=' + authToken)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -64,7 +65,7 @@
     Course.listUserCourses = function () {
       return CourseServices.listUserCourses()
         .then(function (response) {
-          Course.userCourses = $localStorage.auth.user.list_courses || response.data;
+          Course.userCourses = $localStorage.auth.user.list_courses || response.data.users;
         });
     };
 
