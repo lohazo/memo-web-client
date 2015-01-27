@@ -28,7 +28,7 @@
 
     Service.forgetPassword = function (data) {
       var deferred = $q.defer();
-      $http.post(API + '/users/forget_password', data)
+      $http.post(API + '/users/forgot_password', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
