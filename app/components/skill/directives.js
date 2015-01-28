@@ -73,7 +73,7 @@ angular.module('skill.directives', [])
       };
     })
 
-// ---------------------- ADD GRAMMAR ---------------------------- //
+
     .directive('grammarDongTuHienTai1', function(){
       return{
         restrict: 'EA',
