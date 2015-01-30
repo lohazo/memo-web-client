@@ -4,6 +4,25 @@
   function LeaderboardServices($http, $q, $localStorage, API) {
     var Services = {};
 
+    Services.leaderBoard = function (data) {
+      // data = {keywords:, page:}
+      var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
+      var userId = $localStorage.auth.user._id;
+
+      data.auth_token = authToken;
+      data.page = data.page || 0;
+
+      $http.get(API + '/users/' + userId + '/leaderboard', data)
+        .then(function (response) {
+          deferred.resolve(response);
+        }, function (response) {
+          deferred.reject(response);
+        });
+
+      return deferred.promise;
+    };
+
     Services.fbFriends = function () {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
@@ -31,9 +50,10 @@
       var userId = $localStorage.auth.user._id;
 
       data.auth_token = authToken;
-      data.page = data.page || 1;
+      data.page = data.page || 0;
+      data.id = userId;
 
-      $http.post(API + '/users/' + userId + '/search_friends', data)
+      $http.post(API + '/users/' + userId + '/search_friends?auth_token=' + authToken + '&page=' + data.page + '&keywords=' + data.keywords)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -103,6 +123,11 @@
 
   function LeaderboardFactory($q, $localStorage, LeaderboardServices, Facebook) {
     var Leaderboard = {};
+
+    Leaderboard.leaderBoard = function (data) {
+      return Leaderboard.leaderBoard
+        .then(LeaderboardServices.leaderBoard);
+    };
 
     Leaderboard.fbFriends = function (data) {
       return Leaderboard.fbLogin()
