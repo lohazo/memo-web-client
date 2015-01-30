@@ -39,7 +39,7 @@
 
       $http.post(API + '/users/' + userId + '/select_course', data)
         .error(function (data, status, headers, config) {
-          if (status === 400) {
+          if (status === 422) {
             $location.path('/course');
           }
         }).then(function (response) {
@@ -58,7 +58,7 @@
     Course.listCourses = function () {
       return CourseServices.listCourses()
         .then(function (response) {
-          Course.courses = response.data.users;
+          Course.courses = response.data;
         });
     };
 

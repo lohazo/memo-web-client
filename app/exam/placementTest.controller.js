@@ -138,7 +138,7 @@
   }
 
   angular.module('placement.controllers', [])
-    .controller('PlacementCtrl', [
+    .controller('PlacementTestCtrl', [
       '$scope', '$location', 'PlacementTestFactory', 'Question', 'Sound', PlacementTestCtrl
     ]);
 
