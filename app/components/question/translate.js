@@ -13,11 +13,11 @@
           text: currentToken
         };
         var objective = objectiveIds.filter(function (objective) {
-          return objective.text === currentToken;
+          return objective.text === currentToken.toLowerCase();
         })[0];
 
         var specialObjective = specialObjectiveIds.filter(function (objective) {
-          return objective.text === currentToken;
+          return objective.text === currentToken.toLowerCase();
         })[0];
 
         transformedToken.isObjective = !!objective;
