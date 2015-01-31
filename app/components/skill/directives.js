@@ -72,8 +72,6 @@ angular.module('skill.directives', [])
         templateUrl: 'skill/_skill-tu-han-dinh.html'
       };
     })
-
-// ---------------------- ADD GRAMMAR ---------------------------- //
     .directive('grammarDongTuHienTai1', function(){
       return{
         restrict: 'EA',
