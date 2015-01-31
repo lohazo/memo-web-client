@@ -106,9 +106,9 @@
       // data = {email: 'aoesnuth'}
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
+      var email = data.email
       data.auth_token = authToken;
-
-      $http.post(API + '/users/invite_by_email', data)
+      $http.post(API + '/users/invite_by_email?auth_token=sBxbzZfQotrT35Fy&email=luandt@topica.edu.vn')
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
