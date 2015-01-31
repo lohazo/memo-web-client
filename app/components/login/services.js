@@ -16,8 +16,11 @@
     };
 
     Service.login = function (data) {
+      console.log(data);
       var deferred = $q.defer();
-      $http.post(API + '/users/login', data)
+      var access_token = data.g_access_token || data.access_token;
+      var gmail = data.gmail;
+      $http.post(API + '/users/login?access_token=' + access_token , data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
