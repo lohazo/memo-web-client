@@ -1,11 +1,10 @@
- .new-player {
+.new-player {
   padding-top: 40px;
   .player-inner {
     @include grid-row;
     padding-left: 10px;
     padding-right: 10px;
     min-height: 500px;
-    background-color: #ffffff;
   }
   .player-container {
     @include grid-column($columns: 16);
@@ -28,11 +27,11 @@
   margin-left: 190px;
 }
 
-  .img-memo-right {
-    height: 80px;
-    width: 50px;
-    margin-left: -110px;
-  }
+.img-memo-right {
+  height: 80px;
+  width: 50px;
+  margin-left: -110px;
+}
 
 .topicanative {
   text-align: center;
@@ -757,138 +756,161 @@ span.border {
   }
 }
 
-.price-scholarship{
+.price-scholarship {
   overflow-y: scroll;
   height: 430px;
   width: 813px;
 }
+
 .price-scholarship p > span {
   font-weight: 600;
 }
+
 h3.headline-text {
-    text-align: center;
-    color: #810C15;
-    font-weight: 600;
-    font-size: 16px;
-    margin-bottom: 0;
-    margin-top: 10px;
+  text-align: center;
+  color: #810C15;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 0;
+  margin-top: 10px;
 }
-.price-scholarship hr{
+
+.price-scholarship hr {
   height: 2px;
   background: #810c15;
   margin-top: 5px;
   margin-right: 15px;
 }
-.payment-method{
+
+.payment-method {
   overflow-y: scroll;
   height: 430px;
   width: 813px;
   margin-right: 26px;
 }
-.payment-method hr{
+
+.payment-method hr {
   height: 2px;
   background: #810c15;
   margin-top: 5px;
   margin-right: 22px;
 }
+
 .price-scholarship .content p > span {
   color: #810C15;
 }
-.payment-method p > span{
+
+.payment-method p > span {
   color: #810C15;
   font-weight: 600;
 }
-.choose-learning{
+
+.choose-learning {
   color: #810C15;
   font-weight: 600;
   margin-bottom: 0px;
 }
 
-  .header-slider {
-    margin-top: -360px;
-    margin-left: -30px;
-    height: 40px;
-    width: 390px;
-    font-size: 18px;
-  }
+.header-slider {
+  margin-top: -360px;
+  margin-left: -30px;
+  height: 40px;
+  width: 390px;
+  font-size: 18px;
+}
+
 /*--------------------------------------Fix Popup-----------------------------*/
 
 .title-question {
   text-align: center;
 }
-h2.title-question{
-    font-size: 26px;
+
+h2.title-question {
+  font-size: 26px;
   margin-bottom: 20px;
   display: block;
 }
-.titile-question h2{
+
+.titile-question h2 {
   text-align: center;
   display: block;
   font-size: 26px;
   margin-bottom: 20px;
 }
 
-.reveal-modal .native-page2{
+.reveal-modal .native-page2 {
   width: 100%;
   margin: 0 auto;
 }
-.native-page2 .native-conversation{
+
+.native-page2 .native-conversation {
   margin: 0 auto;
 }
-.native-page2 .intro-topica-native .left-intro-topica-native{
+
+.native-page2 .intro-topica-native .left-intro-topica-native {
   width: 500px;
   text-align: center;
 }
-.native-page2 .intro-topica-native .right-intro-topica-native{
+
+.native-page2 .intro-topica-native .right-intro-topica-native {
   width: 500px;
   text-align: center;
 }
-.native-page2 .box-tab-infor .e-learning{
+
+.native-page2 .box-tab-infor .e-learning {
   margin-left: 134px;
 }
-.native-page2 .intro-topica-edu{
+
+.native-page2 .intro-topica-edu {
   margin: 0px auto;
   width: 780px;
 }
-.native-page2  .footer-logo-ads img{
+
+.native-page2 .footer-logo-ads img {
   margin-left: 150px;
 }
-.text-popup .slider-entercode{
+
+.text-popup .slider-entercode {
   margin: 0 auto;
 }
-.text-popup span{
+
+.text-popup span {
   color: #810C15;
 }
-.slider-step-2 .native-page2 .intro-topica-native .left-intro-topica-native{
-  width:365px;
+
+.slider-step-2 .native-page2 .intro-topica-native .left-intro-topica-native {
+  width: 365px;
   text-align: left;
 }
-.slider-step-2 .native-page2 .intro-topica-native .right-intro-topica-native{
-  width:365px;
-  text-align:left;
+
+.slider-step-2 .native-page2 .intro-topica-native .right-intro-topica-native {
+  width: 365px;
+  text-align: left;
   margin-left: 30px;
 }
-.slider-step-2 .native-page2 .box-tab-infor .e-learning{
-  margin-left:31px;
-}
-.slider-step-2 .native-page2  .footer-logo-ads img{
-  margin-left:30px;
+
+.slider-step-2 .native-page2 .box-tab-infor .e-learning {
+  margin-left: 31px;
 }
 
-span.code-shares{
-      color: #810C15;
-    margin: 0;
-    display: inline-block;
-    font-size: 17px;
+.slider-step-2 .native-page2 .footer-logo-ads img {
+  margin-left: 30px;
 }
 
-  .image-step-one-top {
-    height: 460px;
-    width: 1020px;
-    margin-top: 20px;
-    margin-left: 30px;
-    margin-bottom: 10px;
-  }
+span.code-shares {
+  color: #810C15;
+  margin: 0;
+  display: inline-block;
+  font-size: 17px;
+}
+
+.image-step-one-top {
+  height: 460px;
+  width: 1020px;
+  margin-top: 20px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
 
 @import "player-header";
 @import "player-main";
