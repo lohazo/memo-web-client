@@ -8,7 +8,7 @@
       var tokens = inputString.split(' ');
 
       var fixedTokens = tokens.map(function (token) {
-        return [].concat.apply(token.split(/(,|\.|!|\?)/gi));
+        return [].concat.apply(token.split(/(,|\.|!|\?|')/gi));
       }).reduce(function (token1, token2) {
         return token1.concat(token2);
       });
@@ -21,14 +21,14 @@
         };
 
         var objective = objectiveIds.filter(function (objective) {
-          return objective.text === currentToken.toLowerCase();
+          return objective.text.toLowerCase() === currentToken.toLowerCase();
         })[0];
 
         var specialObjective = specialObjectiveIds.filter(function (objective) {
-          return objective.text === currentToken.toLowerCase();
+          return objective.text.toLowerCase() === currentToken.toLowerCase();
         })[0];
 
-        transformedToken.isPunctuation = (',.!?'.indexOf(currentToken) >= 0);
+        transformedToken.isPunctuation = (",.!?'".indexOf(currentToken) >= 0);
         transformedToken.isObjective = !!objective;
         transformedToken.isSpecialObjective = !!specialObjective;
 
