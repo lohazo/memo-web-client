@@ -6,12 +6,20 @@
 
     function tokenize(inputString) {
       var tokens = inputString.split(' ');
-      return tokens.map(function (token) {
-        var currentToken = token.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+
+      var fixedTokens = tokens.map(function (token) {
+        return [].concat.apply(token.split(/(,|\.|!|\?)/gi));
+      }).reduce(function (token1, token2) {
+        return token1.concat(token2);
+      });
+
+      return fixedTokens.map(function (token) {
+        var currentToken = token.replace(/[-\/#$%\^&\*;:{}=\-_`~()]/g, "");
         // token = 'aString'
         var transformedToken = {
           text: currentToken
         };
+
         var objective = objectiveIds.filter(function (objective) {
           return objective.text === currentToken.toLowerCase();
         })[0];
@@ -20,6 +28,7 @@
           return objective.text === currentToken.toLowerCase();
         })[0];
 
+        transformedToken.isPunctuation = (',.!?'.indexOf(currentToken) >= 0);
         transformedToken.isObjective = !!objective;
         transformedToken.isSpecialObjective = !!specialObjective;
 

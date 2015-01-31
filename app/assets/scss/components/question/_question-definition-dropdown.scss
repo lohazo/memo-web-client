@@ -12,6 +12,9 @@
       cursor: pointer;
       border-bottom: 1px dotted #FFA500;
     }
+    &.punctuation {
+      margin-left: -5px;
+    }
   }
   .dropdown-definition {
     border-radius: 5px;
