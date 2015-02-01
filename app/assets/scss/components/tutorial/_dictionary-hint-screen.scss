@@ -1,0 +1,41 @@
+.welcome {
+  .dictionary-hint-screen {
+    @include grid-row;
+    .dictionary-hint-screen-inner {
+      @include grid-column($columns: 16);
+      text-align: center;
+      height: 340px;
+      position: relative;
+      .translate-challenge {
+        .icon {
+          font-size: 32px;
+        }
+        .text-to-translate.hint {
+          font-size: 22px;
+          vertical-align: middle;
+        }
+      }
+      .translation-hint {
+        .ant {
+          position: absolute;
+          width: 204px;
+          height: 236px;
+          background: url("assets/img/tutorial/translation-hint-ant.png") no-repeat;
+          background-size: contain;
+          bottom: -52px;
+          left: 190px;
+        }
+        .translation-hint-textbox {
+          position: absolute;
+          width: 385px;
+          height: 90px;
+          background: url("assets/img/tutorial/translation-hint-textbox.png") no-repeat;
+          bottom: 0;
+          left: 395px;
+          text-align: left;
+          padding: 20px 20px 20px 30px;
+        }
+      }
+    }
+  }
+}
