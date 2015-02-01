@@ -59,8 +59,8 @@
         }, function (response) {
           deferred.reject(response);
         });
-
       return deferred.promise;
+
     };
 
     /*
@@ -70,10 +70,10 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
       var userId = $localStorage.auth.user._id;
-
       data.auth_token = authToken;
+      var friend_id = "5480215ac2fcb5dd108b4604";
 
-      $http.post(API + '/users/' + userId + '/follow_friend', data)
+      $http.post(API + '/users/' + userId + '/follow_friend?friend_id=' + friend_id, data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -107,8 +107,11 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
       var email = data.email
+      var userId = $localStorage.auth.user._id;
+      
       data.auth_token = authToken;
-      $http.post(API + '/users/invite_by_email?auth_token=sBxbzZfQotrT35Fy&email=luandt@topica.edu.vn')
+
+      $http.post(API + '/users/' + userId + '/invite_by_mail', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -125,8 +128,7 @@
     var Leaderboard = {};
 
     Leaderboard.leaderBoard = function (data) {
-      return Leaderboard.leaderBoard
-        .then(LeaderboardServices.leaderBoard);
+      
     };
 
     Leaderboard.fbFriends = function (data) {
@@ -135,7 +137,11 @@
     };
 
     Leaderboard.friends = function (data) {
-      return LeaderboardServices.friends(data);
+      return LeaderboardServices.friends(data)
+        .then(function (response) {
+          console.log(response);
+          $localStorage.auth.profile_detail.friends_id = response.data;
+        });
     };
 
     Leaderboard.follow = function (data) {
