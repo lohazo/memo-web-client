@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function ExamConfig($routeProvider) {
@@ -14,8 +14,14 @@
       templateUrl: 'exam/_index.html',
       controller: 'ExamCtrl'
     });
+    $routeProvider.when('/placement/:id', {
+      templateUrl: 'exam/_placement-test.html',
+      controller: 'PlacementTestCtrl'
+    });
   }
 
-  angular.module('exam', ['exam.controllers', 'exam.services'])
+  angular.module('exam', ['exam.controllers', 'exam.services', 'placement.controllers',
+      'placement.services', 'placement.directives',
+    ])
     .config(['$routeProvider', ExamConfig]);
 }(window.angular));

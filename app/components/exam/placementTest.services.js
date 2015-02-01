@@ -55,6 +55,13 @@
   }
 
   function PlacementTestServices($http, $q, API_PHP) {
+    function transformRequest(obj) {
+      var str = [];
+      for (var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      return str.join("&");
+    }
+
     return {
       start: function (data) {
         var deferred = $q.defer();
@@ -65,7 +72,12 @@
           speak_enabled: false
         };
 
-        $http.post(API_PHP + '/placement_test/start', requestData)
+        $http.post(API_PHP + '/placement_test/start', requestData, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            },
+            transformRequest: transformRequest
+          })
           .then(function (response) {
             deferred.resolve(response);
           });
@@ -78,7 +90,12 @@
         data.device = 'web';
         data.speak_enabled = false;
 
-        $http.post(API_PHP + '/placement_test/submit_answer', data)
+        $http.post(API_PHP + '/placement_test/submit_answer', data, {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            },
+            transformRequest: transformRequest
+          })
           .then(function (response) {
             deferred.resolve(response);
           });

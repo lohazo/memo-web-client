@@ -16,7 +16,7 @@
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
-          if (response.status === 400) {
+          if (response.status === 422) {
             $location.path('/course');
           }
           deferred.reject(response);

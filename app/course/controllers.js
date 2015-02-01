@@ -8,7 +8,9 @@
     });
 
     $scope.selectCourse = function (courseId) {
-      var requestData = { base_course_id: courseId };
+      var requestData = {
+        base_course_id: courseId
+      };
       Course.selectCourse(requestData)
         .then(function () {
           $window.location.href = '/';

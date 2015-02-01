@@ -1,7 +1,49 @@
 .new-player {
   .player-container {
     header.player-header {
+      @include grid-row;
+      margin-top: -20px;
       min-height: 80px;
+      .player-header-right {
+        float: right;
+      }
+      .progress {
+        background: none;
+        position: relative;
+        &.distinct {
+          display: flex;
+          flex-direction: row;
+          padding-left: 0px;
+          padding-top: 15px;
+          span.meter {
+            display: inline-flex;
+            position: relative;
+            margin-right: 4px;
+            width: 20px;
+            height: 5px;
+            &.nothing {
+              background-color: $steel;
+            }
+            &.done {
+              background-color: $gold;
+            }
+          }
+          .ant {
+            background: url("assets/img/lesson-ant.png") no-repeat;
+            background-size: contain;
+            display: inline-flex;
+            height: 14px;
+            width: 20px;
+            top: 0;
+            position: absolute;
+            @for $j from 0 through 33 {
+              &.jump-#{$j} {
+                left: $j * 24px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

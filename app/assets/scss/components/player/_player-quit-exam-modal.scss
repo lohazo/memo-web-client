@@ -1,0 +1,44 @@
+.quit-exam-modal {
+  border: none;
+  outline: none;
+  width: 540px;
+  max-width: 540px;
+  min-height: 210px;
+  top: 240px !important;
+  padding: 20px;
+  .quit-exam-modal-inner {
+    @include grid-row;
+    .warning-sign {
+      background-image: url("assets/img/tutorial/warning.png");
+      width: 110px;
+      height: 98px;
+      margin: 20px auto;
+      vertical-align: middle;
+    }
+    .warning-text {
+      @include grid-column($columns: 16);
+      margin: 20px auto;
+    }
+    .button {
+      font-weight: 700;
+      &.quit-button {
+        border: 2px solid $iron;
+        background-color: $white;
+        color: $warning-font-color;
+        padding-top: 9px;
+        padding-bottom: 10px;
+        &:hover {
+          background-color: $smoke;
+        }
+      }
+      &.close-button {
+        background-color: $success-color;
+        padding-top: 11px;
+        padding-bottom: 12px;
+        &:hover {
+          background-color: scale-color($success-color, $lightness: -20%);
+        }
+      }
+    }
+  }
+}
