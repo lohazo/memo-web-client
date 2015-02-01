@@ -56,7 +56,6 @@ angular.module('report', [])
         content: ''
       };
       $scope.reportBug = function() {
-        console.log('Hit');
         ReportServices.reportBug($scope.data)
           .then(function() {
             $modalInstance.close();
