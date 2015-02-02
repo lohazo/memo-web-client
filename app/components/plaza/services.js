@@ -8,7 +8,7 @@
       var deferred = $q.defer();
 
       var authToken = $localStorage.auth.user.auth_token;
-      $http.get(API + '/plaza_items?platform=0&localize=vi&auth_token=' + authToken)
+      $http.get(API + '/plaza_items?platform=web&localize=vi&auth_token=' + authToken)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
