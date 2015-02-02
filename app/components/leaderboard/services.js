@@ -4,8 +4,8 @@
   function LeaderboardServices($http, $q, $localStorage, API) {
     var Services = {};
 
-    Services.leaderBoard = function (data) {
-      // data = {keywords:, page:}
+    Services.leaderboard = function (data) {
+      // data = {page:, [type: week/month]}
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
       var userId = $localStorage.auth.user._id;
@@ -13,7 +13,8 @@
       data.auth_token = authToken;
       data.page = data.page || 0;
 
-      $http.get(API + '/users/' + userId + '/leaderboard', data)
+      $http.get(API + '/users/' + userId + '/leaderboard?type=' + data.type + '&page=' + data
+          .page + '&auth_token=' + data.auth_token)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -53,7 +54,8 @@
       data.page = data.page || 0;
       data.id = userId;
 
-      $http.post(API + '/users/' + userId + '/search_friends?auth_token=' + authToken + '&page=' + data.page + '&keywords=' + data.keywords)
+      $http.post(API + '/users/' + userId + '/search_friends?auth_token=' + authToken +
+          '&page=' + data.page + '&keywords=' + data.keywords)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -108,7 +110,7 @@
       var authToken = $localStorage.auth.user.auth_token;
       var email = data.email
       var userId = $localStorage.auth.user._id;
-      
+
       data.auth_token = authToken;
 
       $http.post(API + '/users/' + userId + '/invite_by_mail', data)
@@ -127,8 +129,9 @@
   function LeaderboardFactory($q, $localStorage, LeaderboardServices, Facebook) {
     var Leaderboard = {};
 
-    Leaderboard.leaderBoard = function (data) {
-      
+    Leaderboard.leaderboard = function (data) {
+      // data = {page:, [type: week/month]}
+      return LeaderboardServices.leaderboard(data);
     };
 
     Leaderboard.fbFriends = function (data) {
@@ -136,6 +139,7 @@
         .then(LeaderboardServices.fbFriends);
     };
 
+    // Search friend
     Leaderboard.friends = function (data) {
       return LeaderboardServices.friends(data)
         .then(function (response) {
