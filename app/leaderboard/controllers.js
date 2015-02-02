@@ -62,20 +62,23 @@
       var authToken = $localStorage.auth.user.auth_token;
       var userId = $localStorage.auth.user._id;
 
+        // LeaderBoard all time
       $http.get(API + '/users/' + userId + '/leaderboard?auth_token=' + authToken + '&type=alltime' + '&page=0')
         .then(function (response) {
           deferred.resolve(response);
-          var alltime = response.data.leaderboard_all_time;
-          console.log(alltime)
         }, function (response) {
           deferred.reject(response);
         });
+
+        // LeaderBoard by month  
       $http.get(API + '/users/' + userId + '/leaderboard?auth_token=' + authToken + '&type=month' + '&page=0')
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
           deferred.reject(response);
         });
+
+        // LeaderBoard by week 
       $http.get(API + '/users/' + userId + '/leaderboard?auth_token=' + authToken + '&type=week' + '&page=0')
         .then(function (response) {
           deferred.resolve(response);
@@ -84,20 +87,20 @@
         });    
       return deferred.promise;
     });
-    
+
     $scope.$watch('profile', function() {
       if ($scope.$on) {
         $scope.tabs = [{
           'title': "Tuần này",
-          'users': $scope.$on.leaderboard_by_week,
+          'users': $scope.profile.leaderboard_by_week,
           'active': true
         }, {
           'title': "Tháng này",
-          'users': $scope.$on.leaderboard_by_month,
+          'users': $scope.profile.leaderboard_by_month,
           'active': false
         }, {
           'title': "Tổng cộng",
-          'users': alltime,
+          'users': $scope.profile.alltime,
           'active': false
         }];
       }
