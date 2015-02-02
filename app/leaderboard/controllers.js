@@ -51,24 +51,43 @@
     $scope.showTheLeaderboard();
   }
 
-  function LeaderboardHomeCtrl($scope, Profile) {
-    $scope.profile = Profile.detail;
+  /*
+     * data = {auth_token: , page: , friend_id: , type :}
+     */
+  function LeaderboardHomeCtrl($scope, Profile, $http, $q, $localStorage, API) {
+
+    // $scope.profile = Profile.detail;
     $scope.$on('event-profileLoaded', function(e, data) {
-      $scope.profile = data;
+      var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
+      var userId = $localStorage.auth.user._id;
+
+      // data.auth_token = authToken;
+      // data.page = data.page;
+      // data.type = "month";
+
+      $http.get(API + '/users/' + userId + '/leaderboard?auth_token=' + authToken + '&type=alltime' + '&page=0')
+        .then(function (response) {
+          deferred.resolve(response);
+        }, function (response) {
+          deferred.reject(response);
+        });
+      console.log(response)  
+      return deferred.promise;
     });
     $scope.$watch('profile', function() {
-      if ($scope.profile) {
+      if ($scope.$on) {
         $scope.tabs = [{
           'title': "Tuần này",
-          'users': $scope.profile.leader_board_by_week,
+          'users': $scope.$on.leaderboard_by_week,
           'active': true
         }, {
           'title': "Tháng này",
-          'users': $scope.profile.leader_board_by_month,
+          'users': $scope.$on.leaderboard_by_month,
           'active': false
         }, {
           'title': "Tổng cộng",
-          'users': $scope.profile.leader_board_all_time,
+          'users': $scope.$on.leaderboard_all_time,
           'active': false
         }];
       }
@@ -110,7 +129,7 @@
 
   angular.module('leaderboard.controllers', [])
     .controller('LeaderboardCtrl', ['$scope', '$localStorage', 'Leaderboard', LeaderboardCtrl])
-    .controller('LeaderboardHomeCtrl', ['$scope', 'Profile', LeaderboardHomeCtrl])
+    .controller('LeaderboardHomeCtrl', ['$scope', 'Profile', '$http', '$q', '$localStorage', 'API', LeaderboardHomeCtrl])
     .controller('LeaderboardFbFriendsCtrl', ['$scope', LeaderboardFbFriendsCtrl])
     .controller('LeaderboardFriendsCtrl', ['$scope', 'Leaderboard', LeaderboardFriendsCtrl])
     .controller('LeaderboardEmailInviteCtrl', ['$scope', 'Leaderboard', LeaderboardEmailInviteCtrl]);
