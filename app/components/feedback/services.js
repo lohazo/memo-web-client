@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function FeedbackServices($http, $q, $localStorage, API_PHP) {
+  function FeedbackServices($http, $q, $localStorage, API) {
     var Services = {};
 
     Services.create = function (data) {
@@ -13,8 +13,8 @@
       // "is_auto":true}]}
       var deferred = $q.defer();
 
-      $http.post(API_PHP + '/feedback/create', data)
-        .then(function(response) {
+      $http.post(API + '/feedbacks/report_answers', data)
+        .then(function (response) {
           deferred.resolve(response);
         });
 
@@ -48,6 +48,6 @@
 
   angular.module('feedback.services', []);
   angular.module('feedback.services')
-    .factory('FeedbackServices', ['$http', '$q', '$localStorage', 'API_PHP', FeedbackServices])
+    .factory('FeedbackServices', ['$http', '$q', '$localStorage', 'API', FeedbackServices])
     .factory('Feedback', ['FeedbackServices', FeedbackFactory]);
 }(window.angular));

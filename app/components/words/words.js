@@ -7,6 +7,13 @@
     };
     var Factory = {};
 
+    function transformRequest(obj) {
+      var str = [];
+      for (var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      return str.join("&");
+    }
+
     Factory.getWord = function (wordToSearch) {
       // wordToSearch  = {_id: ,text:, isObjective:, isSpecialObjective:}
       var words = [];
@@ -53,7 +60,13 @@
 
       data.auth_token = authToken;
 
-      $http.post(API_PHP + '/words?', data, httpConfig)
+      $http.post(API_PHP + '/words?', data, {
+          ignoreLoadingBar: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+          },
+          transformRequest: transformRequest
+        })
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
