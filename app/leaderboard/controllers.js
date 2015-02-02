@@ -56,25 +56,35 @@
      */
   function LeaderboardHomeCtrl($scope, Profile, $http, $q, $localStorage, API) {
 
-    // $scope.profile = Profile.detail;
+    $scope.profile = Profile.detail;
     $scope.$on('event-profileLoaded', function(e, data) {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
       var userId = $localStorage.auth.user._id;
 
-      // data.auth_token = authToken;
-      // data.page = data.page;
-      // data.type = "month";
-
       $http.get(API + '/users/' + userId + '/leaderboard?auth_token=' + authToken + '&type=alltime' + '&page=0')
+        .then(function (response) {
+          deferred.resolve(response);
+          var alltime = response.data.leaderboard_all_time;
+          console.log(alltime)
+        }, function (response) {
+          deferred.reject(response);
+        });
+      $http.get(API + '/users/' + userId + '/leaderboard?auth_token=' + authToken + '&type=month' + '&page=0')
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
           deferred.reject(response);
         });
-      console.log(response)  
+      $http.get(API + '/users/' + userId + '/leaderboard?auth_token=' + authToken + '&type=week' + '&page=0')
+        .then(function (response) {
+          deferred.resolve(response);
+        }, function (response) {
+          deferred.reject(response);
+        });    
       return deferred.promise;
     });
+    
     $scope.$watch('profile', function() {
       if ($scope.$on) {
         $scope.tabs = [{
@@ -87,7 +97,7 @@
           'active': false
         }, {
           'title': "Tổng cộng",
-          'users': $scope.$on.leaderboard_all_time,
+          'users': alltime,
           'active': false
         }];
       }
