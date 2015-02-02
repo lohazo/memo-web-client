@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('feedback.reportModal', [])
-  .directive('reportDropdown', ['$localStorage', '$document', function($localStorage, $document) {
+  .directive('reportDropdown', ['$localStorage', '$document', function ($localStorage, $document) {
     return {
       restrict: 'EA',
       scope: true,
-      controller: function($scope) {
+      controller: function ($scope) {
         var userNote = '';
-        var options = $localStorage.appSetting.feedback_types[$scope.question.type];
-        $scope.options = options.map(function(option) {
+        var options = $localStorage.appSharedSettings.feedback_types.manual_feedback_types[
+          $scope.question.type];
+        $scope.options = options.map(function (option) {
           return {
             id: option.id,
             name: option.name,
@@ -16,13 +17,13 @@ angular.module('feedback.reportModal', [])
           };
         });
 
-        $scope.send = function() {
-          var checkedOptions = $scope.options.filter(function(option) {
+        $scope.send = function () {
+          var checkedOptions = $scope.options.filter(function (option) {
             if (option.text) {
               userNote = option.text
             };
             return option.checked === true;
-          }).map(function(option) {
+          }).map(function (option) {
             return option.id;
           });
 

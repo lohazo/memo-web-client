@@ -62,7 +62,8 @@
     }
 
     function getIsAutoFeedback() {
-      if ($localStorage.appSetting.auto_feedback_types.indexOf(question.type) >= 0) {
+      if ($localStorage.appSharedSettings.feedback_types.auto_feedback_types.indexOf(question
+          .type) >= 0) {
         return true;
       }
 
