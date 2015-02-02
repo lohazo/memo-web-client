@@ -125,7 +125,7 @@
 
     function updateUser() {
       $scope.user = Profile.user;
-      // $scope.user.created_at.date = convertCreatedAtTime($scope.user.created_at.date);
+      $scope.user.created_at.date = convertCreatedAtTime($scope.user.created_at.sec);
     }
 
     $scope.linkFb = function () {
