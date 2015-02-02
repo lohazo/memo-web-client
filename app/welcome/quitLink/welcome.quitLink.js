@@ -14,8 +14,14 @@
     $scope.open = ctrl.open;
   }
 
-  function WelcomeQuitModalCtrl($scope, $modalInstance) {
+  function WelcomeQuitModalCtrl($scope, $modalInstance, Welcome) {
+    $scope.close = function () {
+      $modalInstance.dismiss();
+    };
 
+    $scope.quit = function () {
+      Welcome.quit();
+    }
   }
 
   function WelcomeQuitLink() {
@@ -38,5 +44,7 @@
   angular.module('welcome.quitLink', [])
     .directive('welcomeQuitLink', WelcomeQuitLink)
     .controller('WelcomeQuitLinkCtrl', ['$scope', '$modal', WelcomeQuitLinkCtrl])
-    .controller('WelcomeQuitModalCtrl', ['$scope', '$modalInstance', WelcomeQuitModalCtrl]);
+    .controller('WelcomeQuitModalCtrl', ['$scope', '$modalInstance', 'Welcome',
+      WelcomeQuitModalCtrl
+    ]);
 }(window.angular));
