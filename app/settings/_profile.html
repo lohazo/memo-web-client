@@ -29,7 +29,9 @@
             </div> -->
             <div class="row">
               <div class="large-6 columns">Học tập từ</div>
-              <div class="large-10 columns" style="margin-bottom: 10px;"><span ng-bind="user.created_at.date"></span></div>
+              <div class="large-10 columns" style="margin-bottom: 10px;">
+                <span>{{test_date | amDateFormat:'DD-MM-YY'}}</span>
+              </div>
             </div>
             <div class="row connection-fb">
               <div class="large-6 columns" style="margin-top: 15px">Kết nối Facebook</div>

@@ -108,24 +108,18 @@
   }
 
   function SettingProfileCtrl($scope, Profile, SettingProfile) {
-    $scope.profile = Profile.detail;
-
     updateUser();
 
     $scope.saveChanges = function () {
       var data = {};
-      //alert('Bạn đã thay đổi thành công !!!');
-    }
-
-    function convertCreatedAtTime(input) {
-      var output = new Date(input * 1000);
-      output = output.getFullYear() + '-' + (output.getMonth() + 1) + '-' + output.getDate();
-      return output;
     }
 
     function updateUser() {
+      $scope.profile = Profile.detail;
       $scope.user = Profile.user;
-      $scope.user.created_at.date = convertCreatedAtTime($scope.user.created_at.sec);
+      console.log(Profile.user.created_at);
+      var date = new Date(1422851245284);
+      $scope.test_date = date;
     }
 
     $scope.linkFb = function () {
@@ -154,7 +148,9 @@
   }
 
   angular.module('settings.profile', [])
-    .controller('SettingProfileCtrl', ['$scope', 'Profile', 'SettingProfile', SettingProfileCtrl])
+    .controller('SettingProfileCtrl', ['$scope', 'Profile', 'SettingProfile',
+      SettingProfileCtrl
+    ])
     .factory('SettingProfileService', ['$http', '$q', '$localStorage', 'API',
       SettingProfileService
     ])
