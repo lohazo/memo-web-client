@@ -140,18 +140,14 @@
 
     // Search friend
     Leaderboard.friends = function (data) {
-      return LeaderboardServices.friends(data)
-        .then(function (response) {
-          console.log(response);
-          $localStorage.auth.profile_detail.friends_id = response.data;
-        });
+      return LeaderboardServices.friends(data);
     };
 
     Leaderboard.follow = function (data) {
-      return LeaderboardServices.follow(data)
-        .then(function (response) {
-          $localStorage.auth.profile_detail.following_user_ids = response.data.following_user_ids;
-        });
+      return LeaderboardServices.follow(data);
+        // .then(function (response) {
+        //   $localStorage.auth.profile_detail.following_user_ids = response.data.following_user_ids;
+        // });
     };
 
     Leaderboard.unfollow = function (data) {

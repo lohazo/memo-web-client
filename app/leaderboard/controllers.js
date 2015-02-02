@@ -99,7 +99,7 @@
       };
       Leaderboard.friends(reqData)
         .then(function (response) {
-          $scope.friends = response.data;
+          $scope.friends = response.data.friends;
         });
     };
   }
