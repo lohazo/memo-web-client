@@ -65,7 +65,7 @@
     Course.listUserCourses = function () {
       return CourseServices.listUserCourses()
         .then(function (response) {
-          Course.userCourses = $localStorage.auth.user.list_courses || response.data.users;
+          Course.userCourses = response.data;
         });
     };
 
