@@ -220,8 +220,7 @@
     .constant('API_PHP', 'http://api.memo.edu.vn/api/v1.7')
     .constant('API', 'http://staging.memo.edu.vn/v2/api')
     .constant('angularMomentConfig', {
-      preprocess: 'unix',
-      timezone: 'Asia/Ho_Chi_Minh'
+      preprocess: 'unix'
     })
     .factory('HttpInterceptor', ['$rootScope', '$q', '$location', '$window', '$localStorage',
       HttpInterceptor

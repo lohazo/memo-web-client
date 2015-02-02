@@ -13,8 +13,8 @@
         </div>
         <div class="large-8 columns nickname">{{friend.username}}</div>
         <div class="large-5 columns buttons">
-          <a ng-if="!friend.is_following"class="large-16 large secondary memo-button follow" ng-click="follow(friend.user_id)">Thêm</a>
-          <a ng-if="friend.is_following" class="large-16 large memo-button" ng-click="unfollow(friend.user_id)">Bạn bè</a>
+          <a ng-if="!friend.is_following"class="large-16 large secondary memo-button follow" ng-click="follow(friend._id)">Thêm</a>
+          <a ng-if="friend.is_following" class="large-16 large memo-button" ng-click="unfollow(friend._id)">Bạn bè</a>
         </div>
       </div>
     </div>
