@@ -6,6 +6,9 @@
     ctrl.a = "1";
     ctrl.type = 'translate';
     $scope.a = ctrl.a;
+    $scope.question = {
+      type: 'translate'
+    };
   }
 
   function WelcomeQuestionTranslateCtrl($scope) {

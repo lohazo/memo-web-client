@@ -52,6 +52,9 @@
             &.continue {
               background-color: $success-color;
               margin: 0 5px;
+              &:hover {
+                background-color: scale-color($success-color, $lightness: -20%);
+              }
             }
           }
         }

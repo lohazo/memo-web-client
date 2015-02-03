@@ -30,6 +30,9 @@
     width: 100%;
     margin-top: 5px;
     margin-bottom: 5px;
+    span.box {
+      padding: 1px 2px 2px 3px;
+    }
   }
   input[type=checkbox] {
     display: none;
@@ -37,7 +40,7 @@
       span.box {
         background: $white;
         color: $primary-color;
-        padding: 1px 2px 2px 2px;
+        padding: 1px 2px 2px 3px;
       }
     }
     &:checked + label:after {
@@ -47,6 +50,10 @@
   textarea {
     resize: none;
     font-size: 15px;
+    width: 360px;
+    display: inline-block;
+    min-height: 80px;
+    margin-top: -1px;
   }
   span.box {
     background: $white;

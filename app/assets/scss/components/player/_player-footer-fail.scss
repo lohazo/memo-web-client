@@ -4,17 +4,28 @@
       &.player-footer {
         &.fail {
           background-color: $warning-bg-color;
-          min-height: 140px;
-          margin-top: -60px;
+          min-height: 180px;
+          margin-top: -80px;
           .grade {
             color: $warning-font-color;
             h3 {
               color: $warning-font-color;
+              .lighter {
+                display: block;
+                font-size: 1rem;
+                font-weight: 100;
+                margin: 15px 0 30px 0;
+              }
             }
             .button {
               background-color: $warning-bg-color;
               border: 2px solid $white;
               color: $warning-font-color;
+              &:hover {
+                background-color: scale-color($warning-bg-color, $lightness: -20%);
+                border: 2px solid scale-color($warning-bg-color, $lightness: -20%);
+                color: $white;
+              }
             }
             .clearfix {
               position: relative;

@@ -1,13 +1,25 @@
 <div class="buttons">
   <div class="left">
     <div class="grade">
-      <span class="left icon-checkmark badge-big"></span>
-      <h3>Chính xác</h3>
+      <span class="left icon-close badge-big"></span>
+      <h3>Chính xác <span class="lighter">Xin chào, tên tôi là Memo.</span></h3>
       <div class="clearfix">
-        <a title class="radius button report">Báo lỗi</a>
-        <span class="welcome-tooltip">
-          <span class="tooltip-peg"></span>
-          <span class="tooltip tip-right fade in">Lựa chọn báo lỗi và vui lòng góp ý cho Memo khi cảm thấy câu trả lời của bạn là đúng. Những góp ý của bạn sẽ giúp nội dung của Memo hoàn thiện hơn.</span>
+        <a title class="radius button report" dropdown-toggle="#report-dropdown">Báo lỗi</a>
+        <ul id="report-dropdown" class="f-dropdown" show-on-click="true">
+          <li><input type="checkbox" id="1"><label for="1"><span class="box icon-checkmark"></span>Tiếng Anh không được tự nhiên hoặc có lỗi</label></li>
+          <li><input type="checkbox" id="2"><label for="2"><span class="box icon-checkmark"></span>Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi</label></li>
+          <li><input type="checkbox" id="3"><label for="3"><span class="box icon-checkmark"></span>Âm thanh không chính xác</label></li>
+          <li><input type="checkbox" id="4"><label for="4"><span class="box icon-checkmark"></span><textarea name=""></textarea></label></li>
+          <li class="row unhoverable">
+            <div class="right">
+              <a class="radius button close">Hủy</a>
+              <a class="radius button send">Gửi</a>
+            </div>
+          </li>
+        </ul>
+        <span class="welcome-tooltip fade in">
+        <span class="tooltip-peg"></span>
+        <span class="tooltip tip-right">Lựa chọn báo lỗi và vui lòng góp ý cho Memo khi cảm thấy câu trả lời của bạn là đúng. Những góp ý của bạn sẽ giúp nội dung của Memo hoàn thiện hơn.</span>
         </span>
       </div>
     </div>

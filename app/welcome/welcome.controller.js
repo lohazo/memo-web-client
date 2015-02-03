@@ -2,7 +2,9 @@
   'use strict';
 
   function TutorialPlayerCtrl($scope) {
-
+    $scope.question = {
+      type: 'translate'
+    };
   }
 
   function PlayerCarouselCtrl($scope, $location, AppSetting, MemoTracker) {
