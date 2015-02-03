@@ -25,6 +25,16 @@
           margin: 0 -10px;
           width: 100%;
           min-height: 120px;
+          .speaker {
+            background: url("assets/img/lesson-speaker.png") no-repeat;
+            background-size: cover;
+            height: 40px;
+            width: 40px;
+            cursor: pointer;
+            display: inline-block;
+            margin-right: 5px;
+            vertical-align: middle;
+          }
           .translate-source {
             .token {
               margin-right: 5px;
