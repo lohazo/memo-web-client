@@ -30,6 +30,7 @@
       scope: {
         text: '@quitLinkText'
       },
+      replace: true,
       controller: 'WelcomeQuitLinkCtrl',
       link: function ($scope, $element, $attr) {
         $element.bind('click', function () {

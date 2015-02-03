@@ -19,7 +19,7 @@
   }
 
   angular.module('welcome', ['app.services', 'welcome.services', 'welcome.quitLink',
-    'welcome.questionScreen'
+    'welcome.questionScreen', 'welcome.claimBonusScreen'
   ]).config([
     '$routeProvider',
     WelcomeConfig
