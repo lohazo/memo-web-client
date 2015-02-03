@@ -18,7 +18,9 @@
 
   }
 
-  angular.module('welcome', ['app.services', 'welcome.quitLink', 'welcome.services']).config([
+  angular.module('welcome', ['app.services', 'welcome.services', 'welcome.quitLink',
+    'welcome.questionScreen'
+  ]).config([
     '$routeProvider',
     WelcomeConfig
   ]);
