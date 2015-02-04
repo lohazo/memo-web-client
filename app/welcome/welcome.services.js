@@ -57,12 +57,51 @@
 
   function Welcome(WelcomeServices) {
     var Services = {};
+    var Settings = {
+      header: {
+        hide: false
+        right: {
+          quitLink: {
+            hide: false,
+            text: ''
+          },
+          memoCoin: {
+            hide: true,
+            text: ''
+          }
+        }
+      },
+      footer: {
+        hide: false,
+        hideTooltips: false,
+        leftButtons: {
+          hide: false,
+          reportButton: {
+            hide: false
+          },
+          forumButton: {
+            hide: false
+          }
+        },
+        rightButtons: {
+          hide: false,
+          continueButton: {
+            hide: false,
+            disable: false,
+            text: ''
+          }
+        }
+      },
+      disableDictionary: false
+    }
 
     function init() {
       // currentStep = ant's position
       Services.currentStep = 0;
       Services.answeredSteps = 0;
       Services.exam = {};
+      // init base Setting
+      Services.settings = angular.copy(Settings);
     }
 
     Services.start = function () {
