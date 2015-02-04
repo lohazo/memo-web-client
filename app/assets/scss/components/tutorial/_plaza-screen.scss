@@ -59,6 +59,8 @@
 .claim-tshirt-modal {
   width: 540px;
   min-height: 370px;
+  border: none;
+  outline: none;
   .claim-tshirt-modal-inner {
     text-align: center;
     h3.title {
@@ -74,6 +76,26 @@
       .city {
         color: $primary-color;
       }
+    }
+  }
+}
+
+.native-scholar-modal {
+  width: 540px;
+  min-height: 370px;
+  border: none;
+  outline: none;
+  top: 50px !important;
+  padding: 20px;
+  position: fixed;
+  .native-scholar-modal-inner {
+    text-align: center;
+    h3.title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .native-scholar-guide {
+      text-align: left;
     }
   }
 }
