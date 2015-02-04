@@ -1,0 +1,10 @@
+<div class="distinct progress left" >
+  <span class="ant jump-{{playerHeader.currentStep}}"></span>
+  <span class="done meter" ng-repeat="i in playerHeader.getNumber(playerHeader.answeredSteps) track by $index"></span>
+  <span class="nothing meter" ng-repeat="j in playerHeader.getNumber(4 - playerHeader.answeredSteps) track by $index"></span>
+</div>
+<div class="player-header-right">
+  <welcome-quit-link quit-link-text="{{playerHeader.settings.right.quitLink.text}}" quit-link-hide="{{playerHeader.settings.right.quitLink.hide}}" skip="playerHeader.skip()">
+  </welcome-quit-link>
+  <welcome-memo-coin memo-coin="5" hide="{{playerHeader.settings.right.memoCoin.hide}}"></welcome-memo-coin>
+</div>

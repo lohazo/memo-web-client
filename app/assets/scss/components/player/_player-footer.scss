@@ -56,6 +56,13 @@
                 background-color: scale-color($success-color, $lightness: -20%);
               }
             }
+            &.disable {
+              background-color: $aluminum !important;
+              cursor: default;
+              &:hover {
+                background-color: $aluminum !important;
+              }
+            }
           }
         }
       }

@@ -8,6 +8,7 @@
   function WelcomeMemoCoinCtrl($scope) {
     var ctrl = this;
     ctrl.coin = $scope.memoCoin;
+    ctrl.hide = ($scope.hide === 'true');
   }
 
   angular.module('welcome.plaza', []);
@@ -26,13 +27,15 @@
       return {
         restrict: 'EA',
         scope: {
-          memoCoin: "@"
+          memoCoin: "@",
+          hide: "@"
         },
         replace: true,
         controller: 'WelcomeMemoCoinCtrl',
         controllerAs: 'welcomeMemoCoin',
-        template: ['<span>', 'Bạn đang có {{welcomeMemoCoin.coin}} MemoCoin', '</span>'].join(
-          '')
+        template: ['<span ng-class="{\'hide\': welcomeMemoCoin.hide}">',
+          'Bạn đang có {{welcomeMemoCoin.coin}} MemoCoin', '</span>'
+        ].join('')
       };
     })
 }(window.angular));

@@ -18,12 +18,21 @@
   function WelcomeCtrl($scope, Welcome) {
     var ctrl = this;
     ctrl.player = Welcome;
-
-    console.log(ctrl.player.exam);
+    ctrl.click = function () {
+      if (ctrl.player.currentStep > 2) {
+        if (ctrl.player.currentQuestion.result === -1) {
+          ctrl.player.answer();
+        } else {
+          ctrl.player.nextStep();
+        }
+      } else {
+        ctrl.player.nextStep();
+      }
+    };
   }
 
-  angular.module('welcome', ['app.services', 'welcome.services', 'welcome.quitLink',
-    'welcome.questionScreen', 'welcome.claimBonusScreen', 'welcome.plaza',
+  angular.module('welcome', ['app.services', 'welcome.services', 'welcome.player',
+    'welcome.quitLink', 'welcome.questionScreen', 'welcome.claimBonusScreen', 'welcome.plaza',
     'welcome.finishScreen'
   ]).config([
     '$routeProvider',

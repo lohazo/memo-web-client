@@ -15,13 +15,12 @@
     };
 
     /*
-     * data = {current_step, next_step_token}
+     * data = {_id: ,current_step, next_step_token}
      */
     Services.nextStep = function (data) {
-      var userId = $localStorage.auth.user._id;
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      return $http.post(API + '/tutorial/' + userId + '/next_step', data);
+      return $http.post(API + '/tutorial/' + data._id + '/next_step', data);
     };
 
     /*
@@ -35,13 +34,12 @@
     };
 
     /*
-     * data = {current_step}
+     * data = {_id, current_step}
      */
     Services.skip = function (data) {
-      var userId = $localStorage.auth.user._id;
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      return $http.post(API + '/tutorial/' + userId + '/skip', data);
+      return $http.post(API + '/tutorial/' + data._id + '/skip', data);
     };
 
     Services.finish = function () {
@@ -56,14 +54,20 @@
   }
 
   function Welcome(WelcomeServices) {
-    var Services = {};
+    var Services = {
+      currentScreen: '',
+      currentQuestion: {}
+    };
+    var Screens = ['', 'introScreen', 'dictionaryHintScreen', 'questionTranslateScreen',
+      'claimBonusScreen', 'plazaScreen', 'finishScreen'
+    ];
     var Settings = {
       header: {
-        hide: false
+        hide: false,
         right: {
           quitLink: {
             hide: false,
-            text: ''
+            text: 'Bỏ qua bài hướng dẫn'
           },
           memoCoin: {
             hide: true,
@@ -97,11 +101,20 @@
 
     function init() {
       // currentStep = ant's position
+      Services.currentScreen = '';
       Services.currentStep = 0;
       Services.answeredSteps = 0;
       Services.exam = {};
+      Services.currentQuestion = {
+        result: -1 // -1: answering, 0: false, 1: true
+      };
       // init base Setting
       Services.settings = angular.copy(Settings);
+    }
+
+    function updateScreen(currentStep) {
+      Services.currentScreen = '';
+      Services.currentScreen = Screens[currentStep];
     }
 
     Services.start = function () {
@@ -114,16 +127,19 @@
 
     Services.answer = function () {
       Services.answeredSteps += 1;
+      Services.currentQuestion.result = 1; // true
     };
 
     Services.nextStep = function () {
       return WelcomeServices.nextStep({
+        _id: Services.exam._id,
         current_step: Services.currentStep,
         next_step_token: Services.exam.next_step_token
       }).then(function (response) {
         Services.currentStep += 1;
-        Services.next_step_token = response.data.next_step_token;
-      })
+        Services.exam.next_step_token = response.data.next_step_token;
+        Services.currentQuestion.result = -1;
+      });
     };
 
     Services.claimBonus = function () {
@@ -134,6 +150,7 @@
 
     Services.skip = function () {
       return WelcomeServices.skip({
+        _id: Services.exam._id,
         current_step: Services.currentStep
       }).then(function (response) {
         init();

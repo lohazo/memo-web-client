@@ -1,12 +1,6 @@
 (function (angular) {
   'use strict';
 
-  function TutorialPlayerCtrl($scope) {
-    $scope.question = {
-      type: 'translate'
-    };
-  }
-
   function PlayerCarouselCtrl($scope, $location, AppSetting, MemoTracker) {
     // var trackingText = 'take a tour v{0} slide {1}';
     // $scope.slideIndex = 0;
@@ -63,7 +57,6 @@
   }
 
   angular.module('welcome')
-    .controller('TutorialPlayerCtrl', ['$scope', TutorialPlayerCtrl])
     .controller('PlayerCarouselCtrl', ['$scope', '$location', 'AppSetting', 'MemoTracking',
       PlayerCarouselCtrl
     ]);
