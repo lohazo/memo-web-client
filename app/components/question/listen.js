@@ -21,7 +21,7 @@ angular.module('question.listen', [])
           slowFile.play();
         }
       };
-
+      
       if ($scope.$parent.shouldPlaySlow) {
         $scope.speaker.slowPlay();
       } else {
@@ -38,13 +38,21 @@ angular.module('question.listen', [])
       },
       controller: 'QuestionListenCtrl',
       link: function($scope, $element) {
+        var myTextField = document.getElementById('myText');
+        
         $element[0].querySelector('input[type="text"]').focus();
         $element.on('keydown', function(e) {
+          if (e.keyCode === 8) {
+            if (myTextField.value != "") {
+            } else {
+              $scope.speaker.play();
+            };
           if (e.keyCode === 13) {
             if ($scope.answer && $scope.answer.length > 0) {
               e.preventDefault();
               $element[0].querySelector('input[type="text"]').setAttribute('readonly', 'readonly');
-            }
+            } 
+          }
           }
         });
       },
