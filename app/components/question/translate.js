@@ -72,6 +72,15 @@
         answer: '='
       },
       link: function ($scope, $element) {
+        var myTextField = document.getElementById('myText');
+        var normalFile = ngAudio.load($scope.translate.normal_question_audio);
+        
+        $scope.speaker = {
+          play: function () {
+            normalFile.play();
+          }
+        };
+
         $element.find('textarea').eq(0)[0].focus();
         $element.on('keydown', function (e) {
           if (e.keyCode === 13) {
@@ -80,6 +89,12 @@
               $element.find('textarea').eq(0).attr('readonly', 'readonly');
             }
           }
+          if (e.keyCode === 8) {
+            if (myTextField.value != "") {
+            } else {
+              $scope.speaker.play();
+            }
+          };
         });
 
         // FIXME: Good enough code
