@@ -22,11 +22,15 @@ angular.module('question.listen', [])
         }
       };
       
-      if ($scope.$parent.shouldPlaySlow) {
+      $scope.$watch('answer', function() {
+        if ($scope.answer.length == 0) {
+          if ($scope.$parent.shouldPlaySlow) {
         $scope.speaker.slowPlay();
       } else {
         $scope.speaker.play();
       }
+        }  
+      })
     }
   ])
   .directive('questionListen', function() {
@@ -42,17 +46,11 @@ angular.module('question.listen', [])
         
         $element[0].querySelector('input[type="text"]').focus();
         $element.on('keydown', function(e) {
-          if (e.key == "backspace" || e.keyCode === 8) {
-            if (myTextField.value != "") {
-            } else {
-              $scope.speaker.play();
-            };
           if (e.keyCode === 13) {
             if ($scope.answer && $scope.answer.length > 0) {
               e.preventDefault();
               $element[0].querySelector('input[type="text"]').setAttribute('readonly', 'readonly');
             } 
-          }
           }
         });
       },
