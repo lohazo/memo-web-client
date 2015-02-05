@@ -42,7 +42,7 @@ angular.module('question.listen', [])
         
         $element[0].querySelector('input[type="text"]').focus();
         $element.on('keydown', function(e) {
-          if (e.keyCode === 8) {
+          if (e.key == "backspace" || e.keyCode === 8) {
             if (myTextField.value != "") {
             } else {
               $scope.speaker.play();
