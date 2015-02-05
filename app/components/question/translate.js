@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function QuestionTranslateCtrl($scope, ngAudio, Words) {
+  function QuestionTranslateCtrl($scope, ngAudio, Words, $element) {
 
     function tokenize(inputString) {
       var tokens = inputString.split(' ');
@@ -61,6 +61,23 @@
         }
       };
       $scope.speaker.play();
+
+      $element.find('textarea').eq(0)[0].focus();
+        $element.on('keydown', function (e) {
+          var myTextField = document.getElementById('myText');
+          if (e.keyCode === 13) {
+            if ($scope.answer && $scope.answer.length > 0) {
+              e.preventDefault();
+              $element.find('textarea').eq(0).attr('readonly', 'readonly');
+            }
+          }
+          if (e.keyCode === 8) {
+            if (myTextField.value != "") {
+            } else {
+              $scope.speaker.play();
+            }
+          };
+        });
     }
   }
 
@@ -72,14 +89,6 @@
         answer: '='
       },
       link: function ($scope, $element) {
-        var myTextField = document.getElementById('myText');
-        var normalFile = ngAudio.load($scope.translate.normal_question_audio);
-        
-        $scope.speaker = {
-          play: function () {
-            normalFile.play();
-          }
-        };
 
         $element.find('textarea').eq(0)[0].focus();
         $element.on('keydown', function (e) {
@@ -126,7 +135,7 @@
 
   angular.module('question.translate', []);
   angular.module('question.translate')
-    .controller('QuestionTranslateCtrl', ['$scope', 'ngAudio', 'Words', QuestionTranslateCtrl])
+    .controller('QuestionTranslateCtrl', ['$scope', 'ngAudio', 'Words', '$element', QuestionTranslateCtrl])
     .directive('questionTranslate', QuestionTranslateDirective);
 
 }(window.angular));
