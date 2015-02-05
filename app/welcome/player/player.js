@@ -39,6 +39,10 @@
     ctrl.settings = $scope.settings;
     ctrl.question = $scope.question;
     ctrl.click = $scope.click;
+    ctrl.reportDropdownClick = function () {
+      ctrl.settings.rightButtons.continueButton.disable = false;
+      ctrl.settings.leftButtons.hideTooltips = true;
+    };
   }
 
   angular.module('welcome.player', []);
@@ -60,13 +64,13 @@
           $element.bind('keydown', function (e) {
             if (e.keyCode === 13) {
               // 'Enter'
-              $scope.control.next();
+              $scope.click();
               $scope.$apply();
             } else if (e.keyCode === 8) {
               // 'Backspace'
-              e.preventDefault();
-              e.stopPropagation();
-              return false;
+              // e.preventDefault();
+              // e.stopPropagation();
+              // return false;
             }
           });
         },
@@ -82,7 +86,6 @@
           answeredSteps: "=",
           skip: "&"
         },
-        require: "^WelcomePlayerCtrl",
         controller: 'WelcomePlayerHeaderCtrl',
         controllerAs: 'playerHeader',
         templateUrl: 'welcome/player/_player-header.html',

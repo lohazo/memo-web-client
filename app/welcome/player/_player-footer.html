@@ -2,9 +2,10 @@
   <div class="left" ng-if="playerFooter.question.result != -1">
     <div class="grade">
       <span class="left icon-close badge-big"></span>
-      <h3>Chính xác<span class="lighter" ng-if="playerFooter.question.result == 0">Xin chào, tên tôi là Memo.</span></h3>
-      <div class="clearfix" ng-if="playerFooter.settings.leftButtons.hide">
-        <a title class="radius button report" dropdown-toggle="#report-dropdown">Báo lỗi</a>
+      <h3 ng-if="playerFooter.question.result == 1">Chính xác<span class="lighter" ng-if="playerFooter.question.result === 1" ng-bind-html="playerFooter.question.answer"></span></h3>
+      <h3 ng-if="playerFooter.question.result == 0">Câu trả lời đúng:<span class="lighter" ng-if="playerFooter.question.result == 0">{{playerFooter.question.correctAnswer}}</span></h3>
+      <div class="clearfix" ng-if="!playerFooter.settings.leftButtons.hide">
+        <a title class="radius button report" dropdown-toggle="#report-dropdown" ng-click="playerFooter.reportDropdownClick()">Báo lỗi</a>
         <ul id="report-dropdown" class="f-dropdown" show-on-click="true">
           <li><input type="checkbox" id="1"><label for="1"><span class="box icon-checkmark"></span>Tiếng Anh không được tự nhiên hoặc có lỗi</label></li>
           <li><input type="checkbox" id="2"><label for="2"><span class="box icon-checkmark"></span>Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi</label></li>
@@ -17,7 +18,7 @@
             </div>
           </li>
         </ul>
-        <span class="welcome-tooltip fade in">
+        <span class="welcome-tooltip fade in" ng-if="!playerFooter.settings.leftButtons.hideTooltips">
           <span class="tooltip-peg"></span>
           <span class="tooltip tip-right">Lựa chọn báo lỗi và vui lòng góp ý cho Memo khi cảm thấy câu trả lời của bạn là đúng. Những góp ý của bạn sẽ giúp nội dung của Memo hoàn thiện hơn.</span>
           </span>

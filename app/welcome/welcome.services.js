@@ -54,7 +54,7 @@
     return Services;
   }
 
-  function Welcome(WelcomeServices) {
+  function Welcome(WelcomeServices, Question) {
     var Services = {
       currentScreen: '',
       currentQuestion: {},
@@ -133,12 +133,22 @@
     };
 
     Services.answer = function () {
+      var result;
       Services.answeredSteps += 1;
       if (Services.currentStep === 1) {
         Services.currentQuestion.result = 1; // true
+        Services.settings.footer.rightButtons.continueButton.disable = false;
+      } else if (Services.currentStep === 2) {
+        result = Question.check(Services.exam.translate_tutorial, Services.currentData.answer
+          .text);
+
+        Services.currentQuestion.result = result.result ? 1 : 0;
+        Services.currentQuestion.correctAnswer = result.correctAnswer;
+        Services.currentQuestion.answerOptions = result.answerOptions;
+
+        Services.settings.footer.rightButtons.continueButton.text = 'Tiếp tục';
+        Services.settings.footer.rightButtons.continueButton.disable = true;
       }
-      Services.settings.footer.rightButtons.continueButton.text = 'Tiếp tục';
-      Services.settings.footer.rightButtons.continueButton.disable = false;
     };
 
     Services.nextStep = function () {
@@ -154,9 +164,11 @@
         if (Services.currentStep === 1) {
           Services.settings.footer.rightButtons.continueButton.text = 'Tiếp tục';
           Services.settings.footer.rightButtons.continueButton.disable = true;
+          Services.settings.footer.leftButtons.hide = true;
         } else if (Services.currentStep === 2) {
-          Services.settings.footer.rightButtons.continueButton.text = 'Tiếp tục';
+          Services.settings.footer.rightButtons.continueButton.text = 'Kiểm tra';
           Services.settings.footer.rightButtons.continueButton.disable = true;
+          Services.settings.footer.leftButtons.hide = false;
         }
       });
     };
@@ -188,5 +200,5 @@
   angular.module('welcome.services', []);
   angular.module('welcome.services')
     .factory('WelcomeServices', ['$http', '$localStorage', 'API', WelcomeServices])
-    .factory('Welcome', ['WelcomeServices', Welcome]);
+    .factory('Welcome', ['WelcomeServices', 'Question', Welcome]);
 }(window.angular));
