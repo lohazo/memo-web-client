@@ -7,6 +7,7 @@
       height: 340px;
       position: relative;
       .translate-challenge {
+        position: relative;
         .icon {
           font-size: 32px;
         }
@@ -22,7 +23,7 @@
           height: 236px;
           background: url("assets/img/tutorial/translation-hint-ant.png") no-repeat;
           background-size: contain;
-          bottom: -52px;
+          bottom: 8px;
           left: 190px;
         }
         .translation-hint-textbox {

@@ -20,14 +20,15 @@
     Services.nextStep = function (data) {
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      return $http.post(API + '/tutorial/' + data._id + '/next_step', data);
+      return $http.post(API + '/tutorial/' + data._id + '/next_step', data, {
+        ignoreLoadingBar: true
+      });
     };
 
     /*
-     * data = {current_step}
+     * data = {_id, current_step}
      */
     Services.claimBonus = function (data) {
-      var userId = $localStorage.auth.user._id;
       data.auth_token = $localStorage.auth.user.auth_token;
 
       return $http.post(API + '/tutorial/' + userId + '/claim_bonus', data);
@@ -56,7 +57,13 @@
   function Welcome(WelcomeServices) {
     var Services = {
       currentScreen: '',
-      currentQuestion: {}
+      currentQuestion: {},
+      currentData: {
+        step: 0,
+        question: {},
+        answer: {},
+        result: {}
+      }
     };
     var Screens = ['', 'introScreen', 'dictionaryHintScreen', 'questionTranslateScreen',
       'claimBonusScreen', 'plazaScreen', 'finishScreen'
@@ -121,37 +128,50 @@
       init();
       return WelcomeServices.start().then(function (response) {
         Services.exam = response.data;
-        Services.currentStep += 1;
+        Services.answeredSteps += 1;
       });
     };
 
     Services.answer = function () {
       Services.answeredSteps += 1;
-      Services.currentQuestion.result = 1; // true
+      if (Services.currentStep === 1) {
+        Services.currentQuestion.result = 1; // true
+      }
+      Services.settings.footer.rightButtons.continueButton.text = 'Tiếp tục';
+      Services.settings.footer.rightButtons.continueButton.disable = false;
     };
 
     Services.nextStep = function () {
       return WelcomeServices.nextStep({
         _id: Services.exam._id,
-        current_step: Services.currentStep,
+        current_step: Services.currentStep + 1,
         next_step_token: Services.exam.next_step_token
       }).then(function (response) {
         Services.currentStep += 1;
+        console.log(Services.currentStep);
         Services.exam.next_step_token = response.data.next_step_token;
         Services.currentQuestion.result = -1;
+        if (Services.currentStep === 1) {
+          Services.settings.footer.rightButtons.continueButton.text = 'Tiếp tục';
+          Services.settings.footer.rightButtons.continueButton.disable = true;
+        } else if (Services.currentStep === 2) {
+          Services.settings.footer.rightButtons.continueButton.text = 'Tiếp tục';
+          Services.settings.footer.rightButtons.continueButton.disable = true;
+        }
       });
     };
 
     Services.claimBonus = function () {
       return WelcomeServices.claimBonus({
-        current_step: Services.currentStep
+        _id: Services.exam._id,
+        current_step: Services.currentStep + 1
       });
     };
 
     Services.skip = function () {
       return WelcomeServices.skip({
         _id: Services.exam._id,
-        current_step: Services.currentStep
+        current_step: Services.currentStep + 1
       }).then(function (response) {
         init();
       });

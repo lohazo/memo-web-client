@@ -4,12 +4,23 @@
   function WelcomePlayerCtrl($scope, $location) {
     var ctrl = this;
     ctrl.data = $scope.welcomePlayer;
-    ctrl.click = $scope.click;
+    ctrl.click = function () {
+      if (ctrl.data.currentStep > 1) {
+        if (ctrl.data.currentQuestion.result === -1) {
+          ctrl.data.answer();
+        } else {
+          ctrl.data.nextStep();
+        }
+      } else {
+        ctrl.data.nextStep();
+      }
+    };
+
     ctrl.skip = function () {
       ctrl.data.skip().then(function () {
         $location.path('/');
       });
-    }
+    };
   }
 
   function WelcomePlayerHeaderCtrl($scope) {
@@ -67,10 +78,11 @@
         strict: 'EA',
         scope: {
           settings: "=",
-          currentStep: "@",
-          answeredSteps: "@",
+          currentStep: "=",
+          answeredSteps: "=",
           skip: "&"
         },
+        require: "^WelcomePlayerCtrl",
         controller: 'WelcomePlayerHeaderCtrl',
         controllerAs: 'playerHeader',
         templateUrl: 'welcome/player/_player-header.html',

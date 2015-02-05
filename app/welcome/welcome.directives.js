@@ -11,13 +11,6 @@
         },
         templateUrl: 'welcome/_intro-screen.html'
       };
-    })
-    .directive('dictionaryHintScreen', function () {
-      return {
-        strict: 'EA',
-        scope: {},
-        templateUrl: 'welcome/_dictionary-hint-screen.html'
-      };
     });
 
   // angular.module('welcome')

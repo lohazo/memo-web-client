@@ -2,8 +2,8 @@
   <div class="left" ng-if="playerFooter.question.result != -1">
     <div class="grade">
       <span class="left icon-close badge-big"></span>
-      <h3>Chính xác <span class="lighter">Xin chào, tên tôi là Memo.</span></h3>
-      <div class="clearfix">
+      <h3>Chính xác<span class="lighter" ng-if="playerFooter.question.result == 0">Xin chào, tên tôi là Memo.</span></h3>
+      <div class="clearfix" ng-if="playerFooter.settings.leftButtons.hide">
         <a title class="radius button report" dropdown-toggle="#report-dropdown">Báo lỗi</a>
         <ul id="report-dropdown" class="f-dropdown" show-on-click="true">
           <li><input type="checkbox" id="1"><label for="1"><span class="box icon-checkmark"></span>Tiếng Anh không được tự nhiên hoặc có lỗi</label></li>
@@ -25,9 +25,9 @@
     </div>
   </div>
   <div class="right">
-    <a title="" class="radius button continue"
-      ng-class="{'disable': playerFooter.settings.rightButtons.continueButton.disable,
-                 'hide': playerFooter.settings.rightButtons.continueButton.hide}"
+    <a ng-if="playerFooter.settings.rightButtons.continueButton.disable" title="" class="radius button continue disable" ng-class="{'hide': playerFooter.settings.rightButtons.continueButton.hide}">{{playerFooter.settings.rightButtons.continueButton.text}}</a>
+    <a ng-if="!playerFooter.settings.rightButtons.continueButton.disable" title="" class="radius button continue"
+      ng-class="{'hide': playerFooter.settings.rightButtons.continueButton.hide}"
       ng-click="playerFooter.click()">{{playerFooter.settings.rightButtons.continueButton.text}}</a>
   </div>
 </div>

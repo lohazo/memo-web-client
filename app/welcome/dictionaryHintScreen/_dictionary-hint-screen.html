@@ -1,0 +1,21 @@
+<div class="dictionary-hint-screen-inner">
+  <h3 class="title">Bấm vào hoặc đưa trỏ chuột tới từ vựng này để xem nghĩa</h3>
+  <div class="translate-challenge">
+    <span class="icon icon-arrow-right"></span>
+    <span class="text-to-translate hint">
+    <bdi>
+    <span class="text" ng-repeat="token in hintScreen.translate_tokens track by $index">
+    <span class="token" ng-if="!(token.isObjective || token.isSpecialObjective)" ng-class='{"punctuation": token.isPunctuation}'>{{token.text}}</span>
+    <span class="token" ng-if="token.isObjective || token.isSpecialObjective" dropdown-toggle="#token-dropdown-{{$index}}" ng-mouseover="showDefinitionDropdown(event=$event)" ng-mouseout="closeDefinitionDropdown(event=$event)" data-sound="{{token.sound}}" data-word-id="{{token._id}}" ng-class='{"objective": token.isObjective, "special-objective": token.isSpecialObjective}'>{{token.text}}</span>
+    <ul id="token-dropdown-{{$index}}" class="f-dropdown dropdown-definition">
+      <li ng-repeat="def in token.definitions" class="definition">{{def}}</li>
+    </ul>
+    </span>
+    </bdi>
+    </span>
+  </div>
+  <div class="translation-hint" ng-show="currentData.result == 1">
+    <div class="ant"></div>
+    <div class="translation-hint-textbox">Bạn luôn có thể đưa trỏ chuột vào từ vựng có những chấm xám bên dưới để xem nghĩa</div>
+  </div>
+</div>

@@ -18,17 +18,6 @@
   function WelcomeCtrl($scope, Welcome) {
     var ctrl = this;
     ctrl.player = Welcome;
-    ctrl.click = function () {
-      if (ctrl.player.currentStep > 2) {
-        if (ctrl.player.currentQuestion.result === -1) {
-          ctrl.player.answer();
-        } else {
-          ctrl.player.nextStep();
-        }
-      } else {
-        ctrl.player.nextStep();
-      }
-    };
   }
 
   angular.module('welcome', ['app.services', 'welcome.services', 'welcome.player',
