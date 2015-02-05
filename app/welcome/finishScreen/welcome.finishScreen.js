@@ -2,7 +2,8 @@
   'use strict';
 
   function FinishScreenCtrl($scope) {
-
+    var ctrl = this;
+    ctrl.finish = $scope.finish;
   }
 
   angular.module('welcome.finishScreen', [])
@@ -10,7 +11,9 @@
     .directive('welcomeFinishScreen', function () {
       return {
         restrict: 'EA',
-        scope: {},
+        scope: {
+          finish: "&"
+        },
         controller: 'FinishScreenCtrl',
         controllerAs: 'finishScreen',
         templateUrl: 'welcome/finishScreen/_finish-screen.html'

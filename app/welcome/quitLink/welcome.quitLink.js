@@ -3,7 +3,7 @@
 
   function WelcomeQuitLinkCtrl($scope, $modal) {
     var ctrl = this;
-    ctrl.hide = ($scope.hide === 'true');
+    ctrl.hide = $scope.hide;
     ctrl.open = function () {
       var modalInstance = $modal.open({
         templateUrl: 'welcome/quitLink/_quit-warning-modal.html',
@@ -36,7 +36,7 @@
       strict: 'EA',
       scope: {
         text: '@quitLinkText',
-        hide: '@quitLinkHide',
+        hide: '=quitLinkHide',
         skip: '&'
       },
       replace: true,
@@ -47,7 +47,7 @@
           $scope.open();
         });
       },
-      template: '<a title="" ng-class="{\'hide\': quitLink.hide}"><span ng-bind="text"></span></a>'
+      template: '<a title="" ng-class="{\'hide\': hide}"><span ng-bind="text"></span></a>'
     };
   }
 

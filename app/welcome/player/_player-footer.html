@@ -25,7 +25,7 @@
       </div>
     </div>
   </div>
-  <div class="right">
+  <div class="right" ng-if="!playerFooter.settings.rightButtons.hide">
     <a ng-if="playerFooter.settings.rightButtons.continueButton.disable" title="" class="radius button continue disable" ng-class="{'hide': playerFooter.settings.rightButtons.continueButton.hide}">{{playerFooter.settings.rightButtons.continueButton.text}}</a>
     <a ng-if="!playerFooter.settings.rightButtons.continueButton.disable" title="" class="radius button continue"
       ng-class="{'hide': playerFooter.settings.rightButtons.continueButton.hide}"

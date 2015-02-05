@@ -31,7 +31,7 @@
     Services.claimBonus = function (data) {
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      return $http.post(API + '/tutorial/' + userId + '/claim_bonus', data);
+      return $http.post(API + '/tutorial/' + data._id + '/claim_bonus', data);
     };
 
     /*
@@ -43,18 +43,19 @@
       return $http.post(API + '/tutorial/' + data._id + '/skip', data);
     };
 
-    Services.finish = function () {
-      var data = {
-        auth_token: $localStorage.auth.user.auth_token
-      };
+    /*
+     * data = {_id}
+     */
+    Services.finish = function (data) {
+      data.auth_token = $localStorage.auth.user.auth_token;
 
-      return $http.post(API + '/tutorial/' + userId + '/finish', data);
+      return $http.post(API + '/tutorial/' + data._id + '/finish', data);
     };
 
     return Services;
   }
 
-  function Welcome(WelcomeServices, Question) {
+  function Welcome(WelcomeServices, Question, $location) {
     var Services = {
       currentScreen: '',
       currentQuestion: {},
@@ -134,7 +135,11 @@
 
     Services.answer = function () {
       var result;
-      Services.answeredSteps += 1;
+
+      if (Services.answeredSteps <= Services.currentStep) {
+        Services.answeredSteps += 1;
+      }
+
       if (Services.currentStep === 1) {
         Services.currentQuestion.result = 1; // true
         Services.settings.footer.rightButtons.continueButton.disable = false;
@@ -158,7 +163,6 @@
         next_step_token: Services.exam.next_step_token
       }).then(function (response) {
         Services.currentStep += 1;
-        console.log(Services.currentStep);
         Services.exam.next_step_token = response.data.next_step_token;
         Services.currentQuestion.result = -1;
         if (Services.currentStep === 1) {
@@ -169,6 +173,11 @@
           Services.settings.footer.rightButtons.continueButton.text = 'Kiểm tra';
           Services.settings.footer.rightButtons.continueButton.disable = true;
           Services.settings.footer.leftButtons.hide = false;
+        } else if (Services.currentStep === 3) {
+          Services.settings.footer.hide = true;
+          Services.settings.header.right.quitLink.hide = true;
+        } else if (Services.currentStep === 4) {
+          Services.settings.footer.rightButtons.hide = true;
         }
       });
     };
@@ -177,6 +186,12 @@
       return WelcomeServices.claimBonus({
         _id: Services.exam._id,
         current_step: Services.currentStep + 1
+      }).then(function (response) {
+        Services.exam.next_step_token = response.data.next_step_token;
+        Services.currentData.claimedBonus = true;
+        Services.settings.footer.hide = false;
+        Services.settings.header.right.memoCoin.hide = false;
+        Services.answeredSteps += 1;
       });
     };
 
@@ -190,8 +205,12 @@
     };
 
     Services.finish = function () {
-      init();
-      return WelcomeServices.finish();
+      return WelcomeServices.finish({
+        _id: Services.exam._id
+      }).then(function (response) {
+        init();
+        $location.url('/');
+      });
     };
 
     return Services;
@@ -200,5 +219,5 @@
   angular.module('welcome.services', []);
   angular.module('welcome.services')
     .factory('WelcomeServices', ['$http', '$localStorage', 'API', WelcomeServices])
-    .factory('Welcome', ['WelcomeServices', 'Question', Welcome]);
+    .factory('Welcome', ['WelcomeServices', 'Question', '$location', Welcome]);
 }(window.angular));

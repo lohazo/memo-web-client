@@ -2,7 +2,8 @@
   'use strict';
 
   function ClaimBonusScreenCtrl($scope) {
-
+    var ctrl = this;
+    ctrl.claimBonus = $scope.claimBonus;
   }
 
   angular.module('welcome.claimBonusScreen', []);
@@ -11,7 +12,11 @@
     .directive('claimBonusScreen', function () {
       return {
         restrict: 'EA',
+        scope: {
+          claimBonus: '&'
+        },
         controller: 'ClaimBonusScreenCtrl',
+        controllerAs: 'claimBonusScreen',
         templateUrl: 'welcome/claimBonusScreen/_claim-bonus-screen.html'
       };
     });

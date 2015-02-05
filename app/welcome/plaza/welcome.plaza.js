@@ -1,19 +1,37 @@
 (function (angular) {
   'use strict';
 
-  function WelcomePlazaCtrl($scope) {
+  function WelcomePlazaCtrl($scope, Plaza) {
+    $scope.powerUpSectionFilter = function (item) {
+      return (["power-ups", "practice"].indexOf(item.section) >= 0);
+    };
 
+    $scope.specialSectionFilter = function (item) {
+      return (["special"].indexOf(item.section) >= 0);
+    };
+
+    Plaza.get().then(function (response) {
+      $scope.plaza = Plaza.data;
+    });
+
+    $scope.buy = function (itemId) {
+      Plaza.buy({
+        base_item_id: itemId,
+        quantity: 1
+      }).then(function (response) {
+        $scope.plaza = Plaza.data;
+      });
+    };
   }
 
   function WelcomeMemoCoinCtrl($scope) {
     var ctrl = this;
     ctrl.coin = $scope.memoCoin;
-    ctrl.hide = ($scope.hide === 'true');
   }
 
   angular.module('welcome.plaza', []);
   angular.module('welcome.plaza')
-    .controller('WelcomePlazaCtrl', ['$scope', WelcomePlazaCtrl])
+    .controller('WelcomePlazaCtrl', ['$scope', 'Plaza', WelcomePlazaCtrl])
     .directive('welcomePlaza', function () {
       return {
         restrict: 'EA',
@@ -28,14 +46,14 @@
         restrict: 'EA',
         scope: {
           memoCoin: "@",
-          hide: "@"
+          hide: "="
         },
         replace: true,
         controller: 'WelcomeMemoCoinCtrl',
         controllerAs: 'welcomeMemoCoin',
-        template: ['<span ng-class="{\'hide\': welcomeMemoCoin.hide}">',
+        template: ['<span ng-class="{\'hide\': hide}">',
           'Bạn đang có {{welcomeMemoCoin.coin}} MemoCoin', '</span>'
         ].join('')
       };
-    })
+    });
 }(window.angular));

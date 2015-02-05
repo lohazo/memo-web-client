@@ -1,21 +1,24 @@
 <div class="welcome-plaza-screen-inner">
   <div class="plaza-items">
     <h3 class="title">Vật phẩm trợ lực</h3>
-    <div class="plaza-item">
+    <div class="plaza-item" ng-repeat="item in plaza.items | filter:powerUpSectionFilter">
       <div class="plaza-item-image">
-        <img src="assets/img/health_potion.png" />
+        <img ng-src="{{item.icon_url}}" />
       </div>
       <div class="plaza-item-intro">
-        <span class="plaza-item-name">Bình hồi máu</span>
-        <p class="plaza-item-desc">Cho phép bạn có thêm một máu trong trường hợp bạn đã mất hết máu trong một bài học.</p>
+        <span class="plaza-item-name" ng-bind="item.name"></span>
+        <p class="plaza-item-desc" ng-bind="item.info"></p>
       </div>
       <div class="plaza-item-buttons">
-        <a title="" class="radius button expand">
-        <span class="price">1</span><span class="memo-coin-badge small"></span>
+        <a title="" class="radius button expand" ng-if="item.can_buy" ng-click="buy(item._id)">
+        <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+        </a>
+        <a title="" class="radius button expand disabled" ng-if="!item.can_buy" tooltip="{{item.message}}" tooltip-placement="top">
+        <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
         </a>
       </div>
     </div>
-    <div class="plaza-item">
+    <!-- <div class="plaza-item">
       <div class="plaza-item-image">
         <img src="assets/img/tutorial/lucky-star.png" />
       </div>
@@ -40,11 +43,28 @@
       <div class="plaza-item-buttons">
         <a title="" class="radius button expand disabled"><span class="price">10</span><span class="memo-coin-badge small"></span></a>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="plaza-items">
     <h3 class="title">Vật phẩm đặc biệt</h3>
-    <div class="plaza-item">
+    <div class="plaza-item" ng-repeat="item in plaza.items | filter:specialSectionFilter" ng-class="{'special': !item.is_unlocked}">
+      <div class="plaza-item-image">
+        <img ng-src="{{item.icon_url}}" />
+      </div>
+      <div class="plaza-item-intro">
+        <span class="plaza-item-name" ng-bind="item.name"></span>
+        <p class="plaza-item-desc">{{item.info}}<br><a ng-if="item._id == '54cf7d116d6169269b0f0000'" ng-controller="ClaimTshirtModalCtrl" ng-click="open()">Hướng dẫn mua và nhận vật phẩm</a><a ng-if="item._id == '54cf7d4f6d6169269b150000'" ng-controller="NativeScholarModalCtrl" ng-click="open()">Hướng dẫn mua và nhận vật phẩm</a></p>
+      </div>
+      <div class="plaza-item-buttons">
+        <a title="" class="radius button expand" ng-if="item.can_buy" ng-click="buy(item._id)">
+        <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+        </a>
+        <a title="" class="radius button expand disabled" ng-if="!item.can_buy" tooltip="{{item.message}}" tooltip-placement="top">
+        <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+        </a>
+      </div>
+    </div>
+    <!-- <div class="plaza-item">
       <div class="plaza-item-image">
         <img src="assets/img/tutorial/memo-tshirt.png" />
       </div>
@@ -68,6 +88,6 @@
       <div class="plaza-item-buttons">
         <a title="" class="radius button expand disabled"><span class="price">30</span><span class="memo-coin-badge small"></span></a>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

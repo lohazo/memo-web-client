@@ -99,7 +99,6 @@
               });
               $scope.answer();
             }, 1000);
-
           };
 
           $scope.closeDefinitionDropdown = function (e) {

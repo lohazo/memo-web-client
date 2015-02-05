@@ -5,7 +5,7 @@
     var ctrl = this;
     ctrl.data = $scope.welcomePlayer;
     ctrl.click = function () {
-      if (ctrl.data.currentStep > 1) {
+      if (ctrl.data.currentStep === 2) {
         if (ctrl.data.currentQuestion.result === -1) {
           ctrl.data.answer();
         } else {
