@@ -98,12 +98,6 @@
               $element.find('textarea').eq(0).attr('readonly', 'readonly');
             }
           }
-          if (e.keyCode === 8) {
-            if (myTextField.value != "") {
-            } else {
-              $scope.speaker.play();
-            }
-          };
         });
 
         // FIXME: Good enough code
