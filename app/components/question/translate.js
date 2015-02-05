@@ -71,13 +71,13 @@
               $element.find('textarea').eq(0).attr('readonly', 'readonly');
             }
           }
-          if ($scope.answer.length === 0 ) {
-            // if ($scope.answer.length = ) {
-              $scope.speaker.play();
-            // }
-          };
         });
-    }
+      $scope.$watch('answer', function() {
+        if ($scope.answer.length == 0) {
+          $scope.speaker.play();
+        }  
+      })
+    } 
   }
 
   function QuestionTranslateDirective($timeout, ngAudio, Words) {
