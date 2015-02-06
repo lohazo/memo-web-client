@@ -182,10 +182,6 @@
           Services.settings.header.right.quitLink.hide = true;
         } else if (Services.currentStep === 4) {
           Services.settings.footer.rightButtons.hide = true;
-        } else if (Services.currentStep < 1) {
-          Services.settings.footer.rightButtons.continueButton.text = 'ABC';
-          Services.settings.footer.rightButtons.continueButton.disable = true;
-          Services.settings.footer.leftButtons.hide = true;
         }
       });
     };
