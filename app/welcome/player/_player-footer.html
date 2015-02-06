@@ -1,7 +1,8 @@
 <div class="buttons">
   <div class="left" ng-if="playerFooter.question.result != -1">
     <div class="grade">
-      <span class="left icon-checkmark badge-big"></span>
+      <span ng-if="playerFooter.question.result == 1" class="left icon-checkmark badge-big"></span>
+      <span ng-if="playerFooter.question.result == 0" class="left icon-close badge-big"></span>
       <h3 ng-if="playerFooter.question.result == 1">Chính xác<span class="lighter" ng-if="playerFooter.question.result === 1" ng-bind-html="playerFooter.question.answer"></span></h3>
       <h3 ng-if="playerFooter.question.result == 0">Câu trả lời đúng:<span class="lighter" ng-if="playerFooter.question.result == 0">{{playerFooter.question.correctAnswer}}</span></h3>
       <div class="clearfix" ng-if="!playerFooter.settings.leftButtons.hide">
