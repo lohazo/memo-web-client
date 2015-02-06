@@ -9,13 +9,12 @@ module.exports = function (config) {
       'app/vendors/angular-mocks/angular-mocks.js',
       'app/vendors/ngStorage/ngStorage.min.js',
       'app/*.js',
-      'app/placement/**/*.js',
-      'app/components/placement/**/*.js',
+      'app/home/**/*.js',
+      'app/components/user/*.js',
+      'app/components/exam/**/*.js',
       'app/components/question/**/*.js',
       'app/components/dmp/**/*.js',
-      'app/vendors/google-diff-match-patch/diff_match_patch.js',
-      'app/home/**/*.js',
-      'app/components/user/**/*.js'
+      'app/vendors/google-diff-match-patch/diff_match_patch.js'
     ],
 
     autoWatch: true,
