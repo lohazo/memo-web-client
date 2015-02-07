@@ -2,7 +2,11 @@
   'use strict';
 
   function ProgressQuizPlayerCtrl($scope) {
-
+    var ctrl = this;
+    ctrl.progressQuiz = $scope.progressQuiz;
+    $scope.$watch('progressQuiz', function () {
+      ctrl.progressQuiz = $scope.progressQuiz;
+    });
   }
 
   function ProgressQuizPlayer() {
@@ -17,6 +21,7 @@
       link: function ($scope, $element, $attrs) {
         var inputElement = $element.find('input').eq(0)[0] || $element.find('textarea').eq(0)[
           0];
+
         if (inputElement) {
           inputElement.focus();
         }

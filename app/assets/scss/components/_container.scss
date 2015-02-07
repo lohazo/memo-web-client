@@ -8,6 +8,10 @@ body {
   background-size: 280px 320px;
 }
 
+*[tabindex] {
+  outline: none;
+}
+
 .full {
   display: block;
   float: left;

@@ -12,6 +12,7 @@ module.exports = function (config) {
       'app/home/**/*.js',
       'app/components/user/*.js',
       'app/components/exam/**/*.js',
+      'app/exam/progressQuiz/*.js',
       'app/components/question/**/*.js',
       'app/components/dmp/**/*.js',
       'app/vendors/google-diff-match-patch/diff_match_patch.js'
