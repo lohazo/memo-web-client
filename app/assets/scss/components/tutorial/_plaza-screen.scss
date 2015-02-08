@@ -9,11 +9,16 @@
           @include grid-row;
           padding: 10px;
           min-height: 130px;
-          margin-bottom: 15px;
-          &.special {
+          &.special_locked {
             border: 2px solid $gold;
             border-radius: 10px;
+            margin-bottom: 15px;
             background-color: rgba(0, 0, 0, 0.1);
+          }
+          &.special_unlocked {
+            border: 2px solid $gold;
+            border-radius: 10px;
+            margin-bottom: 15px;
           }
           .plaza-item-image {
             @include grid-column($columns: 3);
