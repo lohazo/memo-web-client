@@ -58,3 +58,23 @@ a#vp{
         margin-top: -4px;
     }
 }
+.memo-coin-badge {
+            background: url("assets/img/lesson-memos-big.png") no-repeat;
+            background-size: contain;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 5px;
+            &.small {
+              width: 24px;
+              height: 26px;
+            }
+          }
+.plaza-item-buttons {
+            .button.disabled {
+              background-color: $iron;
+              color: $white;
+            }
+          }   
+.plaza-item-image {
+  margin-bottom: 15px;
+}    
