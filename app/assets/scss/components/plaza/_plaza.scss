@@ -58,7 +58,23 @@ a#vp{
         margin-top: -4px;
     }
 }
-.memo-coin-badge {
+
+.plaza-item {
+          @include grid-row;
+          padding: 10px;
+          min-height: 130px;
+          &.special_locked {
+            border: 2px solid $gold;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+          }
+          &.special_unlocked {
+            border: 2px solid $gold;
+            border-radius: 10px;
+            margin-bottom: 15px;
+          }
+          .memo-coin-badge {
             background: url("assets/img/lesson-memos-big.png") no-repeat;
             background-size: contain;
             display: inline-block;
@@ -69,12 +85,24 @@ a#vp{
               height: 26px;
             }
           }
-.plaza-item-buttons {
+          .plaza-item-buttons {
             .button.disabled {
               background-color: $iron;
               color: $white;
             }
           }   
-.plaza-item-image {
-  margin-bottom: 15px;
-}    
+          .plaza-item-image {
+            margin-bottom: 15px;
+          }
+          .plaza-item-intro {
+            @include grid-column($columns: 9);
+            .plaza-item-name {
+              display: block;
+              font-weight: 700;
+              margin-bottom: 10px;
+            }
+            .plaza-item-desc {
+              font-size: .9em;
+            }
+          }
+}

@@ -9,6 +9,7 @@
           @include grid-row;
           padding: 10px;
           min-height: 130px;
+          margin-bottom: 15px;
           &.special {
             border: 2px solid $gold;
             border-radius: 10px;
