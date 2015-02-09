@@ -1,0 +1,15 @@
+<div class="quiz-finish-screen-inner">
+  <h3 class="title">
+    {{data.title + ' ' + data.course_quiz }}
+    <span style="display:block">{{data.result}} <span style="color:#ffbb33;">{{data.score}}/10</span></span>
+  </h3>
+  <p class="quiz-finish-message">{{data.message}}</p>
+  <div class="quiz-result">
+    <h4 class="quiz-result-course">{{data.course_quiz}}</h4>
+    <div class="quiz-result-award">
+      <span class="quiz-result-text">Điểm</span>
+      <span class="quiz-result-score">{{data.score}}</span>
+    </div>
+  </div>
+  <p>Bạn hoàn toàn có thể làm lại Bài kiểm tra này<br />bằng cách truy cập vào <a ng-href="/plaza">Plaza</a> nhé!</p>
+</div>
