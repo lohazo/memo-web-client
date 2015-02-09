@@ -26,15 +26,21 @@
           inputElement.focus();
         }
 
-        // $element.bind('keydown', function (e, data) {
-        //   if (e.keyCode === 8) {
-        //     if (!inputElement) {
-        //       e.preventDefault();
-        //       e.stopPropagation();
-        //       return false;
-        //     }
-        //   }
-        // });
+        $scope.$watch('progressQuiz', function () {
+          $element.unbind('keydown');
+          $element.bind('keydown', function (e, data) {
+            // if (e.keyCode === 8) {
+            //   if (!inputElement) {
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            //     return false;
+            //   }
+            // } else
+            if (e.keyCode === 13) {
+              $scope.progressQuiz.answer();
+            }
+          });
+        });
       },
       templateUrl: 'exam/progressQuiz/player/_player.html'
     }

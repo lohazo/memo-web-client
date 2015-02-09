@@ -81,6 +81,7 @@
         controller: 'WelcomeQuestionScreenCtrl',
         controllerAs: 'questionScreen',
         link: function ($scope, $element, $attrs) {
+          $element.find('textarea').eq(0)[0].focus();
           // FIXME: Good enough code
           var soundPlayingPromise;
 
