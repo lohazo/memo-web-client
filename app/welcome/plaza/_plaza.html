@@ -54,7 +54,7 @@
       </div>
       <div class="plaza-item-intro">
         <span class="plaza-item-name" ng-bind="item.name"></span>
-        <p class="plaza-item-desc">{{item.info}}<br><a ng-if="item._id == '54cf7d116d6169269b0f0000'" ng-controller="ClaimTshirtModalCtrl" ng-click="open()">Hướng dẫn mua và nhận vật phẩm</a><a ng-if="item._id == '54cf7d4f6d6169269b150000'" ng-controller="NativeScholarModalCtrl" ng-click="open()">Hướng dẫn mua và nhận vật phẩm</a></p>
+        <p class="plaza-item-desc">{{item.info}}<br><a ng-if="item._id == 't_shirt'" ng-controller="ClaimTshirtModalCtrl" ng-click="open()">Hướng dẫn mua và nhận vật phẩm</a><a ng-if="item._id == 'gift_1m'" ng-controller="NativeScholarModalCtrl" ng-click="open()">Hướng dẫn mua và nhận vật phẩm</a></p>
       </div>
       <div class="plaza-item-buttons">
         <a title="" class="radius button expand" ng-if="item.can_buy" ng-click="buy(item._id)">
