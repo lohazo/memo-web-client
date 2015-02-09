@@ -29,6 +29,10 @@
         backdrop: 'static',
       });
       modalInstance.result.then(function (msg) {});
+    }
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
     }  
 
     $scope.plaza = Plaza.data;
