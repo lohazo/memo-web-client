@@ -122,7 +122,7 @@
       var answer = {};
       answer[progressQuiz.currentData.question.question_log_id] = progressQuiz.userData.answer
         .result;
-      // progressQuiz.currentData.question.type = "";
+      progressQuiz.currentData.question.type = "";
       return AdaptiveTestServices.submitAnswer({
         _id: progressQuiz.currentData.progress_quiz_log_id,
         exam_token: progressQuiz.currentData.exam_token,
