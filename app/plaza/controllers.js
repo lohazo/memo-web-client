@@ -25,7 +25,7 @@
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_confirm_pop-up.html',
         controller: 'ProgressQuizConfirmModalCtrl',
-        windowClass: 'placement-test-modal',
+        windowClass: 'progress-quiz-confirm-modal',
         resolve: {
           id: function () {
             return id;

@@ -1,0 +1,15 @@
+.progress-quiz-confirm-modal {
+  width: 540px;
+  min-height: 220px !important;
+  padding-top: 0;
+  top: 210px !important;
+  position: fixed;
+  outline: none;
+  h3, p {
+    text-align: center;
+  }
+  h3.title {
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+}
