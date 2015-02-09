@@ -1,0 +1,43 @@
+<section class="app new-player welcome" tabindex="0">
+  <div class="player-inner">
+    <section class="player-container">
+      <div class="context-view" player-context-view></div>
+      <header class="player-header" player-header>
+        <div class="left">
+          <progress-quiz-quit-link quit-link-text="Thoát" quit-link-hide="player.progressQuiz.settings.header.left.quitLink.hide" skip="player.progressQuiz.quit()"></progress-quiz-quit-link>
+        </div>
+      </header>
+      <div class="player-main" ng-switch on="player.progressQuiz.currentData.question.type">
+        <div class="quiz-intro-screen" quiz-start-screen ng-switch-default></div>
+        <div class="question" welcome-question-screen question="player.progressQuiz.currentData.question" user-answer="player.progressQuiz.userData.userAnswer" continue-button="player.progressQuiz.settings.footer.right.continueButton" answer="player.progressQuiz.answer()" ng-switch-when="translate" tabindex="1"></div>
+        <div class="question listen" quiz-question-listen question="player.progressQuiz.currentData.question" user-answer="player.progressQuiz.userData.userAnswer" continue-button="player.progressQuiz.settings.footer.right.continueButton" answer="player.progressQuiz.answer()" ng-switch-when="listen" tabindex="1"></div>
+        <div class="quiz-finish-screen" quiz-finish-screen ng-switch-when="finish"></div>
+      </div>
+      <footer class="player-footer" ng-class="{'success': player.progressQuiz.userData.answer.userAnswer}"player-footer>
+        <div class="buttons">
+          <div class="left">
+            <div class="grade" ng-if="player.progressQuiz.userData.answer.userAnswer">
+              <h3>Đã gửi câu trả lời:<span class="lighter" style="display:block;font-weight:lighter;font-size: 22px;">Lựa chọn "Tiếp tục" để chuyển sang câu hỏi kế tiếp</span></h3>
+            </div>
+            <div class="clearfix">
+              <!-- <a title="" ng-if="player.progressQuiz.settings.footer.left.skipButton.disable" class="radius button skip disable">
+              {{player.progressQuiz.settings.footer.left.skipButton.text}}
+            </a>
+            <a title="" ng-if="!player.progressQuiz.settings.footer.left.skipButton.disable" class="radius button skip" ng-class="{'hide': player.progressQuiz.settings.footer.left.skipButton.hide}">
+              {{player.progressQuiz.settings.footer.left.skipButton.text}}
+            </a> -->
+            </div>
+          </div>
+          <div class="right">
+            <a title="" ng-if="player.progressQuiz.settings.footer.right.continueButton.disable" class="radius button continue disable">
+              {{player.progressQuiz.settings.footer.right.continueButton.text}}
+            </a>
+            <a title="" ng-if="!player.progressQuiz.settings.footer.right.continueButton.disable" class="radius button continue" ng-class="{'hide': player.progressQuiz.settings.footer.right.continueButton.hide}" ng-click="player.progressQuiz.answer()">
+              {{player.progressQuiz.settings.footer.right.continueButton.text}}
+            </a>
+          </div>
+        </div>
+      </footer>
+    </section>
+  </div>
+</section>

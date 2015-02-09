@@ -21,7 +21,7 @@
   }
 
   angular.module('exam', ['exam.controllers', 'exam.services', 'placement.controllers',
-      'placement.services', 'placement.directives',
+      'placement.services', 'placement.directives', 'adaptiveTest', 'adaptiveTest.progressQuiz'
     ])
     .config(['$routeProvider', ExamConfig]);
 }(window.angular));
