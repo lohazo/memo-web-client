@@ -76,11 +76,13 @@ a#vp {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
+    margin-top: 15px;
   }
   &.special_unlocked {
     border: 2px solid $gold;
     border-radius: 10px;
     margin-bottom: 15px;
+    margin-top: 15px;
   }
   .memo-coin-badge {
     background: url("assets/img/lesson-memos-big.png") no-repeat;

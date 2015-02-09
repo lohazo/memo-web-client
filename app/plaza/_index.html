@@ -6,12 +6,15 @@
         <div class="plaza-header row">
           <h3 class="plaza-title">Plaza Shop</h3>
           <a href="/" class="button-back">Back</a>
+          <hr />
         </div>
           <section class="plaza-item-section" ng-repeat="(key, value) in plaza.items | groupBy: 'section' | orderBy: 'key'">
             <div class="plaza-item-section-name">Vật phẩm {{key}}</div>
             <div class="large-16 columns">
               <div class="plaza-items">
-                <div class="plaza-item" ng-repeat="item in value">
+                <div class="plaza-item" ng-repeat="item in value" 
+                     ng-class="{'special_locked': item.is_locked && item.section == 'Đặc biệt',
+                                'special_unlocked': !item.is_locked && item.section == 'Đặc biệt'}">
                   <div class="large-3 columns">
                     <div class="plaza-item-image">
                       <img ng-src="{{item.icon_url}}" />
