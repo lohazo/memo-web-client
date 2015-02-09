@@ -68,10 +68,17 @@
     };
   }
 
-  function ProgressQuizConfirmModalCtrl($scope, $modalInstance, id) {
+  function ProgressQuizConfirmModalCtrl($scope, $modalInstance, id, Plaza) {
+
     $scope.close = function () {
       $modalInstance.dismiss();
     };
+
+    Plaza.get().then(function (response) {
+      $scope.plaza = Plaza.data;
+    });
+
+    $scope.confirm_before_buy_text = Plaza.data.items[3].confirm_before_buy_text;
 
     $scope.buy = function () {
       $modalInstance.close("buy");
@@ -80,7 +87,7 @@
 
   angular.module('plaza.controllers', [])
     .controller('PlazaCtrl', ['$scope', 'Plaza', 'Profile', '$modal', PlazaCtrl])
-    .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id',
+    .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
       ProgressQuizConfirmModalCtrl
     ])
 

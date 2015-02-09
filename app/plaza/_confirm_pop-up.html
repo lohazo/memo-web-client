@@ -1,13 +1,14 @@
-<div class="large-16 columns">
-	<div class="row">
-		<div class="container row">
-      <h3 class="title">Bạn có muốn mua vật phẩm hay không</h3>
-    </div>
-	</div>
-	<div class="row small-8 columns">
-		<div class="container row">
-      <a ng-click="buy()" class="button">Đồng ý</a>
-      <a ng-click="close()" class="button">Hủy</a>
-    </div>
-	</div>
+<div class="progress-quiz-confirm-modal-inner">
+  <h3 class="title text-center">{{confirm_before_buy_text.title}}</h3>
+  <p class="text-center">{{confirm_before_buy_text.message}}</p>
+  <div class="large-16 columns">
+  <div class="large-8 columns">
+  <a ng-click="buy()" class="button cancel">{{confirm_before_buy_text.button_accept}}</a>
+  </div>
+  <div class="large-8 columns">
+  <a ng-click="close()" class="button accept">{{confirm_before_buy_text.button_cancel}}</a>
+  </div>
+  </div>
 </div>
+
+
