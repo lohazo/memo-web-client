@@ -12,8 +12,7 @@
         </div>
         <div class="row items">
           <div class="large-16 columns">
-            <div class="row plaza-item" ng-repeat="item in plaza.items | filter:powerUpSectionFilter" ng-class="{'special_locked': item.is_locked,
-            'special_unlocked': !item.is_locked}">
+            <div class="row plaza-item" ng-repeat="item in plaza.items | filter:powerUpSectionFilter">
               <div class="large-3 columns">
                 <img class="plaza-item-image" ng-src="{{item.icon_url}}" alt="" />
               </div>

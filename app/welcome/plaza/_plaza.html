@@ -1,8 +1,7 @@
 <div class="welcome-plaza-screen-inner">
   <div class="plaza-items">
     <h3 class="title">Vật phẩm trợ lực</h3>
-    <div class="plaza-item" ng-repeat="item in plaza.items | filter:powerUpSectionFilter" ng-class="{'special_locked': !item.is_locked,
-      'special_unlocked': item.is_locked}">
+    <div class="plaza-item" ng-repeat="item in plaza.items | filter:powerUpSectionFilter">
       <div class="plaza-item-image">
         <img ng-src="{{item.icon_url}}" />
       </div>
