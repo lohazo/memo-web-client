@@ -12,29 +12,73 @@
         </div>
         <div class="row items">
           <div class="large-16 columns">
-            <div class="row item item_plaza" ng-repeat="item in plaza.items">
+            <div class="row plaza-item" ng-repeat="item in plaza.items | filter:powerUpSectionFilter" ng-class="{'special_locked': !item.is_unlocked,
+      'special_unlocked': item.is_unlocked}">
               <div class="large-3 columns">
-                <img class="image_item_icon" ng-src="{{item.icon_url}}" alt="" />
+                <img class="plaza-item-image" ng-src="{{item.icon_url}}" alt="" />
               </div>
               <div class="large-9 columns">
-                <h5 class="name name_item_plaza">{{item.name}}</h5>
-                <p class="info item_description">{{item.info}}</p> <!-- description -->
+                <div class="plaza-item-intro">
+                  <span class="plaza-item-name" ng-bind="item.name"></span>
+                  <p class="plaza-item-desc" ng-bind="item.info"></p> 
+                </div>  
               </div>
               <div class="large-4 columns vp-tl">
-                <a ng-show="item.can_buy" tooltip="{{item.can_not_buy_message}}" class="radius button" ng-click="buy(item._id)">
-                  {{item.price}}
-                  <img class="rb" style="display:inline-block;" src="assets/img/lesson-memos-big.png" width="20"/>
-                </a>
-                <a ng-hide="item.can_buy" tooltip="{{item.can_not_buy_message}}" class="radius disabled button">
-                  {{item.price}}
-                  <img class="rb" style="display:inline-block;" src="assets/img/lesson-memos-big.png" width="20"/>
-                </a>
+                <div class="plaza-item-buttons">
+                  <!-- before: ng-click="buy(item._id)" -->
+                  <a title="" class="radius button expand" ng-if="item.can_buy && !item.confirm_before_buy" ng-click="buy(item._id)">
+                    <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+                  </a>
+                  <a title="" class="radius button expand" ng-if="item.can_buy && item.confirm_before_buy" ng-click="confirm()">
+                    <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+                  </a>
+                  <a title="" class="radius button expand disabled" ng-if="!item.can_buy" tooltip="{{item.message}}" tooltip-placement="top">
+                    <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+                  </a>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+          <h4 class="title vptl">Vật phẩm đặc biệt</h4>
+          <hr />
+        </div>
+        <div class="row items">
+          <div class="large-16 columns">
+            <div class="row plaza-item" ng-repeat="item in plaza.items | filter:specialSectionFilter" ng-class="{'special_locked': !item.is_unlocked,
+            'special_unlocked': item.is_unlocked}">
+              <div class="large-3 columns">
+                <img class="plaza-item-image" ng-src="{{item.icon_url}}" alt="" />
+              </div>
+              <div class="large-9 columns">
+                <div class="plaza-item-intro">
+                  <span class="plaza-item-name" ng-bind="item.name"></span>
+                  <p class="plaza-item-desc" ng-bind="item.info"></p> 
+                </div>  
+              </div>
+              <div class="large-4 columns vp-tl">
+                <div class="plaza-item-buttons">
+                  <a title="" class="radius button expand" ng-if="item.can_buy && !item.confirm_before_buy" ng-click="buy(item._id)">
+                    <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+                  </a>
+                  <a title="" class="radius button expand" ng-if="item.can_buy && item.confirm_before_buy" ng-click="confirm()">
+                    <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+                  </a>
+                  <a title="" class="radius button expand disabled" ng-if="!item.can_buy" tooltip="{{item.message}}" tooltip-placement="top">
+                    <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+                  </a>
+                </div>
+              </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     <div class="main-right" main-right></div>
   </div>
 </section>

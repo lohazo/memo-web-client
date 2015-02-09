@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  function PlazaCtrl($scope, Plaza, Profile) {
+  function PlazaCtrl($scope, Plaza, Profile, $modal) {
     $scope.profile = Profile.user;
     $scope.profileDetail = Profile.detail;
     $scope.expChart = {
@@ -19,8 +19,31 @@
     };
 
     // $rootScope.$broadcast('event-profileLoaded', Profile.detail);
-      
+
+    // show pop-up confirm when buy item
+    $scope.confirm = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_cofirm_pop-up.html',
+        controller: 'PlazaCtrl',
+        windowClass: 'placement-test-modal',
+        backdrop: 'static',
+      });
+      modalInstance.result.then(function (msg) {});
+    }  
+
     $scope.plaza = Plaza.data;
+
+    $scope.powerUpSectionFilter = function (item) {
+      return (["power-ups", "practice"].indexOf(item.section) >= 0);
+    };
+
+    $scope.specialSectionFilter = function (item) {
+      return (["special"].indexOf(item.section) >= 0);
+    };
+
+    Plaza.get().then(function (response) {
+      $scope.plaza = Plaza.data;
+    });
 
     $scope.buy = function(id) {
       var data = {};
@@ -39,6 +62,6 @@
   }
 
   angular.module('plaza.controllers', [])
-    .controller('PlazaCtrl', ['$scope', 'Plaza', 'Profile', PlazaCtrl]);
+    .controller('PlazaCtrl', ['$scope', 'Plaza', 'Profile', '$modal', PlazaCtrl]);
 
 }(window.angular));

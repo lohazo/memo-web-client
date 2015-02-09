@@ -1,7 +1,8 @@
 <div class="welcome-plaza-screen-inner">
   <div class="plaza-items">
     <h3 class="title">Vật phẩm trợ lực</h3>
-    <div class="plaza-item" ng-repeat="item in plaza.items | filter:powerUpSectionFilter">
+    <div class="plaza-item" ng-repeat="item in plaza.items | filter:powerUpSectionFilter" ng-class="{'special_locked': !item.is_unlocked,
+      'special_unlocked': item.is_unlocked}">
       <div class="plaza-item-image">
         <img ng-src="{{item.icon_url}}" />
       </div>
@@ -47,7 +48,8 @@
   </div>
   <div class="plaza-items">
     <h3 class="title">Vật phẩm đặc biệt</h3>
-    <div class="plaza-item" ng-repeat="item in plaza.items | filter:specialSectionFilter" ng-class="{'special': !item.is_unlocked}">
+    <div class="plaza-item" ng-repeat="item in plaza.items | filter:specialSectionFilter" ng-class="{'special_locked': !item.is_unlocked,
+      'special_unlocked': item.is_unlocked}">
       <div class="plaza-item-image">
         <img ng-src="{{item.icon_url}}" />
       </div>
