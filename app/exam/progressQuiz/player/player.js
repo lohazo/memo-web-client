@@ -26,15 +26,15 @@
           inputElement.focus();
         }
 
-        $element.bind('keydown', function (e, data) {
-          if (e.keyCode === 8) {
-            if (!inputElement) {
-              e.preventDefault();
-              e.stopPropagation();
-              return false;
-            }
-          }
-        });
+        // $element.bind('keydown', function (e, data) {
+        //   if (e.keyCode === 8) {
+        //     if (!inputElement) {
+        //       e.preventDefault();
+        //       e.stopPropagation();
+        //       return false;
+        //     }
+        //   }
+        // });
       },
       templateUrl: 'exam/progressQuiz/player/_player.html'
     }
