@@ -74,10 +74,12 @@
 
     $scope.close = function () {
       $modalInstance.dismiss();
+      console.log("close");
     };
 
     $scope.buy = function () {
       $modalInstance.close("buy");
+      console.log("buy");
     };
   }
 

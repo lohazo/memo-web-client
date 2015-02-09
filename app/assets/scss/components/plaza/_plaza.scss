@@ -9,11 +9,11 @@
   }
 }
 
-.vptl {
+.plaza-title {
   float: left;
 }
 
-.back-lesson {
+.button-back {
   float: right;
   border-radius: 5px;
   background-color: #FFF;
@@ -24,10 +24,10 @@
   border: 2px solid #FB3;
   color: #810C15;
   font-size: 15px;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
-.back-lesson:hover {
+.button-back:hover {
   background-color: #FB3;
   color: #fff;
 }
@@ -108,9 +108,11 @@ a#vp {
       display: block;
       font-weight: 700;
       margin-bottom: 10px;
+      width: 220px;
     }
     .plaza-item-desc {
       font-size: .9em;
+      width: 220px;
     }
   }
 }
