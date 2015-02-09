@@ -93,28 +93,23 @@
 
         progressQuiz.settings.footer.right.continueButton.text = 'Bắt đầu kiểm tra';
       }, function (response) {
-        init();
-        progressQuiz.currentData = {
-          "progress_quiz_log_id": "54d86c7e6d616928ff0c0000",
-          "current_question": 1,
-          "total_num_questions": 40,
-          "exam_token": "E9_8qrS",
-          "question": {
-            "type": "listen",
-            "question": "A man eats an egg.",
-            "normal_question_audio": "http://admin.memo.edu.vn/uploads/sentence/audio/normal/normal-548e98566465622d45390000.mp3",
-            "slow_question_audio": "http://admin.memo.edu.vn/uploads/sentence/audio/slow/slow-548e98566465622d45390000.mp3",
-            "question_log_id": "54d86c7e6d616928ff0b0000"
-          },
-          "pre_score": 0.15,
-          "message": "Lần mới đây điểm số bài kiểm tra của bạn là 0.15/10",
-          "description": "Hãy thử đánh bại điểm số đó nào!"
-        };
-        //
-        progressQuiz.currentData.question.type += "|start";
-        //
-        progressQuiz.settings.footer.right.continueButton.text = 'Bắt đầu kiểm tra';
-        progressQuiz.settings.footer.right.continueButton.disable = false
+        progressQuiz.quit();
+        // init();
+        // progressQuiz.currentData = {
+        //   "score": 0.15,
+        //   "title": "Chúc mừng bạn đã hoàn thành",
+        //   "result": "Bạn đã đạt được điểm ",
+        //   "message": "Hãy tiếp tục cố gắng để nâng cao điểm số của bạn!",
+        //   "course_quiz": "Bài kiểm tra Tiếng Anh!"
+        // };
+        // // progressQuiz.currentData.question.type += "|start";
+        // progressQuiz.currentData.question = {
+        //   type: 'finish'
+        // };
+        // progressQuiz.settings.header.hide = true;
+        // //
+        // progressQuiz.settings.footer.right.continueButton.text = 'Bắt đầu kiểm tra';
+        // progressQuiz.settings.footer.right.continueButton.disable = false
       });
     };
 
@@ -132,11 +127,13 @@
         progressQuiz.currentData = response.data;
         progressQuiz.userData.answer = {};
 
-        if (progressQuiz.currentData.question.score) {
+        if (progressQuiz.currentData.score) {
           // It's finished
           progressQuiz.settings.header.hide = true;
           progressQuiz.currentData.isFinished = true;
-          progressQuiz.currentData.question.type = "finish";
+          progressQuiz.currentData.question = {
+            type: 'finish'
+          };
         } else {
           progressQuiz.settings.footer.right.continueButton.disable = true;
         }

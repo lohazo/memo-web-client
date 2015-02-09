@@ -2,7 +2,7 @@
   <div class="player-inner">
     <section class="player-container">
       <div class="context-view" player-context-view></div>
-      <header class="player-header" player-header>
+      <header class="player-header" player-header ng-class="{'hide': player.progressQuiz.settings.header.hide}">
         <div class="left">
           <progress-quiz-quit-link quit-link-text="Thoát" quit-link-hide="player.progressQuiz.settings.header.left.quitLink.hide" skip="player.progressQuiz.quit()"></progress-quiz-quit-link>
         </div>
@@ -11,7 +11,7 @@
         <div class="quiz-intro-screen" progress-quiz-intro-screen message="{{player.progressQuiz.currentData.message}}" description="{{player.progressQuiz.currentData.description}}" ng-if="player.progressQuiz.currentData.question.type" ng-switch-default></div>
         <div class="question" welcome-question-screen question="player.progressQuiz.currentData.question" user-answer="player.progressQuiz.userData.userAnswer" continue-button="player.progressQuiz.settings.footer.right.continueButton" answer="player.progressQuiz.answer()" ng-switch-when="translate" tabindex="1"></div>
         <div class="question listen" quiz-question-listen question="player.progressQuiz.currentData.question" user-answer="player.progressQuiz.userData.userAnswer" continue-button="player.progressQuiz.settings.footer.right.continueButton" answer="player.progressQuiz.answer()" ng-switch-when="listen" tabindex="1"></div>
-        <div class="quiz-finish-screen" quiz-finish-screen ng-switch-when="finish"></div>
+        <div class="quiz-finish-screen" progress-quiz-finish-screen data="player.progressQuiz.currentData" ng-switch-when="finish"></div>
       </div>
       <footer class="player-footer" ng-class="{'success': player.progressQuiz.userData.answer.userAnswer}"player-footer>
         <div class="buttons">

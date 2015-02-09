@@ -22,7 +22,7 @@
   }
 
   angular.module('adaptiveTest.progressQuiz', ['adaptiveTest.progressQuiz.quitLink',
-      'adaptiveTest.progressQuiz.introScreen'
+      'adaptiveTest.progressQuiz.introScreen', 'adaptiveTest.progressQuiz.finishScreen'
     ])
     .config(['$routeProvider', ProgressQuizConfig])
     .controller('ProgressQuizCtrl', ['$scope', 'ProgressQuiz', ProgressQuizCtrl]);
