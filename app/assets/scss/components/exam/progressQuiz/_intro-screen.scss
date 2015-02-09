@@ -1,0 +1,39 @@
+.progress-quiz {
+  .quiz-intro-screen {
+    display: block;
+    justify-content: center;
+    position: relative;
+    .smiling-ant {
+      display: inline-block;
+      width: 229px;
+      height: 389px;
+      background-image: url("assets/img/smilling-ant-2.png") !important;
+      margin-left: 200px;
+    }
+    .smiling-ant-textbox {
+      border: 2px solid $iron;
+      border-radius: 10px;
+      display: block;
+      width: 362px;
+      height: 142px;
+      top: 100px;
+      right: 200px;
+      padding: 15px;
+      position: absolute;
+      z-index: 1;
+    }
+    .smiling-ant-textbox-peg {
+      border-left: 2px solid $iron;
+      border-bottom: 2px solid $iron;
+      position: absolute;
+      display: block;
+      width: 25px;
+      height: 25px;
+      top: 155px;
+      left: 447px;
+      transform: rotate(45deg);
+      z-index: 2;
+      background: $white;
+    }
+  }
+}

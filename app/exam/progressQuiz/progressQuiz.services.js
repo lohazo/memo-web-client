@@ -51,18 +51,29 @@
     }
 
     progressQuiz.answer = function () {
-      if (progressQuiz.currentData.question.type !== 'finish') {
-        if (progressQuiz.userData.answer.userAnswer) {
-          progressQuiz.submitAnswer();
-        } else {
-          var result = Question.check(progressQuiz.currentData.question, progressQuiz.userData
-            .userAnswer);
-          progressQuiz.userData.answer = result;
+      if (progressQuiz.currentData.isStarted) {
+        progressQuiz.currentData.isStarted = false;
+        progressQuiz.currentData.question.type = progressQuiz.currentData.question
+          .type.split('|')[0];
+        progressQuiz.settings.footer.right.continueButton.text = 'Kiểm tra';
+        progressQuiz.settings.footer.right.continueButton.disable = true;
+        return;
+      }
 
-          progressQuiz.settings.footer.right.continueButton.text = 'Tiếp tục';
-        }
-      } else {
+      if (progressQuiz.currentData.isFinished) {
+        init();
         $location.url('/');
+        return;
+      }
+
+      if (progressQuiz.userData.answer.userAnswer) {
+        progressQuiz.submitAnswer();
+      } else {
+        var result = Question.check(progressQuiz.currentData.question, progressQuiz.userData
+          .userAnswer);
+        progressQuiz.userData.answer = result;
+
+        progressQuiz.settings.footer.right.continueButton.text = 'Tiếp tục';
       }
     };
 
@@ -77,27 +88,33 @@
       }).then(function (response) {
         init();
         progressQuiz.currentData = response.data;
-        //
-        progressQuiz.settings.footer.right.continueButton.text = 'Kiểm tra';
-        progressQuiz.settings.footer.right.continueButton.disable = true;
+        progressQuiz.currentData.isStarted = true;
+        progressQuiz.currentData.question.type += "|start";
+
+        progressQuiz.settings.footer.right.continueButton.text = 'Bắt đầu kiểm tra';
       }, function (response) {
         init();
-        // progressQuiz.currentData = response.data;
         progressQuiz.currentData = {
-          progress_quiz_log_id: 'a',
-          exam_token: 'a',
-          current_question: 1,
-          question: {
-            normal_question_audio: "http://admin.memo.edu.vn/uploads/sentence/audio/normal/normal-548e98b76465622d45b70700.mp3",
-            question: "I am a boy.",
-            question_log_id: "54d5e511c2fcb582408b4642",
-            slow_question_audio: "http://admin.memo.edu.vn/uploads/sentence/audio/slow/slow-548e98b76465622d45b70700.mp3",
-            type: "listen"
-          }
+          "progress_quiz_log_id": "54d86c7e6d616928ff0c0000",
+          "current_question": 1,
+          "total_num_questions": 40,
+          "exam_token": "E9_8qrS",
+          "question": {
+            "type": "listen",
+            "question": "A man eats an egg.",
+            "normal_question_audio": "http://admin.memo.edu.vn/uploads/sentence/audio/normal/normal-548e98566465622d45390000.mp3",
+            "slow_question_audio": "http://admin.memo.edu.vn/uploads/sentence/audio/slow/slow-548e98566465622d45390000.mp3",
+            "question_log_id": "54d86c7e6d616928ff0b0000"
+          },
+          "pre_score": 0.15,
+          "message": "Lần mới đây điểm số bài kiểm tra của bạn là 0.15/10",
+          "description": "Hãy thử đánh bại điểm số đó nào!"
         };
         //
-        progressQuiz.settings.footer.right.continueButton.text = 'Kiểm tra';
-        progressQuiz.settings.footer.right.continueButton.disable = true;
+        progressQuiz.currentData.question.type += "|start";
+        //
+        progressQuiz.settings.footer.right.continueButton.text = 'Bắt đầu kiểm tra';
+        progressQuiz.settings.footer.right.continueButton.disable = false
       });
     };
 
@@ -105,7 +122,7 @@
       var answer = {};
       answer[progressQuiz.currentData.question.question_log_id] = progressQuiz.userData.answer
         .result;
-      progressQuiz.currentData.question.type = "";
+      // progressQuiz.currentData.question.type = "";
       return AdaptiveTestServices.submitAnswer({
         _id: progressQuiz.currentData.progress_quiz_log_id,
         exam_token: progressQuiz.currentData.exam_token,
@@ -118,6 +135,7 @@
         if (progressQuiz.currentData.question.score) {
           // It's finished
           progressQuiz.settings.header.hide = true;
+          progressQuiz.currentData.isFinished = true;
           progressQuiz.currentData.question.type = "finish";
         } else {
           progressQuiz.settings.footer.right.continueButton.disable = true;

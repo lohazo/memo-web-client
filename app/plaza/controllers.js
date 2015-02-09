@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function PlazaCtrl($scope, Plaza, Profile, $modal) {
+  function PlazaCtrl($scope, $location, Plaza, Profile, $modal) {
     $scope.profile = Profile.user;
     $scope.profileDetail = Profile.detail;
     $scope.expChart = {
@@ -17,8 +17,6 @@
         data: $scope.profileDetail.exp_chart.exp
       }]
     };
-
-    // $rootScope.$broadcast('event-profileLoaded', Profile.detail);
 
     // show pop-up confirm when buy item
     $scope.confirm = function (id) {
@@ -48,10 +46,6 @@
       return (["special"].indexOf(item.section) >= 0);
     };
 
-    Plaza.get().then(function (response) {
-      $scope.plaza = Plaza.data;
-    });
-
     $scope.buy = function (id) {
       var data = {};
       var item = $scope.plaza.items.filter(function (item) {
@@ -63,22 +57,24 @@
         data.quantity = 1;
         Plaza.buy(data).then(function () {
           $scope.plaza = Plaza.data;
+        }).then(function () {
+          if (item._id === 'progress_quiz') {
+            $location.url('/progressquiz');
+          }
         });
       }
+
     };
   }
 
   function ProgressQuizConfirmModalCtrl($scope, $modalInstance, id, Plaza) {
+    $scope.confirm_before_buy_text = Plaza.data.items.filter(function (item) {
+      return item._id === id;
+    })[0].confirm_before_buy_text;
 
     $scope.close = function () {
       $modalInstance.dismiss();
     };
-
-    Plaza.get().then(function (response) {
-      $scope.plaza = Plaza.data;
-    });
-
-    $scope.confirm_before_buy_text = Plaza.data.items[3].confirm_before_buy_text;
 
     $scope.buy = function () {
       $modalInstance.close("buy");
@@ -86,9 +82,8 @@
   }
 
   angular.module('plaza.controllers', [])
-    .controller('PlazaCtrl', ['$scope', 'Plaza', 'Profile', '$modal', PlazaCtrl])
+    .controller('PlazaCtrl', ['$scope', '$location', 'Plaza', 'Profile', '$modal', PlazaCtrl])
     .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
       ProgressQuizConfirmModalCtrl
-    ])
-
+    ]);
 }(window.angular));

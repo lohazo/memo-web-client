@@ -1,17 +1,17 @@
 .player {
-    margin-top: 40px;
-    .container {
-	@include grid-column($columns: 16);
-	header, div.question, footer {
-	    @include grid-row();
-	}
+  margin-top: 40px;
+  .container {
+    @include grid-column($columns: 16);
+    header, div.question, footer {
+      @include grid-row;
     }
+  }
 }
 
-@import
-    "header",
-    "progress-bar",
-    "hearts",
-    "question",
-    "footer",
-    "buttons";
+@import "header";
+@import "progress-bar";
+@import "hearts";
+@import "question";
+@import "footer";
+@import "buttons";
+@import "progressQuiz/intro-screen";
