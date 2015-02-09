@@ -21,7 +21,9 @@
     });
   }
 
-  angular.module('adaptiveTest.progressQuiz', ['adaptiveTest.progressQuiz.quitLink'])
+  angular.module('adaptiveTest.progressQuiz', ['adaptiveTest.progressQuiz.quitLink',
+      'adaptiveTest.progressQuiz.introScreen'
+    ])
     .config(['$routeProvider', ProgressQuizConfig])
     .controller('ProgressQuizCtrl', ['$scope', 'ProgressQuiz', ProgressQuizCtrl]);
 }(window.angular));
