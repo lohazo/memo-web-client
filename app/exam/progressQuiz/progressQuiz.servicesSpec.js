@@ -1,31 +1,43 @@
 'use strict';
 
 describe("Services", function () {
-  beforeEach(module('app.services'));
-  beforeEach(module('ngStorage'));
-  beforeEach(module('adaptiveTest'));
-  // beforeEach(module('adaptiveTest', function ($provider, $routeProvider) {
-  //   $provide.factory('AdaptiveTestServices', function () {
-  //     return {};
-  //   });
-  // }));
+  beforeEach(module('ngRoute'));
+  beforeEach(module('question.services'));
+  beforeEach(function () {
+    angular.module('adaptiveTest', []);
+    module(function ($provide) {
+      $provide.service('AdaptiveTestServices', function ($q, $http) {
+        var services = {};
+        services.start = function () {
+
+        };
+        return services;
+      });
+    })
+  });
 
   beforeEach(module('adaptiveTest.progressQuiz'));
 
   describe('ProgressQuiz', function () {
-    var progressQuiz, adaptiveTestServices;
+    var progressQuiz, adaptiveTestServices, httpBackend;
 
-    beforeEach(inject(function (ProgressQuiz, AdaptiveTestServices) {
-      progressQuiz = ProgressQuiz;
+    beforeEach(inject(function (_ProgressQuiz_, _AdaptiveTestServices_, _$httpBackend_, $q) {
+      progressQuiz = _ProgressQuiz_;
+      adaptiveTestServices = _AdaptiveTestServices_;
+      httpBackend = _$httpBackend_;
+      spyOn(adaptiveTestServices, "start").andCallFake(
+        function () {
+          var deferred = $q.defer();
+          deferred.resolve({
+            score: '8/10'
+          });
+          return deferred.promise;
+        });
     }));
 
     it('should be defined', function () {
       expect(progressQuiz).toBeDefined();
-    });
-
-    it('should have no di', function () {
       progressQuiz.start().then(function () {
-        console.log(progressQuiz.progressQuizLogId);
         expect(progressQuiz.settings).toBeDefined();
       });
     });

@@ -80,6 +80,24 @@
         //
         progressQuiz.settings.footer.right.continueButton.text = 'Kiểm tra';
         progressQuiz.settings.footer.right.continueButton.disable = true;
+      }, function (response) {
+        init();
+        // progressQuiz.currentData = response.data;
+        progressQuiz.currentData = {
+          progress_quiz_log_id: 'a',
+          exam_token: 'a',
+          current_question: 1,
+          question: {
+            normal_question_audio: "http://admin.memo.edu.vn/uploads/sentence/audio/normal/normal-548e98b76465622d45b70700.mp3",
+            question: "I am a boy.",
+            question_log_id: "54d5e511c2fcb582408b4642",
+            slow_question_audio: "http://admin.memo.edu.vn/uploads/sentence/audio/slow/slow-548e98b76465622d45b70700.mp3",
+            type: "listen"
+          }
+        };
+        //
+        progressQuiz.settings.footer.right.continueButton.text = 'Kiểm tra';
+        progressQuiz.settings.footer.right.continueButton.disable = true;
       });
     };
 

@@ -2,7 +2,7 @@
   .player-container {
     header.player-header {
       @include grid-row;
-      margin-top: -20px;
+      margin-top: -40px;
       min-height: 80px;
       .player-header-right {
         float: right;

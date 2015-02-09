@@ -33,6 +33,7 @@
         $scope.$watch('answer', function () {
           if ($scope.answer && $scope.answer.length > 0) {
             $scope.continueButton.disable = false;
+            $scope.userAnswer = $scope.answer;
           }
         })
         $element.on('keydown', function (e) {
@@ -47,7 +48,7 @@
           }
         });
       },
-      templateUrl: 'components/question/_question-listen.html'
+      templateUrl: 'components/question/questionListen/_question-listen.html'
     };
   }
 
