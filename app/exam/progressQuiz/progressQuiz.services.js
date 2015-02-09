@@ -51,16 +51,16 @@
     }
 
     progressQuiz.answer = function () {
-      if (progressQuiz.settings.currentData.isStarted) {
-        progressQuiz.settings.currentData.isStarted = false;
-        progressQuiz.settings.currentData.question.type = progressQuiz.settings.currentData.question
+      if (progressQuiz.currentData.isStarted) {
+        progressQuiz.currentData.isStarted = false;
+        progressQuiz.currentData.question.type = progressQuiz.currentData.question
           .type.split('|')[0];
         progressQuiz.settings.footer.right.continueButton.text = 'Kiểm tra';
         progressQuiz.settings.footer.right.continueButton.disable = true;
         return;
       }
 
-      if (progressQuiz.settings.currentData.isFinished) {
+      if (progressQuiz.currentData.isFinished) {
         init();
         $location.url('/');
         return;
@@ -90,6 +90,8 @@
         progressQuiz.currentData = response.data;
         progressQuiz.currentData.isStarted = true;
         progressQuiz.currentData.question.type += "|start";
+
+        progressQuiz.settings.footer.right.continueButton.text = 'Bắt đầu kiểm tra';
       }, function (response) {
         init();
         progressQuiz.currentData = {
@@ -120,7 +122,7 @@
       var answer = {};
       answer[progressQuiz.currentData.question.question_log_id] = progressQuiz.userData.answer
         .result;
-      progressQuiz.currentData.question.type = "";
+      // progressQuiz.currentData.question.type = "";
       return AdaptiveTestServices.submitAnswer({
         _id: progressQuiz.currentData.progress_quiz_log_id,
         exam_token: progressQuiz.currentData.exam_token,
