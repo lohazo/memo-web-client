@@ -63,7 +63,7 @@
           }
         });
       }
-
+      alert("Bạn đã mua đồ thành công !!!")
     };
   }
 
@@ -79,7 +79,6 @@
 
     $scope.buy = function () {
       $modalInstance.close("buy");
-      console.log("buy");
     };
   }
 

@@ -25,10 +25,10 @@
                   </div>
                   <div class="large-4 columns">
                     <div class="plaza-item-buttons">
-                      <a title="" class="radius button expand" ng-if="item.can_buy && !item.confirm_before_buy" ng-click="buy(item._id)">
+                      <a title="" class="radius button expand" ng-if="item.can_buy && !item.confirm_before_buy" ng-href="{{item.buy_guide_url}}" ng-click="buy(item._id)">
                         <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
                       </a>
-                      <a title="" class="radius button expand" ng-if="item.can_buy && item.confirm_before_buy" ng-click="confirm(item._id)">
+                      <a title="" class="radius button expand" ng-href="{{item.buy_guide_url}}" ng-if="item.can_buy && item.confirm_before_buy" ng-click="confirm(item._id)">
                         <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
                       </a>
                       <a title="" class="radius button expand disabled" ng-if="!item.can_buy" tooltip="{{item.message}}" tooltip-placement="top">
