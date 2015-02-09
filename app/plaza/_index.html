@@ -3,34 +3,44 @@
     <div class="main-left" main-left></div>
     <div class="main-center">
       <div class="container">
-        <div class="plaza-header">
-          <h3 class="plaza-title"></h3>
-          <a href="button">Back</a>
+        <div class="plaza-header row">
+          <h3 class="plaza-title">Plaza Shop</h3>
+          <a href="/" class="button-back">Back</a>
         </div>
-        <section class="plaza-item-section" ng-repeat="(key, value) in plaza.items | groupBy: 'section' | orderBy: 'key'">
-          <div class="plaza-item-section-name">{{key}}</div>
-          <div class="plaza-items">
-            <div class="plaza-item" ng-repeat="item in value">
-              <div class="plaza-item-image">
-                <img ng-src="{{item.icon_url}}" />
-              </div>
-              <div class="plaza-item-intro">
-                <span class="plaza-item-name" ng-bind="item.name"></span>
-                <p class="plaza-item-desc" ng-bind="item.info"></p>
-              </div>
-              <div class="plaza-item-buttons">
-                <a title="" class="radius button expand" ng-if="item.can_buy" ng-click="buy(item._id)">
-                  <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
-                </a>
-                <a title="" class="radius button expand disabled" ng-if="!item.can_buy" tooltip="{{item.message}}" tooltip-placement="top">
-                  <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
-                </a>
-              </div>
-            </div>
+          <section class="plaza-item-section" ng-repeat="(key, value) in plaza.items | groupBy: 'section' | orderBy: 'key'">
+            <div class="plaza-item-section-name">Vật phẩm {{key}}</div>
+            <div class="large-16 columns">
+              <div class="plaza-items">
+                <div class="plaza-item" ng-repeat="item in value">
+                  <div class="large-3 columns">
+                    <div class="plaza-item-image">
+                      <img ng-src="{{item.icon_url}}" />
+                    </div>
+                  </div>  
+                  <div class="large-9 columns">      
+                    <div class="plaza-item-intro">
+                      <span class="plaza-item-name" ng-bind="item.name"></span>
+                      <p class="plaza-item-desc" ng-bind="item.info"></p>
+                    </div>
+                  </div>
+                  <div class="large-4 columns">
+                    <div class="plaza-item-buttons">
+                      <a title="" class="radius button expand" ng-if="item.can_buy && !item.confirm_before_buy && item.buy_guide_url" ng-href="{{item.buy_guide_url}}" ng-click="buy(item._id)">
+                        <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+                      </a>
+                      <a title="" class="radius button expand" ng-if="item.can_buy && item.confirm_before_buy" ng-click="confirm(item._id)">
+                        <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+                      </a>
+                      <a title="" class="radius button expand disabled" ng-if="!item.can_buy" tooltip="{{item.message}}" tooltip-placement="top">
+                        <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+                      </a>
+                    </div>
+                  </div>    
+                </div>
+              </div>    
+          </section>
           </div>
-        </section>
-      </div>
-    </div>
+        </div>
     <div class="main-right" main-right></div>
   </div>
 </section>

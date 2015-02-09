@@ -1,14 +1,13 @@
 <div class="progress-quiz-confirm-modal-inner">
   <h3 class="title text-center">{{confirm_before_buy_text.title}}</h3>
-  <p class="text-center">{{confirm_before_buy_text.message}}</p>
+  <p class="text-center message">{{confirm_before_buy_text.message}}</p>
   <div class="large-16 columns">
   <div class="large-8 columns">
-  <a ng-click="buy()" class="button cancel">{{confirm_before_buy_text.button_accept}}</a>
+  <a ng-click="close()" class="button cancel">{{confirm_before_buy_text.button_cancel}}</a>
   </div>
   <div class="large-8 columns">
-  <a ng-click="close()" class="button accept">{{confirm_before_buy_text.button_cancel}}</a>
+  <a ng-click="buy()" class="button accept">{{confirm_before_buy_text.button_accept}}</a>
   </div>
   </div>
 </div>
-
 
