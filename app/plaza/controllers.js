@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function PlazaCtrl($scope, Plaza, Profile, $modal) {
@@ -21,19 +21,22 @@
     // $rootScope.$broadcast('event-profileLoaded', Profile.detail);
 
     // show pop-up confirm when buy item
-    $scope.confirm = function () {
+    $scope.confirm = function (id) {
       var modalInstance = $modal.open({
-        templateUrl: 'plaza/_cofirm_pop-up.html',
-        controller: 'PlazaCtrl',
+        templateUrl: 'plaza/_confirm_pop-up.html',
+        controller: 'ProgressQuizConfirmModalCtrl',
         windowClass: 'placement-test-modal',
-        backdrop: 'static',
+        resolve: {
+          id: function () {
+            return id;
+          }
+        }
       });
-      modalInstance.result.then(function (msg) {});
-    }
 
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
-    }  
+      modalInstance.result.then(function (msg) {
+        if ($scope[msg] && $scope[msg] instanceof Function) $scope[msg](id);
+      });
+    }
 
     $scope.plaza = Plaza.data;
 
@@ -49,23 +52,36 @@
       $scope.plaza = Plaza.data;
     });
 
-    $scope.buy = function(id) {
+    $scope.buy = function (id) {
       var data = {};
-      var item = $scope.plaza.items.filter(function(item) {
+      var item = $scope.plaza.items.filter(function (item) {
         return item._id === id;
       })[0];
 
       if (item) {
         data.base_item_id = id;
         data.quantity = 1;
-        Plaza.buy(data).then(function() {
+        Plaza.buy(data).then(function () {
           $scope.plaza = Plaza.data;
         });
       }
     };
   }
 
+  function ProgressQuizConfirmModalCtrl($scope, $modalInstance, id) {
+    $scope.close = function () {
+      $modalInstance.dismiss();
+    };
+
+    $scope.buy = function () {
+      $modalInstance.close("buy");
+    };
+  }
+
   angular.module('plaza.controllers', [])
-    .controller('PlazaCtrl', ['$scope', 'Plaza', 'Profile', '$modal', PlazaCtrl]);
+    .controller('PlazaCtrl', ['$scope', 'Plaza', 'Profile', '$modal', PlazaCtrl])
+    .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id',
+      ProgressQuizConfirmModalCtrl
+    ])
 
 }(window.angular));
