@@ -47,7 +47,10 @@
           $scope.open();
         });
       },
-      template: '<a title="" ng-class="{\'hide\': hide}"><span ng-bind="text"></span></a>'
+      template: ['<a title="" ng-class="{\'hide\': hide}">',
+        '<span ng-bind="text" style="line-height:80px;"></span>',
+        '</a>'
+      ].join('')
     };
   }
 
