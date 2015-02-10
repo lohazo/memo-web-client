@@ -167,15 +167,15 @@
         EcoTracker.track('Web 1.0.2 user logged in', data);
         $localStorage.displayTour = true;
 
-        var molData = {};
-        molData.code_chanel = $routeParams.code_chanel || -100;
-        molData.id_landingpage = $routeParams.id_landingpage || -100;
-        molData.id_campaign = $routeParams.id_campaign || -100;
-        molData.id_camp_landingpage = $routeParams.id || -100;
-
-        molData.name = data.name || data.username;
-        molData.email = data.email;
-        molData.phone = data.mobile || '';
+        var molData = {
+          code_chanel: $routeParams.code_chanel || -100,
+          id_landingpage: $routeParams.id_landingpage || -100,
+          id_campaign: $routeParams.id_campaign || -100,
+          id_camp_landingpage: $routeParams.id_campaign || -100,
+          name: data.name || data.username,
+          email: data.email,
+          phone: data.mobile || ''
+        };
 
         MolServices.saveC3(molData);
       } else {

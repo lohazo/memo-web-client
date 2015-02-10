@@ -55,7 +55,7 @@
     return Services;
   }
 
-  function Welcome(WelcomeServices, Question, $location) {
+  function Welcome(WelcomeServices, Question, $location, AppSetting) {
     var Services = {
       currentScreen: '',
       currentQuestion: {},
@@ -129,9 +129,10 @@
       init();
       return WelcomeServices.start().then(function (response) {
         Services.exam = response.data;
-        Services.settings.footer.rightButtons.continueButton.text = 'Bắt đầu bài hướng dẫn';
-          Services.settings.footer.rightButtons.continueButton.disable = false;
-          Services.settings.footer.leftButtons.hide = true;
+        Services.settings.footer.rightButtons.continueButton.text =
+          'Bắt đầu bài hướng dẫn';
+        Services.settings.footer.rightButtons.continueButton.disable = false;
+        Services.settings.footer.leftButtons.hide = true;
         Services.answeredSteps += 1;
       });
     };
@@ -205,6 +206,8 @@
         current_step: Services.currentStep + 1
       }).then(function (response) {
         init();
+        AppSetting.disableTour();
+        $location.path('/');
       });
     };
 
@@ -213,6 +216,7 @@
         _id: Services.exam._id
       }).then(function (response) {
         init();
+        AppSetting.disableTour();
         $location.url('/');
       });
     };
@@ -223,5 +227,5 @@
   angular.module('welcome.services', []);
   angular.module('welcome.services')
     .factory('WelcomeServices', ['$http', '$localStorage', 'API', WelcomeServices])
-    .factory('Welcome', ['WelcomeServices', 'Question', '$location', Welcome]);
+    .factory('Welcome', ['WelcomeServices', 'Question', '$location', 'AppSetting', Welcome]);
 }(window.angular));
