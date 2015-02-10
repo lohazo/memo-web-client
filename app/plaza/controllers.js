@@ -63,7 +63,7 @@
           }
         });
       }
-      alert("Bạn đã mua đồ thành công !!!")
+      // alert("Bạn đã mua đồ thành công !!!")
     };
   }
 
