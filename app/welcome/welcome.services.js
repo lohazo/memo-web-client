@@ -134,6 +134,8 @@
         Services.settings.footer.rightButtons.continueButton.disable = false;
         Services.settings.footer.leftButtons.hide = true;
         Services.answeredSteps += 1;
+      }, function (response) {
+        $location.url('/');
       });
     };
 
@@ -166,7 +168,6 @@
         current_step: Services.currentStep + 1,
         next_step_token: Services.exam.next_step_token
       }).then(function (response) {
-        console.log(response);
         Services.currentStep += 1;
         Services.exam.next_step_token = response.data.next_step_token;
         Services.currentQuestion.result = -1;

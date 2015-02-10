@@ -51,7 +51,8 @@
         replace: true,
         controller: 'WelcomeMemoCoinCtrl',
         controllerAs: 'welcomeMemoCoin',
-        template: ['<span ng-class="{\'hide\': hide}">',
+        template: [
+          '<span ng-class="{\'hide\': hide}" style="line-height:80px;vertical-align:middle">',
           'Bạn đang có {{welcomeMemoCoin.coin}} MemoCoin', '</span>'
         ].join('')
       };
