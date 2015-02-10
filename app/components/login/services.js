@@ -18,8 +18,8 @@
     Service.login = function (data) {
       var deferred = $q.defer();
       var access_token = data.g_access_token || data.access_token;
-      var gmail = data.gmail; 
-      $http.post(API + '/users/login?access_token=' + access_token , data)
+      var gmail = data.gmail;
+      $http.post(API + '/users/login?access_token=' + access_token, data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -166,21 +166,21 @@
         MemoTracker.track('sign up');
         EcoTracker.track('Web 1.0.2 user logged in', data);
         $localStorage.displayTour = true;
+
+        var molData = {};
+        molData.code_chanel = $routeParams.code_chanel || -100;
+        molData.id_landingpage = $routeParams.id_landingpage || -100;
+        molData.id_campaign = $routeParams.id_campaign || -100;
+        molData.id_camp_landingpage = $routeParams.id || -100;
+
+        molData.name = data.name || data.username;
+        molData.email = data.email;
+        molData.phone = data.mobile || '';
+
+        MolServices.saveC3(molData);
       } else {
         MemoTracker.track('login');
       }
-
-      var molData = {};
-      molData.code_chanel = $routeParams.code_chanel || -100;
-      molData.id_landingpage = $routeParams.id_landingpage || -100;
-      molData.id_campaign = $routeParams.id_campaign || -100;
-      molData.id_camp_landingpage = $routeParams.id || -100;
-
-      molData.name = data.name || data.username;
-      molData.email = data.email;
-      molData.phone = data.mobile || '';
-
-      MolServices.saveC3(molData);
 
       $rootScope.$broadcast('event:auth-loginConfirmed', {
         user: response.data

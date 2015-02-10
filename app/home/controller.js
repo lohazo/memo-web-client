@@ -70,8 +70,8 @@
       .then(getStatus)
       .then(AppSetting.getSharedSettings)
       .then(TreeBuilder.getIconSets)
-      .then(buildTree);
-      // .then(takeATour);
+      .then(buildTree)
+      .then(takeATour);
   }
 
   function PlacementTestModalCtrl($scope, $modal, $rootScope) {
@@ -102,7 +102,7 @@
     };
 
     $scope.$watch('profile', function () {
-      if ($scope.profile.is_beginner) {
+      if ($scope.profile.is_beginner && $scope.profile.allow_placement_test) {
         $scope.open();
       }
     });
