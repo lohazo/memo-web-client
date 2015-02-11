@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function ProgressQuiz($location, AdaptiveTestServices, Question) {
+  function ProgressQuiz($location, AdaptiveTestServices, Question, Sound) {
     var progressQuiz = {
       progressQuizLogId: {},
       currentData: {},
@@ -57,6 +57,7 @@
           .type.split('|')[0];
         progressQuiz.settings.footer.right.continueButton.text = 'Kiểm tra';
         progressQuiz.settings.footer.right.continueButton.disable = true;
+        Sound.playCorrectSound();
         return;
       }
 
@@ -75,6 +76,7 @@
           progressQuiz.userData.answer = result;
 
           progressQuiz.settings.footer.right.continueButton.text = 'Tiếp tục';
+          Sound.playCorrectSound();
         }
       }
     };
@@ -148,5 +150,7 @@
   }
 
   angular.module('adaptiveTest.progressQuiz')
-    .service('ProgressQuiz', ['$location', 'AdaptiveTestServices', 'Question', ProgressQuiz]);
+    .service('ProgressQuiz', ['$location', 'AdaptiveTestServices', 'Question', 'Sound',
+      ProgressQuiz
+    ]);
 }(window.angular));

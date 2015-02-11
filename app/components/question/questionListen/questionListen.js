@@ -41,7 +41,6 @@
               $element[0].querySelector('input[type="text"]').setAttribute('readonly',
                 'readonly');
               $scope.userAnswer = $scope.answer;
-              $scope.check();
             }
           }
         });
