@@ -69,11 +69,13 @@
       if (progressQuiz.userData.answer.userAnswer) {
         progressQuiz.submitAnswer();
       } else {
-        var result = Question.check(progressQuiz.currentData.question, progressQuiz.userData
-          .userAnswer);
-        progressQuiz.userData.answer = result;
+        if (progressQuiz.userData.userAnswer && progressQuiz.userData.userAnswer.length > 0) {
+          var result = Question.check(progressQuiz.currentData.question, progressQuiz.userData
+            .userAnswer);
+          progressQuiz.userData.answer = result;
 
-        progressQuiz.settings.footer.right.continueButton.text = 'Tiếp tục';
+          progressQuiz.settings.footer.right.continueButton.text = 'Tiếp tục';
+        }
       }
     };
 
@@ -126,6 +128,7 @@
       }).then(function (response) {
         progressQuiz.currentData = response.data;
         progressQuiz.userData.answer = {};
+        progressQuiz.userData.userAnswer = {};
 
         if (progressQuiz.currentData.score) {
           // It's finished
@@ -135,6 +138,7 @@
             type: 'finish'
           };
         } else {
+          progressQuiz.settings.footer.right.continueButton.text = 'Kiểm tra';
           progressQuiz.settings.footer.right.continueButton.disable = true;
         }
       });
