@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function WelcomePlazaCtrl($scope, Plaza) {
+  function WelcomePlazaCtrl($scope, Plaza, $location, Profile, $modal) {
     $scope.powerUpSectionFilter = function (item) {
       return (["power-ups", "practice"].indexOf(item.section) >= 0);
     };
@@ -13,6 +13,23 @@
     Plaza.get().then(function (response) {
       $scope.plaza = Plaza.data;
     });
+
+    $scope.buyGuide = function (id) {
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_buy-guide-popup.html',
+        controller: 'BuyGuideModalCtrl',
+        windowClass: 'buy-guide-popup-modal',
+        resolve: {
+          id: function () {
+            return id;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (msg) {
+        if ($scope[msg] && $scope[msg] instanceof Function) $scope[msg](id);
+      });
+    }
 
     $scope.buy = function (itemId) {
       Plaza.buy({
@@ -31,7 +48,7 @@
 
   angular.module('welcome.plaza', []);
   angular.module('welcome.plaza')
-    .controller('WelcomePlazaCtrl', ['$scope', 'Plaza', WelcomePlazaCtrl])
+    .controller('WelcomePlazaCtrl', ['$scope', 'Plaza', '$location', 'Profile', '$modal', WelcomePlazaCtrl])
     .directive('welcomePlaza', function () {
       return {
         restrict: 'EA',
