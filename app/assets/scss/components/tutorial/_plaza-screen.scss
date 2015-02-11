@@ -3,8 +3,11 @@
     @include grid-row;
     .welcome-plaza-screen-inner {
       @include grid-column($columns: 16);
-      .plaza-items {
+      .plaza-item-section {
         @include grid-column($columns: 8);
+      
+      .plaza-items {
+        
         .plaza-item {
           @include grid-row;
           padding: 10px;
@@ -13,12 +16,14 @@
             border: 2px solid $gold;
             border-radius: 10px;
             margin-bottom: 15px;
+            margin-top: 15px;
             background-color: rgba(0, 0, 0, 0.1);
           }
           &.special_unlocked {
             border: 2px solid $gold;
             border-radius: 10px;
             margin-bottom: 15px;
+            margin-top: 15px;
           }
           .plaza-item-image {
             @include grid-column($columns: 3);
@@ -35,6 +40,9 @@
               margin-bottom: 10px;
             }
             .plaza-item-desc {
+              font-size: .9em;
+            }
+            .plaza-item-guide {
               font-size: .9em;
             }
           }
@@ -57,6 +65,7 @@
             }
           }
         }
+      }
       }
     }
   }
