@@ -90,7 +90,6 @@
 
     $scope.close = function () {
       $modalInstance.dismiss();
-      console.log("close");
     };
 
     $scope.buy = function () {
@@ -98,17 +97,20 @@
     };
   }
 
-  function BuyGuideModalCtrl($scope, $modalInstance, id, Plaza) {
-    console.log(id);
+  function BuyGuideModalCtrl($scope, $sce, $modalInstance, id, Plaza) {
     $scope.item = Plaza.data.items.filter(function (item) {
       return item._id === id;
     })[0];
+
+    $scope.trustedResource = $sce.trustAsResourceUrl($scope.item.buy_guide_url);
   }
 
   angular.module('plaza.controllers', [])
     .controller('PlazaCtrl', ['$scope', '$location', 'Plaza', 'Profile', '$modal', PlazaCtrl])
-    .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza', ProgressQuizConfirmModalCtrl])
-    .controller('BuyGuideModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
+    .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
+      ProgressQuizConfirmModalCtrl
+    ])
+    .controller('BuyGuideModalCtrl', ['$scope', '$sce', '$modalInstance', 'id', 'Plaza',
       BuyGuideModalCtrl
     ]);
 }(window.angular));
