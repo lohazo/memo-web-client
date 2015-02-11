@@ -135,9 +135,7 @@
         Services.settings.footer.leftButtons.hide = true;
         Services.answeredSteps += 1;
       }, function (response) {
-        // $location.url('/');
-        Services.currentStep = 3;
-        Services.currentData.claimedBonus = true;
+        $location.url('/');
       });
     };
 
