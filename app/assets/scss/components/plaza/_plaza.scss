@@ -36,11 +36,6 @@
     padding: 0 !important;
 }
 
-.vp-tl {
-    padding: 0;
-    text-align: right;
-}
-
 .item_plaza {
     min-height: 100px;
     img.image_item_icon {
@@ -126,3 +121,4 @@ a#vp {
 }
 
 @import "progress-quiz-confirm-modal";
+@import "buy-guide-popup-modal";

@@ -40,6 +40,7 @@
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
         controller: 'BuyGuideModalCtrl',
+        windowClass: 'buy-guide-popup-modal',
         resolve: {
           id: function () {
             return id;
