@@ -1,121 +1,128 @@
 .plaza {
-  .item {
-    img {
-      padding-top: 5px;
+    .item {
+        img {
+            padding-top: 5px;
+        }
+        h5.name {
+            font-weight: 700;
+        }
     }
-    h5.name {
-      font-weight: 700;
-    }
-  }
 }
 
 .plaza-title {
-  float: left;
+    float: left;
 }
 
 .button-back {
-  float: right;
-  border-radius: 5px;
-  background-color: #FFF;
-  text-decoration: none;
-  text-align: center;
-  display: inline-block;
-  padding: 4px 30px;
-  border: 2px solid #FB3;
-  color: #810C15;
-  font-size: 15px;
-  margin-top: 5px;
+    float: right;
+    border-radius: 5px;
+    background-color: #FFF;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding: 4px 30px;
+    border: 2px solid #FB3;
+    color: #810C15;
+    font-size: 15px;
+    margin-top: 5px;
 }
 
 .button-back:hover {
-  background-color: #FB3;
-  color: #fff;
+    background-color: #FB3;
+    color: #fff;
 }
 
 .plaza .item img {
-  padding: 0 !important;
+    padding: 0 !important;
 }
 
 .vp-tl {
-  padding: 0;
-  text-align: right;
+    padding: 0;
+    text-align: right;
 }
 
 .item_plaza {
-  min-height: 100px;
-  img.image_item_icon {
-    height: 60px;
-    // width: 38px;
- 
-  }
-  .name_item_plaza {
-    margin: 0;
-  }
-  .item_description {
-    margin-top: 5px;
-    font-size: 16px;
-    line-height: 19px;
-  }
+    min-height: 100px;
+    img.image_item_icon {
+        height: 60px;
+        // width: 38px;
+   
+    }
+    .name_item_plaza {
+        margin: 0;
+    }
+    .item_description {
+        margin-top: 5px;
+        font-size: 16px;
+        line-height: 19px;
+    }
 }
 
 a#vp {
-  font-size: 19px;
-  font-weight: bold;
-  margin-bottom: 0 !important;
-  img.rb {
-    margin-top: -4px;
-  }
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 0 !important;
+    img.rb {
+        margin-top: -4px;
+    }
 }
 
 .plaza-item {
-  @include grid-row;
-  padding: 10px;
-  min-height: 130px;
-  &.special_locked {
-    border: 2px solid $gold;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
-    margin-top: 15px;
-  }
-  &.special_unlocked {
-    border: 2px solid $gold;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    margin-top: 15px;
-  }
-  .memo-coin-badge {
-    background: url("assets/img/lesson-memos-big.png") no-repeat;
-    background-size: contain;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px;
-    &.small {
-      width: 24px;
-      height: 26px;
+    @include grid-row;
+    padding: 10px;
+    min-height: 130px;
+    &.special_locked {
+        border: 2px solid $gold;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        margin-top: 15px;
     }
-  }
-  .plaza-item-buttons {
-    .button.disabled {
-      background-color: $iron;
-      color: $white;
+    &.special_unlocked {
+        border: 2px solid $gold;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        margin-top: 15px;
     }
-  }
-  .plaza-item-image {
-    margin-bottom: 15px;
-  }
-  .plaza-item-intro {
-    @include grid-column($columns: 9);
-    .plaza-item-name {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 10px;
-      width: 220px;
+    .memo-coin-badge {
+        background: url("assets/img/lesson-memos-big.png") no-repeat;
+        background-size: contain;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 5px;
+        &.small {
+            width: 24px;
+            height: 26px;
+        }
     }
-    .plaza-item-desc {
-      font-size: .9em;
-      width: 220px;
+    .plaza-item-buttons {
+        .button.disabled {
+            background-color: $iron;
+            color: $white;
+        }
     }
-  }
+    .plaza-item-image {
+        margin-bottom: 15px;
+    }
+    .plaza-item-intro {
+        @include grid-column($columns: 9);
+        width: 100%;
+        padding-right: 0px;
+        .plaza-item-name {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 10px;
+            width: 220px;
+        }
+        .plaza-item-desc {
+            font-size: .9em;
+            width: 220px;
+        }
+        .plaza-item-guide {
+            font-size: .9em;
+            width: 250px;
+        }
+    }
 }
+
 @import "progress-quiz-confirm-modal";
