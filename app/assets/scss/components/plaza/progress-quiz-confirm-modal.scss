@@ -23,6 +23,9 @@
       &.accept {
         background-color: #9c0;
         color: #fff;
+        &:hover {
+          background-color: scale-color(#9c0, $lightness: -20%);
+        }
       }
       &.cancel {
         background-color: #fff;
