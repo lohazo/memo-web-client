@@ -4,7 +4,7 @@
     <div class="plaza-items">
       <div class="plaza-item" ng-repeat="item in value"
         ng-class="{'special_locked': item.is_locked && item.buy_guide_url,
-        'special_unlocked': !item.is_locked && item.item.buy_guide_url}">
+        'special_unlocked': !item.is_locked && item.buy_guide_url}">
         <div class="plaza-item-image">
           <img ng-src="{{item.icon_url}}" />
         </div>
