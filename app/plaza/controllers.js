@@ -90,7 +90,6 @@
 
     $scope.close = function () {
       $modalInstance.dismiss();
-      console.log("close");
     };
 
     $scope.buy = function () {
@@ -99,7 +98,6 @@
   }
 
   function BuyGuideModalCtrl($scope, $modalInstance, id, Plaza) {
-    console.log(id);
     $scope.item = Plaza.data.items.filter(function (item) {
       return item._id === id;
     })[0];
