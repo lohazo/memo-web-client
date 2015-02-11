@@ -31,11 +31,9 @@
       link: function ($scope, $element, $attrs) {
         $element[0].querySelector('input[type="text"]').focus();
         $scope.$watch('answer', function () {
-          if ($scope.answer && $scope.answer.length > 0) {
-            $scope.continueButton.disable = false;
-            $scope.userAnswer = $scope.answer;
-          }
-        })
+          $scope.continueButton.disable = !($scope.answer && $scope.answer.length > 0);
+          $scope.userAnswer = $scope.answer;
+        });
         $element.on('keydown', function (e) {
           if (e.keyCode === 13) {
             if ($scope.answer && $scope.answer.length > 0) {

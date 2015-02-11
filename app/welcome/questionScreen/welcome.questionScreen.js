@@ -82,16 +82,22 @@
         controllerAs: 'questionScreen',
         link: function ($scope, $element, $attrs) {
           $element.find('textarea').eq(0)[0].focus();
+          $element.bind('keydown', function (e) {
+            if (e.keyCode === 13) {
+              if (!($scope.translatedText && $scope.translatedText.length > 0)) {
+                e.preventDefault();
+              } else {
+                $element.find('textarea').eq(0).attr('readonly', 'readonly');
+              }
+            }
+          });
           // FIXME: Good enough code
           var soundPlayingPromise;
 
           $scope.$watch('translatedText', function () {
-            if ($scope.translatedText && $scope.translatedText.length > 0) {
-              $scope.continueButton.disable = false;
-              $scope.userAnswer = $scope.translatedText;
-            } else {
-              $scope.continueButton.disable = true;
-            }
+            $scope.userAnswer = $scope.translatedText;
+            $scope.continueButton.disable = !($scope.translatedText && $scope.translatedText
+              .length > 0);
           });
 
           $scope.showDefinitionDropdown = function (e) {

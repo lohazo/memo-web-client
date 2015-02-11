@@ -39,6 +39,8 @@
             // } else
             if (e.keyCode === 13) {
               $scope.progressQuiz.answer();
+              $scope.$apply();
+              e.stopPropagation();
             }
           });
         });
