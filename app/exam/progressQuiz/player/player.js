@@ -19,6 +19,7 @@
       controller: 'ProgressQuizPlayerCtrl',
       controllerAs: 'player',
       link: function ($scope, $element, $attrs) {
+        $element[0].focus();
         var inputElement = $element.find('input').eq(0)[0] || $element.find('textarea').eq(0)[
           0];
 

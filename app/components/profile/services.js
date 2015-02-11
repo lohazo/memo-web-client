@@ -87,6 +87,7 @@
             $localStorage.auth.checkpoints = response.data.checkpoints;
             $localStorage.auth.skills = response.data.skills;
             Profile.user = response.data.user_info;
+            $localStorage.displayTour = Profile.user.allow_tutorial;
           }
         });
     };

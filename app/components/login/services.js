@@ -165,7 +165,6 @@
       if (response.data.is_newly_sign_up) {
         MemoTracker.track('sign up');
         EcoTracker.track('Web 1.0.2 user logged in', data);
-        $localStorage.displayTour = true;
 
         var molData = {
           code_chanel: $routeParams.code_chanel || -100,
