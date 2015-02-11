@@ -36,6 +36,22 @@
       });
     }
 
+    $scope.buyGuide = function (id) {
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_buy-guide-popup.html',
+        controller: 'BuyGuideModalCtrl',
+        resolve: {
+          id: function () {
+            return id;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (msg) {
+        if ($scope[msg] && $scope[msg] instanceof Function) $scope[msg](id);
+      });
+    }
+
     $scope.plaza = Plaza.data;
 
     $scope.powerUpSectionFilter = function (item) {
@@ -82,9 +98,17 @@
     };
   }
 
+  function BuyGuideModalCtrl($scope, $modalInstance, id, Plaza) {
+    console.log(id);
+    $scope.item = Plaza.data.items.filter(function (item) {
+      return item._id === id;
+    })[0];
+  }
+
   angular.module('plaza.controllers', [])
     .controller('PlazaCtrl', ['$scope', '$location', 'Plaza', 'Profile', '$modal', PlazaCtrl])
-    .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
-      ProgressQuizConfirmModalCtrl
+    .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza', ProgressQuizConfirmModalCtrl])
+    .controller('BuyGuideModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
+      BuyGuideModalCtrl
     ]);
 }(window.angular));
