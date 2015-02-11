@@ -136,6 +136,7 @@
         Services.answeredSteps += 1;
       }, function (response) {
         $location.url('/');
+        AppSetting.disableTour();
       });
     };
 
