@@ -1,30 +1,30 @@
 <div class="welcome-plaza-screen-inner">
-  <section class="plaza-item-section" ng-repeat="(key, value) in plaza.items | groupBy: 'section' | orderBy: 'key'">
-    <div class="plaza-item-section-name">Vật phẩm {{key}}</div>
-      <div class="plaza-items">
-        <div class="plaza-item" ng-repeat="item in value"
-          ng-class="{'special_locked': item.is_locked && item.section == 'Đặc biệt',
-          'special_unlocked': !item.is_locked && item.section == 'Đặc biệt'}">
-            <div class="plaza-item-image">
-              <img ng-src="{{item.icon_url}}" />
-            </div>
-            <div class="plaza-item-intro">
-              <span class="plaza-item-name" ng-bind="item.name"></span>
-              <p class="plaza-item-desc" ng-bind="item.info"></p>
-              <a class="plaza-item-guide" ng-if="item.buy_guide_url"><b><u>Hướng dẫn mua và nhận vật phẩm</u></b></a> <!-- ng-href="http://{{item.buy_guide_url}}" -->
-            </div>
-            <div class="plaza-item-buttons">
-              <a title="" class="radius button expand" ng-if="item.can_buy && !item.confirm_before_buy" ng-click="buy(item._id)">
-                <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
-              </a>
-              <a title="" class="radius button expand" ng-if="item.can_buy && item.confirm_before_buy" ng-click="confirm(item._id)">
-                <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
-              </a>
-              <a title="" class="radius button expand disabled" ng-if="!item.can_buy" tooltip="{{item.message}}" tooltip-placement="top">
-                <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
-              </a>
-            </div>
+  <section class="plaza-item-section" ng-repeat="(key, value) in plaza.items | groupBy: 'section_order'">
+    <div class="plaza-item-section-name" ng-repeat="item in value track by $index"><span ng-if="$index == 0">Vật phẩm {{item.section}}</span></div>
+    <div class="plaza-items">
+      <div class="plaza-item" ng-repeat="item in value"
+        ng-class="{'special_locked': item.is_locked && item.section == 'Đặc biệt',
+        'special_unlocked': !item.is_locked && item.section == 'Đặc biệt'}">
+        <div class="plaza-item-image">
+          <img ng-src="{{item.icon_url}}" />
+        </div>
+        <div class="plaza-item-intro">
+          <span class="plaza-item-name" ng-bind="item.name"></span>
+          <p class="plaza-item-desc" ng-bind="item.info"></p>
+          <a class="plaza-item-guide" ng-if="item.buy_guide_url"><b><u>Hướng dẫn mua và nhận vật phẩm</u></b></a> <!-- ng-href="http://{{item.buy_guide_url}}" -->
+        </div>
+        <div class="plaza-item-buttons">
+          <a title="" class="radius button expand" ng-if="item.can_buy && !item.confirm_before_buy" ng-click="buy(item._id)">
+            <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+          </a>
+          <a title="" class="radius button expand" ng-if="item.can_buy && item.confirm_before_buy" ng-click="confirm(item._id)">
+            <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+          </a>
+          <a title="" class="radius button expand disabled" ng-if="!item.can_buy" tooltip="{{item.message}}" tooltip-placement="top">
+            <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
+          </a>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+</div>
