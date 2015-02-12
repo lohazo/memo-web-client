@@ -3,6 +3,9 @@
 
   function ClaimBonusScreenCtrl($scope) {
     var ctrl = this;
+    ctrl.rewardIntro = $scope.playerData.exam.memo_coin_bonus_message.replace('5 MemoCoin',
+      '<b>5</b> <b class="orange">MemoCoin</b>');
+    ctrl.rewardAmount = $scope.playerData.exam.memo_coin_bonus_amount;
     ctrl.claimBonus = $scope.claimBonus;
   }
 
@@ -13,6 +16,7 @@
       return {
         restrict: 'EA',
         scope: {
+          playerData: '=',
           claimBonus: '&'
         },
         controller: 'ClaimBonusScreenCtrl',

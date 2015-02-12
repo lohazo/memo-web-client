@@ -74,6 +74,7 @@
         scope: {
           question: "=",
           currentData: "=",
+          playerData: "=",
           answer: "&"
         },
         controller: 'DictionaryHintScreenCtrl',

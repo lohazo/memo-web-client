@@ -8,7 +8,12 @@
       var modalInstance = $modal.open({
         templateUrl: 'welcome/quitLink/_quit-warning-modal.html',
         controller: 'WelcomeQuitModalCtrl',
-        windowClass: 'quit-exam-modal'
+        windowClass: 'quit-exam-modal',
+        resolve: {
+          alertMessage: function () {
+            return $scope.alertMessage;
+          }
+        }
       });
 
       modalInstance.result.then(function (message) {
@@ -21,14 +26,16 @@
     $scope.open = ctrl.open;
   }
 
-  function WelcomeQuitModalCtrl($scope, $modalInstance) {
+  function WelcomeQuitModalCtrl($scope, $modalInstance, alertMessage) {
     $scope.close = function () {
       $modalInstance.dismiss();
     };
 
     $scope.quit = function () {
       $modalInstance.close('skipTour');
-    }
+    };
+
+    $scope.alertMessage = alertMessage;
   }
 
   function WelcomeQuitLink() {
@@ -36,6 +43,7 @@
       strict: 'EA',
       scope: {
         text: '@quitLinkText',
+        alertMessage: '@quitLinkMessage',
         hide: '=quitLinkHide',
         skip: '&'
       },
@@ -57,7 +65,7 @@
   angular.module('welcome.quitLink', [])
     .directive('welcomeQuitLink', WelcomeQuitLink)
     .controller('WelcomeQuitLinkCtrl', ['$scope', '$modal', WelcomeQuitLinkCtrl])
-    .controller('WelcomeQuitModalCtrl', ['$scope', '$modalInstance', 'Welcome',
+    .controller('WelcomeQuitModalCtrl', ['$scope', '$modalInstance', 'alertMessage',
       WelcomeQuitModalCtrl
     ]);
 }(window.angular));
