@@ -14,6 +14,23 @@
       $scope.plaza = Plaza.data;
     });
 
+    $scope.confirm = function (id) {
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_confirm_pop-up.html',
+        controller: 'ProgressQuizConfirmModalCtrl',
+        windowClass: 'progress-quiz-confirm-modal',
+        resolve: {
+          id: function () {
+            return id;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (msg) {
+        if ($scope[msg] && $scope[msg] instanceof Function) $scope[msg](id);
+      });
+    }
+    
     $scope.buyGuide = function (id) {
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
