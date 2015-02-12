@@ -19,6 +19,8 @@
     ctrl.skip = function () {
       ctrl.data.skip();
     };
+
+    $scope.click = ctrl.click;
   }
 
   function WelcomePlayerHeaderCtrl($scope) {
@@ -30,6 +32,7 @@
       return new Array(num);
     };
     ctrl.skip = $scope.skip;
+
   }
 
   function WelcomePlayerFooterCtrl($scope) {
@@ -82,6 +85,7 @@
           settings: "=",
           currentStep: "=",
           answeredSteps: "=",
+          playerData: "=",
           skip: "&"
         },
         controller: 'WelcomePlayerHeaderCtrl',

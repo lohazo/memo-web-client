@@ -57,7 +57,6 @@
 
   function Welcome(WelcomeServices, Question, $location, AppSetting) {
     var Services = {
-      currentScreen: '',
       currentQuestion: {},
       currentData: {
         step: 0,
@@ -66,9 +65,7 @@
         result: {}
       }
     };
-    var Screens = ['', 'introScreen', 'dictionaryHintScreen', 'questionTranslateScreen',
-      'claimBonusScreen', 'plazaScreen', 'finishScreen'
-    ];
+
     var Settings = {
       header: {
         hide: false,
@@ -109,7 +106,6 @@
 
     function init() {
       // currentStep = ant's position
-      Services.currentScreen = '';
       Services.currentStep = 0;
       Services.answeredSteps = 0;
       Services.exam = {};
@@ -118,11 +114,6 @@
       };
       // init base Setting
       Services.settings = angular.copy(Settings);
-    }
-
-    function updateScreen(currentStep) {
-      Services.currentScreen = '';
-      Services.currentScreen = Screens[currentStep];
     }
 
     Services.start = function () {
@@ -164,6 +155,10 @@
     };
 
     Services.nextStep = function () {
+      if (Services.settings.footer.rightButtons.continueButton.disable) {
+        return;
+      }
+
       return WelcomeServices.nextStep({
         _id: Services.exam._id,
         current_step: Services.currentStep + 1,
