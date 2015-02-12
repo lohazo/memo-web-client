@@ -5,6 +5,7 @@
   top: 210px !important;
   position: fixed;
   outline: none;
+  border: 0;
   .progress-quiz-confirm-modal-inner {
     text-align: center;
     h3.title {
@@ -12,7 +13,7 @@
       font-size: 22px;
       font-weight: 700;
     }
-    .message{
+    .message {
       margin-top: 40px;
     }
     .button {
@@ -23,9 +24,6 @@
       &.accept {
         background-color: #9c0;
         color: #fff;
-        &:hover {
-          background-color: scale-color(#9c0, $lightness: -20%);
-        }
       }
       &.cancel {
         background-color: #fff;
