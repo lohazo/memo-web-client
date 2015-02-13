@@ -1,14 +1,3 @@
-.plaza {
-    .item {
-        img {
-            padding-top: 5px;
-        }
-        h5.name {
-            font-weight: 700;
-        }
-    }
-}
-
 .plaza-title {
     float: left;
 }
@@ -25,44 +14,14 @@
     color: #810C15;
     font-size: 15px;
     margin-top: 5px;
-}
-
-.button-back:hover {
-    background-color: #FB3;
-    color: #fff;
-}
-
-.plaza .item img {
-    padding: 0 !important;
-}
-
-.item_plaza {
-    min-height: 100px;
-    img.image_item_icon {
-        height: 60px;
-        // width: 38px;
-   
-    }
-    .name_item_plaza {
-        margin: 0;
-    }
-    .item_description {
-        margin-top: 5px;
-        font-size: 16px;
-        line-height: 19px;
-    }
-}
-
-a#vp {
-    font-size: 19px;
-    font-weight: bold;
-    margin-bottom: 0 !important;
-    img.rb {
-        margin-top: -4px;
+    &:hover {
+        background-color: #FB3;
+        color: #fff;
     }
 }
 
 .plaza-item {
+    @include grid-column($columns: 16);
     @include grid-row;
     padding: 10px;
     min-height: 130px;
@@ -91,18 +50,18 @@ a#vp {
         }
     }
     .plaza-item-buttons {
+        @include grid-column($columns: 4);
         .button.disabled {
             background-color: $iron;
             color: $white;
         }
     }
     .plaza-item-image {
+        @include grid-column($columns: 3);
         margin-bottom: 15px;
     }
     .plaza-item-intro {
         @include grid-column($columns: 9);
-        width: 100%;
-        padding-right: 0px;
         .plaza-item-name {
             display: block;
             font-weight: 700;
