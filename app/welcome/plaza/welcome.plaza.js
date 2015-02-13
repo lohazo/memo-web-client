@@ -12,7 +12,7 @@
 
     Plaza.get().then(function (response) {
       $scope.plaza = Plaza.data;
-      $scope.memoCoin = Plaza.data.virtual_money;
+      $scope.playerData.tutorial_memo_coin_bonus_amount = Plaza.data.virtual_money;
     });
 
     $scope.confirm = function (id) {
@@ -31,7 +31,7 @@
         if ($scope[msg] && $scope[msg] instanceof Function) $scope[msg](id);
       });
     }
-    
+
     $scope.buyGuide = function (id) {
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
@@ -55,7 +55,7 @@
         quantity: 1
       }).then(function (response) {
         $scope.plaza = Plaza.data;
-        $scope.memoCoin = Plaza.data.virtual_money;
+        $scope.playerData.tutorial_memo_coin_bonus_amount = Plaza.data.virtual_money;
       });
     };
   }
@@ -71,7 +71,7 @@
       return {
         restrict: 'EA',
         scope: {
-          memoCoin: "="
+          playerData: '='
         },
         controller: 'WelcomePlazaCtrl',
         controllerAs: 'plaza',

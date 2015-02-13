@@ -38,7 +38,6 @@
     $scope.$watch('playerData', function () {
       console.log($scope.playerData);
     });
-
   }
 
   function WelcomePlayerFooterCtrl($scope) {

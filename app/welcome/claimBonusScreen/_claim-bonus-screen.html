@@ -8,7 +8,7 @@
       <div class="memo-coin-badge">
         <span class="memo-coin-money" ng-bind="claimBonusScreen.rewardAmount"></span>
       </div>
-      <p class="memo-coin-intro"><b class="orange">MemoCoin</b> là đơn vị tiền tệ trong Memo, giúp bạn mua các vật phẩm thú vị trong <a>Plaza</a></p>
+      <p class="memo-coin-intro" ng-bind-html="claimBonusScreen.rewardTooltip"></p>
       <a title="" class="large-7 radius third memo-button claim-reward" ng-click="claimBonusScreen.claimBonus()"><span style="margin-left:20px;">Tham quan Plaza</span></a>
     </div>
   </div>
