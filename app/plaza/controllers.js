@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function PlazaCtrl($scope, $location, Plaza, Profile, $modal) {
+  function PlazaCtrl($scope, $sce, $location, Plaza, Profile, $modal) {
     $scope.profile = Profile.user;
     $scope.profileDetail = Profile.detail;
     $scope.expChart = {
@@ -77,6 +77,26 @@
         }).then(function () {
           if (item._id === 'progress_quiz') {
             $location.url('/progressquiz');
+          } else {
+            // 
+            console.log($scope.trustedResource);
+            $scope.ClaimUrl = data.claim_guide_url;
+            $scope.trustedResource = $sce.trustAsResourceUrl($scope.ClaimUrl);
+            // 
+            var modalInstance = $modal.open({
+              templateUrl: 'plaza/_claim_guide.html',
+              controller: 'ProgressQuizConfirmModalCtrl',
+              windowClass: 'buy-guide-popup-modal',
+              resolve: {
+                id: function () {
+                  return id;
+                }
+              }
+            });
+
+            modalInstance.result.then(function (msg) {
+              if ($scope[msg] && $scope[msg] instanceof Function) $scope[msg](id);
+            });
           }
         });
       }
@@ -96,6 +116,10 @@
     $scope.buy = function () {
       $modalInstance.close("buy");
     };
+
+    $scope.dismissReport = function() {
+              $modalInstance.dismiss('cancel');
+    };
   }
 
   function BuyGuideModalCtrl($scope, $sce, $modalInstance, id, Plaza) {
@@ -107,7 +131,7 @@
   }
 
   angular.module('plaza.controllers', [])
-    .controller('PlazaCtrl', ['$scope', '$location', 'Plaza', 'Profile', '$modal', PlazaCtrl])
+    .controller('PlazaCtrl', ['$scope', '$sce', '$location', 'Plaza', 'Profile', '$modal', PlazaCtrl])
     .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
       ProgressQuizConfirmModalCtrl
     ])

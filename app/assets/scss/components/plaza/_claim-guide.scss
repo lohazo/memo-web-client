@@ -1,0 +1,25 @@
+.claim-guide-modal {
+  min-height: 500px !important;
+  outline: none;
+  min-width: 500px;
+  border: 0;
+  position: fixed;
+  top: 110px !important;
+  .claim-guide-iframe {
+    height: 450px;
+    width: 95%;
+    border: 0;
+    top: 40px !important;
+    position: fixed;
+  }
+  .button-close {
+    font-size: 30px;
+    line-height: 1;
+    position: fixed;
+    top: 2px !important;
+    right: 10px;
+    color: #aaa;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
