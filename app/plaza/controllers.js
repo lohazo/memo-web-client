@@ -63,6 +63,10 @@
       return (["special"].indexOf(item.section) >= 0);
     };
 
+    $scope.reload = function () {
+      return Plaza.get();
+    };
+
     $scope.buy = function (id) {
       var data = {};
       var item = $scope.plaza.items.filter(function (item) {
@@ -81,6 +85,7 @@
               templateUrl: 'plaza/_claim_guide.html',
               controller: 'ClaimGuideModalCtrl',
               windowClass: 'buy-guide-popup-modal',
+              backdrop: 'static',
               resolve: {
                 id: function () {
                   return id;
@@ -119,7 +124,7 @@
     };
 
     $scope.dismissReport = function() {
-      $modalInstance.dismiss('cancel');
+      $modalInstance.close("reload");
     };
     $scope.trustedResource = $sce.trustAsResourceUrl(Plaza.data.claim_guide_url);
   }
