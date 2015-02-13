@@ -1,15 +1,14 @@
 <div class="player-inner">
   <section class="player-container">
   <div class="context-view" player-context-view></div>
-  <header class="player-header" settings="player.data.settings.header" current-step="player.data.currentStep" answered-steps="player.data.answeredSteps" player-data="welcomePlayer" skip="player.skip()" ng-class="{'hide': player.data.settings.header.hide}" welcome-player-header></header>
-  {{player.data.memo_coin_bonus_amount}}
+  <header class="player-header" settings="player.data.settings.header" current-step="player.data.currentStep" answered-steps="player.data.answeredSteps" player-data-exam="player.data.exam" skip="player.skip()" ng-class="{'hide': player.data.settings.header.hide}" welcome-player-header></header>
   <div class="player-main" ng-switch on="player.data.currentStep">
-    <div class="finish-screen" welcome-finish-screen finish="player.data.finish()" ng-switch-when="4"></div>
-    <div class="welcome-plaza-screen" welcome-plaza memo-coin="data.memo_coin_bonus_amount" ng-switch-when="3" ng-if="player.data.currentData.claimedBonus"></div>
+    <div class="finish-screen" welcome-finish-screen player-data="player.data" finish="player.data.finish()" ng-switch-when="4"></div>
+    <div class="welcome-plaza-screen" welcome-plaza player-data="player.data" ng-switch-when="3" ng-if="player.data.currentData.claimedBonus"></div>
     <div class="claim-bonus-screen" claim-bonus-screen claim-bonus="player.data.claimBonus()" player-data="player.data" ng-switch-when="3" ng-if="!player.data.currentData.claimedBonus"></div>
     <div class="question" ng-class="questionScreen.type" welcome-question-screen question="player.data.exam.translate_tutorial" answer="player.data.answer()" user-answer="player.data.currentData.answer.text" continue-button="player.data.settings.footer.rightButtons.continueButton" ng-switch-when="2"></div>
     <div class="dictionary-hint-screen" dictionary-hint-screen question="player.data.exam.dictionary_tutorial" current-data="player.data.currentQuestion" player-data="player.data" answer="player.data.answer()" ng-switch-when="1"></div>
-    <div class="intro-screen" intro-screen message="{{player.data.exam.welcome_message}}" ng-switch-when="0"></div>
+    <div class="intro-screen" intro-screen message="{{player.data.exam.tutorial_welcome_message}}" ng-switch-when="0"></div>
   </div>
   <footer class="player-footer"
     ng-class="{'hide': player.data.settings.footer.hide,

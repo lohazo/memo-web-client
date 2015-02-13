@@ -6,10 +6,13 @@
         <div class="left">
           <progress-quiz-quit-link quit-link-text="Thoát" quit-link-hide="player.progressQuiz.settings.header.left.quitLink.hide" skip="player.progressQuiz.quit()"></progress-quiz-quit-link>
         </div>
+        <div class="right">
+          <span style="line-height:80px;font-size:22px;" ng-if="!player.progressQuiz.settings.header.right.questionIndicator.hide">Câu hỏi số: {{player.progressQuiz.currentData.current_question || 0}}</span>
+        </div>
       </header>
       <div class="player-main" ng-switch on="player.progressQuiz.currentData.question.type">
         <div class="quiz-intro-screen" progress-quiz-intro-screen message="{{player.progressQuiz.currentData.message}}" description="{{player.progressQuiz.currentData.description}}" ng-if="player.progressQuiz.currentData.question.type" ng-switch-default></div>
-        <div class="question" welcome-question-screen question="player.progressQuiz.currentData.question" user-answer="player.progressQuiz.userData.userAnswer" continue-button="player.progressQuiz.settings.footer.right.continueButton" answer="player.progressQuiz.answer()" ng-switch-when="translate" tabindex="1"></div>
+        <div class="question translate" welcome-question-screen question="player.progressQuiz.currentData.question" user-answer="player.progressQuiz.userData.userAnswer" continue-button="player.progressQuiz.settings.footer.right.continueButton" answer="player.progressQuiz.answer()" ng-switch-when="translate" tabindex="1"></div>
         <div class="question listen" quiz-question-listen question="player.progressQuiz.currentData.question" user-answer="player.progressQuiz.userData.userAnswer" continue-button="player.progressQuiz.settings.footer.right.continueButton" answer="player.progressQuiz.answer()" ng-switch-when="listen" tabindex="1"></div>
         <div class="quiz-finish-screen" progress-quiz-finish-screen data="player.progressQuiz.currentData" ng-switch-when="finish"></div>
       </div>

@@ -4,16 +4,14 @@
   </div>
   <div class="large-11 columns">
     <div class="row">
-      <div class="warning-text">
-        {{alertMessage}}
-      </div>
+      <div class="warning-text">{{messages.alertMessage}}</div>
     </div>
     <div class="row">
       <div class="large-8 columns">
-        <a title="" class="radius button quit-button expand" ng-click="quit()">Bỏ qua</a>
+        <a title="" class="radius button quit-button expand" ng-click="quit()">{{messages.confirmButton}}</a>
       </div>
       <div class="large-8 columns">
-        <a title="" class="radius button close-button expand" ng-click="close()">Quay lại</a>
+        <a title="" class="radius button close-button expand" ng-click="close()">{{messages.cancelButton}}</a>
       </div>
     </div>
   </div>

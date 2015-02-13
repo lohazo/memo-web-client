@@ -39,6 +39,7 @@
             position: relative;
             .token {
               margin-right: 5px;
+              display: inline-flex;
               &.objective {
                 border-bottom: 1px dotted $iron;
               }

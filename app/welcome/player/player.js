@@ -35,10 +35,6 @@
       return new Array(num);
     };
     ctrl.skip = $scope.skip;
-    $scope.$watch('playerData', function () {
-      console.log($scope.playerData);
-    });
-
   }
 
   function WelcomePlayerFooterCtrl($scope) {
@@ -91,7 +87,7 @@
           settings: "=",
           currentStep: "=",
           answeredSteps: "=",
-          playerData: "=",
+          playerDataExam: "=",
           skip: "&"
         },
         controller: 'WelcomePlayerHeaderCtrl',

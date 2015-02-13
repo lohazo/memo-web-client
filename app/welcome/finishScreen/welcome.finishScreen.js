@@ -12,6 +12,7 @@
       return {
         restrict: 'EA',
         scope: {
+          playerData: '=',
           finish: "&"
         },
         controller: 'FinishScreenCtrl',
