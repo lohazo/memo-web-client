@@ -68,7 +68,6 @@
       var item = $scope.plaza.items.filter(function (item) {
         return item._id === id;
       })[0];
-
       if (item) {
         data.base_item_id = id;
         data.quantity = 1;
@@ -77,20 +76,15 @@
         }).then(function () {
           if (item._id === 'progress_quiz') {
             $location.url('/progressquiz');
-          } else {
-            // 
-            console.log($scope.trustedResource);
-            $scope.ClaimUrl = data.claim_guide_url;
-            $scope.trustedResource = $sce.trustAsResourceUrl($scope.ClaimUrl);
-            // 
+          } else if ($scope.plaza.claim_guide_url) {
             var modalInstance = $modal.open({
               templateUrl: 'plaza/_claim_guide.html',
-              controller: 'ProgressQuizConfirmModalCtrl',
+              controller: 'ClaimGuideModalCtrl',
               windowClass: 'buy-guide-popup-modal',
               resolve: {
                 id: function () {
                   return id;
-                }
+                },
               }
             });
 
@@ -117,9 +111,17 @@
       $modalInstance.close("buy");
     };
 
-    $scope.dismissReport = function() {
-              $modalInstance.dismiss('cancel');
+  }
+
+  function ClaimGuideModalCtrl($scope, $sce, $modalInstance, id, Plaza) {
+    $scope.buy = function (data) {
+      $modalInstance.close("buy");
     };
+
+    $scope.dismissReport = function() {
+      $modalInstance.dismiss('cancel');
+    };
+    $scope.trustedResource = $sce.trustAsResourceUrl(Plaza.data.claim_guide_url);
   }
 
   function BuyGuideModalCtrl($scope, $sce, $modalInstance, id, Plaza) {
@@ -132,8 +134,11 @@
 
   angular.module('plaza.controllers', [])
     .controller('PlazaCtrl', ['$scope', '$sce', '$location', 'Plaza', 'Profile', '$modal', PlazaCtrl])
-    .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
+    .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance','id', 'Plaza',
       ProgressQuizConfirmModalCtrl
+    ])
+    .controller('ClaimGuideModalCtrl', ['$scope', '$sce', '$modalInstance','id', 'Plaza',
+      ClaimGuideModalCtrl
     ])
     .controller('BuyGuideModalCtrl', ['$scope', '$sce', '$modalInstance', 'id', 'Plaza',
       BuyGuideModalCtrl
