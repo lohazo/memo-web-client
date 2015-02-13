@@ -19,6 +19,11 @@
             hide: false,
             text: ''
           }
+        },
+        right: {
+          questionIndicator: {
+            hide: true,
+          }
         }
       },
       footer: {
@@ -57,6 +62,7 @@
           .type.split('|')[0];
         progressQuiz.settings.footer.right.continueButton.text = 'Kiểm tra';
         progressQuiz.settings.footer.right.continueButton.disable = true;
+        progressQuiz.settings.header.right.questionIndicator.hide = false;
         Sound.playCorrectSound();
         return;
       }
