@@ -21,7 +21,7 @@
       data.auth_token = $localStorage.auth.user.auth_token;
 
       return $http.post(API + '/tutorial/' + data._id + '/next_step', data, {
-        ignoreLoadingBar: true
+        ignoreLoadingBar: false
       });
     };
 
@@ -182,7 +182,8 @@
           Services.settings.header.right.quitLink.hide = true;
         } else if (Services.currentStep === 4) {
           Services.settings.footer.rightButtons.hide = true;
-          Services.settings.header.right.memoCoin.hide = false;
+          Services.settings.header.right.memoCoin.hide = true;
+          Services.answeredSteps += 1;
         }
       });
     };
