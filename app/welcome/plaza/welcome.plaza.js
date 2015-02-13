@@ -2,17 +2,9 @@
   'use strict';
 
   function WelcomePlazaCtrl($scope, Plaza, $location, Profile, $modal) {
-    $scope.powerUpSectionFilter = function (item) {
-      return (["power-ups", "practice"].indexOf(item.section) >= 0);
-    };
-
-    $scope.specialSectionFilter = function (item) {
-      return (["special"].indexOf(item.section) >= 0);
-    };
-
     Plaza.get().then(function (response) {
       $scope.plaza = Plaza.data;
-      $scope.playerData.tutorial_memo_coin_bonus_amount = Plaza.data.virtual_money;
+      $scope.playerData.exam.tutorial_memo_coin_bonus_amount = Plaza.data.virtual_money;
     });
 
     $scope.confirm = function (id) {
@@ -55,7 +47,7 @@
         quantity: 1
       }).then(function (response) {
         $scope.plaza = Plaza.data;
-        $scope.playerData.tutorial_memo_coin_bonus_amount = Plaza.data.virtual_money;
+        $scope.playerData.exam.tutorial_memo_coin_bonus_amount = Plaza.data.virtual_money;
       });
     };
   }

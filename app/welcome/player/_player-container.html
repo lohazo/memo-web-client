@@ -1,7 +1,7 @@
 <div class="player-inner">
   <section class="player-container">
   <div class="context-view" player-context-view></div>
-  <header class="player-header" settings="player.data.settings.header" current-step="player.data.currentStep" answered-steps="player.data.answeredSteps" player-data="player.data" skip="player.skip()" ng-class="{'hide': player.data.settings.header.hide}" welcome-player-header></header>
+  <header class="player-header" settings="player.data.settings.header" current-step="player.data.currentStep" answered-steps="player.data.answeredSteps" player-data-exam="player.data.exam" skip="player.skip()" ng-class="{'hide': player.data.settings.header.hide}" welcome-player-header></header>
   <div class="player-main" ng-switch on="player.data.currentStep">
     <div class="finish-screen" welcome-finish-screen player-data="player.data" finish="player.data.finish()" ng-switch-when="4"></div>
     <div class="welcome-plaza-screen" welcome-plaza player-data="player.data" ng-switch-when="3" ng-if="player.data.currentData.claimedBonus"></div>
