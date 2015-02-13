@@ -65,7 +65,7 @@
 
     $scope.reload = function () {
       Plaza.get().then(function (response) {
-      $scope.plaza = Plaza.data;
+        $scope.plaza = Plaza.data;
       });
     };
 
@@ -125,7 +125,7 @@
       $modalInstance.close("buy");
     };
 
-    $scope.dismissReport = function() {
+    $scope.dismissReport = function () {
       $modalInstance.close("reload");
     };
     $scope.trustedResource = $sce.trustAsResourceUrl(Plaza.data.claim_guide_url);
@@ -141,10 +141,10 @@
 
   angular.module('plaza.controllers', [])
     .controller('PlazaCtrl', ['$scope', '$sce', '$location', 'Plaza', 'Profile', '$modal', PlazaCtrl])
-    .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance','id', 'Plaza',
+    .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
       ProgressQuizConfirmModalCtrl
     ])
-    .controller('ClaimGuideModalCtrl', ['$scope', '$sce', '$modalInstance','id', 'Plaza',
+    .controller('ClaimGuideModalCtrl', ['$scope', '$sce', '$modalInstance', 'id', 'Plaza',
       ClaimGuideModalCtrl
     ])
     .controller('BuyGuideModalCtrl', ['$scope', '$sce', '$modalInstance', 'id', 'Plaza',

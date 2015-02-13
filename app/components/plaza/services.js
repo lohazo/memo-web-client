@@ -73,6 +73,7 @@
     Plaza.get = function (data) {
       return PlazaServices.get(data).then(function (response) {
         Plaza.data = response.data;
+        $localStorage.auth.profile_detail.virtual_money = response.data.virtual_money;
       });
     };
 
