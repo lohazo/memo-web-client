@@ -18,6 +18,8 @@
      * data = {_id: ,current_step, next_step_token}
      */
     Services.nextStep = function (data) {
+      if (!data.next_step_token) return;
+
       data.auth_token = $localStorage.auth.user.auth_token;
 
       return $http.post(API + '/tutorial/' + data._id + '/next_step', data, {
@@ -56,6 +58,7 @@
   }
 
   function Welcome(WelcomeServices, Question, $location, AppSetting) {
+    var isLoading = false;
     var Services = {
       currentQuestion: {},
       currentData: {
@@ -118,6 +121,7 @@
 
     Services.start = function () {
       init();
+      isLoading = true;
       return WelcomeServices.start().then(function (response) {
         Services.exam = response.data;
         Services.settings.footer.rightButtons.continueButton.text =
@@ -125,6 +129,7 @@
         Services.settings.footer.rightButtons.continueButton.disable = false;
         Services.settings.footer.leftButtons.hide = true;
         Services.answeredSteps += 1;
+        isLoading = false;
         // Services.currentStep = 3;
         // Services.currentData.claimedBonus = true;
       }, function (response) {
@@ -157,9 +162,13 @@
     };
 
     Services.nextStep = function () {
+      if (isLoading) return;
+
       if (Services.settings.footer.rightButtons.continueButton.disable) {
         return;
       }
+
+      isLoading = true;
 
       return WelcomeServices.nextStep({
         _id: Services.exam._id,
@@ -185,10 +194,14 @@
           Services.settings.header.right.memoCoin.hide = true;
           Services.answeredSteps += 1;
         }
+
+        isLoading = false;
       });
     };
 
     Services.claimBonus = function () {
+      if (isLoading) return;
+
       return WelcomeServices.claimBonus({
         _id: Services.exam._id,
         current_step: Services.currentStep + 1
@@ -202,6 +215,8 @@
     };
 
     Services.skip = function () {
+      if (isLoading) return;
+
       return WelcomeServices.skip({
         _id: Services.exam._id,
         current_step: Services.currentStep + 1
@@ -213,6 +228,8 @@
     };
 
     Services.finish = function () {
+      if (isLoading) return;
+
       return WelcomeServices.finish({
         _id: Services.exam._id
       }).then(function (response) {
