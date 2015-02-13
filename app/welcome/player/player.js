@@ -21,6 +21,9 @@
     };
 
     $scope.click = ctrl.click;
+    $scope.$watch('welcomePlayer', function () {
+      ctrl.data = $scope.welcomePlayer;
+    });
   }
 
   function WelcomePlayerHeaderCtrl($scope) {
@@ -32,6 +35,9 @@
       return new Array(num);
     };
     ctrl.skip = $scope.skip;
+    $scope.$watch('playerData', function () {
+      console.log($scope.playerData);
+    });
 
   }
 

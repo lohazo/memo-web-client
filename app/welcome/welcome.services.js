@@ -71,11 +71,11 @@
         hide: false,
         right: {
           quitLink: {
-            hide: false,
+            hide: true,
             text: 'Bỏ qua bài hướng dẫn'
           },
           memoCoin: {
-            hide: true,
+            hide: false,
             text: ''
           }
         }
@@ -120,11 +120,13 @@
       init();
       return WelcomeServices.start().then(function (response) {
         Services.exam = response.data;
-        Services.settings.footer.rightButtons.continueButton.text =
-          'Bắt đầu bài hướng dẫn';
-        Services.settings.footer.rightButtons.continueButton.disable = false;
-        Services.settings.footer.leftButtons.hide = true;
-        Services.answeredSteps += 1;
+        // Services.settings.footer.rightButtons.continueButton.text =
+        //   'Bắt đầu bài hướng dẫn';
+        // Services.settings.footer.rightButtons.continueButton.disable = false;
+        // Services.settings.footer.leftButtons.hide = true;
+        // Services.answeredSteps += 1;
+        Services.currentStep = 3;
+        Services.currentData.claimedBonus = true;
       }, function (response) {
         $location.url('/');
         AppSetting.disableTour();

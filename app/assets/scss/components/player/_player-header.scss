@@ -6,6 +6,16 @@
       min-height: 80px;
       .player-header-right {
         float: right;
+        .memo-coin-badge {
+          background: url("assets/img/lesson-memos-big.png") no-repeat;
+          background-size: contain;
+          display: inline-block;
+          vertical-align: text-bottom;
+          &.small {
+            width: 24px;
+            height: 25px;
+          }
+        }
       }
       .progress {
         background: none;

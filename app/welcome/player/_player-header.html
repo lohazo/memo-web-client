@@ -6,5 +6,6 @@
 <div class="player-header-right">
   <welcome-quit-link quit-link-text="{{playerHeader.settings.right.quitLink.text}}" quit-link-message="{{playerData.exam.skip_alert_message}}" quit-link-hide="settings.right.quitLink.hide" skip="playerHeader.skip()">
   </welcome-quit-link>
-  <welcome-memo-coin memo-coin="5" hide="settings.right.memoCoin.hide"></welcome-memo-coin>
+  {{playerData.exam.memo_coin_bonus_amount}}
+  <welcome-memo-coin memo-coin="playerData.exam.memo_coin_bonus_amount" hide="settings.right.memoCoin.hide"></welcome-memo-coin>
 </div>

@@ -12,6 +12,7 @@
 
     Plaza.get().then(function (response) {
       $scope.plaza = Plaza.data;
+      $scope.memoCoin = Plaza.data.virtual_money;
     });
 
     $scope.buyGuide = function (id) {
@@ -37,21 +38,24 @@
         quantity: 1
       }).then(function (response) {
         $scope.plaza = Plaza.data;
+        $scope.memoCoin = Plaza.data.virtual_money;
       });
     };
   }
 
-  function WelcomeMemoCoinCtrl($scope) {
-    var ctrl = this;
-    ctrl.coin = $scope.memoCoin;
-  }
+  function WelcomeMemoCoinCtrl($scope) {}
 
   angular.module('welcome.plaza', []);
   angular.module('welcome.plaza')
-    .controller('WelcomePlazaCtrl', ['$scope', 'Plaza', '$location', 'Profile', '$modal', WelcomePlazaCtrl])
+    .controller('WelcomePlazaCtrl', ['$scope', 'Plaza', '$location', 'Profile', '$modal',
+      WelcomePlazaCtrl
+    ])
     .directive('welcomePlaza', function () {
       return {
         restrict: 'EA',
+        scope: {
+          memoCoin: "="
+        },
         controller: 'WelcomePlazaCtrl',
         controllerAs: 'plaza',
         templateUrl: 'welcome/plaza/_plaza.html'
@@ -62,15 +66,16 @@
       return {
         restrict: 'EA',
         scope: {
-          memoCoin: "@",
+          memoCoin: "=",
           hide: "="
         },
         replace: true,
         controller: 'WelcomeMemoCoinCtrl',
         controllerAs: 'welcomeMemoCoin',
         template: [
-          '<span ng-class="{\'hide\': hide}" style="line-height:80px;vertical-align:middle">',
-          'Bạn đang có {{welcomeMemoCoin.coin}} MemoCoin', '</span>'
+          '<span ng-class="{\'hide\': hide}" style="line-height:80px;vertical-align:middle;padding:10px;background:#ffbb33;color:#fff;font-size:20px;">',
+          'Bạn đang có {{memoCoin}} <span class="memo-coin-badge small"></span>',
+          '</span>'
         ].join('')
       };
     });
