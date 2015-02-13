@@ -77,11 +77,16 @@
     };
 
     Plaza.buy = function (data) {
+      var claimUrl;
       return PlazaServices.buy(data)
         .then(function (response) {
           $localStorage.auth.profile_detail.virtual_money = response.data.virtual_money;
+          claimUrl = response.data.claim_guide_url;
         })
-        .then(Plaza.get);
+        .then(Plaza.get)
+        .then(function () {
+          Plaza.data.claim_guide_url = claimUrl;
+        });
     };
 
     Plaza.use = function (data) {
