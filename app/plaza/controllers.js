@@ -64,7 +64,9 @@
     };
 
     $scope.reload = function () {
-      return Plaza.get();
+      Plaza.get().then(function (response) {
+      $scope.plaza = Plaza.data;
+      });
     };
 
     $scope.buy = function (id) {
