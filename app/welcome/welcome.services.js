@@ -182,6 +182,7 @@
           Services.settings.header.right.quitLink.hide = true;
         } else if (Services.currentStep === 4) {
           Services.settings.footer.rightButtons.hide = true;
+          Services.settings.header.right.memoCoin.hide = false;
         }
       });
     };
