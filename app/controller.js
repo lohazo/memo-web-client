@@ -15,6 +15,7 @@
         trial: data.is_trial
       };
       $localStorage.auth = $scope.auth;
+      $location.path('/');
     }
 
     function logoutConfirmed(e, data) {

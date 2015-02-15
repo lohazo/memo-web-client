@@ -33,6 +33,13 @@
       ignoreLoadingBar: true
     };
 
+    function transformRequest(obj) {
+      var str = [];
+      for (var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      return str.join("&");
+    }
+
     tracker.init = function () {
       if (isCalled < 1) {
         tracker.createFrame();
@@ -72,7 +79,13 @@
       data.browsing_domain = document.URL;
       data.referrer_url = document.referrer;
 
-      return $http.post(BASE_URL + '/users/track', data, httpConfig)
+      return $http.post(BASE_URL + '/users/track', data, {
+          ignoreLoadingBar: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+          },
+          transformRequest: transformRequest
+        })
         .success(function (response) {
           localStorage.eco_user = JSON.stringify(response);
           if (callback instanceof Function) callback(response);
@@ -93,7 +106,13 @@
         submitted_form_data: JSON.stringify(data)
       };
 
-      $http.post(BASE_URL + '/users/track', requestData, httpConfig)
+      $http.post(BASE_URL + '/users/track', requestData, {
+          ignoreLoadingBar: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+          },
+          transformRequest: transformRequest
+        })
         .success(function (response) {
           $cookies.eco_uuid = response;
           if (callback instanceof Function) callback(response);
@@ -130,7 +149,13 @@
         submitted_form_data: JSON.stringify(data)
       };
 
-      $http.post(BASE_URL + '/users/track', requestData, httpConfig)
+      $http.post(BASE_URL + '/users/track', requestData, {
+          ignoreLoadingBar: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+          },
+          transformRequest: transformRequest
+        })
         .success(function (response) {
           $cookies.eco_uuid = response;
           if (callback instanceof Function) callback(response);
