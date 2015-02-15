@@ -5,7 +5,7 @@ angular.module('skill.tree', [])
     var TreeBuilder = {};
 
     TreeBuilder.getIconSets = function () {
-      TreeBuilder.iconSets = $localStorage.appSharedSettings.base_skill_icon_urls;
+      TreeBuilder.iconSets = $localStorage.appSharedSettings.web_skill_base_icon_urls;
     };
 
     TreeBuilder.getCheckpoints = function () {
