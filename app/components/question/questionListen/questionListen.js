@@ -49,7 +49,7 @@
     };
   }
 
-  angular.module('question.listen', [])
+  angular.module('question.listen')
     .directive('quizQuestionListen', questionListen)
     .controller('QuizQuestionListenCtrl', ['$scope', 'ngAudio', QuestionListenCtrl]);
 }(window.angular));
