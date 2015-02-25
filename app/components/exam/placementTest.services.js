@@ -87,11 +87,20 @@
       submitAnswer: function (data) {
         var deferred = $q.defer();
 
+        // var data = {
+        //   platform: 'web',
+        //   type: 'placement_test',
+        //   auth_token: data.auth_token,
+        //   speak_enabled: false,
+        //   answers: '54ed743a6d61693d7e490000',
+        //   exam_token: data.exam_token
+        // };
+
         data.platform = 'web';
         data.speak_enabled = false;
         type: 'placement_test';
         auth_token: data.auth_token;
-        answer: 'question_log_id : true';
+        // answer = question_log_id : true;
         exam_token: data.exam_token;
 
         $http.post(API + '/adaptive_tests/submit_answer', data, {

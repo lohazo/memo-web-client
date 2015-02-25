@@ -237,8 +237,10 @@
         auth_token: auth_token,
         exam_token: data.examToken,
         device: 'web',
-        answers: data.logs
+        answers: data.logs,
+        base_item_id: data.base_item_id
       };
+      console.log(data);
 
       if (data.type === "lesson") {
         requestData.lesson_number = data.lesson_number;
