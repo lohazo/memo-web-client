@@ -2,7 +2,7 @@
   'use strict';
 
   function MemoTracking($http, $q, $localStorage, APP_VERSION) {
-    var BASE_URL = 'http://services.memo.edu.vn/trackings/track';
+    var BASE_URL = 'http://staging.memo.edu.vn/trackings/track';
     var tracker = {};
 
     tracker.track = function (eventName, data, callback) {

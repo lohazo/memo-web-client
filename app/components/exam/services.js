@@ -268,11 +268,12 @@
       var auth_token = $localStorage.auth.user.auth_token;
 
       var requestData = {
-        type: data.type,
+        // type: data.type,
         auth_token: auth_token,
-        exam_token: data.examToken,
-        device: 'web',
-        answers: data.logs,
+        // exam_token: data.examToken,
+        type: 'checkpoint',
+        platform: 'web',
+        // answers: data.logs,
         checkpoint_position: data.checkpoint_position
       };
 

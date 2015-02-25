@@ -50,11 +50,10 @@
           // };
         });
     }
-
     return PlacementTest;
   }
 
-  function PlacementTestServices($http, $q, API_PHP) {
+  function PlacementTestServices($http, $q, API) {
     function transformRequest(obj) {
       var str = [];
       for (var p in obj)
@@ -67,12 +66,13 @@
         var deferred = $q.defer();
 
         var requestData = {
-          device: 'web',
+          platform: 'web',
+          type: 'placement_test',
           auth_token: data.auth_token,
           speak_enabled: false
         };
 
-        $http.post(API_PHP + '/placement_test/start', requestData, {
+        $http.post(API + '/adaptive_tests/start', requestData, {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
             },
@@ -87,10 +87,14 @@
       submitAnswer: function (data) {
         var deferred = $q.defer();
 
-        data.device = 'web';
+        data.platform = 'web';
         data.speak_enabled = false;
+        type: 'placement_test';
+        auth_token: data.auth_token;
+        answer: 'question_log_id : true';
+        exam_token: data.exam_token;
 
-        $http.post(API_PHP + '/placement_test/submit_answer', data, {
+        $http.post(API + '/adaptive_tests/submit_answer', data, {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
             },
@@ -110,6 +114,6 @@
     .factory('PlacementTestFactory', ['PlacementTestServices', 'Mixpanel', 'MemoTracking',
       PlacementTestFactory
     ])
-    .factory('PlacementTestServices', ['$http', '$q', 'API_PHP', PlacementTestServices]);
+    .factory('PlacementTestServices', ['$http', '$q', 'API', PlacementTestServices]);
 
 }(window.angular));
