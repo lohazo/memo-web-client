@@ -117,6 +117,7 @@
           PlazaServices.use(requestData)
             .then(function (response) {
               delete availableItems[0];
+              $localStorage.auth.base_item_id = item;
             });
         }
       }
@@ -237,7 +238,8 @@
         auth_token: auth_token,
         exam_token: data.examToken,
         device: 'web',
-        answers: data.logs
+        answers: data.logs,
+        base_item_id: $localStorage.auth.base_item_id
       };
 
       if (data.type === "lesson") {
