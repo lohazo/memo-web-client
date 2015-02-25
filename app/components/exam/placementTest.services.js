@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function PlacementTestFactory(PlacementServices, Mixpanel, MemoTracker) {
+  function PlacementTestFactory(PlacementServices, Mixpanel, MemoTracker, $localStorage) {
     var PlacementTest = {};
 
     PlacementTest.start = function (data) {
@@ -10,6 +10,8 @@
         .then(function (response) {
           PlacementTest.question = response.data;
           MemoTracker.track('start exam placement test');
+          console.log(response.data.placement_test_log_id);
+          $localStorage.placementtest = response.data.placement_test_log_id;
         });
     };
 
@@ -53,7 +55,7 @@
     return PlacementTest;
   }
 
-  function PlacementTestServices($http, $q, API) {
+  function PlacementTestServices($http, $q, API, $localStorage) {
     function transformRequest(obj) {
       var str = [];
       for (var p in obj)
@@ -89,12 +91,13 @@
 
         data.platform = 'web';
         data.speak_enabled = false;
-        type: 'placement_test';
         auth_token: data.auth_token;
-        answer: 'question_log_id : true';
+        answer: data.logs;
         exam_token: data.exam_token;
+        data.id= $localStorage.placementtest;
+        data.type= 'placement_test';
 
-        $http.post(API + '/adaptive_tests/submit_answer', data, {
+        $http.post(API + '/adaptive_tests/' + data.id + '/submit_answer', data, {
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
             },
@@ -111,9 +114,9 @@
 
   angular.module('placement.services', [])
   angular.module('placement.services')
-    .factory('PlacementTestFactory', ['PlacementTestServices', 'Mixpanel', 'MemoTracking',
+    .factory('PlacementTestFactory', ['PlacementTestServices', 'Mixpanel', 'MemoTracking', '$localStorage',
       PlacementTestFactory
     ])
-    .factory('PlacementTestServices', ['$http', '$q', 'API', PlacementTestServices]);
+    .factory('PlacementTestServices', ['$http', '$q', 'API', '$localStorage', PlacementTestServices]);
 
 }(window.angular));
