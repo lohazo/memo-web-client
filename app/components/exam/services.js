@@ -116,7 +116,7 @@
           hearts.remaining = hearts.remaining + 1;
           PlazaServices.use(requestData)
             .then(function (response) {
-              delete availableItems[item];
+              delete availableItems[0];
             });
         }
       }

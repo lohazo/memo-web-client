@@ -25,8 +25,8 @@
         <div class="small-4 columns" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess'">
           <div class="row">
             <div class="small-5 columns inventory">
-              <span class="item" ng-repeat="(key, val) in availableItems">
-              <img ng-src="assets/img/{{key}}.png" style="width:25px;height:35px;" ng-click="useItem(key)" />
+              <span class="item" ng-repeat="item in availableItems">
+              <img ng-if="item" ng-src="assets/img/{{item.base_item_id}}.png" style="width:25px;height:35px;" ng-click="useItem(item.base_item_id)" />
               </span>
             </div>
             <div class="small-11 columns hearts">
