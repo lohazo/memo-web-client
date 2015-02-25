@@ -12,6 +12,11 @@
         'auth_token': $localStorage.auth.user.auth_token
       };
 
+      var endpoint = API + '/users/' + requestData._id + '/profile_details?auth_token=' +
+        requestData.auth_token;
+
+      endpoint += data.friend_id && data.friend_id.length > 0 ? '&friend_id=' + data.friend_id : '';
+
       $http.get(API + '/users?auth_token=' + requestData.auth_token)
         .then(function (response) {
           deferred.resolve(response);
@@ -34,8 +39,14 @@
         'auth_token': $localStorage.auth.user.auth_token
       };
 
+      if (data.friend_id) {
+        requestData.friend_id = data.friend_id;
+      }
+
       var endpoint = API + '/users/' + requestData._id + '/profile_details?auth_token=' +
         requestData.auth_token;
+
+      endpoint += data.friend_id && data.friend_id.length > 0 ? '&friend_id=' + data.friend_id : '';
 
       $http.get(endpoint)
         .then(function (response) {
