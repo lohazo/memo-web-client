@@ -3,10 +3,10 @@
   'use strict';
 
   angular.module('question.services', ['diff-match-patch'])
-    .factory('Question', ['dmp', function(dmp) {
-      var Question = function() {};
+    .factory('Question', ['dmp', function (dmp) {
+      var Question = function () {};
 
-      Question.prototype.check = function(question, userAnswer) {
+      Question.prototype.check = function (question, userAnswer) {
         if (question.type === 'listen') {
           return checkListen(question, userAnswer);
         }
@@ -38,7 +38,7 @@
         return false;
       };
 
-      Question.prototype.skip = function(question, userAnswer) {
+      Question.prototype.skip = function (question, userAnswer) {
         var result = {};
 
         if (question.type === 'listen') {
@@ -85,15 +85,19 @@
         var result = {
           result: false,
           userAnswer: userAnswer,
-          correctAnswer: question.translation,
+          correctAnswer: question.translation || question.answer,
           answerOptions: false
         };
 
-        var translations = question.alternative_answers ? question.alternative_answers.slice(0) : [];
-        translations.push(question.translation);
+        var translations = question.alternative_answers ? question.alternative_answers.slice(
+          0) : [];
+        translations.push(result.correctAnswer);
+        translations = translations.filter(function (obj) {
+          return !!obj;
+        });
 
         // Group 1, 2 check case-insensitivity
-        result.result = translations.some(function(obj) {
+        result.result = translations.some(function (obj) {
           return stripSpecialCharacters(userAnswer).toLowerCase()
             .localeCompare(stripSpecialCharacters(obj).toLowerCase()) === 0;
         });
@@ -102,8 +106,9 @@
 
         // Group 3 check
         if (question.common_errors && question.common_errors.length > 0) {
-          var test = question.common_errors.some(function(obj) {
-            return stripSpecialCharacters(userAnswer).toLowerCase() === stripSpecialCharacters(obj).toLowerCase();
+          var test = question.common_errors.some(function (obj) {
+            return stripSpecialCharacters(userAnswer).toLowerCase() ===
+              stripSpecialCharacters(obj).toLowerCase();
           });
 
           if (test) {
@@ -113,11 +118,12 @@
         }
 
         // Typo
-        var typos = translations.filter(function(trans) {
-          return wordCount(stripSpecialCharacters(userAnswer)) === wordCount(stripSpecialCharacters(trans));
-        }).map(function(typoString) {
+        var typos = translations.filter(function (trans) {
+          return wordCount(stripSpecialCharacters(userAnswer)) === wordCount(
+            stripSpecialCharacters(trans));
+        }).map(function (typoString) {
           return [checkTypoOnString(userAnswer, typoString), typoString];
-        }).filter(function(checkedTypos) {
+        }).filter(function (checkedTypos) {
           return checkedTypos[0] instanceof Array;
         })[0];
 
@@ -132,7 +138,7 @@
       function createHtmlForTypoAnswer(correctAnswer, typos) {
         var words = correctAnswer.trim().split(' ');
 
-        typos.forEach(function(typo) {
+        typos.forEach(function (typo) {
           words[typo[0]] = "<u>" + words[typo[0]] + "</u>";
         });
 
@@ -143,11 +149,11 @@
         var inputWords = stripSpecialCharacters(typoString).toLowerCase().split(' ');
         var correctWords = stripSpecialCharacters(correctAnswer).toLowerCase().split(' ');
 
-        var typoCheckedWords = inputWords.map(function(word, i) {
+        var typoCheckedWords = inputWords.map(function (word, i) {
           return [checkTypoOnWord(word, correctWords[i]), word, i];
         });
 
-        var test = typoCheckedWords.filter(function(word, i) {
+        var test = typoCheckedWords.filter(function (word, i) {
           return word[0].isDifferent === true;
         });
 
@@ -155,11 +161,11 @@
           return false;
         }
 
-        test = typoCheckedWords.filter(function(word, i) {
+        test = typoCheckedWords.filter(function (word, i) {
           return word[0].isTypo === true;
         });
 
-        return test.map(function(element) {
+        return test.map(function (element) {
           return [element[2], correctWords[element[2]].length];
         });
       }
@@ -226,7 +232,8 @@
           correctAnswer: question.hint
         };
 
-        if (stripSpecialCharacters(userAnswer).toLowerCase() === stripSpecialCharacters(question.hint).toLowerCase()) {
+        if (stripSpecialCharacters(userAnswer).toLowerCase() === stripSpecialCharacters(
+            question.hint).toLowerCase()) {
           result.result = true;
         }
 
@@ -241,8 +248,9 @@
         };
 
         if (userAnswer.length === question.hints.length) {
-          var test = question.hints.some(function(hint) {
-            return stripSpecialCharacters(userAnswer[0]) === stripSpecialCharacters(hint);
+          var test = question.hints.some(function (hint) {
+            return stripSpecialCharacters(userAnswer[0]) === stripSpecialCharacters(
+              hint);
           });
 
           if (test) result.result = true;
@@ -261,7 +269,7 @@
         var translations = question.definitions || [];
         translations.push(question.hint);
 
-        result.result = translations.some(function(translation) {
+        result.result = translations.some(function (translation) {
           return stripSpecialCharacters(userAnswer).toLowerCase()
             .localeCompare(stripSpecialCharacters(translation).toLowerCase()) === 0;
         });
@@ -269,11 +277,12 @@
         if (result.result) return result;
 
         // Typo
-        var typos = translations.filter(function(trans) {
-          return wordCount(stripSpecialCharacters(userAnswer)) === wordCount(stripSpecialCharacters(trans));
-        }).map(function(typoString) {
+        var typos = translations.filter(function (trans) {
+          return wordCount(stripSpecialCharacters(userAnswer)) === wordCount(
+            stripSpecialCharacters(trans));
+        }).map(function (typoString) {
           return [checkTypoOnString(userAnswer, typoString), typoString];
-        }).filter(function(checkedTypos) {
+        }).filter(function (checkedTypos) {
           return checkedTypos[0] instanceof Array;
         })[0];
 
@@ -293,14 +302,15 @@
         };
 
         var tokens = angular.fromJson(angular.toJson(question.tokens));
-        var options = tokens.filter(function(token) {
+        var options = tokens.filter(function (token) {
           return (token instanceof Array);
         })[0];
         var index = tokens.indexOf(options);
 
         tokens[index] = userAnswer;
 
-        if (stripSpecialCharacters(tokens.join(' ')).toLowerCase() === stripSpecialCharacters(question.hint).toLowerCase()) {
+        if (stripSpecialCharacters(tokens.join(' ')).toLowerCase() ===
+          stripSpecialCharacters(question.hint).toLowerCase()) {
           result.result = true;
         }
 
@@ -575,7 +585,8 @@
         }];
 
         for (var i = 0; i < defaultDiacriticsRemovalMap.length; i++) {
-          str = str.replace(defaultDiacriticsRemovalMap[i].letters, defaultDiacriticsRemovalMap[i].base);
+          str = str.replace(defaultDiacriticsRemovalMap[i].letters,
+            defaultDiacriticsRemovalMap[i].base);
         }
 
         return str;

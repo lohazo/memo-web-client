@@ -1,14 +1,15 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  function SettingServices($http, $q, API_PHP) {
+  function SettingServices($http, $q, $localStorage, API) {
     var Services = {};
 
-    Services.save = function(data) {
+    Services.save = function (data) {
       var deferred = $q.defer();
+      var userId = $localStorage.auth.user._id;
 
-      $http.post(API_PHP + '/users/edit_settings', data)
-        .then(function(response) {
+      $http.put(API + '/users/' + userId + '/notification_settings', data)
+        .then(function (response) {
           deferred.resolve(response);
         });
 
@@ -23,7 +24,7 @@
 
     Setting.settings = $localStorage.auth.profile_detail.settings;
 
-    Setting.save = function(data) {
+    Setting.save = function (data) {
       data.auth_token = $localStorage.auth.user.auth_token;
       return SettingServices.save(data);
     };
@@ -34,22 +35,23 @@
   function SettingNotificationCtrl($scope, SettingNotification) {
     $scope.settings = SettingNotification.settings;
 
-    $scope.saveChanges = function() {
+    $scope.saveChanges = function () {
       var data = {};
-      data.setting = $scope.settings.map(function(userSetting) {
+      data.setting = $scope.settings.map(function (userSetting) {
         userSetting.id = userSetting._id;
         //delete userSetting._id;
         return userSetting._id;
       });
       data.setting = JSON.stringify($scope.settings);
       SettingNotification.save(data);
-      //alert('Bạn đã thay đổi thành công !!!');
     };
   }
 
   angular.module('settings.notification', [])
-    .factory('SettingServices', ['$http', '$q', 'API_PHP', SettingServices])
+    .factory('SettingServices', ['$http', '$q', '$localStorage', 'API', SettingServices])
     .factory('SettingNotification', ['SettingServices', '$localStorage', SettingNotification])
-    .controller('SettingNotificationCtrl', ['$scope', 'SettingNotification', SettingNotificationCtrl]);
+    .controller('SettingNotificationCtrl', ['$scope', 'SettingNotification',
+      SettingNotificationCtrl
+    ]);
 
 })(window.angular);

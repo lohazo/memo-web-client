@@ -1,0 +1,35 @@
+<div class="buttons">
+  <div class="left" ng-if="playerFooter.question.result != -1">
+    <div class="grade">
+      <span ng-if="playerFooter.question.result == 1" class="left icon-checkmark badge-big"></span>
+      <span ng-if="playerFooter.question.result == 0" class="left icon-close badge-big"></span>
+      <h3 ng-if="playerFooter.question.result == 1">Chính xác<span class="lighter" ng-if="playerFooter.question.result === 1" ng-bind-html="playerFooter.question.answer"></span></h3>
+      <h3 ng-if="playerFooter.question.result == 0">Câu trả lời đúng:<span class="lighter" ng-if="playerFooter.question.result == 0">{{playerFooter.question.correctAnswer}}</span></h3>
+      <div class="clearfix" ng-if="!playerFooter.settings.leftButtons.hide">
+        <a title class="radius button report" dropdown-toggle="#report-dropdown" ng-click="playerFooter.reportDropdownClick()">Báo lỗi</a>
+        <ul id="report-dropdown" class="f-dropdown" show-on-click="true">
+          <li><input type="checkbox" id="1"><label for="1"><span class="box icon-checkmark"></span>Tiếng Anh không được tự nhiên hoặc có lỗi</label></li>
+          <li><input type="checkbox" id="2"><label for="2"><span class="box icon-checkmark"></span>Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi</label></li>
+          <li><input type="checkbox" id="3"><label for="3"><span class="box icon-checkmark"></span>Âm thanh không chính xác</label></li>
+          <li><input type="checkbox" id="4"><label for="4"><span class="box icon-checkmark"></span><textarea name=""></textarea></label></li>
+          <li class="row unhoverable">
+            <div class="right">
+              <a class="radius button close" style="border-color: white">Hủy</a>
+              <a class="radius button send" style="border-color: white">Gửi</a>
+            </div>
+          </li>
+        </ul>
+        <span class="welcome-tooltip fade in" ng-if="!playerFooter.settings.leftButtons.hideTooltips">
+          <span class="tooltip-peg"></span>
+          <span class="tooltip tip-right">Lựa chọn báo lỗi và vui lòng góp ý cho Memo khi cảm thấy câu trả lời của bạn là đúng. Những góp ý của bạn sẽ giúp nội dung của Memo hoàn thiện hơn.</span>
+          </span>
+      </div>
+    </div>
+  </div>
+  <div class="right" ng-if="!playerFooter.settings.rightButtons.hide">
+    <a ng-if="playerFooter.settings.rightButtons.continueButton.disable" title="" class="radius button continue disable" ng-class="{'hide': playerFooter.settings.rightButtons.continueButton.hide}">{{playerFooter.settings.rightButtons.continueButton.text}}</a>
+    <a ng-if="!playerFooter.settings.rightButtons.continueButton.disable" title="" class="radius button continue"
+      ng-class="{'hide': playerFooter.settings.rightButtons.continueButton.hide}"
+      ng-click="playerFooter.click()">{{playerFooter.settings.rightButtons.continueButton.text}}</a>
+  </div>
+</div>

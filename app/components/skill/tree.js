@@ -1,40 +1,40 @@
 'use strict';
 
 angular.module('skill.tree', [])
-  .factory('TreeBuilder', ['$localStorage', function($localStorage) {
+  .factory('TreeBuilder', ['$localStorage', function ($localStorage) {
     var TreeBuilder = {};
 
-    TreeBuilder.getIconSets = function() {
-      TreeBuilder.iconSets = $localStorage.appSharedSettings.base_skill_icon_urls;
+    TreeBuilder.getIconSets = function () {
+      TreeBuilder.iconSets = $localStorage.appSharedSettings.web_skill_base_icon_urls;
     };
 
-    TreeBuilder.getCheckpoints = function() {
+    TreeBuilder.getCheckpoints = function () {
       TreeBuilder.checkpoints = $localStorage.auth.checkpoints;
       return TreeBuilder;
     };
 
-    TreeBuilder.getSkills = function() {
+    TreeBuilder.getSkills = function () {
       TreeBuilder.skills = $localStorage.auth.skills;
       return TreeBuilder;
     };
 
-    TreeBuilder.getTree = function() {
+    TreeBuilder.getTree = function () {
       TreeBuilder.skills_tree = $localStorage.auth.skills_tree;
       return TreeBuilder;
     };
 
-    TreeBuilder.build = function() {
+    TreeBuilder.build = function () {
       var checkpoints = TreeBuilder.checkpoints;
       var tree = TreeBuilder.skills_tree;
       var skillTree = [];
       var rowShift = 1;
-      tree.forEach(function(row, i) {
+      tree.forEach(function (row, i) {
         var skillRow = [];
         if (row !== "null") {
           var isFirstInRow = true;
-          row.forEach(function(cell, j) {
+          row.forEach(function (cell, j) {
             if (cell !== "null") {
-              var skill = TreeBuilder.skills.filter(function(sk) {
+              var skill = TreeBuilder.skills.filter(function (sk) {
                 return sk._id === cell;
               })[0];
               if (isFirstInRow) {
@@ -47,7 +47,7 @@ angular.module('skill.tree', [])
             }
           });
         } else {
-          var thisRow = checkpoints.filter(function(checkpoint) {
+          var thisRow = checkpoints.filter(function (checkpoint) {
             return checkpoint.row == (i - rowShift);
           })[0];
           rowShift += 1;
@@ -61,7 +61,7 @@ angular.module('skill.tree', [])
 
     return TreeBuilder;
   }])
-  .directive('skillTree', function() {
+  .directive('skillTree', function () {
     return {
       strict: 'EA',
       scope: true,

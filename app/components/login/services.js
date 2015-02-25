@@ -1,12 +1,12 @@
 (function (angular) {
   'use strict';
 
-  function LoginFactory($http, $q, $localStorage, API_PHP) {
+  function LoginFactory($http, $q, $localStorage, API, API_PHP) {
     var Service = {};
 
     Service.register = function (data) {
       var deferred = $q.defer();
-      $http.post(API_PHP + '/users', data)
+      $http.post(API + '/users', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -17,7 +17,9 @@
 
     Service.login = function (data) {
       var deferred = $q.defer();
-      $http.post(API_PHP + '/users/login', data)
+      var access_token = data.g_access_token || data.access_token;
+      var gmail = data.gmail;
+      $http.post(API + '/users/login?access_token=' + access_token, data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -28,7 +30,7 @@
 
     Service.forgetPassword = function (data) {
       var deferred = $q.defer();
-      $http.post(API_PHP + '/users/forget_password', data)
+      $http.post(API + '/users/forgot_password', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -39,7 +41,7 @@
 
     Service.profile = function (data) {
       var deferred = $q.defer();
-      $http.get(API_PHP + '/users/' + data._id + '?auth_token=' + data.auth_token)
+      $http.get(API + '/users/' + data._id + '?auth_token=' + data.auth_token)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -119,9 +121,8 @@
             deferred.reject(data);
           } else {
             data = {
-              fb_access_token: $localStorage.auth.facebook.accessToken,
-              fb_Id: response.id,
-              fb_name: response.name
+              access_token: $localStorage.auth.facebook.accessToken,
+              facebook_id: response.id
             };
             deferred.resolve(data);
           }
@@ -164,22 +165,21 @@
       if (response.data.is_newly_sign_up) {
         MemoTracker.track('sign up');
         EcoTracker.track('Web 1.0.2 user logged in', data);
-        $localStorage.displayTour = true;
+
+        var molData = {
+          code_chanel: $routeParams.code_chanel || -100,
+          id_landingpage: $routeParams.id_landingpage || -100,
+          id_campaign: $routeParams.id_campaign || -100,
+          id_camp_landingpage: $routeParams.id_campaign || -100,
+          name: data.name || data.username,
+          email: data.email,
+          phone: data.mobile || ''
+        };
+
+        MolServices.saveC3(molData);
       } else {
         MemoTracker.track('login');
       }
-
-      var molData = {};
-      molData.code_chanel = $routeParams.code_chanel || -100;
-      molData.id_landingpage = $routeParams.id_landingpage || -100;
-      molData.id_campaign = $routeParams.id_campaign || -100;
-      molData.id_camp_landingpage = $routeParams.id || -100;
-
-      molData.name = data.name || data.username;
-      molData.email = data.email;
-      molData.phone = data.mobile || '';
-
-      MolServices.saveC3(molData);
 
       $rootScope.$broadcast('event:auth-loginConfirmed', {
         user: response.data
@@ -190,7 +190,7 @@
 
   angular.module('login.services', []);
   angular.module('login.services')
-    .factory('LoginService', ['$http', '$q', '$localStorage', 'API_PHP', LoginFactory]);
+    .factory('LoginService', ['$http', '$q', '$localStorage', 'API', 'API_PHP', LoginFactory]);
   angular.module('login.services')
     .factory('AuthService', ['$q', '$rootScope', '$localStorage', '$routeParams',
       'Facebook', 'GooglePlus', 'EcoTracking', 'MemoTracking',

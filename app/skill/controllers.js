@@ -1,9 +1,9 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   function SkillCtrl($scope, $rootScope, $routeParams, AppSetting, Skill, User) {
     if (User && User.auth_token) {
-      $scope.iconSets = AppSetting.sharedSettings.base_skill_icon_urls;
+      $scope.iconSets = AppSetting.sharedSettings.web_skill_base_icon_urls;
       $scope.skill = Skill.skill($routeParams.id);
       $scope.showGrammar = $routeParams.id;
     } else {

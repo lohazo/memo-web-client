@@ -1,6 +1,32 @@
 .new-player {
   .player-container {
     footer {
+      &.player-footer {
+        .grade {
+          .badge-big {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            vertical-align: middle;
+            background-color: $white;
+            display: inline-block;
+            text-align: center;
+            font-size: 24px;
+          }
+          h3 {
+            font-weight: 700;
+            margin-left: 70px;
+          }
+          .clearfix {
+            margin-left: 70px;
+          }
+          .button {
+            padding-top: 8px !important;
+            padding-bottom: 9px !important;
+          }
+        }
+      }
       &.player-footer, &.player-carousel-footer {
         background-color: $iron;
         border-radius: 0 0 10px 10px;
@@ -8,7 +34,7 @@
         margin: 0 -40px;
         padding: 20px 40px;
       }
-      &.player-carousel-footer {
+      &.player-carousel-footer, &.player-footer {
         .buttons {
           .button, button {
             display: inline-block;
@@ -26,6 +52,16 @@
             &.continue {
               background-color: $success-color;
               margin: 0 5px;
+              &:hover {
+                background-color: scale-color($success-color, $lightness: -20%);
+              }
+            }
+            &.disable {
+              background-color: $aluminum !important;
+              cursor: default;
+              &:hover {
+                background-color: $aluminum !important;
+              }
             }
           }
         }
@@ -63,3 +99,6 @@
 .hide-with-space {
   visibility: hidden;
 }
+
+@import "player-footer-success";
+@import "player-footer-fail";

@@ -7,20 +7,22 @@ module.exports = function (config) {
       'app/vendors/angular/angular.js',
       'app/vendors/angular-route/angular-route.js',
       'app/vendors/angular-mocks/angular-mocks.js',
+      'app/vendors/ngStorage/ngStorage.min.js',
       'app/*.js',
-      'app/placement/**/*.js',
-      'app/components/placement/**/*.js',
+      'app/home/**/*.js',
+      'app/components/user/*.js',
+      'app/components/exam/**/*.js',
+      'app/exam/progressQuiz/*.js',
       'app/components/question/**/*.js',
       'app/components/dmp/**/*.js',
-      'app/vendors/google-diff-match-patch/diff_match_patch.js',
-      'app/home/**/*.js'
+      'app/vendors/google-diff-match-patch/diff_match_patch.js'
     ],
 
     autoWatch: true,
 
     frameworks: ['jasmine'],
 
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
 
     plugins: [
       'karma-chrome-launcher',

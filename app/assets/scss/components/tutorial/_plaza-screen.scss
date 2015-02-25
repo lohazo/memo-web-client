@@ -1,0 +1,105 @@
+.welcome {
+  .welcome-plaza-screen {
+    @include grid-row;
+    .welcome-plaza-screen-inner {
+      @include grid-column($columns: 16);
+      .plaza-item-section {
+        @include grid-column($columns: 8);
+        text-align: left;
+        .plaza-items {
+          .plaza-item {
+            @include grid-row;
+            padding: 10px;
+            min-height: 130px;
+            &.special_locked {
+              border: 2px solid $gold;
+              border-radius: 10px;
+              margin-bottom: 15px;
+              margin-top: 15px;
+              background-color: rgba(0, 0, 0, 0.1);
+            }
+            &.special_unlocked {
+              border: 2px solid $gold;
+              border-radius: 10px;
+              margin-bottom: 15px;
+              margin-top: 15px;
+            }
+            .plaza-item-image {
+              @include grid-column($columns: 3);
+              text-align: center;
+              img {
+                margin-top: 5px;
+              }
+            }
+            .plaza-item-intro {
+              @include grid-column($columns: 9);
+              .plaza-item-name {
+                display: block;
+                font-weight: 700;
+                margin-bottom: 10px;
+              }
+              .plaza-item-desc {
+                font-size: .9em;
+              }
+              .plaza-guide {
+                font-size: .9em;
+              }
+            }
+            .plaza-item-buttons {
+              @include grid-column($columns: 4);
+              .button.disabled {
+                background-color: $iron;
+                color: $white;
+              }
+            }
+            .memo-coin-badge {
+              background: url("assets/img/lesson-memos-big.png") no-repeat;
+              background-size: contain;
+              display: inline-block;
+              vertical-align: middle;
+              margin-left: 5px;
+              &.small {
+                width: 24px;
+                height: 26px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.claim-tshirt-modal {
+  width: 540px;
+  min-height: 370px;
+  border: none;
+  outline: none;
+  .claim-tshirt-modal-inner {
+    text-align: center;
+    h3.title {
+      font-size: 22px;
+      font-weight: 700;
+    }
+  }
+}
+
+.native-scholar-modal {
+  width: 540px;
+  min-height: 370px;
+  border: none;
+  outline: none;
+  top: 50px !important;
+  padding: 20px;
+  position: fixed;
+  .native-scholar-modal-inner {
+    text-align: center;
+    h3.title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .native-scholar-guide {
+      text-align: left;
+    }
+  }
+}

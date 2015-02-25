@@ -15,6 +15,7 @@
         trial: data.is_trial
       };
       $localStorage.auth = $scope.auth;
+      $location.path('/');
     }
 
     function logoutConfirmed(e, data) {
@@ -26,6 +27,14 @@
       };
       $localStorage.auth = $scope.auth;
       $location.path('/');
+    }
+
+    if (!$scope.auth.loggedIn) {
+      var path = $location.path();
+      if (path.indexOf('/referral') < 0) {
+        logoutConfirmed();
+        return;
+      }
     }
 
     $scope.chartOptions = {
@@ -76,13 +85,6 @@
     $scope.getNumber = function (num) {
       return new Array(num);
     };
-
-    if (!$scope.auth.loggedIn) {
-      var path = $location.path();
-      if (path.indexOf('/referral') < 0) {
-        logoutConfirmed();
-      }
-    }
 
     EcoTracker.init();
     $scope.$on('event:auth-loginConfirmed', loginConfirmed);

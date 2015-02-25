@@ -1,0 +1,38 @@
+.progress-quiz-confirm-modal {
+    width: 540px;
+    min-height: 220px !important;
+    padding-top: 0;
+    top: 210px !important;
+    position: fixed;
+    outline: none;
+    border: 0;
+    .progress-quiz-confirm-modal-inner {
+        text-align: center;
+        h3.title {
+            margin-top: 40px;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        .message {
+            margin-top: 40px;
+        }
+        .button {
+            width: 210px;
+            min-height: 40px;
+            border-radius: 5px;
+            padding: 10px 15px;
+            &.accept {
+                background-color: $success-color;
+                color: $white;
+                &:hover {
+                    background-color: scale-color($success-color, $lightness: -20%);
+                }
+            }
+            &.cancel {
+                background-color: $white;
+                color: $alert-color;
+                border: 1px solid $iron;
+            }
+        }
+    }
+}

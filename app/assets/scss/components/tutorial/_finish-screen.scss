@@ -1,0 +1,34 @@
+.welcome {
+  .finish-screen {
+    @include grid-row;
+    .finish-screen-inner {
+      @include grid-column($columns: 16);
+      text-align: center;
+      h3.title {
+        font-size: 36px;
+      }
+      .finish-screen-block {
+        margin-top: 30px;
+        @include grid-column($columns: 9, $center: true);
+        .finish-screen-text {
+          text-align: left;
+          margin-bottom: 25px;
+        }
+        .finish-screen-icon {
+          background: url("assets/img/tutorial/finish-ant.png") no-repeat;
+          display: inline-block;
+          width: 174px;
+          height: 237px;
+          vertical-align: middle;
+          margin-bottom: -40px;
+        }
+        .finish-screen-button {
+          background-color: $success-color;
+          &:hover {
+            background-color: scale-color($success-color, $lightness: -20%);
+          }
+        }
+      }
+    }
+  }
+}

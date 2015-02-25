@@ -1,60 +1,103 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  function LeaderboardServices($http, $q, $localStorage, API_PHP) {
+  function LeaderboardServices($http, $q, $localStorage, API) {
     var Services = {};
 
-    Services.fbFriends = function() {
+    Services.leaderboard = function (data) {
+      // data = {page:, [type: week/month]}
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
+      var userId = $localStorage.auth.user._id;
+
+      data.auth_token = authToken;
+      data.page = data.page || 0;
+
+      $http.get(API + '/users/' + userId + '/leaderboard?type=' + data.type + '&page=' + data
+          .page + '&auth_token=' + data.auth_token)
+        .then(function (response) {
+          deferred.resolve(response);
+        }, function (response) {
+          deferred.reject(response);
+        });
+
+      return deferred.promise;
+    };
+
+    Services.fbFriends = function () {
+      var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
+      var userId = $localStorage.auth.user._id;
       var fbAccessToken = $localStorage.auth.facebook.accessToken;
 
       var data = {
         auth_token: authToken,
         fb_access_token: fbAccessToken
       };
-      $http.post(API_PHP + '/users/search_fb_friend', data)
-        .then(function(response) {
+      $http.post(API + '/users/' + userId + '/search_facebook_friends', data)
+        .then(function (response) {
           deferred.resolve(response);
+        }, function (response) {
+          deferred.reject(response);
         });
 
       return deferred.promise;
     };
 
-    Services.friends = function(data) {
+    Services.friends = function (data) {
+      // data = {keywords:, page:}
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
+      var userId = $localStorage.auth.user._id;
+
+      data.auth_token = authToken;
+      data.page = data.page || 0;
+      data.id = userId;
+
+      $http.post(API + '/users/' + userId + '/search_friends?auth_token=' + authToken +
+          '&page=' + data.page + '&keywords=' + data.keywords)
+        .then(function (response) {
+          deferred.resolve(response);
+        }, function (response) {
+          deferred.reject(response);
+        });
+      return deferred.promise;
+
+    };
+
+    /*
+     * data = {friend_id:}
+     */
+    Services.follow = function (data) {
+      var deferred = $q.defer();
+      var authToken = $localStorage.auth.user.auth_token;
+      var userId = $localStorage.auth.user._id;
       data.auth_token = authToken;
 
-      $http.post(API_PHP + '/users/search_friends', data)
-        .then(function(response) {
+      $http.post(API + '/users/' + userId + '/follow_friend', data)
+        .then(function (response) {
           deferred.resolve(response);
+        }, function (response) {
+          deferred.reject(response);
         });
 
       return deferred.promise;
     };
 
-    Services.follow = function(data) {
+    /*
+     * data = {friend_id:}
+     */
+    Services.unfollow = function (data) {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
+      var userId = $localStorage.auth.user._id;
       data.auth_token = authToken;
 
-      $http.post(API_PHP + '/users/follow', data)
-        .then(function(response) {
+      $http.post(API + '/users/' + userId + '/unfollow_friend', data)
+        .then(function (response) {
           deferred.resolve(response);
-        });
-
-      return deferred.promise;
-    };
-
-    Services.unfollow = function(data) {
-      var deferred = $q.defer();
-      var authToken = $localStorage.auth.user.auth_token;
-      data.auth_token = authToken;
-
-      $http.post(API_PHP + '/users/unfollow', data)
-        .then(function(response) {
-          deferred.resolve(response);
+        }, function (response) {
+          deferred.reject(response);
         });
 
       return deferred.promise;
@@ -64,9 +107,12 @@
       // data = {email: 'aoesnuth'}
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
+      var email = data.email
+      var userId = $localStorage.auth.user._id;
+
       data.auth_token = authToken;
 
-      $http.post(API_PHP + '/users/invite_by_email', data)
+      $http.post(API + '/users/' + userId + '/invite_by_mail', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -82,31 +128,37 @@
   function LeaderboardFactory($q, $localStorage, LeaderboardServices, Facebook) {
     var Leaderboard = {};
 
-    Leaderboard.fbFriends = function(data) {
+    Leaderboard.leaderboard = function (data) {
+      // data = {page:, [type: week/month]}
+      return LeaderboardServices.leaderboard(data);
+    };
+
+    Leaderboard.fbFriends = function (data) {
       return Leaderboard.fbLogin()
         .then(LeaderboardServices.fbFriends);
     };
 
-    Leaderboard.friends = function(data) {
+    // Search friend
+    Leaderboard.friends = function (data) {
       return LeaderboardServices.friends(data);
     };
 
-    Leaderboard.follow = function(data) {
-      return LeaderboardServices.follow(data)
-        .then(function (response) {
-          $localStorage.auth.profile_detail.following_user_ids = response.data.following_user_ids;
-        });
+    Leaderboard.follow = function (data) {
+      return LeaderboardServices.follow(data);
+        // .then(function (response) {
+        //   $localStorage.auth.profile_detail.following_user_ids = response.data.following_user_ids;
+        // });
     };
 
-    Leaderboard.unfollow = function(data) {
+    Leaderboard.unfollow = function (data) {
       return LeaderboardServices.unfollow(data);
     };
 
-    Leaderboard.inviteMail = function(data) {
+    Leaderboard.inviteMail = function (data) {
       return LeaderboardServices.inviteMail(data);
     };
 
-    Leaderboard.fbLogin = function() {
+    Leaderboard.fbLogin = function () {
       var deferred = $q.defer();
 
       Facebook.getLoginStatus(facebookLoginStatusReceived);
@@ -136,7 +188,11 @@
   }
 
   angular.module('leaderboard.services', [])
-    .factory('Leaderboard', ['$q', '$localStorage', 'LeaderboardServices', 'Facebook', LeaderboardFactory])
-    .factory('LeaderboardServices', ['$http', '$q', '$localStorage', 'API_PHP', LeaderboardServices]);
+    .factory('Leaderboard', ['$q', '$localStorage', 'LeaderboardServices', 'Facebook',
+      LeaderboardFactory
+    ])
+    .factory('LeaderboardServices', ['$http', '$q', '$localStorage', 'API',
+      LeaderboardServices
+    ]);
 
 }(window.angular));

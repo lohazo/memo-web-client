@@ -1,45 +1,85 @@
-.plaza {
-    .item {
-	img {
-	    padding-top: 5px;
-	}
-	h5.name {
-	    font-weight: 700;
-	}
-    }
-}
-.vptl {
+.plaza-title {
     float: left;
 }
-.back-lesson{
-	float: right;
-	border-radius: 5px;
-	background-color: #FFF;
-	text-decoration: none;
-	text-align: center;
-	display: inline-block;
-	padding: 4px 30px;
-	border: 2px solid #FB3;
-	color: #810C15;
-	font-size: 15px;
-	margin-top: 15px;
-}
-.back-lesson:hover{
-	background-color:#FB3;
-	color: #fff;
-}
-.plaza .item img{
-    padding: 0 !important;
-}
-.vp-tl {
-    padding: 0;
-    text-align: right;
-}
-a#vp{
-    font-size: 19px;
-    font-weight:bold;
-    margin-bottom: 0 !important;
-    img.rb{
-        margin-top: -4px;
+
+.button-back {
+    width: auto;
+    float: right;
+    border-radius: 5px;
+    background-color: #FFF;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding: 4px 30px;
+    border: 2px solid #FB3;
+    color: #810C15;
+    font-size: 15px;
+    margin-top: 5px;
+    &:hover {
+        background-color: #FB3;
+        color: #fff;
     }
 }
+
+.plaza-item {
+    @include grid-column($columns: 16);
+    @include grid-row;
+    padding: 10px;
+    min-height: 130px;
+    &.special_locked {
+        border: 2px solid $gold;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+    &.special_unlocked {
+        border: 2px solid $gold;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+    .memo-coin-badge {
+        background: url("assets/img/lesson-memos-big.png") no-repeat;
+        background-size: contain;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 5px;
+        &.small {
+            width: 24px;
+            height: 26px;
+        }
+    }
+    .plaza-item-buttons {
+        @include grid-column($columns: 4);
+        .button.disabled {
+            background-color: $iron;
+            color: $white;
+        }
+    }
+    .plaza-item-image {
+        @include grid-column($columns: 3);
+        margin-bottom: 15px;
+    }
+    .plaza-item-intro {
+        @include grid-column($columns: 9);
+        .plaza-item-name {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 10px;
+            width: 220px;
+        }
+        .plaza-item-desc {
+            font-size: .9em;
+            width: 220px;
+        }
+        .plaza-item-guide {
+            font-size: .9em;
+            width: 250px;
+        }
+    }
+}
+
+@import "progress-quiz-confirm-modal";
+@import "buy-guide-popup-modal";
+@import "claim-guide";

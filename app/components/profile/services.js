@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function ProfileServices($http, $q, $location, $localStorage, API_PHP) {
+  function ProfileServices($http, $q, $location, $localStorage, API) {
     var Services = {};
 
     Services.profile = function (data) {
@@ -12,11 +12,11 @@
         'auth_token': $localStorage.auth.user.auth_token
       };
 
-      $http.get(API_PHP + '/users/' + requestData._id + '?auth_token=' + requestData.auth_token)
+      $http.get(API + '/users?auth_token=' + requestData.auth_token)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
-          if (response.status === 400) {
+          if (response.status === 422) {
             $location.path('/course');
           }
           deferred.reject(response);
@@ -30,15 +30,12 @@
       // data = {_id: }
       var deferred = $q.defer();
       var requestData = {
-        'friend_id': (data && data.friend_id) ? data.friend_id : false,
+        '_id': (data && data.friend_id) ? data.friend_id : $localStorage.auth.user._id,
         'auth_token': $localStorage.auth.user.auth_token
       };
 
-      var endpoint = API_PHP + '/users/profile_details?device=web&auth_token=' + requestData.auth_token;
-
-      if (requestData.friend_id) {
-        endpoint += '&friend_id=' + requestData.friend_id;
-      }
+      var endpoint = API + '/users/' + requestData._id + '/profile_details?auth_token=' +
+        requestData.auth_token;
 
       $http.get(endpoint)
         .then(function (response) {
@@ -50,11 +47,11 @@
 
     Services.update = function (data) {
       var deferred = $q.defer();
-
+      var userId = $localStorage.auth.user._id;
       // data = {username: 'asonetuh'/ password: 'anoethuasto'/ email: 'asoentuh'}
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      $http.post(API_PHP + '/users/edit', data)
+      $http.put(API + '/users/' + userId, data)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -90,6 +87,7 @@
             $localStorage.auth.checkpoints = response.data.checkpoints;
             $localStorage.auth.skills = response.data.skills;
             Profile.user = response.data.user_info;
+            $localStorage.displayTour = Profile.user.allow_tutorial;
           }
         });
     };
@@ -114,7 +112,7 @@
   }
 
   angular.module('profile.services', [])
-    .factory('ProfileServices', ['$http', '$q', '$location', '$localStorage', 'API_PHP',
+    .factory('ProfileServices', ['$http', '$q', '$location', '$localStorage', 'API',
       ProfileServices
     ])
     .factory('Profile', ['ProfileServices', '$localStorage', ProfileFactory]);

@@ -64,7 +64,7 @@
     AppSetting.getWords();
     Profile.getProfile()
       .then(getProfile)
-      .then(AppSetting.get)
+      // .then(AppSetting.get)
       .then(Message.list)
       .then(getProfileDetail)
       .then(getStatus)
@@ -102,7 +102,7 @@
     };
 
     $scope.$watch('profile', function () {
-      if ($scope.profile.is_beginner) {
+      if ($scope.profile.is_beginner && $scope.profile.allow_placement_test) {
         $scope.open();
       }
     });

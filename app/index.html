@@ -17,6 +17,8 @@
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="486" />
   <meta property="og:image:height" content="255" />
+  <meta property="fb:admins" content="100007765484291" />
+  <meta property="fb:app_id" content="856714854352716" /> 
   <link href="assets/img/appicon.png" sizes="64x64" type="image/png" rel="icon" id="favicon">
   <base href="/">
   <link rel="stylesheet" href="vendors/html5-boilerplate/css/normalize.css">
@@ -25,7 +27,7 @@
   <link rel="stylesheet" href="app.css"/>
   <script src="vendors/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body ng-class="{landingpage: !auth.loggedIn}" ng-controller="AppCtrl">
+<body ng-class="{landingpage: !auth.loggedIn}" ng-controller="AppCtrl" ng-keydown="keydown(event=$event)">
   <div id="fb-root"></div>
   <!-- Google Tag Manager -->
   <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N6X84R"
@@ -47,6 +49,7 @@
   <script src="vendors/angular-animate/angular-animate.min.js"></script>
   <script src="vendors/angular-route/angular-route.js"></script>
   <script src="vendors/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="vendors/angular-filter/dist/angular-filter.min.js"></script>
   <script src="vendors/angular-foundation/dist/mm-foundation-tpls-0.6.0-SNAPSHOT.min.js"></script>
   <script src="vendors/angular-google-plus/dist/angular-google-plus.min.js"></script>
   <script src="vendors/angular-facebook/lib/angular-facebook.js"></script>
@@ -101,15 +104,20 @@
   <script src="components/skill/services.js"></script>
   <script src="components/skill/directives.js"></script>
   <script src="components/skill/tree.js"></script>
-  <!-- Placement Test -->
-  <script src="placement/placement.js"></script>
-  <script src="placement/controllers.js"></script>
-  <script src="components/placement/services.js"></script>
-  <script src="components/placement/directives.js"></script>
   <!-- Exam -->
   <script src="exam/exam.js"></script>
   <script src="exam/controllers.js"></script>
+  <script src="exam/placementTest.controller.js"></script>
   <script src="components/exam/services.js"></script>
+  <script src="components/exam/placementTest.services.js"></script>
+  <script src="components/exam/placementTest.directives.js"></script>
+  <script src="components/exam/adaptiveTest.services.js"></script>
+  <script src="exam/progressQuiz/progressQuiz.js"></script>
+  <script src="exam/progressQuiz/progressQuiz.services.js"></script>
+  <script src="exam/progressQuiz/player/player.js"></script>
+  <script src="exam/progressQuiz/quitLink/progressQuiz.quitLink.js"></script>
+  <script src="exam/progressQuiz/introScreen/progressQuiz.introScreen.js"></script>
+  <script src="exam/progressQuiz/finishScreen/progressQuiz.finishScreen.js"></script>
   <!-- Question -->
   <script src="components/question/question.js"></script>
   <script src="components/question/services.js"></script>
@@ -120,6 +128,7 @@
   <script src="components/question/select.js"></script>
   <script src="components/question/translate.js"></script>
   <script src="components/question/speak.js"></script>
+  <script src="components/question/questionListen/questionListen.js"></script>
   <!-- Report -->
   <script src="components/report/report.js"></script>
   <!-- Feeback -->
@@ -153,6 +162,18 @@
   <script src="components/notification/referral/eventAlert.js"></script>
   <!-- Welcome -->
   <script src="welcome/welcome.js"></script>
+  <script src="welcome/welcome.directives.js"></script>
+  <script src="welcome/welcome.controller.js"></script>
+  <script src="welcome/welcome.services.js"></script>
+  <script src="welcome/player/player.js"></script>
+  <script src="welcome/quitLink/welcome.quitLink.js"></script>
+  <script src="welcome/dictionaryHintScreen/welcome.dictionaryHintScreen.js"></script>
+  <script src="welcome/questionScreen/welcome.questionScreen.js"></script>
+  <script src="welcome/claimBonusScreen/welcome.claimBonusScreen.js"></script>
+  <script src="welcome/plaza/welcome.plaza.js"></script>
+  <script src="welcome/plaza/welcome.claimTshirtModal.js"></script>
+  <script src="welcome/plaza/welcome.nativeScholar.js"></script>
+  <script src="welcome/finishScreen/welcome.finishScreen.js"></script>
   <!-- Words -->
   <script src="components/words/words.js"></script>
   <!-- Referral -->

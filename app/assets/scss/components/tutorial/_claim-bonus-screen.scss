@@ -1,0 +1,49 @@
+.welcome {
+  .claim-bonus-screen {
+    @include grid-row;
+    padding-bottom: 30px;
+    .claim-bonus-screen-inner {
+      @include grid-column($columns: 16);
+      h3.title {
+        text-align: center;
+        font-size: 32px;
+      }
+      .orange {
+        color: $gold;
+      }
+      .reward {
+        @include grid-column($columns: 8, $center: true);
+        .memo-coin {
+          text-align: center;
+          .memo-coin-badge {
+            position: relative;
+            background: url("assets/img/lesson-memos-big.png") no-repeat;
+            width: 80px;
+            height: 105px;
+            margin: 0 auto;
+            background-size: contain;
+            .memo-coin-money {
+              position: absolute;
+              background: red;
+              color: $white;
+              border-radius: 50%;
+              width: 25px;
+              height: 25px;
+              top: 15px;
+              right: -12px;
+            }
+          }
+          .memo-coin-intro {
+            text-align: left;
+            padding-bottom: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.player-header-right {
+  float: none !important;
+  text-align: right;
+}

@@ -1,0 +1,39 @@
+.progress-quiz {
+  .quiz-finish-screen {
+    @include grid-row;
+    .quiz-finish-screen-inner {
+      @include grid-column($columns: 16);
+      text-align: center;
+      h3.title {
+        font-size: 32px;
+        font-weight: 700;
+      }
+      .quiz-finish-message {
+        font-size: 22px;
+      }
+      .quiz-result {
+        .quiz-result-award {
+          position: relative;
+          display: block;
+          width: 141px;
+          height: 207px;
+          background: url("assets/img/progress-quiz-finish-icon.png") no-repeat;
+          margin: 0 auto;
+          padding: 20px;
+          .quiz-result-text {
+            display: block;
+            color: $white;
+            font-size: 22px;
+          }
+          .quiz-result-score {
+            display: block;
+            font-size: 45px;
+            color: $white;
+            font-weight: 700;
+            padding-top: 7px;
+          }
+        }
+      }
+    }
+  }
+}

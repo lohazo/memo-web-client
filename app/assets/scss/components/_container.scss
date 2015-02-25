@@ -8,6 +8,10 @@ body {
   background-size: 280px 320px;
 }
 
+*[tabindex] {
+  outline: none;
+}
+
 .full {
   display: block;
   float: left;
@@ -90,7 +94,6 @@ a.reverse.button {
       background-color: $gold;
       color: $primary-color;
     }
-
   }
   &.third {
     @include button($padding: $button-tny, $bg: $white, $radius: $global-radius);
@@ -106,7 +109,6 @@ a.reverse.button {
       background: $gold url("assets/img/cart-hover.png") no-repeat;
       background-origin: content-box;
     }
-
   }
 }
 
@@ -153,4 +155,9 @@ a.reverse.button {
 
 .hide {
   display: none !important;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
 }
