@@ -180,7 +180,7 @@
     };
   }
 
-  function ExamServices($http, $q, $localStorage, API_PHP) {
+  function ExamServices($http, $q, $localStorage, API) {
     var Services = {};
 
     function transformRequest(obj) {
@@ -209,7 +209,7 @@
         requestData.skill_id = data.skill_id;
       }
 
-      $http.post(API_PHP + '/exam/start', requestData, {
+      $http.post(API + '/exams/start', requestData, {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
           },
@@ -249,7 +249,7 @@
         requestData.skill_id = data.skill_id;
       }
 
-      $http.post(API_PHP + '/exam/finish', requestData, {
+      $http.post(API + '/exams/finish', requestData, {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
           },
@@ -276,7 +276,7 @@
         checkpoint_position: data.checkpoint_position
       };
 
-      $http.post(API_PHP + '/exam/fail', requestData, {
+      $http.post(API + '/exams/fail', requestData, {
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
           },
@@ -297,5 +297,5 @@
     .factory('Exam', ['$localStorage', '$window',
       'ExamServices', 'Feedback', 'PlazaServices', 'Mixpanel', 'MemoTracking', ExamFactory
     ])
-    .factory('ExamServices', ['$http', '$q', '$localStorage', 'API_PHP', ExamServices]);
+    .factory('ExamServices', ['$http', '$q', '$localStorage', 'API', ExamServices]);
 }(window.angular));
