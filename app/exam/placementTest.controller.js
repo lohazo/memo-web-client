@@ -84,7 +84,7 @@
           } else {
             $scope.question = responseData;
             if ($scope.question.finish_exam_bonus_exp === 0 &&
-              $scope.question.num_affected_skills.length === 0) {
+              $scope.question.num_affected_skill.length === 0) {
 
               Sound.playFailSound();
               $scope.questionTpl = 'questionFailure';
