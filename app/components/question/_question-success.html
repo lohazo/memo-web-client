@@ -23,8 +23,8 @@
             </div>
           </div>
         </li>
-        <li>
-          <div class="slide slide-2 reward" ng-show="(question.bonus_money + question.bonus_money_full_heart) > 0">
+        <li ng-if="(question.bonus_money + question.bonus_money_full_heart) > 0">
+          <div class="slide slide-2 reward">
             <h4 class="text-center">Bạn đã nhận được {{question.bonus_money + question.bonus_money_full_heart}} Memo Coin!</h4>
             <div class="row">
               <div class="large-16 columns">
@@ -50,12 +50,12 @@
             </div>
           </div>
         </li>
-        <li>
-          <div class="slide slide-3" ng-show="question.num_affected_skill > 0">
+        <li ng-if="question.num_affected_skill > 0">
+          <div class="slide slide-3">
             <h4 class="text-center">Hoàn thành kỹ năng</h4>
             <h4>{{question.affected_skill.title}}
             <span ng-show="{{question.num_affected_skill && question.num_affected_skill > 0}}">
-            và {{question.num_affected_skills}} kỹ năng khác
+            và {{question.num_affected_skill}} kỹ năng khác
             </span>
             </h4>
             <div class="row">
