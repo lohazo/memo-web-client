@@ -241,6 +241,7 @@
         answers: data.logs,
         base_item_id: $localStorage.auth.base_item_id
       };
+      console.log(data);
 
       if (data.type === "lesson") {
         requestData.lesson_number = data.lesson_number;
