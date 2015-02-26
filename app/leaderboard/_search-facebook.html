@@ -5,16 +5,16 @@
   </div>
 </div>
 <div class="row facebook-friend-list">
-  <div class="row friend" ng-repeat="friend in friends | filter:search.username">
+  <div class="row friend" ng-repeat="user in users | filter:search.username">
     <div class="large-16 columns">
       <div class="row">
         <div class="large-3 columns avatar">
-          <img ng-src="{{friend.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+          <img ng-src="{{user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
         </div>
-        <div class="large-8 columns nickname">{{friend.username}}</div>
+        <div class="large-8 columns nickname">{{user.username}}</div>
         <div class="large-5 columns buttons">
-          <a ng-if="!friend.is_following"class="large-16 large secondary memo-button follow" ng-click="follow(friend._id)">Thêm</a>
-          <a ng-if="friend.is_following" class="large-16 large memo-button" ng-click="unfollow(friend._id)">Bạn bè</a>
+          <a ng-if="!user.is_following"class="large-16 large secondary memo-button follow" ng-click="follow(user._id)">Thêm</a>
+          <a ng-if="user.is_following" class="large-16 large memo-button" ng-click="unfollow(user._id)">Bạn bè</a>
         </div>
       </div>
     </div>
