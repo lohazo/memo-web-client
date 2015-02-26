@@ -2,10 +2,10 @@
 
   'use strict';
 
-  function ExamFactory($localStorage, $window, ExamServices, Feedback, PlazaServices, Mixpanel,
+  function ExamFactory($localStorage, $window, ExamServices, Feedback, PlazaServices,
     MemoTracker) {
     var exam, questions, answered, wrongAnswers, question, questionPosition,
-      hearts, availableItems, examToken, answersLog;
+      hearts, availableItems, examToken, answersLog, usedItems;
 
     function start(data) {
       return ExamServices.start(data)
@@ -31,9 +31,9 @@
       questionPosition = 0;
       question = questions[questionPosition];
       answersLog = {};
+      usedItems = [];
       Feedback.list = [];
 
-      Mixpanel.track('screen Exam');
       MemoTracker.track('start exam lesson')
     }
 
@@ -117,7 +117,7 @@
           PlazaServices.use(requestData)
             .then(function (response) {
               delete availableItems[0];
-              $localStorage.auth.base_item_id = item;
+              usedItems.push(item);
             });
         }
       }
@@ -125,7 +125,6 @@
 
     function checkState() {
       if (hearts.remaining < 0) {
-        Mixpanel.track('screen FailLesson');
         MemoTracker.track('fail exam lesson')
         return {
           isFinished: true,
@@ -148,6 +147,7 @@
       MemoTracker.track('finish exam lesson')
       data.examToken = examToken;
       data.logs = JSON.stringify(answersLog);
+      data.base_item_id = usedItems.length > 0 ? usedItems[0] : '';
       return ExamServices.finish(data).then(function (response) {
         question = response.data;
       });
@@ -210,12 +210,7 @@
         requestData.skill_id = data.skill_id;
       }
 
-      $http.post(API + '/exams/start', requestData, {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-          },
-          transformRequest: transformRequest
-        })
+      $http.post(API + '/exams/start', requestData)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -239,9 +234,8 @@
         exam_token: data.examToken,
         device: 'web',
         answers: data.logs,
-        base_item_id: $localStorage.auth.base_item_id
+        base_item_id: data.base_item_id
       };
-      console.log(data);
 
       if (data.type === "lesson") {
         requestData.lesson_number = data.lesson_number;
@@ -252,12 +246,7 @@
         requestData.skill_id = data.skill_id;
       }
 
-      $http.post(API + '/exams/finish', requestData, {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-          },
-          transformRequest: transformRequest
-        })
+      $http.post(API + '/exams/finish', requestData)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -268,24 +257,19 @@
 
     Services.fail = function (data) {
       var deferred = $q.defer();
-      var auth_token = $localStorage.auth.user.auth_token;
+      var authToken = $localStorage.auth.user.auth_token;
 
       var requestData = {
-        // type: data.type,
+        type: data.type,
         auth_token: auth_token,
-        // exam_token: data.examToken,
-        type: 'checkpoint',
-        platform: 'web',
-        // answers: data.logs,
-        checkpoint_position: data.checkpoint_position
+        platform: 'web'
       };
 
-      $http.post(API + '/exams/fail', requestData, {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-          },
-          transformRequest: transformRequest
-        })
+      if (data.type === "checkpoint") {
+        requestData.checkpoint_position = data.checkpoint_position;
+      }
+
+      $http.post(API + '/exams/fail', data)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -299,7 +283,7 @@
   angular.module('exam.services', []);
   angular.module('exam.services')
     .factory('Exam', ['$localStorage', '$window',
-      'ExamServices', 'Feedback', 'PlazaServices', 'Mixpanel', 'MemoTracking', ExamFactory
+      'ExamServices', 'Feedback', 'PlazaServices', 'MemoTracking', ExamFactory
     ])
     .factory('ExamServices', ['$http', '$q', '$localStorage', 'API', ExamServices]);
 }(window.angular));
