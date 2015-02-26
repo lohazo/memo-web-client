@@ -5,12 +5,11 @@
   function PlacementTestFactory(PlacementServices, Mixpanel, MemoTracker, $localStorage) {
     var PlacementTest = {};
 
-    PlacementTest.start = function (data) {
-      return PlacementServices.start(data)
+    PlacementTest.start = function () {
+      return PlacementServices.start()
         .then(function (response) {
           PlacementTest.question = response.data;
           MemoTracker.track('start exam placement test');
-          console.log(response.data.placement_test_log_id);
           $localStorage.placementtest = response.data.placement_test_log_id;
         });
     };
@@ -56,30 +55,20 @@
   }
 
   function PlacementTestServices($http, $q, API, $localStorage) {
-    function transformRequest(obj) {
-      var str = [];
-      for (var p in obj)
-        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-      return str.join("&");
-    }
 
     return {
-      start: function (data) {
+      start: function () {
         var deferred = $q.defer();
+        var authToken = $localStorage.auth.user.auth_token;
 
         var requestData = {
           platform: 'web',
           type: 'placement_test',
-          auth_token: data.auth_token,
+          auth_token: authToken,
           speak_enabled: false
         };
 
-        $http.post(API + '/adaptive_tests/start', requestData, {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-            },
-            transformRequest: transformRequest
-          })
+        $http.post(API + '/adaptive_tests/start', requestData)
           .then(function (response) {
             deferred.resolve(response);
           });
@@ -89,29 +78,12 @@
       submitAnswer: function (data) {
         var deferred = $q.defer();
 
-        // var data = {
-        //   platform: 'web',
-        //   type: 'placement_test',
-        //   auth_token: data.auth_token,
-        //   speak_enabled: false,
-        //   answers: '54ed743a6d61693d7e490000',
-        //   exam_token: data.exam_token
-        // };
-
+        data.auth_token = $localStorage.auth.user.auth_token;
         data.platform = 'web';
         data.speak_enabled = false;
-        auth_token: data.auth_token;
-        answer: data.logs;
-        exam_token: data.exam_token;
-        data.id= $localStorage.placementtest;
-        data.type= 'placement_test';
+        data.type = 'placement_test';
 
-        $http.post(API + '/adaptive_tests/' + data.id + '/submit_answer', data, {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-            },
-            transformRequest: transformRequest
-          })
+        $http.post(API + '/adaptive_tests/' + data.id + '/submit_answer', data)
           .then(function (response) {
             deferred.resolve(response);
           });

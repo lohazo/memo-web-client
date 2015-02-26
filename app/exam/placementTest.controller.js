@@ -28,6 +28,7 @@
     $scope.result = {};
     $scope.userAnswer = '';
     $scope.exam_token = '';
+    $scope.placementTestId = '';
 
     $scope.quit = function () {
       delete $scope.question;
@@ -57,7 +58,7 @@
     $scope.nextQuestion = function () {
 
       var requestData = {
-        auth_token: $scope.auth.user.auth_token,
+        id: $scope.placementTestId,
         exam_token: $scope.exam_token
       };
 
@@ -76,9 +77,10 @@
             $scope.question = responseData.question;
             $scope.question.userAnswer = "";
             $scope.questionTpl = questionTplId[$scope.question.type];
-            $scope.num_questions = responseData.num_questions;
+            $scope.num_questions = responseData.current_question;
             $scope.result = {};
             $scope.exam_token = responseData.exam_token;
+            $scope.placementTestId = responseData.placement_test_log_id;
           } else {
             $scope.question = responseData;
             if ($scope.question.finish_exam_bonus_exp === 0 &&
@@ -110,14 +112,15 @@
         });
     };
 
-    PlacementTest.start($scope.auth.user)
+    PlacementTest.start()
       .then(function () {
         $scope.question = PlacementTest.question.question;
         $scope.exam_token = PlacementTest.question.exam_token;
-        $scope.num_questions = PlacementTest.question.num_questions;
+        $scope.num_questions = PlacementTest.question.current_question;
         $scope.total_num_questions = PlacementTest.question.total_num_questions;
         $scope.question.userAnswer = "";
         $scope.questionTpl = questionTplId[$scope.question.type];
+        $scope.placementTestId = PlacementTest.question.placement_test_log_id;
       });
 
     $scope.keyUpHandler = function (e) {
