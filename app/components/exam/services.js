@@ -116,7 +116,8 @@
           hearts.remaining = hearts.remaining + 1;
           PlazaServices.use(requestData)
             .then(function (response) {
-              delete availableItems[item];
+              delete availableItems[0];
+              $localStorage.auth.base_item_id = item;
             });
         }
       }
@@ -238,7 +239,7 @@
         exam_token: data.examToken,
         device: 'web',
         answers: data.logs,
-        base_item_id: data.base_item_id
+        base_item_id: $localStorage.auth.base_item_id
       };
       console.log(data);
 
