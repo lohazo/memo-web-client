@@ -17,9 +17,8 @@
 
     Service.login = function (data) {
       var deferred = $q.defer();
-      var access_token = data.g_access_token || data.access_token;
       var gmail = data.gmail;
-      $http.post(API + '/users/login?access_token=' + access_token, data)
+      $http.post(API + '/users/login', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
