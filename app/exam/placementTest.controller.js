@@ -78,6 +78,7 @@
             $scope.questionTpl = questionTplId[$scope.question.type];
             $scope.num_questions = responseData.num_questions;
             $scope.result = {};
+            $scope.exam_token = responseData.exam_token;
           } else {
             $scope.question = responseData;
             if ($scope.question.finish_exam_bonus_exp === 0 &&
