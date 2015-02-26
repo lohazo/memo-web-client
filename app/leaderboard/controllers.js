@@ -3,15 +3,23 @@
   'use strict';
 
   function LeaderboardCtrl($scope, Leaderboard) {
+    $scope.users = [];
+
+    $scope.search = {
+      username: '',
+      keywords: ''
+    };
+
     $scope.follow = function (id) {
       var reqData = {
         friend_id: id
       };
       Leaderboard.follow(reqData).then(function () {
-        var friend = $scope.friends.filter(function (friend) {
-          return friend.user_id === id;
+        var friend = $scope.users.filter(function (friend) {
+          return friend._id === id;
         })[0];
-        friend.is_following = true;
+        console.log($scope.users, friend);
+        if (friend) friend.is_following = true;
       });
     };
 
@@ -20,11 +28,22 @@
         friend_id: id
       };
       Leaderboard.unfollow(reqData).then(function () {
-        var friend = $scope.friends.filter(function (friend) {
-          return friend.user_id === id;
+        var friend = $scope.users.filter(function (friend) {
+          return friend._id === id;
         })[0];
-        friend.is_following = false;
+        console.log($scope.users, friend);
+        if (friend) friend.is_following = false;
       });
+    };
+
+    $scope.searchMemoFriends = function () {
+      var reqData = {
+        keywords: $scope.search.keywords
+      };
+      Leaderboard.friends(reqData)
+        .then(function (response) {
+          $scope.users = response.data.friends;
+        });
     };
 
     $scope.showTheLeaderboard = function () {
@@ -35,7 +54,7 @@
 
     $scope.searchFbFriends = function () {
       Leaderboard.fbFriends().then(function (response) {
-        $scope.friends = response.data.friends;
+        $scope.users = response.data.friends;
       });
       $scope.showLeaderboard = false;
       $scope.showFbFriends = true;
@@ -83,27 +102,6 @@
     });
   }
 
-  function LeaderboardFbFriendsCtrl($scope) {
-    $scope.search = {
-      username: ''
-    };
-  }
-
-  function LeaderboardFriendsCtrl($scope, Leaderboard) {
-    $scope.search = {
-      keywords: ''
-    };
-    $scope.searchMemoFriends = function () {
-      var reqData = {
-        keywords: $scope.search.keywords
-      };
-      Leaderboard.friends(reqData)
-        .then(function (response) {
-          $scope.friends = response.data.friends;
-        });
-    };
-  }
-
   function LeaderboardEmailInviteCtrl($scope, Leaderboard) {
     $scope.email = "";
     $scope.sendEmail = function () {
@@ -118,8 +116,6 @@
   angular.module('leaderboard.controllers', [])
     .controller('LeaderboardCtrl', ['$scope', 'Leaderboard', LeaderboardCtrl])
     .controller('LeaderboardHomeCtrl', ['$scope', 'Leaderboard', LeaderboardHomeCtrl])
-    .controller('LeaderboardFbFriendsCtrl', ['$scope', LeaderboardFbFriendsCtrl])
-    .controller('LeaderboardFriendsCtrl', ['$scope', 'Leaderboard', LeaderboardFriendsCtrl])
     .controller('LeaderboardEmailInviteCtrl', ['$scope', 'Leaderboard',
       LeaderboardEmailInviteCtrl
     ]);
