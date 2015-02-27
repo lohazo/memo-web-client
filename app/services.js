@@ -206,7 +206,7 @@
   }
 
   angular.module('app.services', [])
-    .constant('APP_VERSION', '1.0.2')
+    .constant('APP_VERSION', '1.0.3')
     .constant('API', 'http://staging.memo.edu.vn/v2/api')
     .constant('angularMomentConfig', {
       preprocess: 'unix'
