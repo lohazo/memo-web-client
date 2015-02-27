@@ -2,8 +2,7 @@
     float: left;
 }
 
-.button-back {
-    width: auto;
+.back-lesson{
     float: right;
     border-radius: 5px;
     background-color: #FFF;
@@ -14,11 +13,11 @@
     border: 2px solid #FB3;
     color: #810C15;
     font-size: 15px;
-    margin-top: 5px;
-    &:hover {
-        background-color: #FB3;
-        color: #fff;
-    }
+    margin-top: 15px;
+}
+.back-lesson:hover{
+    background-color:#FB3;
+    color: #fff;
 }
 
 .plaza-item {
