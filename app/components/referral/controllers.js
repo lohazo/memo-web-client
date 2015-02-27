@@ -133,7 +133,7 @@
       if (Singleton.getView().hasNext()) {
         var index = Singleton.getView().next();
         $scope.directive = Singleton.getView().current();
-        EcoTracker.campaignTrack('Web 1.0.2 click event track', {
+        EcoTracker.campaignTrack('Web 1.0.3 click event track', {
           "campaign": 'REFERRAL',
           "screen": index + 1,
           "code_channel": $localStorage.auth.user ? 'ADS_E8' : 'ADS_NON_E8'
@@ -144,7 +144,7 @@
       if (Singleton.getView().hasPrev()) {
         var index = Singleton.getView().prev();
         $scope.directive = Singleton.getView().current();
-        EcoTracker.campaignTrack('Web 1.0.2 click event track', {
+        EcoTracker.campaignTrack('Web 1.0.3 click event track', {
           "campaign": 'REFERRAL',
           "screen": index + 1,
           "code_channel": $localStorage.auth.user ? 'ADS_E8' : 'ADS_NON_E8',
@@ -155,7 +155,7 @@
     $scope.$on('referral:body-last', function () {
       var index = Singleton.getView().last();
       $scope.directive = Singleton.getView().current();
-      EcoTracker.campaignTrack('Web 1.0.2 click event track', {
+      EcoTracker.campaignTrack('Web 1.0.3 click event track', {
         "campaign": 'REFERRAL',
         "screen": index + 1,
         "code_channel": $localStorage.auth.user ? 'ADS_E8' : 'ADS_NON_E8',
