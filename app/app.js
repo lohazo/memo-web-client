@@ -14,7 +14,7 @@
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.interceptors.push('HttpInterceptor');
 
-    $logProvider.debugEnabled(false);
+    // $logProvider.debugEnabled(false);
 
     FacebookProvider.init({
       appId: '856714854352716',
