@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function LoginFactory($http, $q, $localStorage, API, API_PHP) {
+  function LoginFactory($http, $q, $localStorage, API) {
     var Service = {};
 
     Service.register = function (data) {
@@ -189,7 +189,7 @@
 
   angular.module('login.services', []);
   angular.module('login.services')
-    .factory('LoginService', ['$http', '$q', '$localStorage', 'API', 'API_PHP', LoginFactory]);
+    .factory('LoginService', ['$http', '$q', '$localStorage', 'API', LoginFactory]);
   angular.module('login.services')
     .factory('AuthService', ['$q', '$rootScope', '$localStorage', '$routeParams',
       'Facebook', 'GooglePlus', 'EcoTracking', 'MemoTracking',

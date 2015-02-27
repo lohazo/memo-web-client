@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function CourseServices($http, $q, $location, $localStorage, API, API_PHP) {
+  function CourseServices($http, $q, $location, $localStorage, API) {
     var Services = {};
 
     Services.listCourses = function () {
@@ -86,7 +86,7 @@
 
   angular.module('course.services', [])
     .factory('Course', ['CourseServices', '$localStorage', CourseFactory])
-    .factory('CourseServices', ['$http', '$q', '$location', '$localStorage', 'API', 'API_PHP',
+    .factory('CourseServices', ['$http', '$q', '$location', '$localStorage', 'API',
       CourseServices
     ]);
 }(window.angular));

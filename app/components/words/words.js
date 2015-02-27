@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function WordsFactory($http, $q, $localStorage, API, API_PHP) {
+  function WordsFactory($http, $q, $localStorage, API) {
     var httpConfig = {
       ignoreLoadingBar: true
     };
@@ -60,7 +60,7 @@
 
       data.auth_token = authToken;
 
-      $http.post(API_PHP + '/words?', data, {
+      $http.post('http://api.memo.edu.vn/api/v1.8/words?', data, {
           ignoreLoadingBar: true,
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -81,5 +81,5 @@
 
   angular.module('words', []);
   angular.module('words')
-    .factory('Words', ['$http', '$q', '$localStorage', 'API', 'API_PHP', WordsFactory]);
+    .factory('Words', ['$http', '$q', '$localStorage', 'API', WordsFactory]);
 }(window.angular));
