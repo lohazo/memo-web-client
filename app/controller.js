@@ -1,21 +1,22 @@
 (function (angular) {
   'use strict';
 
-  function AppCtrl($scope, $localStorage, $sessionStorage, $location, $window, EcoTracker,
+  function AppCtrl($scope, $rootScope, $localStorage, $sessionStorage, $location, EcoTracker,
     AuthService) {
+    EcoTracker.init();
     $scope.auth = $localStorage.auth || {
       loggedIn: false,
       trial: false
     };
 
     function loginConfirmed(e, data) {
+      console.log('hit');
       $scope.auth = {
         loggedIn: true,
-        user: data.user,
-        trial: data.is_trial
+        user: data.user
       };
       $localStorage.auth = $scope.auth;
-      $location.path('/');
+      $location.url('/');
     }
 
     function logoutConfirmed(e, data) {
@@ -28,6 +29,9 @@
       $localStorage.auth = $scope.auth;
       $location.path('/');
     }
+
+    $scope.$on('event:auth-loginConfirmed', loginConfirmed);
+    $scope.$on('event:auth-logoutConfirmed', logoutConfirmed);
 
     if (!$scope.auth.loggedIn) {
       var path = $location.path();
@@ -85,14 +89,10 @@
     $scope.getNumber = function (num) {
       return new Array(num);
     };
-
-    EcoTracker.init();
-    $scope.$on('event:auth-loginConfirmed', loginConfirmed);
-    $scope.$on('event:auth-logoutConfirmed', logoutConfirmed);
   }
 
   angular.module('app.controllers', ['ngStorage'])
-    .controller('AppCtrl', ['$scope', '$localStorage', '$sessionStorage', '$location', '$window',
+    .controller('AppCtrl', ['$scope', '$rootScope', '$localStorage', '$sessionStorage', '$location',
       'EcoTracking', 'AuthService', AppCtrl
     ]);
 }(window.angular));
