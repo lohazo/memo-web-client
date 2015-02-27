@@ -1,7 +1,13 @@
 .plaza-title {
     float: left;
 }
-
+.plaza-item-section-name{
+        font-weight: bold;
+        line-height: inherit;
+        border-bottom-color: rgb(221, 221, 221);
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+    }
 .back-lesson{
     float: right;
     border-radius: 5px;
@@ -80,7 +86,12 @@
 }
 .plaza-get-memo-coin {
     .get-memo-coin-header {
+        font-weight: bold;
+        line-height: inherit;
         font-size: 20px;
+        border-bottom-color: rgb(221, 221, 221);
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
     }
     .get-memo-coin-desc {
         font-size: 14px;
