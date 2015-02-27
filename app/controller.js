@@ -3,6 +3,7 @@
 
   function AppCtrl($scope, $localStorage, $sessionStorage, $location, $window, EcoTracker,
     AuthService) {
+    EcoTracker.init();
     $scope.auth = $localStorage.auth || {
       loggedIn: false,
       trial: false
@@ -86,7 +87,6 @@
       return new Array(num);
     };
 
-    EcoTracker.init();
     $scope.$on('event:auth-loginConfirmed', loginConfirmed);
     $scope.$on('event:auth-logoutConfirmed', logoutConfirmed);
   }
