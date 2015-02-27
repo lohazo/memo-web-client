@@ -117,9 +117,6 @@
     function updateUser() {
       $scope.profile = Profile.detail;
       $scope.user = Profile.user;
-      console.log(Profile.user.created_at);
-      var date = new Date(Profile.user.created_at);
-      $scope.test_date = date;
     }
 
     $scope.linkFb = function () {
