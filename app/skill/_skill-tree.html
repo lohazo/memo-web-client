@@ -3,7 +3,7 @@
     class="{{skill.finished_lesson == skill.lessons.length ? 'success' : ''}} {{(skill.theme_color === '#99cc00' ? 'green' : (skill.theme_color === '#ff4444' ? 'red' : 'blue'))}}
     {{skill.unlocked ? 'unlocked' : 'locked'}}
     skill skill-{{skill.order + 1}} skill-offset-{{skill.isFirstInRow ? $index : 0}}" ng-repeat="skill in row track by $index">
-    <a ng-href="{{skill.unlocked ? '/skill/' + skill._id : ''}}">
+    <a href="{{skill.unlocked ? '/skill/' + skill._id : ''}}" target="_self">
       <div class="icon" style="background-image: url('{{skill.unlocked ? iconSets.unlocked : iconSets.locked}}');"></div>
       <div class="name">{{skill.slug}}</div>
       <div class="level level-5">

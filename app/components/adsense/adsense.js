@@ -4,10 +4,13 @@
   function GoogleAds() {
     return {
       restrict: 'A',
-      template: [
-        '<ins class="adsbygoogle"></ins>'
-      ].join(''),
       link: function ($scope, $element, $attrs) {
+        var script = document.createElement('script');
+        script.src = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+        $element.append(script);
+
+        $element.append('<ins class="adsbygoogle"></ins>');
+
         var style = {
           display: 'inline-block',
           width: $attrs.googleAdsWidth,
@@ -18,11 +21,14 @@
           'data-ad-client': $attrs.googleAdsClient,
           'data-ad-slot': $attrs.googleAdsSlot
         });
-        (adsbygoogle = window.adsbygoogle || []).push({});
+
+        script = document.createElement('script');
+        script.text = '(adsbygoogle = window.adsbygoogle || []).push({});'
+        $element.append(script);
       }
     };
   }
 
   angular.module('adsense', [])
-    .directive('googleAds', GoogleAds);
+    .directive('googleAds', [GoogleAds]);
 }(window.angular));
