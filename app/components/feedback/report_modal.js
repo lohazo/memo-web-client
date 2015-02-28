@@ -11,7 +11,7 @@ angular.module('feedback.reportModal', [])
           $scope.question.type];
         $scope.options = options.map(function (option) {
           return {
-            id: option.id,
+            id: option._id,
             name: option.name,
             checked: false
           };
