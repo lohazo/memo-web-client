@@ -3,9 +3,9 @@
 .landingpage {
   .footer {
     background: url("assets/img/landingpage/pattern02.png") repeat;
-    height: 480px;
+    min-height: 480px;
     .container {
-      height: 480px;
+      min-height: 480px;
     }
     .register.button {
       margin-top: 70px;
