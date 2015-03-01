@@ -1,8 +1,9 @@
 (function (angular) {
   'use strict';
 
-  function AppCtrl($scope, $localStorage, $sessionStorage, $location, $window, EcoTracker,
+  function AppCtrl($scope, $rootScope, $localStorage, $sessionStorage, $location, $window, EcoTracker,
     AuthService) {
+    EcoTracker.init();
     $scope.auth = $localStorage.auth || {
       loggedIn: false,
       trial: false
@@ -11,11 +12,10 @@
     function loginConfirmed(e, data) {
       $scope.auth = {
         loggedIn: true,
-        user: data.user,
-        trial: data.is_trial
+        user: data.user
       };
       $localStorage.auth = $scope.auth;
-      $location.path('/');
+      $window.location.href = '/';
     }
 
     function logoutConfirmed(e, data) {
@@ -29,13 +29,8 @@
       $location.path('/');
     }
 
-    if (!$scope.auth.loggedIn) {
-      var path = $location.path();
-      if (path.indexOf('/referral') < 0) {
-        logoutConfirmed();
-        return;
-      }
-    }
+    $scope.$on('event:auth-loginConfirmed', loginConfirmed);
+    $scope.$on('event:auth-logoutConfirmed', logoutConfirmed);
 
     $scope.chartOptions = {
       ///Boolean - Whether grid lines are shown across the chart
@@ -85,14 +80,10 @@
     $scope.getNumber = function (num) {
       return new Array(num);
     };
-
-    EcoTracker.init();
-    $scope.$on('event:auth-loginConfirmed', loginConfirmed);
-    $scope.$on('event:auth-logoutConfirmed', logoutConfirmed);
   }
 
   angular.module('app.controllers', ['ngStorage'])
-    .controller('AppCtrl', ['$scope', '$localStorage', '$sessionStorage', '$location', '$window',
+    .controller('AppCtrl', ['$scope', '$rootScope', '$localStorage', '$sessionStorage', '$location', '$window',
       'EcoTracking', 'AuthService', AppCtrl
     ]);
 }(window.angular));

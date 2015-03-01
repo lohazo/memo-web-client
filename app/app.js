@@ -2,7 +2,7 @@
   'use strict';
 
   function AppConfig($routeProvider, $locationProvider,
-    $httpProvider, FacebookProvider, GooglePlusProvider) {
+    $httpProvider, FacebookProvider, GooglePlusProvider, $logProvider) {
     $locationProvider.html5Mode(true).hashPrefix('!');
     $routeProvider.when('/', {
       templateUrl: '_index.html'
@@ -13,6 +13,8 @@
 
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.interceptors.push('HttpInterceptor');
+
+    // $logProvider.debugEnabled(false);
 
     FacebookProvider.init({
       appId: '856714854352716',
@@ -38,9 +40,9 @@
     'profile', 'skill', 'report', 'exam',
     'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
     'words', 'referral', 'question',
-    'notification', 'download',
+    'notification', 'download', 'adsense'
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
-    'GooglePlusProvider',
+    'GooglePlusProvider', '$logProvider',
     AppConfig
   ]).run(['amMoment', function (amMoment) {
     amMoment.changeLocale('vi');

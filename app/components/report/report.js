@@ -3,21 +3,20 @@
 angular.module('report', [])
   .factory('ReportServices', [
     '$http', '$q', '$localStorage', 'API',
-    function($http, $q, $localStorage, API) {
+    function ($http, $q, $localStorage, API) {
 
       return {
-        reportBug: function(data) {
+        reportBug: function (data) {
           var deferred = $q.defer();
-          
 
-          var requestData = data;
+          var requestData = {};
+          requestData.feedback = data.content;
           requestData.auth_token = $localStorage.auth.user.auth_token;
           requestData.platform = 'web';
           requestData.version = '1.0.2';
-          console.log(requestData);
 
           $http.post(API + '/feedbacks/report_bugs', requestData)
-            .then(function(response) {
+            .then(function (response) {
               deferred.resolve(response);
             });
 
@@ -26,22 +25,22 @@ angular.module('report', [])
       };
     }
   ])
-  .directive('systemReport', function() {
+  .directive('systemReport', function () {
     return {
       strict: 'EA',
       scope: true,
       templateUrl: 'components/report/_report.html'
     };
   })
-  .directive('systemReportPopup', function() {
+  .directive('systemReportPopup', function () {
     return {
       strict: 'EA',
       scope: true,
       templateUrl: 'components/report/_report-popup.html'
     };
   })
-  .controller('ReportCtrl', ['$scope', '$modal', function($scope, $modal) {
-    $scope.reportPopup = function() {
+  .controller('ReportCtrl', ['$scope', '$modal', function ($scope, $modal) {
+    $scope.reportPopup = function () {
       var modalInstance = $modal.open({
         template: '<system-report-popup></system-report-popup>',
         controller: 'ReportPopupCtrl',
@@ -51,20 +50,20 @@ angular.module('report', [])
   }])
   .controller('ReportPopupCtrl', [
     '$scope', '$modalInstance', 'ReportServices',
-    function($scope, $modalInstance, ReportServices) {
+    function ($scope, $modalInstance, ReportServices) {
       $scope.data = {
         content: ''
       };
-      $scope.reportBug = function() {
+      $scope.reportBug = function () {
         ReportServices.reportBug($scope.data)
-          .then(function() {
+          .then(function () {
             $modalInstance.close();
           });
       };
-      $scope.dismissReport = function() {
+      $scope.dismissReport = function () {
         $modalInstance.dismiss('cancel');
       };
-      $scope.cancel = function() {
+      $scope.cancel = function () {
         document.getElementById("cleartext").value = "";
       };
     }

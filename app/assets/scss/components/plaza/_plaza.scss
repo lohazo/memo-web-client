@@ -1,9 +1,14 @@
 .plaza-title {
     float: left;
 }
-
-.button-back {
-    width: auto;
+.plaza-item-section-name{
+        font-weight: bold;
+        line-height: inherit;
+        border-bottom-color: rgb(221, 221, 221);
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+    }
+.back-lesson{
     float: right;
     border-radius: 5px;
     background-color: #FFF;
@@ -15,10 +20,10 @@
     color: #810C15;
     font-size: 15px;
     margin-top: 5px;
-    &:hover {
-        background-color: #FB3;
-        color: #fff;
-    }
+}
+.back-lesson:hover{
+    background-color:#FB3;
+    color: #fff;
 }
 
 .plaza-item {
@@ -77,6 +82,49 @@
             font-size: .9em;
             width: 250px;
         }
+    }
+}
+.plaza-get-memo-coin {
+    .get-memo-coin-header {
+        font-weight: bold;
+        line-height: inherit;
+        font-size: 20px;
+        border-bottom-color: rgb(221, 221, 221);
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+    }
+    .get-memo-coin-desc {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    .get-memo-coin-table {
+        width: 500px;
+        border:2px #ffffff;
+        .get-memo-coin-table-body-left {
+            border-left: 2px solid #e6e6e6;
+            border-right: 2px solid #e6e6e6;
+            border-bottom: 2px solid #e6e6e6;
+            border-top: 2px solid #e6e6e6;
+            text-align: center;
+            align: left;
+            font-weight: bold;
+            line-height: inherit;
+        }
+        .get-memo-coin-table-body-right {
+            border-left: 2px solid #e6e6e6;
+            border-right: 2px solid #e6e6e6;
+            border-bottom: 2px solid #e6e6e6;
+            border-top: 2px solid #e6e6e6;
+            text-align: center;
+            align: left;
+        }
+    }
+    .get-memo-coin-note {
+        font-size: 14px;
+        margin-top: 5px;
+        font-style: italic;
+        line-height: inherit;
+        margin-bottom: 5px;
     }
 }
 
