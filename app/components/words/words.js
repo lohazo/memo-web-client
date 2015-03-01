@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function WordsFactory($http, $q, $localStorage, API, API_PHP) {
+  function WordsFactory($http, $q, $localStorage, API) {
     var httpConfig = {
       ignoreLoadingBar: true
     };
@@ -54,18 +54,15 @@
     };
 
     Factory.revealWords = function (data) {
-      // data = {words: ['en-vi_a', 'en-vi_x']}
+      // data = {words: {'en-vi_a': 1}}
       var deferred = $q.defer();
+      var userId = $localStorage.auth.user._id;
       var authToken = $localStorage.auth.user.auth_token;
 
       data.auth_token = authToken;
 
-      $http.post(API_PHP + '/words?', data, {
-          ignoreLoadingBar: true,
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-          },
-          transformRequest: transformRequest
+      $http.post(API + '/users/' + userId + '/update_owned_word', data, {
+          ignoreLoadingBar: true
         })
         .then(function (response) {
           deferred.resolve(response);
@@ -81,5 +78,5 @@
 
   angular.module('words', []);
   angular.module('words')
-    .factory('Words', ['$http', '$q', '$localStorage', 'API', 'API_PHP', WordsFactory]);
+    .factory('Words', ['$http', '$q', '$localStorage', 'API', WordsFactory]);
 }(window.angular));

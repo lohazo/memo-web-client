@@ -18,7 +18,6 @@
         var friend = $scope.users.filter(function (friend) {
           return friend._id === id;
         })[0];
-        console.log($scope.users, friend);
         if (friend) friend.is_following = true;
       });
     };
@@ -31,7 +30,6 @@
         var friend = $scope.users.filter(function (friend) {
           return friend._id === id;
         })[0];
-        console.log($scope.users, friend);
         if (friend) friend.is_following = false;
       });
     };

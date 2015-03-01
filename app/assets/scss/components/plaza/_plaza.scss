@@ -11,6 +11,17 @@
 .back-lesson{
     float: right;
     border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    color: #810C15;
+    font-size: 15px;
+}
+
+.button-back-plaza {
+    width: auto;
+    float: right;
+    border-radius: 5px;
     background-color: #FFF;
     text-decoration: none;
     text-align: center;
@@ -25,7 +36,6 @@
     background-color:#FB3;
     color: #fff;
 }
-
 .plaza-item {
     @include grid-column($columns: 16);
     @include grid-row;

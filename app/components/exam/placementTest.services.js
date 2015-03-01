@@ -2,14 +2,15 @@
 
   'use strict';
 
-  function PlacementTestFactory(PlacementServices, Mixpanel, MemoTracker) {
+  function PlacementTestFactory(PlacementServices, Mixpanel, MemoTracker, $localStorage) {
     var PlacementTest = {};
 
-    PlacementTest.start = function (data) {
-      return PlacementServices.start(data)
+    PlacementTest.start = function () {
+      return PlacementServices.start()
         .then(function (response) {
           PlacementTest.question = response.data;
           MemoTracker.track('start exam placement test');
+          $localStorage.placementtest = response.data.placement_test_log_id;
         });
     };
 
@@ -29,55 +30,53 @@
           } else {
             MemoTracker.track('quit exam placement test');
           }
-          // question = {
-          //     "finish_exam_bonus_exp": 0,
-          //     "leveled_up": false,
-          //     "heart_bonus_exp": 3,
-          //     "exp_chart": {
-          //  "days": ["Sa","Su","Mo","Tu","We","Th","Fr"],
-          //  "exp": [0,0,0,0,1010,0,0]
-          //     },
-          //     "combo_days": 1,
-          //     "affected_skill": {
-          //  "_id": "en-vi_dai_tu_quan_he",
-          //  "order": 1,
-          //  "title": "Đại từ quan hệ",
-          //  "slug": "Đại từ Q.hệ",
-          //  "theme_color": "#99cc00"
-          //     },
-          //     "num_affected_skills": 37,
-          //     "bonus_coin": 2
-          // };
+
+        // PlacementTest.question = {
+        //   "finish_exam_bonus_exp": 2680,
+        //   "heart_bonus_exp": 0,
+        //   "exp_chart": {
+        //     "days": ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"],
+        //     "exp": [0, 0, 0, 0, 0, 0, 2680]
+        //   },
+        //   "combo_days": 1,
+        //   "affected_skill": {
+        //     "_id": "en-vi_khoa_hoc",
+        //     "title": "Khoa học",
+        //     "order": 48,
+        //     "slug": "Khoa học",
+        //     "theme_color": "#33b5e5",
+        //     "icon_name": "en-vi_khoa_hoc",
+        //     "icon_urls": {}
+        //   },
+        //   "num_affected_skill": 49,
+        //   "leveled_up": true,
+        //   "level": 2,
+        //   "base_course_id": "en-vi",
+        //   "current_course_name": "Tiếng Anh",
+        //   "bonus_money_full_heart": 0,
+        //   "bonus_money_full_heart_message": "",
+        //   "bonus_money": 0
+        // };
         });
     }
-
     return PlacementTest;
   }
 
-  function PlacementTestServices($http, $q, API_PHP) {
-    function transformRequest(obj) {
-      var str = [];
-      for (var p in obj)
-        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-      return str.join("&");
-    }
+  function PlacementTestServices($http, $q, API, $localStorage) {
 
     return {
-      start: function (data) {
+      start: function () {
         var deferred = $q.defer();
+        var authToken = $localStorage.auth.user.auth_token;
 
         var requestData = {
-          device: 'web',
-          auth_token: data.auth_token,
+          platform: 'web',
+          type: 'placement_test',
+          auth_token: authToken,
           speak_enabled: false
         };
 
-        $http.post(API_PHP + '/placement_test/start', requestData, {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-            },
-            transformRequest: transformRequest
-          })
+        $http.post(API + '/adaptive_tests/start', requestData)
           .then(function (response) {
             deferred.resolve(response);
           });
@@ -87,15 +86,12 @@
       submitAnswer: function (data) {
         var deferred = $q.defer();
 
-        data.device = 'web';
+        data.auth_token = $localStorage.auth.user.auth_token;
+        data.platform = 'web';
         data.speak_enabled = false;
+        data.type = 'placement_test';
 
-        $http.post(API_PHP + '/placement_test/submit_answer', data, {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-            },
-            transformRequest: transformRequest
-          })
+        $http.post(API + '/adaptive_tests/' + data.id + '/submit_answer', data)
           .then(function (response) {
             deferred.resolve(response);
           });
@@ -107,9 +103,9 @@
 
   angular.module('placement.services', [])
   angular.module('placement.services')
-    .factory('PlacementTestFactory', ['PlacementTestServices', 'Mixpanel', 'MemoTracking',
+    .factory('PlacementTestFactory', ['PlacementTestServices', 'Mixpanel', 'MemoTracking', '$localStorage',
       PlacementTestFactory
     ])
-    .factory('PlacementTestServices', ['$http', '$q', 'API_PHP', PlacementTestServices]);
+    .factory('PlacementTestServices', ['$http', '$q', 'API', '$localStorage', PlacementTestServices]);
 
 }(window.angular));

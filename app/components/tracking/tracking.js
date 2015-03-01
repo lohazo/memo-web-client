@@ -22,7 +22,7 @@
       if (data.memoEnabled) {
         MemoTracker.track(data.eventName);
       } else {
-        EcoTracker.campaignTrack("Web 1.0.2 click event track", data);
+        EcoTracker.campaignTrack("Web 1.0.3 click event track", data);
       }
     };
   }

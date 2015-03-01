@@ -48,8 +48,8 @@
     }
 
     $scope.translate = $scope.$parent.question;
-    var specialObjectiveIds = angular.copy($scope.translate.special_objective_ids) || [];
-    var objectiveIds = angular.copy($scope.translate.objective_ids) || [];
+    var specialObjectiveIds = angular.copy($scope.translate.underline_words) || [];
+    var objectiveIds = angular.copy($scope.translate.highlighted_words) || [];
     $scope.translate_tokens = tokenize($scope.translate.question);
 
     if ($scope.translate.normal_question_audio) {
@@ -108,8 +108,12 @@
 
             var wordSound = ngAudio.load(element.attr('data-sound'));
             wordSound.play();
+
+            var obj = {};
+            obj[element.attr('data-word-id')] = 1;
+
             Words.revealWords({
-              words: JSON.stringify([element.attr('data-word-id')])
+              words: obj
             });
           }, 300);
         };

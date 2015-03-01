@@ -2,7 +2,7 @@
   'use strict';
 
   function MemoTracking($http, $q, $localStorage, APP_VERSION) {
-    var BASE_URL = 'http://services.memo.edu.vn/trackings/track';
+    var BASE_URL = 'http://staging.memo.edu.vn/trackings/track';
     var tracker = {};
 
     tracker.track = function (eventName, data, callback) {
@@ -167,7 +167,7 @@
 
   function MixpanelFactory() {
     var Mixpanel = {};
-    var APP_VERSION = '1.0.2';
+    var APP_VERSION = '1.0.3';
     var mixpanel = {
       identify: function () {},
       people: {
@@ -180,16 +180,16 @@
     Mixpanel.trackSignin = function (data) {
       mixpanel.identify(data.id);
       mixpanel.people.set(data);
-      mixpanel.track('Web 1.0.2 signin');
+      mixpanel.track('Web 1.0.3 signin');
     };
 
     Mixpanel.track = function (eventName, data) {
-      eventName = "Web 1.0.2 " + eventName;
+      eventName = "Web 1.0.3 " + eventName;
       mixpanel.track(eventName, data);
     };
 
     Mixpanel.track = function (eventName, data, callback) {
-      eventName = "Web 1.0.2 " + eventName;
+      eventName = "Web 1.0.3 " + eventName;
       mixpanel.track(eventName, data, callback);
     };
     Mixpanel.register = function (data) {

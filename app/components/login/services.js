@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function LoginFactory($http, $q, $localStorage, API, API_PHP) {
+  function LoginFactory($http, $q, $localStorage, API) {
     var Service = {};
 
     Service.register = function (data) {
@@ -17,9 +17,8 @@
 
     Service.login = function (data) {
       var deferred = $q.defer();
-      var access_token = data.g_access_token || data.access_token;
       var gmail = data.gmail;
-      $http.post(API + '/users/login?access_token=' + access_token, data)
+      $http.post(API + '/users/login', data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -164,7 +163,7 @@
 
       if (response.data.is_newly_sign_up) {
         MemoTracker.track('sign up');
-        EcoTracker.track('Web 1.0.2 user logged in', data);
+        EcoTracker.track('Web 1.0.3 user logged in', data);
 
         var molData = {
           code_chanel: $routeParams.code_chanel || -100,
@@ -190,7 +189,7 @@
 
   angular.module('login.services', []);
   angular.module('login.services')
-    .factory('LoginService', ['$http', '$q', '$localStorage', 'API', 'API_PHP', LoginFactory]);
+    .factory('LoginService', ['$http', '$q', '$localStorage', 'API', LoginFactory]);
   angular.module('login.services')
     .factory('AuthService', ['$q', '$rootScope', '$localStorage', '$routeParams',
       'Facebook', 'GooglePlus', 'EcoTracking', 'MemoTracking',

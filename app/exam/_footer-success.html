@@ -5,6 +5,7 @@
   <div class="small-4 columns">
   </div>
   <div class="small-4 columns">
-    <a href="" class="right small-9 check memo-button" ng-click="quit(true, '/skill')">Tiếp tục</a>
+    <a href="" class="right small-9 check memo-button" ng-if="examType == 'shortcut' || examType == 'lesson'" ng-click="quit(true, '/skill')">Tiếp tục</a>
+    <a href="" class="right small-9 check memo-button" ng-if="examType == 'checkpoint' || examType == ''" ng-click="quit(true, '/')">Tiếp tục</a>
   </div>
 </div>

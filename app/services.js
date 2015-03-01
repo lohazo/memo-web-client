@@ -105,18 +105,8 @@
     return Setting;
   }
 
-  function AppServices($http, $q, $localStorage, API, API_PHP) {
+  function AppServices($http, $q, $localStorage, API) {
     var AppServices = {};
-    AppServices.get = function (data) {
-      var deferred = $q.defer();
-      var authToken = $localStorage.auth.user.auth_token;
-
-      $http.get(API_PHP + '/appsettings?device=web&auth_token=' + authToken)
-        .then(function (response) {
-          deferred.resolve(response);
-        });
-      return deferred.promise;
-    };
 
     AppServices.getSharedSettings = function (data) {
       var deferred = $q.defer();
@@ -216,9 +206,8 @@
   }
 
   angular.module('app.services', [])
-    .constant('APP_VERSION', '1.0.2')
-    .constant('API_PHP', 'http://api.memo.edu.vn/api/v1.7')
-    .constant('API', 'http://services.memo.edu.vn/v2/api')
+    .constant('APP_VERSION', '1.0.3')
+    .constant('API', 'http://staging.memo.edu.vn/v2/api')
     .constant('angularMomentConfig', {
       preprocess: 'unix'
     })
@@ -226,7 +215,7 @@
       HttpInterceptor
     ])
     .factory('AppSetting', ['$localStorage', 'AppServices', 'Words', AppSetting])
-    .factory('AppServices', ['$http', '$q', '$localStorage', 'API', 'API_PHP', AppServices])
+    .factory('AppServices', ['$http', '$q', '$localStorage', 'API', AppServices])
     .factory('Message', ['MessageService', Message])
     .factory('MessageService', ['$http', '$q', '$localStorage', 'API', MessageService])
 }(window.angular));
