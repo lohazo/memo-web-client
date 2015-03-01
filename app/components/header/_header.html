@@ -12,7 +12,7 @@
       <!-- Left Nav Section -->
       <ul class="left menus">
         <li class="menu-item" ng-class="{'active': path == '/'}" style="width: 130px;">
-          <a ng-href="/">Trang chủ</a>
+          <a href="/" target="_self">Trang chủ</a>
         </li>
       </ul>
       <!-- Right Nav Section -->
@@ -23,8 +23,8 @@
             <img src="assets/img/button-05.png" alt="" />
           </a>
           <ul id="dropdown-setting" class="f-dropdown" dropdown-align="right">
-            <li><a href="/profile">Hồ sơ cá nhân</a></li>
-            <li><a href="/setting/account">Cài đặt</a></li>
+            <li><a href="/profile" target="_self">Hồ sơ cá nhân</a></li>
+            <li><a href="/setting/account" target="_self">Cài đặt</a></li>
             <li><a ng-click="showShortcutPopup()">Phím tắt bàn phím</a></li>
             <li><a ng-click="logout()">Đăng xuất</a></li>
           </ul>
