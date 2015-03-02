@@ -107,8 +107,10 @@
     return SettingProfile;
   }
 
-  function SettingProfileCtrl($scope, Profile, SettingProfile) {
+  function SettingProfileCtrl($scope, Profile, SettingProfile, $localStorage) {
     updateUser();
+
+    $scope.name = $localStorage.auth.user.name;
 
     $scope.saveChanges = function () {
       var data = {};
@@ -117,7 +119,6 @@
     function updateUser() {
       $scope.profile = Profile.detail;
       $scope.user = Profile.user;
-      console.log(Profile.user.created_at);
       var date = new Date(1422851245284);
       $scope.test_date = date;
     }
@@ -148,7 +149,7 @@
   }
 
   angular.module('settings.profile', [])
-    .controller('SettingProfileCtrl', ['$scope', 'Profile', 'SettingProfile',
+    .controller('SettingProfileCtrl', ['$scope', 'Profile', 'SettingProfile', '$localStorage',
       SettingProfileCtrl
     ])
     .factory('SettingProfileService', ['$http', '$q', '$localStorage', 'API',
