@@ -34,7 +34,7 @@
   angular.module('app', [
     'ngRoute', 'ngStorage', 'ngAudio', 'angular.filter',
     'mm.foundation', 'angles', 'facebook', 'googleplus',
-    'angular-loading-bar', 'angularMoment',
+    'angular-loading-bar', 'angularMoment', 'angulartics', 'angulartics.google.analytics',
     'app.controllers', 'app.directives',
     'header', 'landingpage', 'login', 'home', 'course',
     'profile', 'skill', 'report', 'exam',
