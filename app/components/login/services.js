@@ -27,6 +27,7 @@
 
     Service.login = function (data) {
       var deferred = $q.defer();
+      var access_token = data.g_access_token || data.access_token;
       var gmail = data.gmail;
 
       if (!Service.loginProcessing) {
