@@ -179,11 +179,9 @@
     };
 
     function loginCallback(response) {
-      $localStorage.auth = {
-        loggedIn: true,
-        user: response.data,
-        trial: response.data.is_trial
-      };
+      $rootScope.$broadcast('event:auth-loginConfirmed', {
+        user: response.data
+      });
 
       var data = angular.fromJson(angular.toJson(response.data));
       // data.name = data.username;
@@ -208,10 +206,6 @@
       } else {
         MemoTracker.track('login');
       }
-
-      $rootScope.$broadcast('event:auth-loginConfirmed', {
-        user: response.data
-      });
     }
     return Service;
   }
