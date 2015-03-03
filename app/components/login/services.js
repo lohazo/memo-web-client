@@ -4,14 +4,24 @@
   function LoginFactory($http, $q, $localStorage, API, API_PHP) {
     var Service = {};
 
+    Service.loginProcessing = false;
+
     Service.register = function (data) {
       var deferred = $q.defer();
-      $http.post(API + '/users', data)
-        .then(function (response) {
-          deferred.resolve(response);
-        }, function (response) {
-          deferred.reject(response);
-        });
+
+      if (!Service.loginProcessing) {
+        Service.loginProcessing = true;
+
+        $http.post(API + '/users', data)
+          .then(function (response) {
+            deferred.resolve(response);
+            Service.loginProcessing = false;
+          }, function (response) {
+            deferred.reject(response);
+            Service.loginProcessing = false;
+          });
+      }
+
       return deferred.promise;
     };
 
@@ -19,13 +29,29 @@
       var deferred = $q.defer();
       var access_token = data.g_access_token || data.access_token;
       var gmail = data.gmail;
-      $http.post(API + '/users/login?access_token=' + access_token, data)
-        .then(function (response) {
-          deferred.resolve(response);
-        }, function (response) {
-          deferred.reject(response);
-        });
+
+      if (!Service.loginProcessing) {
+        Service.loginProcessing = true;
+
+        $http.post(API + '/users/login?access_token=' + access_token, data)
+          .then(function (response) {
+            deferred.resolve(response);
+            Service.loginProcessing = false;
+          }, function (response) {
+            deferred.reject(response);
+            Service.loginProcessing = false;
+          });
+      }
+
       return deferred.promise;
+    };
+
+    Service.logout = function () {
+      var user = $localStorage.auth.user;
+
+      return $http.post(API + '/users/' + user._id + '/logout', {
+        auth_token: user.auth_token
+      });
     };
 
     Service.forgetPassword = function (data) {
@@ -144,18 +170,18 @@
     };
 
     Service.logout = function () {
-      $localStorage.$reset();
-      delete $localStorage.displayTour;
-      delete $localStorage.auth;
-      $rootScope.$broadcast('event:auth-logoutConfirmed');
+      LoginService.logout().then(function () {
+        $localStorage.$reset();
+        delete $localStorage.displayTour;
+        delete $localStorage.auth;
+        $rootScope.$broadcast('event:auth-logoutConfirmed');
+      });
     };
 
     function loginCallback(response) {
-      $localStorage.auth = {
-        loggedIn: true,
-        user: response.data,
-        trial: response.data.is_trial
-      };
+      $rootScope.$broadcast('event:auth-loginConfirmed', {
+        user: response.data
+      });
 
       var data = angular.fromJson(angular.toJson(response.data));
       // data.name = data.username;
@@ -180,10 +206,6 @@
       } else {
         MemoTracker.track('login');
       }
-
-      $rootScope.$broadcast('event:auth-loginConfirmed', {
-        user: response.data
-      });
     }
     return Service;
   }
