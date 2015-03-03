@@ -1,8 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function AppCtrl($scope, $rootScope, $localStorage, $sessionStorage, $location, $window, EcoTracker,
-    AuthService) {
+  function AppCtrl($scope, $localStorage, $sessionStorage, $location, $window, $timeout, EcoTracker) {
     EcoTracker.init();
     $scope.auth = $localStorage.auth || {
       loggedIn: false,
@@ -15,7 +14,10 @@
         user: data.user
       };
       $localStorage.auth = $scope.auth;
-      $window.location.href = '/';
+
+      $timeout(function () {
+        $window.location.href = '/';
+      }, 250);
     }
 
     function logoutConfirmed(e, data) {
@@ -83,7 +85,7 @@
   }
 
   angular.module('app.controllers', ['ngStorage'])
-    .controller('AppCtrl', ['$scope', '$rootScope', '$localStorage', '$sessionStorage', '$location', '$window',
-      'EcoTracking', 'AuthService', AppCtrl
+    .controller('AppCtrl', ['$scope', '$localStorage', '$sessionStorage', '$location', '$window',
+      '$timeout', 'EcoTracking', AppCtrl
     ]);
 }(window.angular));

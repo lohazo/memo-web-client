@@ -13,7 +13,7 @@ angular.module('report', [])
           requestData.feedback = data.content;
           requestData.auth_token = $localStorage.auth.user.auth_token;
           requestData.platform = 'web';
-          requestData.version = '1.0.2';
+          requestData.version = '1.0.3';
 
           $http.post(API + '/feedbacks/report_bugs', requestData)
             .then(function (response) {
