@@ -4,7 +4,7 @@
   <span class="nothing meter" ng-repeat="j in playerHeader.getNumber(5 - answeredSteps) track by $index"></span>
 </div>
 <div class="player-header-right">
-  <welcome-quit-link quit-link-text="{{playerHeader.settings.right.quitLink.text}}" quit-link-message="{{playerDataExam.tutorial_skip_alert_message}}" confirm-button="{{playerDataExam.tutorial_skip_alert_confirm_button}}" cancel-button="{{playerData.exam.tutorial_skip_alert_cancel_button}}" quit-link-hide="settings.right.quitLink.hide" skip="playerHeader.skip()">
+  <welcome-quit-link quit-link-text="{{playerHeader.settings.right.quitLink.text}}" quit-link-message="{{playerDataExam.tutorial_skip_alert_message}}" confirm-button="{{playerDataExam.tutorial_skip_alert_confirm_button}}" cancel-button="{{playerDataExam.tutorial_skip_alert_cancel_button}}" quit-link-hide="settings.right.quitLink.hide" skip="playerHeader.skip()">
   </welcome-quit-link>
   <welcome-memo-coin memo-coin="playerDataExam.tutorial_memo_coin_bonus_amount" hide="settings.right.memoCoin.hide"></welcome-memo-coin>
 </div>
