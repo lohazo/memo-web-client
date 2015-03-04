@@ -122,6 +122,11 @@
     Service.FbLogin = function () {
       var deferred = $q.defer();
 
+      if (!$localStorage.auth) $localStorage.auth = {
+        loggedIn: false,
+        trial: false
+      };
+
       if ($localStorage.auth.facebook) {
         facebookGetInfo();
       } else {

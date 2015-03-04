@@ -3,10 +3,13 @@
 
   function AppCtrl($scope, $localStorage, $sessionStorage, $location, $window, $timeout, EcoTracker) {
     EcoTracker.init();
-    $scope.auth = $localStorage.auth || {
-      loggedIn: false,
-      trial: false
-    };
+    if (!$localStorage.auth) {
+      $localStorage.auth = {
+        loggedIn: false,
+        trial: false
+      };
+    }
+    $scope.auth = $localStorage.auth;
 
     function loginConfirmed(e, data) {
       $scope.auth = {
