@@ -1,8 +1,8 @@
 (function (angular, localStorage) {
   'use strict';
 
-  function MemoTracking($http, $q, $localStorage, APP_VERSION, API) {
-    var BASE_URL = API + '/trackings/track';
+  function MemoTracking($http, $q, $localStorage, APP_VERSION) {
+    var BASE_URL = 'http://services.memo.edu.vn/v2/trackings/track';
     var tracker = {};
 
     tracker.track = function (eventName, data, callback) {
@@ -200,7 +200,7 @@
   }
 
   angular.module('tracking.services', ['ngCookies'])
-    .factory('MemoTracking', ['$http', '$q', '$localStorage', 'APP_VERSION', 'API', MemoTracking])
+    .factory('MemoTracking', ['$http', '$q', '$localStorage', 'APP_VERSION', MemoTracking])
     .factory('EcoTracking', [
       '$http', '$q', '$routeParams', '$cookies', '$localStorage', EcoTracking
     ])
