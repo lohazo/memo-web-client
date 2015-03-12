@@ -1,25 +1,28 @@
 (function (angular) {
   'use strict';
 
-  function MessageListCtrl($scope, $modal, $localStorage, Message) {
-    var messages = $localStorage.messages;
-    if (!messages) return;
-    $scope.messages = messages;
-    $scope.shouldOpen = messages.message_ids && messages.message_ids.length > 0;
-    if ($scope.shouldOpen) {
-      var modalInstance = $modal.open({
-        template: '<div message-content></div>',
-        controller: 'MessageModalInstanceCtrl',
-        backdrop: 'static',
-        keyboard: false,
-        windowClass: 'message-modal',
-        resolve: {
-          messages: function () {
-            return $scope.messages;
-          },
-        }
-      });
-    }
+  function MessageListCtrl($scope, $modal, $localStorage, $interval) {
+    var intervalPromise = $interval(function () {
+      var messages = $localStorage.messages;
+      if (!messages) return;
+      $scope.messages = messages;
+      $scope.shouldOpen = messages.message_ids && messages.message_ids.length > 0;
+      if ($scope.shouldOpen) {
+        $interval.cancel(intervalPromise);
+        var modalInstance = $modal.open({
+          template: '<div message-content></div>',
+          controller: 'MessageModalInstanceCtrl',
+          backdrop: 'static',
+          keyboard: false,
+          windowClass: 'message-modal',
+          resolve: {
+            messages: function () {
+              return $scope.messages;
+            },
+          }
+        });
+      }
+    }, 500, 100);
   }
 
   function MessageModalInstanceCtrl($scope, $modalInstance, Message, messages) {
@@ -36,12 +39,6 @@
         strict: 'EA',
         scope: true,
         controller: 'MessageListCtrl',
-        link: function ($scope, $element, $attr) {
-          $scope.closeMessageList = function () {
-            $scope.shouldOpen = false;
-            $scope.openMessage($scope.messages);
-          }
-        }
       };
     })
     .directive('messageContent', function ($compile) {
@@ -56,8 +53,8 @@
           });
         }
       };
-    }).
-  controller('MessageListCtrl', ['$scope', '$modal', '$localStorage', 'Message', MessageListCtrl])
+    })
+    .controller('MessageListCtrl', ['$scope', '$modal', '$localStorage', '$interval', MessageListCtrl])
     .controller('MessageModalInstanceCtrl', ['$scope', '$modalInstance', 'Message', 'messages',
       MessageModalInstanceCtrl
     ]);
