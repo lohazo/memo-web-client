@@ -176,7 +176,7 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
-      $http.get(API + '/messages?auth_token=' + authToken)
+      $http.get(API + '/messages?platform=web&auth_token=' + authToken)
         .then(function (response) {
           $localStorage.messages = response.data;
           deferred.resolve(response);
@@ -191,7 +191,8 @@
 
       var requestData = {
         message_ids: JSON.stringify(data.message_ids),
-        auth_token: authToken
+        auth_token: authToken,
+        platform: 'web'
       };
 
       $http.post(API + '/messages/open_messages', requestData)
@@ -207,7 +208,7 @@
 
   angular.module('app.services', [])
     .constant('APP_VERSION', '1.0.3')
-    .constant('API', 'http://services.memo.edu.vn/v2/api')
+    .constant('API', 'http://staging.memo.edu.vn/v2/api')
     .constant('angularMomentConfig', {
       preprocess: 'unix'
     })
