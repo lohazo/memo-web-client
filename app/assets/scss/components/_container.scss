@@ -161,3 +161,14 @@ a.reverse.button {
   display: inline-block;
   vertical-align: middle;
 }
+
+.message-modal {
+  min-width: 800px !important;
+  min-height: 500px !important;
+  border: none;
+  .message-modal-inner {
+    > div > img {
+      margin-bottom: 20px;
+    }
+  }
+}
