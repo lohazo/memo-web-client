@@ -7,6 +7,9 @@
     $routeProvider.when('/', {
       templateUrl: '_index.html'
     });
+    $routeProvider.when('/forum/postDetail', {
+      templateUrl: '/forum/_postDetail.html'
+    });
     $routeProvider.otherwise({
       redirectTo: '/'
     });

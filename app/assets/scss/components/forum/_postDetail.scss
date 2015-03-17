@@ -1,0 +1,39 @@
+.forumDetail {
+	@include grid-row;
+	padding-top: 42px;
+	.main-left {
+	  @include grid-column($columns: 11);
+	}
+	.main-right {
+	  @include grid-column($columns: 5);
+	}
+	.panel {
+	  @include panel($bg: $white);
+	  width: 100% !important;
+	  border: 0;
+	  border-radius: 20px;
+	}
+	.post-panel {
+	  @include grid-row;
+    padding: 30px;
+    .post-panel-header {
+      @include grid-row;
+      margin-bottom: 30px;
+      .right {
+        margin-right: 10px;
+      }
+      left {
+        margin-left: 10px;
+      }
+      .title {
+        padding: 10px;
+      }
+      .follow-post-button {
+        border: 2px solid $gold;
+        background-color: $white;
+        color: $primary-color;
+        padding: 10px 20px;
+      }
+    }
+	}
+}
