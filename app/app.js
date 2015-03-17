@@ -7,9 +7,6 @@
     $routeProvider.when('/', {
       templateUrl: '_index.html'
     });
-    $routeProvider.when('/forum/postDetail', {
-      templateUrl: '/forum/_postDetail.html'
-    });
     $routeProvider.otherwise({
       redirectTo: '/'
     });
@@ -43,7 +40,7 @@
     'profile', 'skill', 'report', 'exam',
     'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
     'words', 'referral', 'question',
-    'notification', 'download', 'adsense'
+    'notification', 'download', 'adsense', 'forum'
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
     'GooglePlusProvider', '$logProvider',
     AppConfig
