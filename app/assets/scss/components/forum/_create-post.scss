@@ -1,0 +1,97 @@
+.create-post {
+	@include grid-row;
+	padding-top: 42px;
+	.main-left {
+	  @include grid-column($columns: 11);
+	}
+	.main-right {
+	  @include grid-column($columns: 5);
+	}
+	.panel {
+	  @include panel($bg: $white);
+	  width: 100% !important;
+	  border: 0;
+	  border-radius: 20px;
+	}
+	.create-post-panel {
+	  @include grid-row;
+    padding: 30px;
+    .create-post-panel-header {
+      @include grid-row;
+      padding: 10px;
+      margin-bottom: 28px;
+      border-bottom: solid 2px #ccc;
+      .right {
+        margin-right: 10px;
+      }
+      left {
+        margin-left: 10px;
+      }
+      .chanel-post-options {
+        width: 200px;
+        border: 2px solid #ffbb33;
+        margin-bottom: 0px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-right: 10px;
+        height: 42px;
+        font-size: 16px;
+        color: $primary-color;
+      }
+    }
+    .create-post-panel-iner {
+      @include grid-row;
+      .editor-title {
+        float: left;
+        width: 100%;
+        padding-left: 10px;
+        margin-bottom: 10px;
+        .editor-title-textarea {
+          min-height: 70px;
+          border: 2px solid $iron;
+          border-radius: 10px;
+          padding: 10px;
+          resize: none;
+          font-size: 24px;
+          margin: 0;
+        }
+      }
+      .editor-desc {
+        float: left;
+        width: 100%;
+        padding-left: 10px;
+        margin-bottom: 20px;
+        .editor-desc-textarea {
+          min-height: 200px;
+          border: 2px solid $iron;
+          border-radius: 10px;
+          padding: 10px;
+          resize: none;
+          font-size: 16px;
+          margin: 0;
+        }
+      }
+    }
+    .editor-toolbar {
+      @include grid-row;
+      padding-left: 10px;
+      .right {
+        margin-right: 10px;
+      }
+      left {
+        margin-left: 10px;
+      }
+      .post-button {
+        padding: 10px;
+        background-color: $success-color;
+        color: $white;
+        padding: 10px 20px;
+        margin-bottom: 10px !important;
+        &:hover {
+          background-color: scale-color($success-color, $lightness: -20%);
+        }
+      }
+    }
+	}
+}
