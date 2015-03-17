@@ -1,14 +1,19 @@
 (function(angular) {
 
-	'use strict';
+  'use strict';
 
-	function ForumConfig($routeProvider) {
-		$routeProvider.when('/forum/post', {
-			templateUrl: 'forum/_create-post.html',
-			controller: ''
-		});
-	}
+  function ForumConfig($routeProvider) {
+    $routeProvider.when('/forum/post', {
+      templateUrl: 'forum/_create-post.html',
+      controller: ''
+    });
 
-	angular.module('forum', [])
-	  .config(['$routeProvider', ForumConfig]);
+    $routeProvider.when('/forum/thread', {
+      templateUrl: 'forum/_thread-list.html',
+      controller: ''
+    });
+  }
+
+  angular.module('forum', [])
+    .config(['$routeProvider', ForumConfig]);
 }(window.angular));

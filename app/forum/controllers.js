@@ -1,12 +1,12 @@
 (function (angular) {
-	'use strict';
+  'use strict';
 
-	function ListPostCtrl($scope) {
-		
-	}
+  function ListPostCtrl($scope) {
+    
+  }
 
-	angular.module('forum.controllers', [])
-	  .controller('ListPostCtrl', ['$scope', 
-	  	ListPostCtrl
-	  ])
+  angular.module('forum.controllers', [])
+  .controller('ListPostCtrl', ['$scope', 
+    ListPostCtrl
+    ])
 }(window.angular));
