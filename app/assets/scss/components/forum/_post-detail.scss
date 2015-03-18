@@ -82,8 +82,7 @@
     .comment-info-header {
       @include grid-row;
       padding: 10px;
-      margin-bottom: 28px;
-      border-bottom: solid 1px #ccc;
+      margin-bottom: 20px;
       .right {
         margin-right: 10px;
       }
@@ -92,6 +91,85 @@
       }
       .title {
         padding: 10px;
+        margin-bottom: 0;
+      }
+    }
+    .comment-info-iner {
+      @include grid-row;
+      .comments {
+        .comment {
+          border-top: solid 1px #ccc;
+          list-style: none;
+          .comment-avatar {
+            @include grid-column($columns: 2);
+          }
+          .comment-content {
+            @include grid-column($columns: 14);
+            padding: 20px 0 0 0;
+            .comment-content-top {
+              text-align: left;
+              .comment-name-text {
+                color: $primary-color;
+                font-size: 16px;
+              }
+            }
+            .comment-content-mid {
+              .comment-content-text {
+                font-size: 16px;
+              }
+            }
+            .comment-content-toolbar {
+              @include grid-column($columns: 16);
+              padding-right: 10px;
+              .total-vote {
+                padding-right: 20px;
+                font-size: 16px;
+              }
+              .vote-up {
+                margin-right: 15px;
+                background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+                background-size: contain;
+                width: 25px;
+                height: 25px;
+              }
+              .vote-down {
+                margin-right: 15px;
+                background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
+                background-size: contain;
+                width: 25px;
+                height: 25px;
+              }
+              .reply {
+                padding-right: 10px;
+              }
+              .comment-version {
+                width: 100%;
+                @include grid-row;
+                padding-right: 20px;
+                .avatar {
+                  width: 65px;
+                  height: 65px;
+                }
+                .comment-editor {
+                  .comment-editor-textarea {
+
+                 }
+                  .comment-editor-toolbar {
+                    .send-comment-button {
+                      color: $white;
+                      font-size: 1rem;
+                      font-weight: bold;
+                      background-color: $success-color;
+                      &:hover {
+                        background-color: scale-color($success-color, $lightness: -20%);
+                      }
+                    }
+                 }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

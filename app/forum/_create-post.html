@@ -3,7 +3,10 @@
     <section class="panel create-post-panel"> <!-- start post-panel -->
       <div class="create-post-panel-header">
        <div class="left">
-        <select class="chanel-post-options" ng-model="paper.sortBy" ng-options="option.queryParams as option.text for option in paper.sortOptions">
+        <!-- <select class="chanel-post-options" ng-model="paper.sortBy" ng-options="">
+          <option value="">Chọn kênh thảo luận</option>
+        </select> -->
+        <select ng-model="selectedItem" ng-options="owned_course.course_name for owned_course in owned_courses">
           <option value="">Chọn kênh thảo luận</option>
         </select>
        </div>
@@ -17,7 +20,7 @@
       </div>
     </div>
     <div class="editor-toolbar">
-      <a href="/forum/postDetail" class="small radius button post-button left">Tạo chủ đề mới</a>
+      <a href="" class="small radius button post-button left" ng-click="CreatePost()">Tạo chủ đề mới</a>
     </div>
     </section> <!-- end post-panel -->  	
   </section> <!-- end main-left -->
