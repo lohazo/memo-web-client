@@ -3,27 +3,22 @@
 
 	function ForumServices($http, $q, $localStorage, API) {
 		var Services = {};
-
-		/*
-     * data = {auth_token: , page: ,sort: ,type: ,filter: }
-     */
-    Services.getAllPosts = function() {
-    	var deferred = $q.defer();
+		Services.post = function (data) {
+      var deferred = $q.defer();
+      console.log(data.title);
       var authToken = $localStorage.auth.user.auth_token;
-
-      var requestData = {
-        auth_token: auth_token,
-        // page: ,
-        // sort: ,
-        // type: ,
-        // filter: 
-      };
-      $http.get(API + '/posts/all_posts', requestData)
+      var requestData = {};
+      requestData.title = data.title;
+      requestData.content = data.content;
+      requestData.auth_token = authToken;
+      requestData.question_log_id =  '';
+      requestData.platform = 'web';
+  	
+      $http.post(API + '/posts', requestData)
         .then(function (response) {
-        	deferred.resolve(response);
-        }, function (response) {
-        	deferred.reject(response)
+          deferred.resolve(response);
         });
+
       return deferred.promise;
     };
     return Services;
@@ -34,13 +29,10 @@
 
 		Forum.data = {};
 
-    Forum.getAllPost = function (data) {
-    	console.log(data);
-    	return Forum.getAllPosts(data).then(function (response) {
-    		Forum.data = response.data;
-    	});
-    };
-
+		// Forum.post = function () {
+  //     return ForumServices.post().then(function (response) {
+  //     });
+  //   };
     return Forum;
 	}
 
