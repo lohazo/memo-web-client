@@ -1,48 +1,137 @@
-.forum-thread {
+.main{
   @include grid-row;
   padding-top: 42px;
   .main-left {
-    @include grid-column ($columns: 11);
-    .thread {
-      padding: 20px 30px;
-      background: #fff;
-      border-radius: 10px;
-      .thread-header {
-        .title {
+    @include grid-column ($columns: 12);
+    padding: 20px 30px;
+    border-radius: 10px;
+    background: #fff;
+    .posts {
+      @include grid-row;
+      .posts-header {
+        @include grid-row;
+        .left {
           float: left;
         }
-        a.button {
+        .right {
           float: right;
-          padding: 5px 20px;
-          background: none repeat scroll 0px 0px #FFF;
-          border: 2px solid #FFC149;
-          color: #810C15;
-          font-size: 16px;
-          border-radius: 5px;
-          transition: all 0.5s ease;
-          &:hover {
-            background-color: #810c15;
-            color: #fff;
+          a.button {
+            padding: 5px 20px;
+            background: none repeat scroll 0px 0px #FFF;
+            border: 2px solid #FFC149;
+            color: #810C15;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.5s ease;
+            &:hover {
+              background-color: #810c15;
+              color: #fff;
+            }
           }
         }
       }
-      .thread-content {
-        // .tabs {
-        //   .tabs-heading {
-        //     background:#fff;
-        //     border-bottom: 3px solid rgb(129, 12, 21);
-        //     padding-left: 0;
-        //     padding-right: 0;
-        //     margin-right: 30px;
-        //     &:hover{
-        //       background: #fff;
-        //     }
-        //   }
-        // }
+      .main-post {
+        .tabs {
+          .tabs-heading {
+            margin-right: 15px;
+            margin-top: 20px;
+          }
+          dd > a {
+            min-width: 90px;
+            text-align: center;
+            padding-left:0;
+            padding-right:0;
+            background: none;
+            margin-right: 20px;
+          }
+          dd > a, .tab-title > a {
+            background:none;
+          }
+          dd.active a, .tab-title.active a {
+            color: #222;
+            border-bottom: 4px solid #810c15;
+            &:hover {
+              background: none;
+            }
+          }
+        }
+        ul.the-posts {
+          list-style: none;
+          margin-top: 30px;
+          li {
+            @include grid-row;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            padding: 15px;
+            border:solid 1px #ccc;
+          }
+          li .post-avatar {
+            float: left;
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+          }
+          .post-content {
+            float: left;
+            margin-left: 25px;
+            a.title {
+              color: #810C15;
+              margin: 0;
+              font-weight: 600;
+              // color: #333;
+              // &:hover {
+              //   color: #810C15;
+              // }
+            }
+            p.post-detail {
+              color: #333;
+              margin:0;
+              a.admin, a.memo{
+                color: #333;
+                &:hover {
+                  color: #810C15;
+                }
+              }
+            }
+          }
+          .comment {
+            background: url("assets/img/chat.jpg") no-repeat center;
+            float:right;
+            width: 44px;
+            height: 41px;
+            text-align: center;
+            color: #fff;
+            span {
+              vertical-align: middle;
+            }
+          }
+        }
       }
     }
   }
   .main-right {
-    @include grid-column ($columns: 5);
+    @include grid-column ($columns: 4);
+    float: right;
+    .search {
+      background: none repeat scroll 0px 0px #FFF;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      input {
+        background: url("assets/img/search.jpg") 10px no-repeat;
+        border: 1px solid #CCC;
+        border-radius: 5px;
+        color: #CCC;
+        height: 36px;
+        padding-left: 35px;
+        margin-bottom: 0px;
+      }
+    }
+    .channel-follow {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+    }
   }
 }

@@ -8,7 +8,7 @@
       controller: ''
     });
 
-    $routeProvider.when('/forum/thread', {
+    $routeProvider.when('/forum',{
       templateUrl: 'forum/_thread-list.html',
       controller: ''
     });
