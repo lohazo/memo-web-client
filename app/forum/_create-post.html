@@ -1,16 +1,32 @@
-<section class="creatThread">
+<section class="create-post">
   <section class="main-left"> <!-- start main-left -->
-    <section class="panel creat-thread-panel"> <!-- start post-panel -->
-      <div class="creat-thread-panel-header">
+    <section class="panel create-post-panel"> <!-- start post-panel -->
+      <div class="create-post-panel-header">
        <div class="left">
-         <a class="small radius button list-chanel-button">Chọn kênh thảo luận</a>	
+        <!-- <select class="chanel-post-options" ng-model="paper.sortBy" ng-options="">
+          <option value="">Chọn kênh thảo luận</option>
+        </select> -->
+        <select ng-model="selectedItem" ng-options="owned_course.course_name for owned_course in owned_courses">
+          <option value="">Chọn kênh thảo luận</option>
+        </select>
        </div>
      </div>
-
+     <div class="create-post-panel-iner">
+        <div class="editor-title">
+          <textarea class="editor-title-textarea" placeholder="Tiêu đề thảo luận"></textarea>
+        </div>
+        <div class="editor-desc">
+          <textarea class="editor-desc-textarea" placeholder="Nội dung thảo luận"></textarea>
+      </div>
+    </div>
+    <div class="editor-toolbar">
+      <a href="" class="small radius button post-button left" ng-click="createPost()">Tạo chủ đề mới</a>
+    </div>
     </section> <!-- end post-panel -->  	
   </section> <!-- end main-left -->
   <!-- <section class="main-right"> 
-    <section class="panel">abc    	
+    <section class="panel">
+
     </section> 	
-  </section> -->
-</section>
+  </section>
+</section> -->
