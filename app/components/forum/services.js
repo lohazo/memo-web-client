@@ -7,7 +7,7 @@
     /*
      * data = {title: , content: , base_course_id: , [questtion_log_id: ]}
      */
-		Services.createPost = function (data, subscriptionId) {
+		Services.createPost = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
 
       data.auth_token = authToken;
@@ -20,13 +20,25 @@
     Services.getListSubscription = function () {
       var authToken = $localStorage.auth.user.auth_token;
 
-      return $http.get(API + '/posts/list_subscriptions' + '?auth_token=' + authToken)
+      return $http.get(API + '/posts/list_subscriptions' + '?auth_token=' + authToken);
     }
 
-    Services.getPost = function () {
+    Services.getPost = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
 
-      return $http.get(API + '?auth_token=' + authToken)
+      return $http.get(API + '/posts/' + data.id + '?auth_token=' + authToken);
+    }
+
+    Services.followPost = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
+
+      return $http.post(API + '/posts/' + data._id + '/follow' + '?auth_token=' + authToken);
+    }
+
+    Services.unFollowPost = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
+
+      return $http.post(API + '/posts/' + data._id + '/unfollow' + '?auth_token=' + authToken);
     }
 
     return Services;

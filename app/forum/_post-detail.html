@@ -7,8 +7,8 @@
 	      		<h4 class="title">Các chủ đề</h4>
 	      	</div>
 	      	<div class="right">
-	      		<a class="small radius button follow-button" ng-if="!isFollowing" ng-click="getPost()">Theo dõi chủ đề</a>
-	      		<a class="small radius button follow-button" ng-if="isFollowing" ng-click="unFollow()">Bỏ theo dõi</a>
+	      		<a class="small radius button follow-button" ng-if="post.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
+	      		<a class="small radius button follow-button" ng-if="post.follow == true" ng-click="unfollowPost()">Bỏ theo dõi</a>
 	      	</div>
 	      </div>
 	      <div class="post-info-iner">
