@@ -2,57 +2,89 @@
   'use strict';
 
 
-  function CreatePostCtrl($scope, ForumServices) {
-    $scope.owned_courses = [
-        {course_name: 'Memo Tiếng Việt'},
-        { course_name: 'Tiếng Anh'},
-        { course_name: 'Tiếng Đức' },
-        { course_name: 'Tiếng Pháp'}
-      ];
-
+  function CreatePostCtrl($scope, ForumServices, $location) {
     $scope.data = {
-      titletext: '',
-      contenttext: ''
+      title: '',
+      content: '',
+      base_course_id: ''
     };
 
+
     $scope.createPost = function() {
-      ForumServices.post($scope.data);
+      ForumServices.createPost($scope.data).success(function(data) {
+        $location.url('/forum/post/' + data._id);
+      });
     }
+
+    $scope.getListSubscription = function() {
+      ForumServices.getListSubscription().success(function(data) {
+        $scope.listSubscriptions = data.list_subscriptions;
+      })
+    }
+
+    $scope.getListSubscription();
   }
 
-  function PostDetailCtrl($scope, ForumServices, Forum) {
+  function PostDetailCtrl($scope, ForumServices) {
 
   }
 
   function ListPostCtrl($scope){
-    
-    $scope.post = [{
-      'avatar': "u",
-      'title': "abc"
-    }]
+    $scope.posts = [
+    {
+      'avatar': "avatar",
+      'title': "Các nguồn học Tiếng trung miễn phí",
+      'comment': "12",
+      'userd' : "admin",
+      'datetime': "12/12/15",
+      "course" : "memoeee"
+    },
+    {
+      'avatar': "avatar",
+      'title': "Các nguồn học Tiếng trung miễn phí",
+      'comment': "12",
+      'userd' : "admin",
+      'datetime': "12/12/15",
+      "course" : "memoeee"
+    },
+    {
+      'avatar': "avatar",
+      'title': "Các nguồn học Tiếng trung miễn phí",
+      'comment': "122",
+      'userd' : "admin",
+      'datetime': "12/12/15",
+      "course" : "memoeee"
+    }
+    ];
+    $scope.tabPost = [
+    {
+      'avatar': "avatar",
+      'title': "Các nguồn học Tiếng trung miễn phí",
+      'comment': "12",
+      'userd' : "admin",
+      'datetime': "12/12/15",
+      "course" : "memoeee"
+    }
+    ];
+    $scope.tabPostFollow = [
+    {
+      'avatar': "avatar",
+      'title': "Các nguồn học Tiếng trung miễn phí",
+      'comment': "1112",
+      'userd' : "admin",
+      'datetime': "12/12/15",
+      "course" : "memoeee"
+    }
+    ];
 
-    // Avatar cua mot post
-    // Title cua mot post
-    // So comment
-    // Decription : Nguoi post -  Ngay post - Course Chu de
 
-
-    // Cac chu de
-        // Khi nhan vao cac tab 
-          // Tab chu de moi : -  Hien thi ra danh sach cac bai post moi nhat
-          // Tab chu de nong: - Hien thi ra danh sach cac bai post duoc thao luan nhieu
-          // Tab theo doi : - Hien thi ra danh sach cai bai post duoc theo doi
-
-    // avatar : Hien thi ra avatar
-    // comment : Hien thi ra so comment 
     // search : Nhap text vao de lam sao Controller nhan duoc text de xu ly ?
     // kenh theo doi chu de , theo doi cac chu de tieng Anh, Phap ....
-
   }
+
 
   angular.module('forum.controllers', ['forum.services'])
   .controller('ListPostCtrl', ['$scope', ListPostCtrl])
-  .controller('CreatePostCtrl', ['$scope', 'ForumServices', CreatePostCtrl])
-  .controller('PostDetailCtrl', ['$scope', 'ForumServices', 'Forum', PostDetailCtrl]);
+  .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', CreatePostCtrl])
+  .controller('PostDetailCtrl', ['$scope', 'ForumServices', PostDetailCtrl]);
 }(window.angular));
-

@@ -88,9 +88,23 @@
         color: $white;
         font-size: 16px;
         padding: 10px 20px;
+        margin-right: 10px;
         margin-bottom: 10px !important;
         &:hover {
           background-color: scale-color($success-color, $lightness: -20%);
+        }
+      }
+      .cancel-button {
+        padding: 10px;
+        border: 2px solid $iron;
+        background-color: $white;
+        color: $warning-font-color;
+        font-size: 16px;
+        padding: 10px 20px;
+        margin-right: 10px;
+        margin-bottom: 10px !important;
+        &:hover {
+          background-color: scale-color($white, $lightness: -20%);
         }
       }
     }

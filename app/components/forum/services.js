@@ -5,59 +5,31 @@
 		var Services = {};
 
     /*
-     * data = {auth_token: , title: , content: , question_log_id: , platform: }
+     * data = {title: , content: , base_course_id: , [questtion_log_id: ]}
      */
-		Services.post = function (data) {
-      var deferred = $q.defer();
-
+		Services.createPost = function (data, subscriptionId) {
       var authToken = $localStorage.auth.user.auth_token;
 
-      var requestData = {};
-      requestData.title = data.title;
-      requestData.content = data.content;
-      requestData.auth_token = authToken;
-      requestData.question_log_id =  '';
-      requestData.platform = 'web';
+      data.auth_token = authToken;
+      data.platform = 'web';
   	
-      $http.post(API + '/posts', requestData)
-        .then(function (response) {
-          $localStorage.postId = response.data._id;
-          deferred.resolve(response);
-        });
-
-      return deferred.promise;
+      return $http.post(API + '/posts', data);
     };
 
     /*
-     * data = {auth_token: , id: }
+     * data = {auth_token: }
      */
-    Services.getPost = function () {
-      
-    };
+    Services.getListSubscription = function () {
+      var authToken = $localStorage.auth.user.auth_token;
+
+      return $http.get(API + '/posts/list_subscriptions' + '?auth_token=' + authToken)
+    }
 
     return Services;
 	}
 
-	function ForumFactory(ForumServices, $localStorage) {
-		var Forum = {};
-
-		Forum.data = {};
-
-		Forum.post = function (data) {
-      return ForumServices.post(data).then(function (response) {
-        Forum.data = response.data;
-      });
-    }
-
-    Forum.getPost = function (data) {
-      
-    };
-
-    return Forum;
-	}
 
   angular.module('forum.services', [])
-    .factory('Forum', ['ForumServices', '$localStorage', ForumFactory])
     .factory('ForumServices', ['$http', '$q', '$localStorage', 'API', ForumServices]);
 
 }(window.angular));
