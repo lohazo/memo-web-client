@@ -27,13 +27,8 @@
     Services.listPosts = function () {
       var authToken = $localStorage.auth.user.auth_token;
       data.auth_token = authToken;
-      // data.page = 0;
-      // data.sort = '';
-      // data.type = '';
-      // data.filter = '';
-    
+      
       return $http.get(API + '/posts/all_posts', data)
-
     };
 
     return Services;
