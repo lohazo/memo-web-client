@@ -4,28 +4,37 @@
 	function ForumServices($http, $q, $localStorage, API) {
 		var Services = {};
 
-		/*
-     * data = {auth_token: , page: ,sort: ,type: ,filter: }
+    /*
+     * data = {auth_token: , title: , content: , question_log_id: , platform: }
      */
-    Services.getAllPosts = function() {
-    	var deferred = $q.defer();
+		Services.post = function (data) {
+      var deferred = $q.defer();
+
       var authToken = $localStorage.auth.user.auth_token;
 
-      var requestData = {
-        auth_token: auth_token,
-        // page: ,
-        // sort: ,
-        // type: ,
-        // filter: 
-      };
-      $http.get(API + '/posts/all_posts', requestData)
+      var requestData = {};
+      requestData.title = data.title;
+      requestData.content = data.content;
+      requestData.auth_token = authToken;
+      requestData.question_log_id =  '';
+      requestData.platform = 'web';
+  	
+      $http.post(API + '/posts', requestData)
         .then(function (response) {
-        	deferred.resolve(response);
-        }, function (response) {
-        	deferred.reject(response)
+          $localStorage.postId = response.data._id;
+          deferred.resolve(response);
         });
+
       return deferred.promise;
     };
+
+    /*
+     * data = {auth_token: , id: }
+     */
+    Services.getPost = function () {
+      
+    };
+
     return Services;
 	}
 
@@ -34,11 +43,14 @@
 
 		Forum.data = {};
 
-    Forum.getAllPost = function (data) {
-    	console.log(data);
-    	return Forum.getAllPosts(data).then(function (response) {
-    		Forum.data = response.data;
-    	});
+		Forum.post = function (data) {
+      return ForumServices.post(data).then(function (response) {
+        Forum.data = response.data;
+      });
+    }
+
+    Forum.getPost = function (data) {
+      
     };
 
     return Forum;

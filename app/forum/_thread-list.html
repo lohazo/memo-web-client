@@ -6,7 +6,7 @@
           <h4 class="title">Các chủ đề</h4>
         </div>
         <div class="right">
-          <a href="" title="" class="small button radius">Đăng chủ đề</a>
+          <a ng-href="/forum/post/create" title="" class="small button radius">Đăng chủ đề</a>
         </div>
       </div>
       <div class="main-post">
@@ -15,9 +15,9 @@
             <tab class="tabs-heading" heading="Chủ đề mới">
               <ul class="the-posts">
                 <li class="post">
-                  <div class="post-avatar"><img src="assets/img/avatar1.jpg" alt=""></div>
+                  <div class="post-avatar">{{post.avatar}}<img src="assets/img/avatar1.jpg" alt=""></div>
                   <div class="post-content">
-                    <a href="" class="title" title="">Các nguồn học Tiếng trung miễn phí</a>
+                    <a href="" class="title" title="">{{post.title}}Các nguồn học Tiếng trung miễn phí</a>
                     <p class="post-detail">
                       <a href="#" class="admin">Administrator</a>, 29/7/2014 - <a href="#" class="memo">Memo</a>
                     </p>
