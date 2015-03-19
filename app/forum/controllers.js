@@ -23,11 +23,11 @@
     $scope.getListSubscription();
   }
 
-	function PostDetailCtrl($scope, ForumServices) {
-    
+	function PostDetailCtrl($scope, ForumServices, reqData) {
+
 	}
 
 	angular.module('forum.controllers', ['forum.services'])
 	  .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', CreatePostCtrl])
-	  .controller('PostDetailCtrl', ['$scope', 'ForumServices', PostDetailCtrl]);
+	  .controller('PostDetailCtrl', ['$scope', 'ForumServices', 'reqData', PostDetailCtrl]);
 }(window.angular));

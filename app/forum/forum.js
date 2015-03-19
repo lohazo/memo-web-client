@@ -9,7 +9,12 @@
 		});
 		$routeProvider.when('/forum/post/:id', {
 			templateUrl: 'forum/_post-detail.html',
-			controller: 'PostDetailCtrl'
+			controller: 'PostDetailCtrl',
+			resolve: {
+				reqData: function($routeParams, Forumservices) {
+					return ForumServices.getListPost({id: $routeParams.id});
+				},
+			}
 		});
 	}
 

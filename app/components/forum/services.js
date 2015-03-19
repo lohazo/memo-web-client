@@ -16,13 +16,17 @@
       return $http.post(API + '/posts', data);
     };
 
-    /*
-     * data = {auth_token: }
-     */
+
     Services.getListSubscription = function () {
       var authToken = $localStorage.auth.user.auth_token;
 
       return $http.get(API + '/posts/list_subscriptions' + '?auth_token=' + authToken)
+    }
+
+    Services.getPost = function () {
+      var authToken = $localStorage.auth.user.auth_token;
+
+      return $http.get(API + '?auth_token=' + authToken)
     }
 
     return Services;
@@ -31,5 +35,4 @@
 
   angular.module('forum.services', [])
     .factory('ForumServices', ['$http', '$q', '$localStorage', 'API', ForumServices]);
-
 }(window.angular));
