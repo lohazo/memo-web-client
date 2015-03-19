@@ -5,9 +5,9 @@
 	function ForumConfig($routeProvider) {
 		$routeProvider.when('/forum/post/create', {
 			templateUrl: 'forum/_create-post.html',
-			controller: 'CreatePostCtrl'
+			controller: 'CreatePostCtrl',
 		});
-		$routeProvider.when('/forum/post/id', {
+		$routeProvider.when('/forum/post/:id', {
 			templateUrl: 'forum/_post-detail.html',
 			controller: 'PostDetailCtrl'
 		});

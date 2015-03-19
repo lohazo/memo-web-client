@@ -1,29 +1,33 @@
 (function (angular) {
 	'use strict';
 
-	function CreatePostCtrl($scope, ForumServices) {
-  	$scope.owned_courses = [
-  		{course_name: 'Memo Tiếng Việt'},
-  		{ course_name: 'Tiếng Anh'},
-  		{ course_name: 'Tiếng Đức' },
-  		{ course_name: 'Tiếng Pháp'}
-  	];
-
+	function CreatePostCtrl($scope, ForumServices, $location) {
     $scope.data = {
-      titletext: '',
-      contenttext: ''
+      title: '',
+      content: '',
+      base_course_id: ''
     };
 
   	$scope.createPost = function() {
-  		ForumServices.post($scope.data);
+  		ForumServices.createPost($scope.data).success(function(data) {
+        $location.url('/forum/post/' + data._id);
+      });
   	}
+
+    $scope.getListSubscription = function() {
+      ForumServices.getListSubscription().success(function(data) {
+        $scope.listSubscriptions = data.list_subscriptions;
+      })
+    }
+
+    $scope.getListSubscription();
   }
 
-	function PostDetailCtrl($scope, ForumServices, Forum) {
+	function PostDetailCtrl($scope, ForumServices) {
     
 	}
 
 	angular.module('forum.controllers', ['forum.services'])
-	  .controller('CreatePostCtrl', ['$scope', 'ForumServices', CreatePostCtrl])
-	  .controller('PostDetailCtrl', ['$scope', 'ForumServices', 'Forum', PostDetailCtrl]);
+	  .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', CreatePostCtrl])
+	  .controller('PostDetailCtrl', ['$scope', 'ForumServices', PostDetailCtrl]);
 }(window.angular));
