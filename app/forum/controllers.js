@@ -77,6 +77,11 @@
     }
     ];
 
+    $scope.listPosts = function() {
+      ForumServices.listPosts().success(function(data){
+        $scope.listPosts = data.all_posts; 
+      })
+    }
 
     // search : Nhap text vao de lam sao Controller nhan duoc text de xu ly ?
     // kenh theo doi chu de , theo doi cac chu de tieng Anh, Phap ....
