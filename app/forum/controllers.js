@@ -17,7 +17,7 @@
     $scope.getListSubscription = function() {
       ForumServices.getListSubscription().success(function(data) {
         $scope.listSubscriptions = data.list_subscriptions;
-      })
+      });
     };
 
     $scope.getListSubscription();
@@ -25,6 +25,10 @@
 
 	function PostDetailCtrl($scope, ForumServices, Post) {
     $scope.post = Post.data;
+    $scope.data = {
+      content: '',
+      id: $scope.post._id
+    };
 
     $scope.followPost = function() {
       ForumServices.followPost($scope.post).success(function() {
@@ -37,6 +41,51 @@
         $scope.post.follow = false;
       });
     };
+
+    $scope.post.vote = false;
+    $scope.post.voteUp = false;
+    $scope.post.voteDown = false;
+
+    $scope.voteUp = function() {
+      if ($scope.post.voteUp == false) {
+        $scope.post.vote = true;
+        $scope.post.voteUp = true;
+        ForumServices.votePost($scope.post).success(function() {
+        $scope.post.up_vote = $scope.post.up_vote + 1;
+        });
+      } else if ($scope.post.voteUp == true) {
+        $scope.post.vote = false;
+        $scope.post.voteUp = false;
+        $scope.post.up_vote = $scope.post.up_vote - 1;
+      };
+    };
+
+    $scope.voteDown = function() {
+      if ($scope.post.voteDown == false) {
+        $scope.post.vote = false;
+        $scope.post.voteDown = true;
+        ForumServices.votePost($scope.post).success(function() {
+        $scope.post.down_vote = $scope.post.down_vote + 1;
+        });
+      } else if ($scope.post.voteDown == true) {
+        $scope.post.vote = true;
+        $scope.post.voteDown = false;
+        $scope.post.down_vote = $scope.post.down_vote - 1;
+      };
+    };
+
+    $scope.listComment = function() {
+
+    };
+
+    $scope.listComments = function() {
+
+    };
+
+    $scope.creatComment = function() {
+      ForumServices.creatComment($scope.data)
+    };
+
 	}
 
 	angular.module('forum.controllers', ['forum.services'])

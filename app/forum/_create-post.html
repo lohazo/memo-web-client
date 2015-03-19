@@ -3,9 +3,6 @@
     <section class="panel create-post-panel"> <!-- start post-panel -->
       <div class="create-post-panel-header">
        <div class="left">
-        <!-- <select class="chanel-post-options" ng-model="paper.sortBy" ng-options="">
-          <option value="">Chọn kênh thảo luận</option>
-        </select> -->
         <select ng-model="data.base_course_id" ng-options="subscription._id as subscription.name for subscription in listSubscriptions">
           <option value="">Chọn kênh thảo luận</option>s
         </select>

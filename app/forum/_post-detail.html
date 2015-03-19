@@ -11,22 +11,23 @@
 	      		<a class="small radius button follow-button" ng-if="post.follow == true" ng-click="unfollowPost()">Bỏ theo dõi</a>
 	      	</div>
 	      </div>
-	      <div class="post-info-iner">
+	      <div class="post-info-inner">
 		      <div class="post-version">
 		      	<img class="poster-avatar" ng-src="{{post.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
 		      	<div class="post-version-content left">
 		      		<div class="post-version-header">
 		      			<div class="title">{{post.title}}</div>
 		      			<div>{{post.user}}</div>
-		      			<div><span class="created-date">{{post.created_at}}</span> - {{post._id}}</div>
+		      			<div><span class="created-date">17/02/2014</span> - Tiếng Đức</div>
 		      		</div>
 		      		<div class="post-version-middler">	
-		      			<div>{{post.content}}</div>
+		      			<div ng-bind="post.content"></div>
 		      		</div>
 		      		<div class="post-version-toolbar">
-		      		  <div class="total-vote left">{{post.up_vote - post.down_vote}}</div>
-		      			<a class="vote-up left" ng-click="voteUp()"></a>
-	    				  <a class="vote-down left" ng-click="voteDown()"></a>
+		      		  <div class="total-vote left">{{post.up_vote}}</div>
+		      		  <a class="vote-up left" ng-class="{'active': post.voteUp == true,'disable': post.voteUp == false}" ng-click="voteUp()"></a>
+		      		  <div class="total-vote left">{{post.down_vote}}</div>
+	    			  <a class="vote-down left" ng-class="{'active': post.voteDown == true,'disable': post.voteDown == false}" ng-click="voteDown()"></a>
 		      		</div>
 		      	</div>
 		      </div>
@@ -34,10 +35,10 @@
 		      	<img class="commenter-avatar" ng-src="{{post.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
 		      	<div class="comment-version-content left">
 		      	  <div class="comment-editor">
-		      	    <textarea class="comment-editor-textarea" placeholder="Gửi bình luận của bạn"></textarea>
+		      	    <textarea ng-model="data.content" class="comment-editor-textarea" placeholder="Gửi bình luận của bạn"></textarea>
 		      	  </div>
 		      	  <div class="comment-toolbar">
-		      	  	<a class="small radius button send-comment-button">Gửi</a>
+		      	  	<a class="small radius button send-comment-button" ng-click="creatComment()">Gửi</a>
 		      	  	<!-- <a class="small radius button cancel-button">Hủy</a> -->
 		      	  </div>
 		      </div>	
@@ -49,7 +50,7 @@
 	    			<h4 class="title">Có {{post.total_comment}} bình luận</h4>
 	    		</div>
 	    	</div>
-	    	<div class="comment-info-iner">
+	    	<div class="comment-info-inner">
 	    		<ul class="comments">
 	    			<li class="comment">
 	    				<img class="comment-avatar" ng-src="{{post.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
