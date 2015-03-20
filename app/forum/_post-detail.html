@@ -2,88 +2,88 @@
   <section class="main-left"> 
     <section class="panel post-detail-panel">
       <section class="post-info">
-        <div class="post-info-header">
-          <div class="left">
-            <h4 class="title">Các chủ đề</h4>
-          </div>
-          <div class="right">
-            <a class="small radius button follow-button" ng-if="post.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
-            <a class="small radius button follow-button" ng-if="post.follow == true" ng-click="unfollowPost()">Bỏ theo dõi</a>
-          </div>
-        </div>
-        <div class="post-info-inner">
-          <div class="post-version">
-            <img class="poster-avatar" ng-src="{{post.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
-            <div class="post-version-content left">
-              <div class="post-version-header">
-                <div class="title" ng-bind="post.title"></div>
-                <div ng-bind="post.user"></div>
-                <div><span class="created-date">17/02/2014</span> - Tiếng Đức</div>
-              </div>
-              <div class="post-version-middler">  
-                <div ng-bind="post.content"></div>
-              </div>
-              <div class="post-version-toolbar">
-                <div class="total-vote left" ng-bind="post.up_vote"></div>
-                <a class="vote-up left" ng-class="{'active': post.type == 'upvote','disable': post.vote == false}" ng-click="voteUpPost()"></a>
-                <div class="total-vote left" ng-bind="post.down_vote"></div>
-              <a class="vote-down left" ng-class="{'active': post.type == 'downvote','disable': post.vote == false}" ng-click="voteDownPost()"></a>
-              </div>
-            </div>
-          </div>
-          <div class="comment-version">
-            <img class="commenter-avatar" ng-src="{{post.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
-            <div class="comment-version-content left">
-              <div class="comment-editor">
-                <textarea ng-model="data.content" class="comment-editor-textarea" placeholder="Gửi bình luận của bạn"></textarea>
-              </div>
-              <div class="comment-toolbar">
-                <a class="small radius button send-comment-button" ng-click="creatComment()">Gửi</a>
-                <!-- <a class="small radius button cancel-button">Hủy</a> -->
-              </div>
-          </div>  
-        </div>
-      </section>
-      <section class="comment-info">
-        <div class="comment-info-header">
-          <div class="left">
-            <h4 class="title">Có {{post.total_comment}} bình luận</h4>
-          </div>
-        </div>
-        <div class="comment-info-inner" ng-repeat="comment in post.comments">
-          <ul class="comments">
-            <li class="comment">
-              <img class="comment-avatar" ng-src="{{comment.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
-              <div class="comment-content">
-                <div class="comment-content-top">
-                  <a class="comment-name-text" ng-bind="comment.user.name"></a>
-                </div>
-                <div class="comment-content-mid">
-                  <div class="comment-content-text" ng-bind="comment.content"></div>
-                </div>
-                <div class="comment-content-toolbar">
-                  <div class="total-vote left" ng-bind="comment"></div>
-                  <!-- <a class="vote-up left" ng-class="{'active': post.type == 'upvote','disable': post.vote == false}" ng-click="voteUpComment()"></a>
-                  <div class="total-vote left"></div>
-                  <a class="vote-down left" ng-class="{'active': post.type == 'downvote','disable': post.vote == false}" ng-click="voteDownComment()"></a> -->
-                  <a class="reply left" ng-click="reply()">Trả lời</a>
-                </div>
-                <div class="comment-version" ng-if="isReplying">
-                  <div class="avatar left"><img ng-src="{{user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
-                  <div class="comment-editor left">
-                    <div class="comment-editor-textarea"><textarea name=""></textarea></div>
-                    <div class="comment-editor-toolbar">
-                      <a class="small radius button send-comment-button" ng-click="">Gửi</a>
-                      <a class="small radius button send-comment-button" ng-click="cancelReply()">Hủy</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>   
-    </section>    
+	      <div class="post-info-header">
+	      	<div class="left">
+	      		<h4 class="title">Các chủ đề</h4>
+	      	</div>
+	      	<div class="right">
+	      		<a class="small radius button follow-button" ng-if="post.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
+	      		<a class="small radius button follow-button" ng-if="post.follow == true" ng-click="unfollowPost()">Bỏ theo dõi</a>
+	      	</div>
+	      </div>
+	      <div class="post-info-inner">
+		      <div class="post-version">
+		      	<img class="poster-avatar" ng-src="{{post.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+		      	<div class="post-version-content left">
+		      		<div class="post-version-header">
+		      			<div class="title" ng-bind="post.title"></div>
+		      			<div ng-bind="post.user"></div>
+		      			<div><span class="created-date">17/02/2014</span> - Tiếng Đức</div>
+		      		</div>
+		      		<div class="post-version-middler">	
+		      			<div ng-bind="post.content"></div>
+		      		</div>
+		      		<div class="post-version-toolbar">
+		      		  <div class="total-vote left" ng-bind="post.up_vote"></div>
+		      		  <a class="vote-up left active" ng-click="voteUpPost()"></a>
+		      		  <div class="total-vote left" ng-bind="post.down_vote"></div>
+	    			  	<a class="vote-down left active" ng-click="voteDownPost()"></a>
+		      		</div>
+		      	</div>
+		      </div>
+		      <div class="comment-version">
+		      	<img class="commenter-avatar" ng-src="{{post.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+		      	<div class="comment-version-content left">
+		      	  <div class="comment-editor">
+		      	    <textarea ng-model="data.content" class="comment-editor-textarea" placeholder="Gửi bình luận của bạn"></textarea>
+		      	  </div>
+		      	  <div class="comment-toolbar">
+		      	  	<a class="small radius button send-comment-button" ng-click="creatComment()">Gửi</a>
+		      	  	<!-- <a class="small radius button cancel-button">Hủy</a> -->
+		      	  </div>
+		      </div>	
+	      </div>
+	    </section>
+	    <section class="comment-info">
+	    	<div class="comment-info-header">
+	    		<div class="left">
+	    			<h4 class="title">Có {{post.total_comment}} bình luận</h4>
+	    		</div>
+	    	</div>
+	    	<div class="comment-info-inner" ng-repeat="comment in post.comments">
+	    		<ul class="comments">
+	    			<li class="comment">
+	    				<img class="comment-avatar" ng-src="{{comment.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+	    				<div class="comment-content">
+	    					<div class="comment-content-top">
+	    						<a class="comment-name-text" ng-bind="comment.user.name"></a>
+	    					</div>
+	    					<div class="comment-content-mid">
+	    						<div class="comment-content-text" ng-bind="comment.content"></div>
+	    					</div>
+	    					<div class="comment-content-toolbar">
+	    						<div class="total-vote left" ng-bind="comment.up_vote_count"></div>
+	    						<a class="vote-up left normal" ng-click="voteUpComment(comment._id)"></a>
+	    						<div class="total-vote left" ng-bind="comment.down_vote_count"></div>
+	    						<a class="vote-down left normal" ng-click="voteDownComment(comment._id)"></a>
+	    						<!-- <a class="reply left" ng-click="reply()">Trả lời</a> -->
+	    					</div>
+	    					<div class="comment-version" ng-if="isReplying">
+	    						<div class="avatar left"><img ng-src="{{user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
+	    						<div class="comment-editor left">
+	    							<div class="comment-editor-textarea"><textarea name=""></textarea></div>
+		    						<div class="comment-editor-toolbar">
+		    							<a class="small radius button send-comment-button" ng-click="">Gửi</a>
+		    							<a class="small radius button send-comment-button" ng-click="cancelReply()">Hủy</a>
+		    						</div>
+	    						</div>
+	    					</div>
+	    				</div>
+	    			</li>
+	    		</ul>
+	    	</div>
+	    </section>   
+    </section>   	
   </section> 
   <section class="main-right"> 
     <section class="panel">
