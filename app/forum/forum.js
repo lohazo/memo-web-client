@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
 
   'use strict';
 
@@ -7,22 +7,44 @@
       templateUrl: 'forum/_create-post.html',
       controller: 'CreatePostCtrl',
     });
+
     $routeProvider.when('/forum/post/:id', {
       templateUrl: 'forum/_post-detail.html',
       controller: 'PostDetailCtrl',
       resolve: {
-        Post: function($route, ForumServices) {
-          return ForumServices.getPost({id: $route.current.params.id});
-        }, 
+        Post: function ($route, ForumServices) {
+          return ForumServices.getPost({
+            id: $route.current.params.id
+          });
+        },
       }
     });
-    $routeProvider.when('/forum',{
+
+    $routeProvider.when('/forum', {
       templateUrl: 'forum/_thread-list.html',
-      controller: 'ListPostCtrl'
+      controller: 'ListPostCtrl',
+      resolve: {
+        allPosts: function ($route, ForumServices) {
+          if ($route.current.params.search) {
+            var text = $route.current.params.search;
+            return ForumServices.searchPosts({
+              keywords: text
+            });
+          }
+          return ForumServices.listPosts($route.current.params);
+        },
+        subscribers: function (ForumServices) {
+            return ForumServices.getListSubscription();
+          }
+          // followingPosts: function (ForumServices) {
+          //   return ForumServices.listPosts({
+          //     filter: 'follow'
+          //   });
+          // }
+      }
     });
   }
 
-
   angular.module('forum', ['forum.services', 'forum.controllers'])
-  .config(['$routeProvider', ForumConfig])
+    .config(['$routeProvider', ForumConfig])
 }(window.angular));
