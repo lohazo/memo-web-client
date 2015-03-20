@@ -39,7 +39,7 @@
         }
       }
     }
-    .post-info-iner {
+    .post-info-inner {
       @include grid-row;
       padding: 10px;
       .poster-avatar {
@@ -72,17 +72,33 @@
           }
           .vote-up {
             margin-right: 15px;
-            background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
             background-size: contain;
             width: 25px;
             height: 25px;
+            &.normal {
+              background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+            }
+            &.active {
+              background: url("assets/img/vote-icon/vote-up-icon-2.png") no-repeat;
+            }
+            &.disable {
+              background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+            }
           }
           .vote-down {
             margin: 7px 15px 0 0;
-            background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
             background-size: contain;
             width: 25px;
             height: 25px;
+            &.normal {
+              background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+            }
+            &.active {
+              background: url("assets/img/vote-icon/vote-down-icon-2.png") no-repeat;
+            }
+            &.disable {
+              background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
+            }
           }
         }
       }
@@ -145,7 +161,7 @@
         margin-bottom: 0;
       }
     }
-    .comment-info-iner {
+    .comment-info-inner {
       @include grid-row;
       .comments {
         .comment {
@@ -179,17 +195,33 @@
               }
               .vote-up {
                 margin-right: 15px;
-                background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
                 background-size: contain;
                 width: 25px;
                 height: 25px;
+                &.normal {
+                  background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+                }
+                &.active {
+                  background: url("assets/img/vote-icon/vote-up-icon-2.png") no-repeat;
+                }
+                &.disable {
+                  background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+                }
               }
               .vote-down {
                 margin: 7px 15px 0 0;
-                background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
                 background-size: contain;
                 width: 25px;
                 height: 25px;
+                &.normal {
+                  background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+                }
+                &.active {
+                  background: url("assets/img/vote-icon/vote-down-icon-2.png") no-repeat;
+                }
+                &.disable {
+                  background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
+                }
               }
               .reply {
                 padding-right: 10px;

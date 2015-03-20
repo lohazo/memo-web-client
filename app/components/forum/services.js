@@ -7,7 +7,8 @@
     /*
      * data = {title: , content: , base_course_id: , [questtion_log_id: ]}
      */
-     Services.createPost = function (data, subscriptionId) {
+
+     Services.createPost = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
       data.auth_token = authToken;
       data.platform = 'web';
@@ -16,21 +17,69 @@
 
     Services.getListSubscription = function () {
       var authToken = $localStorage.auth.user.auth_token;
-      return $http.get(API + '/posts/list_subscriptions' + '?auth_token=' + authToken)
+
+      return $http.get(API + '/posts/list_subscriptions' + '?auth_token=' + authToken);
+    };
+    Services.getPost = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
+      return $http.get(API + '/posts/' + data.id + '?auth_token=' + authToken);
     };
 
-    Services.getPost = function () {
+    Services.followPost = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
-      return $http.get(API + '?auth_token=' + authToken)
+      return $http.post(API + '/posts/' + data._id + '/follow' + '?auth_token=' + authToken);
     };
+
+    Services.unFollowPost = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
+      return $http.post(API + '/posts/' + data._id + '/unfollow' + '?auth_token=' + authToken);
+    };
+
+    Services.votePost = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
+
+      data.auth_token = authToken;
+      data.platform = 'web';
+      return $http.post(API + '/posts/' + data._id + '/vote' ,data);
+    };
+
+    // Services.listComment = function (data) {
+    //   var authToken = $localStorage.auth.user.auth_token;
+
+    //   return $http.get(API + '/posts/' + data.id + '/comments' ,data);
+    // };
+
+    // Services.listComments = function (data) {
+    //   var authToken = $localStorage.auth.user.auth_token;
+
+    //   return $http.get(API + '/comments/' + data.id ,data);
+    // };
+
+    Services.creatComment = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
+
+      data.auth_token = authToken;
+      data.platform = 'web';
+
+      return $http.post(API + '/comments' ,data);
+    };
+
+    // Services.voteComment = function (data) {
+    //   var authToken = $localStorage.auth.user.auth_token;
+
+    //   return $http.post(API + '/comments/' + data.id + '/vote' ,data);
+    // };
 
     Services.listPosts = function () {
       var authToken = $localStorage.auth.user.auth_token;
-      data.auth_token = authToken;
-      
-      return $http.get(API + '/posts/all_posts', data)
+      var data = {
+        page : 0,
+        sort : 'created_at',
+        type : 'desc',
+        filter : 'all'
+      };
+      return $http.get(API + '/posts/all_posts' + '?auth_token=' + authToken, data)
     };
-
     return Services;
   }
 

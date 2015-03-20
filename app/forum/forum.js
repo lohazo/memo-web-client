@@ -2,7 +2,6 @@
 
   'use strict';
 
-
   function ForumConfig($routeProvider) {
     $routeProvider.when('/forum/post/create', {
       templateUrl: 'forum/_create-post.html',
