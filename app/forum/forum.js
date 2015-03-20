@@ -11,9 +11,9 @@
       templateUrl: 'forum/_post-detail.html',
       controller: 'PostDetailCtrl',
       resolve: {
-        reqData: function($routeParams, Forumservices) {
-          return ForumServices.getListPost({id: $routeParams.id});
-        },
+        Post: function($route, ForumServices) {
+          return ForumServices.getPost({id: $route.current.params.id});
+        }, 
       }
     });
     $routeProvider.when('/forum',{

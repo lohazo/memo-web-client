@@ -28,60 +28,59 @@
   }
 
   function ListPostCtrl($scope, ForumServices){
-    // $scope.posts = [
-    // {
-    //   'avatar': "avatar",
-    //   'title': "Các nguồn học Tiếng trung miễn phí",
-    //   'comment': "12",
-    //   'userd' : "admin",
-    //   'datetime': "12/12/15",
-    //   "course" : "memoeee"
-    // },
-    // {
-    //   'avatar': "avatar",
-    //   'title': "Các nguồn học Tiếng trung miễn phí",
-    //   'comment': "12",
-    //   'userd' : "admin",
-    //   'datetime': "12/12/15",
-    //   "course" : "memoeee"
-    // },
-    // {
-    //   'avatar': "avatar",
-    //   'title': "Các nguồn học Tiếng trung miễn phí",
-    //   'comment': "122",
-    //   'userd' : "admin",
-    //   'datetime': "12/12/15",
-    //   "course" : "memoeee"
-    // }
-    // ];
-    // $scope.tabPost = [
-    // {
-    //   'avatar': "avatar",
-    //   'title': "Các nguồn học Tiếng trung miễn phí",
-    //   'comment': "12",
-    //   'userd' : "admin",
-    //   'datetime': "12/12/15",
-    //   "course" : "memoeee"
-    // }
-    // ];
-    // $scope.tabPostFollow = [
-    // {
-    //   'avatar': "avatar",
-    //   'title': "Các nguồn học Tiếng trung miễn phí",
-    //   'comment': "1112",
-    //   'userd' : "admin",
-    //   'datetime': "12/12/15",
-    //   "course" : "memoeee"
-    // }
-    // ];
+
+        $scope.posts = [
+        {
+          'avatar': "avatar",
+          'title': "Các nguồn học Tiếng trung miễn phí",
+          'comment': "12",
+          'userd' : "admin",
+          'datetime': "12/12/15",
+          "course" : "memoeee"
+        },
+        {
+          'avatar': "avatar",
+          'title': "Các nguồn học Tiếng trung miễn phí",
+          'comment': "12",
+          'userd' : "admin",
+          'datetime': "12/12/15",
+          "course" : "memoeee"
+        },
+        {
+          'avatar': "avatar",
+          'title': "Các nguồn học Tiếng trung miễn phí",
+          'comment': "122",
+          'userd' : "admin",
+          'datetime': "12/12/15",
+          "course" : "memoeee"
+        }
+        ];
+        $scope.tabPost = [
+        {
+          'avatar': "avatar",
+          'title': "Các nguồn học Tiếng trung miễn phí",
+          'comment': "12",
+          'userd' : "admin",
+          'datetime': "12/12/15",
+          "course" : "memoeee"
+        }
+        ];
+        $scope.tabPostFollow = [
+        {
+          'avatar': "avatar",
+          'title': "Các nguồn học Tiếng trung miễn phí",
+          'comment': "1112",
+          'userd' : "admin",
+          'datetime': "12/12/15",
+          "course" : "memoeee"
+        }
+        ];
 
     $scope.listPosts = function() {
       ForumServices.listPosts();
     }
     $scope.listPosts();
 
-    // search : Nhap text vao de lam sao Controller nhan duoc text de xu ly ?
-    // kenh theo doi chu de , theo doi cac chu de tieng Anh, Phap ....
   }
 
   function PostDetailCtrl($scope, ForumServices, Post) {
@@ -90,7 +89,14 @@
       content: '',
       id: $scope.post._id
     };
-    console.log(post);
+
+    $scope.listComment = function() {
+      ForumServices.listComment($scope.data).success(function(data){
+        $scope.post.comments = data.comments;
+      });
+    };
+
+    $scope.listComment();
 
     $scope.followPost = function() {
       ForumServices.followPost($scope.post).success(function() {
@@ -107,7 +113,7 @@
     $scope.post.vote = false;
     $scope.post.type = '';
 
-    $scope.voteUp = function() {
+    $scope.voteUpPost = function() {
       if ($scope.post.vote == false) {
         $scope.post.vote = true;
         $scope.post.type = 'upvote';
@@ -126,7 +132,7 @@
       };
     };
 
-    $scope.voteDown = function() {
+    $scope.voteDownPost = function() {
       if ($scope.post.vote == false) {
         $scope.post.vote = true;
         $scope.post.type = 'downvote';
@@ -145,18 +151,52 @@
       };
     };
 
-    $scope.listComment = function() {
-
-    };
 
     $scope.listComments = function() {
 
     };
 
-    $scope.creatComment = function() {
-      ForumServices.creatComment($scope.data)
-    };
+    // $scope.voteUpComment = function() {
+    //   if ($scope.post.vote == false) {
+    //     $scope.post.vote = true;
+    //     $scope.post.type = 'upvote';
+    //     ForumServices.voteComment($scope.post.comment).success(function() {
+    //       $scope.post.up_vote = $scope.post.up_vote + 1;
+    //     });
+    //   } else if ($scope.post.vote == true && $scope.post.type == 'upvote') {
+    //     $scope.post.vote = false;        
+    //     $scope.post.type = 'upvote';
+    //     ForumServices.voteComment($scope.post.comment).success(function() {
+    //       $scope.post.up_vote = $scope.post.up_vote - 1;
+    //     });
+    //   } else if ($scope.post.vote == true && $scope.post.type == 'downvote') {
+    //     $scope.post.vote = true;
+    //     $scope.post.type = 'downvote';
+    //   };
+    // };
 
+    // $scope.voteDownComment = function() {
+    //   if ($scope.post.vote == false) {
+    //     $scope.post.vote = true;
+    //     $scope.post.type = 'downvote';
+    //     ForumServices.voteComment($scope.post.comment).success(function() {
+    //     $scope.post.down_vote = $scope.post.down_vote + 1;
+    //     });
+    //   } else if ($scope.post.vote == true && $scope.post.type == 'downvote') {
+    //     $scope.post.vote = false;
+    //     $scope.post.type = 'downvote';
+    //     ForumServices.voteComment($scope.post.comment).success(function() {
+    //       $scope.post.down_vote = $scope.post.down_vote - 1;
+    //     });
+    //   } else if ($scope.post.vote == true && $scope.post.type == 'upvote') {
+    //     $scope.post.vote = true;
+    //     $scope.post.type = 'upvote';
+    //   };
+    // };
+
+    $scope.creatComment = function() {
+      ForumServices.creatComment($scope.data);
+    };
   }
 
 
@@ -165,4 +205,3 @@
   .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', CreatePostCtrl])
   .controller('PostDetailCtrl', ['$scope', 'ForumServices', 'Post', PostDetailCtrl]);
 }(window.angular));
-
