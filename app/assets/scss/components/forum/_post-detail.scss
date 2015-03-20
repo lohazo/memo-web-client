@@ -75,6 +75,9 @@
             background-size: contain;
             width: 25px;
             height: 25px;
+            &.normal {
+              background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+            }
             &.active {
               background: url("assets/img/vote-icon/vote-up-icon-2.png") no-repeat;
             }
@@ -87,6 +90,9 @@
             background-size: contain;
             width: 25px;
             height: 25px;
+            &.normal {
+              background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+            }
             &.active {
               background: url("assets/img/vote-icon/vote-down-icon-2.png") no-repeat;
             }
@@ -192,6 +198,9 @@
                 background-size: contain;
                 width: 25px;
                 height: 25px;
+                &.normal {
+                  background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+                }
                 &.active {
                   background: url("assets/img/vote-icon/vote-up-icon-2.png") no-repeat;
                 }
@@ -204,6 +213,9 @@
                 background-size: contain;
                 width: 25px;
                 height: 25px;
+                &.normal {
+                  background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+                }
                 &.active {
                   background: url("assets/img/vote-icon/vote-down-icon-2.png") no-repeat;
                 }

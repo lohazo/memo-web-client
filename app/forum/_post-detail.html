@@ -25,9 +25,9 @@
 		      		</div>
 		      		<div class="post-version-toolbar">
 		      		  <div class="total-vote left">{{post.up_vote}}</div>
-		      		  <a class="vote-up left" ng-class="{'active': post.voteUp == true,'disable': post.voteUp == false}" ng-click="voteUp()"></a>
+		      		  <a class="vote-up left" ng-class="{'active': post.type == 'upvote','disable': post.type == 'downvote' || post.vote == false}" ng-click="voteUp()"></a>
 		      		  <div class="total-vote left">{{post.down_vote}}</div>
-	    			  <a class="vote-down left" ng-class="{'active': post.voteDown == true,'disable': post.voteDown == false}" ng-click="voteDown()"></a>
+	    			  <a class="vote-down left" ng-class="{'active': post.type == 'downvote','disable': post.type == 'upvote' || post.vote == false}" ng-click="voteDown()"></a>
 		      		</div>
 		      	</div>
 		      </div>

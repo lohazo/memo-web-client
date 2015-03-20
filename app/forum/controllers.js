@@ -43,34 +43,43 @@
     };
 
     $scope.post.vote = false;
-    $scope.post.voteUp = false;
-    $scope.post.voteDown = false;
+    $scope.post.type = '';
 
     $scope.voteUp = function() {
-      if ($scope.post.voteUp == false) {
+      if ($scope.post.vote == false) {
         $scope.post.vote = true;
-        $scope.post.voteUp = true;
+        $scope.post.type = 'upvote';
         ForumServices.votePost($scope.post).success(function() {
-        $scope.post.up_vote = $scope.post.up_vote + 1;
+          $scope.post.up_vote = $scope.post.up_vote + 1;
         });
-      } else if ($scope.post.voteUp == true) {
-        $scope.post.vote = false;
-        $scope.post.voteUp = false;
-        $scope.post.up_vote = $scope.post.up_vote - 1;
+      } else if ($scope.post.vote == true && $scope.post.type == 'upvote') {
+        $scope.post.vote = false;        
+        $scope.post.type = 'upvote';
+        ForumServices.votePost($scope.post).success(function() {
+          $scope.post.up_vote = $scope.post.up_vote - 1;
+        });
+      } else if ($scope.post.vote == true && $scope.post.type == 'downvote') {
+        $scope.post.vote = true;
+        $scope.post.type = 'downvote';
       };
     };
 
     $scope.voteDown = function() {
-      if ($scope.post.voteDown == false) {
-        $scope.post.vote = false;
-        $scope.post.voteDown = true;
+      if ($scope.post.vote == false) {
+        $scope.post.vote = true;
+        $scope.post.type = 'downvote';
         ForumServices.votePost($scope.post).success(function() {
         $scope.post.down_vote = $scope.post.down_vote + 1;
         });
-      } else if ($scope.post.voteDown == true) {
+      } else if ($scope.post.vote == true && $scope.post.type == 'downvote') {
+        $scope.post.vote = false;
+        $scope.post.type = 'downvote';
+        ForumServices.votePost($scope.post).success(function() {
+          $scope.post.down_vote = $scope.post.down_vote - 1;
+        });
+      } else if ($scope.post.vote == true && $scope.post.type == 'upvote') {
         $scope.post.vote = true;
-        $scope.post.voteDown = false;
-        $scope.post.down_vote = $scope.post.down_vote - 1;
+        $scope.post.type = 'upvote';
       };
     };
 
