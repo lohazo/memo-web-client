@@ -81,9 +81,6 @@
             &.active {
               background: url("assets/img/vote-icon/vote-up-icon-2.png") no-repeat;
             }
-            &.disable {
-              background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
-            }
           }
           .vote-down {
             margin: 7px 15px 0 0;
@@ -91,13 +88,10 @@
             width: 25px;
             height: 25px;
             &.normal {
-              background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+              background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
             }
             &.active {
               background: url("assets/img/vote-icon/vote-down-icon-2.png") no-repeat;
-            }
-            &.disable {
-              background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
             }
           }
         }
@@ -256,6 +250,57 @@
           }
         }
       }
+    }
+  }
+  .search-panel {
+    @include grid-row;
+    padding: 30px;
+    .search {
+      background: none repeat scroll 0px 0px #FFF;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      input {
+        background: url("assets/img/search.jpg") 10px no-repeat;
+        border: 1px solid #CCC;
+        border-radius: 5px;
+        color: #CCC;
+        height: 36px;
+        padding-left: 35px;
+        margin-bottom: 0px;
+      }
+    }
+    .channel-follow {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+  }
+  .chanel-panel {
+    @include grid-row;
+    padding: 30px;
+    margin-top: 20px;
+    .search {
+      background: none repeat scroll 0px 0px #FFF;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      input {
+        background: url("assets/img/search.jpg") 10px no-repeat;
+        border: 1px solid #CCC;
+        border-radius: 5px;
+        color: #CCC;
+        height: 36px;
+        padding-left: 35px;
+        margin-bottom: 0px;
+      }
+    }
+    .channel-follow {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
     }
   }
 }

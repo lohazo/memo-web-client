@@ -45,6 +45,6 @@
     });
   }
 
-  angular.module('forum', ['forum.services', 'forum.controllers'])
+  angular.module('forum', ['forum.services', 'forum.controllers', 'forum.directives'])
     .config(['$routeProvider', ForumConfig])
 }(window.angular));

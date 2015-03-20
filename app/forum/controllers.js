@@ -76,48 +76,11 @@
       });
     };
 
-    $scope.post.vote = false;
-    $scope.post.type = '';
+    // $scope.voteUpPost = function () {
+    // };
 
-    $scope.voteUpPost = function () {
-      if ($scope.post.vote == false) {
-        $scope.post.vote = true;
-        $scope.post.type = 'upvote';
-        ForumServices.votePost($scope.post).success(function () {
-          $scope.post.up_vote = $scope.post.up_vote + 1;
-        });
-      } else if ($scope.post.vote == true && $scope.post.type == 'upvote') {
-        $scope.post.vote = false;
-        $scope.post.type = 'upvote';
-        $scope.post.up_vote = $scope.post.up_vote - 1;
-      } else if ($scope.post.vote == true && $scope.post.type == 'downvote') {
-        $scope.post.vote = true;
-        $scope.post.type = 'downvote';
-        ForumServices.votePost($scope.post).success(function () {
-          $scope.post.up_vote = $scope.post.up_vote - 1;
-        })
-      };
-    };
-
-    $scope.voteDownPost = function () {
-      if ($scope.post.vote == false) {
-        $scope.post.vote = true;
-        $scope.post.type = 'downvote';
-        ForumServices.votePost($scope.post).success(function () {
-          $scope.post.down_vote = $scope.post.down_vote + 1;
-        });
-      } else if ($scope.post.vote == true && $scope.post.type == 'downvote') {
-        $scope.post.vote = false;
-        $scope.post.type = 'downvote';
-        $scope.post.down_vote = $scope.post.down_vote - 1;
-      } else if ($scope.post.vote == true && $scope.post.type == 'upvote') {
-        $scope.post.vote = true;
-        $scope.post.type = 'upvote';
-        ForumServices.votePost($scope.post).success(function () {
-          $scope.post.down_vote = $scope.post.down_vote - 1;
-        })
-      };
-    };
+    // $scope.voteDownPost = function () {
+    // };
 
     $scope.creatComment = function () {
       ForumServices.creatComment($scope.data);
@@ -128,6 +91,7 @@
      * @comment: comment duoc vote
      */
     $scope.voteUpComment = function (comment) {
+      console.log(comment.is_vote_up)
       if (comment.is_vote_up) {
         comment.up_vote_count = comment.up_vote_count - 1;
       } else {

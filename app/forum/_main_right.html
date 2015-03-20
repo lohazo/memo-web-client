@@ -1,0 +1,17 @@
+<section class="panel search-panel">
+  <div class="search">
+    <input type="text" ng-model="postSearch.keywords" ng-keydown="search($event=event)" placeholder="Tìm kiếm chủ đề">
+  </div>
+</section>
+<section class="panel chanel-panel">
+  <div class="channel-follow">
+    <h4 class="title">Kênh theo dõi</h4>
+    <div class="course-language">
+      <ul>
+        <li ng-repeat="subscriber in subscribers.list_subscriptions">
+          <a ng-href="/forum?filter={{subscriber._id}}">{{subscriber.name}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
