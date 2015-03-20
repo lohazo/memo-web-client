@@ -24,52 +24,29 @@
     $scope.getListSubscription();
   }
 
-  function ListPostCtrl($scope, ForumServices) {
+  function ListPostCtrl($scope, $location, ForumServices, allPosts, Subscribers) {
+    $scope.subscribers = Subscribers.data;
+    $scope.stickyPosts = allPosts.data.sticky_posts;
+    $scope.allPosts = allPosts.data.posts;
+    $scope.postSearch = {
+      keywords: ''
+    };
 
-    $scope.posts = [{
-      'avatar': "avatar",
-      'title': "Các nguồn học Tiếng trung miễn phí",
-      'comment': "12",
-      'userd': "admin",
-      'datetime': "12/12/15",
-      "course": "memoeee"
-    }, {
-      'avatar': "avatar",
-      'title': "Các nguồn học Tiếng trung miễn phí",
-      'comment': "12",
-      'userd': "admin",
-      'datetime': "12/12/15",
-      "course": "memoeee"
-    }, {
-      'avatar': "avatar",
-      'title': "Các nguồn học Tiếng trung miễn phí",
-      'comment': "122",
-      'userd': "admin",
-      'datetime': "12/12/15",
-      "course": "memoeee"
-    }];
-    $scope.tabPost = [{
-      'avatar': "avatar",
-      'title': "Các nguồn học Tiếng trung miễn phí",
-      'comment': "12",
-      'userd': "admin",
-      'datetime': "12/12/15",
-      "course": "memoeee"
-    }];
-    $scope.tabPostFollow = [{
-      'avatar': "avatar",
-      'title': "Các nguồn học Tiếng trung miễn phí",
-      'comment': "1112",
-      'userd': "admin",
-      'datetime': "12/12/15",
-      "course": "memoeee"
-    }];
-
-    $scope.listPosts = function () {
-      ForumServices.listPosts();
-    }
-    $scope.listPosts();
-
+    $scope.search = function (e) {
+      if (e.keyCode === 13) {
+        if ($scope.postSearch.keywords.length > 0) {
+          // $location.search({
+          //   search: $scope.postSearch.keywords
+          // });
+          ForumServices.searchPosts({
+            keywords: $scope.postSearch.keywords
+          }).success(function (data) {
+            $scope.stickyPosts = data.sticky_posts;
+            $scope.allPosts = data.posts;
+          });
+        }
+      }
+    };
   }
 
   function PostDetailCtrl($scope, ForumServices, Post) {
@@ -188,7 +165,7 @@
   }
 
   angular.module('forum.controllers', ['forum.services'])
-    .controller('ListPostCtrl', ['$scope', 'ForumServices', ListPostCtrl])
+    .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', ListPostCtrl])
     .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', CreatePostCtrl])
     .controller('PostDetailCtrl', ['$scope', 'ForumServices', 'Post', PostDetailCtrl]);
 }(window.angular));

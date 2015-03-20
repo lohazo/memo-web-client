@@ -76,17 +76,29 @@
       return $http.post(API + '/comments/' + data.id + '/vote', data);
     };
 
+    // data = {[page: , sort: 'created_at', type: 'desc'/'asc', filter: "all"/"follow"/"en-vi"/"fr-vi"/"de-vi"]}
     Services.listPosts = function (data) {
 
       var authToken = $localStorage.auth.user.auth_token;
-      var data = {
-        page: 0,
-        sort: 'created_at',
-        type: 'desc',
-        filter: 'all'
-      };
-      return $http.get(API + '/posts/all_posts' + '?auth_token=' + authToken, data)
+      var endpoint = API + '/posts/all_posts' + '?platform=web&auth_token=' + authToken;
+
+      if (data.page) endpoint += '&page=' + data.page;
+      if (data.sort) endpoint += '&sort=' + data.sort;
+      if (data.type) endpoint += '&type=' + data.type;
+      if (data.filter) endpoint += '&filter=' + data.filter;
+
+      return $http.get(endpoint);
     };
+
+    // data = {keywords: ''}
+    Services.searchPosts = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
+      var endpoint = API + '/posts/search_all_posts?keywords=' + decodeURIComponent(data.keywords) +
+        '&auth_token=' + authToken;
+
+      return $http.get(endpoint);
+    };
+
     return Services;
   }
 
