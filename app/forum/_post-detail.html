@@ -25,9 +25,9 @@
 		      		</div>
 		      		<div class="post-version-toolbar">
 		      		  <div class="total-vote left" ng-bind="post.up_vote"></div>
-		      		  <a class="vote-up left" ng-class="{'active': post.type == 'upvote','disable': post.vote == false}" ng-click="voteUpPost()"></a>
+		      		  <a class="vote-up left active" ng-click="voteUpPost()"></a>
 		      		  <div class="total-vote left" ng-bind="post.down_vote"></div>
-	    			  <a class="vote-down left" ng-class="{'active': post.type == 'downvote','disable': post.vote == false}" ng-click="voteDownPost()"></a>
+	    			  	<a class="vote-down left active" ng-click="voteDownPost()"></a>
 		      		</div>
 		      	</div>
 		      </div>
@@ -62,11 +62,11 @@
 	    						<div class="comment-content-text" ng-bind="comment.content"></div>
 	    					</div>
 	    					<div class="comment-content-toolbar">
-	    						<div class="total-vote left" ng-bind="comment"></div>
-	    						<!-- <a class="vote-up left" ng-class="{'active': post.type == 'upvote','disable': post.vote == false}" ng-click="voteUpComment()"></a>
-	    						<div class="total-vote left"></div>
-	    						<a class="vote-down left" ng-class="{'active': post.type == 'downvote','disable': post.vote == false}" ng-click="voteDownComment()"></a> -->
-	    						<a class="reply left" ng-click="reply()">Trả lời</a>
+	    						<div class="total-vote left" ng-bind="comment.up_vote_count"></div>
+	    						<a class="vote-up left normal" ng-click="voteUpComment(comment._id)"></a>
+	    						<div class="total-vote left" ng-bind="comment.down_vote_count"></div>
+	    						<a class="vote-down left normal" ng-click="voteDownComment(comment._id)"></a>
+	    						<!-- <a class="reply left" ng-click="reply()">Trả lời</a> -->
 	    					</div>
 	    					<div class="comment-version" ng-if="isReplying">
 	    						<div class="avatar left"><img ng-src="{{user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>

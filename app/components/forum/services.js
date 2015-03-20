@@ -74,8 +74,9 @@
 
     Services.voteComment = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
+      console.log(data.type);
 
-      return $http.post(API + '/comments/' + data._id + '/vote' + '?auth_token=' + authToken);
+      return $http.post(API + '/comments/' + data.id + '/vote' + '?auth_token=' + authToken);
     };
 
     return Services;
