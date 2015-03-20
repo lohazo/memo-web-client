@@ -25,6 +25,7 @@
 
 	function PostDetailCtrl($scope, ForumServices, Post) {
     $scope.post = Post.data;
+    console.log($scope.post);
     $scope.data = {
       content: '',
       id: $scope.post._id
@@ -32,10 +33,7 @@
 
     $scope.listComment = function() {
       ForumServices.listComment($scope.data).success(function(data){
-        $scope.post.comment = data.comments.filter(function (item) {
-        return item.comment === $scope.post.comment;
-      })[0];
-        console.log($scope.post.comment);
+        $scope.post.comments = data.comments;
       });
     };
 
