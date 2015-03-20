@@ -49,11 +49,12 @@
       return $http.post(API + '/posts/' + data._id + '/vote' ,data);
     };
 
-    // Services.listComment = function (data) {
-    //   var authToken = $localStorage.auth.user.auth_token;
+    Services.listComment = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
+      data.page = 1;
 
-    //   return $http.get(API + '/posts/' + data.id + '/comments' ,data);
-    // };
+      return $http.get(API + '/posts/' + data.id + '/comments' + '?auth_token=' + authToken,data);
+    };
 
     // Services.listComments = function (data) {
     //   var authToken = $localStorage.auth.user.auth_token;
@@ -66,15 +67,16 @@
 
       data.auth_token = authToken;
       data.platform = 'web';
+      data.post_id = data.id;
 
       return $http.post(API + '/comments' ,data);
     };
 
-    // Services.voteComment = function (data) {
-    //   var authToken = $localStorage.auth.user.auth_token;
+    Services.voteComment = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
 
-    //   return $http.post(API + '/comments/' + data.id + '/vote' ,data);
-    // };
+      return $http.post(API + '/comments/' + data._id + '/vote' + '?auth_token=' + authToken);
+    };
 
     return Services;
 	}

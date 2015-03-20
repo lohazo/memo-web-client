@@ -30,6 +30,17 @@
       id: $scope.post._id
     };
 
+    $scope.listComment = function() {
+      ForumServices.listComment($scope.data).success(function(data){
+        $scope.post.comment = data.comments.filter(function (item) {
+        return item.comment === $scope.post.comment;
+      })[0];
+        console.log($scope.post.comment);
+      });
+    };
+
+    $scope.listComment();
+
     $scope.followPost = function() {
       ForumServices.followPost($scope.post).success(function() {
         $scope.post.follow = true;
@@ -45,7 +56,7 @@
     $scope.post.vote = false;
     $scope.post.type = '';
 
-    $scope.voteUp = function() {
+    $scope.voteUpPost = function() {
       if ($scope.post.vote == false) {
         $scope.post.vote = true;
         $scope.post.type = 'upvote';
@@ -64,7 +75,7 @@
       };
     };
 
-    $scope.voteDown = function() {
+    $scope.voteDownPost = function() {
       if ($scope.post.vote == false) {
         $scope.post.vote = true;
         $scope.post.type = 'downvote';
@@ -83,18 +94,52 @@
       };
     };
 
-    $scope.listComment = function() {
-
-    };
 
     $scope.listComments = function() {
 
     };
 
-    $scope.creatComment = function() {
-      ForumServices.creatComment($scope.data)
-    };
+    // $scope.voteUpComment = function() {
+    //   if ($scope.post.vote == false) {
+    //     $scope.post.vote = true;
+    //     $scope.post.type = 'upvote';
+    //     ForumServices.voteComment($scope.post.comment).success(function() {
+    //       $scope.post.up_vote = $scope.post.up_vote + 1;
+    //     });
+    //   } else if ($scope.post.vote == true && $scope.post.type == 'upvote') {
+    //     $scope.post.vote = false;        
+    //     $scope.post.type = 'upvote';
+    //     ForumServices.voteComment($scope.post.comment).success(function() {
+    //       $scope.post.up_vote = $scope.post.up_vote - 1;
+    //     });
+    //   } else if ($scope.post.vote == true && $scope.post.type == 'downvote') {
+    //     $scope.post.vote = true;
+    //     $scope.post.type = 'downvote';
+    //   };
+    // };
 
+    // $scope.voteDownComment = function() {
+    //   if ($scope.post.vote == false) {
+    //     $scope.post.vote = true;
+    //     $scope.post.type = 'downvote';
+    //     ForumServices.voteComment($scope.post.comment).success(function() {
+    //     $scope.post.down_vote = $scope.post.down_vote + 1;
+    //     });
+    //   } else if ($scope.post.vote == true && $scope.post.type == 'downvote') {
+    //     $scope.post.vote = false;
+    //     $scope.post.type = 'downvote';
+    //     ForumServices.voteComment($scope.post.comment).success(function() {
+    //       $scope.post.down_vote = $scope.post.down_vote - 1;
+    //     });
+    //   } else if ($scope.post.vote == true && $scope.post.type == 'upvote') {
+    //     $scope.post.vote = true;
+    //     $scope.post.type = 'upvote';
+    //   };
+    // };
+
+    $scope.creatComment = function() {
+      ForumServices.creatComment($scope.data);
+    };
 	}
 
 	angular.module('forum.controllers', ['forum.services'])

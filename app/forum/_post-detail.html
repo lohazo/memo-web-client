@@ -25,9 +25,9 @@
 		      		</div>
 		      		<div class="post-version-toolbar">
 		      		  <div class="total-vote left">{{post.up_vote}}</div>
-		      		  <a class="vote-up left" ng-class="{'active': post.type == 'upvote','disable': post.type == 'downvote' || post.vote == false}" ng-click="voteUp()"></a>
+		      		  <a class="vote-up left" ng-class="{'active': post.type == 'upvote','disable': post.vote == false}" ng-click="voteUpPost()"></a>
 		      		  <div class="total-vote left">{{post.down_vote}}</div>
-	    			  <a class="vote-down left" ng-class="{'active': post.type == 'downvote','disable': post.type == 'upvote' || post.vote == false}" ng-click="voteDown()"></a>
+	    			  <a class="vote-down left" ng-class="{'active': post.type == 'downvote','disable': post.vote == false}" ng-click="voteDownPost()"></a>
 		      		</div>
 		      	</div>
 		      </div>
@@ -56,15 +56,15 @@
 	    				<img class="comment-avatar" ng-src="{{post.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
 	    				<div class="comment-content">
 	    					<div class="comment-content-top">
-	    						<a class="comment-name-text">ljnkshady</a>
+	    						<a class="comment-name-text">{{comment.user.name}}</a>
 	    					</div>
 	    					<div class="comment-content-mid">
-	    						<div class="comment-content-text">"tôi nói chuyện" chương trình báo sai</div>
+	    						<div class="comment-content-text">{{comment.content}}</div>
 	    					</div>
 	    					<div class="comment-content-toolbar">
 	    						<div class="total-vote left">{{post.up_vote - post.down_vote}}</div>
-	    						<a class="vote-up left" ng-click="voteUp()"></a>
-	    						<a class="vote-down left" ng-click="voteDown()"></a>
+	    						<!-- <a class="vote-up left" ng-class="{'active': post.type == 'upvote','disable': post.vote == false}" ng-click="voteUpComment()"></a>
+	    						<a class="vote-down left" ng-class="{'active': post.type == 'downvote','disable': post.vote == false}" ng-click="voteDownComment()"></a> -->
 	    						<a class="reply left" ng-click="reply()">Trả lời</a>
 	    					</div>
 	    					<div class="comment-version" ng-if="isReplying">
