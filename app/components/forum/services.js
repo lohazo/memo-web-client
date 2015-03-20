@@ -1,4 +1,4 @@
-(function (angular){
+(function (angular) {
   'use strict';
 
   function ForumServices($http, $q, $localStorage, API) {
@@ -8,7 +8,7 @@
      * data = {title: , content: , base_course_id: , [questtion_log_id: ]}
      */
 
-     Services.createPost = function (data) {
+    Services.createPost = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
       data.auth_token = authToken;
       data.platform = 'web';
@@ -40,14 +40,14 @@
 
       data.auth_token = authToken;
       data.platform = 'web';
-      return $http.post(API + '/posts/' + data._id + '/vote' ,data);
+      return $http.post(API + '/posts/' + data._id + '/vote', data);
     };
 
     Services.listComment = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
       data.page = 1;
 
-      return $http.get(API + '/posts/' + data.id + '/comments' + '?auth_token=' + authToken,data);
+      return $http.get(API + '/posts/' + data.id + '/comments' + '?auth_token=' + authToken, data);
     };
 
     // Services.listComments = function (data) {
@@ -63,24 +63,27 @@
       data.platform = 'web';
       data.post_id = data.id;
 
-      return $http.post(API + '/comments' ,data);
+      return $http.post(API + '/comments', data);
     };
 
+    // data = {id: ,type: 'upvote'/'downvote', vote: true/false}
     Services.voteComment = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
-      console.log(data.type);
 
-      return $http.post(API + '/comments/' + data.id + '/vote' + '?auth_token=' + authToken);
+      data.auth_token = authToken;
+      data.platform = 'web';
+
+      return $http.post(API + '/comments/' + data.id + '/vote', data);
     };
 
     Services.listPosts = function (data) {
-      
+
       var authToken = $localStorage.auth.user.auth_token;
       var data = {
-        page : 0,
-        sort : 'created_at',
-        type : 'desc',
-        filter : 'all'
+        page: 0,
+        sort: 'created_at',
+        type: 'desc',
+        filter: 'all'
       };
       return $http.get(API + '/posts/all_posts' + '?auth_token=' + authToken, data)
     };
@@ -88,6 +91,5 @@
   }
 
   angular.module('forum.services', [])
-  .factory('ForumServices', ['$http', '$q', '$localStorage', 'API', ForumServices]);
+    .factory('ForumServices', ['$http', '$q', '$localStorage', 'API', ForumServices]);
 }(window.angular));
-
