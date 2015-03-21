@@ -50,6 +50,17 @@
       return $http.get(API + '/posts/' + data.id + '/comments' + '?auth_token=' + authToken, data);
     };
 
+    /*
+     * data = {post_id: , parent_comment_id: , content:}
+     */
+    Services.replyComment = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
+      data.auth_token = authToken;
+      data.platform = 'web';
+
+      return $http.post(API + '/comments' , data);
+    }
+
     // Services.listComments = function (data) {
     //   var authToken = $localStorage.auth.user.auth_token;
 

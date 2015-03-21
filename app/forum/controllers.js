@@ -204,6 +204,17 @@
         vote: comment.is_vote_down
       });
     };
+
+    $scope.createComment = function(comment, post) {
+      console.log(post._id);
+      console.log(comment._id);
+      console.log(comment.replycontent);
+      ForumServices.replyComment({
+        post_id: post._id,
+        parent_comment_id: comment._id,
+        content: comment.replycontent
+      })
+    }
   }
 
   angular.module('forum.controllers', ['forum.services'])
