@@ -68,14 +68,21 @@
                     <a class="vote-down left normal" ng-class="{'active': comment.is_vote_down}" ng-click="voteDownComment(comment)"></a>
                     <a class="reply left" ng-click="reply()">Trả lời</a>
                   </div>
-                  <div class="comment-version" >
+                  <div class="comment-version" ng-if="is_replying">
                     <div class="avatar left"><img ng-src="{{user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
                     <div class="comment-editor left">
                       <div class="comment-editor-textarea"><textarea ng-model="comment.replycontent" name=""></textarea></div>
                       <div class="comment-editor-toolbar">
-                        <a class="small radius button send-comment-button" ng-click="createComment(comment,post)">Gửi</a>
+                        <a class="small radius button send-comment-button" ng-click="createReply(comment,post)">Gửi</a>
                         <a class="small radius button send-comment-button" ng-click="cancelReply()">Hủy</a>
                       </div>
+                    </div>
+                  </div>
+                  <div class="comment-version" ng-if="!is_replying" ng-repeat="reply in replies">
+                    <div class="avatar left"><img ng-src="{{user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
+                    <div class="comment-editor left">
+                      <div ng-bind="reply.name"></div>
+                      <div ng-bind="reply.content"></div>
                     </div>
                   </div>
                 </div>

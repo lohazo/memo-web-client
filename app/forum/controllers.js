@@ -205,16 +205,43 @@
       });
     };
 
-    $scope.createComment = function(comment, post) {
-      console.log(post._id);
-      console.log(comment._id);
-      console.log(comment.replycontent);
-      ForumServices.replyComment({
+    $scope.is_replying = false;
+
+    $scope.reply = function () {
+      $scope.is_replying = !$scope.is_replying;
+    }
+    $scope.createReply = function(comment, post) {
+      $scope.is_replying = !$scope.is_replying;
+      ForumServices.createReply({
         post_id: post._id,
         parent_comment_id: comment._id,
         content: comment.replycontent
+      }).success(function (data) {      
+        ForumServices.listReply(data).success(function (data) {
+          // $scope.reply = data;
+          var dataReply = {};
+          dataReply = {
+            "comments": [{
+              "name": "ljnkshady",
+              "content": "Toi noi chuyen ---> I talk",
+              "vote_up_count": 1,
+              "vote_up_down": 2
+            }],
+            "next_page": 0,
+            "total_page": 0
+          }
+          $scope.replies = dataReply;
+          console.log($scope.reply);
+        });
       })
+
     }
+
+    $scope.listReply = function (comment) {
+      ForumServices.listReply(comment);
+    };
+   
+    // $scope.listReply();
   }
 
   angular.module('forum.controllers', ['forum.services'])
