@@ -86,6 +86,7 @@
       <div class="course-language">
        <ul>
          <li ng-repeat="subscriber in subscribers.list_subscriptions">
+         <img class="avatar-course" ng-src="/assets/img/{{subscriber._id}}.png" />          
             <a ng-href="/forum?filter={{subscriber._id}}">{{subscriber.name}}</a>
          </li>
        </ul>
