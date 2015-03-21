@@ -1,10 +1,11 @@
 (function (angular) {
   'use strict';
 
-  function ListPostCtrl($scope, $location, ForumServices, allPosts, subscribers) {
+  function ListPostCtrl($scope, $location, ForumServices, allPosts, subscribers, followingPosts) {
     $scope.subscribers = subscribers.data;
     $scope.stickyPosts = allPosts.data.sticky_posts;
     $scope.allPosts = allPosts.data.posts;
+    $scope.followingPosts = followingPosts.data.posts;
     $scope.postSearch = {
       keywords: ''
     };
@@ -203,10 +204,48 @@
         vote: comment.is_vote_down
       });
     };
+
+    $scope.is_replying = false;
+
+    $scope.reply = function () {
+      $scope.is_replying = !$scope.is_replying;
+    }
+    $scope.createReply = function(comment, post) {
+      $scope.is_replying = !$scope.is_replying;
+      ForumServices.createReply({
+        post_id: post._id,
+        parent_comment_id: comment._id,
+        content: comment.replycontent
+      }).success(function (data) {      
+        ForumServices.listReply(data).success(function (data) {
+          // $scope.reply = data;
+          var dataReply = {};
+          dataReply = {
+            "comments": [{
+              "name": "ljnkshady",
+              "content": "Toi noi chuyen ---> I talk",
+              "vote_up_count": 1,
+              "vote_up_down": 2
+            }],
+            "next_page": 0,
+            "total_page": 0
+          }
+          $scope.replies = dataReply;
+          console.log($scope.reply);
+        });
+      })
+
+    }
+
+    $scope.listReply = function (comment) {
+      ForumServices.listReply(comment);
+    };
+   
+    // $scope.listReply();
   }
 
   angular.module('forum.controllers', ['forum.services'])
-    .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', ListPostCtrl])
+    .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', 'followingPosts', ListPostCtrl])
     .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'allPosts', 'subscribers', CreatePostCtrl])
     .controller('PostDetailCtrl', ['$scope', 'ForumServices', 'Post', 'allPosts', 'subscribers', PostDetailCtrl]);
 }(window.angular));

@@ -50,6 +50,17 @@
       return $http.get(API + '/posts/' + data.id + '/comments' + '?auth_token=' + authToken, data);
     };
 
+    /*
+     * data = {post_id: , parent_comment_id: , content:}
+     */
+    Services.createReply = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
+      data.auth_token = authToken;
+      data.platform = 'web';
+
+      return $http.post(API + '/comments' , data);
+    }
+
     // Services.listComments = function (data) {
     //   var authToken = $localStorage.auth.user.auth_token;
 
@@ -90,13 +101,21 @@
       return $http.get(endpoint);
     };
 
+    Services.listReply = function (data) {
+      var authToken = $localStorage.auth.user.auth_token;
+      var endpoint = API + '/comments/' + data._id + '?platform=web&auth_token=' + authToken;
+
+      if (data.page) endpoint += '&page=' + data.page;
+
+      return $http.get(endpoint);
+    }
+
     // data = {keywords: ''}
     Services.searchPosts = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
-      var endpoint = API + '/posts/search_all_posts?keywords=' + decodeURIComponent(data.keywords) +
-        '&auth_token=' + authToken;
+      data.auth_token = authToken;
 
-      return $http.get(endpoint);
+      return $http.post(API + '/posts/search_all_post' ,data);
     };
 
     return Services;
