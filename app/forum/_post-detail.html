@@ -1,5 +1,5 @@
 <section class="post-detail">
-  <section class="main-left"> 
+  <section class="main-left">
     <section class="panel post-detail-panel">
       <section class="post-info">
         <div class="post-info-header">
@@ -20,7 +20,7 @@
                 <div ng-bind="post.user"></div>
                 <div><span class="created-date">17/02/2014</span> - Tiếng Đức</div>
               </div>
-              <div class="post-version-middler">  
+              <div class="post-version-middler">
                 <div ng-bind="post.content"></div>
               </div>
               <div class="post-version-toolbar">
@@ -41,52 +41,66 @@
                 <a class="small radius button send-comment-button" ng-click="creatComment()">Gửi</a>
                 <!-- <a class="small radius button cancel-button">Hủy</a> -->
               </div>
-          </div>  
-        </div>
-      </section>
-      <section class="comment-info">
-        <div class="comment-info-header">
-          <div class="left">
-            <h4 class="title">Có {{post.total_comment}} bình luận</h4>
+            </div>
           </div>
-        </div>
-        <div class="comment-info-inner" ng-repeat="comment in post.comments">
-          <ul class="comments">
-            <li class="comment">
-              <img class="comment-avatar" ng-src="{{comment.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
-              <div class="comment-content">
-                <div class="comment-content-top">
-                  <a class="comment-name-text" ng-bind="comment.user.name"></a>
-                </div>
-                <div class="comment-content-mid">
-                  <div class="comment-content-text" ng-bind="comment.content"></div>
-                </div>
-                <div class="comment-content-toolbar">
-                  <div class="total-vote left" ng-bind="comment.up_vote_count"></div>
-                  <a class="vote-up left normal" ng-class="{'active': comment.is_vote_up}" ng-click="voteUpComment(comment)"></a>
-                  <div class="total-vote left" ng-bind="comment.down_vote_count"></div>
-                  <a class="vote-down left normal" ng-class="{'active': comment.is_vote_down}" ng-click="voteDownComment(comment)"></a>
-                  <!-- <a class="reply left" ng-click="reply()">Trả lời</a> -->
-                </div>
-                <div class="comment-version" ng-if="isReplying">
-                  <div class="avatar left"><img ng-src="{{user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
-                  <div class="comment-editor left">
-                    <div class="comment-editor-textarea"><textarea name=""></textarea></div>
-                    <div class="comment-editor-toolbar">
-                      <a class="small radius button send-comment-button" ng-click="">Gửi</a>
-                      <a class="small radius button send-comment-button" ng-click="cancelReply()">Hủy</a>
+        </section>
+        <section class="comment-info">
+          <div class="comment-info-header">
+            <div class="left">
+              <h4 class="title">Có {{post.total_comment}} bình luận</h4>
+            </div>
+          </div>
+          <div class="comment-info-inner" ng-repeat="comment in post.comments">
+            <ul class="comments">
+              <li class="comment">
+                <img class="comment-avatar" ng-src="{{comment.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+                <div class="comment-content">
+                  <div class="comment-content-top">
+                    <a class="comment-name-text" ng-bind="comment.user.name"></a>
+                  </div>
+                  <div class="comment-content-mid">
+                    <div class="comment-content-text" ng-bind="comment.content"></div>
+                  </div>
+                  <div class="comment-content-toolbar">
+                    <div class="total-vote left" ng-bind="comment.up_vote_count"></div>
+                    <a class="vote-up left normal" ng-class="{'active': comment.is_vote_up}" ng-click="voteUpComment(comment)"></a>
+                    <div class="total-vote left" ng-bind="comment.down_vote_count"></div>
+                    <a class="vote-down left normal" ng-class="{'active': comment.is_vote_down}" ng-click="voteDownComment(comment)"></a>
+                    <!-- <a class="reply left" ng-click="reply()">Trả lời</a> -->
+                  </div>
+                  <div class="comment-version" ng-if="isReplying">
+                    <div class="avatar left"><img ng-src="{{user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
+                    <div class="comment-editor left">
+                      <div class="comment-editor-textarea"><textarea name=""></textarea></div>
+                      <div class="comment-editor-toolbar">
+                        <a class="small radius button send-comment-button" ng-click="">Gửi</a>
+                        <a class="small radius button send-comment-button" ng-click="cancelReply()">Hủy</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </section>
+    </section>
+    <!-- <section class="main-right" forum-main-right>   -->      <!-- Tạo directive cho main right  -->
+    <section class="main-right">
+      <section class="panel search-panel">
+        <div class="search">
+          <input type="text" ng-model="postSearch.keywords" ng-keydown="search($event=event)" placeholder="Tìm kiếm chủ đề">
+        </div>
+      </section>
+      <section class="panel channel-follow">
+        <h4 class="title">Kênh theo dõi</h4>
+        <div class="course-language">
+          <ul>
+            <li ng-repeat="subscriber in subscribers.list_subscriptions">
+              <a ng-href="/forum?filter={{subscriber._id}}">{{subscriber.name}}</a>
             </li>
           </ul>
         </div>
-      </section>   
-    </section>    
-  </section> 
-  <!-- <section class="main-right" forum-main-right>   -->      <!-- Tạo directive cho main right  -->
-    <section class="main-right">
-        asdfdsfd
+      </section>
     </section>
-</section>
+  </section>

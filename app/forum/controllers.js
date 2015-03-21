@@ -1,31 +1,8 @@
 (function (angular) {
   'use strict';
 
-  function CreatePostCtrl($scope, ForumServices, $location) {
-    $scope.data = {
-      title: '',
-      content: '',
-      base_course_id: ''
-    };
-
-    $scope.createPost = function () {
-      ForumServices.createPost($scope.data).success(function (data) {
-        $location.url('/forum/post/' + data._id);
-      });
-
-    };
-
-    $scope.getListSubscription = function () {
-      ForumServices.getListSubscription().success(function (data) {
-        $scope.listSubscriptions = data.list_subscriptions;
-      });
-    };
-
-    $scope.getListSubscription();
-  }
-
-  function ListPostCtrl($scope, $location, ForumServices, allPosts, Subscribers) {
-    $scope.subscribers = Subscribers.data;
+  function ListPostCtrl($scope, $location, ForumServices, allPosts, subscribers) {
+    $scope.subscribers = subscribers.data;
     $scope.stickyPosts = allPosts.data.sticky_posts;
     $scope.allPosts = allPosts.data.posts;
     $scope.postSearch = {
@@ -49,11 +26,80 @@
     };
   }
 
-  function PostDetailCtrl($scope, ForumServices, Post) {
+  function CreatePostCtrl($scope, ForumServices, $location, allPosts, subscribers) {
+    $scope.data = {
+      title: '',
+      content: '',
+      base_course_id: ''
+    };
+
+    $scope.subscribers = subscribers.data;
+    $scope.stickyPosts = allPosts.data.sticky_posts;
+    $scope.allPosts = allPosts.data.posts;
+    $scope.postSearch = {
+      keywords: ''
+    };
+
+    $scope.search = function (e) {
+      if (e.keyCode === 13) {
+        if ($scope.postSearch.keywords.length > 0) {
+          // $location.search({
+          //   search: $scope.postSearch.keywords
+          // });
+          ForumServices.searchPosts({
+            keywords: $scope.postSearch.keywords
+          }).success(function (data) {
+            $scope.stickyPosts = data.sticky_posts;
+            $scope.allPosts = data.posts;
+          });
+        }
+      }
+    };
+
+    $scope.createPost = function () {
+      ForumServices.createPost($scope.data).success(function (data) {
+        $location.url('/forum/post/' + data._id);
+      });
+
+    };
+
+    $scope.getListSubscription = function () {
+      ForumServices.getListSubscription().success(function (data) {
+        $scope.listSubscriptions = data.list_subscriptions;
+      });
+    };
+
+    $scope.getListSubscription();
+  }
+
+  function PostDetailCtrl($scope, ForumServices, Post, allPosts, subscribers) {
     $scope.post = Post.data;
     $scope.data = {
       content: '',
       id: $scope.post._id
+    };
+
+    $scope.subscribers = subscribers.data;
+    $scope.stickyPosts = allPosts.data.sticky_posts;
+    $scope.allPosts = allPosts.data.posts;
+    $scope.postSearch = {
+      keywords: ''
+    };
+
+    $scope.search = function (e) {
+      if (e.keyCode === 13) {
+        if ($scope.postSearch.keywords.length > 0) {
+          // $location.search({
+          //   search: $scope.postSearch.keywords
+          // });
+          ForumServices.searchPosts({
+            keywords: $scope.postSearch.keywords
+          }).success(function (data) {
+            $scope.stickyPosts = data.sticky_posts;
+            $scope.allPosts = data.posts;
+          });
+        }
+      }
     };
 
     $scope.listComment = function () {
@@ -161,6 +207,6 @@
 
   angular.module('forum.controllers', ['forum.services'])
     .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', ListPostCtrl])
-    .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', CreatePostCtrl])
-    .controller('PostDetailCtrl', ['$scope', 'ForumServices', 'Post', PostDetailCtrl]);
+    .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'allPosts', 'subscribers', CreatePostCtrl])
+    .controller('PostDetailCtrl', ['$scope', 'ForumServices', 'Post', 'allPosts', 'subscribers', PostDetailCtrl]);
 }(window.angular));
