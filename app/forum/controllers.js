@@ -76,14 +76,46 @@
       });
     };
 
-    // $scope.voteUpPost = function () {
-    // };
+    $scope.voteUpPost = function (post) {
+      if (post.is_vote_up) {
+        post.up_vote_count = post.up_vote_count - 1;
+      } else {
+        post.up_vote_count = post.up_vote_count +1;
+        if (post.is_vote_down) {
+          post.down_vote_count = post.down_vote_count -1;
+          post.is_vote_down = false;        
+        }
+      }
+      post.is_vote_up = !post.is_vote_up;
+      ForumServices.votePost({
+        id: post._id,
+        type: 'upvote',
+        vote: post.is_vote_up
+      });
+    };
 
-    // $scope.voteDownPost = function () {
-    // };
+    $scope.voteDownPost = function (post) {
+      if (post.is_vote_down) {
+        post.down_vote_count = post.down_vote_count - 1;
+      } else {
+        post.down_vote_count = post.down_vote_count +1;
+        if (post.is_vote_up) {
+          post.up_vote_count = post.up_vote_count -1;
+          post.is_vote_up = false;
+        }
+      }
+      post.is_vote_down = !post.is_vote_down;
+      ForumServices.votePost({
+        id: post._id,
+        type: 'downvote',
+        vote: post.is_vote_down
+      });
+    };
 
     $scope.creatComment = function () {
-      ForumServices.creatComment($scope.data);
+      ForumServices.creatComment($scope.data).success(function () {
+        $scope.listComment();
+      });
     };
 
     /*
@@ -91,7 +123,6 @@
      * @comment: comment duoc vote
      */
     $scope.voteUpComment = function (comment) {
-      console.log(comment.is_vote_up)
       if (comment.is_vote_up) {
         comment.up_vote_count = comment.up_vote_count - 1;
       } else {

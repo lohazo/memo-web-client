@@ -24,10 +24,10 @@
                 <div ng-bind="post.content"></div>
               </div>
               <div class="post-version-toolbar">
-                <div class="total-vote left" ng-bind="post.up_vote"></div>
-                <a class="vote-up normal left" ng-class="{'active': is_vote_up}" ng-click="voteUpPost()"></a>
-                <div class="total-vote left" ng-bind="post.down_vote"></div>
-                <a class="vote-down normal left" ng-class="{'active': is_vote_up}" ng-click="voteDownPost()"></a>
+                <div class="total-vote left" ng-bind="post.up_vote_count"></div>
+                <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)"></a>
+                <div class="total-vote left" ng-bind="post.down_vote_count"></div>
+                <a class="vote-down normal left" ng-class="{'active': post.is_vote_down}" ng-click="voteDownPost(post)"></a>
               </div>
             </div>
           </div>
@@ -85,6 +85,8 @@
       </section>   
     </section>    
   </section> 
-  <section class="main-right" forum-main-right> 
-  </section>
+  <!-- <section class="main-right" forum-main-right>   -->      <!-- Tạo directive cho main right  -->
+    <section class="main-right">
+        asdfdsfd
+    </section>
 </section>
