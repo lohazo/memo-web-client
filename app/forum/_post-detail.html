@@ -95,12 +95,13 @@
       <section class="panel channel-follow">
         <h4 class="title">Kênh theo dõi</h4>
         <div class="course-language">
-          <ul>
-            <li ng-repeat="subscriber in subscribers.list_subscriptions">
-              <a ng-href="/forum?filter={{subscriber._id}}">{{subscriber.name}}</a>
-            </li>
-          </ul>
-        </div>
+       <ul>
+         <li ng-repeat="subscriber in subscribers.list_subscriptions">
+         <img class="avatar-course" ng-src="/assets/img/{{subscriber._id}}.png" />          
+            <a ng-href="/forum?filter={{subscriber._id}}">{{subscriber.name}}</a>
+         </li>
+       </ul>
+      </div>
       </section>
     </section>
   </section>

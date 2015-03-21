@@ -12,6 +12,9 @@
     width: 100% !important;
     border: 0;
     border-radius: 20px;
+    .li {
+      list-style: none;
+    }
   }
   .post-detail-panel {
     @include grid-row;
@@ -247,8 +250,9 @@
     }
   }
   .search-panel {
-  @include grid-row;
+    @include grid-row;
     padding: 30px;
+    list-style: none;
     background: none repeat scroll 0px 0px #FFF;
     border-radius: 10px;
     text-align: center;
@@ -263,6 +267,7 @@
     }
   }  
   .channel-follow {
+    list-style: none;
     background: #fff;
     border-radius: 10px;
     padding: 20px;
