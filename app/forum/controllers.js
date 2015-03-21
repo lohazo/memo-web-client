@@ -106,6 +106,7 @@
     $scope.listComment = function () {
       ForumServices.listComment($scope.data).success(function (data) {
         $scope.post.comments = data.comments;
+        console.log(data.comments)
       });
     };
 
@@ -159,9 +160,9 @@
       });
     };
 
-    $scope.creatComment = function () {
-      ForumServices.creatComment($scope.data).success(function () {
-        $scope.listComment();
+    $scope.createComment = function () {
+      ForumServices.creatComment($scope.data).success(function (data) {
+        $scope.post.comments.push(data);
       });
     };
 
@@ -231,7 +232,6 @@
             "total_page": 0
           }
           $scope.replies = dataReply;
-          console.log($scope.reply);
         });
       })
 
