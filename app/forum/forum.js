@@ -61,12 +61,12 @@
         },
         subscribers: function (ForumServices) {
             return ForumServices.getListSubscription();
-          }
-          // followingPosts: function (ForumServices) {
-          //   return ForumServices.listPosts({
-          //     filter: 'follow'
-          //   });
-          // }
+        },
+        followingPosts: function (ForumServices) {
+          return ForumServices.listPosts({
+            filter: 'follow'
+          });
+        }
       }
     });
   }

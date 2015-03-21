@@ -1,10 +1,11 @@
 (function (angular) {
   'use strict';
 
-  function ListPostCtrl($scope, $location, ForumServices, allPosts, subscribers) {
+  function ListPostCtrl($scope, $location, ForumServices, allPosts, subscribers, followingPosts) {
     $scope.subscribers = subscribers.data;
     $scope.stickyPosts = allPosts.data.sticky_posts;
     $scope.allPosts = allPosts.data.posts;
+    $scope.followingPosts = followingPosts.data.posts;
     $scope.postSearch = {
       keywords: ''
     };
@@ -206,7 +207,7 @@
   }
 
   angular.module('forum.controllers', ['forum.services'])
-    .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', ListPostCtrl])
+    .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', 'followingPosts', ListPostCtrl])
     .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'allPosts', 'subscribers', CreatePostCtrl])
     .controller('PostDetailCtrl', ['$scope', 'ForumServices', 'Post', 'allPosts', 'subscribers', PostDetailCtrl]);
 }(window.angular));

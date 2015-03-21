@@ -93,10 +93,9 @@
     // data = {keywords: ''}
     Services.searchPosts = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
-      var endpoint = API + '/posts/search_all_posts?keywords=' + decodeURIComponent(data.keywords) +
-        '&auth_token=' + authToken;
+      data.auth_token = authToken;
 
-      return $http.get(endpoint);
+      return $http.post(API + '/posts/search_all_post' ,data);
     };
 
     return Services;
