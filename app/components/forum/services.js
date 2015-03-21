@@ -40,7 +40,7 @@
 
       data.auth_token = authToken;
       data.platform = 'web';
-      return $http.post(API + '/posts/' + data._id + '/vote', data);
+      return $http.post(API + '/posts/' + data.id + '/vote', data);
     };
 
     Services.listComment = function (data) {

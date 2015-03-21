@@ -6,6 +6,20 @@
     $routeProvider.when('/forum/post/create', {
       templateUrl: 'forum/_create-post.html',
       controller: 'CreatePostCtrl',
+      resolve: {
+        allPosts: function ($route, ForumServices) {
+          if ($route.current.params.search) {
+            var text = $route.current.params.search;
+            return ForumServices.searchPosts({
+              keywords: text
+            });
+          }
+          return ForumServices.listPosts($route.current.params);
+        },
+        subscribers: function (ForumServices) {
+          return ForumServices.getListSubscription();
+        }
+      }
     });
 
     $routeProvider.when('/forum/post/:id', {
@@ -17,6 +31,18 @@
             id: $route.current.params.id
           });
         },
+        allPosts: function ($route, ForumServices) {
+          if ($route.current.params.search) {
+            var text = $route.current.params.search;
+            return ForumServices.searchPosts({
+              keywords: text
+            });
+          }
+          return ForumServices.listPosts($route.current.params);
+        },
+        subscribers: function (ForumServices) {
+          return ForumServices.getListSubscription();
+        }
       }
     });
 
@@ -45,6 +71,6 @@
     });
   }
 
-  angular.module('forum', ['forum.services', 'forum.controllers'])
+  angular.module('forum', ['forum.services', 'forum.controllers', 'forum.directives'])
     .config(['$routeProvider', ForumConfig])
 }(window.angular));
