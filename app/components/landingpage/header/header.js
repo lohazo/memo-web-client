@@ -131,6 +131,7 @@
           })
           .then(function () {
             delete $scope.user.referral_code;
+            $scope.user.sign_up_with_ref_code = true;
             AuthService.register($scope.user)
               .then(closeModal, displayMessageOnFail)
               .then(function () {
@@ -141,6 +142,7 @@
           }, displayMessageOnFail);
       } else {
         delete $scope.user.referral_code;
+        $scope.user.sign_up_with_ref_code = false;
         AuthService.register($scope.user)
           .then(closeModal, displayMessageOnFail);
       }

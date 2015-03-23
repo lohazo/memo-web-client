@@ -1,0 +1,18 @@
+.share-code-modal {
+  @include grid-row;
+  border: none;
+  outline: none;
+  max-width: 740px;
+  min-height: 480px !important;
+  .share-code-modal-inner {
+    @include grid-column($columns: 16, $collapse: true);
+    padding-top: 20px;
+    .share-code-image-wrapper {
+      @include grid-row;
+    }
+    .share-code-content {
+      @include grid-row;
+      margin-top: 20px;
+    }
+  }
+}
