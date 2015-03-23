@@ -1,0 +1,20 @@
+<div class="share-code-modal-inner">
+  <div class="share-code-image-wrapper">
+    <img class="share-code-image" ng-src="assets/img/popup-share-code.png">
+  </div>
+  <div class="share-code-content collapse">
+    <div class="large-8 columns text-right" style="padding-top: 5px;">Nhập ngay để nhận 3 MemoCoin nào!</div>
+    <div class="large-6 columns pull-2">
+      <div class="row collapse postfix-radius">
+        <div class="large-13 columns">
+          <input type="text" ng-model="data.referral_code" placeholder="" ng-keydown="keydownHandler(event=$event);"/>
+          <p class="share-code-error-message" ng-if="data.error && data.error.length > 0" ng-bind="data.error"></p>
+        </div>
+        <div class="large-3 columns">
+          <a title="" class="radius button postfix" ng-click='submitCode()'><img src="assets/img/referral/arrow.png" alt=""></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="close-reveal-modal" aria-label="Close" ng-click="close();">&#215;</a>
+</div>

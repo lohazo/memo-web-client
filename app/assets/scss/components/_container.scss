@@ -172,3 +172,25 @@ a.reverse.button {
     }
   }
 }
+
+.band {
+  position: absolute;
+  &.gold {
+    background: $gold;
+    color: $white;
+  }
+  &.arrow-right {
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 3px;
+      right: -9px;
+      width: 17px;
+      height: 16px;
+      background: $white;
+      -moz-transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
+  }
+}

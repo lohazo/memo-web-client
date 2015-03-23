@@ -1,19 +1,19 @@
 <section class="verify-box">
   <div class="verify-box-inner">
     <div class="verify-box-code" ng-show="isReferral == ''">
-      <p>Nhập code từ bạn bè:</p>
+      <span class="arrow-right band gold" style="top: 15px;left: 0;padding: 0 15px;">Nhập code từ bạn bè:</span>
       <div class="row collapse">
         <div class="large-13 columns">
-          <input type="text" name="" value="" placeholder="" ng-model='refCode' />          
+          <input type="text" name="" value="" placeholder="" ng-model='refCode' />
         </div>
         <div class="large-3 columns">
-          <a title="" class="verify-button postfix" ng-click='submitCode()'><img src="assets/img/referral/arrow.png" alt=""></a>    
+          <a title="" class="verify-button postfix" ng-click='submitCode()'><img src="assets/img/referral/arrow.png" alt=""></a>
         </div>
       </div>
-      <p class="verify-box-error" style="color: #810c15;font-size: 12px">{{error}}</p>
+      <p class="verify-box-error" style="color: #810c15;font-size: 12px; margin-bottom: 10px;">{{error}}</p>
     </div>
-    <div class="verify-box-code has-code" ng-show="isReferral != ''">
-      <p>Bạn đã nhập code của <span class="">{{userName}} </span>!</p>
+    <div class="row">
+      <div class="large-16"><span>Nhận 3 MemoCoin khi nhập code chia sẻ từ bạn bè</span></div>
     </div>
   </div>
 </section>
