@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function HttpInterceptor($rootScope, $q, $location, $window, $localStorage) {
+  function HttpInterceptor($rootScope, $q, $location, $localStorage) {
     var canceller = $q.defer();
     return {
       // optional method
@@ -36,12 +36,7 @@
       'responseError': function (rejection) {
         // do something on error
         if (rejection.status === 401) {
-          $rootScope.$broadcast('event:auth-logoutConfirmed', {
-            Unauthorized: true
-          });
-          alert(
-            "Bạn hoặc ai đó đã đăng nhập vào tài khoản này tại một thiết bị khác. Vui lòng đăng nhập lại!"
-          );
+          $location.url('/?error=401');
         }
         return $q.reject(rejection);
       }
@@ -212,7 +207,7 @@
     .constant('angularMomentConfig', {
       preprocess: 'unix'
     })
-    .factory('HttpInterceptor', ['$rootScope', '$q', '$location', '$window', '$localStorage',
+    .factory('HttpInterceptor', ['$rootScope', '$q', '$location', '$localStorage',
       HttpInterceptor
     ])
     .factory('AppSetting', ['$localStorage', 'AppServices', 'Words', AppSetting])

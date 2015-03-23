@@ -1,9 +1,25 @@
 (function (angular) {
   'use strict';
 
-  function PlazaCtrl($scope, $sce, $location, Plaza, Profile, $modal) {
+  function PlazaCtrl($scope, $sce, $location, Plaza, Profile, ReferralService, $modal, res1, res2, res3) {
     $scope.profile = Profile.user;
     $scope.profileDetail = Profile.detail;
+    $scope.plaza = Plaza.data;
+    $scope.leaderboardData = [res1.data.leaderboard_by_week, res2.data.leaderboard_by_month,
+      res3.data.leaderboard_all_time
+    ];
+
+    $scope.FBShare = {
+      shareType: 'referral-code'
+    };
+
+    ReferralService.getStatus().then(function (res) {
+      $scope.referral = res.data;
+      $scope.referral.record.code = res.data.record.code || 0;
+      $scope.referral.record.invited_count = res.data.record.invited_count || 0;
+      $scope.FBShare.shareData = res.data.referral_code;
+    });
+
     $scope.expChart = {
       labels: $scope.profileDetail.exp_chart.days,
       datasets: [{
@@ -52,8 +68,6 @@
         if ($scope[msg] && $scope[msg] instanceof Function) $scope[msg](id);
       });
     }
-
-    $scope.plaza = Plaza.data;
 
     $scope.powerUpSectionFilter = function (item) {
       return (["power-ups", "practice"].indexOf(item.section) >= 0);
@@ -140,7 +154,9 @@
   }
 
   angular.module('plaza.controllers', [])
-    .controller('PlazaCtrl', ['$scope', '$sce', '$location', 'Plaza', 'Profile', '$modal', PlazaCtrl])
+    .controller('PlazaCtrl', ['$scope', '$sce', '$location', 'Plaza', 'Profile', 'ReferralService', '$modal', 'res1',
+      'res2', 'res3', PlazaCtrl
+    ])
     .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
       ProgressQuizConfirmModalCtrl
     ])
