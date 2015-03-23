@@ -237,11 +237,6 @@
 
     }
 
-    $scope.listReply = function (comment) {
-      ForumServices.listReply(comment);
-    };
-   
-    // $scope.listReply();
   }
 
   angular.module('forum.controllers', ['forum.services'])
