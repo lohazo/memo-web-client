@@ -31,7 +31,7 @@
         trial: false
       };
       $localStorage.auth = $scope.auth;
-      $location.path('/');
+      $location.url('/');
     }
 
     $scope.$on('event:auth-loginConfirmed', loginConfirmed);

@@ -45,7 +45,9 @@ angular.module('home.directives', [])
   .directive('leaderboard', function () {
     return {
       restrict: 'EA',
-      scope: true,
+      scope: {
+        leaderboardData: "="
+      },
       controller: 'LeaderboardCtrl',
       templateUrl: 'leaderboard/_index.html'
     };

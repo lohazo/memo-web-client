@@ -4,7 +4,9 @@
   function LeaderboardHomeDirective() {
     return {
       restrict: 'EA',
-      scope: true,
+      scope: {
+        leaderboardData: "="
+      },
       controller: 'LeaderboardHomeCtrl',
       templateUrl: 'leaderboard/_leaderboard.html'
     };
