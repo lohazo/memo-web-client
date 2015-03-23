@@ -6,7 +6,7 @@
       </div>
       <div class="large-10 columns username">
         <h4>{{profile.username}}</h4>
-        <div class="verify-box-code has-code" ng-if="profile.referral_user">
+        <div class="verify-box-code has-code" ng-if="profile.referral_user && profile.referral_user.length > 0">
           <span>Bạn đã nhập code của {{profile.referral_user}}!</span>
         </div>
       </div>
@@ -45,35 +45,33 @@
         </div>
         <div class="row">
           <div class="large-16 columns">
-            <ul style="
-              margin-bottom: 0px;
-              "><p style="
-                margin-bottom: 0;
-                margin-left: -20px;
-                ">Lợi ích:</p> <li>Cùng luyện tiếng Anh</li>
-                <li>Cùng đua top BXH</li>
-                <li>Cùng nhận 3 MemoCoin</li>
-              </ul>
-            </div>
+            <ul style="margin-bottom: 0px;">
+              <p style="margin-bottom: 0;margin-left: -20px;">Lợi ích:</p>
+              <li>Cùng luyện tiếng Anh</li>
+              <li>Cùng đua top BXH</li>
+              <li>Cùng nhận 3 MemoCoin</li>
+            </ul>
           </div>
+        </div>
           <!-- <div class="row text-center">
             <a ng-href="/referral" click-event-track tracking-data='{"campaign":"REFERRAL","code_channel":"PROFILE_E8","screen":""}'><b><u>Xem thông tin học bổng</u></b></a>
           </div> -->
-        </div>
       </div>
       <hr />
-      <div class="row">
-        <div class="large-4 columns streak">
-          <i tooltip="Combo" class="icon"></i><span class="text">{{profileDetail.combo_days}}</span>
-        </div>
-        <div class="large-6 columns exp">
+      <ul class="small-block-grid-3">
+        <li class="streak">
+          <i tooltip="Combo" class="icon"></i>
+          <span class="text">{{profileDetail.combo_days}}</span>
+        </li>
+        <li class="exp">
           <i tooltip="Kinh nghiệm" class="icon"></i>
           <span class="text">{{profileDetail.total_exp}}</span>
-        </div>
-        <div class="large-6 columns memos">
-          <i tooltip="MemoCoin" class="icon"></i><span class="text">{{profileDetail.virtual_money}}</span>
-        </div>
-      </div>
+        </li>
+        <li class="memos">
+          <i tooltip="MemoCoin" class="icon"></i>
+          <span class="text">{{profileDetail.virtual_money}}</span>
+        </li>
+      </ul>
       <div class="row">
         <div class="large-16 columns memo-progress">
           <span class="current-level">{{profileDetail.level}}</span>

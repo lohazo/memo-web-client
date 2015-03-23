@@ -110,7 +110,7 @@
 
   function RefCodeModalCtrl($scope, $modal, ReferralService) {
     $scope.profile = {};
-    $scope.open = function () {
+    $scope.openRefModal = function () {
       var modalInstance = $modal.open({
         templateUrl: 'home/_share-code-popup.html',
         controller: 'RefCodeModalInstanceCtrl',
@@ -121,12 +121,12 @@
         if ($scope.displayTour) modalInstance.close();
       });
 
-      // ReferralService.closePopup();
+      ReferralService.closePopup();
     };
 
     $scope.$watch('profile', function() {
-      if (!$scope.profile.ref_code_popup_display) {
-        $scope.open();
+      if ($scope.profile.ref_code_popup_display) {
+        $scope.openRefModal();
       }
     });
   }
