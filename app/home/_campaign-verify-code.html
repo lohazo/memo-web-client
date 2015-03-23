@@ -4,7 +4,7 @@
       <span class="arrow-right band gold" style="top: 15px;left: 0;padding: 0 15px;">Nhập code từ bạn bè:</span>
       <div class="row collapse">
         <div class="large-13 columns">
-          <input type="text" name="" value="" placeholder="" ng-model='refCode' />
+          <input type="text" name="" value="" placeholder="" ng-model='refCode' ng-keydown="keydownHandler(event=$event);"/>
         </div>
         <div class="large-3 columns">
           <a title="" class="verify-button postfix" ng-click='submitCode()'><img src="assets/img/referral/arrow.png" alt=""></a>

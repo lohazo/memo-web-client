@@ -73,6 +73,35 @@
       .then(AppSetting.getWords);
   }
 
+  function CampaignVerifyCodeCtrl($scope, $route, ReferralService, Profile) {
+    $scope.submitCode = function () {
+      ReferralService.submitCode({
+        referral_code: $scope.refCode
+      }).then(function (res) {
+        $scope.error = '';
+        $scope.isReferral = res.data.code || '';
+        $scope.userName = res.data.referral_user || '';
+        $route.reload();
+      }, function (res) {
+        $scope.error = res.data.message;
+      });
+    };
+
+    $scope.keydownHandler = function (e) {
+      console.log('hit');
+      if (e.keyCode === 13) {
+        $scope.submitCode();
+      }
+    };
+
+    $scope.$watch('profileDetail', function () {
+      if ($scope.profileDetail) {
+        $scope.isReferral = Profile.detail.referral_user || '';
+        $scope.userName = Profile.detail.referral_user;
+      }
+    });
+  }
+
   function PlacementTestModalCtrl($scope, $modal) {
 
     $scope.profile = {};
@@ -121,7 +150,7 @@
         if ($scope.displayTour) modalInstance.close();
       });
 
-      // ReferralService.closePopup();
+      ReferralService.closePopup();
     };
 
     $scope.$watch('profile', function() {
@@ -165,6 +194,9 @@
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder',
       'AppSetting', 'MemoTracking', 'Message', 'ReferralService', HomeMainCtrl
+    ])
+    .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
+      CampaignVerifyCodeCtrl
     ])
     .controller('PlacementTestModalCtrl', ['$scope', '$modal', 'ReferralService', PlacementTestModalCtrl])
     .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance',
