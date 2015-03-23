@@ -106,7 +106,6 @@
     $scope.listComment = function () {
       ForumServices.listComment($scope.data).success(function (data) {
         $scope.post.comments = data.comments;
-        console.log(data.comments)
       });
     };
 

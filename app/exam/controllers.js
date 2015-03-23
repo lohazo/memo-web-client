@@ -2,7 +2,7 @@
   'use strict';
 
   function ExamCtrl($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker,
-    Skill) {
+    Skill, $modal, $localStorage, ForumServices) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
     $scope.shouldPlaySlow = false;
@@ -242,11 +242,50 @@
     };
 
     $scope.start();
+
+    $scope.discussion = function () {
+      $scope.data = {};
+      $scope.data.title = $scope.question.question;
+      $scope.data.content = $scope.question.answer;
+      $scope.data.question_log_id = $scope.question.question_log_id;
+      $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
+      
+      ForumServices.createPost($scope.data).success(function (data) {
+        $scope.data.id = data._id;
+        ForumServices.listComment($scope.data);
+      });
+
+      var modalInstance = $modal.open({
+        templateUrl: 'forum/_discussion.html',
+        windowClass: 'discussion-popup-modal',
+        controller: 'DiscussionModalCtrl'
+      });
+    };
+
+  }
+
+  function DiscussionModalCtrl($scope, Exam, Question, Sound, Skill, $localStorage, ForumServices) {
+    // $scope.questions = Exam.questions();
+    // $scope.question = Exam.question();
+    // console.log($scope.questions)
+    // console.log($scope.question)
+    // console.log($localStorage.auth.user)
+
+    // $scope.discussion = {
+    //   content: '',
+    // }
+
+    
+
+    // $scope.sendDiscussion = function () {
+      
+    // }
   }
 
   angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
       '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
-      'MemoTracking', 'Skill', ExamCtrl
-    ]);
+      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', ExamCtrl
+    ])
+    .controller('DiscussionModalCtrl', ['$scope', 'Exam', 'Question', 'Sound', 'Skill', '$localStorage', 'ForumServices', DiscussionModalCtrl]);
 }(window.angular));
