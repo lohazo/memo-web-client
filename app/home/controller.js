@@ -121,7 +121,7 @@
         if ($scope.displayTour) modalInstance.close();
       });
 
-      ReferralService.closePopup();
+      // ReferralService.closePopup();
     };
 
     $scope.$watch('profile', function() {
@@ -131,9 +131,10 @@
     });
   }
 
-  function RefCodeModalInstanceCtrl($scope, $modalInstance, ReferralService) {
+  function RefCodeModalInstanceCtrl($scope, $modalInstance, $route, ReferralService) {
     $scope.data = {
-      referral_code: ''
+      referral_code: '',
+      error: ''
     };
     $scope.close = function () {
       $modalInstance.close();
@@ -146,6 +147,9 @@
       if ($scope.data.referral_code && $scope.data.referral_code.length > 0) {
         ReferralService.submitCode($scope.data).then(function() {
           $scope.close();
+          $route.reload();
+        }, function(response) {
+          $scope.data.error = response.data.message;
         });
       }
     };
@@ -167,6 +171,6 @@
       PlacementTestModalInstanceCtrl
     ])
     .controller('RefCodeModalCtrl', ['$scope', '$modal', 'ReferralService', RefCodeModalCtrl])
-    .controller('RefCodeModalInstanceCtrl', ['$scope', '$modalInstance', 'ReferralService', RefCodeModalInstanceCtrl]);
+    .controller('RefCodeModalInstanceCtrl', ['$scope', '$modalInstance', '$route', 'ReferralService', RefCodeModalInstanceCtrl]);
 
 }(window.angular));

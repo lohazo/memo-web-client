@@ -8,6 +8,7 @@
       <div class="row collapse postfix-radius">
         <div class="large-13 columns">
           <input type="text" ng-model="data.referral_code" placeholder="" ng-keydown="keydownHandler(event=$event);"/>
+          <p class="share-code-error-message" ng-if="data.error && data.error.length > 0" ng-bind="data.error"></p>
         </div>
         <div class="large-3 columns">
           <a title="" class="radius button postfix" ng-click='submitCode()'><img src="assets/img/referral/arrow.png" alt=""></a>

@@ -14,5 +14,11 @@
       @include grid-row;
       margin-top: 20px;
     }
+    .share-code-error-message {
+      font-style: italic;
+      color: $warning-font-color;
+      font-size: .9rem;
+      margin-bottom: 0;
+    }
   }
 }

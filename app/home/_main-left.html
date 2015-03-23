@@ -6,8 +6,8 @@
       </div>
       <div class="large-10 columns username">
         <h4>{{profile.username}}</h4>
-        <div class="verify-box-code has-code" ng-if="profile.referral_user && profile.referral_user.length > 0">
-          <span>Bạn đã nhập code của {{profile.referral_user}}!</span>
+        <div class="row" ng-if="profile.referral_user && profile.referral_user.length > 0">
+          <span style="font-size: 12px;">Bạn đã nhập code của <a ng-href="/profile/{{profile.referral_user_id}}">{{profile.referral_user}}</a>!</span>
         </div>
       </div>
     </div>
@@ -40,7 +40,6 @@
             <a title="" class="radius button share ng-isolate-scope" tracking-data="{&quot;memoEnabled&quot;:&quot;true&quot;,&quot;eventName&quot;:&quot;viral campaign share profile&quot;}" facebook-share-button="" share-type="referral-code" share-data="a8024" style="
               margin-bottom: 10px;
             "></a>
-            <!-- <referral-fb-share-tooltip viral-level="referral.viral_level" show-on='["v4", "v5"]'></referral-fb-share-tooltip> -->
           </div>
         </div>
         <div class="row">
