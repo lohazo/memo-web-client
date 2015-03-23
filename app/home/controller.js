@@ -3,9 +3,10 @@
 
   function HomeCtrl($scope) {}
 
-  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting,
-    MemoTracker,
-    Message, ReferralService) {
+  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, MemoTracker, Message,
+    ReferralService, Leaderboard) {
+    $scope.leaderboardData = [];
+
     function getProfile() {
       $scope.profile = Profile.user;
     }
@@ -60,6 +61,25 @@
       });
     }
 
+    function getLeaderboardData() {
+      // Get leaderboard by week
+      Leaderboard.leaderboard({
+        type: 'week'
+      }).then(function (res1) {
+        Leaderboard.leaderboard({
+          type: 'month'
+        }).then(function (res2) {
+          Leaderboard.leaderboard({
+            type: 'all_time'
+          }).then(function (res3) {
+            $scope.leaderboardData = [res1.data.leaderboard_by_week, res2.data.leaderboard_by_month,
+              res3.data.leaderboard_all_time
+            ];
+          });
+        });
+      });
+    }
+
     // Chain calls
     Profile.getProfile()
       .then(getProfile)
@@ -70,6 +90,7 @@
       .then(TreeBuilder.getIconSets)
       .then(buildTree)
       .then(takeATour)
+      .then(getLeaderboardData)
       .then(AppSetting.getWords);
   }
 
@@ -88,7 +109,6 @@
     };
 
     $scope.keydownHandler = function (e) {
-      console.log('hit');
       if (e.keyCode === 13) {
         $scope.submitCode();
       }
@@ -153,7 +173,7 @@
       ReferralService.closePopup();
     };
 
-    $scope.$watch('profile', function() {
+    $scope.$watch('profile', function () {
       if ($scope.profile.ref_code_popup_display) {
         $scope.openRefModal();
       }
@@ -174,10 +194,10 @@
 
     $scope.submitCode = function () {
       if ($scope.data.referral_code && $scope.data.referral_code.length > 0) {
-        ReferralService.submitCode($scope.data).then(function() {
+        ReferralService.submitCode($scope.data).then(function () {
           $scope.close();
           $route.reload();
-        }, function(response) {
+        }, function (response) {
           $scope.data.error = response.data.message;
         });
       }
@@ -193,7 +213,7 @@
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder',
-      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', HomeMainCtrl
+      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', HomeMainCtrl
     ])
     .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
       CampaignVerifyCodeCtrl
@@ -203,6 +223,8 @@
       PlacementTestModalInstanceCtrl
     ])
     .controller('RefCodeModalCtrl', ['$scope', '$modal', 'ReferralService', RefCodeModalCtrl])
-    .controller('RefCodeModalInstanceCtrl', ['$scope', '$modalInstance', '$route', 'ReferralService', RefCodeModalInstanceCtrl]);
+    .controller('RefCodeModalInstanceCtrl', ['$scope', '$modalInstance', '$route', 'ReferralService',
+      RefCodeModalInstanceCtrl
+    ]);
 
 }(window.angular));

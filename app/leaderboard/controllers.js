@@ -68,35 +68,23 @@
     $scope.showTheLeaderboard();
   }
 
-  function LeaderboardHomeCtrl($scope, Leaderboard) {
-    $scope.tabs = [{
-      'title': "Tuần này",
-      'active': true
-    }, {
-      'title': "Tháng này",
-      'active': false
-    }, {
-      'title': "Tổng cộng",
-      'active': false
-    }];
-
-    // Get leaderboard by week
-    Leaderboard.leaderboard({
-      type: 'week'
-    }).then(function (response) {
-      $scope.tabs[0].users = response.data.leaderboard_by_week;
-    });
-
-    Leaderboard.leaderboard({
-      type: 'month'
-    }).then(function (response) {
-      $scope.tabs[1].users = response.data.leaderboard_by_month;
-    });
-
-    Leaderboard.leaderboard({
-      type: 'all_time'
-    }).then(function (response) {
-      $scope.tabs[2].users = response.data.leaderboard_all_time;
+  function LeaderboardHomeCtrl($scope) {
+    $scope.$watch('leaderboardData', function () {
+      if ($scope.leaderboardData.length > 0) {
+        $scope.tabs = [{
+          'title': "Tuần này",
+          'users': $scope.leaderboardData[0],
+          'active': true
+        }, {
+          'title': "Tháng này",
+          'users': $scope.leaderboardData[1],
+          'active': false
+        }, {
+          'title': "Tổng cộng",
+          'users': $scope.leaderboardData[2],
+          'active': false
+        }];
+      }
     });
   }
 
