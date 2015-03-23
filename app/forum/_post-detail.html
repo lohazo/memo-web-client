@@ -4,7 +4,8 @@
       <section class="post-info">
         <div class="post-info-header">
           <div class="left">
-            <h4 class="title">Các chủ đề</h4>
+            <!-- <h4 class="title">Các chủ đề</h4> -->
+            <a class="title" href="/forum">&lsaquo; Danh sách chủ đề </a>
           </div>
           <div class="right">
             <a class="small radius button follow-button" ng-if="post.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
@@ -38,7 +39,7 @@
                 <textarea ng-model="data.content" class="comment-editor-textarea" placeholder="Gửi bình luận của bạn"></textarea>
               </div>
               <div class="comment-toolbar">
-                <a class="small radius button send-comment-button" ng-click="creatComment()">Gửi</a>
+                <a class="small radius button send-comment-button" ng-click="createComment()">Gửi</a>
                 <!-- <a class="small radius button cancel-button">Hủy</a> -->
               </div>
             </div>
@@ -59,7 +60,7 @@
                     <a class="comment-name-text" ng-bind="comment.user.name"></a>
                   </div>
                   <div class="comment-content-mid">
-                    <div class="comment-content-text" ng-bind="comment.content"></div>
+                    <div class="comment-content-text" ng-bind="comment.content">{{content}}</div>
                   </div>
                   <div class="comment-content-toolbar">
                     <div class="total-vote left" ng-bind="comment.up_vote_count"></div>
