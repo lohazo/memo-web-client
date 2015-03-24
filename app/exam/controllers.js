@@ -254,6 +254,9 @@
 
   function DiscussionExamModalCtrl($scope, $location, Exam, $localStorage, ForumServices) {
     $scope.question = Exam.question();
+    $scope.requestData = {
+      content: ''
+    }
 
     $scope.data = {};
     $scope.data.question_log_id = $scope.question.question_log_id;
@@ -297,8 +300,9 @@
 
 
     $scope.createComment = function () {
-      $scope.data.id = $scope.getPost._id
-      ForumServices.creatComment($scope.data).success(function (data) {
+      $scope.requestData.id = $scope.getPost._id;
+      ForumServices.creatComment($scope.requestData).success(function (data) {
+        $scope.listComment.comments.push(data);
       });
     };
 

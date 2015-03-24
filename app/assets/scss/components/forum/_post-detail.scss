@@ -160,86 +160,100 @@
       @include grid-row;
       .comments {
         .comment {
-          border-top: solid 1px #ccc;
           list-style: none;
-          .comment-avatar {
-            border-radius: 50%;
-            @include grid-column($columns: 2);
-          }
-          .comment-content {
-            @include grid-column($columns: 14);
-            padding: 20px 0 0 0;
-            .comment-content-top {
-              text-align: left;
-              .comment-name-text {
-                color: $primary-color;
-                font-size: 16px;
-              }
-            }
-            .comment-content-mid {
-              .comment-content-text {
-                font-size: 16px;
-              }
-            }
-            .comment-content-toolbar {
-              @include grid-column($columns: 16);
-              padding-right: 10px;
-              .total-vote {
-                padding-right: 20px;
-                font-size: 16px;
-              }
-              .vote-up {
-                margin-right: 15px;
-                background-size: contain;
-                width: 25px;
-                height: 25px;
-                &.normal {
-                  background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+          .parent-comments {
+            .parent-comment {
+              .parent-comment-inner {
+                border-top: solid 1px #ccc;
+                .comment-avatar {
+                  border-radius: 50%;
+                  @include grid-column($columns: 2);
                 }
-                &.active {
-                  background: url("assets/img/vote-icon/vote-up-icon-2.png") no-repeat;
+                .comment-content {
+                  @include grid-column($columns: 14);
+                  padding: 20px 0 0 0;
+                  .comment-content-top {
+                    text-align: left;
+                    .comment-name-text {
+                      color: $primary-color;
+                      font-size: 16px;
+                    }
+                  }
                 }
-              }
-              .vote-down {
-                margin: 7px 15px 0 0;
-                background-size: contain;
-                width: 25px;
-                height: 25px;
-                &.normal {
-                  background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
+                .comment-content-mid {
+                  .comment-content-text {
+                    font-size: 16px;
+                  }
                 }
-                &.active {
-                  background: url("assets/img/vote-icon/vote-down-icon-2.png") no-repeat;
-                }
-              }
-              .reply {
-                padding-right: 10px;
-              }
-              .comment-version {
-                width: 100%;
-                @include grid-row;
-                padding-right: 20px;
-                .avatar {
-                  width: 65px;
-                  height: 65px;
-                }
-                .comment-editor {
-                  padding-bottom: 20px;
-                  .comment-editor-textarea {
+                .comment-content-toolbar {
+                  @include grid-column($columns: 16);
+                  padding-right: 10px;
+                  .total-vote {
+                    padding-right: 20px;
+                    font-size: 16px;
+                  } 
+                  .vote-up {
+                    margin-right: 15px;
+                    background-size: contain;
+                    width: 25px;
+                    height: 25px;
+                    &.normal {
+                      background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+                    }
+                    &.active {
+                      background: url("assets/img/vote-icon/vote-up-icon-2.png") no-repeat;
+                    }
+                  }
+                  .vote-down {
+                    margin: 7px 15px 0 0;
+                    background-size: contain;
+                    width: 25px;
+                    height: 25px;
+                    &.normal {
+                      background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
+                    }
+                    &.active {
+                      background: url("assets/img/vote-icon/vote-down-icon-2.png") no-repeat;
+                    }
+                  }
+                  .reply {
+                    padding-right: 10px;
+                  }
+                  .comment-version {
+                    width: 100%;
+                    @include grid-row;
+                    padding-right: 20px;
+                    .avatar {
+                      width: 65px;
+                      height: 65px;
+                    }
+                    .comment-editor {
+                      padding-bottom: 20px;
+                      .comment-editor-textarea {
 
-                 }
-                  .comment-editor-toolbar {
-                    .send-comment-button {
-                      color: $white;
-                      font-size: 1rem;
-                      font-weight: bold;
-                      background-color: $success-color;
-                      &:hover {
-                        background-color: scale-color($success-color, $lightness: -20%);
+                      }
+                      .comment-editor-toolbar {
+                        .send-comment-button {
+                          color: $white;
+                          font-size: 1rem;
+                          font-weight: bold;
+                          background-color: $success-color;
+                          &:hover {
+                            background-color: scale-color($success-color, $lightness: -20%);
+                          }
+                        }
                       }
                     }
-                 }
+                  }
                 }
+              }  
+            }
+          }
+          .child-comments {
+            list-style: none;
+            .child-comment {
+              .chil-comment-inner {
+                margin-left: 20px;
               }
             }
           }

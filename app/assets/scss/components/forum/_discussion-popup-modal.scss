@@ -159,17 +159,19 @@
 		      }
 		      .comment-content {
 		      	font-size: 16px;
-		      	color: $iron;
 		      }
 		      .comment-toolbar {
 		        @include grid-row;
+		        @include grid-column($columns: 16);
 		        .comment-vote-count {
 		          @include grid-column($columns: 2);
 		        	width: 45px;
               height: 25px;
 		        }
 		      	.comment-vote-up {
-		      	 @include grid-column($columns: 2);
+		      	  @include grid-column($columns: 2);
+		      	  width: 25px;
+              height: 25px;
 	            &.normal {
 	              background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
 	            }
@@ -181,6 +183,8 @@
 		      	  @include grid-column($columns: 2);
 		      		margin: 7px 15px 0 0;
 	            background-size: contain;
+	            width: 25px;
+              height: 25px;
 	            &.normal {
 	              background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
 	            }

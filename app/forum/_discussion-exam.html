@@ -1,4 +1,4 @@
-<section class="discussion-inner" ng-controller="DiscussionExamModalCtrl">
+<section class="discussion-inner">
 	<section class="discussion-header">
 	  <div class="right">
 	    <a class="small radius button follow-button" ng-if="getPost.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
@@ -22,7 +22,7 @@
 	  		</div>
 	  		<div class="discussion-editor-right">
 	  		  <div class="discussion-editor-text-area">
-	  			  <textarea class="editor-text-area" ng-model="data.content" placeholder="Thảo luận câu này với người học khác"></textarea>
+	  			  <textarea class="editor-text-area" ng-model="requestData.content" placeholder="Thảo luận câu này với người học khác"></textarea>
 	  			</div>
 	  			<div class="discussion-editor-description">
 	  			  <div class="editor-description-left">
