@@ -1,13 +1,13 @@
 .discussion-popup-modal { 
   padding: 30px;
-  height: 1210px;
   outline: none;
-  max-width: 680px !important;
+  width: 680px !important;
+  height: 1210px;
   border: 0;
-  position: relative;
+  position: absolute;
   top: 110px !important;
   .discussion-inner {
-    position: relative !important;
+    position: absolute !important;
     .discussion-header {
 	    padding-right: 30px;
 	    @include grid-row;
@@ -21,11 +21,14 @@
 	      padding: 12px;
 	      font-size: 16px;
 	      text-align: center;
-	      background-color: $success-color;
 	      margin-bottom: 10px;
-	      &:hover {
-	        background-color: scale-color($success-color, $lightness: -20%);
-	      }
+	      border: 2px solid $gold;
+          color: $primary-color;
+          font-weight: bold;
+          background-color: $white;
+          &:hover {
+          background-color: $gold;
+          }
 	    }
 	  }
 	  .discussion-content {

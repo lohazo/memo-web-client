@@ -17,7 +17,7 @@
 	  	</section>
 	  	<section class="discussion-editor">
 	  		<div class="discussion-editor-left">
-	  			<img ng-src="{{discussion.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+	  			<img ng-src="{{question.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
 	  		</div>
 	  		<div class="discussion-editor-right">
 	  		  <div class="discussion-editor-text-area">
@@ -36,24 +36,24 @@
 	  		</div>
 	  	</section>
 	  	<section class="discussion-comment-count">
-	  		<h4 class="">6 bình luận</h4>
+	  		<h4 class="">6 bình luận {{}}</h4>
 	  	</section>
 	  </section>
 	</section>
-	<section class="discussion-comment">
+	<section class="discussion-comment" ng-repeat="comment in data.comments">
 	<ul class="comments">
 		<li class="comment">
 			<div class="discussion-comment-left">
 				<img ng-src="{{'assets/img/profile-avatar-big.png'}}" />
 			</div>
 			<div class="discussion-comment-right">
-				<div class="comment-title">ljnkshady</div>
+				<div class="comment-title"></div>
 				<div class="comment-content">"tôi nói chuyện" chương trình báo sai</div>
 				<div class="comment-toolbar">
 					<span class="comment-vote-count">10</span>
-					<a class="comment-vote-up active">asdfsadf</a>
+					<a class="comment-vote-up active"></a>
 					<span class="comment-vote-count">20</span>
-					<a class="comment-vote-down active">aasd</a>
+					<a class="comment-vote-down active"></a>
 					<a class="comment-reply">Trả lời</a>
 				</div>
 			</div>
