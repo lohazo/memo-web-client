@@ -106,7 +106,6 @@
     $scope.listComment = function () {
       ForumServices.listComment($scope.data).success(function (data) {
         $scope.post.comments = data.comments;
-        console.log(data.comments)
       });
     };
 
@@ -205,38 +204,6 @@
         vote: comment.is_vote_down
       });
     };
-
-    $scope.is_replying = false;
-
-    $scope.reply = function () {
-      $scope.is_replying = !$scope.is_replying;
-    }
-    $scope.createReply = function(comment, post) {
-      $scope.is_replying = !$scope.is_replying;
-      ForumServices.createReply({
-        post_id: post._id,
-        parent_comment_id: comment._id,
-        content: comment.replycontent
-      }).success(function (data) {      
-        ForumServices.listReply(data).success(function (data) {
-          // $scope.reply = data;
-          var dataReply = {};
-          dataReply = {
-            "comments": [{
-              "name": "ljnkshady",
-              "content": "Toi noi chuyen ---> I talk",
-              "vote_up_count": 1,
-              "vote_up_down": 2
-            }],
-            "next_page": 0,
-            "total_page": 0
-          }
-          $scope.replies = dataReply;
-        });
-      })
-
-    }
-
   }
 
   angular.module('forum.controllers', ['forum.services'])

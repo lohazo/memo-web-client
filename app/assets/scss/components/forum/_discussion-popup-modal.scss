@@ -1,0 +1,200 @@
+.discussion-popup-modal { 
+  padding: 30px;
+  outline: none;
+  width: 680px !important;
+  height: 1210px;
+  border: 0;
+  position: absolute;
+  top: 110px !important;
+  .discussion-inner {
+    position: absolute !important;
+    .discussion-header {
+	    padding-right: 30px;
+	    @include grid-row;
+	    .right {
+	      margin-right: 10px;
+	    }
+	    .left {
+	      margin-left: 10px;
+	    }
+	    .follow-button {
+	      padding: 12px;
+	      font-size: 16px;
+	      text-align: center;
+	      margin-bottom: 10px;
+	      border: 2px solid $gold;
+          color: $primary-color;
+          font-weight: bold;
+          background-color: $white;
+          &:hover {
+          background-color: $gold;
+          }
+	    }
+	  }
+	  .discussion-content {
+	    @include grid-row;
+	    padding: 30px;
+		  .right {
+		    margin-right: 10px;
+		  }
+		  .left {
+		    margin-left: 10px;
+		  }
+		  .discussion-content-inner {
+		    @include grid-row;
+		    width: 100%;
+		    .discussion-question {
+		      @include grid-column($columns: 16);
+		      padding: 0 0 40px 0;
+		      .discussion-question-left {
+		        @include grid-column($columns: 2);
+			      .speaker {
+			        background: url("assets/img/lesson-speaker.png") no-repeat;
+						  background-size: cover;
+						  display: inline-block;
+						  height: 40px;
+						  width: 40px;
+						  cursor: pointer;
+			      }
+		      }
+		      .discussion-question-right {
+		        @include grid-column($columns: 14);
+		        .question-title {
+		          @include grid-row;
+		          font-size: 24px;
+		          font-weight: bold;
+		        }
+		        .question-translation {
+		          @include grid-row;
+		          font-size: 24px;
+		        }
+		      }
+		    }
+		    .discussion-editor {
+		      .discussion-editor-left {
+		        @include grid-column($columns: 2);
+		      }
+		      .discussion-editor-right {
+		        @include grid-column($columns: 14);
+		        .editor-text-area {
+		          @include grid-row;
+		          border: 2px solid $iron;
+						  border-radius: 10px;
+						  padding: 10px;
+						  width: 100%;
+						  min-height: 40px;
+						  resize: none;
+						  margin-bottom: 10px;
+						  font-size: 16px;
+		        }
+		        .discussion-editor-description {
+		          @include grid-row;
+		          @include grid-column($columns: 16);
+		          @include grid-row;
+		          border: 2px solid $gold;
+						  border-radius: 10px;
+						  padding: 10px 20px 10px 20px;
+						  width: 100%;
+						  min-height: 140px;
+						  resize: none;
+						  margin-bottom: 20px;
+		          .editor-description-left {
+		          	@include grid-column($columns: 2);
+		          	padding: 0;
+		          	.warning-logo { 
+								  display: inline-block;
+								  width: 46px;
+								  height: 40px;
+								  margin-top: 30px;				  
+		          	}
+		          }
+		          .editor-description-right {
+		            @include grid-column($columns: 14);
+		          }
+		        }
+		      .send-button {
+				    float: left;
+				    padding: 12px;
+					  font-size: 16px;
+					  text-align: center;
+					  margin-right: 10px;
+					  background-color: $success-color;
+					  margin-bottom: 40px;
+					    &:hover {
+					      background-color: scale-color($success-color, $lightness: -20%);
+					    }
+				    }
+				    .cancel-button {
+				      float: left;
+				      padding: 12px 20px 12px 20px;
+					    font-size: 16px;
+					    text-align: center;
+					    background-color: $iron;
+					    margin-bottom: 40px;
+					    &:hover {
+					      background-color: scale-color($iron, $lightness: -20%);
+					    }
+				    }
+				  }  
+		    }
+		    .discussion-comment-count {
+		      border-bottom: solid 1px #ccc;
+		      padding-bottom: 20px;
+		    }
+		  }
+	  }
+	  .discussion-comment {
+	    @include grid-row;
+	    @include grid-column($columns: 16);
+	    .comment {
+	      list-style: none;
+		    .discussion-comment-left {
+		      @include grid-column($columns: 2);
+		    }
+		    .discussion-comment-right {
+		      @include grid-column($columns: 14);
+		      .comment-title {
+		      	font-size: 16px;
+		      	color: $primary-color;
+		      }
+		      .comment-content {
+		      	font-size: 16px;
+		      	color: $iron;
+		      }
+		      .comment-toolbar {
+		        .comment-vote-count {
+
+		        }
+		      	.comment-vote-up {
+		      		margin-right: 15px;
+	            background-size: contain;
+	            width: 25px;
+	            height: 25px;
+	            &.normal {
+	              background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+	            }
+	            &.active {
+	              background: url("assets/img/vote-icon/vote-up-icon-2.png") no-repeat;
+	            }
+		      	}
+		      	.comment-vote-down {
+		      		margin: 7px 15px 0 0;
+	            background-size: contain;
+	            width: 25px;
+	            height: 25px;
+	            &.normal {
+	              background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
+	            }
+	            &.active {
+	              background: url("assets/img/vote-icon/vote-down-icon-2.png") no-repeat;
+	            }
+		      	}
+		      	.comment-reply {
+		      	  color: $primary-color;
+		      	}
+		      }
+		    }
+	    }
+	  }
+  } 
+}
