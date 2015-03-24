@@ -273,27 +273,68 @@
     ForumServices.createPost($scope.data).success(function (data) {
       $scope.data.id = data._id;
       $scope.dataPost = data;
-      console.log($scope.dataPost);
       ForumServices.getPost($scope.data).success(function (data) {
         $scope.data.id = data._id;
-        $scope.dataComment = data;
-        console.log($scope.dataComment);
+        $scope.getPost = data;
         ForumServices.listComment($scope.data).success(function (data) {
-          $scope.dataReply = data;
-          console.log($scope.dataReply);
+          $scope.listComment = data;
+          console.log(data);
         });
       });
     });
 
     $scope.followPost = function () {
-      ForumServices.followPost($scope.dataComment).success(function () {
-        $scope.dataComment.follow = true;
+      ForumServices.followPost($scope.getPost).success(function () {
+        $scope.getPost.follow = true;
       });
     };
 
     $scope.unfollowPost = function () {
-      ForumServices.unFollowPost($scope.dataComment).success(function () {
-        $scope.dataComment.follow = false;
+      ForumServices.unFollowPost($scope.getPost).success(function () {
+        $scope.getPost.follow = false;
+      });
+    };
+
+
+    $scope.createComment = function () {
+      $scope.data.id = $scope.getPost._id
+      ForumServices.creatComment($scope.data).success(function (data) {
+      });
+    };
+
+    $scope.voteUpComment = function (comment) {
+      if (comment.is_vote_up) {
+        comment.up_vote_count = comment.up_vote_count - 1;
+      } else {
+        comment.up_vote_count = comment.up_vote_count + 1;
+        if (comment.is_vote_down) {
+          comment.down_vote_count = comment.down_vote_count - 1;
+          comment.is_vote_down = false;
+        }
+      }
+      comment.is_vote_up = !comment.is_vote_up;
+      ForumServices.voteComment({
+        id: comment._id,
+        type: 'upvote',
+        vote: comment.is_vote_up
+      });
+    };
+
+    $scope.voteDownComment = function (comment) {
+      if (comment.is_vote_down) {
+        comment.down_vote_count = comment.down_vote_count - 1;
+      } else {
+        comment.down_vote_count = comment.down_vote_count + 1;
+        if (comment.is_vote_up) {
+          comment.up_vote_count = comment.up_vote_count - 1;
+          comment.is_vote_up = false;
+        }
+      }
+      comment.is_vote_down = !comment.is_vote_down;
+      ForumServices.voteComment({
+        id: comment._id,
+        type: 'downvote',
+        vote: comment.is_vote_down
       });
     };
   }
