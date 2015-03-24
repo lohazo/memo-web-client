@@ -1,0 +1,63 @@
+<section class="discussion-inner">
+	<section class="discussion-header">
+	  <div class="right">
+	    <a class="small radius button follow-button">Theo dõi thảo luận</a>
+	  </div>
+	</section>
+	<section class="discussion-content">
+	  <section class="discussion-content-inner">
+	  	<section class="discussion-question">
+	  	  <div class="discussion-question-left">
+	  	    <span class="speaker" ng-click="speaker.play()"></span>
+	  	  </div>
+	  	  <div class="discussion-question-right">
+	  	  	<span class="question-title">"{{question.question}}"</span>
+	  		  <span class="question-translation" ng-if="question.answer"><strong>Dịch: </strong>{{question.answer}}</span>
+	  	  </div>
+	  	</section>
+	  	<section class="discussion-editor">
+	  		<div class="discussion-editor-left">
+	  			<img ng-src="{{question.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+	  		</div>
+	  		<div class="discussion-editor-right">
+	  		  <div class="discussion-editor-text-area">
+	  			  <textarea class="editor-text-area" placeholder="Thảo luận câu này với người học khác"></textarea>
+	  			</div>
+	  			<div class="discussion-editor-description">
+	  			  <div class="editor-description-left">
+	  			  	<img class="warning-logo" src="assets/img/tutorial/warning.png" />
+	  			  </div>
+	  			  <div class="editor-description-right">Trong quá trình làm bài, nếu đáp án của bạn có vẻ đúng nhưng không được chấp nhận, làm ơn bấm nút báo lỗi và chọn mục tương ứng để thông báo cho bọn mình. Vui lòng không báo lỗi hoặc đề nghị đáp án đúng tại đây.</div>
+	  			</div>
+	  			<div class="discussion-toolbar">
+	  				<a class="small radius button send-button" ng-click="sendDiscussion()">Gửi bình luận</a>
+	  		    <a class="small radius button cancel-button">Hủy</a>
+	  			</div>
+	  		</div>
+	  	</section>
+	  	<section class="discussion-comment-count">
+	  		<h4 class="">6 bình luận {{}}</h4>
+	  	</section>
+	  </section>
+	</section>
+	<section class="discussion-comment" ng-repeat="comment in data.comments">
+	<ul class="comments">
+		<li class="comment">
+			<div class="discussion-comment-left">
+				<img ng-src="{{'assets/img/profile-avatar-big.png'}}" />
+			</div>
+			<div class="discussion-comment-right">
+				<div class="comment-title"></div>
+				<div class="comment-content">"tôi nói chuyện" chương trình báo sai</div>
+				<div class="comment-toolbar">
+					<span class="comment-vote-count">10</span>
+					<a class="comment-vote-up active"></a>
+					<span class="comment-vote-count">20</span>
+					<a class="comment-vote-down active"></a>
+					<a class="comment-reply">Trả lời</a>
+				</div>
+			</div>
+		</li>
+	</ul>
+	</section>
+</section>

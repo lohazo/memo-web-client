@@ -2,7 +2,7 @@
   'use strict';
 
   function ExamCtrl($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker,
-    Skill) {
+    Skill, $modal, $localStorage, ForumServices) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
     $scope.shouldPlaySlow = false;
@@ -242,11 +242,30 @@
     };
 
     $scope.start();
+
+    $scope.discussion = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'forum/_discussion.html',
+        windowClass: 'discussion-popup-modal',
+      });
+
+      $scope.data = {};
+      $scope.data.title = $scope.question.question;
+      $scope.data.content = $scope.question.answer;
+      $scope.data.question_log_id = $scope.question.question_log_id;
+      $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
+
+      ForumServices.createPost($scope.data).success(function (data) {
+        $scope.data.id = data._id;
+        ForumServices.getPost($scope.data).success(function (data) {
+        });
+      });
+    };
   }
 
   angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
       '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
-      'MemoTracking', 'Skill', ExamCtrl
+      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', ExamCtrl
     ]);
 }(window.angular));
