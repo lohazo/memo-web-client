@@ -203,7 +203,7 @@
 
   angular.module('app.services', [])
     .constant('APP_VERSION', '1.0.3')
-    .constant('API', 'http://services.memo.edu.vn/v2/api')
+    .constant('API', '//services.memo.edu.vn/v2/api')
     .constant('angularMomentConfig', {
       preprocess: 'unix'
     })
