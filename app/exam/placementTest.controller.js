@@ -1,9 +1,11 @@
 (function (angular) {
   'use strict';
 
-  function PlacementTestCtrl($scope, $location, PlacementTest, Question, Sound) {
+  function PlacementTestCtrl($scope, $location, PlacementTest, Question, Sound, $modal, $localStorage, ForumServices) {
     $scope.questionTpl = '';
     $scope.footerTpl = 'footer';
+    $scope.posts = {};
+    $scope.comments = {};
 
     var questionTplId = {
       form: 'questionForm',
@@ -139,11 +141,43 @@
         }
       }
     };
+
+    $scope.discussion = function () {
+      $scope.data = {};
+      $scope.dataComment = {};
+      $scope.data.question_log_id = $scope.question.question_log_id;
+      $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
+
+      if ($scope.question.type == 'judge' ) {
+        $scope.data.title = $scope.question.question;
+        $scope.data.content = $scope.question.hints;
+      } else if ($scope.question.type == 'name' || $scope.question.type == 'select') {
+        $scope.data.title = $scope.question.question;
+        $scope.data.content = $scope.question.hint;
+      } else if ($scope.question.type == 'translate') {
+        $scope.data.title = $scope.question.question;
+        $scope.data.content = $scope.question.answer;
+      };
+
+      ForumServices.createPost($scope.data).success(function (data) {
+        $scope.data.id = data._id;
+        ForumServices.getPost($scope.data).success(function (data) {
+          $scope.dataComment.id = data._id;
+          ForumServices.listComment($scope.dataComment).success(function (data) {
+          });
+        });
+      });
+
+      var modalInstance = $modal.open({
+        templateUrl: 'forum/_discussion.html',
+        windowClass: 'discussion-popup-modal',
+      });
+    }
   }
 
   angular.module('placement.controllers', [])
     .controller('PlacementTestCtrl', [
-      '$scope', '$location', 'PlacementTestFactory', 'Question', 'Sound', PlacementTestCtrl
+      '$scope', '$location', 'PlacementTestFactory', 'Question', 'Sound', '$modal', '$localStorage', 'ForumServices', PlacementTestCtrl
     ]);
 
 }(window.angular));

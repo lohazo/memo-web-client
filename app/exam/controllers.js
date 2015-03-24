@@ -258,6 +258,10 @@
       ForumServices.createPost($scope.data).success(function (data) {
         $scope.data.id = data._id;
         ForumServices.getPost($scope.data).success(function (data) {
+          $scope.dataComment.id = data._id;
+          ForumServices.listPost($scope.dataComment).success(function (data) {
+            
+          })
         });
       });
     };
