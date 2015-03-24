@@ -36,10 +36,18 @@ angular.module('home.directives', [])
       controller: 'PlacementTestModalCtrl'
     };
   })
+  .directive('referralPopupModal', function () {
+    return {
+      strict: 'EA',
+      controller: 'RefCodeModalCtrl'
+    };
+  })
   .directive('leaderboard', function () {
     return {
       restrict: 'EA',
-      scope: true,
+      scope: {
+        leaderboardData: "="
+      },
       controller: 'LeaderboardCtrl',
       templateUrl: 'leaderboard/_index.html'
     };

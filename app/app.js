@@ -44,8 +44,33 @@
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
     'GooglePlusProvider', '$logProvider',
     AppConfig
-  ]).run(['amMoment', function (amMoment) {
+  ]).run(['$rootScope', '$location', '$localStorage', 'amMoment', function ($rootScope, $location, $localStorage,
+    amMoment) {
     amMoment.changeLocale('vi');
+
+    $rootScope.$on("$routeChangeStart", function (event, next, current) {
+      if ($localStorage.auth) {
+        if ($localStorage.auth.loggedIn) {} else {
+          if (next.templateUrl !== '/') {
+            $location.url('/');
+          }
+        }
+      } else {
+        $location.url('/');
+      }
+    });
+
+    $rootScope.$on("$routeChangeSuccess", function (event) {
+      if ($location.search().error && $location.search().error == 401) {
+        $localStorage.$reset();
+        $localStorage.auth = {
+          loggedIn: false,
+          trial: false
+        }
+        $rootScope.$broadcast('event:auth-logoutConfirmed');
+        alert('Bạn hoặc ai đó đã đăng nhập vào tài khoản này trên thiết bị khác. Vui lòng đăng nhập lại!');
+      }
+    });
   }]);
 
 }(window.angular));

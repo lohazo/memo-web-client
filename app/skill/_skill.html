@@ -5,30 +5,27 @@
         <div class="{{skill.finished_lesson == skill.lessons.length ? 'success' : '' }} {{skill.theme_color === '#99cc00' ? 'green' : (skill.theme_color === '#ff4444' ? 'red' : 'blue')}} skill skill-{{skill.order + 1}}">
           <div class="icon" style="background-image: url('{{iconSets.lesson}}');"></div>
           <h4 class="name">{{skill.title}}</h4>
-          <div class="level level-5">
-            <div class="strength-bar"></div>
-          </div>
-          <a ng-if="skill.allow_shortcut && (skill.finished_lesson < skill.lessons.length)" ng-href="/shortcut/{{skill._id}}" class="test-out memo-button" tooltip="Vượt rào để hoàn thành kỹ năng này mà không cần làm từng bài học" tooltip-placement="bottom">
-            Vượt rào
-          </a>
+          <!-- <div class="level">Độ mạnh của từ: {{skill.strength_gap}}/5</div> -->
+          <a ng-if="skill.allow_shortcut && (skill.finished_lesson < skill.lessons.length)" ng-href="/shortcut/{{skill._id}}" class="test-out memo-button" tooltip="Vượt rào để hoàn thành kỹ năng này mà không cần làm từng bài học" tooltip-placement="bottom">Vượt rào</a>
+          <!-- <a ng-if="skill.finished_lesson == skill.lessons.length" ng-href="/strengthen/{{skill._id}}" class="small radius button">Luyện tập củng cố kĩ năng</a> -->
         </div>
       </div>
       <div class="small-12 columns lessons">
         <div class="row">
           <div class="small-16 columns right grammar-note">
             &nbsp;
-        </div>
-        <div class="row {{skill.theme_color === '#99cc00' ? 'green1' : (skill.theme_color === '#ff4444' ? 'red1' : 'blue1')}} skill-{{skill.order + 1}}">
-          <div class="{{$index < skill.finished_lesson ? 'past' : ($index == skill.finished_lesson ? 'unlocked' : 'locked')}} lesson text-center" ng-repeat="lesson in skill.lessons track by $index">
-            <h4 class="name name-lesson">Bài học {{$index + 1}} <img class="tick-lesson" ng-src="/assets/img/tick.png" alt=""></h4>
-            <div class="small-16 small-centered columns objectives">
-              {{skill.lessons[$index].objectives.join(', ')}}
-            </div>
-            <a ng-if="$index < skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button">Làm lại</a>
-            <a ng-if="$index == skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button memo-1 memo-2 memo-3 memo-4 memo-5">Bắt đầu</a>
-            <a ng-if="$index > skill.finished_lesson" class="disabled memo-button"><i class="icon-lock"></i> Khóa</a>
           </div>
-        </div>
+          <div class="row {{skill.theme_color === '#99cc00' ? 'green1' : (skill.theme_color === '#ff4444' ? 'red1' : 'blue1')}} skill-{{skill.order + 1}}">
+            <div class="{{$index < skill.finished_lesson ? 'past' : ($index == skill.finished_lesson ? 'unlocked' : 'locked')}} lesson text-center" ng-repeat="lesson in skill.lessons track by $index">
+              <h4 class="name name-lesson">Bài học {{$index + 1}} <img class="tick-lesson" ng-src="/assets/img/tick.png" alt=""></h4>
+              <div class="small-16 small-centered columns objectives">
+                {{skill.lessons[$index].objectives.join(', ')}}
+              </div>
+              <a ng-if="$index < skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button">Làm lại</a>
+              <a ng-if="$index == skill.finished_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button memo-1 memo-2 memo-3 memo-4 memo-5">Bắt đầu</a>
+              <a ng-if="$index > skill.finished_lesson" class="disabled memo-button"><i class="icon-lock"></i> Khóa</a>
+            </div>
+          </div>
           <div ng-switch on="showGrammar">
             <div ng-switch-when="en-vi_co_ban_1" grammar-co-ban-1>
             </div>
@@ -47,7 +44,7 @@
             <div ng-switch-when="en-vi_so_nhieu" grammar-so-nhieu>
             </div>
             <div ng-switch-when="en-vi_tu_han_dinh" grammar-tu_han_dinh>
-            </div>  
+            </div>
             <div ng-switch-when="en-vi_dong_tu_hien_tai_1" grammar-dong-tu-hien-tai-1>
             </div>
             <div ng-switch-when="en-vi_dong_tu_hien_tai_2" grammar-dong-tu-hien-tai-2>
@@ -79,7 +76,7 @@
             <div ng-switch-default><div google-ads-width="840px" google-ads-height="150px" google-ads-client="ca-pub-6371733042680225" google-ads-slot="6900997391" google-ads></div></div>
           </div>
         </div>
-        </div>
-    </div>    
+      </div>
+    </div>
   </div>
 </section>
