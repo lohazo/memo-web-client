@@ -123,27 +123,7 @@
     };
 
     $scope.register = function () {
-      var user = angular.fromJson(angular.toJson($scope.user));
-      delete user.password;
-      if (user.referral_code && user.referral_code !== "") {
-        AuthService.checkCode({
-            referral_code: user.referral_code
-          })
-          .then(function () {
-            delete $scope.user.referral_code;
-            AuthService.register($scope.user)
-              .then(closeModal, displayMessageOnFail)
-              .then(function () {
-                AuthService.submitReferralCode({
-                  referral_code: user.referral_code
-                });
-              }, displayMessageOnFail);
-          }, displayMessageOnFail);
-      } else {
-        delete $scope.user.referral_code;
-        AuthService.register($scope.user)
-          .then(closeModal, displayMessageOnFail);
-      }
+      AuthService.register($scope.user).then(closeModal, displayMessageOnFail);
     };
 
     $scope.login = function () {

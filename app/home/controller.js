@@ -3,9 +3,10 @@
 
   function HomeCtrl($scope) {}
 
-  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting,
-    MemoTracker,
-    Message, ReferralService) {
+  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, MemoTracker, Message,
+    ReferralService, Leaderboard) {
+    $scope.leaderboardData = [];
+
     function getProfile() {
       $scope.profile = Profile.user;
     }
@@ -60,8 +61,26 @@
       });
     }
 
+    function getLeaderboardData() {
+      // Get leaderboard by week
+      Leaderboard.leaderboard({
+        type: 'week'
+      }).then(function (res1) {
+        Leaderboard.leaderboard({
+          type: 'month'
+        }).then(function (res2) {
+          Leaderboard.leaderboard({
+            type: 'all_time'
+          }).then(function (res3) {
+            $scope.leaderboardData = [res1.data.leaderboard_by_week, res2.data.leaderboard_by_month,
+              res3.data.leaderboard_all_time
+            ];
+          });
+        });
+      });
+    }
+
     // Chain calls
-    AppSetting.getWords();
     Profile.getProfile()
       .then(getProfile)
       .then(Message.list)
@@ -70,10 +89,40 @@
       .then(AppSetting.getSharedSettings)
       .then(TreeBuilder.getIconSets)
       .then(buildTree)
-      .then(takeATour);
+      .then(takeATour)
+      .then(getLeaderboardData)
+      .then(AppSetting.getWords);
   }
 
-  function PlacementTestModalCtrl($scope, $modal, $rootScope) {
+  function CampaignVerifyCodeCtrl($scope, $route, ReferralService, Profile) {
+    $scope.submitCode = function () {
+      ReferralService.submitCode({
+        referral_code: $scope.refCode
+      }).then(function (res) {
+        $scope.error = '';
+        $scope.isReferral = res.data.code || '';
+        $scope.userName = res.data.referral_user || '';
+        $route.reload();
+      }, function (res) {
+        $scope.error = res.data.message;
+      });
+    };
+
+    $scope.keydownHandler = function (e) {
+      if (e.keyCode === 13) {
+        $scope.submitCode();
+      }
+    };
+
+    $scope.$watch('profileDetail', function () {
+      if ($scope.profileDetail) {
+        $scope.isReferral = Profile.detail.referral_user || '';
+        $scope.userName = Profile.detail.referral_user;
+      }
+    });
+  }
+
+  function PlacementTestModalCtrl($scope, $modal) {
 
     $scope.profile = {};
     $scope.displayTour = false;
@@ -82,15 +131,7 @@
         templateUrl: 'home/_placement-test-modal.html',
         controller: 'PlacementTestModalInstanceCtrl',
         windowClass: 'placement-test-modal',
-        backdrop: 'static',
-        resolve: {
-          profile: function () {
-            return $scope.profile;
-          },
-          displayTour: function () {
-            return $scope.displayTour;
-          }
-        }
+        backdrop: 'static'
       });
 
       modalInstance.result.then(function (msg) {});
@@ -113,21 +154,77 @@
     };
     $scope.$on('event:auth-logoutConfirmed', function () {
       $scope.close();
-    })
+    });
+  }
+
+  function RefCodeModalCtrl($scope, $modal, ReferralService) {
+    $scope.profile = {};
+    $scope.openRefModal = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'home/_share-code-popup.html',
+        controller: 'RefCodeModalInstanceCtrl',
+        windowClass: 'share-code-modal'
+      });
+
+      $scope.$watch('displayTour', function () {
+        if ($scope.displayTour) modalInstance.close();
+      });
+
+      ReferralService.closePopup();
+    };
+
+    $scope.$watch('profile', function () {
+      if ($scope.profile.ref_code_popup_display) {
+        $scope.openRefModal();
+      }
+    });
+  }
+
+  function RefCodeModalInstanceCtrl($scope, $modalInstance, $route, ReferralService) {
+    $scope.data = {
+      referral_code: '',
+      error: ''
+    };
+    $scope.close = function () {
+      $modalInstance.close();
+    };
+    $scope.$on('event:auth-logoutConfirmed', function () {
+      $scope.close();
+    });
+
+    $scope.submitCode = function () {
+      if ($scope.data.referral_code && $scope.data.referral_code.length > 0) {
+        ReferralService.submitCode($scope.data).then(function () {
+          $scope.close();
+          $route.reload();
+        }, function (response) {
+          $scope.data.error = response.data.message;
+        });
+      }
+    };
+
+    $scope.keydownHandler = function (e) {
+      if (e.keyCode === 13) {
+        $scope.submitCode();
+      }
+    };
   }
 
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder',
-      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', HomeMainCtrl
+      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', HomeMainCtrl
     ])
-    .controller('PlacementTestModalCtrl', ['$scope', '$modal', '$rootScope',
-      PlacementTestModalCtrl
+    .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
+      CampaignVerifyCodeCtrl
     ])
+    .controller('PlacementTestModalCtrl', ['$scope', '$modal', 'ReferralService', PlacementTestModalCtrl])
     .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance',
       PlacementTestModalInstanceCtrl
-    ]).controller('TourDemoCtrl', function ($scope, $tour) {
-      $tour.start();
-    });
+    ])
+    .controller('RefCodeModalCtrl', ['$scope', '$modal', 'ReferralService', RefCodeModalCtrl])
+    .controller('RefCodeModalInstanceCtrl', ['$scope', '$modalInstance', '$route', 'ReferralService',
+      RefCodeModalInstanceCtrl
+    ]);
 
 }(window.angular));

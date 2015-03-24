@@ -55,7 +55,6 @@
   &.profile-embed, &.profile-page {
     .username {
       h4 {
-        line-height: 60px;
         width: 140px;
         white-space: nowrap;
         overflow: hidden;
@@ -71,7 +70,6 @@
       text-overflow: ellipsis;
     }
     .streak, .memos, .exp, .known-words {
-      padding: 0;
       .icon, .text {
         display: inline-block;
         float: left;
@@ -90,7 +88,6 @@
       }
     }
     .memos {
-      padding: 0;
       .icon {
         background-position: 0 0;
         width: 26px;
@@ -167,65 +164,75 @@
 }
 
 /*------------------------------PROFILE---------------------------------------*/
-.left-profile{
+.left-profile {
   width: 75% !important;
 }
-.leaderboard-profile{
+
+.leaderboard-profile {
   float: right !important;
 }
+
 .user-info-profile {
- text-align: center;
- margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
+
 .user-info-profile p {
   margin-bottom: 10px;
-   img{
+  img {
     width: 120px;
     height: 120px;
     border-radius: 50%;
- }
-  strong{
+  }
+  strong {
     color: #666;
     font-size: 30px;
     font-weight: normal;
   }
 }
-.add-user-name{
+
+.add-user-name {
   margin-bottom: 20px;
-  p{
-  display: inline-block;
-  color: #666;
-  margin-left: 7px;
-  margin-right: 7px;
-  margin-bottom: 0;
-  img{
-    margin-right: 5px;
-    width: 20px;
-    height: 20px;
-  }
+  p {
+    display: inline-block;
+    color: #666;
+    margin-left: 7px;
+    margin-right: 7px;
+    margin-bottom: 0;
+    img {
+      margin-right: 5px;
+      width: 20px;
+      height: 20px;
+    }
   }
 }
+
 .choose-language-profile {
   margin-top: 30px !important;
 }
+
 .language-profile {
   text-align: left;
   margin-bottom: 15px;
 }
-.language-profile img{
+
+.language-profile img {
   float: left;
   margin-right: 10px;
 }
+
 .language-profile a {
   color: #810c15;
   font-weight: 600;
   font-size: 14px;
 }
-.language-profile{
+
+.language-profile {
   font-size: 15px;
   color: rgb(102, 102, 102);
   display: inline-block;
   width: 20%;
   margin-left: 20px;
 }
+
 /*----------------------------------------------------------------------------------*/

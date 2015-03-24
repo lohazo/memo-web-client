@@ -57,7 +57,7 @@
     return Service;
   }
 
-  function NotificationDropdownButtonCtrl($scope, $interval, NotificationService) {
+  function NotificationDropdownButtonCtrl($scope, $interval, NotificationService, MemoTracker) {
     $scope.notification = {};
 
     function getInAppNotifications() {
@@ -71,7 +71,11 @@
 
     $scope.checkAll = function () {
       $scope.notification.is_new_count = 0;
-      NotificationService.checkAll();
+      NotificationService.checkAll().then(function () {
+        $scope.notification.notifications.forEach(function (item) {
+          if (item.is_new) MemoTracker.track(item.type + ' noti read');
+        });
+      });
     };
     getInAppNotifications();
     // $interval(getInAppNotifications, 30 * 1000);
@@ -109,11 +113,12 @@
     'notification.pass',
     'notification.newTier',
     'notification.refCodeSubmitted',
-    'notification.eventAlert'
+    'notification.eventAlert',
+    'notification.gift'
   ]);
   angular.module('notification')
     .factory('NotificationService', ['$http', '$q', '$localStorage', 'API', NotificationService])
-    .controller('NotificationDropdownButtonCtrl', ['$scope', '$interval', 'NotificationService',
+    .controller('NotificationDropdownButtonCtrl', ['$scope', '$interval', 'NotificationService', 'MemoTracking',
       NotificationDropdownButtonCtrl
     ])
     .controller('NotificationDropdownItemCtrl', ['$scope', 'NotificationService',

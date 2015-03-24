@@ -9,6 +9,7 @@
     var Apis = {
         // GET
         status: '/referral/referral_status?auth_token=',
+        close_popup: '/referral/close_pop_up?auth_token=',
 
         // POST
         submit_code: '/referral/submit_referral_code',
@@ -118,6 +119,12 @@
 
       return deferred.promise;
     }
+
+    Referral.closePopup = function () {
+      var authToken = $localStorage.auth.user.auth_token;
+
+      return $http.get(API + Apis.close_popup + authToken);
+    };
     return Referral;
   }
 
