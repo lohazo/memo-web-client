@@ -245,24 +245,55 @@
 
     $scope.discussion = function () {
       var modalInstance = $modal.open({
-        templateUrl: 'forum/_discussion.html',
+        templateUrl: 'forum/_discussion-exam.html',
         windowClass: 'discussion-popup-modal',
+        controller: 'DiscussionExamModalCtrl'
       });
+    };
+  }
 
-      $scope.data = {};
+  function DiscussionExamModalCtrl($scope, $location, Exam, $localStorage, ForumServices) {
+    $scope.question = Exam.question();
+
+    $scope.data = {};
+    $scope.data.question_log_id = $scope.question.question_log_id;
+    $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
+
+    if ($scope.question.type == 'judge' ) {
+      $scope.data.title = $scope.question.question;
+      $scope.data.content = $scope.question.hints;
+    } else if ($scope.question.type == 'name' || $scope.question.type == 'select') {
+      $scope.data.title = $scope.question.question;
+      $scope.data.content = $scope.question.hint;
+    } else if ($scope.question.type == 'translate') {
       $scope.data.title = $scope.question.question;
       $scope.data.content = $scope.question.answer;
-      $scope.data.question_log_id = $scope.question.question_log_id;
-      $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
+    };
 
-      ForumServices.createPost($scope.data).success(function (data) {
+    ForumServices.createPost($scope.data).success(function (data) {
+      $scope.data.id = data._id;
+      $scope.dataPost = data;
+      console.log($scope.dataPost);
+      ForumServices.getPost($scope.data).success(function (data) {
         $scope.data.id = data._id;
-        ForumServices.getPost($scope.data).success(function (data) {
-          $scope.dataComment.id = data._id;
-          ForumServices.listPost($scope.dataComment).success(function (data) {
-            
-          })
+        $scope.dataComment = data;
+        console.log($scope.dataComment);
+        ForumServices.listComment($scope.data).success(function (data) {
+          $scope.dataReply = data;
+          console.log($scope.dataReply);
         });
+      });
+    });
+
+    $scope.followPost = function () {
+      ForumServices.followPost($scope.dataComment).success(function () {
+        $scope.dataComment.follow = true;
+      });
+    };
+
+    $scope.unfollowPost = function () {
+      ForumServices.unFollowPost($scope.dataComment).success(function () {
+        $scope.dataComment.follow = false;
       });
     };
   }
@@ -271,5 +302,8 @@
     .controller('ExamCtrl', [
       '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
       'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', ExamCtrl
+    ])
+    .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', '$localStorage', 'ForumServices',
+      DiscussionExamModalCtrl
     ]);
 }(window.angular));

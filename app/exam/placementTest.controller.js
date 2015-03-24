@@ -143,33 +143,33 @@
     };
 
     $scope.discussion = function () {
-      $scope.data = {};
-      $scope.dataComment = {};
-      $scope.data.question_log_id = $scope.question.question_log_id;
-      $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
+      // $scope.data = {};
+      // $scope.dataComment = {};
+      // $scope.data.question_log_id = $scope.question.question_log_id;
+      // $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
 
-      if ($scope.question.type == 'judge' ) {
-        $scope.data.title = $scope.question.question;
-        $scope.data.content = $scope.question.hints;
-      } else if ($scope.question.type == 'name' || $scope.question.type == 'select') {
-        $scope.data.title = $scope.question.question;
-        $scope.data.content = $scope.question.hint;
-      } else if ($scope.question.type == 'translate') {
-        $scope.data.title = $scope.question.question;
-        $scope.data.content = $scope.question.answer;
-      };
+      // if ($scope.question.type == 'judge' ) {
+      //   $scope.data.title = $scope.question.question;
+      //   $scope.data.content = $scope.question.hints;
+      // } else if ($scope.question.type == 'name' || $scope.question.type == 'select') {
+      //   $scope.data.title = $scope.question.question;
+      //   $scope.data.content = $scope.question.hint;
+      // } else if ($scope.question.type == 'translate') {
+      //   $scope.data.title = $scope.question.question;
+      //   $scope.data.content = $scope.question.answer;
+      // };
 
-      ForumServices.createPost($scope.data).success(function (data) {
-        $scope.data.id = data._id;
-        ForumServices.getPost($scope.data).success(function (data) {
-          $scope.dataComment.id = data._id;
-          ForumServices.listComment($scope.dataComment).success(function (data) {
-          });
-        });
-      });
+      // ForumServices.createPost($scope.data).success(function (data) {
+      //   $scope.data.id = data._id;
+      //   ForumServices.getPost($scope.data).success(function (data) {
+      //     $scope.dataComment.id = data._id;
+      //     ForumServices.listComment($scope.dataComment).success(function (data) {
+      //     });
+      //   });
+      // });
 
       var modalInstance = $modal.open({
-        templateUrl: 'forum/_discussion.html',
+        templateUrl: 'forum/_discussion-placement-test.html',
         windowClass: 'discussion-popup-modal',
       });
     }
