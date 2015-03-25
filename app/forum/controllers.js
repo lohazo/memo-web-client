@@ -4,6 +4,7 @@
   function ListPostCtrl($scope, $location, ForumServices, allPosts, subscribers, followingPosts) {
     $scope.subscribers = subscribers.data;
     $scope.stickyPosts = allPosts.data.sticky_posts;
+    $scope.page = allPosts.data;
     $scope.allPosts = allPosts.data.posts.map(function (post) {
       post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
       return post;
@@ -11,6 +12,11 @@
     $scope.followingPosts = followingPosts.data.posts;
     $scope.postSearch = {
       keywords: ''
+    };
+    $scope.currentPage = $scope.page.next_page - 1;
+    $scope.setPage = function (page) {
+      $location.search({page: page});
+      return;
     };
 
     $scope.search = function (e) {

@@ -31,14 +31,17 @@
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
                 <p class="post-detail">
-                  <a class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo">{{post.user.current_course_name}}</a>
+                  <a class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo">{{post.user.current_course_name}}</a>          
                 </p>
               </div>
               <div class="comment">
-                <span>{{post.total_comment}}</span>
+                <span>{{post.total_comment}}</span> 
               </div>
             </li>
           </ul>
+          <div class="pagination-centered">
+            <pagination page="currentPage" total-items="page.total_page" on-select-page="setPage(page)"></pagination>
+          </div>  
           </tab>
           <!-- <tab class="tabs-heading" heading="Chủ đề nóng">
           <ul class="the-posts">
