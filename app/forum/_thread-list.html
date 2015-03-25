@@ -31,7 +31,7 @@
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
                 <p class="post-detail">
-                  <a class="admin">{{post.user.name}}</a>, {{post.created_at}} - <a class="memo">{{post.user.current_course_name}}</a>
+                  <a class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo">{{post.user.current_course_name}}</a>
                 </p>
               </div>
               <div class="comment">
@@ -63,7 +63,7 @@
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="" ng-bind="post.title"></a>
                 <p class="post-detail">
-                  <a class="admin">{{post.user.name}}</a>, {{post.created_at}} - <a class="memo">{{post.user.current_course_name}}</a>
+                  <a class="admin">{{post.user.name}}</a>, {{post.created_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}} - <a class="memo">{{post.user.current_course_name}}</a>
                 </p>
               </div>
               <div class="comment">
@@ -75,7 +75,7 @@
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
                 <p class="post-detail">
-                  <a class="admin">{{post.user.name}}</a>, {{post.created_at}} - <a class="memo">{{post.user.current_course_name}}</a>
+                  <a class="admin">{{post.user.name}}</a>, {{post.created_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}} - <a class="memo">{{post.user.current_course_name}}</a>
                 </p>
               </div>
               <div class="comment">

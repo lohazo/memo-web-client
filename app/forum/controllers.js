@@ -4,7 +4,10 @@
   function ListPostCtrl($scope, $location, ForumServices, allPosts, subscribers, followingPosts) {
     $scope.subscribers = subscribers.data;
     $scope.stickyPosts = allPosts.data.sticky_posts;
-    $scope.allPosts = allPosts.data.posts;
+    $scope.allPosts = allPosts.data.posts.map(function (post) {
+      post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
+      return post;
+    });
     $scope.followingPosts = followingPosts.data.posts;
     $scope.postSearch = {
       keywords: ''
@@ -121,10 +124,10 @@
       if (post.is_vote_up) {
         post.up_vote_count = post.up_vote_count - 1;
       } else {
-        post.up_vote_count = post.up_vote_count +1;
+        post.up_vote_count = post.up_vote_count + 1;
         if (post.is_vote_down) {
-          post.down_vote_count = post.down_vote_count -1;
-          post.is_vote_down = false;        
+          post.down_vote_count = post.down_vote_count - 1;
+          post.is_vote_down = false;
         }
       }
       post.is_vote_up = !post.is_vote_up;
@@ -139,9 +142,9 @@
       if (post.is_vote_down) {
         post.down_vote_count = post.down_vote_count - 1;
       } else {
-        post.down_vote_count = post.down_vote_count +1;
+        post.down_vote_count = post.down_vote_count + 1;
         if (post.is_vote_up) {
-          post.up_vote_count = post.up_vote_count -1;
+          post.up_vote_count = post.up_vote_count - 1;
           post.is_vote_up = false;
         }
       }
@@ -201,7 +204,9 @@
   }
 
   angular.module('forum.controllers', ['forum.services'])
-    .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', 'followingPosts', ListPostCtrl])
+    .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', 'followingPosts',
+      ListPostCtrl
+    ])
     .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'allPosts', 'subscribers', CreatePostCtrl])
     .controller('PostDetailCtrl', ['$scope', 'ForumServices', 'Post', 'allPosts', 'subscribers', PostDetailCtrl]);
 }(window.angular));
