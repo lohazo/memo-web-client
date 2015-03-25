@@ -20,7 +20,7 @@
     var data = angular.fromJson($scope.trackingData);
     $scope.click = function () {
       if (data.memoEnabled) {
-        MemoTracker.track(data.eventName).then(function () {
+        MemoTracker.track(data.eventName).finally(function () {
           if (data.to) {
             $window.location.href = data.to;
           }
