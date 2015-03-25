@@ -19,7 +19,7 @@
               <div class="post-version-header">
                 <div class="title" ng-bind="post.title"></div>
                 <a ng-href="/profile/{{post.user._id}}" ng-bind="post.user.name"></a>
-                <div ng-bind="post.user.current_course_name"></div>
+                <div>{{post.created_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}} - {{post.user.current_course_name}}</div>
               </div>
               <div class="post-version-middler">
                 <div ng-bind="post.content"></div>
