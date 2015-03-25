@@ -19,7 +19,7 @@
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="" ng-bind="post.title"></a>
                 <p class="post-detail">
-                  <a class="admin">{{post.user.name}}</a>, <a class="memo">{{post.user.current_course_name}}</a>
+                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a>
                 </p>
               </div>
               <div class="comment">
@@ -31,7 +31,7 @@
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
                 <p class="post-detail">
-                  <a class="admin">{{post.user.name}}</a>, <a class="memo">{{post.user.current_course_name}}</a>
+                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a>, <a class="memo">{{post.course_name}}</a>
                 </p>
               </div>
               <div class="comment">
@@ -47,7 +47,7 @@
               <div class="post-content">
                 <a href="" class="title" title="">{{post.title}}</a>
                 <p class="post-detail">
-                  <a href="#" class="admin">{{post.userd}}</a>, {{post.datetime}} - <a href="#" class="memo">{{post.course}}</a>
+                  <a href="#" class="admin">{{post.userd}}</a>, {{post.datetime}} - <a href="#" class="memo">{{post.course_name}}</a>
                 </p>
               </div>
               <div class="comment">
@@ -63,7 +63,7 @@
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="" ng-bind="post.title"></a>
                 <p class="post-detail">
-                  <a class="admin">{{post.user.name}}</a>, <a class="memo">{{post.user.current_course_name}}</a>
+                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a>, <a class="memo">{{post.course_name}}</a>
                 </p>
               </div>
               <div class="comment">
@@ -75,7 +75,7 @@
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
                 <p class="post-detail">
-                  <a class="admin">{{post.user.name}}</a>, <a class="memo">{{post.user.current_course_name}}</a>
+                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a>, <a class="memo">{{post.course_name}}</a>
                 </p>
               </div>
               <div class="comment">

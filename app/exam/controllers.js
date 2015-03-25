@@ -281,7 +281,6 @@
         $scope.getPost = data;
         ForumServices.listComment($scope.data).success(function (data) {
           $scope.listComment = data;
-          console.log(data);
         });
       });
     });

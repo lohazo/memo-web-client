@@ -104,7 +104,6 @@
     Services.listReply = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
       var endpoint = API + '/comments/' + data.id + '?platform=web&auth_token=' + authToken;
-      console.log(id);
 
       if (data.page) endpoint += '&page=' + data.page;
 

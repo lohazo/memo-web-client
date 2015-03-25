@@ -55,10 +55,15 @@
     };
 
     $scope.createPost = function () {
-      ForumServices.createPost($scope.data).success(function (data) {
-        $location.url('/forum/post/' + data._id);
-      });
-
+      if(document.getElementById("createPostTitle").value == "") {
+          alert("Bạn chưa nhập Tiêu đề cho bài thảo luận");
+      } else if(document.getElementById("createPostContent").value == "") {
+          alert("Bạn chưa nhập Nội dung cho bài thảo luận");
+      } else {
+          ForumServices.createPost($scope.data).success(function (data) {
+            $location.url('/forum/post/' + data._id);
+          });
+      }
     };
 
     $scope.getListSubscription = function () {
@@ -152,12 +157,17 @@
         vote: post.is_vote_down
       });
     };
-
+    $scope.isSending = false;
     $scope.createComment = function () {
-      ForumServices.creatComment($scope.data).success(function (data) {
-        $scope.post.comments.push(data);
-        document.getElementById("comment").value = "";
-      });
+      if (!$scope.isSending && $scope.data.content != '') {
+        $scope.isSending = true;
+        ForumServices.creatComment($scope.data).success(function (data) {
+          $scope.post.comments.push(data);
+          $scope.post.total_comment = $scope.post.total_comment + 1;
+          $scope.data.content = '';
+          $scope.isSending = false;
+        });
+      }
     };
 
     /*
