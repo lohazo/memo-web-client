@@ -69,6 +69,18 @@
   <script src="vendors/angular-loading-bar/build/loading-bar.min.js"></script>
   <script src="vendors/google-diff-match-patch/diff_match_patch.js"></script>
   <script src="vendors/moment/moment.js"></script>
+  <script src="vendors/moment-timezone/moment-timezone.js"></script>
+  <script src="vendors/moment-timezone/moment-timezone-utils.js"></script>
+  <script>
+    var unpacked = {
+      name    : 'Asia/Hanoi',
+      abbrs   : ['ICT'],
+      untils  : [null],
+      offsets : [-420]
+    };
+    var packed = moment.tz.pack(unpacked);
+    moment.tz.add('Asia/Hanoi|ICT|-70|0|');
+  </script>
   <script src="vendors/angular-moment/angular-moment.min.js"></script>
   <script src="vendors/moment/locale/vi.js"></script>
   <script src="vendors/angulartics/dist/angulartics.min.js"></script>
