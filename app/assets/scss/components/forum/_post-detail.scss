@@ -279,20 +279,22 @@
     }
   }  
   .channel-follow {
-    list-style: none;
     background: #fff;
     border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
+    .title {
+      padding: 20px 0 20px 0;
+    }
     .course-language ul {
-        margin-left: 0;
-        list-style: none;
-        li {
-          margin-bottom: 20px;
-          a {
-            color: #333;
-          }
+      margin-left: 0;
+      list-style: none;
+      li {
+        margin-bottom: 20px;
+        a {
+          color: #333;
         }
       }
+    }
   }
 }
