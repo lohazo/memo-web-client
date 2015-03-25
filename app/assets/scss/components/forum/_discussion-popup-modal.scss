@@ -2,7 +2,7 @@
   padding: 30px;
   outline: none;
   width: 680px !important;
-  height: 1210px;
+  min-height: 1000px;
   border: 0;
   position: absolute;
   top: 110px !important;
@@ -159,17 +159,19 @@
 		      }
 		      .comment-content {
 		      	font-size: 16px;
-		      	color: $iron;
 		      }
 		      .comment-toolbar {
+		        @include grid-row;
+		        @include grid-column($columns: 16);
 		        .comment-vote-count {
-
+		          @include grid-column($columns: 2);
+		        	width: 45px;
+              height: 25px;
 		        }
 		      	.comment-vote-up {
-		      		margin-right: 15px;
-	            background-size: contain;
-	            width: 25px;
-	            height: 25px;
+		      	  @include grid-column($columns: 2);
+		      	  width: 25px;
+              height: 25px;
 	            &.normal {
 	              background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
 	            }
@@ -178,10 +180,11 @@
 	            }
 		      	}
 		      	.comment-vote-down {
+		      	  @include grid-column($columns: 2);
 		      		margin: 7px 15px 0 0;
 	            background-size: contain;
 	            width: 25px;
-	            height: 25px;
+              height: 25px;
 	            &.normal {
 	              background: url("assets/img/vote-icon/vote-down-icon.png") no-repeat;
 	            }
@@ -190,6 +193,7 @@
 	            }
 		      	}
 		      	.comment-reply {
+		      	  @include grid-column($columns: 4);
 		      	  color: $primary-color;
 		      	}
 		      }

@@ -28,7 +28,7 @@
   }
 
   function CreatePostCtrl($scope, ForumServices, $location, allPosts, subscribers) {
-    $scope.data = {
+    $scope.redata = {
       title: '',
       content: '',
       base_course_id: ''
