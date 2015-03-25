@@ -73,22 +73,19 @@
             float: left;
             margin-left: 25px;
             a.title {
-              color: #810C15;
+              color: $oil;
               margin: 0;
               font-weight: 600;
-              // color: #333;
-              // &:hover {
-              //   color: #810C15;
-              // }
+              &:hover {
+                color: $primary-color;
+              }
             }
             p.post-detail {
+              padding:0;
               color: #333;
               margin:0;
               a.admin, a.memo{
-                color: #333;
-                &:hover {
-                  color: #810C15;
-                }
+                color: $primary-color;
               }
             }
           }

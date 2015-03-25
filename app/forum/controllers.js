@@ -156,6 +156,7 @@
     $scope.createComment = function () {
       ForumServices.creatComment($scope.data).success(function (data) {
         $scope.post.comments.push(data);
+        document.getElementById("comment").value = "";
       });
     };
 
