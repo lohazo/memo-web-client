@@ -16,11 +16,15 @@
     };
   }
 
-  function ClickEventTrackCtrl($scope, EcoTracker, MemoTracker) {
+  function ClickEventTrackCtrl($scope, $window, EcoTracker, MemoTracker) {
     var data = angular.fromJson($scope.trackingData);
     $scope.click = function () {
       if (data.memoEnabled) {
-        MemoTracker.track(data.eventName);
+        MemoTracker.track(data.eventName).finally(function () {
+          if (data.to) {
+            $window.location.href = data.to;
+          }
+        });
       } else {
         EcoTracker.campaignTrack("Web 1.0.3 click event track", data);
       }
@@ -71,7 +75,7 @@
 
   angular.module('tracking')
     .directive('clickEventTrack', clickEventTrack)
-    .controller('ClickEventTrackCtrl', ['$scope', 'EcoTracking', 'MemoTracking',
+    .controller('ClickEventTrackCtrl', ['$scope', '$window', 'EcoTracking', 'MemoTracking',
       ClickEventTrackCtrl
     ]);
 
