@@ -1,7 +1,8 @@
-<section class="discussion-inner" ng-controller="DiscussionPlacementTestModalCtrl">
+<section class="discussion-inner">
 	<section class="discussion-header">
 	  <div class="right">
-	    <a class="small radius button follow-button">Theo dõi thảo luận</a>
+	    <a class="small radius button follow-button" ng-if="getPost.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
+            <a class="small radius button follow-button" ng-if="getPost.follow == true" ng-click="unfollowPost()">Bỏ theo dõi</a>
 	  </div>
 	</section>
 	<section class="discussion-content">
@@ -11,8 +12,8 @@
 	  	    <span class="speaker" ng-click="speaker.play()"></span>
 	  	  </div>
 	  	  <div class="discussion-question-right">
-	  	  	<span class="question-title">""</span>
-	  		  <span class="question-translation" ng-if="question.answer"><strong>Dịch: </strong></span>
+	  	  	<span class="question-title">"{{getPost.title}}"</span>
+	  		  <span class="question-translation" ng-bind="getPost.content"></span>
 	  	  </div>
 	  	</section>
 	  	<section class="discussion-editor">
@@ -21,7 +22,7 @@
 	  		</div>
 	  		<div class="discussion-editor-right">
 	  		  <div class="discussion-editor-text-area">
-	  			  <textarea class="editor-text-area" placeholder="Thảo luận câu này với người học khác"></textarea>
+	  			  <textarea class="editor-text-area" ng-model="requestData.content" placeholder="Thảo luận câu này với người học khác"></textarea>
 	  			</div>
 	  			<div class="discussion-editor-description">
 	  			  <div class="editor-description-left">
@@ -30,31 +31,31 @@
 	  			  <div class="editor-description-right">Trong quá trình làm bài, nếu đáp án của bạn có vẻ đúng nhưng không được chấp nhận, làm ơn bấm nút báo lỗi và chọn mục tương ứng để thông báo cho bọn mình. Vui lòng không báo lỗi hoặc đề nghị đáp án đúng tại đây.</div>
 	  			</div>
 	  			<div class="discussion-toolbar">
-	  				<a class="small radius button send-button" ng-click="sendDiscussion()">Gửi bình luận</a>
-	  		    <a class="small radius button cancel-button">Hủy</a>
+	  				<a class="small radius button send-button" ng-click="createComment()">Gửi bình luận</a>
+	  		    <!-- <a class="small radius button cancel-button">Hủy</a> -->
 	  			</div>
 	  		</div>
 	  	</section>
 	  	<section class="discussion-comment-count">
-	  		<h4 class="">6 bình luận {{}}</h4>
+	  		<h4 class="">{{getPost.total_comment}} bình luận </h4>
 	  	</section>
 	  </section>
 	</section>
-	<section class="discussion-comment" ng-repeat="comment in data.comments">
-	<ul class="comments">
+	<section class="discussion-comment" >
+	<ul class="comments" ng-repeat="comment in listComment.comments">
 		<li class="comment">
 			<div class="discussion-comment-left">
 				<img ng-src="{{'assets/img/profile-avatar-big.png'}}" />
 			</div>
 			<div class="discussion-comment-right">
-				<div class="comment-title"></div>
-				<div class="comment-content">"tôi nói chuyện" chương trình báo sai</div>
+				<div class="comment-title" ng-bind="comment.user.name"></div>
+				<div class="comment-content" ng-bind="comment.content"></div>
 				<div class="comment-toolbar">
-					<span class="comment-vote-count">10</span>
-					<a class="comment-vote-up active"></a>
-					<span class="comment-vote-count">20</span>
-					<a class="comment-vote-down active"></a>
-					<a class="comment-reply">Trả lời</a>
+					<span class="comment-vote-count" ng-bind="comment.up_vote_count"></span>
+					<a class="comment-vote-up normal" ng-class="{'active': comment.is_vote_up}" ng-click="voteUpComment(comment)"></a>
+					<span class="comment-vote-count" ng-bind="comment.down_vote_count"></span>
+					<a class="comment-vote-down normal" ng-class="{'active': comment.is_vote_down}" ng-click="voteDownComment(comment)"></a>
+					<!-- <a class="comment-reply">Trả lời</a> -->
 				</div>
 			</div>
 		</li>

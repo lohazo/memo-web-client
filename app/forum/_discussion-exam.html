@@ -13,7 +13,7 @@
 	  	  </div>
 	  	  <div class="discussion-question-right">
 	  	  	<span class="question-title">"{{getPost.title}}"</span>
-	  		  <span class="question-translation"><strong>Dịch: </strong>{{getPost.content}}</span>
+	  		  <span class="question-translation" ng-bind="getPost.content"></span>
 	  	  </div>
 	  	</section>
 	  	<section class="discussion-editor">
@@ -32,7 +32,7 @@
 	  			</div>
 	  			<div class="discussion-toolbar">
 	  				<a class="small radius button send-button" ng-click="createComment()">Gửi bình luận</a>
-	  		    <a class="small radius button cancel-button">Hủy</a>
+	  		    <!-- <a class="small radius button cancel-button">Hủy</a> -->
 	  			</div>
 	  		</div>
 	  	</section>
@@ -55,7 +55,7 @@
 					<a class="comment-vote-up normal" ng-class="{'active': comment.is_vote_up}" ng-click="voteUpComment(comment)"></a>
 					<span class="comment-vote-count" ng-bind="comment.down_vote_count"></span>
 					<a class="comment-vote-down normal" ng-class="{'active': comment.is_vote_down}" ng-click="voteDownComment(comment)"></a>
-					<a class="comment-reply">Trả lời</a>
+					<!-- <a class="comment-reply">Trả lời</a> -->
 				</div>
 			</div>
 		</li>
