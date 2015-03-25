@@ -40,7 +40,7 @@
     'profile', 'skill', 'report', 'exam',
     'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
     'words', 'referral', 'question',
-    'notification', 'download', 'adsense', 'forum'
+    'notification', 'download', 'adsense', 'forum', 'memo.dropdown'
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
     'GooglePlusProvider', '$logProvider',
     AppConfig
