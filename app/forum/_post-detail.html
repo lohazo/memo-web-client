@@ -14,12 +14,12 @@
         </div>
         <div class="post-info-inner">
           <div class="post-version">
-            <img class="poster-avatar" ng-src="{{post.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+            <img class="poster-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
             <div class="post-version-content left">
               <div class="post-version-header">
                 <div class="title" ng-bind="post.title"></div>
                 <div ng-bind="post.user"></div>
-                <div><span class="created-date">17/02/2014</span> - Tiếng Đức</div>
+                <!-- <div><span class="created-date">17/02/2014</span> - Tiếng Đức</div> -->
               </div>
               <div class="post-version-middler">
                 <div ng-bind="post.content"></div>
@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="comment-version">
-            <img class="commenter-avatar" ng-src="{{post.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+            <img class="commenter-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
             <div class="comment-version-content left">
               <div class="comment-editor">
                 <textarea ng-model="data.content" class="comment-editor-textarea" placeholder="Gửi bình luận của bạn"></textarea>
@@ -57,7 +57,7 @@
               <div class="parent-comments">
                 <div class="parent-comment">
                   <div class="parent-comment-inner">
-                    <img class="comment-avatar" ng-src="{{comment.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+                    <img class="comment-avatar" ng-src="{{comment.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
                     <div class="comment-content">
                       <div class="comment-content-top">
                         <a class="comment-name-text" ng-bind="comment.user.name"></a>

@@ -100,6 +100,8 @@
       .commenter-avatar {
         border-radius: 50%;
         @include grid-column($columns: 2);
+        width: 15px;
+        height: 15px;
       }
       .comment-version-content {
         @include grid-column($columns: 14);
@@ -164,13 +166,19 @@
           .parent-comments {
             .parent-comment {
               .parent-comment-inner {
+                @include grid-column($columns: 16);
                 border-top: solid 1px #ccc;
+                @include grid-row;
                 .comment-avatar {
                   border-radius: 50%;
-                  @include grid-column($columns: 2);
+                  @include grid-column($columns: 3);
+                  width: 60px;
+                  height: 60px;
+                  padding: 0;
+                  margin: 20px 10px 0 0;
                 }
                 .comment-content {
-                  @include grid-column($columns: 14);
+                  @include grid-column($columns: 12);
                   padding: 20px 0 0 0;
                   .comment-content-top {
                     text-align: left;
