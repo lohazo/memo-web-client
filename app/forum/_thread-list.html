@@ -15,7 +15,7 @@
           <tab class="tabs-heading" heading="Chủ đề mới">
           <ul class="the-posts">
             <li class="post" ng-repeat="post in stickPosts">
-              <div class="post-avatar"><img ng-src="{{post.user.url_avatar}}" /></div>
+              <div><img class="post-avatar" ng-src="{{post.user.url_avatar  || 'assets/img/profile-avatar-big.png'}}" /></div>
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="" ng-bind="post.title"></a>
                 <p class="post-detail">
@@ -27,7 +27,7 @@
               </div>
             </li>
             <li class="post" ng-repeat="post in allPosts">
-              <div class="post-avatar"><img ng-src="{{post.user.url_avatar}}" /></div>
+              <div ><img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
                 <p class="post-detail">
@@ -59,7 +59,7 @@
           <tab class="tabs-heading" heading="Đã theo dõi">
           <ul class="the-posts">
             <li class="post" ng-repeat="post in stickPosts">
-              <div class="post-avatar"><img ng-src="{{post.user.url_avatar}}" /></div>
+              <div><img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="" ng-bind="post.title"></a>
                 <p class="post-detail">
@@ -71,7 +71,7 @@
               </div>
             </li>
             <li class="post" ng-repeat="post in followingPosts">
-              <div class="post-avatar"><img ng-src="{{post.user.url_avatar}}" /></div>
+              <div><img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
                 <p class="post-detail">

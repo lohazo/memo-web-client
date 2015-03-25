@@ -44,9 +44,6 @@
     $scope.search = function (e) {
       if (e.keyCode === 13) {
         if ($scope.postSearch.keywords.length > 0) {
-          // $location.search({
-          //   search: $scope.postSearch.keywords
-          // });
           ForumServices.searchPosts({
             keywords: $scope.postSearch.keywords
           }).success(function (data) {
@@ -90,9 +87,6 @@
     $scope.search = function (e) {
       if (e.keyCode === 13) {
         if ($scope.postSearch.keywords.length > 0) {
-          // $location.search({
-          //   search: $scope.postSearch.keywords
-          // });
           ForumServices.searchPosts({
             keywords: $scope.postSearch.keywords
           }).success(function (data) {
