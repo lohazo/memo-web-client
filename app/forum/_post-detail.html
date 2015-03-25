@@ -1,0 +1,108 @@
+<section class="post-detail">
+  <section class="main-left">
+    <section class="panel post-detail-panel">
+      <section class="post-info">
+        <div class="post-info-header">
+          <div class="left">
+            <!-- <h4 class="title">Các chủ đề</h4> -->
+            <a class="title" ng-href="/forum">&lsaquo; Danh sách chủ đề </a>
+          </div>
+          <div class="right">
+            <a class="small radius button follow-button" ng-if="post.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
+            <a class="small radius button follow-button" ng-if="post.follow == true" ng-click="unfollowPost()">Bỏ theo dõi</a>
+          </div>
+        </div>
+        <div class="post-info-inner">
+          <div class="post-version">
+            <img class="poster-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+            <div class="post-version-content left">
+              <div class="post-version-header">
+                <div class="title" ng-bind="post.title"></div>
+                <a ng-href="/profile/{{post.user._id}}" ng-bind="post.user.name"></a>
+                <div>{{post.created_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}} - {{post.user.current_course_name}}</div>
+              </div>
+              <div class="post-version-middler">
+                <div ng-bind="post.content"></div>
+              </div>
+              <div class="post-version-toolbar">
+                <div class="total-vote left" ng-bind="post.up_vote_count"></div>
+                <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)"></a>
+                <div class="total-vote left" ng-bind="post.down_vote_count"></div>
+                <a class="vote-down normal left" ng-class="{'active': post.is_vote_down}" ng-click="voteDownPost(post)"></a>
+              </div>
+            </div>
+          </div>
+          <div class="comment-version">
+            <img class="commenter-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+            <div class="comment-version-content left">
+              <div class="comment-editor">
+                <textarea id="comment" ng-model="data.content" class="comment-editor-textarea" placeholder="Gửi bình luận của bạn"></textarea>
+              </div>
+              <div class="comment-toolbar">
+                <a class="small radius button send-comment-button" ng-click="createComment()">Gửi</a>
+                <!-- <a class="small radius button cancel-button">Hủy</a> -->
+              </div>
+            </div>
+          </div>
+      </section>
+      <section class="comment-info">
+        <div class="comment-info-header">
+          <div class="left">
+            <h4 class="title">Có <span ng-bind="post.total_comment"></span> bình luận</h4>
+          </div>
+        </div>
+        <div class="comment-info-inner">
+          <ul class="comments">
+            <li class="comment" ng-repeat="comment in post.comments">
+              <div class="parent-comments">
+                <div class="parent-comment">
+                  <div class="parent-comment-inner">
+                    <img class="comment-avatar" ng-src="{{comment.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+                    <div class="comment-content">
+                      <div class="comment-content-top">
+                        <a ng-href="/profile/{{comment.user._id}}" class="comment-name-text" ng-bind="comment.user.name"></a>
+                      </div>
+                      <div class="comment-content-mid">
+                        <div class="comment-content-text" ng-bind="comment.content">{{content}}</div>
+                      </div>
+                      <div class="comment-content-toolbar">
+                        <div class="total-vote left" ng-bind="comment.up_vote_count"></div>
+                        <a class="vote-up left normal" ng-class="{'active': comment.is_vote_up}" ng-click="voteUpComment(comment)"></a>
+                        <div class="total-vote left" ng-bind="comment.down_vote_count"></div>
+                        <a class="vote-down left normal" ng-class="{'active': comment.is_vote_down}" ng-click="voteDownComment(comment)"></a>
+                        <!-- <a class="reply left" ng-click="reply()">Trả lời</a> -->
+                      </div>
+                    </div>  
+                  </div>
+                </div>
+              </div>
+              <ul class="child-comments">
+                <li class="child-comment">
+                  <div class="child-comment-inner"></div>               
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    </section>
+  <section class="main-right">
+    <section class="panel search-panel">
+      <div class="search">
+        <input type="text" ng-model="postSearch.keywords" ng-keydown="search($event=event)" placeholder="Tìm kiếm chủ đề">
+      </div>
+    </section>
+    <section class="panel channel-follow">
+      <h4 class="title">Kênh theo dõi</h4>
+      <div class="course-language">
+        <ul>
+          <li ng-repeat="subscriber in subscribers.list_subscriptions">
+            <img class="avatar-course" ng-src="/assets/img/{{subscriber._id}}.png" />
+            <a ng-href="/forum?filter={{subscriber._id}}">{{subscriber.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </section>
+</section>
