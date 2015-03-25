@@ -97,7 +97,7 @@ angular.module('memo.dropdown', ['mm.foundation.position', 'mm.foundation.mediaQ
               if (shouldUnbind) {
                 $document.off('click', closeMenu);
                 if (dropdown.attr('scroll-to-focus')) {
-                  jQuery('body').animate({
+                  jQuery('html, body').animate({
                     scrollTop: -distanceToScroll
                   }, 300, function () {
                     dropdown.css('display', 'none');
@@ -122,7 +122,7 @@ angular.module('memo.dropdown', ['mm.foundation.position', 'mm.foundation.mediaQ
             }
 
             if (dropdown.attr('scroll-to-focus')) {
-              jQuery('body').animate({
+              jQuery('html, body').animate({
                 scrollTop: distanceToScroll
               }, 300);
             }
