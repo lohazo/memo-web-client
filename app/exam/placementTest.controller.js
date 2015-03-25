@@ -153,7 +153,6 @@
 
   function DiscussionPlacementTestModalCtrl ($scope, $location, PlacementTest, $localStorage, ForumServices) {
     $scope.question = PlacementTest.question.question;
-    console.log(PlacementTest.question.question)
     $scope.requestData = {
       content: ''
     }
@@ -181,7 +180,6 @@
         $scope.getPost = data;
         ForumServices.listComment($scope.data).success(function (data) {
           $scope.listComment = data;
-          console.log(data);
         });
       });
     });
