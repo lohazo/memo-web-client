@@ -7,6 +7,9 @@
   position: absolute;
   top: 110px !important;
   .discussion-inner {
+    .close-reveal-modal {
+      top: -28px;
+    }
     position: absolute !important;
     .discussion-header {
 	    padding-right: 30px;

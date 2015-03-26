@@ -252,11 +252,14 @@
     };
   }
 
-  function DiscussionExamModalCtrl($scope, $location, Exam, $localStorage, ForumServices) {
+  function DiscussionExamModalCtrl($scope, $location, Exam, $localStorage, ForumServices, $modalInstance) {
     $scope.question = Exam.question();
     $scope.requestData = {
       content: ''
     }
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
 
     $scope.data = {};
     $scope.data.question_log_id = $scope.question.question_log_id;
@@ -347,7 +350,5 @@
       '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
       'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', ExamCtrl
     ])
-    .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', '$localStorage', 'ForumServices',
-      DiscussionExamModalCtrl
-    ]);
+    .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', '$localStorage', 'ForumServices', '$modalInstance', DiscussionExamModalCtrl]);
 }(window.angular));
