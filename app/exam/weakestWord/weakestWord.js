@@ -6,6 +6,10 @@
   		templateUrl: 'exam/weakestWord/_weakest-word.html',
   		// controller: 'WeakestWordCtrl'
   	});
+  	$routeProvider.when('/weakestword/detail', {
+  		templateUrl: 'exam/weakestWord/_weakest-word-detail.html',
+  		// controller: 'WeakestWordCtrl'
+  	});
   };
   
 
