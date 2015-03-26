@@ -2,8 +2,8 @@
   'use strict';
 
   function weakestWordConfig($routeProvider) {
-  	$routeProvider.when('/weakestword/detail', {
-  		templateUrl: 'exam/weakestWord/_weakest-word-detail.html',
+  	$routeProvider.when('/weakestword', {
+  		templateUrl: 'exam/weakestWord/_weakest-word.html',
   		// controller: 'WeakestWordCtrl'
   	});
   };

@@ -1,0 +1,24 @@
+.weakest-word {
+  @include grid-row;
+  padding-top: 42px;
+  .main-left {
+    @include grid-column($columns: 10);
+  }	
+  .main-right {
+    @include grid-column($columns: 6);
+  }
+  .panel {
+    @include panel($bg: $white);
+    width: 100% !important;
+    border: 0;
+    border-radius: 20px;
+  }
+  .left-panel{ 
+    @include grid-row;
+    padding: 30px; 
+  }
+  .right-panel{
+    @include grid-row;
+    padding: 30px;
+  }
+}
