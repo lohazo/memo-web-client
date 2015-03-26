@@ -22,14 +22,11 @@
     $scope.search = function (e) {
       if (e.keyCode === 13) {
         if ($scope.postSearch.keywords.length > 0) {
-          // $location.search({
-          //   search: $scope.postSearch.keywords
-          // });
           ForumServices.searchPosts({
             keywords: $scope.postSearch.keywords
           }).success(function (data) {
             $scope.stickyPosts = data.sticky_posts;
-            $scope.allPosts = data.posts;
+            $scope.searchPosts = data.posts;
           });
         }
       }
@@ -44,8 +41,7 @@
     };
 
     $scope.subscribers = subscribers.data;
-    $scope.stickyPosts = allPosts.data.sticky_posts;
-    $scope.allPosts = allPosts.data.posts;
+
     $scope.postSearch = {
       keywords: ''
     };
@@ -86,14 +82,15 @@
 
   function PostDetailCtrl($scope, ForumServices, Post, allPosts, subscribers) {
     $scope.post = Post.data;
+    $scope.post.created_time = Math.round((new Date('' + $scope.post.created_at)).getTime() / 1000);
+
     $scope.data = {
       content: '',
       id: $scope.post._id
     };
 
     $scope.subscribers = subscribers.data;
-    $scope.stickyPosts = allPosts.data.sticky_posts;
-    $scope.allPosts = allPosts.data.posts;
+
     $scope.postSearch = {
       keywords: ''
     };
@@ -114,10 +111,22 @@
     $scope.listComment = function () {
       ForumServices.listComment($scope.data).success(function (data) {
         $scope.post.comments = data.comments;
+        $scope.page = data;
       });
     };
 
     $scope.listComment();
+
+    $scope.setPage = function (page) {
+      ForumServices.listComment({
+        page: page,
+        id: $scope.data.id
+      }).success(function (data) {
+        $scope.post.comments = data.comments;
+        $scope.page = data;
+      });
+      return;
+    };
 
     $scope.followPost = function () {
       ForumServices.followPost($scope.post).success(function () {
@@ -166,6 +175,7 @@
         vote: post.is_vote_down
       });
     };
+
     $scope.isSending = false;
     $scope.createComment = function () {
       if (!$scope.isSending && $scope.data.content != '') {
@@ -216,6 +226,12 @@
         id: comment._id,
         type: 'downvote',
         vote: comment.is_vote_down
+      });
+    };
+
+    $scope.reply = function (comment) {
+      ForumServices.listReply({id: comment._id}).success(function (data) {
+        $scope.replies = data.comments;
       });
     };
   }

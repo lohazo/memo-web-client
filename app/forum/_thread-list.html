@@ -87,6 +87,37 @@
             </li>
           </ul>
           </tab>
+          <tab class="tabs-heading" heading="Chủ đề tìm kiếm">
+          <ul class="the-posts">
+            <li class="post" ng-repeat="post in stickPosts">
+              <div><img class="post-avatar" ng-src="{{post.user.url_avatar  || 'assets/img/profile-avatar-big.png'}}" /></div>
+              <div class="post-content">
+                <a ng-href="/forum/post/{{post._id}}" class="title" title="" ng-bind="post.title"></a>
+                <p class="post-detail">
+                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a>
+                </p>
+              </div>
+              <div class="comment">
+                <span>{{post.total_comment}}</span>
+              </div>
+            </li>
+            <li class="post" ng-repeat="post in searchPosts">
+              <div ><img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
+              <div class="post-content">
+                <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
+                <p class="post-detail">
+                  <a class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo">{{post.user.current_course_name}}</a>          
+                </p>
+              </div>
+              <div class="comment">
+                <span>{{post.total_comment}}</span> 
+              </div>
+            </li>
+          </ul>
+          <!-- <div class="pagination-centered">
+            <pagination page="currentPage" total-items="page.total_page" on-select-page="setPage(page)"></pagination>
+          </div> -->  
+          </tab>
           </tabset>
         </div>
       </div>
