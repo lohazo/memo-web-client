@@ -2,20 +2,29 @@
     float: left;
 }
 .plaza-item-section-name{
-        font-weight: bold;
-        line-height: inherit;
-        border-bottom-color: rgb(221, 221, 221);
-        border-bottom-style: solid;
-        border-bottom-width: 1px;
-    }
+    font-weight: bold;
+    line-height: inherit;
+    border-bottom-color: rgb(221, 221, 221);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
 .back-lesson{
     float: right;
     border-radius: 5px;
     text-decoration: none;
+    border:2px solid #fb3;
     text-align: center;
+    font-weight: 600;
     display: inline-block;
+    padding: 10px 20px;
     color: #810C15;
     font-size: 15px;
+    transition: background-color 1s;
+    margin-bottom: 20px;
+    &:hover {
+      background-color:#FB3;
+      // color: #fff;
+    }
 }
 
 .button-back-plaza {
@@ -32,10 +41,7 @@
     font-size: 15px;
     margin-top: 5px;
 }
-.back-lesson:hover{
-    background-color:#FB3;
-    color: #fff;
-}
+
 .plaza-item {
     @include grid-column($columns: 16);
     @include grid-row;
