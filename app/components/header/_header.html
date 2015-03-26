@@ -14,6 +14,9 @@
         <li class="menu-item" ng-class="{'active': path == '/'}" style="width: 130px;">
           <a href="/" target="_self">Trang chủ</a>
         </li>
+        <li class="menu-item" ng-class="{'active': path.indexOf('/forum') >= 0}" style="width: 130px;">
+          <a href="/forum" target="_self">Thảo luận</a>
+        </li>
       </ul>
       <!-- Right Nav Section -->
       <ul class="right">

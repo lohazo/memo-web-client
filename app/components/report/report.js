@@ -8,13 +8,11 @@ angular.module('report', [])
       return {
         reportBug: function (data) {
           var deferred = $q.defer();
-
           var requestData = {};
           requestData.feedback = data.content;
           requestData.auth_token = $localStorage.auth.user.auth_token;
           requestData.platform = 'web';
           requestData.version = '1.0.3';
-
           $http.post(API + '/feedbacks/report_bugs', requestData)
             .then(function (response) {
               deferred.resolve(response);

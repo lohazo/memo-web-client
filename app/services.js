@@ -205,7 +205,8 @@
     .constant('APP_VERSION', '1.0.3')
     .constant('API', '//services.memo.edu.vn/v2/api')
     .constant('angularMomentConfig', {
-      preprocess: 'unix'
+      preprocess: 'unix',
+      timezone: 'Asia/Hanoi'
     })
     .factory('HttpInterceptor', ['$rootScope', '$q', '$location', '$localStorage',
       HttpInterceptor
