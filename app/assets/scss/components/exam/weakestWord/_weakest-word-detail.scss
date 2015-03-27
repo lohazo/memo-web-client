@@ -42,10 +42,10 @@
           @include grid-column($columns: 3);
         }
         .time {
-          @include grid-column($columns: 5);
+          @include grid-column($columns: 4);
         }
         .strengthen {
-          @include grid-column($columns: 5);
+          @include grid-column($columns: 4);
         }
       }
     }

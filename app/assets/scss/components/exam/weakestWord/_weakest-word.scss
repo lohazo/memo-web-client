@@ -2,23 +2,36 @@
   @include grid-row;
   padding-top: 42px;
   .main-left {
-    @include grid-column($columns: 10);
+    @include grid-column($columns: 11);
+    .weakest-word-panel {
+      padding: 30px;  
+      @include grid-row;
+      .total-word {
+        padding-top: 10px;
+      }
+    }
   }	
   .main-right {
-    @include grid-column($columns: 6);
+    @include grid-column($columns: 5);
+    .weakest-word-panel {
+      margin-top: 0;
+      padding: 30px; 
+      ul.level-base-word {
+        list-style: none;
+        li {
+          margin-left: 30px;
+          margin-bottom: 10px;
+          img {
+            padding-right: 20px;
+          }
+        }
+      }
+    }
   }
   .panel {
     @include panel($bg: $white);
     width: 100% !important;
     border: 0;
     border-radius: 20px;
-  }
-  .left-panel{ 
-    @include grid-row;
-    padding: 30px; 
-  }
-  .right-panel{
-    @include grid-row;
-    padding: 30px;
   }
 }
