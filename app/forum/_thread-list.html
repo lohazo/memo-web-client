@@ -12,9 +12,9 @@
       <div class="main-post">
         <div class="tabs">
           <tabset vertical="false" type="navType">
-          <tab class="tabs-heading" heading="Chủ đề mới">
+          <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
           <ul class="the-posts">
-            <li class="post" ng-repeat="post in allPosts.sticky_posts">
+            <li class="post" ng-repeat="post in tab.data.sticky_posts">
               <div><img class="post-avatar" ng-src="{{post.user.url_avatar  || 'assets/img/profile-avatar-big.png'}}" /></div>
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="" ng-bind="post.title"></a>
@@ -26,7 +26,7 @@
                 <span>{{post.total_comment}}</span>
               </div>
             </li>
-            <li class="post" ng-repeat="post in allPosts.posts">
+            <li class="post" ng-repeat="post in tab.data.posts">
               <div ><img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
               <div class="post-content">
                 <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
@@ -40,36 +40,8 @@
             </li>
           </ul>
           <div class="pagination-centered">
-            <pagination page="allPosts.current_page" total-items="allPosts.total_page * 10" on-select-page="setPage(page)"></pagination>
+            <pagination ng-if="tab.data.total_page > 0" page="tab.data.current_page" total-items="tab.data.total_page * 10" on-select-page="setPage(page)"></pagination>
           </div>  
-          </tab>
-          <tab class="tabs-heading" heading="Đã theo dõi">
-          <ul class="the-posts">
-            <li class="post" ng-repeat="post in allPosts.sticky_posts">
-              <div><img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
-              <div class="post-content">
-                <a ng-href="/forum/post/{{post._id}}" class="title" title="" ng-bind="post.title"></a>
-                <p class="post-detail">
-                  <a class="admin">{{post.user.name}}</a>, {{post.created_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}} - <a class="memo">{{post.course_name}}</a>
-                </p>
-              </div>
-              <div class="comment">
-                <span>{{post.total_comment}}</span>
-              </div>
-            </li>
-            <li class="post" ng-repeat="post in followingPosts.posts">
-              <div><img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
-              <div class="post-content">
-                <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
-                <p class="post-detail">
-                  <a class="admin">{{post.user.name}}</a>, {{post.created_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}} - <a class="memo">{{post.course_name}}</a>
-                </p>
-              </div>
-              <div class="comment">
-                <span>{{post.total_comment}}</span>
-              </div>
-            </li>
-          </ul>
           </tab>
           </tabset>
         </div>

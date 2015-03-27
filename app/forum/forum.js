@@ -7,12 +7,6 @@
       templateUrl: 'forum/_create-post.html',
       controller: 'CreatePostCtrl',
       resolve: {
-        allPosts: function ($route, ForumServices) {
-          if ($route.current.params.keywords) {
-            return ForumServices.searchPosts($route.current.params);
-          }
-          return ForumServices.listPosts($route.current.params);
-        },
         subscribers: function (ForumServices) {
           return ForumServices.getListSubscription();
         }
@@ -28,15 +22,6 @@
             id: $route.current.params.id
           });
         },
-        allPosts: function ($route, ForumServices) {
-          if ($route.current.params.search) {
-            var text = $route.current.params.search;
-            return ForumServices.searchPosts({
-              keywords: text
-            });
-          }
-          return ForumServices.listPosts($route.current.params);
-        },
         subscribers: function (ForumServices) {
           return ForumServices.getListSubscription();
         }
@@ -48,12 +33,6 @@
       controller: 'ListPostCtrl',
       resolve: {
         allPosts: function ($route, ForumServices) {
-          if ($route.current.params.search) {
-            var text = $route.current.params.search;
-            return ForumServices.searchPosts({
-              keywords: text
-            });
-          }
           return ForumServices.listPosts($route.current.params);
         },
         subscribers: function (ForumServices) {
@@ -63,6 +42,14 @@
           return ForumServices.listPosts({
             filter: 'follow'
           });
+        },
+        searchPosts: function ($route, $q, ForumServices) {
+          var deferred = $q.defer();
+          if ($route.current.params.keywords) {
+            return ForumServices.searchPosts($route.current.params);
+          }
+          deferred.resolve();
+          return deferred.promise;
         }
       }
     });

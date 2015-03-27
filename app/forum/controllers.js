@@ -1,16 +1,44 @@
 (function (angular) {
   'use strict';
 
-  function ListPostCtrl($scope, $location, ForumServices, allPosts, subscribers, followingPosts) {
-    $scope.subscribers = subscribers.data;
-    $scope.allPosts = allPosts.data;
-    $scope.allPosts.posts = allPosts.data.posts.map(function (post) {
-      post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
-      return post;
-    });
-    $scope.allPosts.current_page = $scope.allPosts.next_page > 0 ? $scope.allPosts.next_page - 1 : $scope.allPosts.total_page;
+  function ListPostCtrl($scope, $location, ForumServices, allPosts, subscribers, followingPosts, searchPosts) {
 
-    $scope.followingPosts = followingPosts.data;
+    function convertToViewData(data) {
+      var output = angular.copy(data);
+      if (!output.message) {
+        output.posts = output.posts.map(function (post) {
+          post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
+          return post;
+        });
+        output.current_page = output.next_page > 0 ? output.next_page - 1 : output.total_page;
+      }
+      return output;
+    }
+
+    $scope.subscribers = subscribers.data;
+    $scope.allPosts = convertToViewData(allPosts.data);
+    $scope.followingPosts = convertToViewData(followingPosts.data);
+
+    $scope.tabs = [{
+      title: 'Chủ đề mới',
+      data: $scope.allPosts,
+      active: true
+    }, {
+      title: 'Đang theo dõi',
+      data: $scope.followingPosts,
+      active: false
+    }];
+
+    if ($location.search().keywords) {
+      $scope.searchPosts = convertToViewData(searchPosts.data);
+      $scope.tabs[0].active = false;
+      $scope.tabs[2] = {
+        title: 'Kết quả tìm kiếm',
+        data: $scope.searchPosts,
+        active: true
+      };
+    }
+
     $scope.postSearch = {
       keywords: ''
     };
@@ -216,6 +244,7 @@
 
   angular.module('forum.controllers', ['forum.services'])
     .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', 'followingPosts',
+      'searchPosts',
       ListPostCtrl
     ])
     .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'subscribers', CreatePostCtrl])
