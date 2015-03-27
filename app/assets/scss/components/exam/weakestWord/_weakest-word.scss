@@ -3,14 +3,19 @@
   padding-top: 42px;
   .main-left {
     @include grid-column($columns: 11);
-    .weakest-word-panel { 
+    .weakest-word-panel {
+      padding: 30px;  
       @include grid-row;
+      .total-word {
+        padding-top: 10px;
+      }
     }
   }	
   .main-right {
     @include grid-column($columns: 5);
     .weakest-word-panel {
       margin-top: 0;
+      padding: 30px; 
       ul.level-base-word {
         list-style: none;
         li {
