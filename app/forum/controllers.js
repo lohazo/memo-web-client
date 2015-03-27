@@ -3,49 +3,48 @@
 
   function ListPostCtrl($scope, $location, ForumServices, allPosts, subscribers, followingPosts) {
     $scope.subscribers = subscribers.data;
-    $scope.stickyPosts = allPosts.data.sticky_posts;
-    $scope.page = allPosts.data;
-    $scope.allPosts = allPosts.data.posts.map(function (post) {
+    $scope.allPosts = allPosts.data;
+    $scope.allPosts.posts = allPosts.data.posts.map(function (post) {
       post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
       return post;
     });
-    $scope.followingPosts = followingPosts.data.posts;
+    $scope.allPosts.current_page = $scope.allPosts.next_page > 0 ? $scope.allPosts.next_page - 1 : $scope.allPosts.total_page;
+
+    $scope.followingPosts = followingPosts.data;
     $scope.postSearch = {
       keywords: ''
     };
-    $scope.currentPage = $scope.page.next_page - 1;
+
     $scope.setPage = function (page) {
-      $location.search({page: page});
+      var search = {
+        page: page
+      };
+      if ($location.search().keywords) {
+        search.keywords = $location.search().keywords;
+      }
+      $location.search(search);
       return;
     };
 
     $scope.search = function (e) {
       if (e.keyCode === 13) {
         if ($scope.postSearch.keywords.length > 0) {
-          // $location.search({
-          //   search: $scope.postSearch.keywords
-          // });
-          ForumServices.searchPosts({
+          $location.search({
             keywords: $scope.postSearch.keywords
-          }).success(function (data) {
-            $scope.stickyPosts = data.sticky_posts;
-            $scope.allPosts = data.posts;
           });
         }
       }
     };
   }
 
-  function CreatePostCtrl($scope, ForumServices, $location, allPosts, subscribers) {
-    $scope.redata = {
+  function CreatePostCtrl($scope, ForumServices, $location, subscribers) {
+    $scope.data = {
       title: '',
       content: '',
       base_course_id: ''
     };
 
     $scope.subscribers = subscribers.data;
-    $scope.stickyPosts = allPosts.data.sticky_posts;
-    $scope.allPosts = allPosts.data.posts;
     $scope.postSearch = {
       keywords: ''
     };
@@ -53,26 +52,26 @@
     $scope.search = function (e) {
       if (e.keyCode === 13) {
         if ($scope.postSearch.keywords.length > 0) {
-          ForumServices.searchPosts({
+          $location.url('/forum').search({
             keywords: $scope.postSearch.keywords
-          }).success(function (data) {
-            $scope.stickyPosts = data.sticky_posts;
-            $scope.allPosts = data.posts;
           });
         }
       }
     };
 
     $scope.createPost = function () {
-      if(document.getElementById("createPostTitle").value == "") {
-          alert("Bạn chưa nhập Tiêu đề cho bài thảo luận");
-      } else if(document.getElementById("createPostContent").value == "") {
-          alert("Bạn chưa nhập Nội dung cho bài thảo luận");
-      } else {
-          ForumServices.createPost($scope.data).success(function (data) {
-            $location.url('/forum/post/' + data._id);
-          });
+      if ($scope.data.title.length <= 0) {
+        alert("Bạn chưa nhập Tiêu đề cho bài thảo luận");
+        return;
       }
+      if ($scope.data.content.length <= 0) {
+        alert("Bạn chưa nhập Nội dung cho bài thảo luận");
+        return;
+      }
+
+      ForumServices.createPost($scope.data).success(function (data) {
+        $location.url('/forum/post/' + data._id);
+      });
     };
 
     $scope.getListSubscription = function () {
@@ -84,7 +83,7 @@
     $scope.getListSubscription();
   }
 
-  function PostDetailCtrl($scope, ForumServices, Post, allPosts, subscribers) {
+  function PostDetailCtrl($scope, ForumServices, $location, Post, subscribers) {
     $scope.post = Post.data;
     $scope.data = {
       content: '',
@@ -92,8 +91,6 @@
     };
 
     $scope.subscribers = subscribers.data;
-    $scope.stickyPosts = allPosts.data.sticky_posts;
-    $scope.allPosts = allPosts.data.posts;
     $scope.postSearch = {
       keywords: ''
     };
@@ -101,11 +98,8 @@
     $scope.search = function (e) {
       if (e.keyCode === 13) {
         if ($scope.postSearch.keywords.length > 0) {
-          ForumServices.searchPosts({
+          $location.url('/forum').search({
             keywords: $scope.postSearch.keywords
-          }).success(function (data) {
-            $scope.stickyPosts = data.sticky_posts;
-            $scope.allPosts = data.posts;
           });
         }
       }
@@ -224,6 +218,6 @@
     .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', 'followingPosts',
       ListPostCtrl
     ])
-    .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'allPosts', 'subscribers', CreatePostCtrl])
-    .controller('PostDetailCtrl', ['$scope', 'ForumServices', 'Post', 'allPosts', 'subscribers', PostDetailCtrl]);
+    .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'subscribers', CreatePostCtrl])
+    .controller('PostDetailCtrl', ['$scope', 'ForumServices', '$location', 'Post', 'subscribers', PostDetailCtrl]);
 }(window.angular));

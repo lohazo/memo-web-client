@@ -8,11 +8,8 @@
       controller: 'CreatePostCtrl',
       resolve: {
         allPosts: function ($route, ForumServices) {
-          if ($route.current.params.search) {
-            var text = $route.current.params.search;
-            return ForumServices.searchPosts({
-              keywords: text
-            });
+          if ($route.current.params.keywords) {
+            return ForumServices.searchPosts($route.current.params);
           }
           return ForumServices.listPosts($route.current.params);
         },
@@ -60,7 +57,7 @@
           return ForumServices.listPosts($route.current.params);
         },
         subscribers: function (ForumServices) {
-            return ForumServices.getListSubscription();
+          return ForumServices.getListSubscription();
         },
         followingPosts: function (ForumServices) {
           return ForumServices.listPosts({
