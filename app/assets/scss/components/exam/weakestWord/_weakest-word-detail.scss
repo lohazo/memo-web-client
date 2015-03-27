@@ -2,10 +2,10 @@
   @include grid-row;
   padding-top: 42px;
   .main-left {
-    @include grid-column($columns: 11);
-  } 
+    @include grid-column($columns: 10);
+  }	
   .main-right {
-    @include grid-column($columns: 5);
+    @include grid-column($columns: 6);
   }
   .panel {
     @include panel($bg: $white);
@@ -27,65 +27,25 @@
       font-size: 16px;
       color: $oil;
     }
-    .content {
-      @include grid-column($columns: 16);
-      @include grid-row;
-      padding: 30px 10px 20px 10px;
-      color: $oil;
-      .word {
-        @include grid-column($columns: 3);
-        .title {
-          font-size: 16px;
-          text-align: left;
+    .tab-content {
+    	@include grid-column($columns: 16);
+    	padding: 30px 10px 20px 10px;
+    	color: $oil;
+    	.header {
+        @include grid-row;
+        font-size: 16px;
+        text-align: center;
+        .word {
+          @include grid-column($columns: 3);
         }
-        .content {
-          font-size: 16px;
-          color: $steel;
-          &:hover {
-            background-color: $smoke;
-          }
+        .skill {
+          @include grid-column($columns: 3);
         }
-      }
-      .skill {
-        @include grid-column($columns: 3);
-        .title {
-          font-size: 16px;
-          text-align: center;
+        .time {
+          @include grid-column($columns: 4);
         }
-        .content {
-          font-size: 16px;
-          color: $steel;
-          &:hover {
-            background-color: $smoke;
-          } 
-        }
-      }
-      .time {
-        @include grid-column($columns: 5);
-        .title {
-          font-size: 16px;
-          text-align: center;
-        }
-        .content {
-          font-size: 16px;
-          color: $steel;
-          &:hover {
-            background-color: $smoke;
-          }
-        }
-      }
-      .strengthen {
-        @include grid-column($columns: 5);
-        .title {
-          font-size: 16px;
-          text-align: center;
-        }
-        .content {
-          font-size: 16px;
-          color: $steel;
-          &:hover {
-            background-color: $smoke;
-          }
+        .strengthen {
+          @include grid-column($columns: 4);
         }
       }
     }
@@ -106,18 +66,18 @@
       padding-bottom: 20px;
       .speaker {
         @include grid-column($columns: 8);
-        background: url("assets/img/lesson-speaker.png") no-repeat;
-        background-size: cover;
-        display: inline-block;
-        height: 40px;
-        width: 40px;
-        cursor: pointer;
-      }
-      .word {
-        @include grid-column($columns: 8);
-        font-size: 24px;
-        color: $oil;
-      }
+			  background: url("assets/img/lesson-speaker.png") no-repeat;
+			  background-size: cover;
+			  display: inline-block;
+				height: 40px;
+				width: 40px;
+				cursor: pointer;
+			}
+			.word {
+			  @include grid-column($columns: 8);
+			  font-size: 24px;
+			  color: $oil;
+			}
     }
     .description {
       @include grid-column($columns: 16);
@@ -163,22 +123,22 @@
             color: $oil;
             padding: 5px 0 40px 0;
             &.level-01 {
-              background: url("assets/img/weakest-word-icon/level-01.png") no-repeat;
+              background: url("assets/img/weakest-word-icon/strength-level-01.png") no-repeat;
               background-size: contain;
               height: 20px;
             }
             &.level-02 {
-              background: url("assets/img/weakest-word-icon/level-02.png") no-repeat;
+              background: url("assets/img/weakest-word-icon/strength-level-02.png") no-repeat;
               background-size: contain;
               height: 20px;
             }
             &.level-03 {
-              background: url("assets/img/weakest-word-icon/level-03.png") no-repeat;
+              background: url("assets/img/weakest-word-icon/strength-level-03.png") no-repeat;
               background-size: contain;
               height: 20px;
             }
             &.level-04 {
-              background: url("assets/img/weakest-word-icon/level-04.png") no-repeat;
+              background: url("assets/img/weakest-word-icon/strength-level-04.png") no-repeat;
               background-size: contain;
               height: 20px;
             }
@@ -189,7 +149,7 @@
         @include grid-column($columns: 8);
         @include grid-row;
         .title {
-          font-size: 16px;
+        	font-size: 16px;
           color: $aluminum;
         }
         .content {
