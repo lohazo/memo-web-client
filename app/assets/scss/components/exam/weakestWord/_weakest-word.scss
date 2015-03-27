@@ -9,6 +9,30 @@
       .total-word {
         padding-top: 10px;
       }
+      table {
+        @include grid-row;
+        margin-top: 20px;
+        border:none;
+        tbody {
+          margin-top: 15px;
+          tr.word {
+            border-bottom:  solid 1px #ccc;
+            cursor: pointer;
+            .word-text {
+              span {
+                color: #666;
+                border-bottom: dotted 2px #ccc;
+              }
+            }
+            &:hover {
+              background: $smoke;
+            }
+            .translation {
+              border: solid 1px #ccc;
+            }
+          }
+        }
+      }
     }
   }	
   .main-right {
