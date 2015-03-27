@@ -27,67 +27,27 @@
       font-size: 16px;
       color: $oil;
     }
-    .content {
+    .tab-content {
     	@include grid-column($columns: 16);
-    	@include grid-row;
     	padding: 30px 10px 20px 10px;
     	color: $oil;
-    	.word {
-    	  @include grid-column($columns: 3);
-    	  .title {
-    	  	font-size: 16px;
-    	  	text-align: left;
-    	  }
-    	  .content {
-    	    font-size: 16px;
-				  color: $steel;
-				  &:hover {
-				    background-color: $smoke;
-				  }
-    	  }
-    	}
-    	.skill {
-    	  @include grid-column($columns: 3);
-    	  .title {
-    	    font-size: 16px;
-    	    text-align: center;
-    	  }
-    	  .content {
-    	    font-size: 16px;
-    	    color: $steel;
-    	    &:hover {
-    	      background-color: $smoke;
-    	    } 
-    	  }
-    	}
-    	.time {
-				@include grid-column($columns: 5);
-				.title {
-				  font-size: 16px;
-				  text-align: center;
-				}
-    	  .content {
-    	    font-size: 16px;
-				  color: $steel;
-				  &:hover {
-				    background-color: $smoke;
-				  }
-    	  }
-    	}
-    	.strengthen {
-				@include grid-column($columns: 5);
-				.title {
-				  font-size: 16px;
-				  text-align: center;
-				}
-    	  .content {
-    	    font-size: 16px;
-				  color: $steel;
-				  &:hover {
-				    background-color: $smoke;
-				  }
-    	  }
-    	}
+    	.header {
+        @include grid-row;
+        font-size: 16px;
+        text-align: center;
+        .word {
+          @include grid-column($columns: 3);
+        }
+        .skill {
+          @include grid-column($columns: 3);
+        }
+        .time {
+          @include grid-column($columns: 5);
+        }
+        .strengthen {
+          @include grid-column($columns: 5);
+        }
+      }
     }
   }
   .weakest-word-info-panel{
@@ -163,22 +123,22 @@
             color: $oil;
             padding: 5px 0 40px 0;
             &.level-01 {
-              background: url("assets/img/weakest-word-icon/level-01.png") no-repeat;
+              background: url("assets/img/weakest-word-icon/strength-level-01.png") no-repeat;
               background-size: contain;
               height: 20px;
             }
             &.level-02 {
-              background: url("assets/img/weakest-word-icon/level-02.png") no-repeat;
+              background: url("assets/img/weakest-word-icon/strength-level-02.png") no-repeat;
               background-size: contain;
               height: 20px;
             }
             &.level-03 {
-              background: url("assets/img/weakest-word-icon/level-03.png") no-repeat;
+              background: url("assets/img/weakest-word-icon/strength-level-03.png") no-repeat;
               background-size: contain;
               height: 20px;
             }
             &.level-04 {
-              background: url("assets/img/weakest-word-icon/level-04.png") no-repeat;
+              background: url("assets/img/weakest-word-icon/strength-level-04.png") no-repeat;
               background-size: contain;
               height: 20px;
             }

@@ -6,24 +6,13 @@
 	    </div>
 	    <div class="discusion">Đã học tổng cộng: <span >8 từ</span>
 	    </div>
-	    <div class="content">
-	      <div class="word">
-	      	<div class="title">Từ vựng</div>
-	      	<div class="content"></div>
+	    <div class="tab-content">
+	      <div class="header">
+	      	<div class="word">Từ vựng</div>
+	      	<div class="skill">Kỹ năng</div>
+	      	<div class="time">Lần ôn tập cuối</div>
+	      	<div class="strength">Độ nhớ</div>
 	      </div>
-	      <div class="skill">
-	      	<div class="title">Kĩ năng</div>
-	      	<div class="content"></div>
-	      </div>
-	      <div class="time">
-	      	<div class="title">Lần ôn tập cuối</div>
-	      	<div class="content"></div>
-	      </div>
-	      <div class="strengthen">
-	      	<div class="title">Độ nhớ</div>
-	      	<div class="content"></div>
-	      </div>
-	    </div>
 	    <div class="pagination-centered">
         <pagination page="currentPage" total-items="page.total_page" on-select-page="setPage(page)">	
         </pagination>
@@ -37,29 +26,29 @@
 	  	</div> -->
 	  	<div class="content">
 	  			<a class="speaker"></a>
-	  			<span class="word" >girl</span>
+	  			<span class="word" >{{word.title}}Girl</span>
 	  	</div>
 	  	<div class="description">
         <div class="description-left">
         	<div class="traslation">
         		<span class="title">Dịch nghĩa</span>
-        		<span class="content">cô gái</span>
+        		<span class="content">{{word.content}}Cô gái</span>
         	</div>
         	<div class="skill">
         		<span class="title">Kĩ năng</span>
-        		<span class="content">Cơ bản 1</span>
+        		<span class="content">{{word.skill}}Cơ bản 1</span>
         	</div>
         </div>
         <div class="description-right">
         	<div class="strengthen">
-						<span class="title">Độ nhớ</span>
+						<span class="title">{{word.strength}}Độ nhớ</span>
 						<img class="content level-01" />        		
         	</div>
         </div>
         <div class="description-bottom">
         	<div class="example">
         		<span class="title">Ví dụ</span>
-        		<span class="content">I am a girl<br>She is a girl</span>
+        		<span class="content">{{word.example}}I am a girl</span>
         	</div>
         </div>
 	  	</div>
