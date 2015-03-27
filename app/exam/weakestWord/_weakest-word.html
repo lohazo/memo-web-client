@@ -2,9 +2,9 @@
   <section class="main-left">
     <section class="panel weakest-word-panel">
       <div class="weakest-word-header">
-        <h4 class="title">Các từ tiếng Anh đã đọc</h4>
+        <h4 class="title" ng-bind="weakest_words.title"></h4>
       </div>
-      <div class="total-word">Đã học tổng cộng: <span ng-bind="weakest_words.owned_word"> từ</span></div>
+      <div class="total-word" ng-bind="weakest_words.content"></div>
       <table class="weakest-words" cellspacing="0" cellpadding="0" border="0">
         <thead>
           <tr>
@@ -15,27 +15,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-href="" class="word"> <!-- ng-repeat="word in weakest_words.words" -->
-            <td class="word-text"><span>a</span>
+          <tr ng-href="" class="word" ng-repeat="word in weakest_words.words"> 
+            <td class="word-text"><span ng-bind="word.text"></span>
             <div class="translation">
-              <span>co gai </br> co be</span>
+              <span ng-bind="word.translation"></span>
             </div>
-            </td> <!-- ng-bind="word.text" -->
-            <td class="word-skills">co ban 1</td> <!-- ng-bind="word.skills" -->
-            <td class="word-last-study">15 phut truoc</td>  <!-- ng-bind="word.last_study" -->
-            <td class="word-strength-gap">do nho</td> <!-- ng-bind="word.strength_gap" -->
-          </tr>
-          <tr class="word"> <!-- ng-repeat="word in weakest_words" -->
-          <td class="word-text"><span>an</span></td> <!-- ng-bind="word.text" -->
-            <td class="word-skills">co ban 1</td> <!-- ng-bind="word.skills" -->
-            <td class="word-last-study">15 phut truoc</td>  <!-- ng-bind="word.last_study" -->
-            <td class="word-strength-gap">do nho</td> <!-- ng-bind="word.strength_gap" -->
-          </tr>
-          <tr class="word"> <!-- ng-repeat="word in weakest_words" -->
-            <td class="word-text"><span>annn</span></td> <!-- ng-bind="word.text" -->
-            <td class="word-skills">co ban 1</td> <!-- ng-bind="word.skills" -->
-            <td class="word-last-study">15 phut truoc</td>  <!-- ng-bind="word.last_study" -->
-            <td class="word-strength-gap">do nho</td> <!-- ng-bind="word.strength_gap" -->
+            </td>
+            <td class="word-skills" ng-bind="word.skills"></td>
+            <td class="word-last-study" ng-bind="word.last_study"></td> 
+            <td class="word-strength-gap" ng-bind="word.strength_gap" ng-class=""></td>
           </tr>
         </tbody>
       </table>
