@@ -15,31 +15,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="word" ng-repeat="word in weakest_words.words"> 
-            <td class="word-text"><span ng-bind="word.text"></span>
+          <tr class="word" ng-repeat="word in weakest_words.weakest_words"> 
+            <td class="word-text"><a ng-href="/weakestword/{{word.text}}"><span ng-bind="word.text"></a></span>
               <div class="translation">
                 <span ng-bind="word.translation"></span>
               </div>
-            </td>
+            </td></a>
             <td class="word-skills" ng-bind="word.skills"></td>
             <td class="word-last-study" ng-bind="word.last_study"></td> 
             <td class="word-strength-gap" ng-bind="word.strength_gap" ng-class=""></td>
+
           </tr>
         </tbody>
       </table>
       <div class="weakest-word-footer">
-<!--         <ul class="pagination">
-          <li class="arrow unavailable"><a href="">&laquo;</a></li>
-          <li class="current"><a href="">1</a></li>
-          <li><a href="">2</a></li>
-          <li><a href="">3</a></li>
-          <li><a href="">4</a></li>
-          <li class="unavailable"><a href="">&hellip;</a></li>
-          <li><a href="">12</a></li>
-          <li><a href="">13</a></li>
-          <li class="arrow"><a href="">&raquo;</a></li>
-        </ul> -->
-        <pagination total-items="weakest_words.total_page" page="currentPage"></pagination>
+        <pagination boundary-links="true" total-items="total_items" page="currentPage" on-select-page="setPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="Đầu" last-text="Cuối" rotate="true" max-size="max_size_page"></pagination>
       </div>
     </div>
   </section>
@@ -49,10 +39,10 @@
     <h4 class="title">Spaced repetition</h4>
     <p>Memo's algorithms figure out when you should practice words to get them into your long-term memory. </p>
     <ul class="level-base-word">
-      <li><img src="assets/img/weakest-word-icon/level-04.png" alt="">Vấn nhớ tốt</li>
-      <li><img src="assets/img/weakest-word-icon/level-03.png" alt="">Nhớ khá tốt</li>
-      <li><img src="assets/img/weakest-word-icon/level-02.png" alt="">Cần ôn tập</li>
-      <li><img src="assets/img/weakest-word-icon/level-01.png" alt="">Quên rồi!</li>
+      <li><img src="assets/img/weakest-word-icon/strength-level-04.png" alt="">Vấn nhớ tốt</li>
+      <li><img src="assets/img/weakest-word-icon/strength-level-03.png" alt="">Nhớ khá tốt</li>
+      <li><img src="assets/img/weakest-word-icon/strength-level-02.png" alt="">Cần ôn tập</li>
+      <li><img src="assets/img/weakest-word-icon/strength-level-01.png" alt="">Quên rồi!</li>
     </ul>
   </section>
 </section>
