@@ -9,6 +9,7 @@
   }
 
   function DownloadCtrl($scope, $routeParams, $window, $timeout) {
+    console.log('hit');
     var redirect = $routeParams.redirect;
     $timeout(function () {
       $window.location = redirect;
@@ -16,8 +17,6 @@
   }
 
   angular.module('download', ['app.services'])
-    .config(['$routeProvider', DownloadsConfig]);
-
-  angular.module('download')
+    .config(['$routeProvider', DownloadsConfig])
     .controller('DownloadCtrl', ['$scope', '$routeParams', '$window', '$timeout', DownloadCtrl]);
 }(window.angular));

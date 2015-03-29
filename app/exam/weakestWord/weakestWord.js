@@ -14,9 +14,6 @@
 
   function ListWeakestWordCtrl($scope, WeakestWordServices) {
     $scope.max_size_page = 5;
-    $scope.test = function() {
-      console.log("ABC");
-    }
 
     WeakestWordServices.listWeakestWord().success(function (data) {
       $scope.weakest_words = data;
@@ -25,7 +22,8 @@
     });
 
     $scope.setPage = function (page) {
-      WeakestWordServices.listWeakestWord({page: page});
+      $scope.data.page = page;
+      WeakestWordServices.listWeakestWord($scope.data);
       return;
     };
   }
