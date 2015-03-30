@@ -10,6 +10,7 @@
 
   function ListWeakestWordCtrl($scope, $location, WeakestWordServices) {
     $scope.max_page = 5;
+    $scope.word_detail = {};
 
     WeakestWordServices.listWeakestWord().success(function (data) {
       $scope.weakest_word = data;
@@ -22,7 +23,10 @@
       WeakestWordServices.listWeakestWord($scope.weakest_word).success(function (data) {
         $scope.weakest_word = data;
       });
-      return;
+    };
+
+    $scope.getWordDetail = function (word) {
+      $scope.word_detail = word;
     };
   }
 
@@ -30,9 +34,9 @@
     var Services = {};
 
     /*
-     * data = {skill_id: , page: }
+     * data = {skill_id: , page: , soft_by:}
      */
-    Services.listWeakestWord = function(data) {
+    Services.listWeakestWord = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
       var userId = $localStorage.auth.user._id;
 

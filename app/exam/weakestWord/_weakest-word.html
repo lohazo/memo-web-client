@@ -15,15 +15,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="word" ng-repeat="word in weakest_word.weakest_words"> 
-            <td class="word-text"><a ng-href="/weakestword/{{word.text}}"><span ng-bind="word.text"></span></a>
+          <tr class="word" ng-repeat="word in weakest_word.weakest_words">
+            <td ng-click="getWordDetail(word)" class="word-text"><span ng-bind="word.text"></span>
               <div class="translation">
                 <span ng-bind="word.definitions"></span>
               </div>
             </td>
-            <td class="word-skills" ng-bind="word.skills"></td>
-            <td class="word-last-study" ng-bind="word.last_study"></td> 
-            <td class="word-strength-gap" ng-class="{'level-1': word.strength_gap == 1 , 'level-2' : word.strength_gap == 2 , 'level-3' : word.strength_gap == 3 , 'level-4' : word.strength_gap == 4}"></td>
+            <td ng-click="getWordDetail(word)" class="word-skills" ng-bind="word.skills"></td>
+            <td ng-click="getWordDetail(word)" class="word-last-study" ng-bind="word.last_study"></td> 
+            <td ng-click="getWordDetail(word)" class="word-strength-gap" ng-class="{'level-1': word.strength_gap == 1 , 'level-2' : word.strength_gap == 2 , 'level-3' : word.strength_gap == 3 , 'level-4' : word.strength_gap == 4}"></td>  
           </tr>
         </tbody>
       </table>
@@ -45,6 +45,7 @@
       <li><img src="assets/img/weakest-word-icon/strength-level-02.png" alt="">Cần ôn tập</li>
       <li><img src="assets/img/weakest-word-icon/strength-level-01.png" alt="">Quên rồi!</li>
     </ul>
+    {{word_detail}}
   </section>
 </section>
 </section>
