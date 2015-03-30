@@ -8,26 +8,36 @@
   	});
   	$routeProvider.when('/weakestword/:id', {
   		templateUrl: 'exam/weakestWord/_weakest-word-detail.html',
-  		controller: 'WeakestWordDetailCtrl'
+  		controller: 'WeakestWordDetailCtrl',
+      resolve: {
+        Word: function ($route, WeakestWordServices) {
+          return WeakestWordServices.listWeakestWord({
+            id: $route.current.params.id
+          });
+        }
+      }
   	});
   }
 
-  function ListWeakestWordCtrl($scope, WeakestWordServices) {
-    $scope.max_size_page = 5;
-    
+  function ListWeakestWordCtrl($scope, $location, WeakestWordServices) {
+    $scope.max_page = 5;
+
     WeakestWordServices.listWeakestWord().success(function (data) {
-      $scope.weakest_words = data;
+      $scope.weakest_word = data;
       $scope.total_items = data.total_page * 10;
       $scope.currentPage = data.next_page - 1;
     });
 
     $scope.setPage = function (page) {
-      WeakestWordServices.listWeakestWord({page: page});
+      $scope.weakest_word.page = page;
+      WeakestWordServices.listWeakestWord($scope.weakest_word).success(function (data) {
+        $scope.weakest_word = data;
+      });
       return;
     };
   }
 
-  function WeakestWordDetailCtrl($scope, WeakestWordServices) {
+  function WeakestWordDetailCtrl($scope, $location, WeakestWordServices) {
     WeakestWordServices.listWeakestWord().success(function (data) {
       $scope.weakest_words = data;
     });
@@ -45,7 +55,7 @@
 
       var endpoint = API + '/users/' + userId + '/weakest_word' + '?platform=web&auth_token=' + authToken;
 
-      // if (data.page) endpoint += '&page=' + data.page;
+      if (data) endpoint += '&page=' + data.page;
       // if (data.skill_id) endpoint += '&skill_id=' + data.skill_id;
 
       return $http.get(endpoint);
@@ -56,7 +66,7 @@
 
   angular.module('weakestWord', [])
     .config(['$routeProvider', weakestWordConfig])
-    .controller('ListWeakestWordCtrl', ['$scope', 'WeakestWordServices', ListWeakestWordCtrl])
-    .controller('WeakestWordDetailCtrl', ['$scope', 'WeakestWordServices', WeakestWordDetailCtrl])
+    .controller('ListWeakestWordCtrl', ['$scope', '$location', 'WeakestWordServices', ListWeakestWordCtrl])
+    .controller('WeakestWordDetailCtrl', ['$scope', '$location', 'WeakestWordServices', WeakestWordDetailCtrl])
     .factory('WeakestWordServices', ['$http', '$q', '$localStorage', 'API', WeakestWordServices]);
 }(window.angular));
