@@ -1,13 +1,16 @@
-.forum-main{
+.forum-main {
   @include grid-row;
   padding-top: 42px;
   .main-left {
-    @include grid-column ($columns: 12);
-    padding: 20px 30px;
-    border-radius: 10px;
-    background: #fff;
-    .posts {
+    @include grid-column($columns: 12);
+    .panel {
+      @include panel($bg: $white);
+      width: 100% !important;
+      border: 0;
+    }
+    .posts-panel {
       @include grid-row;
+      border-radius: 20px;
       .posts-header {
         @include grid-row;
         .left {
@@ -36,13 +39,13 @@
           dd > a {
             min-width: 90px;
             text-align: center;
-            padding-left:0;
-            padding-right:0;
+            padding-left: 0;
+            padding-right: 0;
             background: none;
             margin-right: 20px;
           }
           dd > a, .tab-title > a {
-            background:none;
+            background: none;
           }
           dd.active a, .tab-title.active a {
             color: #222;
@@ -52,18 +55,18 @@
             }
           }
         }
-        ul.the-posts {
+        .posts {
           list-style: none;
           margin-top: 30px;
           margin-left: 0;
-          li {
+          .post {
             @include grid-row;
             margin-bottom: 20px;
             border-radius: 5px;
             padding: 15px;
-            border:solid 1px #ccc;
+            border: solid 1px #ccc;
           }
-          li .post-avatar {
+          .post-avatar {
             float: left;
             height: 60px;
             width: 60px;
@@ -72,7 +75,7 @@
           .post-content {
             float: left;
             margin-left: 25px;
-            a.title {
+            .title {
               color: $oil;
               margin: 0;
               font-weight: 600;
@@ -80,18 +83,18 @@
                 color: $primary-color;
               }
             }
-            p.post-detail {
-              padding:0;
+            .post-detail {
+              padding: 0;
               color: #333;
-              margin:0;
-              a.admin, a.memo{
+              margin: 0;
+              a.admin, a.memo {
                 color: $primary-color;
               }
             }
           }
           .comment {
             background: url("assets/img/chat.jpg") no-repeat center;
-            float:right;
+            float: right;
             width: 44px;
             height: 41px;
             text-align: center;
@@ -109,8 +112,7 @@
     }
   }
   .main-right {
-    @include grid-column ($columns: 4);
-    float: right;
+    @include grid-column($columns: 4);
     .search {
       background: none repeat scroll 0px 0px #FFF;
       border-radius: 10px;

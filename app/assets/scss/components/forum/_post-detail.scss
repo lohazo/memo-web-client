@@ -43,14 +43,14 @@
     .post-info-inner {
       @include grid-row;
       padding: 10px;
-      .poster-avatar {
+      .post-avatar {
         @include grid-column($columns: 2);
         border-radius: 50%;
       }
-      .post-version-content {
+      .post-content-wrapper {
         @include grid-column($columns: 14);
         padding: 0 20px 20px 20px;
-        .post-version-header {
+        .post-header {
           padding: 5px;
           color: $primary-color;
           font-size: 16px;
@@ -61,12 +61,14 @@
             color: $steel;
           }
         }
-        .post-version-middler {
+        .post-inner {
           font-size: 16px;
           padding: 15px 0 10px 0;
-
+          .post-content {
+            white-space: pre-line;
+          }
         }
-        .post-version-toolbar {
+        .post-toolbar {
           .total-vote {
             padding-right: 20px;
             font-size: 16px;
@@ -205,7 +207,7 @@
                   .total-vote {
                     padding-right: 20px;
                     font-size: 16px;
-                  } 
+                  }
                   .vote-up {
                     margin-right: 15px;
                     background-size: contain;
@@ -243,9 +245,7 @@
                     }
                     .comment-editor {
                       padding-bottom: 20px;
-                      .comment-editor-textarea {
-
-                      }
+                      .comment-editor-textarea {}
                       .comment-editor-toolbar {
                         .send-comment-button {
                           color: $white;
@@ -260,7 +260,7 @@
                     }
                   }
                 }
-              }  
+              }
             }
           }
           .child-comments {
@@ -291,7 +291,7 @@
       padding-left: 35px;
       margin-bottom: 0px;
     }
-  }  
+  }
   .channel-follow {
     background: #fff;
     border-radius: 10px;

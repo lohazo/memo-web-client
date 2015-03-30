@@ -50,8 +50,8 @@
 
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
       if ($localStorage.auth) {
-        if ($localStorage.auth.loggedIn) {} else {
-          if (next.templateUrl !== '/') {
+        if (!$localStorage.auth.loggedIn) {
+          if (next.originalPath !== '/' && next.originalPath !== '/downloads') {
             $location.url('/');
           }
         }

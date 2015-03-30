@@ -113,6 +113,7 @@
 
   function PostDetailCtrl($scope, ForumServices, $location, Post, subscribers) {
     $scope.post = Post.data;
+    $scope.post.created_time = Math.round((new Date('' + $scope.post.created_at)).getTime() / 1000);
     $scope.data = {
       content: '',
       id: $scope.post._id

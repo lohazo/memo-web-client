@@ -4,7 +4,6 @@
       <section class="post-info">
         <div class="post-info-header">
           <div class="left">
-            <!-- <h4 class="title">Các chủ đề</h4> -->
             <a class="title" ng-href="/forum">&lsaquo; Danh sách chủ đề </a>
           </div>
           <div class="right">
@@ -13,18 +12,18 @@
           </div>
         </div>
         <div class="post-info-inner">
-          <div class="post-version">
-            <img class="poster-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
-            <div class="post-version-content left">
-              <div class="post-version-header">
+          <div class="post">
+            <img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+            <div class="post-content-wrapper left">
+              <header class="post-header">
                 <div class="title" ng-bind="post.title"></div>
                 <a ng-href="/profile/{{post.user._id}}" ng-bind="post.user.name"></a>
-                <div>{{post.created_time | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}} - {{post.user.current_course_name}}</div>
+                <div>{{post.created_time | amDateFormat:'Do/Mo/YYYY'}} - {{post.course_name}}</div>
+              </header>
+              <div class="post-inner">
+                <div class="post-content" ng-bind-html="post.content"></div>
               </div>
-              <div class="post-version-middler">
-                <div ng-bind="post.content"></div>
-              </div>
-              <div class="post-version-toolbar">
+              <div class="post-toolbar">
                 <div class="total-vote left" ng-bind="post.up_vote_count"></div>
                 <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)"></a>
                 <div class="total-vote left" ng-bind="post.down_vote_count"></div>
