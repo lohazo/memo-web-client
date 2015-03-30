@@ -13,13 +13,15 @@
         @include grid-row;
         margin-top: 20px;
         border:none;
-        // thead {
-        //   tr {
-        //     th {
-        //       min-width: 150px;
-        //     }
-        //   }
-        // }
+        thead {
+          tr {
+            th {
+              a {
+                background: url("assets/img/weakest-word-icon/dropdown.png") right no-repeat;
+              }
+            }
+          }
+        }
         tbody {
           margin-top: 15px;
           tr.word {
@@ -78,6 +80,11 @@
     .weakest-word-panel {
       margin-top: 0;
       padding: 30px; 
+      .weakest-word-back {
+        margin-bottom: 20px;
+        color: #333;
+        display: block;
+      }
       ul.level-base-word {
         list-style: none;
         li {
