@@ -29,14 +29,14 @@
       </table>
       <div class="weakest-word-footer">
         <div class="pagination-centered">
-          <pagination boundary-links="true" total-items="total_items" page="currentPage" on-select-page="setPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="Đầu" last-text="Cuối" rotate="true" max-size="max_page"></pagination>
+          <pagination boundary-links="true" total-items="total_items" page="currentPage" on-select-page="setPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="Đầu" last-text="Cuối" rotate="false" max-size="max_page"></pagination>
         </div>
       </div>
     </div>
   </section>
 </section>
-<section class="main-right">  
-  <section class="panel weakest-word-panel">
+<section class="main-right"> 
+  <section class="panel weakest-word-panel" ng-show="!getDetail">
     <h4 class="title">Spaced repetition</h4>
     <p>Memo's algorithms figure out when you should practice words to get them into your long-term memory. </p>
     <ul class="level-base-word">
@@ -46,31 +46,31 @@
       <li><img src="assets/img/weakest-word-icon/strength-level-01.png" alt="">Quên rồi!</li>
     </ul>
   </section>
-  <section class="panel weakest-word-info-panel">
+  <section class="panel weakest-word-info-panel" ng-show="getDetail">
     <div class="content">
       <a class="speaker" ng-bind="word_detail.word.sound"></a>
-      <span class="word" ng-bind="word_detail.text"></span> <!-- {{word.title}}Girl -->
+      <span class="word" ng-bind="word_detail.text"></span> 
     </div>
     <div class="description">
       <div class="description-left">
         <div class="traslation">
           <span class="title">Dịch nghĩa</span>
-          <span class="content" ng-bind="word_detail.definitions"></span> <!-- {{word.content}}Cô gái -->
+          <span class="content" ng-bind="word_detail.definitions"></span> 
         </div>
         <div class="skill">
           <span class="title">Kĩ năng</span>
-          <span class="content" ng-bind="word_detail.skills"></span> <!-- {{word.skill}}Cơ bản 1 -->
+          <span class="content" ng-bind="word_detail.skills"></span> 
         </div>
       </div>
       <div class="description-right">
         <div class="strengthen">
-          <span class="word-strength-gap" ng-class="{'level-1': word.strength_gap == 1 , 'level-2' : word.strength_gap == 2 , 'level-3' : word.strength_gap == 3 , 'level-4' : word.strength_gap == 4}"></span><!-- {{word.strength}}Độ nhớ -->
+          <span class="word-strength-gap" ng-class="{'level-1': word.strength_gap == 1 , 'level-2' : word.strength_gap == 2 , 'level-3' : word.strength_gap == 3 , 'level-4' : word.strength_gap == 4}"></span>
         </div>
       </div>
       <div class="description-bottom">
         <div class="example">
           <span class="title">Ví dụ</span>
-          <span class="content" ng-repeat="exam in word_detail.pre_exrcise"></span> <!-- {{word.example}}I am a girl -->
+          <span class="content" ng-repeat="exam in word_detail.pre_exrcise"></span>
         </div>
       </div>
     </div>

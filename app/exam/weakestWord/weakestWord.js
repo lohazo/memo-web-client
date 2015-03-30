@@ -27,7 +27,12 @@
 
     $scope.getWordDetail = function (word) {
       $scope.word_detail = word;
+      $scope.getDetail = true;
     };
+
+    $scope.backListWeakestWord = function () {
+      $scope.getDetail = false;
+    }
   }
 
   function WeakestWordServices($http, $q, $localStorage, API)  {
