@@ -47,10 +47,10 @@
         @include grid-column($columns: 2);
         border-radius: 50%;
       }
-      .post-version-content {
+      .post-content-wrapper {
         @include grid-column($columns: 14);
         padding: 0 20px 20px 20px;
-        .post-version-header {
+        .post-header {
           padding: 5px;
           color: $primary-color;
           font-size: 16px;
@@ -61,11 +61,14 @@
             color: $steel;
           }
         }
-        .post-version-middler {
+        .post-inner {
           font-size: 16px;
           padding: 15px 0 10px 0;
+          .post-content {
+            white-space: pre-line;
+          }
         }
-        .post-version-toolbar {
+        .post-toolbar {
           .total-vote {
             padding-right: 20px;
             font-size: 16px;
