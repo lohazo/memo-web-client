@@ -6,17 +6,6 @@
   		templateUrl: 'exam/weakestWord/_weakest-word.html',
   		controller: 'ListWeakestWordCtrl'
   	});
-  	$routeProvider.when('/weakestword/:id', {
-  		templateUrl: 'exam/weakestWord/_weakest-word-detail.html',
-  		controller: 'WeakestWordDetailCtrl',
-      resolve: {
-        Word: function ($route, WeakestWordServices) {
-          return WeakestWordServices.listWeakestWord({
-            id: $route.current.params.id
-          });
-        }
-      }
-  	});
   }
 
   function ListWeakestWordCtrl($scope, $location, WeakestWordServices) {
@@ -35,12 +24,6 @@
       });
       return;
     };
-  }
-
-  function WeakestWordDetailCtrl($scope, $location, WeakestWordServices) {
-    WeakestWordServices.listWeakestWord().success(function (data) {
-      $scope.weakest_words = data;
-    });
   }
 
   function WeakestWordServices($http, $q, $localStorage, API)  {
@@ -67,6 +50,5 @@
   angular.module('weakestWord', [])
     .config(['$routeProvider', weakestWordConfig])
     .controller('ListWeakestWordCtrl', ['$scope', '$location', 'WeakestWordServices', ListWeakestWordCtrl])
-    .controller('WeakestWordDetailCtrl', ['$scope', '$location', 'WeakestWordServices', WeakestWordDetailCtrl])
     .factory('WeakestWordServices', ['$http', '$q', '$localStorage', 'API', WeakestWordServices]);
 }(window.angular));
