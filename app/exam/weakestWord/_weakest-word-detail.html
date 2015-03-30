@@ -1,0 +1,56 @@
+<section class="weakest-word-detail">
+  <section class="main-left">
+    <section class="panel weakest-word-panel">
+      <div class="title">
+        <span>Các từ tiếng Anh đã học</span>
+      </div>
+      <div class="discusion">Đã học tổng cộng: <span >8 từ</span>
+      </div>
+      <div class="tab-content">
+        <div class="header">
+          <div class="word">Từ vựng</div>
+          <div class="skill">Kỹ năng</div>
+          <div class="time">Lần ôn tập cuối</div>
+          <div class="strength">Độ nhớ</div>
+        </div>
+        <div class="pagination-centered">
+          <pagination page="currentPage" total-items="page.total_page" on-select-page="setPage(page)">  
+          </pagination>
+        </div> 
+      </section>
+    </section>
+    <section class="main-right">  
+      <section class="panel weakest-word-info-panel">
+<!--       <div class="header">
+        <a class="title" ng-href="/weakestword">&lsaquo; Quay lại</a>
+      </div> -->
+      <div class="content">
+      <a class="speaker" ng-bind="word.speaker"></a>
+        <span class="word" ng-bind="word.text"></span> <!-- {{word.title}}Girl -->
+      </div>
+      <div class="description">
+        <div class="description-left">
+          <div class="traslation">
+            <span class="title">Dịch nghĩa</span>
+            <span class="content" ng-bind="word.maining"></span> <!-- {{word.content}}Cô gái -->
+          </div>
+          <div class="skill">
+            <span class="title">Kĩ năng</span>
+            <span class="content" ng-bind="word.skills"></span> <!-- {{word.skill}}Cơ bản 1 -->
+          </div>
+        </div>
+        <div class="description-right">
+          <div class="strengthen">
+            <span class="word-strength-gap" ng-class="{'level-1': word.strength_gap == 1 , 'level-2' : word.strength_gap == 2 , 'level-3' : word.strength_gap == 3 , 'level-4' : word.strength_gap == 4}"></span><!-- {{word.strength}}Độ nhớ -->
+          </div>
+        </div>
+        <div class="description-bottom">
+          <div class="example">
+            <span class="title">Ví dụ</span>
+            <span class="content" ng-repeat="exam in word.example"></span> <!-- {{word.example}}I am a girl -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</section>
