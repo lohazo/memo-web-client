@@ -18,6 +18,7 @@
             th {
               a {
                 background: url("assets/img/weakest-word-icon/dropdown.png") right no-repeat;
+                padding-right: 15px;
               }
             }
           }
@@ -53,6 +54,7 @@
               display: none;
               span {
                 font-weight: 600;
+                border-bottom: solid 2px #ccc;
               }
             }
             .level-1 {
@@ -80,11 +82,6 @@
     .weakest-word-panel {
       margin-top: 0;
       padding: 30px; 
-      .weakest-word-back {
-        margin-bottom: 20px;
-        color: #333;
-        display: block;
-      }
       ul.level-base-word {
         list-style: none;
         li {
@@ -100,6 +97,11 @@
       @include grid-row;
       margin-bottom: 30px;
       padding: 30px;
+      .weakest-word-back {
+        margin-bottom: 20px;
+        color: #333;
+        display: block;
+      }
       .header {
         font-size: 16px;
         padding-bottom: 40px;
