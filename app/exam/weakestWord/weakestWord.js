@@ -44,7 +44,7 @@
     var Services = {};
 
     /*
-     * data = {skill_id: , page: , soft_by:}
+     * data = {skill_id: , page: , sort_by: , sort_type:}
      */
     Services.listWeakestWord = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
