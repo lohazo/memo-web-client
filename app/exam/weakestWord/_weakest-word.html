@@ -48,7 +48,7 @@
   </section>
   <section class="panel weakest-word-info-panel" ng-show="getDetail">
     <div class="content">
-      <a class="speaker" ng-bind="word_detail.word.sound"></a>
+      <a class="speaker" ng-click="speaker.play()"></a>
       <span class="word" ng-bind="word_detail.text"></span>
     </div>
     <div class="description">
