@@ -2,9 +2,9 @@
   <section class="main-left">
     <section class="panel weakest-word-panel">
       <div class="weakest-word-header">
-        <h4 class="title" ng-bind="weakest_words.title"></h4>
+        <h4 class="title" ng-bind="weakest_word.title"></h4>
       </div>
-      <div class="total-word" ng-bind="weakest_words.content"></div>
+      <div class="total-word" ng-bind="weakest_word.content"></div>
       <table class="weakest-words" cellspacing="0" cellpadding="0" border="0">
         <thead>
           <tr>
@@ -15,10 +15,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="word" ng-repeat="word in weakest_words.weakest_words"> 
+          <tr class="word" ng-repeat="word in weakest_word.weakest_words"> 
             <td class="word-text"><a ng-href="/weakestword/{{word.text}}"><span ng-bind="word.text"></a></span>
               <div class="translation">
-                <span ng-bind="word.translation"></span>
+                <span ng-bind="word.definitions"></span>
               </div>
             </td></a>
             <td class="word-skills" ng-bind="word.skills"></td>
