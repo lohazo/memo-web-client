@@ -43,7 +43,7 @@
     .post-info-inner {
       @include grid-row;
       padding: 10px;
-      .poster-avatar {
+      .post-avatar {
         @include grid-column($columns: 2);
         border-radius: 50%;
       }
@@ -64,7 +64,6 @@
         .post-version-middler {
           font-size: 16px;
           padding: 15px 0 10px 0;
-
         }
         .post-version-toolbar {
           .total-vote {
@@ -205,7 +204,7 @@
                   .total-vote {
                     padding-right: 20px;
                     font-size: 16px;
-                  } 
+                  }
                   .vote-up {
                     margin-right: 15px;
                     background-size: contain;
@@ -243,9 +242,7 @@
                     }
                     .comment-editor {
                       padding-bottom: 20px;
-                      .comment-editor-textarea {
-
-                      }
+                      .comment-editor-textarea {}
                       .comment-editor-toolbar {
                         .send-comment-button {
                           color: $white;
@@ -260,7 +257,7 @@
                     }
                   }
                 }
-              }  
+              }
             }
           }
           .child-comments {
@@ -291,7 +288,7 @@
       padding-left: 35px;
       margin-bottom: 0px;
     }
-  }  
+  }
   .channel-follow {
     background: #fff;
     border-radius: 10px;
