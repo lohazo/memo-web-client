@@ -40,7 +40,9 @@
 
       data.auth_token = authToken;
       data.platform = 'web';
-      return $http.post(API + '/posts/' + data.id + '/vote', data);
+      return $http.post(API + '/posts/' + data.id + '/vote', data, {
+        ignoreLoadingBar: true
+      });
     };
 
     Services.listComment = function (data) {
@@ -58,7 +60,7 @@
       data.auth_token = authToken;
       data.platform = 'web';
 
-      return $http.post(API + '/comments' , data);
+      return $http.post(API + '/comments', data);
     }
 
     // Services.listComments = function (data) {
@@ -84,7 +86,9 @@
       data.auth_token = authToken;
       data.platform = 'web';
 
-      return $http.post(API + '/comments/' + data.id + '/vote', data);
+      return $http.post(API + '/comments/' + data.id + '/vote', data, {
+        ignoreLoadingBar: true
+      });
     };
 
     // data = {[page: , sort: 'created_at', type: 'desc'/'asc', filter: "all"/"follow"/"en-vi"/"fr-vi"/"de-vi"]}
@@ -115,7 +119,7 @@
       var authToken = $localStorage.auth.user.auth_token;
       data.auth_token = authToken;
 
-      return $http.post(API + '/posts/search_all_post' ,data);
+      return $http.post(API + '/posts/search_all_post', data);
     };
 
     return Services;
