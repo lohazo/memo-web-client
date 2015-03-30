@@ -3,7 +3,7 @@
   padding-top: 42px;
   .main-left {
     @include grid-column($columns: 10);
-  }	
+  } 
   .main-right {
     @include grid-column($columns: 6);
   }
@@ -28,10 +28,10 @@
       color: $oil;
     }
     .tab-content {
-    	@include grid-column($columns: 16);
-    	padding: 30px 10px 20px 10px;
-    	color: $oil;
-    	.header {
+      @include grid-column($columns: 16);
+      padding: 30px 10px 20px 10px;
+      color: $oil;
+      .header {
         @include grid-row;
         font-size: 16px;
         text-align: center;
@@ -66,90 +66,39 @@
       padding-bottom: 20px;
       .speaker {
         @include grid-column($columns: 8);
-			  background: url("assets/img/lesson-speaker.png") no-repeat;
-			  background-size: cover;
-			  display: inline-block;
-				height: 40px;
-				width: 40px;
-				cursor: pointer;
-			}
-			.word {
-			  @include grid-column($columns: 8);
-			  font-size: 24px;
-			  color: $oil;
-			}
-    }
-    .description {
-      @include grid-column($columns: 16);
-      .description-left {
-        @include grid-column($columns: 8);
-        padding: 0 10px 0 10px;
-        .traslation {
-          .title {
-            font-size: 16px;
-            color: $aluminum;
-          }
-          .content {
-            border-top: 1px solid $aluminum;
-            font-size: 16px;
-            color: $oil;
-            padding: 5px 0 40px 0;
-          }
-        }
-        .skill {
-          .title {
-            font-size: 16px;
-            color: $aluminum;
-          }
-          .content {
-            border-top: 1px solid $aluminum;
-            font-size: 16px;
-            color: $oil;
-            padding: 5px 0 40px 0;
-          }
-        }
+        background: url("assets/img/lesson-speaker.png") no-repeat;
+        background-size: cover;
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
       }
-      .description-right {
-        @include grid-column($columns: 8);
-        padding: 0 10px 0 10px;
-        .strengthen {
-          .title {
-            font-size: 16px;
-            color: $aluminum;
-          }
-          .content {
-            border-top: 1px solid $aluminum;
-            font-size: 16px;
-            color: $oil;
-            padding: 5px 0 40px 0;
-            &.level-01 {
-              background: url("assets/img/weakest-word-icon/strength-level-01.png") no-repeat;
-              background-size: contain;
-              height: 20px;
-            }
-            &.level-02 {
-              background: url("assets/img/weakest-word-icon/strength-level-02.png") no-repeat;
-              background-size: contain;
-              height: 20px;
-            }
-            &.level-03 {
-              background: url("assets/img/weakest-word-icon/strength-level-03.png") no-repeat;
-              background-size: contain;
-              height: 20px;
-            }
-            &.level-04 {
-              background: url("assets/img/weakest-word-icon/strength-level-04.png") no-repeat;
-              background-size: contain;
-              height: 20px;
-            }
-          }
-        }
-      }
-      .description-bottom {
-        @include grid-column($columns: 8);
-        @include grid-row;
+      .word {
+       @include grid-column($columns: 8);
+       font-size: 24px;
+       color: $oil;
+     }
+   }
+   .description {
+    @include grid-column($columns: 16);
+    .description-left {
+      @include grid-column($columns: 8);
+      padding: 0 10px 0 10px;
+      .traslation {
         .title {
-        	font-size: 16px;
+          font-size: 16px;
+          color: $aluminum;
+        }
+        .content {
+          border-top: 1px solid $aluminum;
+          font-size: 16px;
+          color: $oil;
+          padding: 5px 0 40px 0;
+        }
+      }
+      .skill {
+        .title {
+          font-size: 16px;
           color: $aluminum;
         }
         .content {
@@ -160,5 +109,56 @@
         }
       }
     }
+    .description-right {
+      @include grid-column($columns: 8);
+      padding: 0 10px 0 10px;
+      .strengthen {
+        .title {
+          font-size: 16px;
+          color: $aluminum;
+        }
+        .content {
+          border-top: 1px solid $aluminum;
+          font-size: 16px;
+          color: $oil;
+          padding: 5px 0 40px 0;
+          &.level-01 {
+            background: url("assets/img/weakest-word-icon/strength-level-01.png") no-repeat;
+            background-size: contain;
+            height: 20px;
+          }
+          &.level-02 {
+            background: url("assets/img/weakest-word-icon/strength-level-02.png") no-repeat;
+            background-size: contain;
+            height: 20px;
+          }
+          &.level-03 {
+            background: url("assets/img/weakest-word-icon/strength-level-03.png") no-repeat;
+            background-size: contain;
+            height: 20px;
+          }
+          &.level-04 {
+            background: url("assets/img/weakest-word-icon/strength-level-04.png") no-repeat;
+            background-size: contain;
+            height: 20px;
+          }
+        }
+      }
+    }
+    .description-bottom {
+      @include grid-column($columns: 8);
+      @include grid-row;
+      .title {
+       font-size: 16px;
+       color: $aluminum;
+     }
+     .content {
+      border-top: 1px solid $aluminum;
+      font-size: 16px;
+      color: $oil;
+      padding: 5px 0 40px 0;
+    }
   }
+}
+}
 }
