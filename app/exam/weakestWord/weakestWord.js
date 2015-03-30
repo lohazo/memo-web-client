@@ -8,9 +8,8 @@
   	});
   }
 
-  function ListWeakestWordCtrl($scope, $location, WeakestWordServices) {
+  function ListWeakestWordCtrl($scope, $location, ngAudio, WeakestWordServices) {
     $scope.max_page = 5;
-    $scope.word_detail = {};
 
     WeakestWordServices.listWeakestWord().success(function (data) {
       $scope.weakest_word = data;
@@ -27,14 +26,25 @@
 
     $scope.getWordDetail = function (word) {
       $scope.word_detail = word;
+      $scope.getDetail = true;
+      var normalFile = ngAudio.load($scope.word_detail.sound);
+      $scope.speaker = {
+        play: function() {
+          normalFile.play();
+        }
+      };
     };
+
+    $scope.backListWeakestWord = function () {
+      $scope.getDetail = false;
+    }
   }
 
   function WeakestWordServices($http, $q, $localStorage, API)  {
     var Services = {};
 
     /*
-     * data = {skill_id: , page: , soft_by:}
+     * data = {skill_id: , page: , sort_by: , sort_type:}
      */
     Services.listWeakestWord = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
@@ -53,6 +63,6 @@
 
   angular.module('weakestWord', [])
     .config(['$routeProvider', weakestWordConfig])
-    .controller('ListWeakestWordCtrl', ['$scope', '$location', 'WeakestWordServices', ListWeakestWordCtrl])
+    .controller('ListWeakestWordCtrl', ['$scope', '$location', 'ngAudio', 'WeakestWordServices', ListWeakestWordCtrl])
     .factory('WeakestWordServices', ['$http', '$q', '$localStorage', 'API', WeakestWordServices]);
 }(window.angular));

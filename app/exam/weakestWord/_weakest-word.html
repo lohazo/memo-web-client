@@ -29,15 +29,15 @@
       </table>
       <div class="weakest-word-footer">
         <div class="pagination-centered">
-          <pagination boundary-links="true" total-items="total_items" page="currentPage" on-select-page="setPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="Đầu" last-text="Cuối" rotate="true" max-size="max_page"></pagination>
+          <pagination boundary-links="true" total-items="total_items" page="currentPage" on-select-page="setPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="Đầu" last-text="Cuối" rotate="false" max-size="max_page"></pagination>
         </div>
       </div>
     </div>
   </section>
 </section>
-<section class="main-right">  
-  <section class="panel weakest-word-panel">
-    <a class="weakest-word-back"><span style="font-size: 24px;">&lsaquo; </span>Quay lại</a>
+<section class="main-right"> 
+  <a class="weakest-word-back"><span style="font-size: 24px;">&lsaquo; </span>Quay lại</a>
+  <section class="panel weakest-word-panel" ng-show="!getDetail">
     <h4 class="title">Spaced repetition</h4>
     <p>Memo's algorithms figure out when you should practice words to get them into your long-term memory. </p>
     <ul class="level-base-word">
@@ -47,9 +47,9 @@
       <li><img src="assets/img/weakest-word-icon/strength-level-01.png" alt="">Quên rồi!</li>
     </ul>
   </section>
-  <section class="panel weakest-word-info-panel">
+  <section class="panel weakest-word-info-panel" ng-show="getDetail">
     <div class="content">
-      <a class="speaker" ng-bind="word_detail.word.sound"></a>
+      <a class="speaker" ng-click="speaker.play()"></a>
       <span class="word" ng-bind="word_detail.text"></span>
     </div>
     <div class="description">
@@ -76,6 +76,5 @@
       </div>
     </div>
   </section>
-
 </section>
 </section>
