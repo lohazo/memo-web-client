@@ -49,28 +49,28 @@
   <section class="panel weakest-word-info-panel" ng-show="getDetail">
     <div class="content">
       <a class="speaker" ng-bind="word_detail.word.sound"></a>
-      <span class="word" ng-bind="word_detail.text"></span> 
+      <span class="word" ng-bind="word_detail.text"></span>
     </div>
     <div class="description">
       <div class="description-left">
         <div class="traslation">
           <span class="title">Dịch nghĩa</span>
-          <span class="content" ng-bind="word_detail.definitions"></span> 
+          <span class="content" ng-bind="word_detail.definitions"></span>
         </div>
         <div class="skill">
           <span class="title">Kĩ năng</span>
-          <span class="content" ng-bind="word_detail.skills"></span> 
+          <span class="content" ng-bind="word_detail.skills"></span>
         </div>
       </div>
       <div class="description-right">
         <div class="strengthen">
-          <span class="word-strength-gap" ng-class="{'level-1': word.strength_gap == 1 , 'level-2' : word.strength_gap == 2 , 'level-3' : word.strength_gap == 3 , 'level-4' : word.strength_gap == 4}"></span>
+          <p class="word-strength-gap" ng-class="{'level-1': word_detail.strength_gap == 1 , 'level-2' : word_detail.strength_gap == 2 , 'level-3' : word_detail.strength_gap == 3 , 'level-4' : word_detail.strength_gap == 4}"><span style="border-bottom: solid 1px #999">Độ nhớ</span></p>
         </div>
       </div>
       <div class="description-bottom">
         <div class="example">
           <span class="title">Ví dụ</span>
-          <span class="content" ng-repeat="exam in word_detail.pre_exrcise"></span>
+          <span class="content" ng-bind="word_detail.pre_exercise"></span>
         </div>
       </div>
     </div>

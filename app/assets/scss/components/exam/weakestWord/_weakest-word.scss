@@ -162,26 +162,22 @@
             font-size: 16px;
             color: $oil;
             padding: 5px 0 40px 0;
-            &.level-01 {
-              background: url("assets/img/weakest-word-icon/strength-level-01.png") no-repeat;
-              background-size: contain;
-              height: 20px;
-            }
-            &.level-02 {
-              background: url("assets/img/weakest-word-icon/strength-level-02.png") no-repeat;
-              background-size: contain;
-              height: 20px;
-            }
-            &.level-03 {
-              background: url("assets/img/weakest-word-icon/strength-level-03.png") no-repeat;
-              background-size: contain;
-              height: 20px;
-            }
-            &.level-04 {
-              background: url("assets/img/weakest-word-icon/strength-level-04.png") no-repeat;
-              background-size: contain;
-              height: 20px;
-            }
+          }
+          .level-1 {
+            background: url("assets/img/weakest-word-icon/strength-level-01.png") left no-repeat;
+            padding-bottom: 55px;
+          }
+          .level-2 {
+            background: url("assets/img/weakest-word-icon/strength-level-02.png") left no-repeat;
+            padding-bottom: 55px;
+          }
+          .level-3 {
+            background: url("assets/img/weakest-word-icon/strength-level-03.png") left no-repeat;
+            padding-bottom: 55px;
+          }
+          .level-4 {
+            background: url("assets/img/weakest-word-icon/strength-level-04.png") left no-repeat;
+            padding-bottom: 55px;
           }
         }
       }
