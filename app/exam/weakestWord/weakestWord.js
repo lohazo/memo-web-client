@@ -38,9 +38,21 @@
   }
 
   function WeakestWordDetailCtrl($scope, $location, WeakestWordServices) {
+    $scope.max_page = 5;
+
     WeakestWordServices.listWeakestWord().success(function (data) {
-      $scope.weakest_words = data;
+      $scope.weakest_word = data;
+      $scope.total_items = data.total_page * 10;
+      $scope.currentPage = data.next_page - 1;
     });
+
+    $scope.setPage = function (page) {
+      $scope.weakest_word.page = page;
+      WeakestWordServices.listWeakestWord($scope.weakest_word).success(function (data) {
+        $scope.weakest_word = data;
+      });
+      return;
+    };
   }
 
   function WeakestWordServices($http, $q, $localStorage, API)  {
