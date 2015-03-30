@@ -16,20 +16,22 @@
         </thead>
         <tbody>
           <tr class="word" ng-repeat="word in weakest_words.weakest_words"> 
-            <td class="word-text"><a ng-href="/weakestword/{{word.text}}"><span ng-bind="word.text"></a></span>
+            <td class="word-text">
+              <a ng-href="/weakestword/{{word.text}}"><span ng-bind="word.text"></span></a>
               <div class="translation">
                 <span ng-bind="word.translation"></span>
               </div>
-            </td></a>
+            </td>
             <td class="word-skills" ng-bind="word.skills"></td>
             <td class="word-last-study" ng-bind="word.last_study"></td> 
-            <td class="word-strength-gap" ng-bind="word.strength_gap" ng-class=""></td>
-
+            <td class="word-strength-gap" ng-class="{'level-1': word.strength_gap == 1 , 'level-2' : word.strength_gap == 2 , 'level-3' : word.strength_gap == 3 , 'level-4' : word.strength_gap == 4}"></td>
           </tr>
         </tbody>
       </table>
       <div class="weakest-word-footer">
-        <pagination boundary-links="true" total-items="total_items" page="currentPage" on-select-page="setPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="Đầu" last-text="Cuối" rotate="true" max-size="max_size_page"></pagination>
+        <div class="pagination-centered">
+          <pagination boundary-links="true" total-items="total_items" page="currentPage" on-select-page="setPage(page)" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="Đầu" last-text="Cuối" rotate="true" max-size="max_size_page"></pagination>
+        </div>
       </div>
     </div>
   </section>

@@ -13,6 +13,13 @@
         @include grid-row;
         margin-top: 20px;
         border:none;
+        // thead {
+        //   tr {
+        //     th {
+        //       min-width: 150px;
+        //     }
+        //   }
+        // }
         tbody {
           margin-top: 15px;
           tr.word {
@@ -43,9 +50,24 @@
                 font-weight: 600;
               }
             }
+            .level-1 {
+              background: url("assets/img/weakest-word-icon/strength-level-01.png") left no-repeat;
+            }
+            .level-2 {
+              background: url("assets/img/weakest-word-icon/strength-level-02.png") left no-repeat;
+            }
+            .level-3 {
+              background: url("assets/img/weakest-word-icon/strength-level-03.png") left no-repeat;
+            }
+            .level-4 {
+              background: url("assets/img/weakest-word-icon/strength-level-04.png") left no-repeat;
+            }
           }
         }
       }
+    }
+    .weakest-word-footer {
+      margin-top: 20px;
     }
   }	
   .main-right {

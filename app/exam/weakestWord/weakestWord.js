@@ -14,10 +14,7 @@
 
   function ListWeakestWordCtrl($scope, WeakestWordServices) {
     $scope.max_size_page = 5;
-    $scope.test = function() {
-      console.log("ABC");
-    }
-
+    
     WeakestWordServices.listWeakestWord().success(function (data) {
       $scope.weakest_words = data;
       $scope.total_items = data.total_page * 10;
