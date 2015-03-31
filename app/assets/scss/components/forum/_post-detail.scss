@@ -111,11 +111,11 @@
       .comment-version-content {
         @include grid-column($columns: 14);
         .comment-editor {
-          padding-bottom: 20px;
+          padding-bottom: 15px;
           .comment-editor-textarea {
-            min-height: 120px;
-            border: 2px solid $iron;
-            border-radius: 10px;
+            min-height: 80px;
+            border: 1px solid #999;
+            border-radius: 5px;
             resize: none;
             font-size: 16px;
             margin: 0;
