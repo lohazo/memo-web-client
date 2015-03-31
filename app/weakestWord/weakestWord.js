@@ -38,13 +38,27 @@
     $scope.backListWeakestWord = function () {
       $scope.getDetail = false;
     }
-
+    // $scope.sorted = false;
+    // $scope.sorted_by_desc = false;
     $scope.sortWeakestWord = function (sort_by) {
-      WeakestWordServices.listWeakestWord(
-      {
-        sort_by: sort_by,
-        sort_type: 'asc'
-      });
+      if (!$scope.sorted_by_desc || !$scope.sorted) {
+        WeakestWordServices.listWeakestWord({
+          sort_by: sort_by,
+          sort_type: 'desc'
+        }).success(function (data) {
+          $scope.weakest_word = data;
+        });
+        $scope.sorted_by_desc = true;
+      } else if ($scope.sorted_by_desc) {
+        WeakestWordServices.listWeakestWord({
+          sort_by: sort_by,
+          sort_type: 'asc'
+        }).success(function (data) {
+          $scope.weakest_word = data;
+        });
+        $scope.sorted_by_desc = false;
+      };
+      $scope.sorted = true;
     }
   }
 
