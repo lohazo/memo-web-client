@@ -40,8 +40,11 @@
     }
 
     $scope.sortWeakestWord = function (sort_by) {
-      console.log(sort_by);
-      // WeakestWordServices.listWeakestWord().su
+      WeakestWordServices.listWeakestWord(
+      {
+        sort_by: sort_by,
+        sort_type: 'asc'
+      });
     }
   }
 
