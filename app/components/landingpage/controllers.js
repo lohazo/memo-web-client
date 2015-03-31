@@ -58,6 +58,11 @@ angular.module('landingpage.controllers', [])
     $scope.toPlayStore1 = function () {
       $window.location.href = 'https://play.google.com/store/apps/details?id=vn.topica.memo';
     };
+
+    $scope.toWPStore = function () {
+      $window.location.href =
+        'http://www.windowsphone.com/vi-vn/store/app/topica-memo-h%E1%BB%8Dc-ti%E1%BA%BFng-anh-mi%E1%BB%85n-ph%C3%AD/be98f876-f3e6-49a2-991d-78782129c557';
+    };
   }])
   .controller('LpStatCtrl', [
     '$scope',

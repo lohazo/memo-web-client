@@ -64,6 +64,9 @@
           }
           .window {
             background: url("assets/img/landingpage/2-wp.png") no-repeat;
+            &:hover {
+              background: url("assets/img/landingpage/2-wp-hover.png") no-repeat;
+            }
           }
         }
       }
