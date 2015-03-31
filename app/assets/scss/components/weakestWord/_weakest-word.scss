@@ -52,7 +52,9 @@
               width: 80px;
               line-height: 25px;
               display: none;
-              span {
+              list-style: none;
+              li {
+                display: block;
                 font-weight: 600;
                 border-bottom: solid 2px #ccc;
               }

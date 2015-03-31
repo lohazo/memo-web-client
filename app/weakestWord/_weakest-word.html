@@ -17,13 +17,13 @@
         <tbody>
           <tr class="word" ng-repeat="word in weakest_word.weakest_words">
             <td ng-click="getWordDetail(word)" class="word-text"><span ng-bind="word.text"></span>
-              <div class="translation">
-                <span ng-bind="word.definitions"></span>
-              </div>
+              <ul class="translation">
+                <li ng-repeat="word in word.definitions" ng-bind="word"></li>
+              </ul>
             </td>
             <td ng-click="getWordDetail(word)" class="word-skills" ng-bind="word.skills"></td>
             <td ng-click="getWordDetail(word)" class="word-last-study" ng-bind="word.last_study"></td> 
-            <td ng-click="getWordDetail(word)" class="word-strength-gap" ng-class="{'level-1': word.strength_gap == 1 , 'level-2' : word.strength_gap == 2 , 'level-3' : word.strength_gap == 3 , 'level-4' : word.strength_gap == 4}"></td>  
+            <td ng-click="getWordDetail(word)" class="word-strength-gap" ng-class="{'level-1': word.strength_gap == 1 , 'level-2' : word.strength_gap == 2 , 'level-3' : word.strength_gap == 3 , 'level-4' : word.strength_gap == 4}"></td>
           </tr>
         </tbody>
       </table>
