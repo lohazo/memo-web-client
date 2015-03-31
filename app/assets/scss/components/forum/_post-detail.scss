@@ -46,6 +46,9 @@
       .post-avatar {
         @include grid-column($columns: 2);
         border-radius: 50%;
+        height: 60px;
+        width: 60px;
+        padding:0;
       }
       .post-content-wrapper {
         @include grid-column($columns: 14);
