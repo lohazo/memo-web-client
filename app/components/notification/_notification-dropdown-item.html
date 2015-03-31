@@ -1,6 +1,6 @@
 <div class="noti-item-inner" noti-id="{{noti._id}}">
-  <div class="noti-item-image"><img /></div>
+  <div class="noti-item-image"><img ng-src="{{noti.metadata.url_image}}"/></div>
   <div class="noti-item-content">{{noti.content}}
-    <div class="noti-time-ago">{{noti.time_ago}}</div>
+    <div class="noti-time-ago" am-time-ago="{{noti.time_ago}}"></div>
   </div>
 </div>

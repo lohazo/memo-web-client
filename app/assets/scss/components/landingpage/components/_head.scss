@@ -66,7 +66,7 @@
           height: 59px;
           opacity: 0.7;
         }
-        .ios, .android {
+        .ios, .android, .window {
           &:hover {
             opacity: 1;
           }
@@ -117,5 +117,6 @@
     //     margin-left: 10px;
     //   }
     // }
+ 
   }
 }

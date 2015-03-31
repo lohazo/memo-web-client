@@ -40,7 +40,7 @@
     'profile', 'skill', 'report', 'exam',
     'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
     'words', 'referral', 'question',
-    'notification', 'download', 'adsense', 'forum', 'memo.dropdown'
+    'notification', 'download', 'adsense', 'forum', 'memo.dropdown', 'weakestWord'
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
     'GooglePlusProvider', '$logProvider',
     AppConfig
@@ -50,8 +50,8 @@
 
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
       if ($localStorage.auth) {
-        if ($localStorage.auth.loggedIn) {} else {
-          if (next.templateUrl !== '/') {
+        if (!$localStorage.auth.loggedIn) {
+          if (next.originalPath !== '/' && next.originalPath !== '/downloads') {
             $location.url('/');
           }
         }
