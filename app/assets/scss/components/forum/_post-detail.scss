@@ -145,6 +145,7 @@
                 @include grid-column($columns: 16);
                 border-top: solid 1px #ccc;
                 @include grid-row;
+                padding-bottom: 20px;
                 .comment-avatar {
                   border-radius: 50%;
                   @include grid-column($columns: 3);

@@ -17,7 +17,7 @@
             <div class="post-content-wrapper left">
               <header class="post-header">
                 <div class="title" ng-bind="post.title"></div>
-                <a ng-href="/forum/post/{{post._id}}" ng-bind="post.user.name"></a>
+                <a ng-href="/profile/{{post.user._id}}" ng-bind="post.user.name"></a>
                 <div><span class="created-time">{{post.created_time | amDateFormat:'Do/Mo/YYYY'}}</span> - {{post.course_name}}</div>
               </header>
               <div class="post-inner">
@@ -57,19 +57,22 @@
                         <a class="vote-up left normal" ng-class="{'active': comment.is_vote_up}" ng-click="voteUpComment(comment)"></a>
                         <div class="total-vote left" ng-bind="comment.down_vote_count"></div>
                         <a class="vote-down left normal" ng-class="{'active': comment.is_vote_down}" ng-click="voteDownComment(comment)"></a>
-                        <!-- <a class="reply left" ng-click="reply()">Trả lời</a> -->
+                        <!-- <a class="reply left" ng-click="reply(comment)">Trả lời</a>   -->
                       </div>
+                      <!-- <ul class="child-comments">
+                        <li class="child-comment" ng-repeat="reply in replies track by reply._id">
+                          <div class="child-comment-inner">{{reply.content}}</div>               
+                        </li>
+                      </ul> -->
                     </div>  
                   </div>
                 </div>
               </div>
-              <ul class="child-comments">
-                <li class="child-comment">
-                  <div class="child-comment-inner"></div>               
-                </li>
-              </ul>
             </li>
           </ul>
+          <div class="pagination-centered">
+            <pagination page="currentPage" total-items="post.total_comment" on-select-page="setPage(page)"></pagination>
+          </div>
         </div>
       </section>
       <section class="comment-editor">
