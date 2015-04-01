@@ -70,9 +70,6 @@
               </div>
             </li>
           </ul>
-          <div class="pagination-centered">
-            <pagination page="currentPage" total-items="post.total_comment" on-select-page="setPage(page)"></pagination>
-          </div>
         </div>
       </section>
       <section class="comment-editor">
@@ -94,7 +91,7 @@
   <section class="main-right">
     <section class="panel search-panel">
       <div class="search">
-        <input type="text" ng-model="postSearch.keywords" ng-keydown="search(event=$event)" placeholder="Tìm kiếm chủ đề">
+        <input type="text" ng-model="postSearch.keywords" ng-keydown="search(event=$event)" placeholder="Tìm kiếm chủ đề"><a class="small radius button" ></a>
       </div>
     </section>
     <section class="panel channel-follow">
