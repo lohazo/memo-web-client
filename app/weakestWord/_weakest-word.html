@@ -22,7 +22,7 @@
               </ul>
             </td>
             <td ng-click="getWordDetail(word)" class="word-skills" ng-bind="word.skills"></td>
-            <td ng-click="getWordDetail(word)" class="word-last-study"></td> 
+            <td ng-click="getWordDetail(word)" class="word-last-study" am-time-ago="word.time_ago"></td> 
             <td ng-click="getWordDetail(word)" class="word-strength-gap" ng-class="{'level-1': word.strength_gap == 1 , 'level-2' : word.strength_gap == 2 , 'level-3' : word.strength_gap == 3 , 'level-4' : word.strength_gap == 4}"></td>
           </tr>
         </tbody>
