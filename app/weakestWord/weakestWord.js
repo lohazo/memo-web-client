@@ -11,8 +11,17 @@
   function ListWeakestWordCtrl($scope, $location, ngAudio, WeakestWordServices) {
     $scope.max_page = 5;
 
+    function convertTime(data) {
+      var time = angular.copy(data);
+      time.weakest_words = time.weakest_words.map(function (word) {
+        word.time_ago = Math.round((new Date('' + word.pre_exercise)).getTime() / 1000);
+        return word;
+      })
+      return time;
+    }
+
     WeakestWordServices.listWeakestWord().success(function (data) {
-      $scope.weakest_word = data;
+      $scope.weakest_word = convertTime(data);
       $scope.total_items = data.total_page * 10;
       $scope.currentPage = data.next_page - 1;
     });
@@ -20,7 +29,7 @@
     $scope.setPage = function (page) {
       $scope.weakest_word.page = page;
       WeakestWordServices.listWeakestWord($scope.weakest_word).success(function (data) {
-        $scope.weakest_word = data;
+         $scope.weakest_word = convertTime(data);
       });
     };
 
@@ -38,13 +47,26 @@
     $scope.backListWeakestWord = function () {
       $scope.getDetail = false;
     }
-
+    
     $scope.sortWeakestWord = function (sort_by) {
-      WeakestWordServices.listWeakestWord(
-      {
-        sort_by: sort_by,
-        sort_type: 'asc'
-      });
+      if (!$scope.sorted_by_desc || !$scope.sorted) {
+        WeakestWordServices.listWeakestWord({
+          sort_by: sort_by,
+          sort_type: 'desc'
+        }).success(function (data) {
+           $scope.weakest_word = convertTime(data);
+        });
+        $scope.sorted_by_desc = true;
+      } else if ($scope.sorted_by_desc) {
+        WeakestWordServices.listWeakestWord({
+          sort_by: sort_by,
+          sort_type: 'asc'
+        }).success(function (data) {
+          $scope.weakest_word = convertTime(data);
+        });
+        $scope.sorted_by_desc = false;
+      };
+      $scope.sorted = true;
     }
   }
 
