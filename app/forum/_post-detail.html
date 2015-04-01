@@ -17,7 +17,7 @@
             <div class="post-content-wrapper left">
               <header class="post-header">
                 <div class="title" ng-bind="post.title"></div>
-                <a ng-href="/profile/{{post.user._id}}" ng-bind="post.user.name"></a>
+                <a ng-href="/forum/post/{{post._id}}" ng-bind="post.user.name"></a>
                 <div>{{post.created_time | amDateFormat:'Do/Mo/YYYY'}} - {{post.course_name}}</div>
               </header>
               <div class="post-inner">

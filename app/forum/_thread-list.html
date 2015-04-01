@@ -17,9 +17,15 @@
             <li class="post sticky" ng-repeat="post in tab.data.sticky_posts">
               <div><img class="post-avatar" ng-src="{{post.user.url_avatar  || 'assets/img/profile-avatar-big.png'}}" /></div>
               <div class="post-content">
-                <a ng-href="/forum/post/{{post._id}}" class="title" title=""><img ng-src="assets/img/sao.jpg" /><span ng-bind="post.title"></span></a>
+                <a ng-href="/forum/post/{{post._id}}" class="title" title=""><span ng-bind="post.title"></span></a>
                 <p class="post-detail">
                   <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a>
+                </p>
+                <p class="post-toolbar">
+                  <!-- <span></span>  
+                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a>
+                  <span></span>
+                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a> -->
                 </p>
               </div>
               <div class="comment">
@@ -50,14 +56,14 @@
   </section>
   <section class="main-right">
     <div class="search">
-      <input type="text" ng-model="postSearch.keywords" ng-keydown="search(event=$event)" placeholder="Tìm kiếm chủ đề ...">
+      <input type="text" ng-model="postSearch.keywords" ng-keydown="search(event=$event)" placeholder="Tìm kiếm chủ đề ..." />
     </div>
     <div class="channel-follow">
       <h4 class="title">Kênh theo dõi</h4>
       <div class="course-language">
         <ul>
           <li ng-repeat="subscriber in subscribers.list_subscriptions">
-            <img class="avatar-course" ng-src="/assets/img/{{subscriber._id}}.png" />
+            <img class="avatar-course" ng-src="/assets/img/forum/{{subscriber._id}}.png" />
             <a ng-href="/forum?filter={{subscriber._id}}">{{subscriber.name}}</a>
           </li>
         </ul>
