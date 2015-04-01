@@ -189,15 +189,13 @@
         vote: post.is_vote_down
       });
     };
-    $scope.isSending = false;
+    
     $scope.createComment = function () {
       if (!$scope.isSending && $scope.data.content != '') {
-        $scope.isSending = true;
         ForumServices.creatComment($scope.data).success(function (data) {
           $scope.post.comments.push(data);
           $scope.post.total_comment = $scope.post.total_comment + 1;
           $scope.data.content = '';
-          $scope.isSending = false;
         });
       }
     };

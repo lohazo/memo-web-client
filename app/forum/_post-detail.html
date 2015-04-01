@@ -4,7 +4,7 @@
       <section class="post-info">
         <div class="post-info-header">
           <div class="left">
-            <a class="title" ng-href="/forum">&lsaquo; Danh sách chủ đề </a>
+            <a class="small radius button return-button" ng-href="/forum">&lsaquo; Danh sách chủ đề </a>
           </div>
           <div class="right">
             <a class="small radius button follow-button" ng-if="post.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
@@ -18,7 +18,7 @@
               <header class="post-header">
                 <div class="title" ng-bind="post.title"></div>
                 <a ng-href="/forum/post/{{post._id}}" ng-bind="post.user.name"></a>
-                <div>{{post.created_time | amDateFormat:'Do/Mo/YYYY'}} - {{post.course_name}}</div>
+                <div><span class="created-time">{{post.created_time | amDateFormat:'Do/Mo/YYYY'}}</span> - {{post.course_name}}</div>
               </header>
               <div class="post-inner">
                 <div class="post-content" ng-bind-html="post.content"></div>
@@ -28,18 +28,6 @@
                 <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)"></a>
                 <div class="total-vote left" ng-bind="post.down_vote_count"></div>
                 <a class="vote-down normal left" ng-class="{'active': post.is_vote_down}" ng-click="voteDownPost(post)"></a>
-              </div>
-            </div>
-          </div>
-          <div class="comment-version">
-            <img class="commenter-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
-            <div class="comment-version-content left">
-              <div class="comment-editor">
-                <textarea id="comment" ng-model="data.content" class="comment-editor-textarea" placeholder="Gửi bình luận của bạn"></textarea>
-              </div>
-              <div class="comment-toolbar">
-                <a class="small radius button send-comment-button" ng-click="createComment()">Gửi</a>
-                <!-- <a class="small radius button cancel-button">Hủy</a> -->
               </div>
             </div>
           </div>
@@ -84,6 +72,20 @@
           </ul>
         </div>
       </section>
+      <section class="comment-editor">
+        <div class="comment-editor-left">
+          <img class="comment-editor-avatar" class="comment-avatar" ng-src="{{comment.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+        </div>
+        <div class="comment-editor-right">
+          <div class="comment-editor-text-area">
+            <textarea class="text-area" rows="3" ng-model="data.content"></textarea>
+          </div>
+          <div class="comment-editor-toolbar">
+            <a class="small radius button send-button" ng-click="createComment()">Gửi</a>
+            <a class="small radius button cancel-button">Hủy</a>
+          </div>
+        </div>
+      </section>
     </section>
     </section>
   <section class="main-right">
@@ -97,7 +99,7 @@
       <div class="course-language">
         <ul>
           <li ng-repeat="subscriber in subscribers.list_subscriptions">
-            <img class="avatar-course" ng-src="/assets/img/{{subscriber._id}}.png" />
+            <img class="avatar-course" ng-src="/assets/img/forum/{{subscriber._id}}.png" />
             <a ng-href="/forum?filter={{subscriber._id}}">{{subscriber.name}}</a>
           </li>
         </ul>
