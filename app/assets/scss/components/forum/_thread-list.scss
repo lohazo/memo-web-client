@@ -78,6 +78,7 @@
           .post-content {
             float: left;
             margin-left: 25px;
+            min-width: 663px;
             .title {
               color: $oil;
               margin: 0;
@@ -119,6 +120,18 @@
               line-height: 20px;
               span {
                 vertical-align: middle;
+              }
+            }
+            .follow {
+              .follow-button {
+                border: 2px solid $gold;
+                color: $primary-color;
+                font-size: 1rem;
+                font-weight: bold;
+                background-color: $white;
+                &:hover {
+                  background-color: $gold;
+                }
               }
             }
           }
