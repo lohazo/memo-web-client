@@ -12,43 +12,45 @@
       <div class="main-post">
         <div class="tabs">
           <tabset vertical="false" type="navType">
-          <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
-          <ul class="posts">
-            <li class="post sticky" ng-repeat="post in tab.data.sticky_posts">
-              <div><img class="post-avatar" ng-src="{{post.user.url_avatar  || 'assets/img/profile-avatar-big.png'}}" /></div>
-              <div class="post-content">
-                <a ng-href="/forum/post/{{post._id}}" class="title" title=""><span ng-bind="post.title"></span></a>
-                <p class="post-detail">
-                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a>
-                </p>
-                <p class="post-toolbar">
-                  <!-- <span></span>  
-                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a>
-                  <span></span>
-                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a> -->
-                </p>
-              </div>
-              <div class="comment">
-                <span>{{post.total_comment}}</span>
-              </div>
-            </li>
-            <li class="post" ng-repeat="post in tab.data.posts">
-              <div ><img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
-              <div class="post-content">
-                <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
-                <p class="post-detail">
-                  <a class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo">{{post.course_name}}</a>
-                </p>
-              </div>
-              <div class="comment">
-                <span>{{post.total_comment}}</span> 
-              </div>
-            </li>
-          </ul>
-          <div class="pagination-centered">
-            <pagination ng-if="tab.data.total_page > 0" page="tab.data.current_page" total-items="tab.data.total_page * 10" on-select-page="setPage(page)"></pagination>
-          </div>  
-          </tab>
+            <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
+              <ul class="posts">
+                <li class="post sticky" ng-repeat="post in tab.data.sticky_posts">
+                  <div><img class="post-avatar" ng-src="{{post.user.url_avatar  || 'assets/img/profile-avatar-big.png'}}" /></div>
+                  <div class="post-content">
+                    <a ng-href="/forum/post/{{post._id}}" class="title" title=""><img ng-src="assets/img/sao.jpg" /><span ng-bind="post.title"></span></a>
+                    <p class="post-detail">
+                      <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a>
+                    </p>
+                    <div class="post-toolbar">
+                      <div class="total-vote left" ng-bind="post.up_vote_count"></div>
+                      <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)"></a>
+                    </div>
+                    <div class="comment">
+                      <span>{{post.total_comment}}</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="post" ng-repeat="post in tab.data.posts">
+                  <div ><img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
+                  <div class="post-content">
+                    <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
+                    <p class="post-detail">
+                      <a class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo">{{post.course_name}}</a>
+                    </p>
+                    <div class="post-toolbar">
+                      <div class="total-vote left" ng-bind="post.up_vote_count"></div>
+                      <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)"></a>
+                    </div>
+                  </div>
+                  <div class="comment">
+                    <span>{{post.total_comment}}</span> 
+                  </div>
+                </li>
+              </ul>
+              <div class="pagination-centered">
+                <pagination ng-if="tab.data.total_page > 0" page="tab.data.current_page" total-items="tab.data.total_page * 10" on-select-page="setPage(page)"></pagination>
+              </div>  
+            </tab>
           </tabset>
         </div>
       </div>

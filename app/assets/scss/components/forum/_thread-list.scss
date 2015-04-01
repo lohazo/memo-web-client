@@ -94,18 +94,48 @@
                 color: $primary-color;
               }
             }
-          }
-          .comment {
-            background: url("assets/img/chat.jpg") no-repeat center;
-            float: right;
-            width: 44px;
-            height: 41px;
-            text-align: center;
-            color: #fff;
-            span {
-              vertical-align: middle;
+            .post-toolbar {
+              float: left;
+              .total-vote {
+                padding-right: 20px;
+                font-size: 16px;
+              }
+              .vote-up {
+                margin-right: 15px;
+                background-size: contain;
+                width: 25px;
+                height: 25px;
+                &.normal {
+                  background: url("assets/img/vote-icon/vote-up-icon.png") no-repeat;
+                }
+                &.active {
+                  background: url("assets/img/vote-icon/vote-up-icon-2.png") no-repeat;
+                }
+              }
+            }
+            .comment {
+              // background: url("assets/img/chat.jpg") no-repeat center;
+              float: left;
+              // width: 44px;
+              // height: 41px;
+              // text-align: center;
+              color: #000;
+              span {
+                vertical-align: middle;
+              }
             }
           }
+          // .comment {
+          //   background: url("assets/img/chat.jpg") no-repeat center;
+          //   float: right;
+          //   width: 44px;
+          //   height: 41px;
+          //   text-align: center;
+          //   color: #fff;
+          //   span {
+          //     vertical-align: middle;
+          //   }
+          // }
         }
         .page-toolbar {
           text-align: center;
