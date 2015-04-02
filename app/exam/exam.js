@@ -20,7 +20,7 @@
     });
   }
 
-  angular.module('exam', ['exam.controllers', 'exam.services', 'placement.controllers',
+  angular.module('exam', ['exam.controllers', 'exam.services', 'exam.strengthen', 'placement.controllers',
       'placement.services', 'placement.directives', 'adaptiveTest', 'adaptiveTest.progressQuiz'
     ])
     .config(['$routeProvider', ExamConfig]);

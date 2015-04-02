@@ -17,92 +17,107 @@
         height: 315px;
       }
     }
-    &.success {
-      margin-top: auto;
-      .slider {
-        .slide {
-          h4 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 700;
-          }
-          p {
-            width: 600px;
-            font-size: 18px;
-            color: $steel;
-            margin: 0 auto;
-          }
+    .slider {
+      .slide {
+        h4 {
+          text-align: center;
+          margin-bottom: 20px;
+          font-weight: 700;
+        }
+        p {
+          width: 600px;
+          font-size: 18px;
+          color: $steel;
+          margin: 0 auto;
         }
       }
-      .col-left {
-        border-right: 1px solid $gainsboro;
-        height: 450px;
-      }
-      .col-right {
-        padding-top: 30px;
-        text-align: center;
-      }
-      .lesson-finish-ant {
-        background-postition: 0 0;
-        background-size: cover;
-        display: block;
-        width: 220px;
-        height: 276px;
-        margin: 30px auto;
-      }
-      .facebook.share.button {
-        background-color: #33b5e5;
-        margin-top: 40px;
-      }
-      .skill-row {
-        @include grid-row;
-        float: left;
-        text-align: center;
+    }
+    .col-left {
+      border-right: 1px solid $gainsboro;
+      height: 450px;
+    }
+    .col-right {
+      padding-top: 30px;
+      text-align: center;
+    }
+    .lesson-finish-ant {
+      background-postition: 0 0;
+      background-size: cover;
+      display: block;
+      width: 220px;
+      height: 276px;
+      margin: 30px auto;
+    }
+    .facebook.share.button {
+      background-color: #33b5e5;
+      margin-top: 40px;
+    }
+    .skill-row {
+      @include grid-row;
+      float: left;
+      text-align: center;
+      position: relative;
+      .skill {
+        background: url("assets/img/hex-units.png") no-repeat;
+        margin: 0 auto 50px;
         position: relative;
-        .skill {
-          background: url("assets/img/hex-units.png") no-repeat;
-          margin: 0 auto 50px;
-          position: relative;
-          padding-top: 27px;
-          width: 140px;
-          height: 200px;
-          a {
-            color: $white;
-            display: block;
-          }
-          .name {
-            margin: 10px auto;
-          }
-          .level {
-            width: 110px;
-            margin: 0 auto;
-          }
-          .icon {
-            margin: 5px auto;
-            height: 70px;
-            width: 70px;
-          }
-          &.success {
-            background-position: -560px 0;
-            color: $white;
-            .strength-bar {
-              height: 41px;
-              background: url("assets/img/hex-strength.png") no-repeat;
-            }
-            .icon {
-              background: url("assets/img/skills-pack-unlocked-70.png") no-repeat;
-            }
-          }
-          $x: 1;
-          @for $i from 0 through 4 {
-            @for $j from 0 through 10 {
-              &.skill-#{$x} {
-                .icon {
-                  background-position: $j * -70px $i * -70px;
-                }
+        padding-top: 27px;
+        width: 140px;
+        height: 200px;
+        display: inline-block;
+        color: $white;
+        a {
+          color: $white;
+          display: block;
+        }
+        .name {
+          margin: 10px auto;
+        }
+        .level {
+          width: 110px;
+          margin: 0 auto;
+        }
+        .icon {
+          margin: 5px auto;
+          height: 70px;
+          width: 70px;
+          background: url("assets/img/skills-pack-unlocked-70.png") no-repeat;
+        }
+        .strength-bar {
+          height: 41px;
+          background: url("assets/img/hex-strength.png") no-repeat;
+        }
+        &.success {
+          background-position: -560px 0 !important;
+          color: $white;
+        }
+        &.red {
+          background-position: -140px 0;
+        }
+        &.green {
+          background-position: -280px 0;
+        }
+        &.blue {
+          background-position: -420px 0;
+        }
+        .level-1 .strength-bar {
+          background-position: 0 -123px !important;
+        }
+        .level-2 .strength-bar {
+          background-position: 0 -82px !important;
+        }
+        .level-3 .strength-bar {
+          background-position: 0 -41px !important;
+        }
+        $x: 1;
+        @for $i from 0 through 4 {
+          @for $j from 0 through 10 {
+            &.skill-#{$x} {
+              .icon {
+                background-position: $j * -70px $i * -70px;
               }
-              $x: $x + 1;
             }
+            $x: $x + 1;
           }
         }
       }
