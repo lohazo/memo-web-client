@@ -30,8 +30,8 @@
                       <img src="assets/img/Forum/comment-icon.png" alt="">
                     </div>
                     <div class="follow">
-                      <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followPost()">Theo dõi</a>
-                      <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowPost()">Đang theo dõi </a>
+                      <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followStickyPost(post)">Theo dõi</a>
+                      <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowStickyPost(post)">Đang theo dõi </a>
                     </div>
                   </div>
                 </li>
@@ -51,8 +51,8 @@
                       <img src="assets/img/Forum/comment-icon.png" alt="">
                     </div>
                     <div class="follow">
-                      <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followPost()">Theo dõi</a>
-                      <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowPost()">Đang theo dõi </a>
+                      <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followPost(post)">Theo dõi</a>
+                      <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowPost(post)">Đang theo dõi </a>
                     </div>
                   </div>
                 </li>
