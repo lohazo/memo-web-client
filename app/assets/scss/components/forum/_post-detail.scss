@@ -285,8 +285,12 @@
       padding-left: 5px;
       margin-bottom: 0px;
     }
-    .search-post-button {
-    
+    .search-box {
+      @include grid-row;
+      .search-box-inner {
+        @include grid-column($columns: 16);
+        min-height: 32px;
+      }
     }
   }
   .channel-follow {
