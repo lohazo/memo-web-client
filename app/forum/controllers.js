@@ -124,13 +124,11 @@
       keywords: ''
     };
 
-    $scope.search = function (e) {
-      if (e.keyCode === 13) {
-        if ($scope.postSearch.keywords.length > 0) {
-          $location.url('/forum').search({
-            keywords: $scope.postSearch.keywords
-          });
-        }
+    $scope.search = function () {
+      if ($scope.postSearch.keywords.length > 0) {
+        $location.url('/forum').search({
+          keywords: $scope.postSearch.keywords
+        });
       }
     };
 
@@ -173,13 +171,11 @@
       keywords: ''
     };
 
-    $scope.search = function (e) {
-      if (e.keyCode === 13) {
-        if ($scope.postSearch.keywords.length > 0) {
-          $location.url('/forum').search({
-            keywords: $scope.postSearch.keywords
-          });
-        }
+    $scope.search = function () {
+      if ($scope.postSearch.keywords.length > 0) {
+        $location.url('/forum').search({
+          keywords: $scope.postSearch.keywords
+        });
       }
     };
 
