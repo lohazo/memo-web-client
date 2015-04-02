@@ -26,6 +26,7 @@
   <section class="panel search-panel">
         <div class="search">
           <input type="text" ng-model="postSearch.keywords" ng-keydown="search(event=$event)" placeholder="Tìm kiếm chủ đề">
+          <a class="small radius button" ng-click="searchWithButton()"></a>
         </div>
       </section>
       <section class="panel channel-follow">
@@ -33,7 +34,7 @@
         <div class="course-language">
        <ul>
          <li ng-repeat="subscriber in subscribers.list_subscriptions">
-         <img class="avatar-course" ng-src="/assets/img/{{subscriber._id}}.png" />          
+         <img class="avatar-course" ng-src="/assets/img/Forum/{{subscriber._id}}.png" />          
             <a ng-href="/forum?filter={{subscriber._id}}">{{subscriber.name}}</a>
          </li>
        </ul>
