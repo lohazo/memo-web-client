@@ -34,12 +34,13 @@
       }
       .main-post {
         .tabs {
+          border-bottom: solid 2px #ddd;
           .tabs-heading {
             margin-right: 15px;
             margin-top: 20px;
           }
           dd > a {
-            min-width: 90px;
+            min-width: 50px;
             text-align: center;
             padding-left: 0;
             padding-right: 0;
@@ -55,6 +56,11 @@
             &:hover {
               background: none;
             }
+          }
+        }
+        .tabs-content {
+          .content {
+            padding-top: 0;
           }
         }
         .posts {
@@ -185,7 +191,7 @@
       padding: 20px;
       margin-top: 20px;
       .title {
-        padding: 20px 0 20px 0;
+        padding: 10px 0 20px 0;
       }
       .course-language ul {
         margin-left: 0;

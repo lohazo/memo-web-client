@@ -20,7 +20,7 @@
     $scope.followingPosts = convertToViewData(followingPosts.data);
 
     $scope.tabs = [{
-      title: 'Chủ đề mới',
+      title: 'Tất cả',
       data: $scope.allPosts,
       active: true
     }, {
