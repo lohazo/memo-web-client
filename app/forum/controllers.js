@@ -97,16 +97,11 @@
       return;
     };
 
-    $scope.search = function (e) {
-      if (e.keyCode === 13) {
-        if ($scope.postSearch.keywords.length > 0) {
-          ForumServices.searchPosts({
-            keywords: $scope.postSearch.keywords
-          }).success(function (data) {
-            $scope.stickyPosts = data.sticky_posts;
-            $scope.searchPosts = data.posts;
-          });
-        }
+    $scope.search = function () {
+      if ($scope.postSearch.keywords.length > 0) {
+        $location.search({
+          keywords: $scope.postSearch.keywords
+        });
       }
     };
   }
