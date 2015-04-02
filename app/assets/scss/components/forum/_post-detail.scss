@@ -272,7 +272,7 @@
   }
   .search-panel {
     @include grid-row;
-    padding: 30px;
+    padding:20px;
     list-style: none;
     background: none repeat scroll 0px 0px #FFF;
     border-radius: 10px;
@@ -290,16 +290,25 @@
       @include grid-row;
       .search-box-inner {
         // @include grid-column($columns: 16);
-        min-height: 32px;
+        min-height: 35px;
         position: relative;
+        input {
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+          margin-bottom: 0;
+        }
         .button {
           position: absolute;
-          top: 1px;
+          top: 0px;
           right: 0px;
+          height: 35px;
+          width: 40px;
+          padding: 0;
           border-top-left-radius: 0;
           margin-bottom: 0;
           border-bottom-left-radius: 0;
           min-height: 35px;
+          background: url("assets/img/search.png") 13px no-repeat #810c15;
         }
       }
     }
