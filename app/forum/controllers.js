@@ -97,11 +97,21 @@
       return;
     };
 
-    $scope.search = function () {
+    $scope.searchWithButton = function () {
       if ($scope.postSearch.keywords.length > 0) {
         $location.search({
           keywords: $scope.postSearch.keywords
         });
+      }
+    };
+
+    $scope.search = function (e) {
+      if (e.keyCode === 13) {
+        if ($scope.postSearch.keywords.length > 0) {
+          $location.search({
+            keywords: $scope.postSearch.keywords
+          });
+        }
       }
     };
   }
@@ -119,11 +129,21 @@
       keywords: ''
     };
 
-    $scope.search = function () {
+    $scope.searchWithButton = function () {
       if ($scope.postSearch.keywords.length > 0) {
         $location.url('/forum').search({
           keywords: $scope.postSearch.keywords
         });
+      }
+    };
+
+    $scope.search = function (e) {
+      if (e.keyCode === 13) {
+        if ($scope.postSearch.keywords.length > 0) {
+          $location.url('/forum').search({
+            keywords: $scope.postSearch.keywords
+          });
+        }
       }
     };
 
@@ -176,13 +196,23 @@
         $scope.currentPage = data.next_page - 1;
         $scope.total_items = data.total_page * 10;
       });
-    }
+    };
 
-    $scope.search = function () {
+    $scope.searchWithButton = function () {
       if ($scope.postSearch.keywords.length > 0) {
         $location.url('/forum').search({
           keywords: $scope.postSearch.keywords
         });
+      }
+    };
+
+    $scope.search = function (e) {
+      if (e.keyCode === 13) {
+        if ($scope.postSearch.keywords.length > 0) {
+          $location.url('/forum').search({
+            keywords: $scope.postSearch.keywords
+          });
+        }
       }
     };
 

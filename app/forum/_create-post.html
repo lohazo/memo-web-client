@@ -25,8 +25,8 @@
   <section class="main-right">
   <section class="panel search-panel">
         <div class="search">
-          <input type="text" ng-model="postSearch.keywords" placeholder="Tìm kiếm chủ đề">
-          <a class="small radius button" ng-click="search()"></a>
+          <input type="text" ng-model="postSearch.keywords" ng-keydown="search(event=$event)" placeholder="Tìm kiếm chủ đề">
+          <a class="small radius button" ng-click="searchWithButton()"></a>
         </div>
       </section>
       <section class="panel channel-follow">

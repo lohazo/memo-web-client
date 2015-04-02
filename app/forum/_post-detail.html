@@ -95,8 +95,8 @@
     <section class="panel search-panel">
       <div class="search-box">
         <div class="search-box-inner">
-            <input type="text" class="search-input" ng-model="postSearch.keywords" placeholder="Tìm kiếm chủ đề" />
-            <a title="" class="small radius button search-button postfix" ng-click="search()"></a>
+            <input type="text" class="search-input" ng-model="postSearch.keywords" ng-keydown="search(event=$event)" placeholder="Tìm kiếm chủ đề" />
+            <a title="" class="small radius button search-button postfix" ng-click="searchWithButton()"></a>
         </div>
       </div>
     </section>
