@@ -11,6 +11,8 @@
     .posts-panel {
       @include grid-row;
       border-radius: 20px;
+      padding-bottom: 0;
+      margin-bottom: 20px;
       .posts-header {
         @include grid-row;
         .left {
@@ -34,7 +36,6 @@
       }
       .main-post {
         .tabs {
-          border-bottom: solid 2px #ddd;
           .tabs-heading {
             margin-right: 15px;
             margin-top: 20px;
@@ -59,8 +60,10 @@
           }
         }
         .tabs-content {
+          margin-bottom: 0;
           .content {
             padding-top: 0;
+            padding-bottom: 0;
           }
         }
         .posts {
