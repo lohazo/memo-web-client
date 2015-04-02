@@ -61,29 +61,29 @@
       });
     };
 
-    // $scope.followPost = function () {
-    //   ForumServices.followPost($scope.post).success(function () {
-    //     $scope.post.is_followed = true;
-    //   });
-    // };
+    $scope.followStickyPost = function (post) {
+      ForumServices.followPost(post).success(function () {
+        post.is_followed = true;
+      });
+    };
 
-    // $scope.unfollowPost = function () {
-    //   ForumServices.unFollowPost($scope.post).success(function () {
-    //     $scope.post.is_followed = false;
-    //   });
-    // };
+    $scope.unfollowStickyPost = function (post) {
+      ForumServices.unFollowPost(post).success(function () {
+        post.is_followed = false;
+      });
+    };
 
-    // $scope.followPost = function () {
-    //   ForumServices.followPost($scope.post).success(function () {
-    //     $scope.post.is_followed = true;
-    //   });
-    // };
+    $scope.followPost = function (post) {
+      ForumServices.followPost(post).success(function () {
+        post.is_followed = true;
+      });
+    };
 
-    // $scope.unfollowPost = function () {
-    //   ForumServices.unFollowPost($scope.post).success(function () {
-    //     $scope.post.is_followed = false;
-    //   });
-    // };
+    $scope.unfollowPost = function (post) {
+      ForumServices.unFollowPost(post).success(function () {
+        post.is_followed = false;
+      });
+    };
 
 
     $scope.setPage = function (page) {
@@ -177,6 +177,7 @@
       $scope.data.page = page;
       ForumServices.listComment($scope.data).success(function (data) {
         $scope.post.comments = data.comments;
+        $scope.page = data;
         $scope.currentPage = data.next_page - 1;
         $scope.total_items = data.total_page * 10;
       });
@@ -193,6 +194,7 @@
     $scope.listComment = function () {
       ForumServices.listComment($scope.data).success(function (data) {
         $scope.post.comments = data.comments;
+        $scope.page = data;
         $scope.currentPage = data.next_page - 1;
         $scope.total_items = data.total_page * 10;
       });
