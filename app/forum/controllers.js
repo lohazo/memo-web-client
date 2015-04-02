@@ -63,13 +63,25 @@
 
     // $scope.followPost = function () {
     //   ForumServices.followPost($scope.post).success(function () {
-    //     $scope.stickyPosts.is_followed = true;
+    //     $scope.post.is_followed = true;
     //   });
     // };
 
     // $scope.unfollowPost = function () {
     //   ForumServices.unFollowPost($scope.post).success(function () {
-    //     $scope.stickyPosts.is_followed = false;
+    //     $scope.post.is_followed = false;
+    //   });
+    // };
+
+    // $scope.followPost = function () {
+    //   ForumServices.followPost($scope.post).success(function () {
+    //     $scope.post.is_followed = true;
+    //   });
+    // };
+
+    // $scope.unfollowPost = function () {
+    //   ForumServices.unFollowPost($scope.post).success(function () {
+    //     $scope.post.is_followed = false;
     //   });
     // };
 

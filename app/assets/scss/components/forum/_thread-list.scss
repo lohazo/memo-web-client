@@ -98,7 +98,7 @@
             .post-toolbar {
               float: left;
               .total-vote {
-                padding-right: 20px;
+                padding-right: 10px;
                 font-size: 16px;
               }
               .vote-up {
@@ -124,13 +124,21 @@
             }
             .follow {
               .follow-button {
-                border: 2px solid $gold;
-                color: $primary-color;
-                font-size: 1rem;
+                margin-bottom: 0;
+                color: #fff;
+                font-size: 14px;
                 font-weight: bold;
-                background-color: $white;
+                padding: 5px 15px;
+                background-color: #810c15;
+                float: right;
                 &:hover {
-                  background-color: $gold;
+                  background-color: #670a11;
+                }
+              }
+              .followed {
+                background: #333;
+                &:hover {
+                  background: #333;
                 }
               }
             }
