@@ -20,7 +20,7 @@
     $scope.followingPosts = convertToViewData(followingPosts.data);
 
     $scope.tabs = [{
-      title: 'Chủ đề mới',
+      title: 'Tất cả',
       data: $scope.allPosts,
       active: true
     }, {
@@ -43,6 +43,49 @@
       keywords: ''
     };
 
+    $scope.voteUpPost = function (post) {
+      if (post.is_vote_up) {
+        post.up_vote_count = post.up_vote_count - 1;
+      } else {
+        post.up_vote_count = post.up_vote_count + 1;
+        if (post.is_vote_down) {
+          post.down_vote_count = post.down_vote_count - 1;
+          post.is_vote_down = false;
+        }
+      }
+      post.is_vote_up = !post.is_vote_up;
+      ForumServices.votePost({
+        id: post._id,
+        type: 'upvote',
+        vote: post.is_vote_up
+      });
+    };
+
+    $scope.followStickyPost = function (post) {
+      ForumServices.followPost(post).success(function () {
+        post.is_followed = true;
+      });
+    };
+
+    $scope.unfollowStickyPost = function (post) {
+      ForumServices.unFollowPost(post).success(function () {
+        post.is_followed = false;
+      });
+    };
+
+    $scope.followPost = function (post) {
+      ForumServices.followPost(post).success(function () {
+        post.is_followed = true;
+      });
+    };
+
+    $scope.unfollowPost = function (post) {
+      ForumServices.unFollowPost(post).success(function () {
+        post.is_followed = false;
+      });
+    };
+
+
     $scope.setPage = function (page) {
       var search = {
         page: page
@@ -52,6 +95,14 @@
       }
       $location.search(search);
       return;
+    };
+
+    $scope.searchWithButton = function () {
+      if ($scope.postSearch.keywords.length > 0) {
+        $location.search({
+          keywords: $scope.postSearch.keywords
+        });
+      }
     };
 
     $scope.search = function (e) {
@@ -73,8 +124,17 @@
     };
 
     $scope.subscribers = subscribers.data;
+
     $scope.postSearch = {
       keywords: ''
+    };
+
+    $scope.searchWithButton = function () {
+      if ($scope.postSearch.keywords.length > 0) {
+        $location.url('/forum').search({
+          keywords: $scope.postSearch.keywords
+        });
+      }
     };
 
     $scope.search = function (e) {
@@ -114,14 +174,36 @@
   function PostDetailCtrl($scope, ForumServices, $location, Post, subscribers) {
     $scope.post = Post.data;
     $scope.post.created_time = Math.round((new Date('' + $scope.post.created_at)).getTime() / 1000);
+
+    $scope.max_page = 5;
+
     $scope.data = {
       content: '',
       id: $scope.post._id
     };
 
     $scope.subscribers = subscribers.data;
+
     $scope.postSearch = {
       keywords: ''
+    };
+
+    $scope.setPage = function (page) {
+      $scope.data.page = page;
+      ForumServices.listComment($scope.data).success(function (data) {
+        $scope.post.comments = data.comments;
+        $scope.page = data;
+        $scope.currentPage = data.next_page - 1;
+        $scope.total_items = data.total_page * 10;
+      });
+    };
+
+    $scope.searchWithButton = function () {
+      if ($scope.postSearch.keywords.length > 0) {
+        $location.url('/forum').search({
+          keywords: $scope.postSearch.keywords
+        });
+      }
     };
 
     $scope.search = function (e) {
@@ -137,10 +219,24 @@
     $scope.listComment = function () {
       ForumServices.listComment($scope.data).success(function (data) {
         $scope.post.comments = data.comments;
+        $scope.page = data;
+        $scope.currentPage = data.next_page - 1;
+        $scope.total_items = data.total_page * 10;
       });
     };
 
     $scope.listComment();
+
+    $scope.setPage = function (page) {
+      ForumServices.listComment({
+        page: page,
+        id: $scope.data.id
+      }).success(function (data) {
+        $scope.post.comments = data.comments;
+        $scope.page = data;
+      });
+      return;
+    };
 
     $scope.followPost = function () {
       ForumServices.followPost($scope.post).success(function () {
@@ -189,15 +285,13 @@
         vote: post.is_vote_down
       });
     };
-    $scope.isSending = false;
+
     $scope.createComment = function () {
       if (!$scope.isSending && $scope.data.content != '') {
-        $scope.isSending = true;
         ForumServices.creatComment($scope.data).success(function (data) {
           $scope.post.comments.push(data);
           $scope.post.total_comment = $scope.post.total_comment + 1;
           $scope.data.content = '';
-          $scope.isSending = false;
         });
       }
     };
@@ -206,7 +300,7 @@
      * Vote up cho 1 comment
      * @comment: comment duoc vote
      */
-    $scope.voteUpComment = function (comment) {
+     $scope.voteUpComment = function (comment) {
       if (comment.is_vote_up) {
         comment.up_vote_count = comment.up_vote_count - 1;
       } else {
@@ -241,13 +335,20 @@
         vote: comment.is_vote_down
       });
     };
+
+    $scope.reply = function (comment) {
+      ForumServices.listReply({id: comment._id}).success(function (data) {
+        $scope.replies = data.comments;
+      });
+    };
   }
 
+
   angular.module('forum.controllers', ['forum.services'])
-    .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', 'followingPosts',
-      'searchPosts',
-      ListPostCtrl
+  .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', 'followingPosts',
+    'searchPosts',
+    ListPostCtrl
     ])
-    .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'subscribers', CreatePostCtrl])
-    .controller('PostDetailCtrl', ['$scope', 'ForumServices', '$location', 'Post', 'subscribers', PostDetailCtrl]);
+  .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'subscribers', CreatePostCtrl])
+  .controller('PostDetailCtrl', ['$scope', 'ForumServices', '$location', 'Post', 'subscribers', PostDetailCtrl]);
 }(window.angular));

@@ -47,9 +47,12 @@
 
     Services.listComment = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
-      data.page = 1;
 
-      return $http.get(API + '/posts/' + data.id + '/comments' + '?auth_token=' + authToken, data);
+      var endpoint = API + '/posts/' + data.id + '/comments' + '?auth_token=' + authToken;
+
+      if (data.page) endpoint += '&page=' + data.page;
+
+      return $http.get(endpoint);
     };
 
     /*
