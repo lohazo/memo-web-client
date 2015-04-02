@@ -19,8 +19,7 @@
         .right {
           float: right;
           a.button {
-            padding-left: 0;
-            padding-right: 0;
+            padding: 10px 25px;
             min-width: 155px;
             border: 2px solid $gold;
             color: $primary-color;
