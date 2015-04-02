@@ -148,6 +148,8 @@
     $scope.post = Post.data;
     $scope.post.created_time = Math.round((new Date('' + $scope.post.created_at)).getTime() / 1000);
 
+    $scope.max_page = 5;
+
     $scope.data = {
       content: '',
       id: $scope.post._id
@@ -158,6 +160,15 @@
     $scope.postSearch = {
       keywords: ''
     };
+
+    $scope.setPage = function (page) {
+      $scope.data.page = page;
+      ForumServices.listComment($scope.data).success(function (data) {
+        $scope.post.comments = data.comments;
+        $scope.currentPage = data.next_page - 1;
+        $scope.total_items = data.total_page * 10;
+      });
+    }
 
     $scope.search = function () {
       if ($scope.postSearch.keywords.length > 0) {
@@ -170,7 +181,8 @@
     $scope.listComment = function () {
       ForumServices.listComment($scope.data).success(function (data) {
         $scope.post.comments = data.comments;
-        $scope.page = data;
+        $scope.currentPage = data.next_page - 1;
+        $scope.total_items = data.total_page * 10;
       });
     };
 
