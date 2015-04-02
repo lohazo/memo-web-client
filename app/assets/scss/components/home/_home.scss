@@ -3,6 +3,15 @@
     margin-top: 40px;
     .main-left, .main-right {
       @include grid-column($columns: 4);
+      .pratice-button {
+        @include button($padding: $button-tny, $radius: $global-radius);
+        color: $white;
+        margin-bottom: 0;
+        margin-top: 20px;
+        font-size: 16px;
+        background: $primary-color url("assets/img/pratice-button.png") no-repeat;
+        background-origin: content-box;
+      }
     }
     .main-center {
       @include grid-column($columns: 8);
