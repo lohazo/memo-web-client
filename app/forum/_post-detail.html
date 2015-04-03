@@ -44,7 +44,7 @@
                 <div class="parent-comments">
                   <div class="parent-comment">
                     <div class="parent-comment-inner">
-                      <img class="comment-avatar" ng-src="{{profileDetail.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+                      <img class="comment-avatar" ng-src="{{comment.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
                       <div class="comment-content">
                         <div class="comment-content-top">
                           <a ng-href="/profile/{{comment.user._id}}" class="comment-name-text" ng-bind="comment.user.name"></a>
@@ -77,7 +77,7 @@
       </section>
       <section class="comment-editor">
         <div class="comment-editor-left">
-          <img class="post-avatar comment-editor-avatar comment-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}"/>
+          <img class="post-avatar comment-editor-avatar comment-avatar" ng-src="{{profileDetail.url_avatar || 'assets/img/profile-avatar-big.png'}}"/>
         </div>
         <div class="comment-editor-right">
           <div class="comment-editor-text-area">
