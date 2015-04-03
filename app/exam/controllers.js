@@ -3,6 +3,8 @@
 
   function ExamCtrl($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker,
     Skill, $modal, $localStorage, ForumServices) {
+    console.log(Exam);
+    console.log(Question);
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
     $scope.shouldPlaySlow = false;
@@ -277,6 +279,7 @@
     };
 
     ForumServices.createPost($scope.data).success(function (data) {
+      console.log(data)
       $scope.data.id = data._id;
       $scope.dataPost = data;
       ForumServices.getPost($scope.data).success(function (data) {
