@@ -64,28 +64,28 @@
     $scope.followStickyPost = function (post) {
       ForumServices.followPost(post).success(function (data) {
         post.is_followed = true;
-        $scope.followingPosts = convertToViewData(post);
+        $scope.followingPosts = post;
       });
     };
 
     $scope.unfollowStickyPost = function (post) {
       ForumServices.unFollowPost(post).success(function (data) {
         post.is_followed = false;
-        $scope.followingPosts = convertToViewData(post);
+        $scope.followingPosts = post;
       });
     };
 
     $scope.followPost = function (post) {
       ForumServices.followPost(post).success(function (data) {
         post.is_followed = true;
-        $scope.followingPosts = convertToViewData(post);
+        $scope.followingPosts = post;
       });
     };
 
     $scope.unfollowPost = function (post) {
       ForumServices.unFollowPost(post).success(function (data) {
         post.is_followed = false;
-        $scope.followingPosts = convertToViewData(post);
+        $scope.followingPosts = post;
       });
     };
 
