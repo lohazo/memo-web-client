@@ -10,13 +10,14 @@
     }
     .posts-panel {
       @include grid-row;
-      border-radius: 20px;
+      border-radius: 10px;
       padding-bottom: 0;
       margin-bottom: 20px;
       .posts-header {
         @include grid-row;
         .left {
           float: left;
+          margin-top: 19px;
         }
         .right {
           float: right;
@@ -72,7 +73,7 @@
           margin-left: 0;
           .post {
             @include grid-row;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             border-radius: 5px;
             padding: 15px;
             border: solid 1px #ccc;
@@ -93,6 +94,9 @@
               font-weight: 600;
               &:hover {
                 color: $primary-color;
+              }
+              img {
+                float: right;
               }
             }
             .post-detail {
@@ -135,10 +139,11 @@
                 margin-bottom: 0;
                 color: #fff;
                 font-size: 14px;
-                font-weight: bold;
+                font-weight: normal;
                 padding: 5px 15px;
                 background-color: #810c15;
                 float: right;
+                border-radius: 3px;
                 &:hover {
                   background-color: #670a11;
                 }
