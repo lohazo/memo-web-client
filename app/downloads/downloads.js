@@ -9,7 +9,6 @@
   }
 
   function DownloadCtrl($scope, $routeParams, $window, $timeout) {
-    console.log('hit');
     var redirect = $routeParams.redirect;
     $timeout(function () {
       $window.location = redirect;
