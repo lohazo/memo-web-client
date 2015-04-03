@@ -14,7 +14,8 @@
       }
       return output;
     }
-
+    $scope.post.created_time = Math.round((new Date('' + $scope.post.created_at)).getTime() / 1000);
+    
     $scope.subscribers = subscribers.data;
     $scope.allPosts = convertToViewData(allPosts.data);
     $scope.followingPosts = convertToViewData(followingPosts.data);
