@@ -53,8 +53,8 @@
         Exam.sendFeedbackLogs();
       }
       delete $scope.exam;
-      if (returnPath === '/skill') {
-        returnPath += '/' + $routeParams.id;
+      if (returnPath === '/') {
+        returnPath += '/';
       }
       $location.url(returnPath);
     };
@@ -289,7 +289,7 @@
       }
       delete $scope.exam;
       if (returnPath === '/skill') {
-        returnPath += '/' + $routeParams.id;
+        returnPath += '/' + $routeParams.skill_id;
       }
       $location.url(returnPath);
     };
