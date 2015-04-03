@@ -168,6 +168,10 @@
       }
       &.success {
         background-position: -780px 0;
+        .button.transparent:hover {
+          background: $white;
+          color: #ffbb33;
+        }
       }
       $k: 1;
       @for $i from 0 through 4 {
