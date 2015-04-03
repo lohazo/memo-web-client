@@ -70,24 +70,37 @@
     $scope.followStickyPost = function (post) {
       ForumServices.followPost(post).success(function (data) {
         post.is_followed = true;
+        if (!$scope.tabs[1].data.posts) {
+          $scope.tabs[1].data.posts = [];
+        }
+        $scope.tabs[1].data.posts.push(post);
       });
+
     };
 
     $scope.unfollowStickyPost = function (post) {
       ForumServices.unFollowPost(post).success(function (data) {
         post.is_followed = false;
+        var index = $scope.tabs[1].data.posts.indexOf(post);
+        $scope.tabs[1].data.posts.splice(index, 1);
       });
     };
 
     $scope.followPost = function (post) {
       ForumServices.followPost(post).success(function (data) {
         post.is_followed = true;
+        if (!$scope.tabs[1].data.posts) {
+          $scope.tabs[1].data.posts = [];
+        }
+        $scope.tabs[1].data.posts.push(post);
       });
     };
 
     $scope.unfollowPost = function (post) {
       ForumServices.unFollowPost(post).success(function (data) {
         post.is_followed = false;
+        var index = $scope.tabs[1].data.posts.indexOf(post);
+        $scope.tabs[1].data.posts.splice(index, 1);
       });
     };
 
@@ -176,9 +189,10 @@
     $scope.getListSubscription();
   }
 
-  function PostDetailCtrl($scope, ForumServices, $location, Post, subscribers) {
+  function PostDetailCtrl($scope, $sce, ForumServices, $location, Post, subscribers) {
     $scope.post = Post.data;
     $scope.post.created_time = Math.round((new Date('' + $scope.post.created_at)).getTime() / 1000);
+    $scope.post.content = $sce.trustAsHtml($scope.post.content);
 
     $scope.max_page = 5;
 
@@ -356,5 +370,7 @@
       ListPostCtrl
     ])
     .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'subscribers', CreatePostCtrl])
-    .controller('PostDetailCtrl', ['$scope', 'ForumServices', '$location', 'Post', 'subscribers', PostDetailCtrl]);
+    .controller('PostDetailCtrl', ['$scope', '$sce', 'ForumServices', '$location', 'Post', 'subscribers',
+      PostDetailCtrl
+    ]);
 }(window.angular));
