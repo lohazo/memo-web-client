@@ -53,8 +53,8 @@
         <li ng-if="question.num_affected_skill > 1">
           <div class="slide slide-3">
             <h4 class="text-center">Bạn đã củng cố được các kỹ năng</h4>
-            <h4>{{question.affected_skill[0].title}}, {{question.affected_skill[1].title}}, {{question.affected_skill[3].title}}
-              <span ng-show="{{question.num_affected_skill && question.num_affected_skill > 0}}">
+            <h4>{{question.affected_skill[0].title}}, {{question.affected_skill[1].title}}<span ng-if="question.num_affected_skill > 2">, {{question.affected_skill[2].title}}</span>
+              <span ng-show="{{question.num_affected_skill && question.num_affected_skill > 3}}">
                 và {{question.num_affected_skill - 3}} kỹ năng khác
               </span>
             </h4>
@@ -75,7 +75,7 @@
                       <div class="strength-bar"></div>
                     </div>
                   </div>
-                  <div class="{{question.affected_skill[2].strength_gap >= 4 ? 'success' : ''}} {{(question.affected_skill[2].theme_color === '#99cc00' ? 'green' : (question.affected_skill[2].theme_color === '#ff4444' ? 'red' : 'blue'))}} skill skill-{{question.affected_skill[2].order + 1}}">
+                  <div ng-if="question.num_affected_skill > 2" class="{{question.affected_skill[2].strength_gap >= 4 ? 'success' : ''}} {{(question.affected_skill[2].theme_color === '#99cc00' ? 'green' : (question.affected_skill[2].theme_color === '#ff4444' ? 'red' : 'blue'))}} skill skill-{{question.affected_skill[2].order + 1}}">
                     <div class="icon"></div>
                     <div class="name">{{question.affected_skill[2].slug}}</div>
                     <div class="level level-{{question.affected_skill[2].strength_gap }}">
