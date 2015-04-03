@@ -68,25 +68,25 @@
     };
 
     $scope.followStickyPost = function (post) {
-      ForumServices.followPost(post).success(function () {
+      ForumServices.followPost(post).success(function (data) {
         post.is_followed = true;
       });
     };
 
     $scope.unfollowStickyPost = function (post) {
-      ForumServices.unFollowPost(post).success(function () {
+      ForumServices.unFollowPost(post).success(function (data) {
         post.is_followed = false;
       });
     };
 
     $scope.followPost = function (post) {
-      ForumServices.followPost(post).success(function () {
+      ForumServices.followPost(post).success(function (data) {
         post.is_followed = true;
       });
     };
 
     $scope.unfollowPost = function (post) {
-      ForumServices.unFollowPost(post).success(function () {
+      ForumServices.unFollowPost(post).success(function (data) {
         post.is_followed = false;
       });
     };
