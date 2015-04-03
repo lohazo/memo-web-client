@@ -69,7 +69,6 @@
           })
           .then(function (response) {
             $scope.success = 'Memo đã ghi nhận số điện thoại của bạn.';
-            console.log($scope.success);
           }, function (response) {
             $scope.error = response.error;
           });
