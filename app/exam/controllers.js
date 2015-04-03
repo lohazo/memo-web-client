@@ -254,7 +254,6 @@
 
   function DiscussionExamModalCtrl($scope, $location, Exam, $localStorage, ForumServices, $modalInstance) {
     $scope.question = Exam.question();
-    console.log($scope.question);
     $scope.requestData = {
       content: ''
     }
@@ -262,88 +261,88 @@
       $modalInstance.dismiss('cancel');
     };
 
-    // $scope.data = {};
-    // $scope.data.question_log_id = $scope.question.question_log_id;
-    // $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
+    $scope.data = {};
+    $scope.data.question_log_id = $scope.question.question_log_id;
+    $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
 
-    // if ($scope.question.type == 'judge' ) {
-    //   $scope.data.title = $scope.question.question;
-    //   $scope.data.content = $scope.question.hints;
-    // } else if ($scope.question.type == 'name' || $scope.question.type == 'select') {
-    //   $scope.data.title = $scope.question.question;
-    //   $scope.data.content = $scope.question.hint;
-    // } else if ($scope.question.type == 'translate') {
-    //   $scope.data.title = $scope.question.question;
-    //   $scope.data.content = $scope.question.answer;
-    // };
+    if ($scope.question.type == 'judge' ) {
+      $scope.data.title = $scope.question.question;
+      $scope.data.content = $scope.question.hints;
+    } else if ($scope.question.type == 'name' || $scope.question.type == 'select') {
+      $scope.data.title = $scope.question.question;
+      $scope.data.content = $scope.question.hint;
+    } else if ($scope.question.type == 'translate') {
+      $scope.data.title = $scope.question.question;
+      $scope.data.content = $scope.question.answer;
+    };
 
-    // ForumServices.createPost($scope.data).success(function (data) {
-    //   $scope.data.id = data._id;
-    //   $scope.dataPost = data;
-    //   ForumServices.getPost($scope.data).success(function (data) {
-    //     $scope.data.id = data._id;
-    //     $scope.getPost = data;
-    //     ForumServices.listComment($scope.data).success(function (data) {
-    //       $scope.listComment = data;
-    //     });
-    //   });
-    // });
+    ForumServices.createPost($scope.data).success(function (data) {
+      $scope.data.id = data._id;
+      $scope.dataPost = data;
+      ForumServices.getPost($scope.data).success(function (data) {
+        $scope.data.id = data._id;
+        $scope.getPost = data;
+        ForumServices.listComment($scope.data).success(function (data) {
+          $scope.listComment = data;
+        });
+      });
+    });
 
-    // $scope.followPost = function () {
-    //   ForumServices.followPost($scope.getPost).success(function () {
-    //     $scope.getPost.follow = true;
-    //   });
-    // };
+    $scope.followPost = function () {
+      ForumServices.followPost($scope.getPost).success(function () {
+        $scope.getPost.follow = true;
+      });
+    };
 
-    // $scope.unfollowPost = function () {
-    //   ForumServices.unFollowPost($scope.getPost).success(function () {
-    //     $scope.getPost.follow = false;
-    //   });
-    // };
+    $scope.unfollowPost = function () {
+      ForumServices.unFollowPost($scope.getPost).success(function () {
+        $scope.getPost.follow = false;
+      });
+    };
 
 
-    // $scope.createComment = function () {
-    //   $scope.requestData.id = $scope.getPost._id;
-    //   ForumServices.creatComment($scope.requestData).success(function (data) {
-    //     $scope.listComment.comments.push(data);
-    //   });
-    // };
+    $scope.createComment = function () {
+      $scope.requestData.id = $scope.getPost._id;
+      ForumServices.creatComment($scope.requestData).success(function (data) {
+        $scope.listComment.comments.push(data);
+      });
+    };
 
-    // $scope.voteUpComment = function (comment) {
-    //   if (comment.is_vote_up) {
-    //     comment.up_vote_count = comment.up_vote_count - 1;
-    //   } else {
-    //     comment.up_vote_count = comment.up_vote_count + 1;
-    //     if (comment.is_vote_down) {
-    //       comment.down_vote_count = comment.down_vote_count - 1;
-    //       comment.is_vote_down = false;
-    //     }
-    //   }
-    //   comment.is_vote_up = !comment.is_vote_up;
-    //   ForumServices.voteComment({
-    //     id: comment._id,
-    //     type: 'upvote',
-    //     vote: comment.is_vote_up
-    //   });
-    // };
+    $scope.voteUpComment = function (comment) {
+      if (comment.is_vote_up) {
+        comment.up_vote_count = comment.up_vote_count - 1;
+      } else {
+        comment.up_vote_count = comment.up_vote_count + 1;
+        if (comment.is_vote_down) {
+          comment.down_vote_count = comment.down_vote_count - 1;
+          comment.is_vote_down = false;
+        }
+      }
+      comment.is_vote_up = !comment.is_vote_up;
+      ForumServices.voteComment({
+        id: comment._id,
+        type: 'upvote',
+        vote: comment.is_vote_up
+      });
+    };
 
-    // $scope.voteDownComment = function (comment) {
-    //   if (comment.is_vote_down) {
-    //     comment.down_vote_count = comment.down_vote_count - 1;
-    //   } else {
-    //     comment.down_vote_count = comment.down_vote_count + 1;
-    //     if (comment.is_vote_up) {
-    //       comment.up_vote_count = comment.up_vote_count - 1;
-    //       comment.is_vote_up = false;
-    //     }
-    //   }
-    //   comment.is_vote_down = !comment.is_vote_down;
-    //   ForumServices.voteComment({
-    //     id: comment._id,
-    //     type: 'downvote',
-    //     vote: comment.is_vote_down
-    //   });
-    // };
+    $scope.voteDownComment = function (comment) {
+      if (comment.is_vote_down) {
+        comment.down_vote_count = comment.down_vote_count - 1;
+      } else {
+        comment.down_vote_count = comment.down_vote_count + 1;
+        if (comment.is_vote_up) {
+          comment.up_vote_count = comment.up_vote_count - 1;
+          comment.is_vote_up = false;
+        }
+      }
+      comment.is_vote_down = !comment.is_vote_down;
+      ForumServices.voteComment({
+        id: comment._id,
+        type: 'downvote',
+        vote: comment.is_vote_down
+      });
+    };
   }
 
   angular.module('exam.controllers', ['ngSanitize'])
