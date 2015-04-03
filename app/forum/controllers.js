@@ -70,24 +70,37 @@
     $scope.followStickyPost = function (post) {
       ForumServices.followPost(post).success(function (data) {
         post.is_followed = true;
+        if (!$scope.tabs[1].data.posts) {
+          $scope.tabs[1].data.posts = [];
+        }
+        $scope.tabs[1].data.posts.push(post);
       });
+
     };
 
     $scope.unfollowStickyPost = function (post) {
       ForumServices.unFollowPost(post).success(function (data) {
         post.is_followed = false;
+        var index = $scope.tabs[1].data.posts.indexOf(post);
+        $scope.tabs[1].data.posts.splice(index,1);
       });
     };
 
     $scope.followPost = function (post) {
       ForumServices.followPost(post).success(function (data) {
         post.is_followed = true;
+        if (!$scope.tabs[1].data.posts) {
+          $scope.tabs[1].data.posts = [];
+        }
+        $scope.tabs[1].data.posts.push(post);
       });
     };
 
     $scope.unfollowPost = function (post) {
       ForumServices.unFollowPost(post).success(function (data) {
         post.is_followed = false;
+        var index = $scope.tabs[1].data.posts.indexOf(post);
+        $scope.tabs[1].data.posts.splice(index,1);
       });
     };
 
