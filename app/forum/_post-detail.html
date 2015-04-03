@@ -4,7 +4,7 @@
       <section class="post-info">
         <div class="post-info-header">
           <div class="left">
-            <a class="small radius button return-button" ng-href="/forum">&lsaquo; Danh sách chủ đề </a>
+            <a class="return-button" ng-href="/forum">&lsaquo; Danh sách các chủ đề </a>
           </div>
           <div class="right">
             <a class="small radius button follow-button" ng-if="post.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
@@ -77,7 +77,7 @@
       </section>
       <section class="comment-editor">
         <div class="comment-editor-left">
-          <img class="comment-editor-avatar" class="comment-avatar" ng-src="{{comment.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
+          <img class="post-avatar comment-editor-avatar comment-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}"/>
         </div>
         <div class="comment-editor-right">
           <div class="comment-editor-text-area">
