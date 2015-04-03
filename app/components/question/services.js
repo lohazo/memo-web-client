@@ -90,7 +90,6 @@
         };
 
         var translations = question.alternative_answers;
-        // translations.push(result.correctAnswer);
         translations = translations.filter(function (obj) {
           return !!obj;
         });
@@ -130,6 +129,7 @@
         }
 
         // Typo
+        translations.push(result.correctAnswer);
         var typos = translations.filter(function (trans) {
           return wordCount(stripSpecialCharacters(userAnswer)) === wordCount(
             stripSpecialCharacters(trans));
