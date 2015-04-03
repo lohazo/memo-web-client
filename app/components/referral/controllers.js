@@ -275,7 +275,6 @@
     $scope.notiCode =
       "(Nếu bạn quên chưa nhập code chia sẻ từ bạn bè, hãy điền ngay tại đây để được tính là đã mời thêm 1 bạn)";
     $scope.submitCode = function () {
-      // console.log()
       ReferralService.submitCode({
         referral_code: $scope.refCode
       }).then(function (res) {

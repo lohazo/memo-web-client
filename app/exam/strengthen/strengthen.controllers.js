@@ -53,8 +53,8 @@
         Exam.sendFeedbackLogs();
       }
       delete $scope.exam;
-      if (returnPath === '/skill') {
-        returnPath += '/' + $routeParams.id;
+      if (returnPath === '/') {
+        returnPath += '/';
       }
       $location.url(returnPath);
     };
@@ -87,9 +87,6 @@
           $scope.questionTpl = questionTplId.failure;
           $scope.footerTpl = "footerFailure";
           Sound.playFailSound();
-          if (examType === 'checkpoint') {
-            Exam.fail(requestData);
-          }
         } else {
           // Call finish API
           Exam.finish(requestData).then(function () {
@@ -289,7 +286,7 @@
       }
       delete $scope.exam;
       if (returnPath === '/skill') {
-        returnPath += '/' + $routeParams.id;
+        returnPath += '/' + $routeParams.skill_id;
       }
       $location.url(returnPath);
     };
@@ -322,9 +319,6 @@
           $scope.questionTpl = questionTplId.failure;
           $scope.footerTpl = "footerFailure";
           Sound.playFailSound();
-          if (examType === 'checkpoint') {
-            Exam.fail(requestData);
-          }
         } else {
           // Call finish API
           Exam.finish(requestData).then(function () {
