@@ -102,7 +102,7 @@
                 <div class="skill-row">
                   <div class="{{question.affected_skill.strength_gap >= 4 ? 'success' : ''}} {{(question.affected_skill.theme_color === '#99cc00' ? 'green' : (question.affected_skill.theme_color === '#ff4444' ? 'red' : 'blue'))}} skill skill-{{question.affected_skill.order + 1}}">
                     <div class="icon"></div>
-                    <div class="name">{{question.affected_skill[0].slug}}</div>
+                    <div class="name">{{question.affected_skill.slug}}</div>
                     <div class="level level-{{question.affected_skill.strength_gap}}">
                       <div class="strength-bar"></div>
                     </div>
