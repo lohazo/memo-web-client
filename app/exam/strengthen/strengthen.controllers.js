@@ -87,9 +87,6 @@
           $scope.questionTpl = questionTplId.failure;
           $scope.footerTpl = "footerFailure";
           Sound.playFailSound();
-          if (examType === 'checkpoint') {
-            Exam.fail(requestData);
-          }
         } else {
           // Call finish API
           Exam.finish(requestData).then(function () {
