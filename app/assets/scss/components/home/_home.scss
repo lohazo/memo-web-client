@@ -8,6 +8,9 @@
       @include grid-column($columns: 8);
     }
     .main-left, .main-center, .main-right {
+      .tooltip {
+        border-radius: 5px;
+      }
       min-height: 580px;
       .container {
         background-color: $white;

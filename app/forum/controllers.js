@@ -11,6 +11,12 @@
           return post;
         });
         output.current_page = output.next_page > 0 ? output.next_page - 1 : output.total_page;
+        if (output.sticky_posts) {
+          output.sticky_posts = output.sticky_posts.map(function (post) {
+            post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
+            return post;
+          });
+        }
       }
       return output;
     }
@@ -62,29 +68,41 @@
     };
 
     $scope.followStickyPost = function (post) {
-      ForumServices.followPost(post).success(function () {
+      ForumServices.followPost(post).success(function (data) {
         post.is_followed = true;
+        if (!$scope.tabs[1].data.posts) {
+          $scope.tabs[1].data.posts = [];
+        }
+        $scope.tabs[1].data.posts.push(post);
       });
+
     };
 
     $scope.unfollowStickyPost = function (post) {
-      ForumServices.unFollowPost(post).success(function () {
+      ForumServices.unFollowPost(post).success(function (data) {
         post.is_followed = false;
+        var index = $scope.tabs[1].data.posts.indexOf(post);
+        $scope.tabs[1].data.posts.splice(index,1);
       });
     };
 
     $scope.followPost = function (post) {
-      ForumServices.followPost(post).success(function () {
+      ForumServices.followPost(post).success(function (data) {
         post.is_followed = true;
+        if (!$scope.tabs[1].data.posts) {
+          $scope.tabs[1].data.posts = [];
+        }
+        $scope.tabs[1].data.posts.push(post);
       });
     };
 
     $scope.unfollowPost = function (post) {
-      ForumServices.unFollowPost(post).success(function () {
+      ForumServices.unFollowPost(post).success(function (data) {
         post.is_followed = false;
+        var index = $scope.tabs[1].data.posts.indexOf(post);
+        $scope.tabs[1].data.posts.splice(index,1);
       });
     };
-
 
     $scope.setPage = function (page) {
       var search = {
@@ -300,7 +318,7 @@
      * Vote up cho 1 comment
      * @comment: comment duoc vote
      */
-     $scope.voteUpComment = function (comment) {
+    $scope.voteUpComment = function (comment) {
       if (comment.is_vote_up) {
         comment.up_vote_count = comment.up_vote_count - 1;
       } else {
@@ -337,18 +355,19 @@
     };
 
     $scope.reply = function (comment) {
-      ForumServices.listReply({id: comment._id}).success(function (data) {
+      ForumServices.listReply({
+        id: comment._id
+      }).success(function (data) {
         $scope.replies = data.comments;
       });
     };
   }
 
-
   angular.module('forum.controllers', ['forum.services'])
-  .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', 'followingPosts',
-    'searchPosts',
-    ListPostCtrl
+    .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', 'followingPosts',
+      'searchPosts',
+      ListPostCtrl
     ])
-  .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'subscribers', CreatePostCtrl])
-  .controller('PostDetailCtrl', ['$scope', 'ForumServices', '$location', 'Post', 'subscribers', PostDetailCtrl]);
+    .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'subscribers', CreatePostCtrl])
+    .controller('PostDetailCtrl', ['$scope', 'ForumServices', '$location', 'Post', 'subscribers', PostDetailCtrl]);
 }(window.angular));
