@@ -20,6 +20,7 @@
                     <a ng-href="/forum/post/{{post._id}}" class="title" title=""><img ng-src="assets/img/Forum/sticky-posts-icon.png" /><span ng-bind="post.title"></span></a>
                     <p class="post-detail">
                       <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a>
+                      <div><span class="created-time">{{post.created_time | amDateFormat:'Do/Mo/YYYY'}}</span></div>
                     </p>
                     <div class="post-toolbar">
                       <div class="total-vote left" ng-bind="post.up_vote_count"></div>
