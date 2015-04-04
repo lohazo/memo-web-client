@@ -233,7 +233,7 @@
   }
 
   function SecretGiftModalCtrl($scope, $sce, $modalInstance) {
-    $scope.trustedResource = $sce.trustAsResourceUrl('//services.memo.edu.vn/native/web?back=false');
+    $scope.trustedResource = $sce.trustAsResourceUrl('//staging.memo.edu.vn/native/web?disable_back_button=true');
   }
 
   angular.module('home.controller', ['app.services', 'message.directives'])
