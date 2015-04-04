@@ -234,8 +234,8 @@
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
         controller: ['$scope', '$sce', '$modalInstance', function ($scope, $sce, $modalInstance) {
-          $scope.trustedResource = $sce.trustAsResourceUrl(API + '/plaza_items/claim_gift_1m?auth_token=' +
-            Profile.auth_token);
+          $scope.trustedResource = $sce.trustAsResourceUrl(API +
+            '/plaza_items/claim_gift_1m?platform=web&auth_token=' + Profile.auth_token);
         }],
         windowClass: 'buy-guide-popup-modal',
       });
