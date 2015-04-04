@@ -1,3 +1,41 @@
+<div class="container" ng-controller="SecretGiftCtrl as gift" ng-if="profile.daily_gift_popup_display" style="margin-bottom:20px;border:2px solid #ffbb33;border-radius:20px;">
+  <div class="row" ng-if="!gift.isOpen">
+    <div class="large-2 columns">
+      <img src="assets/img/gift.png" alt="" />
+    </div>
+    <div class="large-11 columns">
+      <span>Bạn nhận được một phần quà hằng ngày từ Kiến Memo. Cùng khám phá nào!</span>
+    </div>
+    <div class="large-3 columns">
+      <a class="small radius button" style="margin-bottom:0" ng-click="gift.openGift(profile)">Mở</a>
+    </div>
+  </div>
+  <div class="row" ng-if="gift.isOpen && gift.type == 't_shirt'">
+    <div class="large-2 columns text-center">
+      <img src="assets/img/lesson-memos-big.png" width="60" height="60" alt="" />
+    </div>
+    <div class="large-14 columns">
+      <p style="margin-bottom:0">Chúc mừng, hôm nay bạn đã nhận được <span style="color:#810c15;font-weight:700;">{{gift.value}} MemoCoin</span>, chúc bạn có một ngày làm việc vui vẻ cùng Kiến Memo</p>
+    </div>
+  </div>
+  <div class="row" ng-if="gift.isOpen && gift.type == 'memocoin'">
+    <div class="large-2 columns text-center">
+      <img src="assets/img/lesson-memos-big.png" width="60" height="60" alt="" />
+    </div>
+    <div class="large-14 columns">
+      <p style="margin-bottom:0">Chúc mừng, hôm nay bạn đã nhận được <span style="color:#810c15;font-weight:700;">{{gift.value}} MemoCoin</span>, chúc bạn có một ngày làm việc vui vẻ cùng Kiến Memo</p>
+    </div>
+  </div>
+  <div class="row" ng-if="gift.isOpen && gift.type == 'gift_1m'">
+    <div class="large-3 columns text-center">
+      <img src="assets/img/tutorial/native-scholar.png" alt="" />
+    </div>
+    <div class="large-13 columns">
+      <p>Chúc mừng, hôm nay bạn đã nhận được gói học bổng trị giá <span style="color:#810c15;font-weight:700;">1,000,000 VND</span> của <span style="color:#810c15;font-weight:700;">TOPICA Native</span></p>
+      <span class="text-center" style="display:block;"><a class="small radius button" style="margin-bottom:0" ng-click="gift.open()">Tìm hiểu TOPICA Native</a></span>
+    </div>
+  </div>
+</div>
 <div class="container">
   <div class="row">
     <div class="small-8 columns">

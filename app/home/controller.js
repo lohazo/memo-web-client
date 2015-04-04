@@ -210,6 +210,32 @@
     };
   }
 
+  function SecretGiftCtrl($scope, $http, $modal, API) {
+    var vm = this;
+    vm.isOpen = false;
+    vm.openGift = function (Profile) {
+      $http.get(API + '/daily_gift/open_gift?platform=web&auth_token=' + Profile.auth_token)
+        .success(function (data) {
+          vm.isOpen = true;
+          vm.type = Object.keys(data).filter(function (key) {
+            return data[key] > 0;
+          });
+          vm.value = data[vm.type];
+        });
+    };
+    vm.open = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_buy-guide-popup.html',
+        controller: 'SecretGiftModalCtrl',
+        windowClass: 'buy-guide-popup-modal',
+      });
+    }
+  }
+
+  function SecretGiftModalCtrl($scope, $sce, $modalInstance) {
+    $scope.trustedResource = $sce.trustAsResourceUrl('//services.memo.edu.vn/native/web?back=false');
+  }
+
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder',
@@ -225,6 +251,8 @@
     .controller('RefCodeModalCtrl', ['$scope', '$modal', 'ReferralService', RefCodeModalCtrl])
     .controller('RefCodeModalInstanceCtrl', ['$scope', '$modalInstance', '$route', 'ReferralService',
       RefCodeModalInstanceCtrl
-    ]);
+    ])
+    .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', SecretGiftCtrl])
+    .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl]);
 
 }(window.angular));
