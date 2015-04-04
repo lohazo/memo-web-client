@@ -1,4 +1,4 @@
-<div class="container" ng-controller="SecretGiftCtrl as gift" ng-if="!profile.daily_gift_popup_display" style="margin-bottom:20px;border:2px solid #ffbb33;border-radius:20px;">
+<div class="container" ng-controller="SecretGiftCtrl as gift" ng-if="profile.daily_gift_popup_display" style="margin-bottom:20px;border:2px solid #ffbb33;border-radius:20px;">
   <div class="row" ng-if="!gift.isOpen">
     <div class="large-2 columns">
       <img src="assets/img/gift.png" alt="" />
@@ -18,7 +18,7 @@
       <p style="margin-bottom:0">Chúc mừng, hôm nay bạn đã nhận được <span style="color:#810c15;font-weight:700;">{{gift.value}} MemoCoin</span>, chúc bạn có một ngày làm việc vui vẻ cùng Kiến Memo</p>
     </div>
   </div>
-  <div class="row" ng-if="gift.isOpen && gift.type != 'memocoin'">
+  <div class="row" ng-if="gift.isOpen && gift.type *= 'memocoin'">
     <div class="large-2 columns text-center">
       <img src="assets/img/lesson-memos-big.png" width="60" height="60" alt="" />
     </div>
@@ -26,7 +26,7 @@
       <p style="margin-bottom:0">Chúc mừng, hôm nay bạn đã nhận được <span style="color:#810c15;font-weight:700;">{{gift.value}} MemoCoin</span>, chúc bạn có một ngày làm việc vui vẻ cùng Kiến Memo</p>
     </div>
   </div>
-  <div class="row" ng-if="gift.isOpen && gift.type != 'gift_1m'">
+  <div class="row" ng-if="gift.isOpen && gift.type == 'gift_1m'">
     <div class="large-3 columns text-center">
       <img src="assets/img/tutorial/native-scholar.png" alt="" />
     </div>
