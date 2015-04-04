@@ -223,17 +223,27 @@
           vm.value = data[vm.type];
         });
     };
-    vm.open = function () {
+    vm.openNativeInfoModal = function () {
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
         controller: 'SecretGiftModalCtrl',
         windowClass: 'buy-guide-popup-modal',
       });
-    }
+    };
+    vm.openClaimScholarModal = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_buy-guide-popup.html',
+        controller: ['$scope', '$sce', '$modalInstance', function ($scope, $sce, $modalInstance) {
+          $scope.trustedResource = $sce.trustAsResourceUrl(API + '/plaza_items/claim_gift_1m');
+        }],
+        windowClass: 'buy-guide-popup-modal',
+      });
+    };
   }
 
   function SecretGiftModalCtrl($scope, $sce, $modalInstance) {
-    $scope.trustedResource = $sce.trustAsResourceUrl('//staging.memo.edu.vn/native/web?disable_back_button=true');
+    $scope.trustedResource = $sce.trustAsResourceUrl(
+      '//staging.memo.edu.vn/native/web?disable_back_button=true');
   }
 
   angular.module('home.controller', ['app.services', 'message.directives'])
