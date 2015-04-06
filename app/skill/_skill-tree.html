@@ -12,6 +12,14 @@
       </div>
     </a>
   </div>
+  <div class="row collapse" ng-if="(!row.isCheckpoint && row[1].order == 27)" style="clear: both">
+    <div class="large-12 columns large-centered" style="padding:10px;border: 2px solid #ccc;border-radius:10px;margin-top:20px;cursor:pointer;">
+      <div class="row collapse">
+        <div class="large-3 columns text-left"><img ng-src="assets/img/tutorial/native-scholar.png" /></div>
+        <div class="large-13 columns text-left">Vốn từ vựng của bạn đã tốt rồi đó. Mua ngay gói học bổng luyện nói Tiếng Anh từ 8h sáng đến 24h đêm!</div>
+      </div>
+    </div>
+  </div>
   <a ng-if="row.isCheckpoint && (row[0].remaining_test_times == 0)" class="disabled secondary test-out hex-memo-button">
     <i class="icon-lock"></i>
     {{row[0].title}}
