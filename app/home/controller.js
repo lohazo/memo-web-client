@@ -235,7 +235,8 @@
         templateUrl: 'plaza/_buy-guide-popup.html',
         controller: ['$scope', '$sce', '$modalInstance', function ($scope, $sce, $modalInstance) {
           $scope.trustedResource = $sce.trustAsResourceUrl(API +
-            '/plaza_items/claim_gift_1m?platform=web&auth_token=' + Profile.auth_token);
+            '/plaza_items/claim_gift_1m?platform=web&&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' + Profile.auth_token + 
+            '&verification_code=' + Profile.verification_code);
         }],
         windowClass: 'buy-guide-popup-modal',
       });

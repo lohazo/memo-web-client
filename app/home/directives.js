@@ -112,5 +112,14 @@
         controllerAs: 'gift',
         templateUrl: 'home/_secret-gift.html'
       };
+    })
+    .directive('verifyBox', function () {
+      return {
+        restrict: 'EA',
+        scope: true,
+        controller: 'SecretGiftCtrl',
+        controllerAs: 'gift',
+        templateUrl: 'home/_verify-box.html'
+      };
     });
 }(window.angular));
