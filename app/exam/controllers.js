@@ -3,6 +3,7 @@
 
   function ExamCtrl($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker,
     Skill, $modal, $localStorage, ForumServices) {
+    console.log(Exam);
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
     $scope.shouldPlaySlow = false;
@@ -110,8 +111,8 @@
           }
         } else {
           // Call finish API
-          Exam.finish(requestData).then(function (response) {
-            console.log(response)
+          Exam.finish(requestData).then(function (data) {
+            console.log(data)
             $scope.questionTpl = questionTplId.success;
             $scope.footerTpl = "footerSuccess";
             $scope.question = Exam.question();
