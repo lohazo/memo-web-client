@@ -210,6 +210,44 @@
     };
   }
 
+  function SecretGiftCtrl($scope, $http, $modal, API) {
+    var vm = this;
+    vm.isOpen = false;
+    vm.openGift = function (Profile) {
+      $http.get(API + '/daily_gift/open_gift?platform=web&auth_token=' + Profile.auth_token)
+        .success(function (data) {
+          vm.isOpen = true;
+          vm.type = Object.keys(data).filter(function (key) {
+            return data[key] > 0;
+          });
+          vm.value = data[vm.type];
+        });
+    };
+    vm.openNativeInfoModal = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_buy-guide-popup.html',
+        controller: 'SecretGiftModalCtrl',
+        windowClass: 'buy-guide-popup-modal',
+      });
+    };
+    vm.openClaimScholarModal = function (Profile) {
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_buy-guide-popup.html',
+        controller: ['$scope', '$sce', '$modalInstance', function ($scope, $sce, $modalInstance) {
+          $scope.trustedResource = $sce.trustAsResourceUrl(API +
+            '/plaza_items/claim_gift_1m?platform=web&&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' + Profile.auth_token + 
+            '&verification_code=' + Profile.verification_code);
+        }],
+        windowClass: 'buy-guide-popup-modal',
+      });
+    };
+  }
+
+  function SecretGiftModalCtrl($scope, $sce, $modalInstance) {
+    $scope.trustedResource = $sce.trustAsResourceUrl(
+      '//staging.memo.edu.vn/native/web?disable_back_button=true');
+  }
+
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder',
@@ -225,6 +263,8 @@
     .controller('RefCodeModalCtrl', ['$scope', '$modal', 'ReferralService', RefCodeModalCtrl])
     .controller('RefCodeModalInstanceCtrl', ['$scope', '$modalInstance', '$route', 'ReferralService',
       RefCodeModalInstanceCtrl
-    ]);
+    ])
+    .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', SecretGiftCtrl])
+    .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl]);
 
 }(window.angular));
