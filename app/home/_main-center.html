@@ -1,3 +1,7 @@
+<div class="container" ng-if="profile.daily_gift_popup_display" style="margin-bottom:20px;border:2px solid #ffbb33;border-radius:20px;" secret-gift>
+</div>
+<div class="container" ng-if="profile.show_verify_box" style="margin-bottom:20px;border:2px solid #ffbb33;border-radius:20px;" verify-box>
+</div>
 <div class="container">
   <div class="row">
     <div class="small-8 columns">
@@ -11,4 +15,7 @@
     </div>
   </div>
   <div class="hexagon skills" skill-tree></div>
+  <div class="small-16 columns max-skill" ng-if="profile.max_skill">
+    <img ng-src="assets/img/max-skill-icon.png" />
+  </div>
 </div>

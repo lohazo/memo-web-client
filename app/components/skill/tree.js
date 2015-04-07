@@ -65,6 +65,16 @@ angular.module('skill.tree', [])
     return {
       strict: 'EA',
       scope: true,
+      controller: ['$scope', '$location', '$localStorage', function ($scope, $location, $localStorage) {
+        $scope.popupClicked = !!$localStorage.popupClicked;
+        $scope.goToPlaza = function () {
+          if (!$scope.popupClicked) {
+            $scope.popupClicked = true;
+            $localStorage.popupClicked = true;
+            $location.url('/plaza');
+          }
+        };
+      }],
       templateUrl: 'skill/_skill-tree.html'
     };
   });

@@ -34,14 +34,26 @@
       .ios {
         background: url("assets/img/landingpage/3-ios.png") no-repeat;
         background-size: contain;
+        &:hover {
+          background: url("assets/img/landingpage/3-ios-hover.png") no-repeat;
+          background-size: contain;
+        }
       }
       .android {
         background: url("assets/img/landingpage/3-adr.png") no-repeat;
         background-size: contain;
+        &:hover {
+          background: url("assets/img/landingpage/3-adr-hover.png") no-repeat;
+          background-size: contain;
+        }
       }
       .window {
-        background: url("assets/img/landingpage/3-ios-cs.png") no-repeat;
+        background: url("assets/img/landingpage/3-wp.png") no-repeat;
         background-size: contain;
+        &:hover {
+          background: url("assets/img/landingpage/3-wp-hover.png") no-repeat;
+          background-size: contain;
+        }
       }
     }
   }
