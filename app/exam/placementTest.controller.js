@@ -6,6 +6,7 @@
     $scope.footerTpl = 'footer';
     $scope.posts = {};
     $scope.comments = {};
+    $scope.examType = 'placement_test'
 
     var questionTplId = {
       form: 'questionForm',
@@ -151,7 +152,7 @@
     }
   }
 
-  function DiscussionPlacementTestModalCtrl ($scope, $location, PlacementTest, $localStorage, ForumServices) {
+  function DiscussionPlacementTestModalCtrl($scope, $location, PlacementTest, $localStorage, ForumServices) {
     $scope.question = PlacementTest.question.question;
     $scope.requestData = {
       content: ''
@@ -161,7 +162,7 @@
     $scope.data.question_log_id = $scope.question.question_log_id;
     $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
 
-    if ($scope.question.type == 'judge' ) {
+    if ($scope.question.type == 'judge') {
       $scope.data.title = $scope.question.question;
       $scope.data.content = $scope.question.hints;
     } else if ($scope.question.type == 'name' || $scope.question.type == 'select') {
@@ -195,7 +196,6 @@
         $scope.getPost.follow = false;
       });
     };
-
 
     $scope.createComment = function () {
       $scope.requestData.id = $scope.getPost._id;
@@ -243,9 +243,11 @@
 
   angular.module('placement.controllers', [])
     .controller('PlacementTestCtrl', [
-      '$scope', '$location', 'PlacementTestFactory', 'Question', 'Sound', '$modal', '$localStorage', PlacementTestCtrl
+      '$scope', '$location', 'PlacementTestFactory', 'Question', 'Sound', '$modal', '$localStorage',
+      PlacementTestCtrl
     ])
-    .controller('DiscussionPlacementTestModalCtrl', ['$scope', '$location', 'PlacementTestFactory', '$localStorage', 'ForumServices',
+    .controller('DiscussionPlacementTestModalCtrl', ['$scope', '$location', 'PlacementTestFactory', '$localStorage',
+      'ForumServices',
       DiscussionPlacementTestModalCtrl
     ]);
 

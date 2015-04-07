@@ -96,7 +96,6 @@
 
     // data = {[page: , sort: 'created_at', type: 'desc'/'asc', filter: "all"/"follow"/"en-vi"/"fr-vi"/"de-vi"]}
     Services.listPosts = function (data) {
-
       var authToken = $localStorage.auth.user.auth_token;
       var endpoint = API + '/posts/all_posts' + '?platform=web&auth_token=' + authToken;
 

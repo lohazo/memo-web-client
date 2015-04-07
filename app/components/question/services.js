@@ -89,20 +89,30 @@
           answerOptions: false
         };
 
-        var translations = question.alternative_answers ? question.alternative_answers.slice(
-          0) : [];
-        translations.push(result.correctAnswer);
+        var translations = question.alternative_answers;
         translations = translations.filter(function (obj) {
           return !!obj;
         });
 
-        // Group 1, 2 check case-insensitivity
+        // Group 1
+        result.result = stripSpecialCharacters(userAnswer).toLowerCase()
+          .localeCompare(stripSpecialCharacters(result.correctAnswer).toLowerCase()) === 0;
+
+        if (result.result) {
+          result.type = 1;
+          return result
+        };
+
+        // Group 2
         result.result = translations.some(function (obj) {
           return stripSpecialCharacters(userAnswer).toLowerCase()
             .localeCompare(stripSpecialCharacters(obj).toLowerCase()) === 0;
         });
 
-        if (result.result) return result;
+        if (result.result) {
+          result.type = 2;
+          return result
+        };
 
         // Group 3 check
         if (question.common_errors && question.common_errors.length > 0) {
@@ -113,11 +123,13 @@
 
           if (test) {
             result.result = false;
+            result.type = -1;
             return result;
           }
         }
 
         // Typo
+        translations.push(result.correctAnswer);
         var typos = translations.filter(function (trans) {
           return wordCount(stripSpecialCharacters(userAnswer)) === wordCount(
             stripSpecialCharacters(trans));
@@ -129,6 +141,7 @@
 
         if (typos) {
           result.result = true;
+          result.type = 3;
           result.answerOptions = createHtmlForTypoAnswer(typos[1], typos[0]);
         }
 

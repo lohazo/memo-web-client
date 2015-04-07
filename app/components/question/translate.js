@@ -48,8 +48,8 @@
     }
 
     $scope.translate = $scope.$parent.question;
-    var specialObjectiveIds = angular.copy($scope.translate.underline_words) || [];
-    var objectiveIds = angular.copy($scope.translate.highlighted_words) || [];
+    var specialObjectiveIds = angular.copy($scope.translate.highlighted_words) || [];
+    var objectiveIds = angular.copy($scope.translate.underline_words) || [];
     $scope.translate_tokens = tokenize($scope.translate.question);
 
     if ($scope.translate.normal_question_audio) {
@@ -63,21 +63,21 @@
       $scope.speaker.play();
 
       $element.find('textarea').eq(0)[0].focus();
-        $element.on('keydown', function (e) {
-          var myTextField = document.getElementById('myText');
-          if (e.keyCode === 13) {
-            if ($scope.answer && $scope.answer.length > 0) {
-              e.preventDefault();
-              $element.find('textarea').eq(0).attr('readonly', 'readonly');
-            }
+      $element.on('keydown', function (e) {
+        var myTextField = document.getElementById('myText');
+        if (e.keyCode === 13) {
+          if ($scope.answer && $scope.answer.length > 0) {
+            e.preventDefault();
+            $element.find('textarea').eq(0).attr('readonly', 'readonly');
           }
-        });
-      $scope.$watch('answer', function() {
+        }
+      });
+      $scope.$watch('answer', function () {
         if ($scope.answer.length == 0) {
           $scope.speaker.play();
-        }  
+        }
       })
-    } 
+    }
   }
 
   function QuestionTranslateDirective($timeout, ngAudio, Words) {
@@ -115,6 +115,8 @@
             Words.revealWords({
               words: obj
             });
+
+            $scope.$parent.objectives.push(element.attr('data-word-id'));
           }, 300);
         };
 

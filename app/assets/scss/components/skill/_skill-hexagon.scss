@@ -75,13 +75,13 @@
         &.success {
           background-position: -560px 0;
         }
-        .level-2 .strength-bar {
+        .level-1 .strength-bar {
           background-position: 0 -123px;
         }
-        .level-3 .strength-bar {
+        .level-2 .strength-bar {
           background-position: 0 -82px;
         }
-        .level-4 .strength-bar {
+        .level-3 .strength-bar {
           background-position: 0 -41px;
         }
       }
@@ -147,15 +147,31 @@
       width: 100%;
       &.red {
         background-position: 0 0;
+        .button.transparent:hover {
+          background: $white;
+          color: #ff4444;
+        }
       }
       &.green {
         background-position: -260px 0;
+        .button.transparent:hover {
+          background: $white;
+          color: #99cc00;
+        }
       }
       &.blue {
         background-position: -520px 0;
+        .button.transparent:hover {
+          background: $white;
+          color: #34b4e3;
+        }
       }
       &.success {
         background-position: -780px 0;
+        .button.transparent:hover {
+          background: $white;
+          color: #ffbb33;
+        }
       }
       $k: 1;
       @for $i from 0 through 4 {
@@ -175,6 +191,9 @@
       }
       .name {
         color: $white;
+      }
+      .level {
+        color: $white;
         margin-bottom: 30px;
       }
       .test-out {
@@ -182,6 +201,10 @@
         color: $primary-color;
         margin: 0 auto;
         width: 120px;
+      }
+      .button.transparent {
+        background: transparent;
+        border: 2px solid $white;
       }
     }
     .lessons {
