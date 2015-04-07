@@ -110,7 +110,8 @@
           }
         } else {
           // Call finish API
-          Exam.finish(requestData).then(function () {
+          Exam.finish(requestData).then(function (response) {
+            console.log(response)
             $scope.questionTpl = questionTplId.success;
             $scope.footerTpl = "footerSuccess";
             $scope.question = Exam.question();
