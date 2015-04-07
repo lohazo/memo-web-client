@@ -2,7 +2,7 @@
   <div class="row main hexagon">
     <div class="skill-page container">
       <div class="small-4 columns text-center">
-        <div class="{{(skill.finished_lesson == skill.lessons.length && skill.strength_gap >= 4) ? 'success' : '' }} {{skill.theme_color === '#99cc00' ? 'green' : (skill.theme_color === '#ff4444' ? 'red' : 'blue')}} skill skill-{{skill.order + 1}}">
+        <div class="{{(skill.finished_lesson == skill.lessons.length) ? 'success' : '' }} {{skill.theme_color === '#99cc00' ? 'green' : (skill.theme_color === '#ff4444' ? 'red' : 'blue')}} skill skill-{{skill.order + 1}}">
           <div class="icon" style="background-image: url('{{iconSets.lesson}}');"></div>
           <h4 class="name">{{skill.title}}</h4>
           <!-- <div class="level" ng-if="skill.finished_lesson == skill.lessons.length && skill.strength_gap < 4">Độ mạnh: {{skill.strength_gap}}/5</div> -->
