@@ -7,6 +7,13 @@
     ReferralService, Leaderboard) {
     $scope.leaderboardData = [];
 
+    $scope.shareMaxSkill = function () {
+      FB.ui({
+        method: 'share',
+        href: 'http://memo.edu.vn'
+      });
+    }
+
     function getProfile() {
       $scope.profile = Profile.user;
     }
