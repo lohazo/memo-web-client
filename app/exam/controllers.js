@@ -215,22 +215,7 @@
     $scope.start = function () {
       Exam.start(requestData).then(function (response) {
         $scope.questions = Exam.questions();
-        $scope.question = {
-          "type": "translate",
-          "question": "Màu xanh lá cây? Màu đen?",
-          "answer": "The green? The black?",
-          "answer_lang": "en",
-          "alternative_answers": [
-            "Green? Black?",
-            "Green or Black?",
-            "The green or the black?"
-          ],
-          "common_errors": [],
-          "normal_question_audio": "",
-          "underline_words": [],
-          "highlighted_words": [],
-          "question_log_id": "5524ef656d6169126b6d0100"
-        };
+        $scope.question = Exam.question();
         $scope.answered = Exam.answered();
         $scope.ant = 0;
         $scope.hearts = Exam.hearts();
@@ -267,8 +252,7 @@
     };
   }
 
-  function DiscussionExamModalCtrl($scope, $location, Exam, ExamStrengthen, $localStorage, ForumServices,
-    $modalInstance) {
+  function DiscussionExamModalCtrl($scope, $location, Exam, ExamStrengthen, $localStorage, ForumServices, $modalInstance) {
     $scope.question = Exam.question() || ExamStrengthen.question();
     $scope.requestData = {
       content: ''
@@ -281,7 +265,7 @@
     $scope.data.question_log_id = $scope.question.question_log_id;
     $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
 
-    if ($scope.question.type == 'judge') {
+    if ($scope.question.type == 'judge' ) {
       $scope.data.title = $scope.question.question;
       $scope.data.content = $scope.question.hints;
     } else if ($scope.question.type == 'name' || $scope.question.type == 'select') {
@@ -315,6 +299,7 @@
         $scope.getPost.follow = false;
       });
     };
+
 
     $scope.createComment = function () {
       $scope.requestData.id = $scope.getPost._id;
@@ -365,7 +350,5 @@
       '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
       'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', ExamCtrl
     ])
-    .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage',
-      'ForumServices', '$modalInstance', DiscussionExamModalCtrl
-    ]);
+    .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage', 'ForumServices', '$modalInstance', DiscussionExamModalCtrl]);
 }(window.angular));
