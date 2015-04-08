@@ -5,7 +5,8 @@
     return {
       strict: 'EA',
       scope: {
-        trackingData: "@"
+        trackingData: "@",
+        trackingCallback: "&"
       },
       controller: 'ClickEventTrackCtrl',
       link: function ($scope, $element) {
@@ -21,6 +22,7 @@
     $scope.click = function () {
       if (data.memoEnabled) {
         MemoTracker.track(data.eventName).finally(function () {
+          $scope.trackingCallback();
           if (data.to) {
             $window.location.href = data.to;
           }
