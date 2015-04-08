@@ -18,11 +18,11 @@
       </div>
     </div>
   </div>
-  <a ng-if="row.isCheckpoint && (row[0].remaining_test_times == 0)" class="disabled secondary test-out hex-memo-button">
+  <a ng-if="row.isCheckpoint && (row[0].remaining_test_times == 0)" class="disabled secondary test-out hex-memo-button" style="padding-right:15px;padding-left:15px;">
     <i class="icon-lock"></i>
     {{row[0].title}}
   </a>
-  <a ng-if="row.isCheckpoint && (row[0].remaining_test_times > 0)" ng-href="{{'checkpoint/' + row[0].row}}" class="secondary test-out hex-memo-button" tooltip="Làm bài kiểm tra về kiến thức của tất cả các kĩ năng phía trên để nhanh chóng vượt qua những kĩ năng đó" tooltip-placement="right">
+  <a ng-if="row.isCheckpoint && (row[0].remaining_test_times > 0)" ng-href="{{'checkpoint/' + row[0].row}}" class="secondary test-out hex-memo-button" tooltip="Làm bài kiểm tra về kiến thức của tất cả các kĩ năng phía trên để nhanh chóng vượt qua những kĩ năng đó" tooltip-placement="right" style="padding-right:15px;padding-left:15px;">
     <i class="icon-lock"></i>
     {{row[0].title}}
   </a>
