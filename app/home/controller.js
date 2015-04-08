@@ -257,6 +257,16 @@
       '//staging.memo.edu.vn/native/web?disable_back_button=true');
   }
 
+  function NativeCtrl($scope, $modal){
+    $scope.openNativeModal = function(){
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_buy-guide-popup.html',
+        controller: 'SecretGiftModalCtrl',
+        windowClass: 'buy-guide-popup-modal',
+      });
+    }
+  }
+
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder',
@@ -274,6 +284,7 @@
       RefCodeModalInstanceCtrl
     ])
     .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', SecretGiftCtrl])
-    .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl]);
+    .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl])
+    .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl]);
 
 }(window.angular));
