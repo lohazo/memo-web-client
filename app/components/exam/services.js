@@ -464,6 +464,22 @@
       return deferred.promise;
     };
 
+    Services.getUrlScholarshipPopup = function () {
+      var authToken = $localStorage.auth.user.auth_token;
+
+      var endpoint = API + '/popup/?auth_token=' + authToken;
+
+      return $http.get(endpoint);
+    }
+
+    Services.openScholarshipPopup = function () {
+      var authToken = $localStorage.auth.user.auth_token;
+
+      var endpoint = API + '/popup/open/?auth_token=' + authToken;
+
+      return $http.get(endpoint);
+    }
+
     return Services;
   }
 
