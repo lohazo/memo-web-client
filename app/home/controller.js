@@ -3,16 +3,18 @@
 
   function HomeCtrl($scope) {}
 
-  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, MemoTracker, Message,
+  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting,  MemoTracker, Message,
     ReferralService, Leaderboard) {
     $scope.leaderboardData = [];
 
     $scope.shareMaxSkill = function () {
-      FB.ui({
-        method: 'share',
-        href: 'http://memo.edu.vn'
+      AppSetting.getMaxSkillFacebookContent().then(function (response) {
+        var data = response.data;
+        data.method = 'feed';
+
+        FB.ui(data, function (response) {});
       });
-    }
+    };
 
     function getProfile() {
       $scope.profile = Profile.user;
