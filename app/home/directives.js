@@ -28,7 +28,8 @@
       return {
         strict: 'EA',
         scope: true,
-        templateUrl: 'home/_main-right.html'
+        templateUrl: 'home/_main-right.html',
+        controller: 'NativeCtrl'
       };
     })
     .directive('placementTestModal', function () {
