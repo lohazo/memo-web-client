@@ -10,7 +10,7 @@
       </div>
     </a>
   </div>
-  <div class="row collapse" ng-if="(!row.isCheckpoint && row[1].order == 27 && !popupClicked)" style="clear: both">
+  <div class="row collapse" ng-if="(!row.isCheckpoint && row[1].order == 27 && row[1].unlocked && !popupClicked)" style="clear: both">
     <div class="large-12 columns large-centered" style="padding:10px;border: 2px solid #ccc;border-radius:10px;margin-top:20px;cursor:pointer;" click-event-track tracking-data='{"memoEnabled":true,"eventName":"skill tree education ad click"}' tracking-callback='goToPlaza();'>
       <div class="row collapse">
         <div class="large-3 columns text-left"><img ng-src="assets/img/tutorial/native-scholar.png" /></div>
