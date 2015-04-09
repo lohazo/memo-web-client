@@ -11,7 +11,7 @@
         <div class="large-3 columns avatar">
           <img ng-src="{{user.url_avatar || 'assets/img/profile-avatar-big.png'}}" />
         </div>
-        <div class="large-8 columns nickname">{{user.username}}</div>
+        <div class="large-8 columns nickname"><a ng-href="/profile/{{user._id}}">{{user.username}}</a></div>
         <div class="large-5 columns buttons">
           <a ng-if="!user.is_following"class="large-16 large secondary memo-button follow" ng-click="follow(user._id)">Thêm</a>
           <a ng-if="user.is_following" class="large-16 large memo-button" ng-click="unfollow(user._id)">Bạn bè</a>
