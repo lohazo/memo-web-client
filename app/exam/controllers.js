@@ -128,7 +128,6 @@
                 data: $scope.question.exp_chart.exp
               }]
             };
-            console.log(Exam.question().max_skill)
             if (Exam.question().max_skill) {
               $scope.openMaxCoursePopup();
             }
