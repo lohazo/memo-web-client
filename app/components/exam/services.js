@@ -19,7 +19,7 @@
     }
 
     function init(data) {
-      // questions = data.questions.filter(function(q) {return q.type === 'translate';});
+      // questions = data.questions.filter(function(q) {return q.type === 'judge';});
       questions = data.questions;
       hearts = {
         remaining: data.max_hearts_count,

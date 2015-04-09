@@ -111,8 +111,7 @@
           $scope.openScholarshipPopup();
         } else {
           // Call finish API
-          Exam.finish(requestData).then(function (data) {
-            
+          Exam.finish(requestData).then(function () {
             $scope.questionTpl = questionTplId.success;
             $scope.footerTpl = "footerSuccess";
             $scope.question = Exam.question();
@@ -129,10 +128,13 @@
                 data: $scope.question.exp_chart.exp
               }]
             };
-            console.log($scope.question)
+            console.log(Exam.question().max_skill)
+            if (Exam.question().max_skill) {
+              $scope.openMaxCoursePopup();
+            }
           });
           Sound.playFinishSound();
-          $scope.openScholarshipPopup();
+          // $scope.openScholarshipPopup();
         }
         return true;
       }
