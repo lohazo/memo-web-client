@@ -108,13 +108,11 @@
           if (examType === 'checkpoint') {
             Exam.fail(requestData);
           }
-          console.log(Profile);
-          $scope.openMaxCoursePopup();
           $scope.openScholarshipPopup();
         } else {
           // Call finish API
           Exam.finish(requestData).then(function (data) {
-            console.log(data)
+            
             $scope.questionTpl = questionTplId.success;
             $scope.footerTpl = "footerSuccess";
             $scope.question = Exam.question();
@@ -131,6 +129,7 @@
                 data: $scope.question.exp_chart.exp
               }]
             };
+            console.log($scope.question)
           });
           Sound.playFinishSound();
           $scope.openScholarshipPopup();
@@ -277,7 +276,8 @@
     $scope.openMaxCoursePopup = function () {
       var modalInstance = $modal.open({
         templateUrl: 'exam/_max-course-popup-modal.html',
-        windowClass: 'max-course-popup-modal'
+        windowClass: 'max-course-popup-modal',
+        controller: 'MaxCoursePopupModalCtrl'
       });
     }    
   }
@@ -379,11 +379,27 @@
     $scope.test = $sce.trustAsResourceUrl(url);
   }
 
+  function MaxCoursePopupModalCtrl($scope, $modalInstance, AppSetting) {
+    $scope.shareMaxSkill = function () {
+      AppSetting.getMaxSkillFacebookContent().then(function (response) {
+        var data = response.data;
+        data.method = 'feed';
+
+        FB.ui(data, function (response) {});
+      });
+    };
+
+    $scope.close = function () {
+      $modalInstance.close();
+    };
+  }
+
   angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
       '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
       'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', ExamCtrl
     ])
     .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage', 'ForumServices', '$modalInstance', DiscussionExamModalCtrl])
-    .controller('ScholarshipPopupModalCtrl', ['$scope', 'url', '$sce', ScholarshipPopupModalCtrl]);
+    .controller('ScholarshipPopupModalCtrl', ['$scope', 'url', '$sce', ScholarshipPopupModalCtrl])
+    .controller('MaxCoursePopupModalCtrl', ['$scope', '$modalInstance', 'AppSetting', MaxCoursePopupModalCtrl]);
 }(window.angular));

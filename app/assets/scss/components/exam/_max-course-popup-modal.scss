@@ -1,29 +1,28 @@
 .max-course-popup-modal {
+  width: 400px;
   min-height: 450px !important;
-  outline: none;
-  min-width: 400px;
-  border: 0;
-  position: fixed;
+  padding: 30px 30px 20px 30px;
   top: 110px !important;
-  .max-course-popup-inner {
-    padding : 30px;
-    .header {
-       @include grid-column($columns: 16);
-       padding-top: 10px;
-       text-align: center;
-       font-size: 16px;
-      .title {
-        color: $oil;
-      }
-      .description {
-        color: $steel;
-      }
+  position: fixed;
+  outline: none;
+  border: 0;
+  .max-course-popup-modal-inner {
+    font-size: 16px;
+    .title {
+      padding-top: 10px;
+      font-weight: bold;
+      color: $oil;
+      margin: 0px;
     }
-    .midder {
-
+    .discription {
+      color: $steel;
+      margin-bottom: 30px;
     }
-    .footer {
-
+    .max-course-icon {
+      margin-bottom: 20px;
+    }
+    .max-course-button {
+      margin: 0;
     }
   }
 }

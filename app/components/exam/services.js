@@ -150,6 +150,7 @@
       data.base_item_id = usedItems.length > 0 ? usedItems[0] : '';
       return ExamServices.finish(data).then(function (response) {
         question = response.data;
+        
       });
     }
 
