@@ -6,81 +6,65 @@
           <h4 class="title">Danh sách các chủ đề</h4>
         </div>
         <div class="right">
-          <a ng-href="/forum/post/create" title="" class="small button radius">Tạo chủ đề mới</a>
+          <a ng-href="/forum/post/create" title="" class="small button radius" ng-if="isAuthenticated();">Tạo chủ đề mới</a>
         </div>
       </div>
       <div class="main-post">
         <div class="tabs">
           <tabset vertical="false" type="navType">
-            <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
-              <ul class="posts">
-                <li class="post sticky" ng-repeat="post in tab.data.sticky_posts">
-                  <div><img class="post-avatar" ng-src="{{post.user.url_avatar  || 'assets/img/profile-avatar-big.png'}}" /></div>
-                  <div class="post-content">
-                    <p  class="title" title=""><img tooltip-placement="top" tooltip="Những chủ đề nổi bật" ng-src="assets/img/Forum/sticky-posts-icon.png" /><a ng-href="/forum/post/{{post._id}}" ng-bind="post.title"></a></p>
-                    <p class="post-detail">
-                      <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo" ng-href="/forum?filter={{post.base_course_id}}">{{post.course_name}}</a>
-                    </p>
-                    <div class="post-toolbar">
-                      <div class="total-vote left" ng-bind="post.up_vote_count"></div>
-                      <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)"></a>
-                    </div>
-                    <div class="comment">
-                      <span>{{post.total_comment}}</span>
-                      <img src="assets/img/Forum/comment-icon.png" alt="">
-                    </div>
-                    <div class="follow">
-                      <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followStickyPost(post)">Theo dõi</a>
-                      <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowStickyPost(post)">Đang theo dõi </a>
-                    </div>
-                  </div>
-                </li>
-                <li class="post" ng-repeat="post in tab.data.posts">
-                  <div ><img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
-                  <div class="post-content">
-                    <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
-                    <p class="post-detail">
-                      <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo" ng-href="/forum?filter={{post.base_course_id}}">{{post.course_name}}</a>
-                    </p>
-                    <div class="post-toolbar">
-                      <div class="total-vote left" ng-bind="post.up_vote_count"></div>
-                      <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)"></a>
-                    </div>
-                    <div class="comment">
-                      <span>{{post.total_comment}}</span> 
-                      <img src="assets/img/Forum/comment-icon.png" alt="">
-                    </div>
-                    <div class="follow">
-                      <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followPost(post)">Theo dõi</a>
-                      <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowPost(post)">Đang theo dõi </a>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-              <div class="pagination-centered">
-                <pagination ng-if="tab.data.total_page > 0" page="tab.data.current_page" total-items="tab.data.total_page * 10" on-select-page="setPage(page)"></pagination>
-              </div>  
-            </tab>
-          <!-- <tab class="tabs-heading" heading="Chủ đề nóng">
-          <ul class="the-posts">
-            <li class="post" ng-repeat="post in tabPost">
-              <div class="post-avatar">{{post.avatar}}</div>
+          <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
+          <ul class="posts">
+            <li class="post sticky" ng-repeat="post in tab.data.sticky_posts">
+              <div><img class="post-avatar" ng-src="{{post.user.url_avatar  || 'assets/img/profile-avatar-big.png'}}" /></div>
               <div class="post-content">
-                <a href="" class="title" title="">{{post.title}}</a>
+                <p  class="title" title=""><img tooltip-placement="top" tooltip="Những chủ đề nổi bật" ng-src="assets/img/Forum/sticky-posts-icon.png" /><a ng-href="/forum/post/{{post._id}}" ng-bind="post.title"></a></p>
                 <p class="post-detail">
-                  <a href="#" class="admin">{{post.userd}}</a>, {{post.datetime}} - <a href="#" class="memo">{{post.course_name}}</a>
+                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo" ng-href="/forum?filter={{post.base_course_id}}">{{post.course_name}}</a>
                 </p>
+                <div class="post-toolbar">
+                  <div class="total-vote left" ng-bind="post.up_vote_count"></div>
+                  <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)"></a>
+                </div>
+                <div class="comment">
+                  <span>{{post.total_comment}}</span>
+                  <img src="assets/img/Forum/comment-icon.png" alt="">
+                </div>
+                <div class="follow" ng-if="isAuthenticated()">
+                  <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followStickyPost(post)">Theo dõi</a>
+                  <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowStickyPost(post)">Đang theo dõi </a>
+                </div>
               </div>
-              <div class="comment">
-                <span>{{post.comment}}</span>
+            </li>
+            <li class="post" ng-repeat="post in tab.data.posts">
+              <div ><img class="post-avatar" ng-src="{{post.user.url_avatar || 'assets/img/profile-avatar-big.png'}}" /></div>
+              <div class="post-content">
+                <a ng-href="/forum/post/{{post._id}}" class="title" title="">{{post.title}}</a>
+                <p class="post-detail">
+                  <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo" ng-href="/forum?filter={{post.base_course_id}}">{{post.course_name}}</a>
+                </p>
+                <div class="post-toolbar">
+                  <div class="total-vote left" ng-bind="post.up_vote_count"></div>
+                  <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)"></a>
+                </div>
+                <div class="comment">
+                  <span>{{post.total_comment}}</span>
+                  <img src="assets/img/Forum/comment-icon.png" alt="">
+                </div>
+                <div class="follow" ng-if="isAuthenticated()">
+                  <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followPost(post)">Theo dõi</a>
+                  <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowPost(post)">Đang theo dõi </a>
+                </div>
               </div>
             </li>
           </ul>
-        </tab> -->
-      </tabset>
+          <div class="pagination-centered">
+          <pagination ng-if="tab.data.total_page > 0" page="tab.data.current_page" total-items="tab.data.total_page * 10" on-select-page="setPage(page)"></pagination>
+        </div>
+        </tab>
+        </tabset>
+      </div>
     </div>
   </div>
-</div>
 </section>
 <section class="main-right">
   <div class="search">

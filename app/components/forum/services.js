@@ -16,12 +16,13 @@
     };
 
     Services.getListSubscription = function () {
-      var authToken = $localStorage.auth.user.auth_token;
-
-      return $http.get(API + '/posts/list_subscriptions' + '?auth_token=' + authToken);
+      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
+      var endpoint = API + '/posts/list_subscriptions';
+      if (authToken.length > 0) endpoint += '?auth_token=' + authToken;
+      return $http.get(endpoint);
     };
     Services.getPost = function (data) {
-      var authToken = $localStorage.auth.user.auth_token;
+      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       return $http.get(API + '/posts/' + data.id + '?auth_token=' + authToken);
     };
 
@@ -46,10 +47,10 @@
     };
 
     Services.listComment = function (data) {
-      var authToken = $localStorage.auth.user.auth_token;
+      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
 
-      var endpoint = API + '/posts/' + data.id + '/comments' + '?auth_token=' + authToken;
-
+      var endpoint = API + '/posts/' + data.id + '/comments';
+      if (authToken.length > 0) endpoint += "?auth_token=" + authToken;
       if (data.page) endpoint += '&page=' + data.page;
 
       return $http.get(endpoint);
@@ -96,9 +97,10 @@
 
     // data = {[page: , sort: 'created_at', type: 'desc'/'asc', filter: "all"/"follow"/"en-vi"/"fr-vi"/"de-vi"]}
     Services.listPosts = function (data) {
-      var authToken = $localStorage.auth.user.auth_token;
-      var endpoint = API + '/posts/all_posts' + '?platform=web&auth_token=' + authToken;
+      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
+      var endpoint = API + '/posts/all_posts' + '?platform=web';
 
+      if (authToken.length > 0) endpoint += '&auth_token=' + authToken;
       if (data.page) endpoint += '&page=' + data.page;
       if (data.sort) endpoint += '&sort=' + data.sort;
       if (data.type) endpoint += '&type=' + data.type;
@@ -108,9 +110,10 @@
     };
 
     Services.listReply = function (data) {
-      var authToken = $localStorage.auth.user.auth_token;
-      var endpoint = API + '/comments/' + data.id + '?platform=web&auth_token=' + authToken;
+      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
+      var endpoint = API + '/comments/' + data.id + '?platform=web';
 
+      if (authToken.length > 0) endpoint += '&auth_token=' + authToken;
       if (data.page) endpoint += '&page=' + data.page;
 
       return $http.get(endpoint);
@@ -118,7 +121,7 @@
 
     // data = {keywords: ''}
     Services.searchPosts = function (data) {
-      var authToken = $localStorage.auth.user.auth_token;
+      var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       data.auth_token = authToken;
 
       return $http.post(API + '/posts/search_all_post', data);
