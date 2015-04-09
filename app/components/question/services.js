@@ -95,6 +95,8 @@
         });
 
         // Group 1
+        console.log(stripSpecialCharacters(userAnswer).toLowerCase(), stripSpecialCharacters(result.correctAnswer)
+          .toLowerCase());
         result.result = stripSpecialCharacters(userAnswer).toLowerCase()
           .localeCompare(stripSpecialCharacters(result.correctAnswer).toLowerCase()) === 0;
 
@@ -333,7 +335,8 @@
       function stripSpecialCharacters(input) {
         var output = input.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g, " ");
         output = output.replace(/\s+/g, ' ');
-        output = output.replace('?', ' ');
+        output = output.replace(/\?/g, ' ');
+        output = output.replace(/ {2,}/g, ' ');
         return output.trim();
       }
 

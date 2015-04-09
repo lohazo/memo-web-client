@@ -3,7 +3,6 @@
 
   function ExamCtrl($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker,
     Skill, $modal, $localStorage, ForumServices) {
-    console.log(Exam);
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
     $scope.shouldPlaySlow = false;
@@ -109,6 +108,7 @@
           if (examType === 'checkpoint') {
             Exam.fail(requestData);
           }
+          $scope.openScholarshipPopup();
         } else {
           // Call finish API
           Exam.finish(requestData).then(function (data) {
@@ -131,6 +131,7 @@
             };
           });
           Sound.playFinishSound();
+          $scope.openScholarshipPopup();
         }
         return true;
       }
@@ -252,6 +253,24 @@
         controller: 'DiscussionExamModalCtrl'
       });
     };
+
+    $scope.openScholarshipPopup = function () {
+      ExamServices.getUrlScholarshipPopup().success(function (data) {
+        $scope.scholarshipPopupUrl = data.popup_url;
+        ExamServices.openScholarshipPopup().success(function (data) {
+          var modalInstance = $modal.open({
+            templateUrl: 'exam/_scholarship-popup-modal.html',
+            windowClass: 'scholarship-popup-modal',
+            resolve: {
+              url: function () {
+                return $scope.scholarshipPopupUrl;
+              }
+            },
+            controller: 'ScholarshipPopupModalCtrl'
+          });
+        })
+      });
+    };    
   }
 
   function DiscussionExamModalCtrl($scope, $location, Exam, ExamStrengthen, $localStorage, ForumServices, $modalInstance) {
@@ -347,10 +366,15 @@
     };
   }
 
+  function ScholarshipPopupModalCtrl($scope, url, $sce) {
+    $scope.test = $sce.trustAsResourceUrl(url);
+  }
+
   angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
       '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
       'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', ExamCtrl
     ])
-    .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage', 'ForumServices', '$modalInstance', DiscussionExamModalCtrl]);
+    .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage', 'ForumServices', '$modalInstance', DiscussionExamModalCtrl])
+    .controller('ScholarshipPopupModalCtrl', ['$scope', 'url', '$sce', ScholarshipPopupModalCtrl]);
 }(window.angular));
