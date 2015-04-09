@@ -1,0 +1,29 @@
+.max-course-popup-modal {
+  min-height: 450px !important;
+  outline: none;
+  min-width: 400px;
+  border: 0;
+  position: fixed;
+  top: 110px !important;
+  .max-course-popup-inner {
+    padding : 30px;
+    .header {
+       @include grid-column($columns: 16);
+       padding-top: 10px;
+       text-align: center;
+       font-size: 16px;
+      .title {
+        color: $oil;
+      }
+      .description {
+        color: $steel;
+      }
+    }
+    .midder {
+
+    }
+    .footer {
+
+    }
+  }
+}

@@ -2,7 +2,7 @@
   'use strict';
 
   function ExamCtrl($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker,
-    Skill, $modal, $localStorage, ForumServices) {
+    Skill, $modal, $localStorage, ForumServices, Profile) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
     $scope.shouldPlaySlow = false;
@@ -108,6 +108,8 @@
           if (examType === 'checkpoint') {
             Exam.fail(requestData);
           }
+          console.log(Profile);
+          $scope.openMaxCoursePopup();
           $scope.openScholarshipPopup();
         } else {
           // Call finish API
@@ -270,7 +272,14 @@
           });
         })
       });
-    };    
+    };
+
+    $scope.openMaxCoursePopup = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'exam/_max-course-popup-modal.html',
+        windowClass: 'max-course-popup-modal'
+      });
+    }    
   }
 
   function DiscussionExamModalCtrl($scope, $location, Exam, ExamStrengthen, $localStorage, ForumServices, $modalInstance) {
@@ -373,7 +382,7 @@
   angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
       '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
-      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', ExamCtrl
+      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', ExamCtrl
     ])
     .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage', 'ForumServices', '$modalInstance', DiscussionExamModalCtrl])
     .controller('ScholarshipPopupModalCtrl', ['$scope', 'url', '$sce', ScholarshipPopupModalCtrl]);
