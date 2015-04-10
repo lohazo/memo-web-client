@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="app.css"/>
   <script src="vendors/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body ng-class="{landingpage: (!auth.loggedIn && currentPath != '/forum')}" ng-controller="AppCtrl" ng-keydown="keydown(event=$event)">
+<body ng-class="{landingpage: (!auth.loggedIn && (currentPath.indexOf('/forum') < 0))}" ng-controller="AppCtrl" ng-keydown="keydown(event=$event)">
   <div id="fb-root"></div>
   <!-- Google Tag Manager -->
   <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N6X84R"
@@ -48,8 +48,8 @@
   })(window,document,'script','dataLayer','GTM-N6X84R');</script>
   <!-- End Google Tag Manager -->
 
-  <header ng-if="!auth.loggedIn && (currentPath != '/forum')" class="fixed contain-to-grid" landing-header></header>
-  <header ng-if="auth.loggedIn || currentPath == '/forum'" class="fixed contain-to-grid" app-header></header>
+  <header ng-if="!auth.loggedIn && (currentPath.indexOf('/forum') < 0)" class="fixed contain-to-grid" landing-header></header>
+  <header ng-if="auth.loggedIn || (currentPath.indexOf('/forum') >= 0)" class="fixed contain-to-grid" app-header></header>
   <div ng-view></div>
   <footer app-footer></footer>
 
