@@ -75,7 +75,7 @@
           <pagination ng-if="page.total_page > 0" boundary-links="true" total-items="total_items" page="currentPage"  previous-text="&lsaquo;" next-text="&rsaquo;" first-text="Đầu" last-text="Cuối" on-select-page="setPage(page)" rotate="false" max-size="max_page"></pagination>
         </div>
       </section>
-      <section class="comment-editor">
+      <section class="comment-editor" ng-if="isAuthenticated();">
         <div class="comment-editor-left">
           <img class="post-avatar comment-editor-avatar comment-avatar" ng-src="{{profileDetail.url_avatar || 'assets/img/profile-avatar-big.png'}}"/>
         </div>

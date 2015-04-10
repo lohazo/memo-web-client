@@ -45,11 +45,11 @@
     if ($location.search().keywords) {
       $scope.searchPosts = convertToViewData(searchPosts.data);
       $scope.tabs[0].active = false;
-      $scope.tabs[2] = {
+      $scope.tabs.push({
         title: 'Kết quả tìm kiếm',
         data: $scope.searchPosts,
         active: true
-      };
+      });
     }
 
     $scope.postSearch = {
