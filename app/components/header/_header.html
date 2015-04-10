@@ -36,6 +36,11 @@
           </ul>
         </li>
       </ul>
+      <ul class="right" ng-if="!auth.loggedIn" ng-controller="LoginModalCtrl">
+        <li class="has-form">
+          <a class="reverse login button" ng-click="open()">Đăng nhập</a>
+        </li>
+      </ul>
     </top-bar-section>
   </top-bar>
 </div>
