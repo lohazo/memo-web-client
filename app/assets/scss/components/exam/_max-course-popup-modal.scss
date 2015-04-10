@@ -23,6 +23,22 @@
     }
     .max-course-button {
       margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+      color: $white;
+      text-align: center;
+      &.share {
+        background-color: #33b5e5;
+        &:hover {
+          background-color: scale-color(#33b5e5, $lightness: -20%);
+        }
+      }
+      &.close {
+        background-color: $success-color;
+        &:hover {
+          background-color: scale-color($success-color, $lightness: -20%);
+        }
+      }
     }
   }
 }
