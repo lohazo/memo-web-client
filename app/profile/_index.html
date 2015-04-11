@@ -3,7 +3,13 @@
     <div class="container container-page-profile">
       <div class="row user-info-profile">
         <p>
-          <img ng-src="{{profileDetail.url_avatar || 'assets/img/profile-avatar-big.png'}}" alt=""/> <br>
+          <img ng-src="{{profileDetail.url_avatar || imageSource || 'assets/img/profile-avatar-big.png'}}" alt=""/>
+          <!-- Change Avatar -->
+          <input ng-model="imageSource" type="file" onchange="angular.element(this).scope().fileNameChaged(this)"></input>   
+          <!-- Change Avatar -->
+           <br>
+           <img ng-src="{{imageSource}}">
+           <br>
           <strong ng-bind="profileDetail.username"></strong>
         </p>
         <div class="row add-user-name">

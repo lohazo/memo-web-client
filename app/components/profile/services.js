@@ -56,6 +56,13 @@
       return deferred.promise;
     };
 
+    // Services.uploadAvatar = function (data) {
+    //   // data = {user_id: , file: }
+    //   data.auth_token = $localStorage.auth.user.auth_token;
+    //   // data.file = 
+    //   return $http.post(API + '/users/' + data._id + '/avatar', data);
+    // }
+
     Services.update = function (data) {
       var deferred = $q.defer();
       var userId = $localStorage.auth.user._id;
