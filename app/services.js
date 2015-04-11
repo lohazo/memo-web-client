@@ -77,7 +77,13 @@
 
     Setting.getLevelUpFacebookContent = function () {
       return AppServices.getFacebookSharedContent({
-        level_up: true
+        level_up: true,
+      });
+    };
+    
+    Setting.getMaxSkillFacebookContent = function () {
+      return AppServices.getFacebookSharedContent({
+        max_skill: true,
       });
     };
 
@@ -121,15 +127,18 @@
       // data = {skill_id: 'aoheusantheu' / level_up: true};
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
+      var baseCourseId = $localStorage.auth.user.current_course_id;
 
       var endpoint = API + '/shared_settings/facebook_share_content?device=web&auth_token=' +
-        authToken;
+        authToken + '&base_course_id=' + baseCourseId;
       if (data.skill_id) {
         endpoint += '&skill_id=' + data.skill_id;
       } else if (data.level_up) {
         endpoint += '&level_up=' + data.level_up;
       } else if (data.referral_code) {
         endpoint += '&referral=true';
+      } else if (data.max_skill) {
+        endpoint += '&max_skill=' + data.max_skill;
       }
 
       $http.get(endpoint)

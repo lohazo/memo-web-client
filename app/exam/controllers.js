@@ -2,7 +2,7 @@
   'use strict';
 
   function ExamCtrl($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker,
-    Skill, $modal, $localStorage, ForumServices, ExamServices, $sce) {
+    Skill, $modal, $localStorage, ForumServices, Profile) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
     $scope.shouldPlaySlow = false;
@@ -128,9 +128,12 @@
                 data: $scope.question.exp_chart.exp
               }]
             };
+            if (Exam.question().max_skill) {
+              $scope.openMaxCoursePopup();
+            }
           });
           Sound.playFinishSound();
-          $scope.openScholarshipPopup();
+          // $scope.openScholarshipPopup();
         }
         return true;
       }
@@ -269,7 +272,15 @@
           });
         })
       });
-    };    
+    };
+
+    $scope.openMaxCoursePopup = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'exam/_max-course-popup-modal.html',
+        windowClass: 'max-course-popup-modal',
+        controller: 'MaxCoursePopupModalCtrl'
+      });
+    }    
   }
 
   function DiscussionExamModalCtrl($scope, $location, Exam, ExamStrengthen, $localStorage, ForumServices, $modalInstance) {
@@ -369,11 +380,27 @@
     $scope.test = $sce.trustAsResourceUrl(url);
   }
 
+  function MaxCoursePopupModalCtrl($scope, $modalInstance, AppSetting) {
+    $scope.shareMaxSkill = function () {
+      AppSetting.getMaxSkillFacebookContent().then(function (response) {
+        var data = response.data;
+        data.method = 'feed';
+
+        FB.ui(data, function (response) {});
+      });
+    };
+
+    $scope.close = function () {
+      $modalInstance.close();
+    };
+  }
+
   angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
       '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
-      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'ExamServices', '$sce', ExamCtrl
+      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', ExamCtrl
     ])
     .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage', 'ForumServices', '$modalInstance', DiscussionExamModalCtrl])
-    .controller('ScholarshipPopupModalCtrl', ['$scope', 'url', '$sce', ScholarshipPopupModalCtrl]);
+    .controller('ScholarshipPopupModalCtrl', ['$scope', 'url', '$sce', ScholarshipPopupModalCtrl])
+    .controller('MaxCoursePopupModalCtrl', ['$scope', '$modalInstance', 'AppSetting', MaxCoursePopupModalCtrl]);
 }(window.angular));
