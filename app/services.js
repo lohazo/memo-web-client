@@ -80,7 +80,7 @@
         level_up: true,
       });
     };
-    
+
     Setting.getMaxSkillFacebookContent = function () {
       return AppServices.getFacebookSharedContent({
         max_skill: true,
@@ -212,7 +212,7 @@
 
   angular.module('app.services', [])
     .constant('APP_VERSION', '1.0.3')
-    .constant('API', '//staging.memo.edu.vn/v2/api')
+    .constant('API', '//services.memo.edu.vn/v2/api')
     .constant('angularMomentConfig', {
       preprocess: 'unix',
       timezone: 'Asia/Hanoi'
