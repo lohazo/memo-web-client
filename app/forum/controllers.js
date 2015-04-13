@@ -385,7 +385,6 @@
       });
     };
 
-    console.log($location.host());
     $scope.sharePost = function () {
       FB.ui({
         method: 'feed',
