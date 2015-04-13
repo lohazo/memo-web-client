@@ -385,12 +385,13 @@
       });
     };
 
+    console.log($location.host());
     $scope.sharePost = function () {
       FB.ui({
         method: 'feed',
         name: $scope.post.title,
         description: $scope.post.description,
-        link: 'http://memo.com/forum/post/' + $scope.post.slug
+        link: $location.host() + '/forum/post/' + $scope.post.slug
       });
     };
   }
