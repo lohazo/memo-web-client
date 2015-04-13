@@ -30,9 +30,14 @@
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var endpoint = API + '/posts';
 
-      endpoint += data.id ? '/?' : '';
-      endpoint += data.slug ? '/post_details?slug=' + data.slug + '&' : '';
-      endpoint += (authToken.length > 0) ? 'auth_token=' + authToken : '';
+      endpoint += data.id ? '/' + data.id : '';
+      endpoint += data.slug ? '/post_details?slug=' + data.slug : '';
+
+      if (authToken.length > 0) {
+        endpoint += data.id ? '?auth_token=' + authToken : '';
+        endpoint += data.slug ? '&auth_token=' + authToken : '';
+      }
+
       return $http.get(endpoint);
     };
 
