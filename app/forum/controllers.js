@@ -1,3 +1,5 @@
+/* global window */
+/* global FB */
 (function (angular) {
   'use strict';
 
@@ -185,7 +187,7 @@
       }
 
       ForumServices.createPost($scope.data).success(function (data) {
-        $location.url('/forum/post/' + data._id);
+        $location.url('/forum/post/' + data.slug);
       });
     };
 
@@ -201,6 +203,7 @@
   function PostDetailCtrl($scope, AuthService, $sce, ForumServices, $location, Post, subscribers) {
     $scope.isAuthenticated = AuthService.isAuthenticated;
     $scope.post = Post.data;
+    var description = $scope.post.content.split('.')[0];
     $scope.post.created_time = Math.round((new Date('' + $scope.post.created_at)).getTime() / 1000);
     $scope.post.content = $sce.trustAsHtml($scope.post.content);
 
@@ -381,13 +384,20 @@
         $scope.replies = data.comments;
       });
     };
+
+    $scope.sharePost = function () {
+      FB.ui({
+        method: 'feed',
+        name: $scope.post.title,
+        description: $scope.post.description,
+        link: 'http://memo.com/forum/post/' + $scope.post.slug
+      });
+    };
   }
 
   angular.module('forum.controllers', ['forum.services'])
     .controller('ListPostCtrl', ['$scope', '$location', 'AuthService', 'ForumServices', 'allPosts', 'subscribers',
-      'followingPosts',
-      'searchPosts',
-      ListPostCtrl
+      'followingPosts', 'searchPosts', ListPostCtrl
     ])
     .controller('CreatePostCtrl', ['$scope', 'AuthService', 'ForumServices', '$location', 'subscribers',
       CreatePostCtrl

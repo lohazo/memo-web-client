@@ -19,7 +19,7 @@
       $localStorage.auth = $scope.auth;
 
       $timeout(function () {
-        $window.location.href = '/';
+        $window.location.reload();
       }, 250);
     }
 

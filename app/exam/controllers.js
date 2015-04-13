@@ -2,7 +2,7 @@
   'use strict';
 
   function ExamCtrl($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker,
-    Skill, $modal, $localStorage, ForumServices) {
+    Skill, $modal, $localStorage, ForumServices, Profile) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
     $scope.shouldPlaySlow = false;
@@ -108,6 +108,7 @@
           if (examType === 'checkpoint') {
             Exam.fail(requestData);
           }
+          $scope.openScholarshipPopup();
         } else {
           // Call finish API
           Exam.finish(requestData).then(function () {
@@ -127,8 +128,12 @@
                 data: $scope.question.exp_chart.exp
               }]
             };
+            if (Exam.question().max_skill) {
+              $scope.openMaxCoursePopup();
+            }
           });
           Sound.playFinishSound();
+          // $scope.openScholarshipPopup();
         }
         return true;
       }
@@ -250,6 +255,32 @@
         controller: 'DiscussionExamModalCtrl'
       });
     };
+
+    $scope.openScholarshipPopup = function () {
+      ExamServices.getUrlScholarshipPopup().success(function (data) {
+        $scope.scholarshipPopupUrl = data.popup_url;
+        ExamServices.openScholarshipPopup().success(function (data) {
+          var modalInstance = $modal.open({
+            templateUrl: 'exam/_scholarship-popup-modal.html',
+            windowClass: 'scholarship-popup-modal',
+            resolve: {
+              url: function () {
+                return $scope.scholarshipPopupUrl;
+              }
+            },
+            controller: 'ScholarshipPopupModalCtrl'
+          });
+        })
+      });
+    };
+
+    $scope.openMaxCoursePopup = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'exam/_max-course-popup-modal.html',
+        windowClass: 'max-course-popup-modal',
+        controller: 'MaxCoursePopupModalCtrl'
+      });
+    }    
   }
 
   function DiscussionExamModalCtrl($scope, $location, Exam, ExamStrengthen, $localStorage, ForumServices, $modalInstance) {
@@ -345,10 +376,31 @@
     };
   }
 
+  function ScholarshipPopupModalCtrl($scope, url, $sce) {
+    $scope.test = $sce.trustAsResourceUrl(url);
+  }
+
+  function MaxCoursePopupModalCtrl($scope, $modalInstance, AppSetting) {
+    $scope.shareMaxSkill = function () {
+      AppSetting.getMaxSkillFacebookContent().then(function (response) {
+        var data = response.data;
+        data.method = 'feed';
+
+        FB.ui(data, function (response) {});
+      });
+    };
+
+    $scope.close = function () {
+      $modalInstance.close();
+    };
+  }
+
   angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
       '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
-      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', ExamCtrl
+      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', ExamCtrl
     ])
-    .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage', 'ForumServices', '$modalInstance', DiscussionExamModalCtrl]);
+    .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage', 'ForumServices', '$modalInstance', DiscussionExamModalCtrl])
+    .controller('ScholarshipPopupModalCtrl', ['$scope', 'url', '$sce', ScholarshipPopupModalCtrl])
+    .controller('MaxCoursePopupModalCtrl', ['$scope', '$modalInstance', 'AppSetting', MaxCoursePopupModalCtrl]);
 }(window.angular));

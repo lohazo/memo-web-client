@@ -1,7 +1,8 @@
 (function (angular) {
   'use strict';
+  /*jslint browser: true*/
 
-  function ForumServices($http, $q, $localStorage, API) {
+  function ForumServices($http, $localStorage, API) {
     var Services = {};
 
     /*
@@ -18,12 +19,21 @@
     Services.getListSubscription = function () {
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var endpoint = API + '/posts/list_subscriptions';
-      if (authToken.length > 0) endpoint += '?auth_token=' + authToken;
+
+      endpoint += authToken.length > 0 ? '?auth_token=' + authToken : '';
+
       return $http.get(endpoint);
     };
+
+    // data = {id:, slug:}
     Services.getPost = function (data) {
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
-      return $http.get(API + '/posts/' + data.id + '?auth_token=' + authToken);
+      var endpoint = API + '/posts';
+
+      endpoint += data.id ? '/?' : '';
+      endpoint += data.slug ? '/post_details?slug=' + data.slug + '&' : '';
+      endpoint += (authToken.length > 0) ? 'auth_token=' + authToken : '';
+      return $http.get(endpoint);
     };
 
     Services.followPost = function (data) {
@@ -50,8 +60,9 @@
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
 
       var endpoint = API + '/posts/' + data.id + '/comments';
-      if (authToken.length > 0) endpoint += "?auth_token=" + authToken;
-      if (data.page) endpoint += '&page=' + data.page;
+
+      endpoint += authToken.length > 0 ? "?auth_token=" + authToken : '';
+      endpoint += data.page ? '&page=' + data.page : '';
 
       return $http.get(endpoint);
     };
@@ -65,7 +76,7 @@
       data.platform = 'web';
 
       return $http.post(API + '/comments', data);
-    }
+    };
 
     // Services.listComments = function (data) {
     //   var authToken = $localStorage.auth.user.auth_token;
@@ -100,11 +111,11 @@
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var endpoint = API + '/posts/all_posts' + '?platform=web';
 
-      if (authToken.length > 0) endpoint += '&auth_token=' + authToken;
-      if (data.page) endpoint += '&page=' + data.page;
-      if (data.sort) endpoint += '&sort=' + data.sort;
-      if (data.type) endpoint += '&type=' + data.type;
-      if (data.filter) endpoint += '&filter=' + data.filter;
+      endpoint += authToken.length > 0 ? '&auth_token=' + authToken : '';
+      endpoint += data.page ? '&page=' + data.page : '';
+      endpoint += data.sort ? '&sort=' + data.sort : '';
+      endpoint += data.type ? '&type=' + data.type : '';
+      endpoint += data.filter ? '&filter=' + data.filter : '';
 
       return $http.get(endpoint);
     };
@@ -113,11 +124,11 @@
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var endpoint = API + '/comments/' + data.id + '?platform=web';
 
-      if (authToken.length > 0) endpoint += '&auth_token=' + authToken;
-      if (data.page) endpoint += '&page=' + data.page;
+      endpoint += authToken.length > 0 ? '&auth_token=' + authToken : '';
+      endpoint += data.page ? '&page=' + data.page : '';
 
       return $http.get(endpoint);
-    }
+    };
 
     // data = {keywords: ''}
     Services.searchPosts = function (data) {
@@ -131,5 +142,5 @@
   }
 
   angular.module('forum.services', [])
-    .factory('ForumServices', ['$http', '$q', '$localStorage', 'API', ForumServices]);
+    .factory('ForumServices', ['$http', '$localStorage', 'API', ForumServices]);
 }(window.angular));

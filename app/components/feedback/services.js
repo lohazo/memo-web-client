@@ -7,6 +7,7 @@
     Services.create = function (data) {
       var auth_token = $localStorage.auth.user.auth_token;
       data.auth_token = auth_token;
+      data.platform = 'web';
       // data = {auth_token, feedbacks: [{
       // "question_log_id":"544f488248177e4c0c8b456f",
       // "user_input":"Test thoi nhe!",

@@ -19,7 +19,7 @@
     }
 
     function init(data) {
-      // questions = data.questions.filter(function(q) {return q.type === 'translate';});
+      // questions = data.questions.filter(function(q) {return q.type === 'judge';});
       questions = data.questions;
       hearts = {
         remaining: data.max_hearts_count,
@@ -150,6 +150,7 @@
       data.base_item_id = usedItems.length > 0 ? usedItems[0] : '';
       return ExamServices.finish(data).then(function (response) {
         question = response.data;
+        
       });
     }
 
@@ -463,6 +464,22 @@
 
       return deferred.promise;
     };
+
+    Services.getUrlScholarshipPopup = function () {
+      var authToken = $localStorage.auth.user.auth_token;
+
+      var endpoint = API + '/popup/?auth_token=' + authToken;
+
+      return $http.get(endpoint);
+    }
+
+    Services.openScholarshipPopup = function () {
+      var authToken = $localStorage.auth.user.auth_token;
+
+      var endpoint = API + '/popup/open/?auth_token=' + authToken;
+
+      return $http.get(endpoint);
+    }
 
     return Services;
   }
