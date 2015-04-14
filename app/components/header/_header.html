@@ -8,9 +8,9 @@
         </a>
       </li>
     </ul>
-    <top-bar-section ng-if="auth.loggedIn">
+    <top-bar-section>
       <!-- Left Nav Section -->
-      <ul class="left menus">
+      <ul class="left menus" ng-if="auth.loggedIn">
         <li class="menu-item" ng-class="{'active': path == '/'}" style="width: 130px;">
           <a href="/" target="_self">Trang chủ</a>
         </li>
@@ -22,7 +22,7 @@
         </li> -->
       </ul>
       <!-- Right Nav Section -->
-      <ul class="right">
+      <ul class="right" ng-if="auth.loggedIn">
         <li class="has-form notification" notification-dropdown-button></li>
         <li class="has-form setting">
           <a dropdown-toggle="#dropdown-setting" class="button">
@@ -34,6 +34,11 @@
             <li><a ng-click="showShortcutPopup()">Phím tắt bàn phím</a></li>
             <li><a ng-click="logout()">Đăng xuất</a></li>
           </ul>
+        </li>
+      </ul>
+      <ul class="right" ng-if="!auth.loggedIn" ng-controller="LoginModalCtrl">
+        <li class="has-form">
+          <a class="reverse login button" ng-click="open()">Đăng nhập</a>
         </li>
       </ul>
     </top-bar-section>

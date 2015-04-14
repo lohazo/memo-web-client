@@ -13,13 +13,13 @@
       }
     });
 
-    $routeProvider.when('/forum/post/:id', {
+    $routeProvider.when('/forum/post/:slug', {
       templateUrl: 'forum/_post-detail.html',
       controller: 'PostDetailCtrl',
       resolve: {
         Post: function ($route, ForumServices) {
           return ForumServices.getPost({
-            id: $route.current.params.id
+            slug: $route.current.params.slug
           });
         },
         subscribers: function (ForumServices) {

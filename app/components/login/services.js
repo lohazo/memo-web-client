@@ -77,9 +77,8 @@
     return Service;
   }
 
-  function AuthService($q, $rootScope, $localStorage, $routeParams, Facebook, GooglePlus,
-    EcoTracker, MemoTracker,
-    LoginService, MolServices, ReferralService) {
+  function AuthService($q, $rootScope, $localStorage, Facebook, GooglePlus, EcoTracker, MemoTracker,
+    LoginService, ReferralService) {
     var Service = {};
 
     Service.checkCode = function (data) {
@@ -89,6 +88,14 @@
     Service.submitReferralCode = function (data) {
       return ReferralService.submitCode(data);
     }
+
+    Service.isAuthenticated = function () {
+      if ($localStorage.auth && $localStorage.auth.loggedIn) {
+        return true;
+      }
+
+      return false;
+    };
 
     Service.register = function (data) {
       return LoginService.register(data).then(loginCallback);
@@ -177,8 +184,8 @@
     Service.logout = function () {
       LoginService.logout().then(function () {
         $localStorage.$reset();
-        delete $localStorage.displayTour;
-        delete $localStorage.auth;
+        $localStorage.displayTour = null;
+        $localStorage.auth = null;
         $rootScope.$broadcast('event:auth-logoutConfirmed');
       });
     };
@@ -196,22 +203,11 @@
       if (response.data.is_newly_sign_up) {
         MemoTracker.track('sign up');
         EcoTracker.track('Web 1.0.3 user logged in', data);
-
-        var molData = {
-          code_chanel: $routeParams.code_chanel || -100,
-          id_landingpage: $routeParams.id_landingpage || -100,
-          id_campaign: $routeParams.id_campaign || -100,
-          id_camp_landingpage: $routeParams.id_campaign || -100,
-          name: data.name || data.username,
-          email: data.email,
-          phone: data.mobile || ''
-        };
-
-        MolServices.saveC3(molData);
       } else {
         MemoTracker.track('login');
       }
     }
+
     return Service;
   }
 
@@ -219,8 +215,7 @@
   angular.module('login.services')
     .factory('LoginService', ['$http', '$q', '$localStorage', 'API', LoginFactory]);
   angular.module('login.services')
-    .factory('AuthService', ['$q', '$rootScope', '$localStorage', '$routeParams',
-      'Facebook', 'GooglePlus', 'EcoTracking', 'MemoTracking',
-      'LoginService', 'MolServices', 'ReferralService', AuthService
+    .factory('AuthService', ['$q', '$rootScope', '$localStorage', 'Facebook', 'GooglePlus', 'EcoTracking',
+      'MemoTracking', 'LoginService', 'ReferralService', AuthService
     ]);
 }(window.angular));

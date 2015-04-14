@@ -80,7 +80,7 @@
         level_up: true,
       });
     };
-    
+
     Setting.getMaxSkillFacebookContent = function () {
       return AppServices.getFacebookSharedContent({
         max_skill: true,

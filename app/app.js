@@ -48,12 +48,15 @@
     amMoment) {
     amMoment.changeLocale('vi');
 
+    var notRequireLoginPaths = {
+      '/': true,
+      '/download': true,
+      '/forum': true
+    };
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
       if ($localStorage.auth) {
-        if (!$localStorage.auth.loggedIn) {
-          if (next.originalPath !== '/' && next.originalPath !== '/downloads') {
-            $location.url('/');
-          }
+        if (!$localStorage.auth.loggedIn && notRequireLoginPaths[next.originPath]) {
+          $location.url('/');
         }
       } else {
         $location.url('/');

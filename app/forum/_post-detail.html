@@ -6,7 +6,10 @@
           <div class="left">
             <a class="return-button" ng-href="/forum">&lsaquo; Danh sách các chủ đề </a>
           </div>
-          <div class="right">
+          <div class="right" ng-if="!isAuthenticated();" ng-controller="LoginModalCtrl">
+            <a class="small radius button" ng-click="open()">Đăng nhập để theo dõi chủ đề</a>
+          </div>
+          <div class="right" ng-if="isAuthenticated()">
             <a class="small radius button follow-button" ng-if="post.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
             <a class="small radius button follow-button" ng-if="post.follow == true" ng-click="unfollowPost()">Bỏ theo dõi</a>
           </div>
@@ -25,9 +28,15 @@
               </div>
               <div class="post-toolbar">
                 <div class="total-vote left" ng-bind="post.up_vote_count"></div>
-                <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)"></a>
+                <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)" tooltip="Đăng nhập để vote" ng-if="!isAuthenticated()"></a>
+                <a class="vote-up normal left" ng-class="{'active': post.is_vote_up}" ng-click="voteUpPost(post)" ng-if="isAuthenticated()"></a>
                 <div class="total-vote left" ng-bind="post.down_vote_count"></div>
-                <a class="vote-down normal left" ng-class="{'active': post.is_vote_down}" ng-click="voteDownPost(post)"></a>
+                <a class="vote-down normal left" ng-class="{'active': post.is_vote_down}" ng-click="voteDownPost(post)" tooltip="Đăng nhập để vote" ng-if="!isAuthenticated()"></a>
+                <a class="vote-down normal left" ng-class="{'active': post.is_vote_down}" ng-click="voteDownPost(post)" ng-if="isAuthenticated()"></a>
+                <a class="tiny radius facebook button" ng-click="sharePost()" style="margin-bottom:0;margin-top:10px;">
+                  <span class="icon-facebook-wrapper"><i style="background-image: url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y1/r/LVx-xkvaJ0b.png);background-size: auto;background-repeat: no-repeat;display: inline-block;height: 14px;width: 14px;  background-position: 0 -42px;margin: 5px 4px 0 5px;"></i></span>
+                  <span class="facebook-share-text">Chia sẻ</span>
+                </a>
               </div>
             </div>
           </div>
@@ -75,7 +84,7 @@
           <pagination ng-if="page.total_page > 0" boundary-links="true" total-items="total_items" page="currentPage"  previous-text="&lsaquo;" next-text="&rsaquo;" first-text="Đầu" last-text="Cuối" on-select-page="setPage(page)" rotate="false" max-size="max_page"></pagination>
         </div>
       </section>
-      <section class="comment-editor">
+      <section class="comment-editor" ng-if="isAuthenticated();">
         <div class="comment-editor-left">
           <img class="post-avatar comment-editor-avatar comment-avatar" ng-src="{{profileDetail.url_avatar || 'assets/img/profile-avatar-big.png'}}"/>
         </div>

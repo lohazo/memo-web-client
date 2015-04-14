@@ -1,7 +1,12 @@
+/* global window */
+/* global FB */
 (function (angular) {
   'use strict';
 
-  function ListPostCtrl($scope, $location, ForumServices, allPosts, subscribers, followingPosts, searchPosts) {
+  function ListPostCtrl($scope, $location, AuthService, ForumServices, allPosts, subscribers, followingPosts,
+    searchPosts) {
+
+    $scope.isAuthenticated = AuthService.isAuthenticated;
 
     function convertToViewData(data) {
       var output = angular.copy(data);
@@ -29,20 +34,24 @@
       title: 'Tất cả',
       data: $scope.allPosts,
       active: true
-    }, {
-      title: 'Đang theo dõi',
-      data: $scope.followingPosts,
-      active: false
     }];
+
+    if ($scope.isAuthenticated()) {
+      $scope.tabs.push({
+        title: 'Đang theo dõi',
+        data: $scope.followingPosts,
+        active: false
+      });
+    }
 
     if ($location.search().keywords) {
       $scope.searchPosts = convertToViewData(searchPosts.data);
       $scope.tabs[0].active = false;
-      $scope.tabs[2] = {
+      $scope.tabs.push({
         title: 'Kết quả tìm kiếm',
         data: $scope.searchPosts,
         active: true
-      };
+      });
     }
 
     $scope.postSearch = {
@@ -50,21 +59,23 @@
     };
 
     $scope.voteUpPost = function (post) {
-      if (post.is_vote_up) {
-        post.up_vote_count = post.up_vote_count - 1;
-      } else {
-        post.up_vote_count = post.up_vote_count + 1;
-        if (post.is_vote_down) {
-          post.down_vote_count = post.down_vote_count - 1;
-          post.is_vote_down = false;
+      if ($scope.isAuthenticated()) {
+        if (post.is_vote_up) {
+          post.up_vote_count = post.up_vote_count - 1;
+        } else {
+          post.up_vote_count = post.up_vote_count + 1;
+          if (post.is_vote_down) {
+            post.down_vote_count = post.down_vote_count - 1;
+            post.is_vote_down = false;
+          }
         }
+        post.is_vote_up = !post.is_vote_up;
+        ForumServices.votePost({
+          id: post._id,
+          type: 'upvote',
+          vote: post.is_vote_up
+        });
       }
-      post.is_vote_up = !post.is_vote_up;
-      ForumServices.votePost({
-        id: post._id,
-        type: 'upvote',
-        vote: post.is_vote_up
-      });
     };
 
     $scope.followStickyPost = function (post) {
@@ -134,7 +145,7 @@
     };
   }
 
-  function CreatePostCtrl($scope, ForumServices, $location, subscribers) {
+  function CreatePostCtrl($scope, AuthService, ForumServices, $location, subscribers) {
     $scope.data = {
       title: '',
       content: '',
@@ -176,7 +187,7 @@
       }
 
       ForumServices.createPost($scope.data).success(function (data) {
-        $location.url('/forum/post/' + data._id);
+        $location.url('/forum/post/' + data.slug);
       });
     };
 
@@ -189,8 +200,10 @@
     $scope.getListSubscription();
   }
 
-  function PostDetailCtrl($scope, $sce, ForumServices, $location, Post, subscribers) {
+  function PostDetailCtrl($scope, AuthService, $sce, ForumServices, $location, Post, subscribers) {
+    $scope.isAuthenticated = AuthService.isAuthenticated;
     $scope.post = Post.data;
+    var description = $scope.post.content.split('.')[0];
     $scope.post.created_time = Math.round((new Date('' + $scope.post.created_at)).getTime() / 1000);
     $scope.post.content = $sce.trustAsHtml($scope.post.content);
 
@@ -258,18 +271,21 @@
     };
 
     $scope.followPost = function () {
+      if (!$scope.isAuthenticated()) return;
       ForumServices.followPost($scope.post).success(function () {
         $scope.post.follow = true;
       });
     };
 
     $scope.unfollowPost = function () {
+      if (!$scope.isAuthenticated()) return;
       ForumServices.unFollowPost($scope.post).success(function () {
         $scope.post.follow = false;
       });
     };
 
     $scope.voteUpPost = function (post) {
+      if (!$scope.isAuthenticated()) return;
       if (post.is_vote_up) {
         post.up_vote_count = post.up_vote_count - 1;
       } else {
@@ -288,6 +304,7 @@
     };
 
     $scope.voteDownPost = function (post) {
+      if (!$scope.isAuthenticated()) return;
       if (post.is_vote_down) {
         post.down_vote_count = post.down_vote_count - 1;
       } else {
@@ -306,6 +323,7 @@
     };
 
     $scope.createComment = function () {
+      if (!$scope.isAuthenticated()) return;
       if (!$scope.isSending && $scope.data.content != '') {
         ForumServices.creatComment($scope.data).success(function (data) {
           $scope.post.comments.push(data);
@@ -320,6 +338,7 @@
      * @comment: comment duoc vote
      */
     $scope.voteUpComment = function (comment) {
+      if (!$scope.isAuthenticated()) return;
       if (comment.is_vote_up) {
         comment.up_vote_count = comment.up_vote_count - 1;
       } else {
@@ -338,6 +357,7 @@
     };
 
     $scope.voteDownComment = function (comment) {
+      if (!$scope.isAuthenticated()) return;
       if (comment.is_vote_down) {
         comment.down_vote_count = comment.down_vote_count - 1;
       } else {
@@ -356,21 +376,34 @@
     };
 
     $scope.reply = function (comment) {
+      if (!$scope.isAuthenticated()) return;
+
       ForumServices.listReply({
         id: comment._id
       }).success(function (data) {
         $scope.replies = data.comments;
       });
     };
+
+    $scope.sharePost = function () {
+      FB.ui({
+        method: 'feed',
+        name: $scope.post.title,
+        description: $scope.post.description,
+        link: $location.host() + '/forum/post/' + $scope.post.slug
+      });
+    };
   }
 
   angular.module('forum.controllers', ['forum.services'])
-    .controller('ListPostCtrl', ['$scope', '$location', 'ForumServices', 'allPosts', 'subscribers', 'followingPosts',
-      'searchPosts',
-      ListPostCtrl
+    .controller('ListPostCtrl', ['$scope', '$location', 'AuthService', 'ForumServices', 'allPosts', 'subscribers',
+      'followingPosts', 'searchPosts', ListPostCtrl
     ])
-    .controller('CreatePostCtrl', ['$scope', 'ForumServices', '$location', 'subscribers', CreatePostCtrl])
-    .controller('PostDetailCtrl', ['$scope', '$sce', 'ForumServices', '$location', 'Post', 'subscribers',
+    .controller('CreatePostCtrl', ['$scope', 'AuthService', 'ForumServices', '$location', 'subscribers',
+      CreatePostCtrl
+    ])
+    .controller('PostDetailCtrl', ['$scope', 'AuthService', '$sce', 'ForumServices', '$location', 'Post',
+      'subscribers',
       PostDetailCtrl
     ]);
 }(window.angular));

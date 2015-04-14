@@ -11,6 +11,7 @@
   <meta name="viewport" content="width=device-width" />
   <meta name="fragment" content="!" />
   <meta name="google-site-verification" content="TNPEa8Au-b4DQ535KLkcq2mN_Tjo-qKVIju0Z1ixffs" />
+  <meta name="google-site-verification" content="CgUW75jjIfXR841f1ibC86r03GJ95mLLmWqOb2JNL7g" />
   <meta property="al:ios:url" content="topicamemo://facebook/applinks" />
   <meta property="al:ios:app_store_id" content="932238745" />
   <meta property="al:ios:app_name" content="TOPICA Memo" />
@@ -35,7 +36,7 @@
   <link rel="stylesheet" href="app.css"/>
   <script src="vendors/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body ng-class="{landingpage: !auth.loggedIn}" ng-controller="AppCtrl" ng-keydown="keydown(event=$event)">
+<body ng-class="{landingpage: (!auth.loggedIn && (currentPath.indexOf('/forum') < 0))}" ng-controller="AppCtrl" ng-keydown="keydown(event=$event)">
   <div id="fb-root"></div>
   <!-- Google Tag Manager -->
   <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N6X84R"
@@ -47,8 +48,8 @@
   })(window,document,'script','dataLayer','GTM-N6X84R');</script>
   <!-- End Google Tag Manager -->
 
-  <header ng-if="auth.loggedIn || auth.trial" app-header></header>
-  <header ng-if="!auth.loggedIn" class="fixed contain-to-grid" landing-header></header>
+  <header ng-if="!auth.loggedIn && (currentPath.indexOf('/forum') < 0)" class="fixed contain-to-grid" landing-header></header>
+  <header ng-if="auth.loggedIn || (currentPath.indexOf('/forum') >= 0)" class="fixed contain-to-grid" app-header></header>
   <div ng-view></div>
   <footer app-footer></footer>
 

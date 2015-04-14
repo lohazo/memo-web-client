@@ -19,7 +19,7 @@
       $localStorage.auth = $scope.auth;
 
       $timeout(function () {
-        $window.location.href = '/';
+        $window.location.reload();
       }, 250);
     }
 
@@ -36,6 +36,9 @@
 
     $scope.$on('event:auth-loginConfirmed', loginConfirmed);
     $scope.$on('event:auth-logoutConfirmed', logoutConfirmed);
+    $scope.$on('$routeChangeSuccess', function (e, next) {
+      $scope.currentPath = $location.path();
+    });
 
     $scope.chartOptions = {
       ///Boolean - Whether grid lines are shown across the chart

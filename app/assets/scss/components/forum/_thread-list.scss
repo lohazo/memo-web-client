@@ -14,23 +14,26 @@
       padding-bottom: 0;
       margin-bottom: 20px;
       .posts-header {
+        padding-top: 10px;
         @include grid-row;
         .left {
-          float: left;
-          margin-top: 19px;
+          .title {
+            margin-top: 15px;
+          }
         }
         .right {
-          float: right;
           a.button {
-            padding: 10px 25px;
-            min-width: 155px;
-            border: 2px solid $gold;
-            color: $primary-color;
-            font-size: 1rem;
-            font-weight: bold;
-            background-color: $white;
-            &:hover {
-              background-color: $gold;
+            &.gold {
+              padding: 10px 25px;
+              min-width: 155px;
+              border: 2px solid $gold;
+              color: $primary-color;
+              font-size: 1rem;
+              font-weight: bold;
+              background-color: $white;
+              &:hover {
+                background-color: $gold;
+              }
             }
           }
         }
@@ -177,7 +180,7 @@
         border-radius: 5px;
         color: #CCC;
         height: 36px;
-        padding-left:10px;
+        padding-left: 10px;
         margin-bottom: 0px;
       }
       .button {
