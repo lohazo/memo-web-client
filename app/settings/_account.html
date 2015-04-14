@@ -67,6 +67,7 @@
               <div class="large-5 columns img-avatar">Hình ảnh hồ sơ</div>
               <div class="large-11 columns">
                 <img ng-src="{{user.url_avatar || 'assets/img/profile-avatar-big.png'}}" style="width:85px;height:85px;border-radius:50%;" />
+                <input class="change-avatar" ng-model="imageSource" type="file" onchange="angular.element(this).scope().changeAvatar(this)"></input>
               </div>
             </div><!--
             <div class="row text-center">

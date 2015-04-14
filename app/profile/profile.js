@@ -80,20 +80,6 @@
     $scope.profileDetail = Profile.detail;
     $scope.leaderboardData = [];
 
-    // Change Avatar
-    $scope.imageSource = "";
-
-    $scope.fileNameChaged = function(element) { 
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $scope.$apply(function() {
-          $scope.profileDetail.url_avatar = e.target.result;
-        });
-      }
-      reader.readAsDataURL(element.files[0]);
-    };
-    // 
-
     var ownedCourses = $scope.profileDetail.owned_courses;
     $scope.ownedCourses = [];
 
