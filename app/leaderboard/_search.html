@@ -1,4 +1,4 @@
-<h4>Tìm kiếm</h4>
+<h4 translate="TEXT_SEARCH_FRIEND"></h4>
 <div class="row">
   <div class="large-16 columns">
     <input type="text" class="search-box" ng-model="search.keywords" placeholder="Tên hoặc email" />
@@ -6,7 +6,7 @@
 </div>
 <div class="row">
   <div class="large-16 columns">
-    <a href="" class="large-16 large memo-button search-frid" ng-click="searchMemoFriends()">Tìm kiếm</a>
+    <a href="" class="large-16 large memo-button search-frid" ng-click="searchMemoFriends()" translate="BTN_SEARCH_FRIEND"></a>
   </div>
 </div>
 <div class="row friend-list">
@@ -20,8 +20,8 @@
           </div>
           <div class="large-7 columns nickname"><a ng-href="/profile/{{user._id}}">{{user.username}}</a></div>
           <div class="large-5 columns buttons">
-            <a ng-if="!user.is_following"class="large-16 large secondary memo-button follow btn-friend" ng-click="follow(user._id)">Thêm</a>
-            <a ng-if="user.is_following" class="large-16 large memo-button btn-friend" ng-click="unfollow(user._id)">Bạn bè</a>
+            <a ng-if="!user.is_following"class="large-16 large secondary memo-button follow btn-friend" ng-click="follow(user._id)" translate="TEXT_FOLLOW_FRIEND"></a>
+            <a ng-if="user.is_following" class="large-16 large memo-button btn-friend" ng-click="unfollow(user._id)" translate="TEXT_UNFOLLOW_FRIEND"></a>
           </div>
         </div>
       </div>
@@ -29,6 +29,6 @@
 </div>
 <div class="row btn-back-leaderboard">
   <div class="large-16 columns">
-    <a href="" class="large-16 secondary show-leaderboard memo-button" ng-click="showTheLeaderboard()">Trở về</a>
+    <a href="" class="large-16 secondary show-leaderboard memo-button" ng-click="showTheLeaderboard()" translate="BTN_BACK"></a>
   </div>
 </div>
