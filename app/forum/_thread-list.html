@@ -61,7 +61,7 @@
             </li>
           </ul>
           <div class="pagination-centered">
-          <pagination ng-if="tab.data.total_page > 0" page="tab.data.current_page" total-items="tab.data.total_page * 10" on-select-page="setPage(page)"></pagination>
+          <pagination ng-if="tab.data.total_page > 0" page="tab.data.current_page" total-items="tab.data.total_page * 10" max-size="max_page" rotate="false" on-select-page="setPage(page)"></pagination>
         </div>
         </tab>
         </tabset>

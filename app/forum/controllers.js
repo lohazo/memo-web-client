@@ -5,6 +5,7 @@
 
   function ListPostCtrl($scope, $location, AuthService, ForumServices, allPosts, subscribers, followingPosts,
     searchPosts) {
+    $scope.max_page = 5;
 
     $scope.isAuthenticated = AuthService.isAuthenticated;
 
