@@ -112,6 +112,13 @@
       LABEL_CHECK_BOX_2: 'Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi',
       LABEL_CHECK_BOX_3: 'Âm thanh không chính xác',
       
+
+      TEXT_MAX_SKILL_CONTENT: 'Bạn đã học hết bảng kỹ năng tiếng Anh rồi,<br> nhưng đừng quên phải luôn luyện tập nhé!',
+      TEXT_MAX_SKILL_TITLE: 'Chúc mừng bạn đã phá đảo',
+      TEXT_CONFIRM_ANSWER_PROGRESS_QUIZ: 'Đã gửi câu trả lời:<span class="lighter" style="display:block;font-weight:lighter;font-size: 22px;">Lựa chọn "Tiếp tục" để chuyển sang câu hỏi kế tiếp</span>',
+      TEXT_QUESTION_NO: 'Câu hỏi số:',
+      TEXT_FINISH_PROGRESS_QUIZ_CONTENT: 'Bạn hoàn toàn có thể làm lại Bài kiểm tra này<br />bằng cách truy cập vào <a ng-href="/plaza">Plaza</a> nhé!',
+      TEXT_POINT: 'Điểm',
       TEXT_WEAKEST_WORD_HOOK: 'Cố giữ những thanh hiển thị độ mạnh luôn đầy vì qua thời gian các thanh sẽ giảm dần khi quên từ vựng',
       TEXT_AND: 'và',
       TEXT_TO_USE_MEMO_COIN: 'Sử dụng Memo Coin để mua những vật phẩm từ',
@@ -192,6 +199,7 @@
       TEXT_NO_NOTIFICATION: 'Bạn không có thông báo nào',
       TEXT_SHORTCUT_KEYBOARD_TITLE: 'Phím tắt bàn phím trong quá trình làm bài',
       TEXT_SHORTCUT_CHOOSE_ANSWER: 'Chọn một hoặc nhiều câu trả lời',
+      TEXT_SHORTCUT_ENTER_KEYBOARD: 'Bạn có thể ấn vào phím Enter để trả lời câu hỏi!',
       TEXT_SHORTCUT_SUBMIT_ANSWER: 'Nhập đáp án',
       TEXT_PROFILE_SETTING: 'Cài đặt tài khoản',
       TEXT_USER_NAME: 'Tên đăng nhập',

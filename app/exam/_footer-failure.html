@@ -5,7 +5,7 @@
         <h3 class="icon-close"></h3>
       </div>
       <div class="small-14 columns">
-       <h4 class="result">Đáp án đúng</h4>
+       <h4 class="result" translate="TEXT_CORRECT_ANSWER"></h4>
      </div>
    </div>
    <div class="row">
@@ -17,11 +17,11 @@
     <div class="small-14 columns">
       <div class="row">
         <div class="small-5 columns" style="padding-left: 0;">
-          <a ng-href="" memo-dropdown="#report-dropdown" class="small-16 memo-button report">Báo lỗi</a>
+          <a ng-href="" memo-dropdown="#report-dropdown" class="small-16 memo-button report">{{'BTN_REPORT_BUG' | translate}}</a>
           <div id="report-dropdown" class="f-dropdown" report-dropdown show-on-click="true" scroll-to-focus="true"></div>
         </div>
         <div class="small-6 columns">
-          <a href="" class="small-14 memo-button discussion" ng-click="discussion()">Thảo luận</a>
+          <a href="" class="small-14 memo-button discussion" ng-click="discussion()">{{'BTN_DICUSSION' | translate}}</a>
         </div>
         <div class="small-4 columns"></div>
       </div>
@@ -29,9 +29,9 @@
   </div>
 </div>
 <div class="small-4 columns button-replay">
-  <a class="right small-10 memo-button continue replay" ng-click="replay()">Làm lại</a>
+  <a class="right small-10 memo-button continue replay" ng-click="replay()" translate="BTN_REPLAY_EXAM"></a>
 </div>
 <div class="small-4 columns button-back">
-  <a class="right small-12 memo-button continue back-home" ng-click="quit(true, '/')">Trở về trang chủ</a>
+  <a class="right small-12 memo-button continue back-home" ng-click="quit(true, '/')" translate="BTN_GOTO_HOME"></a>
 </div>
 </div>
