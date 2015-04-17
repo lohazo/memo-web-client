@@ -7,14 +7,24 @@
     $routeProvider.when('/', {
       templateUrl: '_index.html'
     });
+
+    $routeProvider.when('/authenticate', {
+      resolve: ['$route', '$window', '$localStorage', function ($route, $window, $localStorage) {
+        var authToken = $route.current.params.auth_token;
+        $localStorage.auth.loggedIn = true;
+        $localStorage.auth.user = {
+          auth_token: authToken
+        };
+        $window.location.href = '/';
+      }]
+    });
+
     $routeProvider.otherwise({
       redirectTo: '/'
     });
 
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.interceptors.push('HttpInterceptor');
-
-    // $logProvider.debugEnabled(false);
 
     FacebookProvider.init({
       appId: '856714854352716',
@@ -304,9 +314,11 @@
 
     var notRequireLoginPaths = {
       '/': true,
+      '/authenticate': true,
       '/download': true,
       '/forum': true
     };
+
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
       if ($localStorage.auth) {
         if (!$localStorage.auth.loggedIn && notRequireLoginPaths[next.originPath]) {
