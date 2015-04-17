@@ -8,6 +8,28 @@
       width: 100% !important;
       border: 0;
     }
+    .job-detail-panel {
+      padding: 20px;
+      border-radius: 10px;
+      @include grid-row;
+      .job-detail-header {
+        .right {
+          margin-right: 10px;
+        }
+        .left {
+          margin-left: 10px;
+          margin-top: 10px;
+        }
+        .return-button {
+          color: #333;
+          font-size: 1rem;
+          font-weight: bold;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
   }
   .main-right {
     @include grid-column($columns: 4);

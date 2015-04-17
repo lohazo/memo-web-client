@@ -124,6 +124,7 @@
       LABEL_CHECK_BOX_2: 'Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi',
       LABEL_CHECK_BOX_3: 'Âm thanh không chính xác',
       
+      TEXT_LIST_JOB_TITLE: 'Danh sách việc làm',
       TEXT_HOT_LINE_TO_APPLY_JOB: 'memo@job.edu.vn',
       TEXT_APPLE_BY_HOT_LINE: 'Hoặc gọi tới HOT LINE',
       TEXT_EMAIL_TO_APPLY_JOB: 'memo@job.edu.vn',
