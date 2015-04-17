@@ -49,6 +49,7 @@
       BTN_HOME: 'Trang chủ',
       BTN_FORUM: 'Thảo luận',
       BTN_WORDS: 'Từ vựng',
+      BTN_JOB: 'Cơ hội việc làm',
       BTN_PLAZA: 'Memo Plaza',
       BTN_CHECKPOINT: 'Kiểm tra rút ngắn {{value}} kỹ năng',
       BTN_FINISH_CHECKPOINT: 'Bạn đã vượt qua checkpoint này',
@@ -311,7 +312,7 @@
     'profile', 'skill', 'report', 'exam',
     'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
     'words', 'referral', 'question',
-    'notification', 'download', 'adsense', 'forum', 'memo.dropdown', 'weakestWord'
+    'notification', 'download', 'adsense', 'forum', 'job', 'memo.dropdown', 'weakestWord'
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
     'GooglePlusProvider', '$logProvider', '$translateProvider',
     AppConfig
