@@ -122,7 +122,14 @@
       LABEL_CHECK_BOX_2: 'Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi',
       LABEL_CHECK_BOX_3: 'Âm thanh không chính xác',
       
-
+      TEXT_EXAM: 'Ví dụ',
+      TEXT_TRANSLATE_MEANING: 'Dịch nghĩa',
+      TEXT_STRENGTH_LEVEL_4: 'Vẫn nhớ tốt',
+      TEXT_STRENGTH_LEVEL_3: 'Nhớ khá tốt',
+      TEXT_STRENGTH_LEVEL_2: 'Cần ôn tập',
+      TEXT_STRENGTH_LEVEL_1: 'Quên rồi!',
+      TEXT_STRENGTH_GAP: 'Độ nhớ',
+      TEXT_PRE_EXCERCIES: 'Lần ôn tập cuối',
       TEXT_MAX_SKILL_CONTENT: 'Bạn đã học hết bảng kỹ năng tiếng Anh rồi,<br> nhưng đừng quên phải luôn luyện tập nhé!',
       TEXT_MAX_SKILL_TITLE: 'Chúc mừng bạn đã phá đảo',
       TEXT_CONFIRM_ANSWER_PROGRESS_QUIZ: 'Đã gửi câu trả lời:<span class="lighter" style="display:block;font-weight:lighter;font-size: 22px;">Lựa chọn "Tiếp tục" để chuyển sang câu hỏi kế tiếp</span>',

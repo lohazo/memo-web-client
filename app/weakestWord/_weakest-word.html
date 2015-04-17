@@ -8,10 +8,10 @@
       <table class="weakest-words" cellspacing="0" cellpadding="0" border="0">
         <thead>
           <tr>
-            <th><a ng-click="sortWeakestWord(sort_by = 'text')">Từ vựng</a></th>
-            <th><a ng-click="sortWeakestWord(sort_by = 'skills')">Kĩ năng</a></th>
-            <th><a ng-click="sortWeakestWord(sort_by = 'pre_excercies')">Lần ôn tập cuối</a></th>
-            <th><a ng-click="sortWeakestWord(sort_by = 'strength_gap')">Độ nhớ</a></th>
+            <th><a ng-click="sortWeakestWord(sort_by = 'text')" translate="BTN_WORDS"></a></th>
+            <th><a ng-click="sortWeakestWord(sort_by = 'skills')" translate="TEXT_SKILL"></a></th>
+            <th><a ng-click="sortWeakestWord(sort_by = 'pre_excercies')" translate="TEXT_PRE_EXCERCIES"></a></th>
+            <th><a ng-click="sortWeakestWord(sort_by = 'strength_gap')" translate="TEXT_STRENGTH_GAP"></a></th>
           </tr>
         </thead>
         <tbody>
@@ -40,14 +40,14 @@
     <h4 class="title">Spaced repetition</h4>
     <p>Memo's algorithms figure out when you should practice words to get them into your long-term memory. </p>
     <ul class="level-base-word">
-      <li><img src="assets/img/weakest-word-icon/strength-level-04.png" alt="">Vấn nhớ tốt</li>
-      <li><img src="assets/img/weakest-word-icon/strength-level-03.png" alt="">Nhớ khá tốt</li>
-      <li><img src="assets/img/weakest-word-icon/strength-level-02.png" alt="">Cần ôn tập</li>
-      <li><img src="assets/img/weakest-word-icon/strength-level-01.png" alt="">Quên rồi!</li>
+      <li><img src="assets/img/weakest-word-icon/strength-level-04.png" alt="" translate="TEXT_STRENGTH_LEVEL_4"></li>
+      <li><img src="assets/img/weakest-word-icon/strength-level-03.png" alt="" translate="TEXT_STRENGTH_LEVEL_3"></li>
+      <li><img src="assets/img/weakest-word-icon/strength-level-02.png" alt="" translate="TEXT_STRENGTH_LEVEL_2"></li>
+      <li><img src="assets/img/weakest-word-icon/strength-level-01.png" alt="" translate="TEXT_STRENGTH_LEVEL_1"></li>
     </ul>
   </section>
   <section class="panel weakest-word-info-panel" ng-show="getDetail">
-    <a class="weakest-word-back" ng-click="backListWeakestWord()"><span style="font-size: 24px;">&lsaquo; </span>Quay lại</a>
+    <a class="weakest-word-back" ng-click="backListWeakestWord()"><span style="font-size: 24px;">&lsaquo; </span>{{'BTN_RETURN' | translate}}</a>
     <div class="content">
       <a class="speaker" ng-click="speaker.play()"></a>
       <span class="word" ng-bind="word_detail.text"></span>
@@ -55,22 +55,22 @@
     <div class="description">
       <div class="description-left">
         <div class="traslation">
-          <span class="title">Dịch nghĩa</span>
+          <span class="title" translate="TEXT_TRANSLATE_MEANING"></span>
           <span class="content" ng-bind="word_detail.definitions[0]"></span>
         </div>
         <div class="skill">
-          <span class="title">Kĩ năng</span>
+          <span class="title" translate="TEXT_SKILL"></span>
           <span class="content" ng-bind="word_detail.skills"></span>
         </div>
       </div>
       <div class="description-right">
         <div class="strengthen">
-          <p class="word-strength-gap" ng-class="{'level-1': word_detail.strength_gap == 1 , 'level-2' : word_detail.strength_gap == 2 , 'level-3' : word_detail.strength_gap == 3 , 'level-4' : word_detail.strength_gap == 4}"><span style="border-bottom: solid 1px #999">Độ nhớ</span></p>
+          <p class="word-strength-gap" ng-class="{'level-1': word_detail.strength_gap == 1 , 'level-2' : word_detail.strength_gap == 2 , 'level-3' : word_detail.strength_gap == 3 , 'level-4' : word_detail.strength_gap == 4}"><span style="border-bottom: solid 1px #999" translate="TEXT_STRENGTH_GAP"></span></p>
         </div>
       </div>
       <div class="description-bottom">
         <div class="example">
-          <span class="title">Ví dụ</span>
+          <span class="title" translate="TEXT_EXAM"></span>
           <span class="content"></span>
         </div>
       </div>
