@@ -7,7 +7,7 @@
     <ul class="noti-list">
       <li class="noti-item" ng-class="{'hide': notification.notifications.length > 0}">
         <div class="noti-item-inner" noti-id="{{noti._id}}">
-          <div class="noti-item-content">Bạn không có thông báo nào</div>
+          <div class="noti-item-content" translate="TEXT_NO_NOTIFICATION"></div>
         </div>
       </li>
       <li class="noti-item" ng-repeat="noti in notification.notifications" ng-switch="noti.type">

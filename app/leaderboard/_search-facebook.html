@@ -1,7 +1,7 @@
-<h4>Mời bạn Facebook</h4>
+<h4 translate="TEXT_SEARCH_FACEBOOK_FRIEND"></h4>
 <div class="row">
   <div class="large-16 columns">
-    <input type="text" ng-model="search.username" class="search-box" placeholder="Tìm bạn" />
+    <input type="text" ng-model="search.username" class="search-box" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_FACEBOOK_FRIEND' | translate}}" />
   </div>
 </div>
 <div class="row facebook-friend-list">
@@ -13,8 +13,8 @@
         </div>
         <div class="large-8 columns nickname"><a ng-href="/profile/{{user._id}}">{{user.username}}</a></div>
         <div class="large-5 columns buttons">
-          <a ng-if="!user.is_following"class="large-16 large secondary memo-button follow" ng-click="follow(user._id)">Thêm</a>
-          <a ng-if="user.is_following" class="large-16 large memo-button" ng-click="unfollow(user._id)">Bạn bè</a>
+          <a ng-if="!user.is_following"class="large-16 large secondary memo-button follow" ng-click="follow(user._id)" translate="TEXT_FOLLOW_FRIEND"></a>
+          <a ng-if="user.is_following" class="large-16 large memo-button" ng-click="unfollow(user._id)" translate="TEXT_UNFOLLOW_FRIEND"></a>
         </div>
       </div>
     </div>

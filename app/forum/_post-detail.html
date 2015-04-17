@@ -4,14 +4,14 @@
       <section class="post-info">
         <div class="post-info-header">
           <div class="left">
-            <a class="return-button" ng-href="/forum">&lsaquo; Danh sách các chủ đề </a>
+            <a class="return-button" ng-href="/forum">&lsaquo; {{'TEXT_LIST_POST_TITLE' | translate}} </a>
           </div>
           <div class="right" ng-if="!isAuthenticated();" ng-controller="LoginModalCtrl">
-            <a class="small radius button" ng-click="open()">Đăng nhập để theo dõi chủ đề</a>
+            <a class="small radius button" ng-click="open()" translate="BTN_LOGIN_TO_FOLLOW_POST"></a>
           </div>
           <div class="right" ng-if="isAuthenticated()">
-            <a class="small radius button follow-button" ng-if="post.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
-            <a class="small radius button follow-button" ng-if="post.follow == true" ng-click="unfollowPost()">Bỏ theo dõi</a>
+            <a class="small radius button follow-button" ng-if="post.follow == false" ng-click="followPost()" translate="TEXT_FOLLOW_POST"></a>
+            <a class="small radius button follow-button" ng-if="post.follow == true" ng-click="unfollowPost()" translate="TEXT_UNFOLLOW_POST"></a>
           </div>
         </div>
         <div class="post-info-inner">
@@ -35,7 +35,7 @@
                 <a class="vote-down normal left" ng-class="{'active': post.is_vote_down}" ng-click="voteDownPost(post)" ng-if="isAuthenticated()"></a>
                 <a class="tiny radius facebook button" ng-click="sharePost()" style="margin-bottom:0;margin-top:10px;">
                   <span class="icon-facebook-wrapper"><i style="background-image: url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y1/r/LVx-xkvaJ0b.png);background-size: auto;background-repeat: no-repeat;display: inline-block;height: 14px;width: 14px;  background-position: 0 -42px;margin: 5px 4px 0 5px;"></i></span>
-                  <span class="facebook-share-text">Chia sẻ</span>
+                  <span class="facebook-share-text" translate="TEXT_SHARE"></span>
                 </a>
               </div>
             </div>
@@ -44,7 +44,7 @@
         <section class="comment-info">
           <div class="comment-info-header">
             <div class="left">
-              <h4 class="title">Có <span ng-bind="post.total_comment"></span> bình luận</h4>
+              <h4 class="title">{{'TEXT_HAVE' | translate}} <span ng-bind="post.total_comment"></span> {{'TEXT_COMMENT' | translate}}</h4>
             </div>
           </div>
           <div class="comment-info-inner">
@@ -93,8 +93,8 @@
             <textarea class="text-area" rows="3" ng-model="data.content"></textarea>
           </div>
           <div class="comment-editor-toolbar">
-            <a class="small radius button send-button" ng-click="createComment()">Gửi</a>
-            <a class="small radius button cancel-button">Hủy</a>
+            <a class="small radius button send-button" ng-click="createComment()" translate="BTN_SEND"></a>
+            <a class="small radius button cancel-button" translate="BTN_CANCEL"></a>
           </div>
         </div>
       </section>
@@ -104,13 +104,13 @@
     <section class="panel search-panel">
       <div class="search-box">
         <div class="search-box-inner">
-            <input type="text" class="search-input" ng-model="postSearch.keywords" ng-keydown="search(event=$event)" placeholder="Tìm kiếm chủ đề" />
+            <input type="text" class="search-input" ng-model="postSearch.keywords" ng-keydown="search(event=$event)" placeholder="{{'TEXT_SEARCH_POST' | translate}}" />
             <a title="" class="small radius button search-button postfix" ng-click="searchWithButton()"></a>
         </div>
       </div>
     </section>
     <section class="panel channel-follow">
-      <h4 class="title">Kênh theo dõi</h4>
+      <h4 class="title" translate="TEXT_SUBSCRIPTIONS"></h4>
       <div class="course-language">
         <ul>
           <li ng-repeat="subscriber in subscribers.list_subscriptions">

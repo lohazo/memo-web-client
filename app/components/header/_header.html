@@ -12,10 +12,10 @@
       <!-- Left Nav Section -->
       <ul class="left menus" ng-if="auth.loggedIn">
         <li class="menu-item" ng-class="{'active': path == '/'}" style="width: 130px;">
-          <a href="/" target="_self">Trang chủ</a>
+          <a href="/" target="_self" translate="BTN_HOME"></a>
         </li>
         <li class="menu-item" ng-class="{'active': path.indexOf('/forum') >= 0}" style="width: 130px;">
-          <a href="/forum" target="_self">Thảo luận</a>
+          <a href="/forum" target="_self" translate="BTN_FORUM"></a>
         </li>
         <!-- <li class="menu-item" ng-class="{'active': path.indexOf('/weakestword') >= 0}" style="width: 130px;">
           <a href="/weakestword" target="_self">Từ vựng</a>
@@ -29,16 +29,16 @@
             <img src="assets/img/button-05.png" alt="" />
           </a>
           <ul id="dropdown-setting" class="f-dropdown" dropdown-align="right">
-            <li><a href="/profile" target="_self">Hồ sơ cá nhân</a></li>
-            <li><a href="/setting/account" target="_self">Cài đặt</a></li>
-            <li><a ng-click="showShortcutPopup()">Phím tắt bàn phím</a></li>
-            <li><a ng-click="logout()">Đăng xuất</a></li>
+            <li><a href="/profile" target="_self" translate="LABEL_USER_PROFILE"></a></li>
+            <li><a href="/setting/account" target="_self" translate="LABEL_SETTINGS"></a></li>
+            <li><a ng-click="showShortcutPopup()" translate="LABEL_KEYBOARD_SHORTCUT"></a></li>
+            <li><a ng-click="logout()" translate="LABEL_LOG_OUT"></a></li>
           </ul>
         </li>
       </ul>
       <ul class="right" ng-if="!auth.loggedIn" ng-controller="LoginModalCtrl">
         <li class="has-form">
-          <a class="reverse login button" ng-click="open()">Đăng nhập</a>
+          <a class="reverse login button" ng-click="open()" translate="BTN_LOGIN"></a>
         </li>
       </ul>
     </top-bar-section>

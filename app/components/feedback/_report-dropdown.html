@@ -2,12 +2,12 @@
   <input type="checkbox" ng-model="option.checked" id="{{option.id}}"/>
   <label for="{{option.id}}"><span class="box icon-checkmark"></span>
   <span ng-if="option.id != '5458e5524574682c92090000'" ng-bind="option.name"></span>
-  <textarea placeholder ="Mô tả vấn đề của bạn" ng-if="option.id == '5458e5524574682c92090000'" ng-model="option.text"></textarea>
+  <textarea placeholder ="{{'TEXT_PLACEHOLDER_FEEDBACK' | translate}}" ng-if="option.id == '5458e5524574682c92090000'" ng-model="option.text"></textarea>
   </label>
 </li>
 <li class="row unhoverable">
   <div class="small-8 columns right">
-    <a class="small-6 radius close button">Hủy</a>
-    <a class="small-6 radius send button" ng-click="send()">Gửi</a>
+    <a class="small-6 radius close button" translate="BTN_CANCEL"></a>
+    <a class="small-6 radius send button" ng-click="send()" translate="BTN_SEND"></a>
   </div>
 </li>

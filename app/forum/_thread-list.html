@@ -3,13 +3,13 @@
     <div class="panel posts-panel">
       <div class="posts-header">
         <div class="left">
-          <h4 class="title">Danh sách các chủ đề</h4>
+          <h4 class="title" translate="TEXT_LIST_POST_TITLE"></h4>
         </div>
         <div class="right" ng-if="!isAuthenticated();" ng-controller="LoginModalCtrl">
-          <a class="small radius button" ng-click="open()">Đăng nhập để tạo chủ đề</a>
+          <a class="small radius button" ng-click="open()" translate="BTN_LOGIN_TO_CREATE_POST"></a>
         </div>
         <div class="right" ng-if="isAuthenticated();">
-          <a ng-href="/forum/post/create" title="" class="small radius gold button">Tạo chủ đề mới</a>
+          <a ng-href="/forum/post/create" title="" class="small radius gold button" translate="BTN_CREATE_POST"></a>
         </div>
       </div>
       <div class="main-post">
@@ -20,7 +20,7 @@
             <li class="post sticky" ng-repeat="post in tab.data.sticky_posts">
               <div><img class="post-avatar" ng-src="{{post.user.url_avatar  || 'assets/img/profile-avatar-big.png'}}" /></div>
               <div class="post-content">
-                <p class="title" title=""><img tooltip-placement="top" tooltip="Những chủ đề nổi bật" ng-src="assets/img/Forum/sticky-posts-icon.png" /><a ng-href="/forum/post/{{post.slug}}" ng-bind="post.title"></a></p>
+                <p class="title" title=""><img tooltip-placement="top" tooltip="{{'TEXT_TOOLTIP_STICKY_POST' | translate}}" ng-src="assets/img/Forum/sticky-posts-icon.png" /><a ng-href="/forum/post/{{post.slug}}" ng-bind="post.title"></a></p>
                 <p class="post-detail">
                   <a ng-href="/profile/{{post.user._id}}" class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo" ng-href="/forum?filter={{post.base_course_id}}">{{post.course_name}}</a>
                 </p>
@@ -33,8 +33,8 @@
                   <img src="assets/img/Forum/comment-icon.png" alt="">
                 </div>
                 <div class="follow" ng-if="isAuthenticated()">
-                  <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followStickyPost(post)">Theo dõi</a>
-                  <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowStickyPost(post)">Đang theo dõi </a>
+                  <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followStickyPost(post)" translate="BTN_FOLLOW"></a>
+                  <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowStickyPost(post)" translate="BTN_UNFOLLOW"></a>
                 </div>
               </div>
             </li>
@@ -54,8 +54,8 @@
                   <img src="assets/img/Forum/comment-icon.png" alt="">
                 </div>
                 <div class="follow" ng-if="isAuthenticated()">
-                  <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followPost(post)">Theo dõi</a>
-                  <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowPost(post)">Đang theo dõi </a>
+                  <a class="small radius button follow-button" ng-if="post.is_followed == false" ng-click="followPost(post)" translate="BTN_FOLLOW"></a>
+                  <a class="small radius button follow-button followed" ng-if="post.is_followed == true" ng-click="unfollowPost(post)" translate="BTN_UNFOLLOW"></a>
                 </div>
               </div>
             </li>
@@ -75,7 +75,7 @@
     <span class="small radius button" ng-click="searchWithButton()"></span>
   </div>
   <div class="channel-follow">
-    <h4 class="title">Kênh theo dõi</h4>
+    <h4 class="title" translate="TEXT_SUBSCRIPTIONS"></h4>
     <div class="course-language">
       <ul>
         <li ng-repeat="subscriber in subscribers.list_subscriptions">
