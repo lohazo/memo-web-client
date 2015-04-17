@@ -1,0 +1,30 @@
+.job-main {
+	@include grid-row;
+  padding-top: 42px;
+  .main-left {
+    @include grid-column($columns: 12);
+    .panel {
+      @include panel($bg: $white);
+      width: 100% !important;
+      border: 0;
+    }
+  }
+  .main-right {
+  	@include grid-column($columns: 4);
+    .panel {
+      @include panel($bg: $white);
+      width: 100% !important;
+      border: 0;
+    }
+    .search-job-panel {
+      padding: 20px;
+      border-radius: 10px;
+      .search-job-title {
+        padding-top: 20px;
+        font-size: 24px;
+      }
+      .search-job-toolbar {
+      }
+    }
+  }
+}

@@ -98,6 +98,7 @@
       BTN_ADDED_FRIEND: 'Đã thêm vào danh sách bạn bè',
       BTN_SKIP_TUTORIAL: 'Bỏ qua hướng dẫn',
       BTN_RETURN: 'Quay lại',
+      BTN_SEARCH: 'Tìm kiếm',
      
       LABEL_REFERRAL_CODE: 'Nhập code từ bạn bè',
       LABEL_OWNER_MEMOCOIN: 'Bạn đang có',
@@ -123,6 +124,13 @@
       LABEL_CHECK_BOX_2: 'Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi',
       LABEL_CHECK_BOX_3: 'Âm thanh không chính xác',
       
+      TEXT_HOT_LINE_TO_APPLY_JOB: 'memo@job.edu.vn',
+      TEXT_APPLE_BY_HOT_LINE: 'Hoặc gọi tới HOT LINE',
+      TEXT_EMAIL_TO_APPLY_JOB: 'memo@job.edu.vn',
+      TEXT_APPLY_BY_EMAIL: 'Gửi email kèm CV của bạn tới',
+      TEXT_APPLY_JOB_TITLE: 'Bạn muốn ứng tuyển vị trí này ?',
+      TEXT_JOB_INFORMATION_TITLE: "Thông tin công việc",
+      TEXT_SEARCH_JOB: 'Tìm kiếm việc làm',
       TEXT_EXAM: 'Ví dụ',
       TEXT_TRANSLATE_MEANING: 'Dịch nghĩa',
       TEXT_STRENGTH_LEVEL_4: 'Vẫn nhớ tốt',
@@ -297,6 +305,10 @@
       TEXT_PLACEHOLDER_FEEDBACK: 'Mô tả vấn đề của bạn',
       TEXT_PLACEHOLDER_LISTEN_QUESTION: 'Nhập đáp án ...',
       TEXT_PLACEHOLDER_NAME_QUESTION: 'Đáp án ...',
+      TEXT_PLACEHOLDER_SEARCH_JOB: 'Nhập từ khóa',
+      TEXT_PLACEHOLDER_SEARCH_JOB_BY_WORK: 'Chọn ngành nghề',
+      TEXT_PLACEHOLDER_SEARCH_JOB_BY_SALARY: 'Chọn mức lương',
+      TEXT_PLACEHOLDER_SEARCH_JOB_BY_LOCATION: 'Chọn nơi làm việc',
     });
 
     $translateProvider.preferredLanguage('vi');

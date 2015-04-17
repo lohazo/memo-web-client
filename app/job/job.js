@@ -7,7 +7,7 @@
       templateUrl: 'job/_job-list.html',
     });
 
-    $routeProvider.when('/job/:id', {
+    $routeProvider.when('/job/detail', {
       templateUrl: 'job/_job-detail.html',
     });
   }

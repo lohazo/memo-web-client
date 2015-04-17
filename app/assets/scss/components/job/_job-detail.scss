@@ -1,0 +1,65 @@
+.job-detail-main {
+	@include grid-row;
+  padding-top: 42px;
+  .main-left {
+    @include grid-column($columns: 12);
+    .panel {
+      @include panel($bg: $white);
+      width: 100% !important;
+      border: 0;
+    }
+  }
+  .main-right {
+    @include grid-column($columns: 4);
+    .panel {
+      @include panel($bg: $white);
+      width: 100% !important;
+      border: 0;
+    }
+    .job-info-panel { 
+      padding: 20px;
+      border-radius: 10px;
+      .job-info-title {
+        padding-top: 20px;
+        font-size: 24px;
+      }
+      .job-info-content {
+        font-size: 16px;
+        padding-top: 20px;
+        border-bottom: 1px solid $iron;
+        .by_time {
+          padding-bottom: 20px;
+        }
+        .by_location {
+          padding-bottom: 20px;
+        }
+        .by_phone {
+          padding-bottom: 20px;
+        }
+      }
+      .job-apply-content {
+        font-size: 16px;
+        text-align: center;
+        .title {
+
+        }
+        .apply-for-email {
+        	.title {
+
+        	}
+          .email {
+            color: $primary-color;
+          }
+        }
+        .apply-for-hot-line {
+        	.title {
+
+        	}
+          .hot-line {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}
