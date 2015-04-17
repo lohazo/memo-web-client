@@ -1,20 +1,29 @@
 (function (angular) {
   'use strict';
 
-  function AppConfig($routeProvider, $locationProvider,
-    $httpProvider, FacebookProvider, GooglePlusProvider, $logProvider) {
+  function AppConfig($routeProvider, $locationProvider, $httpProvider, FacebookProvider, GooglePlusProvider) {
     $locationProvider.html5Mode(true).hashPrefix('!');
     $routeProvider.when('/', {
       templateUrl: '_index.html'
     });
+
+    $routeProvider.when('/authenticate', {
+      resolve: ['$route', '$window', '$localStorage', function ($route, $window, $localStorage) {
+        var authToken = $route.current.params.auth_token;
+        $localStorage.auth.loggedIn = true;
+        $localStorage.auth.user = {
+          auth_token: authToken
+        };
+        $window.location.href = '/';
+      }]
+    });
+
     $routeProvider.otherwise({
       redirectTo: '/'
     });
 
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.interceptors.push('HttpInterceptor');
-
-    // $logProvider.debugEnabled(false);
 
     FacebookProvider.init({
       appId: '856714854352716',
@@ -42,17 +51,18 @@
     'words', 'referral', 'question',
     'notification', 'download', 'adsense', 'forum', 'memo.dropdown', 'weakestWord'
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
-    'GooglePlusProvider', '$logProvider',
-    AppConfig
+    'GooglePlusProvider', AppConfig
   ]).run(['$rootScope', '$location', '$localStorage', 'amMoment', function ($rootScope, $location, $localStorage,
     amMoment) {
     amMoment.changeLocale('vi');
 
     var notRequireLoginPaths = {
       '/': true,
+      '/authenticate': true,
       '/download': true,
       '/forum': true
     };
+
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
       if ($localStorage.auth) {
         if (!$localStorage.auth.loggedIn && notRequireLoginPaths[next.originPath]) {

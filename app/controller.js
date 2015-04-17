@@ -19,7 +19,11 @@
       $localStorage.auth = $scope.auth;
 
       $timeout(function () {
-        $window.location.reload();
+        if ($location.host().match(/^memo./g)) {
+          $window.location.reload();
+        } else {
+          $window.location = 'http://memo.edu.vn/authenticate?auth_token=' + $scope.auth.user.auth_token;
+        }
       }, 250);
     }
 
