@@ -18,13 +18,9 @@
       };
       $localStorage.auth = $scope.auth;
 
-      // $timeout(function () {
       if (!$location.host().match(/(^memo.|.net.vn$|.local$)/g)) {
-        //   $window.location.reload();
-        // } else {
         $window.location = 'http://memo.edu.vn/authenticate?auth_token=' + $scope.auth.user.auth_token;
       }
-      // }, 250);
     }
 
     function logoutConfirmed(e, data) {
