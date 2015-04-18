@@ -11,6 +11,11 @@
     }
     $scope.auth = $localStorage.auth;
 
+    if ($scope.auth.loggedIn && !$location.host().match(/(^memo.|.net.vn$|.local$)/g)) {
+      $window.location = 'http://memo.edu.vn/';
+      return;
+    }
+
     function loginConfirmed(e, data) {
       $scope.auth = {
         loggedIn: true,
@@ -20,6 +25,7 @@
 
       if (!$location.host().match(/(^memo.|.net.vn$|.local$)/g)) {
         $window.location = 'http://memo.edu.vn/authenticate?auth_token=' + $scope.auth.user.auth_token;
+        return;
       }
     }
 
