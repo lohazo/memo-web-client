@@ -3,12 +3,12 @@
 
   function HomeCtrl($scope) {}
 
-  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting,  MemoTracker, Message,
+  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, MemoTracker, Message,
     ReferralService, Leaderboard) {
     $scope.leaderboardData = [];
 
     $scope.shareMaxSkill = function () {
-      AppSetting.getMaxSkillFacebookContent().then(function (response) {
+      return AppSetting.getMaxSkillFacebookContent().then(function (response) {
         var data = response.data;
         data.method = 'feed';
 
@@ -17,7 +17,13 @@
     };
 
     function getProfile() {
-      $scope.profile = Profile.user;
+      return Profile.getProfile().then(function () {
+        $scope.profile = Profile.getUser();
+        if ($scope.auth.loggedIn && !$location.host().match(/(^memo.|.net.vn$|.local$)/g)) {
+          $window.location = 'http://memo.edu.vn/';
+          return;
+        }
+      });
     }
 
     function buildTree() {
@@ -31,7 +37,7 @@
     }
 
     function getProfileDetail() {
-      Profile.getProfileDetail()
+      return Profile.getProfileDetail()
         .then(function () {
           $scope.profileDetail = Profile.detail;
           $scope.expChart = {
@@ -244,7 +250,8 @@
         templateUrl: 'plaza/_buy-guide-popup.html',
         controller: ['$scope', '$sce', '$modalInstance', function ($scope, $sce, $modalInstance) {
           $scope.trustedResource = $sce.trustAsResourceUrl(API +
-            '/plaza_items/claim_gift_1m?platform=web&&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' + Profile.auth_token + 
+            '/plaza_items/claim_gift_1m?platform=web&&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' +
+            Profile.auth_token +
             '&verification_code=' + Profile.verification_code);
         }],
         windowClass: 'buy-guide-popup-modal',
@@ -257,8 +264,8 @@
       '//staging.memo.edu.vn/native/web?disable_back_button=true');
   }
 
-  function NativeCtrl($scope, $modal){
-    $scope.openNativeModal = function(){
+  function NativeCtrl($scope, $modal) {
+    $scope.openNativeModal = function () {
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
         controller: 'SecretGiftModalCtrl',
