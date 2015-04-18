@@ -3,8 +3,8 @@
 
   function HomeCtrl($scope) {}
 
-  function HomeMainCtrl($scope, $rootScope, $location, Profile, TreeBuilder, AppSetting, MemoTracker, Message,
-    ReferralService, Leaderboard) {
+  function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
+    Message, ReferralService, Leaderboard) {
     $scope.leaderboardData = [];
 
     $scope.shareMaxSkill = function () {
@@ -276,7 +276,7 @@
 
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
-    .controller('HomeMainCtrl', ['$scope', '$rootScope', '$location', 'Profile', 'TreeBuilder',
+    .controller('HomeMainCtrl', ['$scope', '$rootScope', '$window', '$location', 'Profile', 'TreeBuilder',
       'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', HomeMainCtrl
     ])
     .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
