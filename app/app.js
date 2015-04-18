@@ -81,7 +81,9 @@
           trial: false
         }
         $rootScope.$broadcast('event:auth-logoutConfirmed');
-        alert('Bạn hoặc ai đó đã đăng nhập vào tài khoản này trên thiết bị khác. Vui lòng đăng nhập lại!');
+        if ($location.host().match(/(^memo.|.net.vn$|.local$)/g)) {
+          alert('Bạn hoặc ai đó đã đăng nhập vào tài khoản này trên thiết bị khác. Vui lòng đăng nhập lại!');
+        }
       }
     });
   }]);
