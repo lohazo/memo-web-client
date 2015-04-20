@@ -63,13 +63,13 @@
       active: true
     }];
 
-    if ($location.search().keywords) {
-      $scope.tabs.push({
-        title: 'Kết quả tìm kiếm',
-        data: $scope.searchJobs,
-        active: true
-      });
-    }
+    // if ($location.search().keywords) {
+    //   $scope.tabs.push({
+    //     title: 'Kết quả tìm kiếm',
+    //     data: $scope.searchJobs,
+    //     active: true
+    //   });
+    // }
 
     $scope.jobSearch = {
       keywords: ''
