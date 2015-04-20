@@ -40,15 +40,11 @@
       title: 'Tất cả',
       data: $scope.allJobs,
       active: true
-    }];
-
-    $scope.tabs = [{
+    },{
       title: 'Mới nhất',
       data: $scope.newJobs,
       active: true
-    }];
-
-    $scope.tabs = [{
+    },{
       title: 'HOT',
       data: $scope.hotJobs,
       active: true
@@ -65,9 +61,6 @@
     $scope.jobSearch = {
       keywords: ''
     };
-
-
-
   }
 
   function JobDetailCtrl ($scope) {
