@@ -1,28 +1,56 @@
 <section class="job-main">
   <section class="main-left">
     <div class="panel">
+
+      <div class="tabs" ng-controller="Tabs">
+        <tabset vertical="false" type="navType">
+        <tab heading="Tất cả">
+            <ul class="jobs">
+              <li class="job">
+                <a href="" title="" class="title">Automation Engineer</a>
+                <div class="description">
+                  <p>An engineer excited to help TOPICA Memo develop faster while delivering high quality products.</p>
+                </div>
+                <div class="content">
+                  <p>Thưởng định kỳ</p>
+                  <p>Chửi xếp thoải mái</p>
+                </div>
+                <div class="working">
+                  <span class="work-type">Full-time</span>
+                  <span class="location">Hà Nội</span>
+                </div>
+              </li>
+            </ul>
+          </tab>
+          <tab heading="Mới nhất">23</tab>
+          <tab heading="HOT">111</tab>
+        </tabset>
+      </div>
+
+
+
     </div>
   </section>
-	<section class="main-right">
-	  <section class="panel search-job-panel">
-	    <div class="search-job-title">
-	    	<span translate="TEXT_SEARCH_JOB"></span>
-	    </div>
-	    <div class="">
-	    	<input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB' | translate}}" />
-	    </div>
-	    <div class="">
-	    	<input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_WORK' | translate}}" />
-	    </div>
-	    <div class="">
-	    	<input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_SALARY' | translate}}" />
-	    </div>
-	    <div class="">
-	    	<input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_LOCATION' | translate}}" />
-	    </div>
-	    <div>
-	    	<a class="radius small button" translate="BTN_SEARCH"></a>
-	    </div>
+  <section class="main-right">
+    <section class="panel search-job-panel">
+      <div class="search-job-title">
+        <span translate="TEXT_SEARCH_JOB"></span>
+      </div>
+      <div class="">
+        <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB' | translate}}" />
+      </div>
+      <div class="">
+        <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_WORK' | translate}}" />
+      </div>
+      <div class="">
+        <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_SALARY' | translate}}" />
+      </div>
+      <div class="">
+        <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_LOCATION' | translate}}" />
+      </div>
+      <div>
+        <a class="radius small button" translate="BTN_SEARCH"></a>
+      </div>
     </section>
   </section>
 </section>

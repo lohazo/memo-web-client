@@ -7,6 +7,52 @@
       @include panel($bg: $white);
       width: 100% !important;
       border: 0;
+      .tabs {
+        dd  > a{
+          background-color: #fff;
+        }
+        .jobs {
+          list-style: none;
+          padding: 10px;
+          border-bottom: solid 1px #ccc;
+          .job {
+            .title {
+              color: #222;
+              font-weight: 600;
+            }
+            .description {
+              p {
+                margin: 0;
+                color: #666;
+              }
+            }
+            .content {
+              p {
+                margin: 0;
+                color: #666;
+              }
+            }
+            .working {
+              span {
+                color: #222;
+                &.work-type {
+                  background: url("assets/img/jobs/job-type-icon.png") left no-repeat;
+                  padding-left: 25px;
+                }
+                &.location {
+                  background: url("assets/img/jobs/job-location-icon.png") left no-repeat;
+                  margin-left: 15px;
+                  padding-left: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .tabs dd.active a, .tabs .tab-title.active a {
+        border-bottom: solid 2px #810c15;
+        color: #810c15;
+      }
     }
   }
   .main-right {
