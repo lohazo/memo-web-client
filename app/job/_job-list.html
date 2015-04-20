@@ -4,10 +4,10 @@
 
       <div class="tabs" ng-controller="Tabs">
         <tabset vertical="false" type="navType">
-          <tab heading="Tất cả">
+          <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
             <ul class="jobs">
               <li class="job">
-                <a href="" title="" class="title">Automation Engineer</a>
+                <a href="" title="" class="title">{{jobs.title}}</a>
                 <div class="description">
                   <p>An engineer excited to help TOPICA Memo develop faster while delivering high quality products.</p>
                 </div>
@@ -20,10 +20,11 @@
                   <span class="location">Hà Nội</span>
                 </div>
               </li>
+              <li class="job hot" ng-repeat="jobs in tab.data.hotJobs">
+                
+              </li>
             </ul>
           </tab>
-          <tab heading="Mới nhất">23</tab>
-          <tab heading="HOT">111</tab>
         </tabset>
       </div>
 

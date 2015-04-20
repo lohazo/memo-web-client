@@ -5,12 +5,12 @@
   function ListJobCtrl ($scope, JobServices, allJobs, newJobs, hotJobs, searchJobs) {
     $scope.max_page = 5;
 
-		// $scope.allJobs = allJobs.data;
-		// $scope.newJobs = newJobs.data;
-		// $scope.hotJobs = hotJobs.data;
-		// $scope.searchJobs = searchJobs.data;
-		$scope.allJobs = {
-			jobs: [{
+    // $scope.allJobs = allJobs.data;
+    // $scope.newJobs = newJobs.data;
+    // $scope.hotJobs = hotJobs.data;
+    // $scope.searchJobs = searchJobs.data;
+    $scope.allJobs = {
+      jobs: [{
         title: 'Automation Engineer',
         slug: '',
         description: 'An engineer excited to help TOPCIA Memo develop faster while delivering high quality products.',
@@ -34,9 +34,9 @@
       }], 
       next_page: 1, 
       total_pages: 10
-		}
+    }
 
-		$scope.tabs = [{
+    $scope.tabs = [{
       title: 'Tất cả',
       data: $scope.allJobs,
       active: true
