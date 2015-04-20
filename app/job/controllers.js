@@ -140,7 +140,6 @@
     };
 
     $scope.searchJobs = function () {
-      console.log($scope.jobSearch.keywords);
     	if ($scope.jobSearch.keywords.length > 0) {
         $location.search({
           keywords: $scope.jobSearch.keywords

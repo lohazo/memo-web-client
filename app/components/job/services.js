@@ -4,25 +4,30 @@
   function JobServices($http, $localStorage, API) {
   	var Services = {};
 
-  	Services.getJobs = function () {
-  		var endpoint = API + 'jobs';
-
-  		endpoint += data.page ? '&page=' + data.page : '';
-  		endpoint += data.filter ? '&filter=' + data.filter : '';
-  		endpoint += data.sort_by ? '&sort_by=' + data.sort_by : '';
-  		endpoint += data.sort_type ? '&sort_type=' + data.sort_type : '';
+  	Services.getJobs = function (data) {
+  		var endpoint = API + '/jobs';
+      if (!data) {
+        var data = {};
+      }
+  		endpoint += data.page ? '?page=' + data.page : '';
+  		endpoint += data.filter ? '?filter=' + data.filter : '';
+  		endpoint += data.sort_by ? '?sort_by=' + data.sort_by : '';
+  		endpoint += data.sort_type ? '?sort_type=' + data.sort_type : '';
 
   		return $http.get(endpoint);
   	};
 
-  	Services.searchJobs = function () {
+  	Services.searchJobs = function (data) {
   		var endpoint = API + '/jobs/search';
+      if (!data) {
+        var data = {};
+      }
 
-  		endpoint += data.page ? '&page=' + data.page : '';
-  		endpoint += data.filter ? '&filter=' + data.filter : '';
-  		endpoint += data.sort_by ? '&sort_by=' + data.sort_by : '';
-  		endpoint += data.sort_type ? '&sort_type=' + data.sort_type : '';
-  		endpoint += data.keyword ? '&keyword=' + data.keyword : '';
+  		endpoint += data.page ? '?page=' + data.page : '';
+  		endpoint += data.filter ? '?filter=' + data.filter : '';
+  		endpoint += data.sort_by ? '?sort_by=' + data.sort_by : '';
+  		endpoint += data.sort_type ? '?sort_type=' + data.sort_type : '';
+  		endpoint += data.keywords ? '?keyword=' + data.keywords : '';
 
   		return $http.get(endpoint);
   	};
@@ -56,6 +61,8 @@
 
       return $http.post(API + '/jobs/upload_cv', data);
   	}
+
+    return Services;
   }
 
   angular.module('job.services', [])

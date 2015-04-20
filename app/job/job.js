@@ -6,23 +6,29 @@
     $routeProvider.when('/jobs', {
       templateUrl: 'job/_job-list.html',
       controller: 'ListJobCtrl',
-      // resolve {
-      //   allJobs: function (JobServices) {
-      //     return JobServices.getJobs();
-      //   },
-      //   newJobs: function (JobServices) {
-      //     return JobServices.getJobs({
-      //       filter: 'new'
-      //     })
-      //   },
-      //   hotJobs: function (JobServices) {
-      //     return JobServices.getJobs({
-      //       filter: 'hot'
-      //     })
-      //   },
-      //   searchJobs: function ($route, $q, ForumServices) {
-      //   }
-      // }
+      resolve: {
+        allJobs: function (JobServices) {
+          return JobServices.getJobs();
+        },
+        newJobs: function (JobServices) {
+          return JobServices.getJobs({
+            filter: 'new'
+          })
+        },
+        hotJobs: function (JobServices) {
+          return JobServices.getJobs({
+            filter: 'hot'
+          })
+        },
+        searchJobs: function ($route, $q, JobServices) {
+          var deferred = $q.defer();
+          if ($route.current.params.keywords) {
+            JobServices.searchJobs({
+              keywords: $route.current.params.keywords
+            })
+          };
+        }
+      }
     });
 
     $routeProvider.when('/jobs/:slug', {
