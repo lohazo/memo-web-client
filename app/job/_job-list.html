@@ -37,7 +37,7 @@
       <span translate="TEXT_SEARCH_JOB"></span>
     </div>
     <div class="search-job-toolbar">
-      <input class="search-job" type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB' | translate}}" />
+      <input class="search-job" type="text" ng-model="jobSearch.keywords" ng-keydown="search(event=$event)" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB' | translate}}" />
     </div>
     <div class="filter-job-toolbar">	
       <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_WORK' | translate}}" />
@@ -45,7 +45,7 @@
       <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_LOCATION' | translate}}" />
     </div>
     <div>
-      <a class="radius small button" translate="BTN_SEARCH"></a>
+      <a class="radius small button" translate="BTN_SEARCH" ng-click="searchJobs()"></a>
     </div>
   </section>
 </section>

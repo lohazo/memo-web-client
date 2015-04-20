@@ -14,22 +14,71 @@
         title: 'Automation Engineer',
         slug: '',
         description: 'An engineer excited to help TOPCIA Memo develop faster while delivering high quality products.',
-        content: 'Thưởng định kì',
+        content: ["Thưởng định kì","Chửi sếp thoải mái"],
         location: 'Hà nội',
         field: 'IT',
         type: 'Full-time',
-        is_hot: true,
+        is_hot: false,
         created_at: '',
       },
       {
         title: 'Brand Designer',
         slug: '',
         description: 'A visionary designer to join TOPICA Memo’s marketing team.',
-        content: 'Thưởng định kì',
+        content: ["Môi trường làm việc thoải mái","Nhiều cơ chế đãi ngộ"],
         location: 'Hà nội',
         field: 'Marketing',
+        type: 'Part-time',
+        is_hot: true,
+        created_at: '',
+      },
+      {
+        title: 'Java Developer ($800-$1.400)',
+        slug: '',
+        description: 'Create technical designs for new integrations into 3rd party products',
+        content: ["Công việc nhẹ nhàng","Lương cao"],
+        location: 'TP.Hồ Chí Minh',
+        field: 'IT',
         type: 'Full-time',
+        is_hot: true,
+        created_at: '',
+      },
+      {
+        title: 'Sale Executive-logistics/forwarding',
+        slug: '',
+        description: 'Conduct sales planning and follow up in line with company sales targets, objectives and strategies',
+        content: ["Thưởng định kì","Chửi sếp thoải mái"],
+        location: 'Vũng Tàu',
+        field: 'Sale',
+        type: 'Part-time',
         is_hot: false,
+        created_at: '',
+      }], 
+      next_page: 1, 
+      total_pages: 10
+    }
+
+    $scope.hotJobs = {
+    	jobs: [{
+        title: 'Brand Designer',
+        slug: '',
+        description: 'A visionary designer to join TOPICA Memo’s marketing team.',
+        content: ["Môi trường làm việc thoải mái","Nhiều cơ chế đãi ngộ"],
+        location: 'Hà nội',
+        field: 'Marketing',
+        type: 'Part-time',
+        is_hot: true,
+        created_at: '',
+      },
+      {
+        title: 'Java Developer ($800-$1.400)',
+        slug: '',
+        description: 'Create technical designs for new integrations into 3rd party products',
+        content: ["Công việc nhẹ nhàng","Lương cao"],
+        location: 'TP.Hồ Chí Minh',
+        field: 'IT',
+        type: 'Full-time',
+        is_hot: true,
         created_at: '',
       }], 
       next_page: 1, 
@@ -60,6 +109,24 @@
 
     $scope.jobSearch = {
       keywords: ''
+    };
+
+    $scope.searchJobs = function () {
+    	if ($scope.jobSearch.keywords.length > 0) {
+        $location.search({
+          keywords: $scope.jobSearch.keywords
+        });
+      }
+    }
+
+    $scope.search = function (e) {
+      if (e.keyCode === 13) {
+        if ($scope.jobSearch.keywords.length > 0) {
+          $location.search({
+            keywords: $scope.jobSearch.keywords
+          });
+        }
+      }
     };
   }
 
