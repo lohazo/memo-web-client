@@ -29,7 +29,7 @@
         location: 'Hà nội',
         field: 'Marketing',
         type: 'Full-time',
-        is_hot: true,
+        is_hot: false,
         created_at: '',
       }], 
       next_page: 1, 
