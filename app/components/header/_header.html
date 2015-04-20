@@ -12,10 +12,10 @@
       <!-- Left Nav Section -->
       <ul class="left menus" ng-if="auth.loggedIn">
         <li class="menu-item" ng-class="{'active': path == '/'}">
-          <a href="/" target="_self">Trang chủ</a>
+          <a href="/" target="_self" translate="BTN_HOME"></a>
         </li>
         <li class="menu-item" ng-class="{'active': path.indexOf('/forum') >= 0}">
-          <a href="/forum" target="_self">Thảo luận</a>
+          <a href="/forum" target="_self" translate="BTN_FORUM"></a>
         </li>
         <!-- <li class="menu-item" ng-class="{'active': path.indexOf('/weakestword') >= 0}">
           <a href="/weakestword" target="_self">Từ vựng</a>
