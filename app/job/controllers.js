@@ -12,7 +12,7 @@
     $scope.allJobs = {
       jobs: [{
         title: 'Automation Engineer',
-        slug: '',
+        slug: '123',
         description: 'An engineer excited to help TOPCIA Memo develop faster while delivering high quality products.',
         content: ["Thưởng định kì","Chửi sếp thoải mái"],
         location: 'Hà nội',
@@ -23,7 +23,7 @@
       },
       {
         title: 'Brand Designer',
-        slug: '',
+        slug: '456',
         description: 'A visionary designer to join TOPICA Memo’s marketing team.',
         content: ["Môi trường làm việc thoải mái","Nhiều cơ chế đãi ngộ"],
         location: 'Hà nội',
@@ -34,7 +34,7 @@
       },
       {
         title: 'Java Developer ($800-$1.400)',
-        slug: '',
+        slug: '789',
         description: 'Create technical designs for new integrations into 3rd party products',
         content: ["Công việc nhẹ nhàng","Lương cao"],
         location: 'TP.Hồ Chí Minh',
@@ -45,7 +45,7 @@
       },
       {
         title: 'Sale Executive-logistics/forwarding',
-        slug: '',
+        slug: '012',
         description: 'Conduct sales planning and follow up in line with company sales targets, objectives and strategies',
         content: ["Thưởng định kì","Chửi sếp thoải mái"],
         location: 'Vũng Tàu',
@@ -61,7 +61,7 @@
     $scope.hotJobs = {
     	jobs: [{
         title: 'Brand Designer',
-        slug: '',
+        slug: '456',
         description: 'A visionary designer to join TOPICA Memo’s marketing team.',
         content: ["Môi trường làm việc thoải mái","Nhiều cơ chế đãi ngộ"],
         location: 'Hà nội',
@@ -72,13 +72,40 @@
       },
       {
         title: 'Java Developer ($800-$1.400)',
-        slug: '',
+        slug: '789',
         description: 'Create technical designs for new integrations into 3rd party products',
         content: ["Công việc nhẹ nhàng","Lương cao"],
         location: 'TP.Hồ Chí Minh',
         field: 'IT',
         type: 'Full-time',
         is_hot: true,
+        created_at: '',
+      }], 
+      next_page: 1, 
+      total_pages: 10
+    }
+
+    $scope.newJobs = {
+    	jobs: [{
+        title: 'Automation Engineer',
+        slug: '123',
+        description: 'An engineer excited to help TOPCIA Memo develop faster while delivering high quality products.',
+        content: ["Thưởng định kì","Chửi sếp thoải mái"],
+        location: 'Hà nội',
+        field: 'IT',
+        type: 'Full-time',
+        is_hot: false,
+        created_at: '',
+      },
+      {
+        title: 'Sale Executive-logistics/forwarding',
+        slug: '012',
+        description: 'Conduct sales planning and follow up in line with company sales targets, objectives and strategies',
+        content: ["Thưởng định kì","Chửi sếp thoải mái"],
+        location: 'Vũng Tàu',
+        field: 'Sale',
+        type: 'Part-time',
+        is_hot: false,
         created_at: '',
       }], 
       next_page: 1, 
@@ -112,6 +139,7 @@
     };
 
     $scope.searchJobs = function () {
+      console.log($scope.jobSearch.keywords);
     	if ($scope.jobSearch.keywords.length > 0) {
         $location.search({
           keywords: $scope.jobSearch.keywords
