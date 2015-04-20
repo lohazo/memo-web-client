@@ -113,6 +113,7 @@
       LABEL_LOG_OUT: 'Đăng xuất',
       LABEL_ALL_POST: 'Tất cả',
       LABEL_FOLLOWING_POST: 'Đang theo dõi',
+      LABEL_SEND_EMAIL_NOTIFICATION: 'Gửi mail cho tôi khi',
       LABEL_NOTIFICATION_DO_EXAM: 'Nhắc nhở làm bài',
       LABEL_NOTIFICATION_FOLLOW: 'Khi có người theo dõi',
       LABEL_NOTIFICATION_BE_OVERCOME: 'Khi có người vượt qua',
