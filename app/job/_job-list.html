@@ -6,21 +6,21 @@
         <tabset vertical="false" type="navType">
           <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
             <ul class="jobs">
-              <li class="job">
-                <a href="" title="" class="title">{{jobs.title}}</a>
+              <li class="job" ng-repeat="job in tab.data.jobs">
+                <a href="" title="" class="title" ng-bind="job.title"></a>
+                <span ng-bind="job.is_hot" class="hot"></span>
                 <div class="description">
-                  <p>An engineer excited to help TOPICA Memo develop faster while delivering high quality products.</p>
+                  <p ng-bind="job.description"></p>
                 </div>
-                <div class="content">
-                  <p>Thưởng định kỳ</p>
-                  <p>Chửi xếp thoải mái</p>
+                <div class="content" ng-repeat="content in tab.data.jobs">
+                  <p ng-bind="job.content"></p>
                 </div>
                 <div class="working">
-                  <span class="work-type">Full-time</span>
-                  <span class="location">Hà Nội</span>
+                  <span class="work-type" ng-bind="job.type"></span>
+                  <span class="location" ng-bind="job.location"></span>
                 </div>
               </li>
-              <li class="job hot" ng-repeat="jobs in tab.data.hotJobs">
+              <li class="job hot" ng-repeat="job in tab.data.hotJobs">
                 
               </li>
             </ul>

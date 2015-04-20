@@ -17,7 +17,7 @@
         content: 'Thưởng định kì',
         location: 'Hà nội',
         field: 'IT',
-        type: 'fulltime',
+        type: 'Full-time',
         is_hot: true,
         created_at: '',
       },
@@ -28,7 +28,7 @@
         content: 'Thưởng định kì',
         location: 'Hà nội',
         field: 'Marketing',
-        type: 'fulltime',
+        type: 'Full-time',
         is_hot: true,
         created_at: '',
       }], 
@@ -43,11 +43,11 @@
     },{
       title: 'Mới nhất',
       data: $scope.newJobs,
-      active: true
+      active: false
     },{
       title: 'HOT',
       data: $scope.hotJobs,
-      active: true
+      active: false
     }];
 
     // if ($location.search().keywords) {
