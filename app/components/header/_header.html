@@ -11,13 +11,13 @@
     <top-bar-section>
       <!-- Left Nav Section -->
       <ul class="left menus" ng-if="auth.loggedIn">
-        <li class="menu-item" ng-class="{'active': path == '/'}" style="width: 130px;">
+        <li class="menu-item" ng-class="{'active': path == '/'}">
           <a href="/" target="_self" translate="BTN_HOME"></a>
         </li>
-        <li class="menu-item" ng-class="{'active': path.indexOf('/forum') >= 0}" style="width: 130px;">
-          <a href="/forum" target="_self" translate="BTN_FORUM"></a>
+        <li class="menu-item" ng-class="{'active': path.indexOf('/forum') >= 0}">
+          <a href="/forum" target="_self" translate="BTN_HOME"></a>
         </li>
-        <!-- <li class="menu-item" ng-class="{'active': path.indexOf('/weakestword') >= 0}" style="width: 130px;">
+        <!-- <li class="menu-item" ng-class="{'active': path.indexOf('/weakestword') >= 0}">
           <a href="/weakestword" target="_self">Từ vựng</a>
         </li> -->
       </ul>
