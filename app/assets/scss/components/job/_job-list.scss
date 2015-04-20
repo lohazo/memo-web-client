@@ -70,6 +70,16 @@
         font-size: 24px;
       }
       .search-job-toolbar {
+        padding-top: 20px;
+        .search-job {
+          width: 100%;
+          padding: 10px 0 10px 10px;
+          font-size: 16px;
+          margin: 0;
+        }
+      }
+      .filter-job-toolbar {
+        padding-top: 20px;
       }
     }
   }

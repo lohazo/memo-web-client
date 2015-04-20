@@ -4,7 +4,7 @@
 
       <div class="tabs" ng-controller="Tabs">
         <tabset vertical="false" type="navType">
-        <tab heading="Tất cả">
+          <tab heading="Tất cả">
             <ul class="jobs">
               <li class="job">
                 <a href="" title="" class="title">Automation Engineer</a>
@@ -32,25 +32,21 @@
     </div>
   </section>
   <section class="main-right">
-    <section class="panel search-job-panel">
-      <div class="search-job-title">
-        <span translate="TEXT_SEARCH_JOB"></span>
-      </div>
-      <div class="">
-        <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB' | translate}}" />
-      </div>
-      <div class="">
-        <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_WORK' | translate}}" />
-      </div>
-      <div class="">
-        <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_SALARY' | translate}}" />
-      </div>
-      <div class="">
-        <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_LOCATION' | translate}}" />
-      </div>
-      <div>
-        <a class="radius small button" translate="BTN_SEARCH"></a>
-      </div>
-    </section>
+   <section class="panel search-job-panel">
+     <div class="search-job-title">
+      <span translate="TEXT_SEARCH_JOB"></span>
+    </div>
+    <div class="search-job-toolbar">
+      <input class="search-job" type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB' | translate}}" />
+    </div>
+    <div class="filter-job-toolbar">	
+      <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_WORK' | translate}}" />
+      <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_SALARY' | translate}}" />
+      <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_LOCATION' | translate}}" />
+    </div>
+    <div>
+      <a class="radius small button" translate="BTN_SEARCH"></a>
+    </div>
   </section>
+</section>
 </section>
