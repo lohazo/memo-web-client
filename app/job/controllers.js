@@ -5,19 +5,19 @@
   function ListJobCtrl ($scope, JobServices, allJobs, newJobs, hotJobs, searchJobs) {
     $scope.max_page = 5;
 
-		// $scope.allJobs = allJobs.data;
-		// $scope.newJobs = newJobs.data;
-		// $scope.hotJobs = hotJobs.data;
-		// $scope.searchJobs = searchJobs.data;
-		$scope.allJobs = {
-			jobs: [{
+    // $scope.allJobs = allJobs.data;
+    // $scope.newJobs = newJobs.data;
+    // $scope.hotJobs = hotJobs.data;
+    // $scope.searchJobs = searchJobs.data;
+    $scope.allJobs = {
+      jobs: [{
         title: 'Automation Engineer',
         slug: '',
         description: 'An engineer excited to help TOPCIA Memo develop faster while delivering high quality products.',
         content: 'Thưởng định kì',
         location: 'Hà nội',
         field: 'IT',
-        type: 'fulltime',
+        type: 'Full-time',
         is_hot: true,
         created_at: '',
       },
@@ -28,27 +28,27 @@
         content: 'Thưởng định kì',
         location: 'Hà nội',
         field: 'Marketing',
-        type: 'fulltime',
+        type: 'Full-time',
         is_hot: true,
         created_at: '',
       }], 
       next_page: 1, 
       total_pages: 10
-		}
+    }
 
-		$scope.tabs = [{
+    $scope.tabs = [{
       title: 'Tất cả',
       data: $scope.allJobs,
       active: true
     },{
       title: 'Mới nhất',
       data: $scope.newJobs,
-      active: true
+      active: false
     },{
       title: 'HOT',
       data: $scope.hotJobs,
-      active: true
-    }]
+      active: false
+    }];
 
     // if ($location.search().keywords) {
     //   $scope.tabs.push({
