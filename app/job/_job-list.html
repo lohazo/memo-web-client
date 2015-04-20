@@ -7,7 +7,7 @@
           <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
             <ul class="jobs">
               <li class="job" ng-repeat="job in tab.data.jobs">
-                <a href="" title="" class="title" ng-bind="job.title"></a>
+                <a ng-href="/jobs/{{job.slug}}" title="" class="title" ng-bind="job.title"></a>
                 <span class="hot" ng-if="job.is_hot == true">HOT</span>
                 <div class="description">
                   <p ng-bind="job.description"></p>
@@ -24,7 +24,7 @@
               </li>
             </ul>
             <div class="pagination-centered">
-              <pagination ng-if="tab.data.total_page > 0" page="tab.data.current_page" total-items="tab.data.total_page * 10" max-size="max_page" rotate="false" on-select-page="setPage(page)"></pagination>
+              <pagination ng-if="tab.data.total_pages > 0" page="tab.data.current_page" total-items="tab.data.total_pages * 10" max-size="max_page" rotate="false" on-select-page="setPage(page)"></pagination>
             </div>
           </tab>
         </tabset>

@@ -2,7 +2,7 @@
   'use strict';
 
 
-  function ListJobCtrl ($scope, JobServices, allJobs, newJobs, hotJobs, searchJobs) {
+  function ListJobCtrl ($scope, $location, JobServices, allJobs, newJobs, hotJobs, searchJobs) {
     $scope.max_page = 5;
 
     // $scope.allJobs = allJobs.data;
@@ -126,13 +126,14 @@
       active: false
     }];
 
-    // if ($location.search().keywords) {
-    //   $scope.tabs.push({
-    //     title: 'Kết quả tìm kiếm',
-    //     data: $scope.searchJobs,
-    //     active: true
-    //   });
-    // }
+    if ($location.search().keywords) {
+      $scope.tabs[0].active = false;
+      $scope.tabs.push({
+        title: 'Kết quả tìm kiếm',
+        data: $scope.searchJobs,
+        active: true
+      });
+    }
 
     $scope.jobSearch = {
       keywords: ''
@@ -163,7 +164,7 @@
   }
   angular.module('job').controller('Tabs', function ($scope) {})
   angular.module('job.controllers', ['job.services'])
-  .controller('ListJobCtrl', ['$scope', ListJobCtrl
+  .controller('ListJobCtrl', ['$scope', '$location', ListJobCtrl
     ])
   .controller('JobDetailCtrl', ['$scope',
     JobDetailCtrl
