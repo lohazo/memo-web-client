@@ -48,7 +48,7 @@
       title: 'HOT',
       data: $scope.hotJobs,
       active: true
-    }];
+    }]
 
     // if ($location.search().keywords) {
     //   $scope.tabs.push({
