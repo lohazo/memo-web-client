@@ -9,42 +9,32 @@
 		// $scope.newJobs = newJobs.data;
 		// $scope.hotJobs = hotJobs.data;
 		// $scope.searchJobs = searchJobs.data;
-		// $scope.allJobs = {
-		// 	jobs: [{
-  //       title: 'Automation Engineer',
-  //       slug:
-  //       description: 'An engineer excited to help TOPCIA Memo develop faster while delivering high quality products.',
-  //       content: [{
-  //       	'Thưởng định kì',
-  //       },
-  //       {
-  //       	'Chửi sếp thoải mái',
-  //       }]
-  //       location: 'Hà nội',
-  //       field: 'IT',
-  //       type: 'fulltime,'
-  //       is_hot: false,
-  //       created_at: 
-  //     },
-  //     {
-  //       title: 'Brand Designer',
-  //       slug:
-  //       description: 'A visionary designer to join TOPICA Memo’s marketing team.',
-  //       content: [{
-  //       	'Thưởng định kì',
-  //       },
-  //       {
-  //       	'Chửi sếp thoải mái',
-  //       }]
-  //       location: 'Hà nội',
-  //       field: 'Marketing',
-  //       type: 'fulltime',
-  //       is_hot: true,
-  //       created_at: ,
-  //     }], 
-  //     next_page: 1, 
-  //     total_pages: 10
-		// }
+		$scope.allJobs = {
+			jobs: [{
+        title: 'Automation Engineer',
+        slug: '',
+        description: 'An engineer excited to help TOPCIA Memo develop faster while delivering high quality products.',
+        content: 'Thưởng định kì',
+        location: 'Hà nội',
+        field: 'IT',
+        type: 'fulltime',
+        is_hot: true,
+        created_at: '',
+      },
+      {
+        title: 'Brand Designer',
+        slug: '',
+        description: 'A visionary designer to join TOPICA Memo’s marketing team.',
+        content: 'Thưởng định kì',
+        location: 'Hà nội',
+        field: 'Marketing',
+        type: 'fulltime',
+        is_hot: true,
+        created_at: '',
+      }], 
+      next_page: 1, 
+      total_pages: 10
+		}
 
 		$scope.tabs = [{
       title: 'Tất cả',
