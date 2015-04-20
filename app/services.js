@@ -212,7 +212,10 @@
 
   angular.module('app.services', [])
     .constant('APP_VERSION', '1.0.3')
-    .constant('API', '//services.memo.edu.vn/v2/api')
+    .factory('API', ['$location', function ($location) {
+      var host = $location.host();
+      return host.match(/(^memo.|.edu.vn$)/g) ? '//services.memo.edu.vn/v2/api' : '//staging.memo.edu.vn/v2/api'
+    }])
     .constant('angularMomentConfig', {
       preprocess: 'unix',
       timezone: 'Asia/Hanoi'
