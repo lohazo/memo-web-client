@@ -23,6 +23,9 @@
               <li class="job hot" ng-repeat="job in tab.data.hotJobs">
               </li>
             </ul>
+            <div class="pagination-centered">
+              <pagination ng-if="tab.data.total_page > 0" page="tab.data.current_page" total-items="tab.data.total_page * 10" max-size="max_page" rotate="false" on-select-page="setPage(page)"></pagination>
+            </div>
           </tab>
         </tabset>
       </div>
@@ -37,9 +40,24 @@
       <input class="search-job" type="text" ng-model="jobSearch.keywords" ng-keydown="search(event=$event)" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB' | translate}}" />
     </div>
     <div class="filter-job-toolbar">	
-      <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_WORK' | translate}}" />
+      <!-- <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_WORK' | translate}}" />
       <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_SALARY' | translate}}" />
-      <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_LOCATION' | translate}}" />
+      <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_LOCATION' | translate}}" /> -->
+      <select class="choose-work">
+        <option value="">Chọn ngành nghề</option>
+        <option value="">Chọn ngành nghề</option>
+        <option value="">Chọn ngành nghề</option>
+      </select>
+      <select class="salary">
+        <option value="">Chọn mức lương</option>
+        <option value="">Chọn mức lương</option>
+        <option value="">Chọn mức lương</option>
+      </select>
+      <select class="where-work">
+        <option value="">Chọn nơi làm việc</option>
+        <option value="">Chọn nơi làm việc</option>
+        <option value="">Chọn nơi làm việc</option>
+      </select>
     </div>
     <div>
       <a class="radius small button" translate="BTN_SEARCH" ng-click="searchJobs()"></a>
