@@ -61,6 +61,24 @@
     $scope.jobSearch = {
       keywords: ''
     };
+
+    $scope.searchJobs = function () {
+    	if ($scope.jobSearch.keywords.length > 0) {
+        $location.search({
+          keywords: $scope.jobSearch.keywords
+        });
+      }
+    }
+
+    $scope.search = function (e) {
+      if (e.keyCode === 13) {
+        if ($scope.jobSearch.keywords.length > 0) {
+          $location.search({
+            keywords: $scope.jobSearch.keywords
+          });
+        }
+      }
+    };
   }
 
   function JobDetailCtrl ($scope) {
