@@ -27,7 +27,7 @@
   		endpoint += data.filter ? '?filter=' + data.filter : '';
   		endpoint += data.sort_by ? '?sort_by=' + data.sort_by : '';
   		endpoint += data.sort_type ? '?sort_type=' + data.sort_type : '';
-  		endpoint += data.keywords ? '?keyword=' + data.keywords : '';
+  		endpoint += data.keywords ? '?keywords=' + data.keywords : '';
 
   		return $http.get(endpoint);
   	};
@@ -38,7 +38,7 @@
         var data = {};
       }
 
-  		endpoint += data.slug ? '/?slug=' + data.slug : '';
+  		endpoint += data.slug ? '/' + data.slug : '';
 
   		return $http.get(endpoint);
   	};
@@ -47,11 +47,11 @@
   		var authToken = $localStorage.auth.user.auth_token;
 
       data.auth_token = authToken;
-      data.job_id = '';
-      data.fullname = '';
-      data.email = '';
-      data.mobile = '';
-      data.content = '';
+      data.job_id = 'test-jobs';
+      // data.fullname = '';
+      // data.email = '';
+      // data.mobile = '';
+      // data.content = '';
 
       return $http.post(API + '/jobs/apply', data);
   	};

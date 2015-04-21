@@ -10,10 +10,10 @@
                 <a ng-href="/jobs/{{job.slug}}" title="" class="title" ng-bind="job.title"></a>
                 <span class="hot" ng-if="job.is_hot == true">HOT</span>
                 <div class="description">
-                  <p ng-bind="job.description"></p>
+                  <p ng-bind-html="job.description"></p>
                 </div>
-                <div class="content" ng-repeat="content in job.content">
-                  <p ng-bind="content"></p>
+                <div class="content">
+                  <p ng-bind-html="job.content"></p>
                 </div>
                 <div class="working">
                   <span class="work-type" ng-bind="job.type"></span>

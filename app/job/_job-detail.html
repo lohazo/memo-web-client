@@ -5,7 +5,12 @@
       	<div class="left">
             <a class="return-button" ng-href="/jobs">&lsaquo; {{'TEXT_LIST_JOB_TITLE' | translate}} </a>
           </div>
-      </div> 	
+      </div> 
+      <!-- Job Detail -->
+      <div ng-bind="job.title"></div>
+      <div ng-bind-html="job.description"></div>
+      <div ng-bind-html="job.content"></div>
+    <!--  -->
     </section>
   </section>
   <section class="main-right">
@@ -15,13 +20,13 @@
     	</div>
     	<div class="job-info-content">
     		<div class="by_time">
-    			<span>Full-time</span>
+    			<span ng-bind="job.type"></span>
     		</div>
     		<div class="by_location">
-    			<span>Hà Nội</span>
+    			<span ng-bind="job.location"></span>
     		</div>
     		<div class="by_phone">
-    			<span>0986103650</span>
+    			<span ng-bind="job.phone"></span>
     		</div>
     	</div>
     	<div class="job-apply-content">
@@ -37,6 +42,11 @@
     			<span class="hot-line" translate="TEXT_HOT_LINE_TO_APPLY_JOB"></span>
     		</div>
     	</div>
+        <!-- Apply-button -->
+        <div class="job-apply-content">
+          <a class="small radius button" ng-click="applyForJob()">Ứng tuyển vị trí này</a>  
+        </div>
+        <!--  -->
     </section>
   </section>
 </section>

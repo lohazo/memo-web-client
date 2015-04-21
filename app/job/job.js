@@ -23,10 +23,10 @@
         searchJobs: function ($route, $q, JobServices) {
           var deferred = $q.defer();
           if ($route.current.params.keywords) {
-            JobServices.searchJobs({
-              keywords: $route.current.params.keywords
-            })
-          };
+            return JobServices.searchJobs($route.current.params);
+          }
+          deferred.resolve();
+          return deferred.promise;
         }
       }
     });
