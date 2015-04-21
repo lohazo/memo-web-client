@@ -1,40 +1,40 @@
 <div class="row">
 	<div class="small-16 columns">
 		<div class="small-8 columns">Ten day du</div>
-		<input class="small-8 columns" ng-model="form_apply.fullname" />
+		<input class="small-8 columns" ng-model="candidate_data.fullname" />
 	</div>
 </div>
 <br>
 <div class="row">
 	<div class="small-16 columns">
 		<div class="small-8 columns">email</div>
-		<input class="small-8 columns" ng-model="form_apply.email" />
+		<input class="small-8 columns" ng-model="candidate_data.email" />
 	</div>
 </div>
 <br>
 <div class="row">
 	<div class="small-16 columns">
 		<div class="small-8 columns">dien thoai</div>
-		<input class="small-8 columns" ng-model="form_apply.mobile" />
+		<input class="small-8 columns" ng-model="candidate_data.mobile" />
 	</div>
 </div>
 <br>
 <div class="row">
 	<div class="small-16 columns">
 		<div class="small-8 columns">Gioi thieu</div>
-		<input class="small-8 columns" ng-model="form_apply.content" />
+		<input class="small-8 columns" ng-model="candidate_data.content" />
 	</div>
 </div>
 <br>
 <div class="row">
 	<div class="small-16 columns">
 		<div class="small-8 columns">CV dinh kem</div>
-		<input class="small-8 columns" ng-model="CVSource" type="file" onchange="angular.element(this).scope().uploadCV(this)" />
+		<input class="small-8 columns" type="file" onchange="angular.element(this).scope().uploadCV(this)" />
 	</div>
 </div>
 <br>
 <div class="row">
 	<div class="small-16 columns">
-		<a class="small radius button" ng-click="applyJob(form_apply)">Gui ho so</a>
+		<a class="small radius button" ng-click="applyJob(candidate_data)">Gui ho so</a>
 	</div>
 </div>
