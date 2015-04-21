@@ -1,40 +1,44 @@
-<div class="row">
-	<div class="small-16 columns">
-		<div class="small-8 columns">Ten day du</div>
-		<input class="small-8 columns" ng-model="form_apply.fullname" />
-	</div>
+<div class="row recruitment">
+  <p>Ban dang ung tuyen vi tri <span>Automation Engineer</span></p>
+</div>
+<div class="row" style="margin-top:30px;">
+  <div class="small-16 columns">
+    <div class="text small-5 columns">Ten day du</div>
+    <input class="small-11 columns" ng-model="form_apply.fullname" />
+  </div>
 </div>
 <br>
 <div class="row">
-	<div class="small-16 columns">
-		<div class="small-8 columns">email</div>
-		<input class="small-8 columns" ng-model="form_apply.email" />
-	</div>
+  <div class="small-16 columns">
+    <div class="text small-5 columns">email</div>
+    <input class="small-11 columns" ng-model="form_apply.email" />
+  </div>
 </div>
 <br>
 <div class="row">
-	<div class="small-16 columns">
-		<div class="small-8 columns">dien thoai</div>
-		<input class="small-8 columns" ng-model="form_apply.mobile" />
-	</div>
+  <div class="small-16 columns">
+    <div class="text small-5 columns">dien thoai</div>
+    <input class="small-11 columns" ng-model="form_apply.mobile" />
+  </div>
 </div>
 <br>
 <div class="row">
-	<div class="small-16 columns">
-		<div class="small-8 columns">Gioi thieu</div>
-		<input class="small-8 columns" ng-model="form_apply.content" />
-	</div>
+  <div class="small-16 columns">
+    <div class="text small-5 columns">Gioi thieu</div>
+    <!-- <input class="text-message small-11 columns" ng-model="form_apply.content" /> -->
+    <textarea class="text-message small-11 columns" ng-model="form_apply.content"></textarea>
+  </div>
+</div>
+<br>
+<div class="upload row">
+  <div class="small-16 columns">
+    <div class="text small-4 columns">CV dinh kem</div>
+    <input class="upload-file small-11 columns" ng-model="CVSource" type="file" onchange="angular.element(this).scope().uploadCV(this)" />
+  </div>
 </div>
 <br>
 <div class="row">
-	<div class="small-16 columns">
-		<div class="small-8 columns">CV dinh kem</div>
-		<input class="small-8 columns" ng-model="CVSource" type="file" onchange="angular.element(this).scope().uploadCV(this)" />
-	</div>
-</div>
-<br>
-<div class="row">
-	<div class="small-16 columns">
-		<a class="small radius button" ng-click="applyJob(form_apply)">Gui ho so</a>
-	</div>
+  <div class="small-16 columns">
+    <a class="small radius button" ng-click="applyJob(form_apply)">Gui ho so</a>
+  </div>
 </div>

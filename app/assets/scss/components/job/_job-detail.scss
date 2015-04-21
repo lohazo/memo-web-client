@@ -81,24 +81,31 @@
         .by_phone {
           color: #222;
           background: url("assets/img/jobs/phone-icon.png") left no-repeat;
-          padding-left: 20px;
+          padding-left:19px;
+          margin-bottom:20px;
         }
       }
       .job-apply-content {
         font-size: 16px;
         text-align: center;
         .title {
-
+          text-align:left;
+          margin-top:15px;
+          display:block;
+          font-size:15px;
         }
         .apply-for-email {
+          text-align:left;
           .title {
-
+            display:block;
           }
           .email {
             color: $primary-color;
           }
         }
         .apply-for-hot-line {
+          text-align:left;
+          margin-bottom:20px;
           .title {
 
           }
