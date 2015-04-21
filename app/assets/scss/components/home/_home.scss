@@ -9,8 +9,10 @@
         margin-bottom: 0;
         margin-top: 20px;
         font-size: 16px;
-        background: $primary-color url("assets/img/pratice-button.png") no-repeat;
+        background: $primary-color url("assets/img/pratice-button.png") 10px center no-repeat;
         background-origin: content-box;
+        text-align: right;
+        padding-right: 35px;
       }
     }
     .main-center {
