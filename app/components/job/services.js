@@ -47,11 +47,6 @@
   		var authToken = $localStorage.auth.user.auth_token;
 
       data.auth_token = authToken;
-      data.job_id = 'test-jobs';
-      // data.fullname = '';
-      // data.email = '';
-      // data.mobile = '';
-      // data.content = '';
 
       return $http.post(API + '/jobs/apply', data);
   	};
