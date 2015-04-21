@@ -96,8 +96,7 @@
     }
 
     // Chain calls
-    Profile.getProfile()
-      .then(getProfile)
+    getProfile()
       .then(Message.list)
       .then(getProfileDetail)
       .then(getStatus)
