@@ -78,7 +78,7 @@
         // windowClass: ''
         resolve: {
           id: function () {
-            return job.slug
+            return job._id;
           }
         }
       })
@@ -86,23 +86,33 @@
   }
   
   function ApplyJobModalCtrl ($scope, JobServices, id, $localStorage, $http) {
-    $scope.uploadCV = function(element) { 
-      var fd = new FormData();
+    var fd = new FormData();
+
+    $scope.uploadCV = function(element) {
+      fd.append("file", element.files[0]);
+    };
+
+    $scope.applyJob = function (form_apply) {
+      form_apply.job_id = id;
+      JobServices.applyJob(form_apply).success(function () {
+        $scope.upCV();
+      }).error(function () {
+        alert("Bạn nhập sai thông tin.Vui lòng nhập lại");
+      });
+    };
+
+    $scope.upCV = function () {
       var auth_token = $localStorage.auth.user.auth_token;
       var uploadUrl = 'http://staging.memo.edu.vn/v2/api/jobs/upload_cv?auth_token=' + auth_token;
-      fd.append("file", element.files[0]);
-      
       $http.post(uploadUrl, fd, {
         withCredentials: true,
         headers: {'Content-Type': undefined },
         transformRequest: angular.identity
       });
-    };
-    $scope.applyJob = function (form_apply) {
-      form_apply.job_id = id;
-      JobServices.applyJob(form_apply).success(function () {
-      });
-    };
+      // JobServices.uploadCV({file: f}).error(function () {
+      //   console.log("fail_upload");
+      // });
+    }
   };
 
   angular.module('job').controller('Tabs', function ($scope) {})
