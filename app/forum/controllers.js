@@ -116,17 +116,6 @@
       });
     };
 
-    $scope.setPage = function (page) {
-      var search = {
-        page: page
-      };
-      if ($location.search().keywords) {
-        search.keywords = $location.search().keywords;
-      }
-      $location.search(search);
-      return;
-    };
-
     $scope.searchWithButton = function () {
       if ($scope.postSearch.keywords.length > 0) {
         $location.search({

@@ -34,6 +34,13 @@
     $routeProvider.when('/jobs/:slug', {
       templateUrl: 'job/_job-detail.html',
       controller: 'JobDetailCtrl',
+      resolve: {
+        Job: function ($route, JobServices) {
+          return JobServices.getJob({
+            slug: $route.current.params.slug
+          });
+        }
+      }
     });
   }
 

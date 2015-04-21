@@ -139,6 +139,17 @@
       keywords: ''
     };
 
+    $scope.setPage = function (page) {
+      var search = {
+        page: page
+      };
+      if ($location.search().keywords) {
+        search.keywords = $location.search().keywords;
+      }
+      $location.search(search);
+      return;
+    };
+
     $scope.searchJobs = function () {
     	if ($scope.jobSearch.keywords.length > 0) {
         $location.search({

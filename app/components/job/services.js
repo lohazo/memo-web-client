@@ -32,8 +32,11 @@
   		return $http.get(endpoint);
   	};
 
-  	Services.getJob = function () {
+  	Services.getJob = function (data) {
   		var endpoint = API + '/jobs';
+      if (!data) {
+        var data = {};
+      }
 
   		endpoint += data.slug ? '/?slug=' + data.slug : '';
 
