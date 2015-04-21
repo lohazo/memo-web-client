@@ -1,5 +1,5 @@
 .job-detail-main {
-	@include grid-row;
+  @include grid-row;
   padding-top: 42px;
   .main-left {
     @include grid-column($columns: 12);
@@ -29,6 +29,18 @@
           }
         }
       }
+      .job {
+        clear: both;
+        font-size: 25px;
+        font-weight: 600;
+        padding-top: 20px;
+        display: block;
+      }
+      .description {
+        border-bottom: 1px solid #999;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+      }
     }
   }
   .main-right {
@@ -41,6 +53,7 @@
     .job-info-panel { 
       padding: 20px;
       border-radius: 10px;
+      margin-top:0;
       .job-info-title {
         padding-top: 20px;
         font-size: 24px;
@@ -51,12 +64,24 @@
         border-bottom: 1px solid $iron;
         .by_time {
           padding-bottom: 20px;
+          span {
+            color: #222;
+            background: url("assets/img/jobs/job-type-icon.png") left no-repeat;
+            padding-left: 25px;
+          }
         }
         .by_location {
           padding-bottom: 20px;
+          span {
+            color: #222;
+            background: url("assets/img/jobs/job-location-icon.png") left no-repeat;
+            padding-left: 20px;
+          }
         }
         .by_phone {
-          padding-bottom: 20px;
+          color: #222;
+          background: url("assets/img/jobs/phone-icon.png") left no-repeat;
+          padding-left: 20px;
         }
       }
       .job-apply-content {
@@ -66,17 +91,17 @@
 
         }
         .apply-for-email {
-        	.title {
+          .title {
 
-        	}
+          }
           .email {
             color: $primary-color;
           }
         }
         .apply-for-hot-line {
-        	.title {
+          .title {
 
-        	}
+          }
           .hot-line {
             color: $primary-color;
           }
