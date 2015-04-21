@@ -70,23 +70,39 @@
 
   function JobDetailCtrl ($scope, $modal, Job) {
     $scope.job = Job.data;
-    console.log(Job.data);
 
-    $scope.applyForJob = function () {
+    $scope.applyForJob = function (job) {
       var modalInstance = $modal.open ({
         templateUrl: '/job/_apply-job-popup.html',
         controller: 'ApplyJobModalCtrl',
         // windowClass: ''
+        resolve: {
+          id: function () {
+            return job.slug
+          }
+        }
       })
     }
   }
   
-  function ApplyJobModalCtrl ($scope, JobServices) {
-    // $scope.applyJob = function (form_apply) {
-    //   JobServices.applyJob(form_apply).success(function () {
-    //     JobServices.uploadCV()
-    //   });
-    // };
+  function ApplyJobModalCtrl ($scope, JobServices, id, $localStorage, $http) {
+    $scope.uploadCV = function(element) { 
+      var fd = new FormData();
+      var auth_token = $localStorage.auth.user.auth_token;
+      var uploadUrl = 'http://staging.memo.edu.vn/v2/api/jobs/upload_cv?auth_token=' + auth_token;
+      fd.append("file", element.files[0]);
+      
+      $http.post(uploadUrl, fd, {
+        withCredentials: true,
+        headers: {'Content-Type': undefined },
+        transformRequest: angular.identity
+      });
+    };
+    $scope.applyJob = function (form_apply) {
+      form_apply.job_id = id;
+      JobServices.applyJob(form_apply).success(function () {
+      });
+    };
   };
 
   angular.module('job').controller('Tabs', function ($scope) {})
@@ -95,7 +111,7 @@
   ])
   .controller('JobDetailCtrl', ['$scope', '$modal', 'Job', JobDetailCtrl
   ])
-  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 
+  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', '$localStorage', '$http', 
     ApplyJobModalCtrl
   ]);
 

@@ -1,35 +1,35 @@
 <div class="row">
 	<div class="small-16 columns">
 		<div class="small-8 columns">Ten day du</div>
-		<input class="small-8 columns" ng-model="form_apply.fullname"></input>
+		<input class="small-8 columns" ng-model="form_apply.fullname" />
 	</div>
 </div>
 <br>
 <div class="row">
 	<div class="small-16 columns">
 		<div class="small-8 columns">email</div>
-		<input class="small-8 columns" ng-model="form_apply.email"></input>
+		<input class="small-8 columns" ng-model="form_apply.email" />
 	</div>
 </div>
 <br>
 <div class="row">
 	<div class="small-16 columns">
 		<div class="small-8 columns">dien thoai</div>
-		<input class="small-8 columns" ng-model="form_apply.mobile"></input>
+		<input class="small-8 columns" ng-model="form_apply.mobile" />
 	</div>
 </div>
 <br>
 <div class="row">
 	<div class="small-16 columns">
 		<div class="small-8 columns">Gioi thieu</div>
-		<input class="small-8 columns" ng-model="form_apply.content"></input>
+		<input class="small-8 columns" ng-model="form_apply.content" />
 	</div>
 </div>
 <br>
 <div class="row">
 	<div class="small-16 columns">
 		<div class="small-8 columns">CV dinh kem</div>
-		<input class="small-8 columns"></input>
+		<input class="small-8 columns" ng-model="CVSource" type="file" onchange="angular.element(this).scope().uploadCV(this)" />
 	</div>
 </div>
 <br>
