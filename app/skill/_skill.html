@@ -5,9 +5,9 @@
         <div class="{{(skill.finished_lesson == skill.lessons.length && skill.strength_gap >= 4) ? 'success' : '' }} {{skill.theme_color === '#99cc00' ? 'green' : (skill.theme_color === '#ff4444' ? 'red' : 'blue')}} skill skill-{{skill.order + 1}}">
           <div class="icon" style="background-image: url('{{iconSets.lesson}}');"></div>
           <h4 class="name">{{skill.title}}</h4>
-          <div class="level" ng-if="skill.finished_lesson == skill.lessons.length && skill.strength_gap < 4">Độ mạnh: {{skill.strength_gap}}/5</div>
-          <a ng-if="skill.allow_shortcut && (skill.finished_lesson < skill.lessons.length)" ng-href="/shortcut/{{skill._id}}" class="test-out memo-button" tooltip="Vượt rào để hoàn thành kỹ năng này mà không cần làm từng bài học" tooltip-placement="bottom">Vượt rào</a>
-          <a ng-if="skill.finished_lesson == skill.lessons.length" ng-href="/skill/{{skill._id}}/practice" class="small radius button transparent" >Luyện tập củng cố kĩ năng</a>
+          <div class="level" ng-if="skill.finished_lesson == skill.lessons.length && skill.strength_gap < 4"><span>{{'TEXT_STRENGTHEN' | translate}} :</span> {{skill.strength_gap}}/5</div>
+          <a ng-if="skill.allow_shortcut && (skill.finished_lesson < skill.lessons.length)" ng-href="/shortcut/{{skill._id}}" class="test-out memo-button" tooltip="{{'TEXT_TOOLTIP_SHORTCUT_EXAM' | translate}}" tooltip-placement="bottom" translate="BTN_SHORTCUT_EXAM"></a>
+          <a ng-if="skill.finished_lesson == skill.lessons.length" ng-href="/skill/{{skill._id}}/practice" class="small radius button transparent" translate="TEXT_STRENGTHEN_EXAM"></a>
         </div>
       </div>
       <div class="small-12 columns lessons">
