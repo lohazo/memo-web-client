@@ -41,11 +41,10 @@
       <!-- <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_WORK' | translate}}" />
       <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_SALARY' | translate}}" />
       <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_LOCATION' | translate}}" /> -->
-      {{list_fields}}
-      <select class="choose-work" ng-options="list_field._id as list_field.name for list_field in list_fields">
+      <select class="choose-work" ng-model="jobSearch.filter_by_field" ng-options="field._id as field.name for field in list_fields">
         <option value="">Chọn ngành nghề</option>
       </select>
-      <select class="where-work">
+      <select class="where-work" ng-model="jobSearch.filter_by_location" ng-options="location._id as location.name for location in list_locations">
         <option value="">Chọn nơi làm việc</option>
       </select>
     </div>

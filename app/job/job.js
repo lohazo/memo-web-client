@@ -10,11 +10,6 @@
         allJobs: function (JobServices) {
           return JobServices.getJobs();
         },
-        newJobs: function (JobServices) {
-          return JobServices.getJobs({
-            filter: 'new'
-          })
-        },
         hotJobs: function (JobServices) {
           return JobServices.getJobs({
             filter: 'hot'

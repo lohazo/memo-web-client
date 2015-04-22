@@ -7,17 +7,13 @@
     $scope.allJobs = allJobs.data;
     $scope.newJobs = newJobs.data;
     $scope.hotJobs = hotJobs.data;
-    $scope.list_fields = [{_id: "IT", name: "IT"},{_id: "Marketing", name: "Marketing"}, {_id: "Worker", name: "Worker"}]
-    $scope.list_locations = [{_id: "HN", name: "Hà Nội"},{_id: "HCM", name: "TP.Hồ Chí Minh"}, {_id: "ĐN", name: "Đà Nẵng"}]
+    $scope.list_fields = [{_id: "IT", name: "IT"},{_id: "Marketing", name: "Marketing"},{_id: "Worker", name: "Worker"}];
+    $scope.list_locations = [{_id: "HN", name: "Hà Nội"},{_id: "HCM", name: "TP.Hồ Chí Minh"},{_id: "ĐN", name: "Đà Nẵng"}];
     
     $scope.tabs = [{
       title: 'Tất cả',
       data: $scope.allJobs,
       active: true
-    },{
-      title: 'Mới nhất',
-      data: $scope.newJobs,
-      active: false
     },{
       title: 'HOT',
       data: $scope.hotJobs,
@@ -35,7 +31,9 @@
     }
 
     $scope.jobSearch = {
-      keywords: ''
+      keywords: '',
+      filter_by_field: '',
+      filter_by_location: ''
     };
 
     $scope.setPage = function (page) {
@@ -50,9 +48,11 @@
     };
 
     $scope.searchJobs = function () {
-    	if ($scope.jobSearch.keywords.length > 0) {
+    	if ($scope.jobSearch.keywords.length > 0 || $scope.jobSearch.filter_by_field || $scope.jobSearch.filter_by_location) {
         $location.search({
-          keywords: $scope.jobSearch.keywords
+          keywords: $scope.jobSearch.keywords,
+          filter_by_field: $scope.jobSearch.filter_by_field,
+          filter_by_location: $scope.jobSearch.filter_by_location
         });
       }
     }
@@ -61,7 +61,9 @@
       if (e.keyCode === 13) {
         if ($scope.jobSearch.keywords.length > 0) {
           $location.search({
-            keywords: $scope.jobSearch.keywords
+            keywords: $scope.jobSearch.keywords,
+            filter_by_field: $scope.jobSearch.filter_by_field,
+            filter_by_location: $scope.jobSearch.filter_by_location
           });
         }
       }
