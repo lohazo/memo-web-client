@@ -1,10 +1,10 @@
 <div class="skill-row skill-block-{{row.length}}" ng-repeat="row in skillTree track by $index">
   <div ng-if="!row.isCheckpoint && skill != 'null'"
-    class="{{(skill.finished_lesson == skill.lessons.length) ? 'success' : ''}} {{(skill.theme_color === '#99cc00' ? 'green' : (skill.theme_color === '#ff4444' ? 'red' : 'blue'))}} {{skill.unlocked ? 'unlocked' : 'locked'}} skill skill-{{skill.order + 1}} skill-offset-{{skill.isFirstInRow ? $index : 0}}" ng-repeat="skill in row track by $index">
+    class="{{(skill.finished_lesson == skill.lessons.length && skill.strength_gap >= 4) ? 'success' : ''}} {{(skill.theme_color === '#99cc00' ? 'green' : (skill.theme_color === '#ff4444' ? 'red' : 'blue'))}} {{skill.unlocked ? 'unlocked' : 'locked'}} skill skill-{{skill.order + 1}} skill-offset-{{skill.isFirstInRow ? $index : 0}}" ng-repeat="skill in row track by $index">
     <a href="{{skill.unlocked ? '/skill/' + skill._id : ''}}" target="_self">
       <div class="icon" style="background-image: url('{{skill.unlocked ? iconSets.unlocked : iconSets.locked}}');"></div>
       <div class="name">{{skill.slug}}</div>
-      <div class="level level-4">
+      <div class="level level-{{skill.strength_gap}}">
         <span ng-if="skill.finished_lesson != skill.lessons.length">{{skill.finished_lesson || 0}} / {{skill.lessons.length || 0}}</span>
         <div ng-if="skill.finished_lesson == skill.lessons.length" class="strength-bar"></div>
       </div>

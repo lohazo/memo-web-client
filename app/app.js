@@ -115,6 +115,7 @@
       LABEL_LOG_OUT: 'Đăng xuất',
       LABEL_ALL_POST: 'Tất cả',
       LABEL_FOLLOWING_POST: 'Đang theo dõi',
+      LABEL_SEND_EMAIL_NOTIFICATION: 'Gửi mail cho tôi khi',
       LABEL_NOTIFICATION_DO_EXAM: 'Nhắc nhở làm bài',
       LABEL_NOTIFICATION_FOLLOW: 'Khi có người theo dõi',
       LABEL_NOTIFICATION_BE_OVERCOME: 'Khi có người vượt qua',
@@ -124,6 +125,8 @@
       LABEL_CHECK_BOX_2: 'Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi',
       LABEL_CHECK_BOX_3: 'Âm thanh không chính xác',
       
+      TEXT_STRENGTHEN_EXAM: 'Luyện tập củng cố kĩ năng',
+      TEXT_STRENGTHEN: 'Độ mạnh',
       TEXT_LIST_JOB_TITLE: 'Danh sách việc làm',
       TEXT_HOT_LINE_TO_APPLY_JOB: '0986103650',
       TEXT_APPLE_BY_HOT_LINE: 'Hoặc gọi tới HOT LINE',
