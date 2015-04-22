@@ -63,7 +63,11 @@
 
       data.auth_token = authToken;
 
-      return $http.post(API + '/jobs/upload_cv', data);
+      return $http.post(API + '/jobs/upload_cv?auth_token=' + authToken,data,{
+        withCredentials: false,
+        headers: {'Content-Type': undefined },
+        transformRequest: angular.identity
+      });
   	}
 
     return Services;
