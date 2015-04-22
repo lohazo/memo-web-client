@@ -85,7 +85,7 @@
     };
   }
   
-  function ApplyJobModalCtrl ($scope, JobServices, id, $localStorage, $http) {
+  function ApplyJobModalCtrl ($scope, JobServices, id, $localStorage, $http, $modalInstance, $location) {
     var fd = new FormData();
 
     $scope.uploadCV = function(element) {
@@ -133,7 +133,7 @@
   ])
   .controller('JobDetailCtrl', ['$scope', '$modal', 'Job', JobDetailCtrl
   ])
-  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', '$localStorage', '$http', 
+  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', '$localStorage', '$http', '$modalInstance', '$location', 
     ApplyJobModalCtrl
   ]);
 
