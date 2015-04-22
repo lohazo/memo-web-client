@@ -41,14 +41,11 @@
       <!-- <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_WORK' | translate}}" />
       <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_SALARY' | translate}}" />
       <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_LOCATION' | translate}}" /> -->
-      <select class="choose-work">
-        <option value="">Chọn ngành nghề</option>
-        <option value="">Chọn ngành nghề</option>
+      {{list_fields}}
+      <select class="choose-work" ng-options="list_field._id as list_field.name for list_field in list_fields">
         <option value="">Chọn ngành nghề</option>
       </select>
       <select class="where-work">
-        <option value="">Chọn nơi làm việc</option>
-        <option value="">Chọn nơi làm việc</option>
         <option value="">Chọn nơi làm việc</option>
       </select>
     </div>

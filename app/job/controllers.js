@@ -7,8 +7,8 @@
     $scope.allJobs = allJobs.data;
     $scope.newJobs = newJobs.data;
     $scope.hotJobs = hotJobs.data;
-    
-    // console.log(searchJobs.data);
+    $scope.list_fields = [{_id: "IT", name: "IT"},{_id: "Marketing", name: "Marketing"}, {_id: "Worker", name: "Worker"}]
+    $scope.list_locations = [{_id: "HN", name: "Hà Nội"},{_id: "HCM", name: "TP.Hồ Chí Minh"}, {_id: "ĐN", name: "Đà Nẵng"}]
     
     $scope.tabs = [{
       title: 'Tất cả',
