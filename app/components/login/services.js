@@ -203,7 +203,7 @@
 
       var hostElements = $location.host().split('.');
       var domain = hostElements.shift().match(/^memo/g) ? $location.host() : hostElements.join('.');
-      $cookies.put('auth_token', data.auth_token, {
+      $cookies.put('auth_token', response.data.auth_token, {
         domain: domain
       });
 

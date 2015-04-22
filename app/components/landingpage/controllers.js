@@ -29,7 +29,7 @@ angular.module('landingpage.controllers', [])
     function ($scope, $routeParams, MolServices) {
       var data = $routeParams;
       data.preview = '1';
-      MolServices.saveC2(data);
+  // MolServices.saveC2(data);
       $scope.showLoginCTA = function () {
         return data.code_chanel && data.code_chanel === 'REF001'
       };
