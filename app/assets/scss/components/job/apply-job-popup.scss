@@ -1,5 +1,7 @@
 .reveal-modal {
   width:700px;
+  min-height:300px;
+  padding-bottom:0;
   .recruitment{
     p {      
       font-size: 25px;
@@ -19,15 +21,30 @@
     margin-top: 7px;
   }
   .text-message {
-    min-height:150px;
-    border-radius:4px;
-    margin-bottom:0;
+    min-height: 100px;
+    border-radius: 4px;
+    margin-bottom: 0px;
+    resize: none;
+    border: 1px solid #999;
+  }
+  .form-info {
+    margin-bottom:10px;
   }
   .upload {
     .text {
     }
     .upload-file {
-      width:433px;
+      width: 360px;
+      margin-bottom: 0px;
+      padding-left: 0;
+
+    }
+    .support {
+      clear: both;
+      margin: 0px;
+      margin-left: 194px;
+      font-size: 15px;      
+      padding-top: 5px;
     }
   }
 }

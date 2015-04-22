@@ -1,7 +1,7 @@
 <section class="job-main">
   <section class="main-left">
     <div class="panel">
-
+      <div class="title"><h3>Danh sách việc làm</h3></div>
       <div class="tabs" ng-controller="Tabs">
         <tabset vertical="false" type="navType">
           <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
@@ -15,7 +15,7 @@
                 <div class="content">
                   <p ng-bind-html="job.content"></p>
                 </div>
-                <div class="working">
+                <div class="working"> 
                   <span class="work-type" ng-bind="job.type"></span>
                   <span class="location" ng-bind="job.location"></span>
                 </div>
