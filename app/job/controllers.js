@@ -85,15 +85,11 @@
     };
   }
   
-  function ApplyJobModalCtrl ($scope, JobServices, id, $localStorage, $http, $modalInstance) {
+  function ApplyJobModalCtrl ($scope, JobServices, id, $localStorage, $http) {
     var fd = new FormData();
 
     $scope.uploadCV = function(element) {
       fd.append("file", element.files[0]);
-    };
-
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
     };
 
     $scope.applyJob = function (candidate_data) {
@@ -137,7 +133,7 @@
   ])
   .controller('JobDetailCtrl', ['$scope', '$modal', 'Job', JobDetailCtrl
   ])
-  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', '$localStorage', '$http', '$modalInstance', 
+  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', '$localStorage', '$http', 
     ApplyJobModalCtrl
   ]);
 
