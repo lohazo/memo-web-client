@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function AppCtrl($scope, $localStorage, $sessionStorage, $location, $window, $timeout, EcoTracker) {
+  function AppCtrl($scope, $localStorage, $sessionStorage, $location, $window, $cookies, EcoTracker) {
     EcoTracker.init();
     if (!$localStorage.auth) {
       $localStorage.auth = {
@@ -9,7 +9,15 @@
         trial: false
       };
     }
+
     $scope.auth = $localStorage.auth;
+
+    if ($cookies.get('auth_token')) {
+      if (!$location.host().match(/(^memo.|.net.vn$|.local$)/g)) {
+        $window.location = 'http://memo.edu.vn';
+        return;
+      }
+    }
 
     function loginConfirmed(e, data) {
       $scope.auth = {
@@ -93,6 +101,6 @@
 
   angular.module('app.controllers', ['ngStorage'])
     .controller('AppCtrl', ['$scope', '$localStorage', '$sessionStorage', '$location', '$window',
-      '$timeout', 'EcoTracking', AppCtrl
+      '$cookies', 'EcoTracking', AppCtrl
     ]);
 }(window.angular));

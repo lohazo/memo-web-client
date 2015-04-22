@@ -77,7 +77,8 @@
     return Service;
   }
 
-  function AuthService($q, $rootScope, $localStorage, Facebook, GooglePlus, EcoTracker, MemoTracker,
+  function AuthService($q, $rootScope, $location, $cookies, $localStorage, Facebook, GooglePlus, EcoTracker,
+    MemoTracker,
     LoginService, ReferralService) {
     var Service = {};
 
@@ -182,10 +183,15 @@
     };
 
     Service.logout = function () {
+      var hostElements = $location.host().split('.');
+      var domain = hostElements.shift().match(/^memo/g) ? $location.host() : hostElements.join('.');
       LoginService.logout().then(function () {
         $localStorage.$reset();
         $localStorage.displayTour = null;
         $localStorage.auth = null;
+        $cookies.remove('auth_token', {
+          domain: domain
+        });
         $rootScope.$broadcast('event:auth-logoutConfirmed');
       });
     };
@@ -193,6 +199,12 @@
     function loginCallback(response) {
       $rootScope.$broadcast('event:auth-loginConfirmed', {
         user: response.data
+      });
+
+      var hostElements = $location.host().split('.');
+      var domain = hostElements.shift().match(/^memo/g) ? $location.host() : hostElements.join('.');
+      $cookies.put('auth_token', response.data.auth_token, {
+        domain: domain
       });
 
       var data = angular.fromJson(angular.toJson(response.data));
@@ -211,11 +223,10 @@
     return Service;
   }
 
-  angular.module('login.services', []);
-  angular.module('login.services')
-    .factory('LoginService', ['$http', '$q', '$localStorage', 'API', LoginFactory]);
-  angular.module('login.services')
-    .factory('AuthService', ['$q', '$rootScope', '$localStorage', 'Facebook', 'GooglePlus', 'EcoTracking',
+  angular.module('login')
+    .factory('LoginService', ['$http', '$q', '$localStorage', 'API', LoginFactory])
+    .factory('AuthService', ['$q', '$rootScope', '$location', '$cookies', '$localStorage', 'Facebook', 'GooglePlus',
+      'EcoTracking',
       'MemoTracking', 'LoginService', 'ReferralService', AuthService
     ]);
 }(window.angular));
