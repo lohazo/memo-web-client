@@ -92,6 +92,10 @@
       fd.append("file", element.files[0]);
     };
 
+  $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+
     $scope.applyJob = function (candidate_data) {
       if (!candidate_data) {
         alert("Vui lòng điền thông tin của bạn !!!")
