@@ -41,7 +41,7 @@
 
   // Declare app level module which depends on filters, and services
   angular.module('app', [
-    'ngRoute', 'ngStorage', 'ngAudio', 'angular.filter',
+    'ngRoute', 'ngStorage', 'ngAudio', 'ngCookies', 'angular.filter',
     'mm.foundation', 'angles', 'facebook', 'googleplus',
     'angular-loading-bar', 'angularMoment', 'angulartics', 'angulartics.google.analytics', 'angularFileUpload',
     'app.controllers', 'app.directives',
