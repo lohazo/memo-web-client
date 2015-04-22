@@ -4,38 +4,36 @@
 </div>
 <div class="form-info row" style="margin-top:30px;">
   <div class="small-16 columns">
-    <div class="text small-5 columns">Tên đầy đủ</div>
-    <input class="small-11 columns" ng-model="candidate_data.fullname" />
+    <div class="text small-4 columns">Tên đầy đủ:</div>
+    <input class="small-12 columns" ng-model="candidate_data.fullname" />
   </div>
 </div>
 <div class="form-info row">
   <div class="small-16 columns">
-    <div class="text small-5 columns">Email</div>
-    <input class="small-11 columns" ng-model="candidate_data.email" />
+    <div class="text small-4 columns">Email:</div>
+    <input class="small-12 columns" ng-model="candidate_data.email" />
   </div>
 </div>
 <div class="form-info row">
   <div class="small-16 columns">
-    <div class="text small-5 columns">Điện thoại</div>
-    <input class="small-11 columns" ng-model="candidate_data.mobile" />
+    <div class="text small-4 columns">Điện thoại:</div>
+    <input class="small-12 columns" ng-model="candidate_data.mobile" />
   </div>
 </div>
 <div class="form-info row">
   <div class="small-16 columns">
-    <div class="text small-5 columns">Giới thiệu</div>
+    <div class="text small-4 columns">Giới thiệu:</div>
     <!-- <input class="text-message small-11 columns" ng-model="candidate_data.content" /> -->
-    <textarea class="text-message small-11 columns" ng-model="candidate_data.content"></textarea>
+    <textarea class="text-message small-12 columns" ng-model="candidate_data.content"></textarea>
   </div>
 </div>
 <div class="form-info upload row">
   <div class="small-16 columns">
-    <div class="text small-5 columns">CV đính kèm</div>
-    <input class="upload-file small-11 columns" type="file" accept=".pdf,.doc,.docx" onchange="angular.element(this).scope().uploadCV(this)" />
+    <div class="text small-4 columns">CV đính kèm:</div>
+    <input class="upload-file small-12 columns" type="file" accept=".pdf,.doc,.docx" onchange="angular.element(this).scope().uploadCV(this)" />
     <p class="support">Hỗ trợ định dạng .doc, docx, .pdf nhỏ hơn 512KB</p>
   </div>
 </div>
-<div class="row">
-  <div class="small-16 columns">
+<div class="send-cv row">
     <a class="small radius button" ng-click="applyJob(candidate_data)">Gửi hồ sơ</a>
-  </div>
 </div>
