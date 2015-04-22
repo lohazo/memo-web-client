@@ -76,6 +76,7 @@
       var modalInstance = $modal.open ({
         templateUrl: '/job/_apply-job-popup.html',
         controller: 'ApplyJobModalCtrl',
+        backdrop: 'static',
         // windowClass: ''
         resolve: {
           id: function () {
