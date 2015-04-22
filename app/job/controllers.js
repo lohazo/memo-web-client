@@ -85,7 +85,7 @@
     };
   }
   
-  function ApplyJobModalCtrl ($scope, JobServices, id, $localStorage, $http) {
+  function ApplyJobModalCtrl ($scope, JobServices, id, $localStorage, $http, $modalInstance) {
     var fd = new FormData();
 
     $scope.uploadCV = function(element) {
@@ -114,11 +114,17 @@
         headers: {'Content-Type': undefined },
         transformRequest: angular.identity
       }).success(function () {
-        console.log("suc");
+        $scope.closePopup();
+        alert("Bạn đã gửi hồ sơ thành công !!!");
+        
       }).error(function () {
         alert("Bạn chưa chọn file hoặc file không đúng định dạng");
       });
     };
+
+    $scope.closePopup = function () {
+      $modalInstance.close();
+    }
   }
 
   angular.module('job').controller('Tabs', function ($scope) {})
@@ -127,7 +133,7 @@
   ])
   .controller('JobDetailCtrl', ['$scope', '$modal', 'Job', JobDetailCtrl
   ])
-  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', '$localStorage', '$http', 
+  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', '$localStorage', '$http', '$modalInstance', 
     ApplyJobModalCtrl
   ]);
 
