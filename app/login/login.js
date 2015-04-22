@@ -1,5 +1,7 @@
-'use strict';
+(function (window) {
+  'use strict';
+  /*jshint browser: true */
+  var angular = window.angular;
 
-angular.module('login', [
-   'login.services'
-]);
+  angular.module('login', []);
+}(window));
