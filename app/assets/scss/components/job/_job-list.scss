@@ -7,6 +7,10 @@
       @include panel($bg: $white);
       width: 100% !important;
       border: 0;
+      .title h3 {
+        margin-bottom: 20px;
+        font-size: 24px;  
+      }
       .tabs {
         dd  > a{
           background-color: #fff;
@@ -19,6 +23,7 @@
         .jobs {
           list-style: none;
           padding: 10px;
+          margin-left:0;
           .job {
             border-bottom: solid 1px #ccc;
             padding: 15px 0;

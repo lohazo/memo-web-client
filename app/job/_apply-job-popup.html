@@ -2,42 +2,38 @@
   <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
   <p>Bạn đang ứng tuyển vị trí <span>Automation Engineer</span></p>
 </div>
-<div class="row" style="margin-top:30px;">
+<div class="form-info row" style="margin-top:30px;">
   <div class="small-16 columns">
     <div class="text small-5 columns">Tên đầy đủ</div>
     <input class="small-11 columns" ng-model="candidate_data.fullname" />
   </div>
 </div>
-<br>
-<div class="row">
+<div class="form-info row">
   <div class="small-16 columns">
     <div class="text small-5 columns">Email</div>
     <input class="small-11 columns" ng-model="candidate_data.email" />
   </div>
 </div>
-<br>
-<div class="row">
+<div class="form-info row">
   <div class="small-16 columns">
     <div class="text small-5 columns">Điện thoại</div>
     <input class="small-11 columns" ng-model="candidate_data.mobile" />
   </div>
 </div>
-<br>
-<div class="row">
+<div class="form-info row">
   <div class="small-16 columns">
     <div class="text small-5 columns">Giới thiệu</div>
     <!-- <input class="text-message small-11 columns" ng-model="candidate_data.content" /> -->
     <textarea class="text-message small-11 columns" ng-model="candidate_data.content"></textarea>
   </div>
 </div>
-<br>
-<div class="upload row">
+<div class="form-info upload row">
   <div class="small-16 columns">
-    <div class="text small-4 columns">CV đính kèm</div>
+    <div class="text small-5 columns">CV đính kèm</div>
     <input class="upload-file small-11 columns" type="file" accept=".pdf,.doc,.docx" onchange="angular.element(this).scope().uploadCV(this)" />
+    <p class="support">Hỗ trợ định dạng .doc, docx, .pdf nhỏ hơn 512KB</p>
   </div>
 </div>
-<br>
 <div class="row">
   <div class="small-16 columns">
     <a class="small radius button" ng-click="applyJob(candidate_data)">Gửi hồ sơ</a>
