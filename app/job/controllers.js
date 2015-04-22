@@ -92,7 +92,7 @@
       fd.append("file", element.files[0]);
     };
 
-  $scope.cancel = function () {
+    $scope.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
 
