@@ -2,71 +2,39 @@
 
   'use strict';
 
-  angular.module('question.services', ['diff-match-patch'])
-    .factory('Question', ['dmp', function (dmp) {
-      var Question = function () {};
+  angular.module('question.services', [])
+    .factory('Question', [function () {
+      var Question = {};
 
-      Question.prototype.check = function (question, userAnswer) {
-        if (question.type === 'listen') {
-          return checkListen(question, userAnswer);
-        }
+      Question.check = function (question, userAnswer) {
+        var obj = {
+          'listen': Question.checkListen,
+          'translate': Question.checkTranslate,
+          'select': Question.checkSelect,
+          'judge': Question.checkJudge,
+          'name': Question.checkName,
+          'form': Question.checkForm,
+          'default': function () {
+            return false;
+          }
+        };
 
-        if (question.type === 'translate') {
-          return checkTranslate(question, userAnswer);
-        }
-
-        if (question.type === 'select') {
-          return checkSelect(question, userAnswer);
-        }
-
-        if (question.type === 'judge') {
-          return checkJudge(question, userAnswer);
-        }
-
-        if (question.type === 'name') {
-          return checkName(question, userAnswer);
-        }
-
-        if (question.type === 'form') {
-          return checkForm(question, userAnswer);
-        }
         // {
         //  result: false,
         //  correctAnswer:
         //  answerOptions: [ result form diff]
         // };
-        return false;
+        return (obj[question.type] || obj['default'])(question, userAnswer);
       };
 
-      Question.prototype.skip = function (question, userAnswer) {
-        var result = {};
-
-        if (question.type === 'listen') {
-          result = checkListen(question, userAnswer);
-        } else if (question.type === 'translate') {
-          result = checkTranslate(question, userAnswer);
-        } else if (question.type === 'select') {
-          result = checkSelect(question, userAnswer);
-        } else if (question.type === 'judge') {
-          result = checkJudge(question, userAnswer);
-        } else if (question.type === 'name') {
-          result = checkName(question, userAnswer);
-        } else if (question.type === 'form') {
-          result = checkForm(question, userAnswer);
-        }
-
+      Question.skip = function (question, userAnswer) {
+        var result = Question.check(question, userAnswer);
         result.result = false;
 
         return result;
       };
 
-      Question.prototype.checkListen = checkListen;
-      Question.prototype.checkTranslate = checkTranslate;
-      Question.prototype.checkTypoOnWord = checkTypoOnWord;
-      Question.prototype.checkTypoOnString = checkTypoOnString;
-      Question.prototype.createHtmlForTypoAnswer = createHtmlForTypoAnswer;
-
-      function checkListen(question, userAnswer) {
+      Question.checkListen = function (question, userAnswer) {
         var result = {
           result: false,
           userAnswer: userAnswer,
@@ -79,9 +47,9 @@
           result.result = true;
         }
         return result;
-      }
+      };
 
-      function checkTranslate(question, userAnswer) {
+      Question.checkTranslate = function (question, userAnswer) {
         var result = {
           result: false,
           userAnswer: userAnswer,
@@ -95,8 +63,6 @@
         });
 
         // Group 1
-        console.log(stripSpecialCharacters(userAnswer).toLowerCase(), stripSpecialCharacters(result.correctAnswer)
-          .toLowerCase());
         result.result = stripSpecialCharacters(userAnswer).toLowerCase()
           .localeCompare(stripSpecialCharacters(result.correctAnswer).toLowerCase()) === 0;
 
@@ -136,7 +102,7 @@
           return wordCount(stripSpecialCharacters(userAnswer)) === wordCount(
             stripSpecialCharacters(trans));
         }).map(function (typoString) {
-          return [checkTypoOnString(userAnswer, typoString), typoString];
+          return [Question.checkTypoOnString(userAnswer, typoString), typoString];
         }).filter(function (checkedTypos) {
           return checkedTypos[0] instanceof Array;
         })[0];
@@ -144,48 +110,13 @@
         if (typos) {
           result.result = true;
           result.type = 3;
-          result.answerOptions = createHtmlForTypoAnswer(typos[1], typos[0]);
+          result.answerOptions = Question.createHtmlForTypoAnswer(typos[1], typos[0]);
         }
 
         return result;
-      }
+      };
 
-      function createHtmlForTypoAnswer(correctAnswer, typos) {
-        var words = correctAnswer.trim().split(' ');
-
-        typos.forEach(function (typo) {
-          words[typo[0]] = "<u>" + words[typo[0]] + "</u>";
-        });
-
-        return words.join(' ');
-      }
-
-      function checkTypoOnString(typoString, correctAnswer) {
-        var inputWords = stripSpecialCharacters(typoString).toLowerCase().split(' ');
-        var correctWords = stripSpecialCharacters(correctAnswer).toLowerCase().split(' ');
-
-        var typoCheckedWords = inputWords.map(function (word, i) {
-          return [checkTypoOnWord(word, correctWords[i]), word, i];
-        });
-
-        var test = typoCheckedWords.filter(function (word, i) {
-          return word[0].isDifferent === true;
-        });
-
-        if (test.length > 0) {
-          return false;
-        }
-
-        test = typoCheckedWords.filter(function (word, i) {
-          return word[0].isTypo === true;
-        });
-
-        return test.map(function (element) {
-          return [element[2], correctWords[element[2]].length];
-        });
-      }
-
-      function checkTypoOnWord(word, correctWord) {
+      Question.checkTypoOnWord = function (word, correctWord) {
         var result = {
           isDifferent: false,
           isEqual: false,
@@ -238,9 +169,44 @@
 
         result.isTypo = true;
         return result;
-      }
+      };
 
-      function checkSelect(question, userAnswer) {
+      Question.checkTypoOnString = function (typoString, correctAnswer) {
+        var inputWords = stripSpecialCharacters(typoString).toLowerCase().split(' ');
+        var correctWords = stripSpecialCharacters(correctAnswer).toLowerCase().split(' ');
+
+        var typoCheckedWords = inputWords.map(function (word, i) {
+          return [Question.checkTypoOnWord(word, correctWords[i]), word, i];
+        });
+
+        var test = typoCheckedWords.filter(function (word, i) {
+          return word[0].isDifferent === true;
+        });
+
+        if (test.length > 0) {
+          return false;
+        }
+
+        test = typoCheckedWords.filter(function (word, i) {
+          return word[0].isTypo === true;
+        });
+
+        return test.map(function (element) {
+          return [element[2], correctWords[element[2]].length];
+        });
+      };
+
+      Question.createHtmlForTypoAnswer = function (correctAnswer, typos) {
+        var words = correctAnswer.trim().split(' ');
+
+        typos.forEach(function (typo) {
+          words[typo[0]] = "<u>" + words[typo[0]] + "</u>";
+        });
+
+        return words.join(' ');
+      };
+
+      Question.checkSelect = function (question, userAnswer) {
         var result = {
           result: false,
           userAnswer: userAnswer,
@@ -253,9 +219,9 @@
         }
 
         return result;
-      }
+      };
 
-      function checkJudge(question, userAnswer) {
+      Question.checkJudge = function (question, userAnswer) {
         var result = {
           result: false,
           correctAnswer: question.hints[0],
@@ -274,7 +240,7 @@
         return result;
       }
 
-      function checkName(question, userAnswer) {
+      Question.checkName = function (question, userAnswer) {
         var result = {
           result: false,
           userAnswer: userAnswer,
@@ -296,20 +262,20 @@
           return wordCount(stripSpecialCharacters(userAnswer)) === wordCount(
             stripSpecialCharacters(trans));
         }).map(function (typoString) {
-          return [checkTypoOnString(userAnswer, typoString), typoString];
+          return [Question.checkTypoOnString(userAnswer, typoString), typoString];
         }).filter(function (checkedTypos) {
           return checkedTypos[0] instanceof Array;
         })[0];
 
         if (typos) {
           result.result = true;
-          result.answerOptions = createHtmlForTypoAnswer(typos[1], typos[0]);
+          result.answerOptions = Question.createHtmlForTypoAnswer(typos[1], typos[0]);
         }
 
         return result;
-      }
+      };
 
-      function checkForm(question, userAnswer) {
+      Question.checkForm = function (question, userAnswer) {
         var result = {
           result: false,
           userAnswer: userAnswer,
@@ -608,6 +574,6 @@
         return str;
       }
 
-      return new Question();
+      return Question;
     }]);
 })(window.angular);

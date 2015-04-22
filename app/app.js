@@ -123,6 +123,8 @@
       LABEL_CHECK_BOX_2: 'Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi',
       LABEL_CHECK_BOX_3: 'Âm thanh không chính xác',
       
+      TEXT_STRENGTHEN_EXAM: 'Luyện tập củng cố kĩ năng',
+      TEXT_STRENGTHEN: 'Độ mạnh',
       TEXT_EXAM: 'Ví dụ',
       TEXT_TRANSLATE_MEANING: 'Dịch nghĩa',
       TEXT_STRENGTH_LEVEL_4: 'Vẫn nhớ tốt',
