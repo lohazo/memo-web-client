@@ -15,6 +15,9 @@
             filter: 'hot'
           })
         },
+        allFilter: function (JobServices) {
+          return JobServices.getFilter();
+        },
         searchJobs: function ($route, $q, JobServices) {
           var deferred = $q.defer();
           if ($route.current.params.keywords) {

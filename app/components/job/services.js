@@ -17,6 +17,12 @@
   		return $http.get(endpoint);
   	};
 
+    Services.getFilter = function () {
+      var endpoint = API + '/jobs/all_filters';
+
+      return $http.get(endpoint);
+    }
+
   	Services.searchJobs = function (data) {
   		var endpoint = API + '/jobs/search';
       if (!data) {
@@ -24,7 +30,8 @@
       }
 
   		endpoint += data.page ? '?page=' + data.page : '';
-  		endpoint += data.filter ? '?filter=' + data.filter : '';
+      endpoint += data.filter_by_fields ? '?filter_by_fields=' + data.filter_by_fields : '';
+  		endpoint += data.filter_by_locations ? '?filter_by_locations=' + data.filter_by_locations : '';
   		endpoint += data.sort_by ? '?sort_by=' + data.sort_by : '';
   		endpoint += data.sort_type ? '?sort_type=' + data.sort_type : '';
   		endpoint += data.keywords ? '?keywords=' + data.keywords : '';

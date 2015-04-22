@@ -2,13 +2,12 @@
   'use strict';
 
 
-  function ListJobCtrl ($scope, $location, JobServices, allJobs, newJobs, hotJobs, searchJobs) {
+  function ListJobCtrl ($scope, $location, JobServices, allJobs, hotJobs, allFilter, searchJobs) {
     $scope.max_page = 5;
     $scope.allJobs = allJobs.data;
-    $scope.newJobs = newJobs.data;
     $scope.hotJobs = hotJobs.data;
-    $scope.list_fields = [{_id: "IT", name: "IT"},{_id: "Marketing", name: "Marketing"},{_id: "Worker", name: "Worker"}];
-    $scope.list_locations = [{_id: "HN", name: "Hà Nội"},{_id: "HCM", name: "TP.Hồ Chí Minh"},{_id: "ĐN", name: "Đà Nẵng"}];
+    $scope.list_fields = allFilter.data.filter_by_fields;
+    $scope.list_locations = allFilter.data.filter_by_locations;
     
     $scope.tabs = [{
       title: 'Tất cả',
@@ -96,7 +95,7 @@
 
     $scope.applyJob = function (candidate_data) {
       if (!candidate_data) {
-        alert("Vui lòng điền thông tin của bạn !!!")
+        alert("Vui lòng điền đầy đủ thông tin của bạn !!!")
       } else {
         candidate_data.job_id = id;
       };
@@ -131,7 +130,7 @@
 
   angular.module('job').controller('Tabs', function ($scope) {})
   angular.module('job.controllers', ['job.services'])
-  .controller('ListJobCtrl', ['$scope', '$location', 'JobServices', 'allJobs', 'newJobs', 'hotJobs', 'searchJobs', ListJobCtrl
+  .controller('ListJobCtrl', ['$scope', '$location', 'JobServices', 'allJobs', 'hotJobs', 'allFilter', 'searchJobs', ListJobCtrl
   ])
   .controller('JobDetailCtrl', ['$scope', '$modal', 'Job', JobDetailCtrl
   ])
