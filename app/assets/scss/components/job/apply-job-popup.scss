@@ -12,10 +12,6 @@
       }
     }
   }
-  input {
-    height:40px;
-    line-height:40px;
-  }
   .text {
     margin-top: 7px;
   }
@@ -25,9 +21,16 @@
     margin-bottom: 0px;
     resize: none;
     border: 1px solid #999;
+    width:463px;
   }
   .form-info {
     margin-bottom:10px;
+    input {
+      height:40px;
+      line-height:40px;
+      border-radius:4px;
+      border:solid 1px #999;
+    }
   }
   .upload {
     .text {
@@ -36,6 +39,7 @@
       width: 360px;
       margin-bottom: 0px;
       padding-left: 0;
+      border:none;
 
     }
     .support {
@@ -44,6 +48,13 @@
       margin-left: 194px;
       font-size: 15px;      
       padding-top: 5px;
+    }
+  }
+  .send-cv {
+    text-align:center;
+    .button {
+      margin-bottom:0;
+      padding:15px 65px;
     }
   }
 }
