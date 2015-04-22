@@ -62,7 +62,6 @@
   		var authToken = $localStorage.auth.user.auth_token;
 
       data.auth_token = authToken;
-      data.candidate_id = '';
 
       return $http.post(API + '/jobs/upload_cv', data);
   	}
