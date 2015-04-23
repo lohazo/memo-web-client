@@ -25,6 +25,12 @@
           if ($route.current.params.keywords) {
             return JobServices.searchJobs($route.current.params);
           }
+          if ($route.current.params.filter_by_fields) {
+            return JobServices.searchJobs($route.current.params);
+          }
+          if ($route.current.params.filter_by_locations) {
+            return JobServices.searchJobs($route.current.params);
+          }
           deferred.resolve();
           return deferred.promise;
         }
