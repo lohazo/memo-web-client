@@ -2,7 +2,10 @@
   <a class="close-reveal-modal" ng-click="closePopup()">&#215;</a>
   <p>Bạn đang ứng tuyển vị trí <span>Automation Engineer</span></p>
 </div>
-<div class="form-info row" style="margin-top:30px;">
+<div class="row" style="margin-bottom:0px;height: 35px;color:#810c15;font-size: 14px">
+  <p style="margin:0;text-align:center;">Bạn chưa nhập thông tin đầy đủ</p>
+</div>
+<div class="form-info row">
   <div class="small-16 columns">
     <div class="text small-4 columns">Tên đầy đủ:</div>
     <input class="small-12 columns" ng-model="candidate_data.fullname" />
@@ -29,7 +32,7 @@
 </div>
 <div class="form-info upload row">
   <div class="small-16 columns">
-    <div class="text small-4 columns">CV đính kèm:</div>
+    <div class="text small-4 columns" style="margin-top:0;">CV đính kèm:</div>
     <input class="upload-file small-12 columns" type="file" accept=".pdf,.doc,.docx" onchange="angular.element(this).scope().uploadCV(this)" />
     <p class="support">Hỗ trợ định dạng .doc, docx, .pdf nhỏ hơn 512KB</p>
   </div>
