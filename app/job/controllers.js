@@ -101,6 +101,7 @@
       JobServices.applyJob(candidate_data).success(function () {
         $scope.upCV();
       }).error(function () {
+        $scope.apply_error = true;
       });
     };
 
