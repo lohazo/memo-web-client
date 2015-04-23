@@ -7,6 +7,9 @@
       @include panel($bg: $white);
       width: 100% !important;
       border: 0;
+      padding-left: 30px;
+      padding-right: 30px;
+      padding-top: 35px;
       .title h3 {
         margin-bottom: 20px;
         font-size: 24px;  
@@ -22,14 +25,15 @@
         }
         .jobs {
           list-style: none;
-          padding: 10px;
           margin-left:0;
           .job {
             border-bottom: solid 1px #ccc;
             padding: 15px 0;
             .title {
-              color: #222;
+              color: #810c15;
               font-weight: 600;
+              text-transform: uppercase;
+              font-size: 18px;
             }
             .hot {
               color: #fff;
@@ -42,6 +46,7 @@
               margin-left: 10px;
             }
             .description {
+              margin-top: 10px;
               p {
                 margin: 0;
                 color: #666;
@@ -54,6 +59,7 @@
               }
             }
             .working {
+              margin-top: 15px;
               span {
                 color: #222;
                 &.work-type {
@@ -67,6 +73,11 @@
                 }
               }
             }
+          }
+        }
+        .pagination-centered {
+          .pagination {
+            margin-bottom:0;
           }
         }
       }
@@ -101,6 +112,14 @@
       }
       .filter-job-toolbar {
         padding-top: 20px;
+      }
+      .search {
+        .button {
+          display: block;
+          padding: 10px;
+          margin-bottom: 5px;
+          background: url('assets/img/jobs/search.png') 60px no-repeat #810c15;
+        }
       }
     }
   }
