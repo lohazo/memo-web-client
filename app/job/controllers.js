@@ -102,6 +102,7 @@
         $scope.apply_error = true;
       } else {
         $scope.apply_error = false;
+        $scope.upload_error = false;
         candidate_data.job_id = id;
         JobServices.applyJob(candidate_data).success(function () {
           $scope.upCV();
@@ -116,6 +117,7 @@
         $modalInstance.close(true);
       }).error(function () {
         $scope.upload_error = true;
+        $scope.apply_fail = false;
       });
     };
 
