@@ -62,3 +62,6 @@
     }
   }
 }
+.apply-fail {
+  @include animation(shake 1.3s);
+}

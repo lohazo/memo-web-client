@@ -1,1 +1,81 @@
-.reveal-modal{width:700px;min-height:300px}.reveal-modal .recruitment p{font-size:25px;border-bottom:solid 3px #810c15;padding-bottom:10px}.reveal-modal .recruitment p span{color:#222;font-weight:600}.reveal-modal .text{margin-top:7px;padding-right:20px;text-align:right}.reveal-modal .text-message{min-height:100px;border-radius:4px;margin-bottom:0px;resize:none;border:1px solid #999;width:463px}.reveal-modal .form-info{margin-bottom:10px}.reveal-modal .form-info input{height:40px;line-height:40px;border-radius:4px;border:solid 1px #999}.reveal-modal .upload .upload-file{width:360px;margin-bottom:0px;padding-left:0;line-height:0;border:none}.reveal-modal .upload .support{clear:both;margin:0px;text-align:center;margin-left:21px;font-size:15px;padding-top:5px}.reveal-modal .send-cv{margin-top:10px;text-align:center}.reveal-modal .send-cv .button{margin-bottom:0;padding:15px 65px}
+/*
+Error: Undefined mixin 'animation'.
+        on line 65 of d:/Topica/Topica/WebClient/web-client/app/assets/scss/components/job/apply-job-popup.scss, in `animation'
+        from line 65 of d:/Topica/Topica/WebClient/web-client/app/assets/scss/components/job/apply-job-popup.scss
+
+60:       margin-bottom:0;
+61:       padding:15px 65px;
+62:     }
+63:   }
+64:   .apply-fail {
+65:     @include animation(shake 1.3s);
+66:   }
+67: }
+
+Backtrace:
+d:/Topica/Topica/WebClient/web-client/app/assets/scss/components/job/apply-job-popup.scss:65:in `animation'
+d:/Topica/Topica/WebClient/web-client/app/assets/scss/components/job/apply-job-popup.scss:65
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:348:in `block in visit_mixin'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:98:in `block in with_mixin'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:115:in `with_frame'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:98:in `with_mixin'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:346:in `visit_mixin'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/base.rb:36:in `visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:79:in `block in with_base'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:115:in `with_frame'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:79:in `with_base'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:158:in `visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:430:in `block (2 levels) in visit_rule'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:430:in `map'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:430:in `block in visit_rule'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:428:in `visit_rule'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/base.rb:36:in `visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:79:in `block in with_base'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:115:in `with_frame'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:79:in `with_base'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:158:in `visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:430:in `block (2 levels) in visit_rule'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:430:in `map'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:430:in `block in visit_rule'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:428:in `visit_rule'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/base.rb:36:in `visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:79:in `block in with_base'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:115:in `with_frame'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/stack.rb:79:in `with_base'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:158:in `visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/base.rb:52:in `map'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/base.rb:36:in `visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:157:in `visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/visitors/perform.rb:8:in `visit'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/root_node.rb:36:in `css_tree'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/tree/root_node.rb:20:in `render'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/engine.rb:268:in `render'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/plugin/compiler.rb:209:in `each'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/plugin/compiler.rb:470:in `on_file_changed'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/lib/sass/plugin/compiler.rb:328:in `block in watch'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/vendor/listen/lib/listen/listener.rb:252:in `call'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/vendor/listen/lib/listen/listener.rb:252:in `on_change'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/vendor/listen/lib/listen/adapters/polling.rb:48:in `call'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/vendor/listen/lib/listen/adapters/polling.rb:48:in `poll_changed_directories'
+c:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.11/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined mixin 'animation'.\A         on line 65 of d:/Topica/Topica/WebClient/web-client/app/assets/scss/components/job/apply-job-popup.scss, in `animation'\A         from line 65 of d:/Topica/Topica/WebClient/web-client/app/assets/scss/components/job/apply-job-popup.scss\A \A 60:       margin-bottom:0;\A 61:       padding:15px 65px;\A 62:     }\A 63:   }\A 64:   .apply-fail {\A 65:     @include animation(shake 1.3s);\A 66:   }\A 67: }"; }

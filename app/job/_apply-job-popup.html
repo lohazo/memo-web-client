@@ -3,7 +3,9 @@
   <p>Bạn đang ứng tuyển vị trí <span>Automation Engineer</span></p>
 </div>
 <div class="row" style="margin-bottom:0px;height: 35px;color:#810c15;font-size: 14px">
-  <p style="margin:0;text-align:center;">Bạn chưa nhập thông tin đầy đủ</p>
+  <p style="margin:0;text-align:center;" ng-class="{'apply-fail': apply_error}" ng-if="apply_error">Bạn chưa điền thông tin</p>
+  <p style="margin:0;text-align:center;" ng-class="{'apply-fail': apply_fail}" ng-if="apply_fail">Thông tin của bạn chưa chính xác</p>
+  <p style="margin:0;text-align:center;" ng-class="{'apply-fail': upload_error}" ng-if="upload_error">Bạn chưa chọn file CV để upload</p>
 </div>
 <div class="form-info row">
   <div class="small-16 columns">
@@ -38,5 +40,6 @@
   </div>
 </div>
 <div class="send-cv row">
-    <a class="small radius button" ng-click="applyJob(candidate_data)">Gửi hồ sơ</a>
+  <a class="small radius button" ng-click="applyJob(candidate_data)" ng-show="job.can_apply">Gửi hồ sơ</a>
+  <a class="small radius button" ng-show="!job.can_apply">Gửi hồ sơ</a>
 </div>

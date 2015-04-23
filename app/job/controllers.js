@@ -83,6 +83,10 @@
           }
         }
       });
+
+      modalInstance.result.then(function () {
+        $scope.job.can_apply = false;
+      });
     };
   }
   
@@ -95,20 +99,23 @@
 
     $scope.applyJob = function (candidate_data) {
       if (!candidate_data) {
-      } else {
-        candidate_data.job_id = id;
-      };
-      JobServices.applyJob(candidate_data).success(function () {
-        $scope.upCV();
-      }).error(function () {
         $scope.apply_error = true;
-      });
+      } else {
+        $scope.apply_error = false;
+        candidate_data.job_id = id;
+        JobServices.applyJob(candidate_data).success(function () {
+          $scope.upCV();
+        }).error(function () {
+          $scope.apply_fail = true;
+        });
+      };
     };
 
     $scope.upCV = function () {
       JobServices.uploadCV(fd).success(function () {
-        $modalInstance.dismiss();
-        location.reload();
+        $modalInstance.close(true);
+      }).error(function () {
+        $scope.upload_error = true;
       });
     };
 
