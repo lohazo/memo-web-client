@@ -42,6 +42,7 @@
               margin-left: 10px;
             }
             .description {
+              margin-top: 10px;
               p {
                 margin: 0;
                 color: #666;
@@ -101,6 +102,14 @@
       }
       .filter-job-toolbar {
         padding-top: 20px;
+      }
+      .search {
+        .button {
+          display: block;
+          padding: 10px;
+          margin-bottom: 5px;
+          background: url('assets/img/jobs/search.png') 60px no-repeat #810c15;
+        }
       }
     }
   }
