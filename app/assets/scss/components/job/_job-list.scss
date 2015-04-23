@@ -30,9 +30,10 @@
             border-bottom: solid 1px #ccc;
             padding: 15px 0;
             .title {
-              color: #222;
+              color: #810c15;
               font-weight: 600;
               text-transform: uppercase;
+              font-size: 18px;
             }
             .hot {
               color: #fff;
@@ -58,6 +59,7 @@
               }
             }
             .working {
+              margin-top: 15px;
               span {
                 color: #222;
                 &.work-type {
