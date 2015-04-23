@@ -7,9 +7,13 @@
           </div>
       </div> 
       <!-- Job Detail -->
-      <div class="job title" ng-bind="job.title"></div>
-      <div class="description" ng-bind-html="job.description"></div>
+      <div>
+        <span class="job-position">[{{job.position}}]</span>
+        <span class="job title" ng-bind="job.title"></span>
+        <div class="description" ng-bind-html="job.description"></div>
       <div ng-bind-html="job.content"></div>
+      </div>
+      
     <!--  -->
     </section>
   </section>

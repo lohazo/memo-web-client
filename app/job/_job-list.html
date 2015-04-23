@@ -7,6 +7,7 @@
           <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
             <ul class="jobs">
               <li class="job" ng-repeat="job in tab.data.jobs">
+                <span style="float: left;margin-right: 10px;">[{{job.position}}]</span>
                 <a ng-href="/jobs/{{job.slug}}" title="" class="title" ng-bind="job.title"></a>
                 <span class="hot" ng-if="job.is_hot == true">HOT</span>
                 <div class="description">

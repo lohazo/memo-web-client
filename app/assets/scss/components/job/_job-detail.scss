@@ -21,6 +21,10 @@
         }
         .left {
           margin-top: 10px;
+          .return-button {
+            margin-bottom: 15px;
+            display: block;
+          }
         }
         .return-button {
           color: #333;
@@ -31,12 +35,15 @@
           }
         }
       }
+      .job-position {
+        float:left;
+        clear:both;
+      }
       .job {
-        clear: both;
         font-size: 19px;
         font-weight: 600;
-        padding-top: 20px;
-        display: block;
+        float:left;
+        margin-left: 10px;
         text-transform: uppercase;
         color: #810c15;
       }
@@ -45,6 +52,7 @@
         padding-bottom: 5px;
         margin-bottom: 10px;
         margin-top: 10px;
+        clear: both;
       }
     }
   }
