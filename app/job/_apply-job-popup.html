@@ -1,6 +1,6 @@
 <div class="row recruitment">
   <a class="close-reveal-modal" ng-click="closePopup()">&#215;</a>
-  <p>Bạn đang ứng tuyển vị trí <span>Automation Engineer</span></p>
+  <p>Bạn đang ứng tuyển vị trí <span> {{job.position}}</span></p>
 </div>
 <div class="row" style="margin-bottom:0px;height: 35px;color:#810c15;font-size: 14px">
   <p style="margin:0;text-align:center;" ng-class="{'apply-fail': apply_error}" ng-if="apply_error">Bạn chưa điền thông tin</p>

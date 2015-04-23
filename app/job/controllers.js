@@ -2,20 +2,20 @@
   'use strict';
 
 
-  function ListJobCtrl ($scope, $location, JobServices, allJobs, hotJobs, allFilter, searchJobs) {
+  function ListJobCtrl ($scope, $location, JobServices, JobsOfMemo, JobsForUser, allFilter, searchJobs) {
     $scope.max_page = 5;
-    $scope.allJobs = allJobs.data;
-    $scope.hotJobs = hotJobs.data;
+    $scope.JobsOfMemo = JobsOfMemo.data;
+    $scope.JobsForUser = JobsForUser.data;
     $scope.list_fields = allFilter.data.filter_by_fields;
     $scope.list_locations = allFilter.data.filter_by_locations;
-    
+
     $scope.tabs = [{
-      title: 'Tất cả',
-      data: $scope.allJobs,
+      title: allFilter.data.filter.memo_td,
+      data: $scope.JobsOfMemo,
       active: true
     },{
-      title: 'HOT',
-      data: $scope.hotJobs,
+      title: allFilter.data.filter.for_user,
+      data: $scope.JobsForUser,
       active: false
     }];
 
@@ -23,7 +23,7 @@
       $scope.searchJobs = searchJobs.data;
       $scope.tabs[0].active = false;
       $scope.tabs.push({
-        title: 'Kết quả tìm kiếm',
+        title: allFilter.data.filter.search,
         data: $scope.searchJobs,
         active: true
       });
@@ -31,8 +31,8 @@
 
     $scope.jobSearch = {
       keywords: '',
-      filter_by_field: '',
-      filter_by_location: ''
+      filter_by_fields: '',
+      filter_by_locations: ''
     };
 
     $scope.setPage = function (page) {
@@ -47,11 +47,11 @@
     };
 
     $scope.searchJobs = function () {
-    	if ($scope.jobSearch.keywords.length > 0 || $scope.jobSearch.filter_by_field || $scope.jobSearch.filter_by_location) {
+    	if ($scope.jobSearch.keywords.length > 0 || $scope.jobSearch.filter_by_fields || $scope.jobSearch.filter_by_locations) {
         $location.search({
           keywords: $scope.jobSearch.keywords,
-          filter_by_field: $scope.jobSearch.filter_by_field,
-          filter_by_location: $scope.jobSearch.filter_by_location
+          filter_by_fields: $scope.jobSearch.filter_by_fields,
+          filter_by_locations: $scope.jobSearch.filter_by_locations
         });
       }
     }
@@ -61,8 +61,8 @@
         if ($scope.jobSearch.keywords.length > 0) {
           $location.search({
             keywords: $scope.jobSearch.keywords,
-            filter_by_field: $scope.jobSearch.filter_by_field,
-            filter_by_location: $scope.jobSearch.filter_by_location
+            filter_by_fields: $scope.jobSearch.filter_by_fields,
+            filter_by_locations: $scope.jobSearch.filter_by_locations
           });
         }
       }
@@ -80,6 +80,9 @@
         resolve: {
           id: function () {
             return job._id;
+          },
+          job: function () {
+            return job;
           }
         }
       });
@@ -90,8 +93,9 @@
     };
   }
   
-  function ApplyJobModalCtrl ($scope, JobServices, id, $localStorage, $http, $modalInstance, $location) {
+  function ApplyJobModalCtrl ($scope, JobServices, id, job, $localStorage, $http, $modalInstance, $location) {
     var fd = new FormData();
+    $scope.job = job;
 
     $scope.uploadCV = function(element) {
       fd.append("file", element.files[0]);
@@ -128,11 +132,11 @@
 
   angular.module('job').controller('Tabs', function ($scope) {})
   angular.module('job.controllers', ['job.services'])
-  .controller('ListJobCtrl', ['$scope', '$location', 'JobServices', 'allJobs', 'hotJobs', 'allFilter', 'searchJobs', ListJobCtrl
+  .controller('ListJobCtrl', ['$scope', '$location', 'JobServices', 'JobsOfMemo', 'JobsForUser', 'allFilter', 'searchJobs', ListJobCtrl
   ])
   .controller('JobDetailCtrl', ['$scope', '$modal', 'Job', JobDetailCtrl
   ])
-  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', '$localStorage', '$http', '$modalInstance', '$location', 
+  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', 'job', '$localStorage', '$http', '$modalInstance', '$location', 
     ApplyJobModalCtrl
   ]);
 

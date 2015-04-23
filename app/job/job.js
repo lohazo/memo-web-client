@@ -7,12 +7,14 @@
       templateUrl: 'job/_job-list.html',
       controller: 'ListJobCtrl',
       resolve: {
-        allJobs: function (JobServices) {
-          return JobServices.getJobs();
-        },
-        hotJobs: function (JobServices) {
+        JobsOfMemo: function (JobServices) {
           return JobServices.getJobs({
-            filter: 'hot'
+            filter: 'memo_td'
+          });
+        },
+        JobsForUser: function (JobServices) {
+          return JobServices.getJobs({
+            filter: 'for_user'
           })
         },
         allFilter: function (JobServices) {
