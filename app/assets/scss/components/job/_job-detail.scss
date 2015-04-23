@@ -104,6 +104,11 @@
           display: block;
           padding: 10px;
         }
+        .disable-button {
+          color: $white;
+          background: $iron;
+          pointer-events: none;
+        }
         .apply-for-email {
           text-align:center;
           .title {
