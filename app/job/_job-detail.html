@@ -39,8 +39,7 @@
     		</div>
     		<div class="apply-for-email">
     			<span class="title" translate="TEXT_APPLY_BY_EMAIL"></span>
-    			<a class="email" href="mailto:thanhluan151@gmail.com?subject=Childminding%20query&body=Dear%20Jo,%0A%0AYour%20message%20here%0A%0ARegards,%0A%0AName:%0AEmail:%0APhone:%0A"  
-          style="text-align:center;" target="_blank" ng-click="setGmail()" translate="TEXT_EMAIL_TO_APPLY_JOB"></a>
+    			<a class="email" translate="TEXT_EMAIL_TO_APPLY_JOB"></a>
     		</div>
     		<div class="apply-for-hot-line">
     			<span class="title" translate="TEXT_APPLE_BY_HOT_LINE"></span>
@@ -49,7 +48,7 @@
     	</div>
         <!-- Apply-button -->
         <div class="job-apply-content">
-          <a class="small radius button" ng-click="applyForJob(job)" ng-show="!job.can_apply">Ứng tuyển vị trí này</a>
+          <a class="small radius button" ng-click="applyForJob(job)" ng-show="job.can_apply">Ứng tuyển vị trí này</a>
           <a class="small radius button disable-button" ng-click="applyForJob(job)" ng-show="!job.can_apply">Đã ứng tuyển vị trí này</a>  
         </div>
         <!--  -->

@@ -29,8 +29,8 @@
         var data = {};
       }
 
-      endpoint += data.filter_by_fields ? '&filter_by_fields=' + data.filter_by_fields : '';
-  		endpoint += data.filter_by_locations ? '&filter_by_locations=' + data.filter_by_locations : '';
+      endpoint += data.filter_by_fields ? '&filter_by_field=' + data.filter_by_fields : '';
+  		endpoint += data.filter_by_locations ? '&filter_by_location=' + data.filter_by_locations : '';
   		endpoint += data.sort_by ? '&sort_by=' + data.sort_by : '';
   		endpoint += data.sort_type ? '&sort_type=' + data.sort_type : '';
   		endpoint += data.keywords ? '&keywords=' + data.keywords : '';

@@ -47,7 +47,7 @@
     };
 
     $scope.searchJobs = function () {
-    	if ($scope.jobSearch.keywords.length > 0 || $scope.jobSearch.filter_by_fields || $scope.jobSearch.filter_by_locations) {
+    	if ($scope.jobSearch.keywords.length > 0 || $scope.jobSearch.filter_by_field || $scope.jobSearch.filter_by_location) {
         $location.search({
           keywords: $scope.jobSearch.keywords,
           filter_by_fields: $scope.jobSearch.filter_by_fields,
@@ -71,10 +71,6 @@
 
   function JobDetailCtrl ($scope, $modal, Job) {
     $scope.job = Job.data;
-
-    $scope.setGmail = function () {
-      window.navigator.registerProtocolHandler("mailto","https://mail.google.com/mail/?extsrc=mailto&url=%s","Gmail")
-    }
 
     $scope.applyForJob = function (job) {
       var modalInstance = $modal.open ({

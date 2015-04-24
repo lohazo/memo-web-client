@@ -16,6 +16,9 @@
     margin-top: 7px;
     padding-right: 20px;
     text-align:right;
+    &.note {
+      text-align: center;
+    }
     .required-text {
       color: $red;
     }
@@ -63,5 +66,8 @@
       margin-bottom:0;
       padding:15px 65px;
     }
+  }
+  .apply-fail {
+    @include animation(shake 1.3s);
   }
 }

@@ -2,13 +2,13 @@
   <a class="close-reveal-modal" ng-click="closePopup()">&#215;</a>
   <p>Bạn đang ứng tuyển vị trí <span> {{job.position}}</span></p>
 </div>
-<div class="row" style="margin-bottom:0px;height: 35px;color:#810c15;font-size: 14px">
+<div class="row" style="margin-bottom:0px;height: 35px;color:#810c15;font-size: 14px" ng-if="apply_error || apply_fail || upload_error">
   <p style="margin:0;text-align:center;" ng-class="{'apply-fail': apply_error}" ng-if="apply_error">Bạn chưa điền thông tin</p>
   <p style="margin:0;text-align:center;" ng-class="{'apply-fail': apply_fail}" ng-if="apply_fail">Thông tin của bạn chưa chính xác</p>
   <p style="margin:0;text-align:center;" ng-class="{'apply-fail': upload_error}" ng-if="upload_error">Bạn chưa chọn file CV để upload</p>
 </div>
 <div class="form-note row">
-  <p class="text note">Các trường hợp đánh dấu (*) là bắt buộc</p>
+  <p class="text note">Các trường hợp đánh dấu <span class="required-text">(*)</span> là bắt buộc</p>
 </div>
 <div class="form-info row">
   <div class="small-16 columns">
