@@ -14,15 +14,15 @@
         <li class="menu-item" ng-class="{'active': path == '/'}">
           <a href="/" target="_self" translate="BTN_HOME"></a>
         </li>
+        <li class="menu-item" ng-class="{'active': path.indexOf('/jobs') >= 0}">
+          <a href="/jobs" target="_self" translate="BTN_JOB"></a>
+        </li>
         <li class="menu-item" ng-class="{'active': path.indexOf('/forum') >= 0}">
           <a href="/forum" target="_self" translate="BTN_FORUM"></a>
         </li>
         <li class="menu-item" ng-class="{'active': path.indexOf('/weakestword') >= 0}">
           <a href="/weakestword" target="_self" translate="BTN_WORDS"></a>
         </li> 
-        <li class="menu-item" ng-class="{'active': path.indexOf('/jobs') >= 0}">
-          <a href="/jobs" target="_self" translate="BTN_JOB"></a>
-        </li>
       </ul>
       <!-- Right Nav Section -->
       <ul class="right" ng-if="auth.loggedIn">
