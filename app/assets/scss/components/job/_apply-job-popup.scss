@@ -16,6 +16,9 @@
     margin-top: 7px;
     padding-right: 20px;
     text-align:right;
+    .required-text {
+      color: $red;
+    }
   }
   .text-message {
     min-height: 100px;

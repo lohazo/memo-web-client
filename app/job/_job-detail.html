@@ -49,7 +49,7 @@
     	</div>
         <!-- Apply-button -->
         <div class="job-apply-content">
-          <a class="small radius button" ng-click="applyForJob(job)" ng-show="job.can_apply">Ứng tuyển vị trí này</a>
+          <a class="small radius button" ng-click="applyForJob(job)" ng-show="!job.can_apply">Ứng tuyển vị trí này</a>
           <a class="small radius button disable-button" ng-click="applyForJob(job)" ng-show="!job.can_apply">Đã ứng tuyển vị trí này</a>  
         </div>
         <!--  -->

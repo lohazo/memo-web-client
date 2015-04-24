@@ -7,34 +7,37 @@
   <p style="margin:0;text-align:center;" ng-class="{'apply-fail': apply_fail}" ng-if="apply_fail">Thông tin của bạn chưa chính xác</p>
   <p style="margin:0;text-align:center;" ng-class="{'apply-fail': upload_error}" ng-if="upload_error">Bạn chưa chọn file CV để upload</p>
 </div>
+<div class="form-note row">
+  <p class="text note">Các trường hợp đánh dấu (*) là bắt buộc</p>
+</div>
 <div class="form-info row">
   <div class="small-16 columns">
-    <div class="text small-4 columns">Tên đầy đủ:</div>
+    <div class="text small-4 columns">Tên đầy đủ <span class="required-text">(*)</span></div>
     <input class="small-12 columns" ng-model="candidate_data.fullname" />
   </div>
 </div>
 <div class="form-info row">
   <div class="small-16 columns">
-    <div class="text small-4 columns">Email:</div>
+    <div class="text small-4 columns">Email <span class="required-text">(*)</span></div>
     <input class="small-12 columns" ng-model="candidate_data.email" />
   </div>
 </div>
 <div class="form-info row">
   <div class="small-16 columns">
-    <div class="text small-4 columns">Điện thoại:</div>
+    <div class="text small-4 columns">Điện thoại <span class="required-text">(*)</span></div>
     <input class="small-12 columns" ng-model="candidate_data.mobile" />
   </div>
 </div>
 <div class="form-info row">
   <div class="small-16 columns">
-    <div class="text small-4 columns">Giới thiệu:</div>
+    <div class="text small-4 columns">Giới thiệu</div>
     <!-- <input class="text-message small-11 columns" ng-model="candidate_data.content" /> -->
     <textarea class="text-message small-12 columns" ng-model="candidate_data.content"></textarea>
   </div>
 </div>
 <div class="form-info upload row">
   <div class="small-16 columns">
-    <div class="text small-4 columns" style="margin-top:0;">CV đính kèm:</div>
+    <div class="text small-4 columns" style="margin-top:0;">CV đính kèm <span class="required-text">(*)</span></div>
     <input class="upload-file small-12 columns" type="file" accept=".pdf,.doc,.docx" onchange="angular.element(this).scope().uploadCV(this)" />
     <p class="support">Hỗ trợ định dạng .doc, docx, .pdf nhỏ hơn 512KB</p>
   </div>
