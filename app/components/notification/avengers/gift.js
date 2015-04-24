@@ -11,7 +11,7 @@
         content: '@',
         timeAgo: '='
       },
-      templateUrl: 'components/notification/avenger/_avengers.html',
+      templateUrl: 'components/notification/avengers/_avengers.html',
       controller: 'NotificationGiftItemCtrl'
     };
   }
