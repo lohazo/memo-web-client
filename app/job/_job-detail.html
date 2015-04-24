@@ -1,0 +1,57 @@
+<section class="job-detail-main">
+  <section class="main-left">
+    <section class="panel job-detail-panel">  
+      <div class="job-detail-header">
+      	<div class="left">
+            <a class="return-button" ng-href="/jobs">&lsaquo; {{'TEXT_LIST_JOB_TITLE' | translate}} </a>
+          </div>
+      </div> 
+      <!-- Job Detail -->
+      <div>
+        <span class="job-position">[{{job.position}}]</span>
+        <span class="job title" ng-bind="job.title"></span>
+        <div class="description" ng-bind-html="job.description"></div>
+      <div ng-bind-html="job.content"></div>
+      </div>
+      
+    <!--  -->
+    </section>
+  </section>
+  <section class="main-right">
+    <section class="panel job-info-panel">
+    	<div class="job-info-title">
+    		<span translate="TEXT_JOB_INFORMATION_TITLE"></span>
+    	</div>
+    	<div class="job-info-content">
+    		<div class="by_time">
+    			<span ng-bind="job.type"></span>
+    		</div>
+    		<div class="by_location">
+    			<span ng-bind="job.location"></span>
+    		</div>
+    		<div class="by_phone">
+    			<span ng-bind="job.phone"></span>
+    		</div>
+    	</div>
+    	<div class="job-apply-content">
+    		<div class="title">
+    			<span translate="TEXT_APPLY_JOB_TITLE"></span>
+    		</div>
+    		<div class="apply-for-email">
+    			<span class="title" translate="TEXT_APPLY_BY_EMAIL"></span>
+    			<a class="email" translate="TEXT_EMAIL_TO_APPLY_JOB"></a>
+    		</div>
+    		<div class="apply-for-hot-line">
+    			<span class="title" translate="TEXT_APPLE_BY_HOT_LINE"></span>
+    			<span class="hot-line" translate="TEXT_HOT_LINE_TO_APPLY_JOB"></span>
+    		</div>
+    	</div>
+        <!-- Apply-button -->
+        <div class="job-apply-content">
+          <a class="small radius button" ng-click="applyForJob(job)" ng-show="job.can_apply">Ứng tuyển vị trí này</a>
+          <a class="small radius button disable-button" ng-click="applyForJob(job)" ng-show="!job.can_apply">Đã ứng tuyển vị trí này</a>  
+        </div>
+        <!--  -->
+    </section>
+  </section>
+</section>

@@ -126,7 +126,7 @@
       $location.search(search);
       return;
     };
-
+    
     $scope.searchWithButton = function () {
       if ($scope.postSearch.keywords.length > 0) {
         $location.search({

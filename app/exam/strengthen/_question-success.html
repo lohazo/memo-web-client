@@ -10,8 +10,8 @@
       <ul>
         <li>
           <div class="slide slide-1">
-            <h4>Bài học kết thúc! + {{question.finish_exam_bonus_exp}} XP</h4>
-            <h4 ng-if="question.heart_bonus_exp > 0">Thưởng thêm trái tim + {{question.heart_bonus_exp}} XP</h4>
+            <h4><span>{{'TEXT_FINISH_LESSON' | translate}}</span> + {{question.finish_exam_bonus_exp}} XP</h4>
+            <h4 ng-if="question.heart_bonus_exp > 0"><span>{{'TEXT_BONUS_HEART' | translate}}</span> + {{question.heart_bonus_exp}} XP</h4>
             <div class="row">
               <div class="large-8 columns col-left">
                 <span class="lesson-finish-ant"></span>
@@ -25,7 +25,7 @@
         </li>
         <li ng-if="(question.bonus_money + question.bonus_money_full_heart) > 0">
           <div class="slide slide-2 reward">
-            <h4 class="text-center">Bạn đã nhận được {{question.bonus_money + question.bonus_money_full_heart}} Memo Coin!</h4>
+            <h4 class="text-center"><span>{{'TEXT_GET_BONUS' | translate}}</span> {{question.bonus_money + question.bonus_money_full_heart}} Memo Coin!</h4>
             <div class="row">
               <div class="large-16 columns">
                 <div class="big-memo-coin">
@@ -33,7 +33,7 @@
                 </div>
                 <div class="detail-box">
                   <div class="row item" ng-if="question.bonus_money > 0">
-                    <div class="large-12 columns text">Hoàn tất kỹ năng {{question.affected_skill.title}}</div>
+                    <div class="large-12 columns text"><span>{{'TEXT_AFFECTED_SKILL_TITLE' | translate}}</span> {{question.affected_skill.title}}</div>
                     <div class="large-4 columns quantity">{{question.bonus_money}}</div>
                   </div>
                   <div class="row item" ng-if="question.bonus_money_full_heart > 0">
@@ -42,8 +42,8 @@
                   </div>
                   <hr />
                   <div>
-                    Sử dụng Memo Coin để mua những vật phẩm từ
-                    <a ng-href="/plaza">Memo Plaza</a>
+                    <span>{{'TEXT_TO_USE_MEMO_COIN' | translate}}</span>
+                    <a ng-href="/plaza" translate="BTN_PLAZA"></a>
                   </div>
                 </div>
               </div>
@@ -52,10 +52,10 @@
         </li>
         <li ng-if="question.num_affected_skill > 1">
           <div class="slide slide-3">
-            <h4 class="text-center">Bạn đã củng cố được các kỹ năng</h4>
+            <h4 class="text-center" translate="TEXT_FINISH_AFFECTED_SKILL_TITLE"></h4>
             <h4>{{question.affected_skill[0].title}}, {{question.affected_skill[1].title}}<span ng-if="question.num_affected_skill > 2">, {{question.affected_skill[2].title}}</span>
               <span ng-show="{{question.num_affected_skill && question.num_affected_skill > 3}}">
-                và {{question.num_affected_skill - 3}} kỹ năng khác
+                <span>{{'TEXT_AND' | translate}}</span> {{question.num_affected_skill - 3}} <span>{{'TEXT_FINISH_AFFECTED_SKILL_TITLE' | translate}}</span>
               </span>
             </h4>
             <div class="row">
@@ -84,10 +84,10 @@
                   </div>
                 </div>
                 <div class="row">
-                  <p>Cố giữ những thanh hiển thị độ mạnh luôn đầy vì qua thời gian các thanh sẽ giảm dần khi quên từ vựng</p>
+                  <p translate="TEXT_WEAKEST_WORD_HOOK"></p>
                 </div>
                 <div class="row">
-                  <a href="" class="small radius facebook share button">Chia sẻ</a>
+                  <a href="" class="small radius facebook share button" translate="BTN_SHARE"></a>
                 </div>
               </div>
             </div>

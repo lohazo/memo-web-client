@@ -4,15 +4,13 @@
       <div class="container">
         <section class="setting-notification">
           <div class="row">
-            <h3 class="title left">Ngôn ngữ</h3>
-            <a class="small radius button right save-change" ng-click="saveChanges()">Lưu thay đổi</a>
+            <h3 class="title left" translate="TEXT_LANGUAGE"></h3>
+            <a class="small radius button right save-change" ng-click="saveChanges()" translate="BTN_SAVE_CHANGES"></a>
           </div>
           <div class="row">
             <div class="large-10 columns large-centered">
               <div class="row">
-                <div class="large-4 columns">
-                  Học ngôn ngữ
-                </div>
+                <div class="large-4 columns" translate="TEXT_SELECT_COURSE"></div>
                 <div class="large-12 columns">
                   <select ng-model="course" ng-options="course.name for course in userCourses">
                   </select>
@@ -21,7 +19,7 @@
               <div class="row">
                 <div class="large-4 columns"></div>
                 <div class="large-12 columns">
-                  <a ng-href="/course" class="small-16 secondary memo-button">Xem tất cả các khoá học ngôn ngữ</a>
+                  <a ng-href="/course" class="small-16 secondary memo-button" translate="BTN_VIEW_COURSE"></a>
                 </div>
               </div>
             </div>

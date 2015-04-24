@@ -5,8 +5,8 @@
         <div class="small-4 columns text-center track" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess'">
           <div class="row">
             <div class="small-8 columns">
-              <a ng-if="examType == 'checkpoint'" href="" ng-click="quit(false, '/')">Thoát</a>
-              <a ng-if="examType != 'checkpoint'" href="" ng-click="quit(false, '/skill')">Thoát</a>
+              <a ng-if="examType == 'checkpoint'" href="" ng-click="quit(false, '/')" translate="BTN_QUIT"></a>
+              <a ng-if="examType != 'checkpoint'" href="" ng-click="quit(false, '/skill')" translate="BTN_QUIT"></a>
             </div>
             <div class="small-8 columns">
               {{answered || 0}} / {{questions.length || 0}}

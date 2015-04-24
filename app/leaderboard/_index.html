@@ -4,16 +4,16 @@
 <div ng-if="showLeaderboard">
   <div class="row" >
     <div class="columns small-16">
-      <a href="#" class="small-16 secondary memo-button facebook-search" ng-click="searchFbFriends()" >Tìm bạn trên facebook</a>
+      <a href="#" class="small-16 secondary memo-button facebook-search" ng-click="searchFbFriends()" translate="BTN_SEARCH_FACEBOOK_FRIEND"></a>
     </div>
   </div>
   <div class="row">
     <div class="columns small-8">
-      <a dropdown-toggle="#search-friend" class="small-16 secondary email-invitation memo-button">Mời</a>
+      <a dropdown-toggle="#search-friend" class="small-16 secondary email-invitation memo-button">{{'BTN_INVITE_FRIEND' | translate}}</a>
       <div id="search-friend" class="f-dropdown" leaderboard-email-invite show-on-click="true"></div>
     </div>
     <div class="columns small-8">
-      <a href="#" class="small-16 secondary memo-button memo-search" ng-click="searchFriends()">Tìm kiếm</a>
+      <a href="#" class="small-16 secondary memo-button memo-search" ng-click="searchFriends()" translate="BTN_SEARCH_FRIEND"></a>
     </div>
   </div>
 </div>

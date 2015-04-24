@@ -2,8 +2,8 @@
 <a class="close-reveal-modal" ng-click="cancel()">×</a>
   <section class="discussion-header">
     <div class="left">
-      <a class="small radius button follow-button" ng-if="getPost.follow == false" ng-click="followPost()">Theo dõi chủ đề</a>
-      <a class="small radius button follow-button" ng-if="getPost.follow == true" ng-click="unfollowPost()">Bỏ theo dõi</a>
+      <a class="small radius button follow-button" ng-if="getPost.follow == false" ng-click="followPost()" translate="TEXT_FOLLOW_POST"></a>
+      <a class="small radius button follow-button" ng-if="getPost.follow == true" ng-click="unfollowPost()" translate="TEXT_UNFOLLOW_POST"></a>
     </div>
   </section>
   <section class="discussion-content">
@@ -23,22 +23,22 @@
         </div>
         <div class="discussion-editor-right">
           <div class="discussion-editor-text-area">
-            <textarea class="editor-text-area" ng-model="requestData.content" placeholder="Thảo luận câu này với người học khác"></textarea>
+            <textarea class="editor-text-area" ng-model="requestData.content" placeholder="{{'TEXT_DISCUSSION_QUESTION' | translate}}"></textarea>
           </div>
           <div class="discussion-editor-description">
             <div class="editor-description-left">
               <img class="warning-logo" src="assets/img/tutorial/warning.png" /> 
             </div>
-            <div class="editor-description-right">Trong quá trình làm bài, nếu đáp án của bạn có vẻ đúng nhưng không được chấp nhận, làm ơn bấm nút báo lỗi và chọn mục tương ứng để thông báo cho bọn mình. Vui lòng không báo lỗi hoặc đề nghị đáp án đúng tại đây.</div>
+            <div class="editor-description-right" translate="TEXT_DISCUSSION_CONTENT"></div>
           </div>
           <div class="discussion-toolbar">
-            <a class="small radius button send-button" ng-click="createComment()">Gửi bình luận</a>
+            <a class="small radius button send-button" ng-click="createComment()" translate="BTN_SEND_DISCUSSION"></a>
             <!-- <a class="small radius button cancel-button">Hủy</a> -->
           </div>
         </div>
       </section>
       <section class="discussion-comment-count">
-        <h4 class="">{{getPost.total_comment}} bình luận </h4>
+        <h4 class="">{{getPost.total_comment}} <span>{{'TEXT_COMMENT' | translate}}</span> </h4>
       </section>
     </section>
   </section>
