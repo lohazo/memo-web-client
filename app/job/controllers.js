@@ -6,19 +6,28 @@
     $scope.max_page = 5;
     $scope.JobsOfMemo = JobsOfMemo.data;
     $scope.JobsForUser = JobsForUser.data;
+    console.log(JobsForUser.data);
     $scope.list_fields = allFilter.data.filter_by_fields;
     $scope.list_locations = allFilter.data.filter_by_locations;
 
-    $scope.tabs = [{
-      title: allFilter.data.filter.for_user,
-      data: $scope.JobsForUser,
-      active: true
-    },
-    {
-      title: allFilter.data.filter.memo_td,
-      data: $scope.JobsOfMemo,
-      active: false
-    }];
+    if (!JobsForUser.data.message) {
+      $scope.tabs = [{
+        title: allFilter.data.filter.for_user,
+        data: $scope.JobsForUser,
+        active: true
+      },
+      {
+        title: allFilter.data.filter.memo_td,
+        data: $scope.JobsOfMemo,
+        active: false
+      }];
+    } else {
+      $scope.tabs = [{
+        title: allFilter.data.filter.memo_td,
+        data: $scope.JobsOfMemo,
+        active: true
+      }];
+    };
 
     if ($location.search().keywords || $location.search().filter_by_fields || $location.search().filter_by_locations) {
       $scope.searchJobs = searchJobs.data;
