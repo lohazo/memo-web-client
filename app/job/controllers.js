@@ -6,7 +6,6 @@
     $scope.max_page = 5;
     $scope.JobsOfMemo = JobsOfMemo.data;
     $scope.JobsForUser = JobsForUser.data;
-    console.log(JobsForUser.data);
     $scope.list_fields = allFilter.data.filter_by_fields;
     $scope.list_locations = allFilter.data.filter_by_locations;
 
