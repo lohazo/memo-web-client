@@ -49,7 +49,7 @@
       BTN_HOME: 'Trang chủ',
       BTN_FORUM: 'Thảo luận',
       BTN_WORDS: 'Từ vựng',
-      BTN_JOB: 'CƠ HỘI VIỆC LÀM !',
+      BTN_JOB: 'CƠ HỘI VIỆC LÀM!',
       BTN_PLAZA: 'Memo Plaza',
       BTN_CHECKPOINT: 'Kiểm tra rút ngắn {{value}} kỹ năng',
       BTN_FINISH_CHECKPOINT: 'Bạn đã vượt qua checkpoint này',
