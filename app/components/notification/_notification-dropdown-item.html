@@ -1,6 +1,9 @@
 <div class="noti-item-inner" noti-id="{{noti._id}}">
   <div class="noti-item-image"><img ng-src="{{noti.metadata.url_image}}"/></div>
   <div class="noti-item-content">{{noti.content}}
+    <div click-event-track tracking-data='{"eventName": "avengers noti click", "memoEnabled": "true"}'>
+      <a class="noti-follow-button" ng-href="{{noti.metadata.url_shop}}" target="_blank">Tham gia ngay</a>
+    </div>
     <div class="noti-time-ago" am-time-ago="{{noti.time_ago}}"></div>
   </div>
 </div>
