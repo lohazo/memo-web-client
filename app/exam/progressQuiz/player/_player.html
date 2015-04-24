@@ -4,10 +4,10 @@
       <div class="context-view" player-context-view></div>
       <header class="player-header" player-header ng-class="{'hide': player.progressQuiz.settings.header.hide}">
         <div class="left">
-          <progress-quiz-quit-link quit-link-text="Thoát" quit-link-hide="player.progressQuiz.settings.header.left.quitLink.hide" skip="player.progressQuiz.quit()"></progress-quiz-quit-link>
+          <progress-quiz-quit-link quit-link-text="{{'TEXT_QUIT' | translate}}" quit-link-hide="player.progressQuiz.settings.header.left.quitLink.hide" skip="player.progressQuiz.quit()"></progress-quiz-quit-link>
         </div>
         <div class="right">
-          <span style="line-height:80px;font-size:22px;" ng-if="!player.progressQuiz.settings.header.right.questionIndicator.hide">Câu hỏi số: {{player.progressQuiz.currentData.current_question || 0}}</span>
+          <span style="line-height:80px;font-size:22px;" ng-if="!player.progressQuiz.settings.header.right.questionIndicator.hide"><span>{{'TEXT_QUESTION_NO' | translate}}</span> {{player.progressQuiz.currentData.current_question || 0}}</span>
         </div>
       </header>
       <div class="player-main" ng-switch on="player.progressQuiz.currentData.question.type">
@@ -20,7 +20,7 @@
         <div class="buttons">
           <div class="left">
             <div class="grade" ng-if="player.progressQuiz.userData.answer.userAnswer">
-              <h3>Đã gửi câu trả lời:<span class="lighter" style="display:block;font-weight:lighter;font-size: 22px;">Lựa chọn "Tiếp tục" để chuyển sang câu hỏi kế tiếp</span></h3>
+              <h3 translate="TEXT_CONFIRM_ANSWER_PROGRESS_QUIZ"></h3>
             </div>
             <div class="clearfix">
               <!-- <a title="" ng-if="player.progressQuiz.settings.footer.left.skipButton.disable" class="radius button skip disable">

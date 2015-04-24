@@ -1,0 +1,142 @@
+.job-detail-main {
+  @include grid-row;
+  padding-top: 42px;
+  .main-left {
+    @include grid-column($columns: 12);
+    .panel {
+      @include panel($bg: $white);
+      width: 100% !important;
+      border: 0;
+    }
+    .job-detail-panel {
+      border-radius: 10px;
+      padding-left: 30px;
+      padding-right: 30px;
+      padding-top: 35px;
+      padding-bottom:20px;
+      @include grid-row;
+      .job-detail-header {
+        .right {
+          margin-right: 10px;
+        }
+        .left {
+          margin-top: 10px;
+          .return-button {
+            margin-bottom: 15px;
+            display: block;
+          }
+        }
+        .return-button {
+          color: #333;
+          font-size: 1rem;
+          font-weight: bold;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      .job-position {
+        float:left;
+        clear:both;
+      }
+      .job {
+        font-size: 19px;
+        font-weight: 600;
+        float:left;
+        margin-left: 10px;
+        text-transform: uppercase;
+        color: #810c15;
+      }
+      .description {
+        border-bottom: 1px solid #999;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        clear: both;
+      }
+    }
+  }
+  .main-right {
+    @include grid-column($columns: 4);
+    .panel {
+      @include panel($bg: $white);
+      width: 100% !important;
+      border: 0;
+    }
+    .job-info-panel { 
+      padding: 20px;
+      border-radius: 10px;
+      margin-top:0;
+      .job-info-title {
+        padding-top: 20px;
+        font-size: 24px;
+      }
+      .job-info-content {
+        font-size: 16px;
+        padding-top: 20px;
+        border-bottom: 1px solid $iron;
+        .by_time {
+          padding-bottom: 20px;
+          span {
+            color: #222;
+            background: url("assets/img/jobs/job-type-icon.png") left no-repeat;
+            padding-left:30px;
+          }
+        }
+        .by_location {
+          padding-bottom: 20px;
+          span {
+            color: #222;
+            background: url("assets/img/jobs/job-location-icon.png") left no-repeat;
+            padding-left: 28px;
+          }
+        }
+        .by_phone {
+          color: #222;
+          background: url("assets/img/jobs/phone-icon.png") left no-repeat;
+          padding-left:30px;
+          margin-bottom:20px;
+        }
+      }
+      .job-apply-content {
+        font-size: 16px;
+        text-align: center;
+        .title {
+          text-align:center;
+          margin-top:15px;
+          display:block;
+          font-size:15px;
+        }
+        .button {
+          margin-bottom: 5px;
+          display: block;
+          padding: 10px;
+        }
+        .disable-button {
+          color: $white;
+          background: $iron;
+          pointer-events: none;
+        }
+        .apply-for-email {
+          text-align:center;
+          .title {
+            display:block;
+          }
+          .email {
+            color: $primary-color;
+          }
+        }
+        .apply-for-hot-line {
+          text-align:center;
+          margin-bottom:20px;
+          .title {
+
+          }
+          .hot-line {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}

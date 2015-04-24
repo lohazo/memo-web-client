@@ -2,29 +2,29 @@
   <div class="left">
     <div class="grade">
       <span class="left icon-close badge-big"></span>
-      <h3>Chính xác <span class="lighter">Xin chào, tên tôi là Memo.</span></h3>
+      <h3>{{'TEXT_CORRECT' | translate}} <span class="lighter">{{'TEXT_HELLO_MEMO' | translate}}</span></h3>
       <div class="clearfix">
-        <a title class="radius button report" dropdown-toggle="#report-dropdown">Báo lỗi</a>
+        <a title class="radius button report" dropdown-toggle="#report-dropdown">{{'BTN_REPORT_BUG' | translate}}</a>
         <ul id="report-dropdown" class="f-dropdown" show-on-click="true">
-          <li><input type="checkbox" id="1"><label for="1"><span class="box icon-checkmark"></span>Tiếng Anh không được tự nhiên hoặc có lỗi</label></li>
-          <li><input type="checkbox" id="2"><label for="2"><span class="box icon-checkmark"></span>Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi</label></li>
-          <li><input type="checkbox" id="3"><label for="3"><span class="box icon-checkmark"></span>Âm thanh không chính xác</label></li>
+          <li><input type="checkbox" id="1"><label for="1"><span class="box icon-checkmark"></span>{{'LABEL_CHECK_BOX_1' | translate}}</label></li>
+          <li><input type="checkbox" id="2"><label for="2"><span class="box icon-checkmark"></span>{{'LABEL_CHECK_BOX_2' | translate}}</label></li>
+          <li><input type="checkbox" id="3"><label for="3"><span class="box icon-checkmark"></span>{{'LABEL_CHECK_BOX_3' | translate}}</label></li>
           <li><input type="checkbox" id="4"><label for="4"><span class="box icon-checkmark"></span><textarea name=""></textarea></label></li>
           <li class="row unhoverable">
             <div class="right">
-              <a class="radius button close">Hủy</a>
-              <a class="radius button send">Gửi</a>
+              <a class="radius button close" translate="BTN_CANCEL"></a>
+              <a class="radius button send" translate="BTN_SEND"></a>
             </div>
           </li>
         </ul>
         <span class="welcome-tooltip fade in">
           <span class="tooltip-peg"></span>
-          <span class="tooltip tip-right">Lựa chọn báo lỗi và vui lòng góp ý cho Memo khi cảm thấy câu trả lời của bạn là đúng. Những góp ý của bạn sẽ giúp nội dung của Memo hoàn thiện hơn.</span>
+          <span class="tooltip tip-right" translate="TEXT_REPORT_POPUP"></span>
           </span>
       </div>
     </div>
   </div>
   <div class="right">
-    <a title="" class="radius button continue">Bắt đầu bài hướng dẫn</a>
+    <a title="" class="radius button continue" translate="BTN_START_TUTORIAL"></a>
   </div>
 </div>

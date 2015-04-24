@@ -7,7 +7,7 @@
       <div class="large-10 columns username">
         <h4>{{profile.username}}</h4>
         <div class="row" ng-if="profile.referral_user && profile.referral_user.length > 0">
-          <span style="font-size: 12px;">Bạn đã nhập code của <a ng-href="/profile/{{profile.referral_user_id}}">{{profile.referral_user}}</a>!</span>
+          <span style="font-size: 12px;">{{'TEXT_GET_REFERRAL_CODE' | translate}}<a ng-href="/profile/{{profile.referral_user_id}}">{{profile.referral_user}}</a>!</span>
         </div>
       </div>
     </div>
@@ -15,24 +15,20 @@
       <hr />
       <div class="campaign-left" style="margin-left:-10px;margin-right:-10px;">
         <div class="row" style="margin-top: 10px;">
-          <div class="large-10 columns">
-            Đã mời được:
-          </div>
+          <div class="large-10 columns" translate="TEXT_INVITED"></div>
           <div class="large-6 columns text-right ng-binding" style="font-weight: 700;">
-            {{referral.record.invited_count}} bạn
+            {{referral.record.invited_count}} <span>{{'TEXT_FRIEND' | translate}}</span>
           </div>
         </div>
         <div class="row">
-          <div class="large-10 columns">
-            Code chia sẻ:
-          </div>
+          <div class="large-10 columns" translate="TEXT_SHARE_REFERRAL_CODE"></div>
           <div class="large-6 columns text-right ng-binding" style="font-weight: 700;">
             {{referral.record.code}}
           </div>
         </div>
         <div class="row" style="margin-top: 10px;">
           <div class="large-16 columns">
-            <i>Memo sẽ trở nên thú vị hơn khi học cùng bạn bè. Rủ bạn học ngay nhé!</i>
+            <i translate="TEXT_INVITE_FRIEND"></i>
           </div>
         </div>
         <div class="row collapse" style="margin-top: 10px;">
@@ -45,10 +41,10 @@
         <div class="row">
           <div class="large-16 columns">
             <ul style="margin-bottom: 0px;">
-              <p style="margin-bottom: 0;margin-left: -20px;">Lợi ích:</p>
-              <li>Cùng học tiếng Anh</li>
-              <li>So tài đua top BXH</li>
-              <li>Cùng nhận 3 MemoCoin</li>
+              <p style="margin-bottom: 0;margin-left: -20px;" translate="TEXT_UTILITY_TITLE"></p>
+              <li translate="TEXT_FIRST_UTILITY"></li>
+              <li translate="TEXT_SECOND_UTILITY"></li>
+              <li translate="TEXT_THIRD_UTILITY"></li>
             </ul>
           </div>
         </div>
@@ -56,15 +52,15 @@
       <hr />
       <ul class="small-block-grid-3">
         <li class="streak text-center">
-          <i style="border-radius: 5px; float:none; margin: 0" tooltip="Combo là số ngày bạn học Memo liên tiếp." class="icon"></i>
+          <i style="border-radius: 5px; float:none; margin: 0" tooltip="{{'TEXT_TOOLTIP_COMBO' | translate}}" class="icon"></i>
           <span class="text" style="float:none; display: block;">{{profileDetail.combo_days}}</span>
         </li>
         <li class="exp text-center">
-          <i style="border-radius: 5px; float:none; margin: 0" tooltip="Xp là điểm kinh nghiệm tích lũy khi làm xong bài." class="icon"></i>
+          <i style="border-radius: 5px; float:none; margin: 0" tooltip="{{'TEXT_TOOTIP_XP' | translate}}" class="icon"></i>
           <span class="text" style="float:none; display: block;">{{profileDetail.total_exp}}</span>
         </li>
         <li class="memos text-center">
-          <i style="border-radius: 5px; float:none; margin: 0" tooltip="MemoCoin là tiền ảo dùng để mua đồ trong Plaza!" class="icon"></i>
+          <i style="border-radius: 5px; float:none; margin: 0" tooltip="{{'TEXT_TOOLTIP_MEMO_COIN' | translate}}" class="icon"></i>
           <span class="text" style="float:none; display: block;">{{profileDetail.virtual_money}}</span>
         </li>
       </ul>

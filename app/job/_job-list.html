@@ -1,0 +1,55 @@
+<section class="job-main">
+  <section class="main-left">
+    <div class="panel">
+      <div class="title"><h3>Danh sách việc làm</h3></div>
+      <div class="tabs" ng-controller="Tabs">
+        <tabset vertical="false" type="navType">
+          <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
+            <ul class="jobs">
+              <li class="job" ng-repeat="job in tab.data.jobs">
+                <span style="float: left;margin-right: 10px;"></span>
+                <a ng-href="/jobs/{{job.slug}}" title="" class="title" ng-bind="job.title"></a>
+                <span class="hot" ng-if="job.is_hot == true">HOT</span>
+                <div class="description">
+                  <p ng-bind-html="job.description"></p>
+                </div>
+                <div class="working"> 
+                  <span class="work-type" ng-bind="job.type"></span>
+                  <span class="location" ng-bind="job.location"></span>
+                  <span class="position" ng-bind="job.position"></span>
+                </div>
+              </li>
+            </ul>
+            <div class="pagination-centered">
+              <pagination ng-if="tab.data.total_pages > 0" page="tab.data.current_page" total-items="tab.data.total_pages * 10" max-size="max_page" rotate="false" on-select-page="setPage(page)"></pagination>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </section>
+  <section class="main-right">
+   <section class="panel search-job-panel">
+     <div class="search-job-title">
+      <span translate="TEXT_SEARCH_JOB"></span>
+    </div>
+    <div class="search-job-toolbar">
+      <input class="search-job" type="text" ng-model="jobSearch.keywords" ng-keydown="search(event=$event)" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB' | translate}}" />
+    </div>
+    <div class="filter-job-toolbar">	
+      <!-- <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_WORK' | translate}}" />
+      <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_SALARY' | translate}}" />
+      <input type="text" placeholder="{{'TEXT_PLACEHOLDER_SEARCH_JOB_BY_LOCATION' | translate}}" /> -->
+      <select class="choose-work" ng-model="jobSearch.filter_by_fields" ng-options="key as value for (key , value) in list_fields">
+        <option value="">Chọn ngành nghề</option>
+      </select>
+      <select class="where-work" ng-model="jobSearch.filter_by_locations" ng-options="key as value for (key , value) in list_locations">
+        <option value="">Chọn nơi làm việc</option>
+      </select>
+    </div>
+    <div class="search">
+      <a class="radius small button" translate="BTN_SEARCH" ng-click="searchJobs()"></a>
+    </div>
+  </section>
+</section>
+</section>

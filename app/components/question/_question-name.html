@@ -1,7 +1,7 @@
 <div class="question-inner">
   <div class="small-12 small-centered columns name">
     <div class="row">
-      <h4 class="name">Dịch "{{question.question}}"</h4>
+      <h4 class="name"><span>{{'TEXT_NAME_QUESTION_TITLE' | translate}}</span> "{{question.question}}"</h4>
     </div>
     <div class="row">
       <div class="small-8 columns content">
@@ -17,7 +17,7 @@
       </div>
       <div class="small-7 columns answers">
         <div class="row postfix-round">
-          <input type="text" class="radius answer" ng-model="answer" id="answer-1" placeholder="Đáp án ..."/>
+          <input type="text" class="radius answer" ng-model="answer" id="answer-1" placeholder="{{'TEXT_PLACEHOLDER_NAME_QUESTION' | translate}}"/>
         </div>
       </div>
     </div>
