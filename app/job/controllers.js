@@ -47,7 +47,7 @@
     };
 
     $scope.searchJobs = function () {
-    	if ($scope.jobSearch.keywords.length > 0 || $scope.jobSearch.filter_by_field || $scope.jobSearch.filter_by_location) {
+    	if ($scope.jobSearch.keywords.length > 0 || $scope.jobSearch.filter_by_fields || $scope.jobSearch.filter_by_locations) {
         $location.search({
           keywords: $scope.jobSearch.keywords,
           filter_by_fields: $scope.jobSearch.filter_by_fields,
