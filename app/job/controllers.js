@@ -12,12 +12,12 @@
     $scope.tabs = [{
       title: allFilter.data.filter.for_user,
       data: $scope.JobsForUser,
-      active: false
+      active: true
     },
     {
       title: allFilter.data.filter.memo_td,
       data: $scope.JobsOfMemo,
-      active: true
+      active: false
     }];
 
     if ($location.search().keywords || $location.search().filter_by_fields || $location.search().filter_by_locations) {
