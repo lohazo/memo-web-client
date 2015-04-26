@@ -81,6 +81,10 @@
   function JobDetailCtrl ($scope, $modal, Job) {
     $scope.job = Job.data;
 
+    $scope.setGmail = function () {
+      window.navigator.registerProtocolHandler("mailto","https://mail.google.com/mail/?extsrc=mailto&url=%s","Gmail")
+    };
+
     $scope.applyForJob = function (job) {
       var modalInstance = $modal.open ({
         templateUrl: '/job/_apply-job-popup.html',
