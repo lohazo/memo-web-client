@@ -1,5 +1,6 @@
 (function (angular) {
   'use strict';
+  /*jslint browser:true */
 
   function AppConfig($routeProvider, $locationProvider,
     $httpProvider, FacebookProvider, GooglePlusProvider, $logProvider, $translateProvider) {
@@ -9,13 +10,13 @@
     });
 
     $routeProvider.when('/authenticate', {
-      resolve: ['$route', '$window', '$localStorage', function ($route, $window, $localStorage) {
+      resolve: ['$route', '$location', '$localStorage', function ($route, $location, $localStorage) {
         var authToken = $route.current.params.auth_token;
-        $localStorage.auth.loggedIn = true;
         $localStorage.auth.user = {
           auth_token: authToken
         };
-        $window.location.href = '/';
+        $localStorage.auth.loggedIn = true;
+        $location.url('/');
       }]
     });
 
