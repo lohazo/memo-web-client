@@ -10,14 +10,18 @@
     });
 
     $routeProvider.when('/authenticate', {
-      resolve: ['$route', '$location', '$localStorage', function ($route, $location, $localStorage) {
-        var authToken = $route.current.params.auth_token;
-        $localStorage.auth.user = {
-          auth_token: authToken
-        };
-        $localStorage.auth.loggedIn = true;
-        $location.url('/');
-      }]
+      resolve: ['$route', '$window', '$timeout', '$localStorage',
+        function ($route, $window, $timeout, $localStorage) {
+          var authToken = $route.current.params.auth_token;
+          $localStorage.auth.user = {
+            auth_token: authToken
+          };
+          $localStorage.auth.loggedIn = true;
+          $timeout(function () {
+            $window.location.href = '/';
+          }, 100);
+        }
+      ]
     });
 
     $routeProvider.otherwise({
