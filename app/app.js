@@ -41,7 +41,7 @@
     });
 
     $translateProvider.translations('vi', {
-      BTN_LOGIN : 'Đăng nhập',
+      BTN_LOGIN: 'Đăng nhập',
       BTN_SIGNUP: 'Tạo tài khoản',
       BTN_FACEBOOK_LOGIN: 'Facebook',
       BTN_GOOGLE_LOGIN: 'Google',
@@ -100,7 +100,7 @@
       BTN_SKIP_TUTORIAL: 'Bỏ qua hướng dẫn',
       BTN_RETURN: 'Quay lại',
       BTN_SEARCH: 'Tìm kiếm',
-     
+
       LABEL_REFERRAL_CODE: 'Nhập code từ bạn bè',
       LABEL_OWNER_MEMOCOIN: 'Bạn đang có',
       LABEL_COURSE_EN: 'Tiếng Anh',
@@ -125,7 +125,7 @@
       LABEL_CHECK_BOX_1: 'Tiếng Anh không được tự nhiên hoặc có lỗi',
       LABEL_CHECK_BOX_2: 'Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi',
       LABEL_CHECK_BOX_3: 'Âm thanh không chính xác',
-      
+
       TEXT_STRENGTHEN_EXAM: 'Luyện tập củng cố kĩ năng',
       TEXT_STRENGTHEN: 'Độ mạnh',
       TEXT_LIST_JOB_TITLE: 'Danh sách việc làm',
@@ -170,7 +170,7 @@
       TEXT_UNFOLLOW_POST: 'Bỏ theo dõi',
       TEXT_GET_SCHOLAR_TOPICA_NATIVE: 'Nhận học bổng',
       TEXT_LEARN_TOPICA_NATIVE: 'Tìm hiểu TOPICA Native',
-      TEXT_SCHOLAR_NATIVE_MONEY: '1,000,000 VND',
+      TEXT_SCHOLAR_NATIVE_MONEY: '500,000 VND',
       TEXT_OF: 'của',
       TEXT_TOPICA_NATIVE: 'TOPICA Native',
       TEXT_SHARE_CODE: 'Nhập ngay để nhận 3 MemoCoin nào!',
@@ -183,7 +183,7 @@
       TEXT_LEADERBOARD: 'Bảng xếp hạng',
       TEXT_INVITE_FRIEND_BY_EMAIL_TITLE: 'Mời thêm bạn bè',
       TEXT_INVITE_FRIEND_BY_EMAIL: 'Nhập địa chỉ email của bạn bè để gửi họ lời mời',
-      TEXT_ITEM: 'VẬT PHẨM',     
+      TEXT_ITEM: 'VẬT PHẨM',
       TEXT_LESSON: 'Bài học',
       TEXT_SHARE: 'Chia sẻ',
       TEXT_INVITED: 'Đã mời được:',
@@ -262,7 +262,7 @@
       TEXT_COMMENT: 'Bình luận',
       TEXT_SKILL: 'Kĩ năng',
       TEXT_SHOW_MORE: 'Xem thêm',
-      TEXT_SUBSCRIPTIONS: 'Kênh theo dõi', 
+      TEXT_SUBSCRIPTIONS: 'Kênh theo dõi',
       TEXT_SKIP_TUTORIAL: 'Bỏ qua bài hướng dẫn',
       TEXT_TUTORIAL_WELCOME: 'Xin chào! Tôi là Kiến Memo và bây giờ, tôi rất vui mừng khi được hướng dẫn bạn cách sử dụng Topica Memo nhé!',
       TEXT_SHOW_DICTIONARY_POPUP: 'Bấm vào hoặc đưa trỏ chuột tới những từ vựng này để xem nghĩa',
@@ -323,7 +323,8 @@
   angular.module('app', [
     'ngRoute', 'ngStorage', 'ngAudio', 'ngCookies', 'angular.filter',
     'mm.foundation', 'angles', 'facebook', 'googleplus',
-    'angular-loading-bar', 'angularMoment', 'angulartics', 'angulartics.google.analytics', 'angularFileUpload', 'pascalprecht.translate',
+    'angular-loading-bar', 'angularMoment', 'angulartics', 'angulartics.google.analytics', 'angularFileUpload',
+    'pascalprecht.translate',
     'app.controllers', 'app.directives',
     'header', 'landingpage', 'login', 'home', 'course',
     'profile', 'skill', 'report', 'exam',
