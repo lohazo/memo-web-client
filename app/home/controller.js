@@ -235,7 +235,8 @@
             return data[key] > 0;
           });
           vm.value = data[vm.type];
-          $scope.profileDetail.virtual_money += vm.value;
+
+          vm.type == 'memocoin' ? $scope.profileDetail.virtual_money += vm.value : false;
         });
     };
     vm.openNativeInfoModal = function () {
