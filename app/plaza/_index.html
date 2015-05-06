@@ -26,13 +26,10 @@
                 <a title="" class="radius button expand" ng-if="item.can_buy && !item.confirm_before_buy && !item.is_locked" ng-click="buy(item._id)">
                   <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
                 </a>
-                <a title="" class="radius button expand locked" ng-if="item.can_buy && !item.confirm_before_buy && item.is_locked">
-                  <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
-                </a>
                 <a title="" class="radius button expand" ng-if="item.can_buy && item.confirm_before_buy && !item.is_locked" ng-click="confirm(item._id)">
                   <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
                 </a>
-                <a title="" class="radius button expand locked" ng-if="item.can_buy && item.confirm_before_buy && item.is_locked">
+                <a title="" class="radius button expand locked" ng-if="item.can_buy && item.is_locked">
                   <span class="price" ng-bind="item.price"></span><span class="memo-coin-badge small"></span>
                 </a>
                 <a title="" class="radius button expand disabled" ng-if="!item.can_buy" tooltip="{{item.message}}" tooltip-placement="top">
