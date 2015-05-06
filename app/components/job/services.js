@@ -36,15 +36,17 @@
   		endpoint += data.keywords ? '&keywords=' + data.keywords : '';
 
   		return $http.get(endpoint);
-  	};
+  	}; 
 
   	Services.getJob = function (data) {
-  		var endpoint = API + '/jobs';
-      if (!data) {
-        var data = {};
-      }
+  		var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
+      var endpoint = API + '/jobs';
 
   		endpoint += data.slug ? '/' + data.slug : '';
+
+      if (authToken.length > 0) {
+        endpoint += data.slug ? '?auth_token=' + authToken : '';
+      };
 
   		return $http.get(endpoint);
   	};
