@@ -67,15 +67,18 @@
         vertical-align: middle;
         margin-left: 5px;
         &.small {
-            width: 24px;
-            height: 26px;
+          width: 24px;
+          height: 26px;
         }
     }
     .plaza-item-buttons {
         @include grid-column($columns: 4);
         .button.disabled {
-            background-color: $iron;
-            color: $white;
+          background-color: $iron;
+          color: $white;
+        }
+        .button.locked {
+          pointer-events: none;
         }
     }
     .plaza-item-image {
