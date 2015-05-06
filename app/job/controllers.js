@@ -82,7 +82,7 @@
     $scope.job = Job.data;
 
     $scope.setGmail = function () {
-      window.navigator.registerProtocolHandler("mailto","https://mail.google.com/mail/?extsrc=mailto&url=%s","Gmail")
+      $window.navigator.registerProtocolHandler("mailto","https://mail.google.com/mail/?extsrc=mailto&url=%s","Gmail")
     };
 
     $scope.applyForJob = function (job) {
