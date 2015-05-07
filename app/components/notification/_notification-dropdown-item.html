@@ -2,7 +2,7 @@
   <div class="noti-item-image"><img ng-src="{{noti.metadata.url_image}}"/></div>
   <div class="noti-item-content">{{noti.content}}
     <div click-event-track tracking-data='{"eventName": "avengers noti click", "memoEnabled": "true"}'>
-      <a class="noti-follow-button" ng-href="{{noti.metadata.button_url}}" target="_blank" ng-bind="noti.metadata.button_text" ng-if="noti.metadata.button_url &&  noti.metadata.is_new_tab"></a>
+      <a class="noti-follow-button" ng-href="{{noti.metadata.button_url}}" target="_blank" ng-bind="noti.metadata.button_text" ng-if="noti.metadata.button_url && noti.metadata.is_new_tab"></a>
       <a class="noti-follow-button" ng-href="/plaza" target="_self" ng-bind="noti.metadata.button_text" ng-if="noti.metadata.button_url && !noti.metadata.is_new_tab"></a>
     </div>
     <div class="noti-time-ago" am-time-ago="{{noti.time_ago}}"></div>
