@@ -201,6 +201,8 @@
         user: response.data
       });
 
+      $localStorage.auth.user = response.data;
+
       var hostElements = $location.host().split('.');
       var domain = hostElements.shift().match(/^memo/g) ? $location.host() : hostElements.join('.');
       $cookies.put('auth_token', response.data.auth_token, {
