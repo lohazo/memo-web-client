@@ -27,10 +27,24 @@
     });
 
     $scope.setPage = function (page) {
-      $scope.weakest_word.page = page;
-      WeakestWordServices.listWeakestWord($scope.weakest_word).success(function (data) {
+      if (!$scope.sorted_by_desc || !$scope.sorted) {
+        $scope.weakest_word.page = page;
+        $scope.weakest_word.sort_by = $scope.save_sort_by;
+        $scope.weakest_word.sort_type = $scope.save_sort_type;
+        WeakestWordServices.listWeakestWord($scope.weakest_word).success(function (data) {
          $scope.weakest_word = convertTime(data);
-      });
+        });
+        $scope.sorted_by_desc = true;
+      } else if ($scope.sorted_by_desc) {
+        $scope.weakest_word.page = page;
+        $scope.weakest_word.sort_by = $scope.save_sort_by;
+        $scope.weakest_word.sort_type = $scope.save_sort_type;
+        WeakestWordServices.listWeakestWord($scope.weakest_word).success(function (data) {
+         $scope.weakest_word = convertTime(data);
+        });
+        $scope.sorted_by_desc = false;
+      };
+      
     };
 
     $scope.getWordDetail = function (word) {
@@ -49,7 +63,9 @@
     }
     
     $scope.sortWeakestWord = function (sort_by) {
+      $scope.save_sort_by = sort_by;
       if (!$scope.sorted_by_desc || !$scope.sorted) {
+        $scope.save_sort_type = 'desc';
         WeakestWordServices.listWeakestWord({
           sort_by: sort_by,
           sort_type: 'desc'
@@ -58,6 +74,7 @@
         });
         $scope.sorted_by_desc = true;
       } else if ($scope.sorted_by_desc) {
+        $scope.save_sort_type = 'asc';
         WeakestWordServices.listWeakestWord({
           sort_by: sort_by,
           sort_type: 'asc'
