@@ -52,7 +52,9 @@
       </div>
       <div class="job-apply-content" ng-if="job.can_apply == '' && !isAuthenticated();">
         <span class="warning-text">Để ứng tuyển vị trí này, bạn cần có tài khoản tại TOPICA Memo</span>
-        <a class="small radius button" ng-click="open()">Đăng ký hoặc Đăng nhập</a>
+        <a class="small radius button" ng-click="openRegister()">Đăng ký</a>
+        <span>hoặc</span>
+        <a ng-click="open()">Đăng nhập</a>
       </div>
     </section>
   </section>
