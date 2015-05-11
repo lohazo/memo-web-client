@@ -78,8 +78,46 @@
     };
   }
 
-  function JobDetailCtrl ($scope, $modal, Job) {
+  function JobDetailCtrl ($scope, $modal, AuthService, Job) {
     $scope.job = Job.data;
+
+    $scope.isAuthenticated = AuthService.isAuthenticated;
+
+    $scope.open = function () {
+      var modalInstance = $modal.open({
+        template: '<div login-modal></div>',
+        controller: 'LoginModalInstanceCtrl',
+        windowClass: 'login-modal'
+      });
+
+      modalInstance.result.then(function (msg) {
+        if ($scope[msg] instanceof Function) $scope[msg]();
+      });
+    }; 
+
+    $scope.openRegister = function () {
+      var modalInstance = $modal.open({
+        template: '<div register-modal></div>',
+        controller: 'LoginModalInstanceCtrl',
+        windowClass: 'register-modal'
+      });
+
+      modalInstance.result.then(function (msg) {
+        if ($scope[msg] instanceof Function) $scope[msg]();
+      });
+    };
+
+    $scope.openForgetPassword = function () {
+      var modalInstance = $modal.open({
+        template: '<div forget-modal></div>',
+        controller: 'ForgetPasswordModalInstanceCtrl',
+        windowClass: 'forget-modal'
+      });
+
+      modalInstance.result.then(function (msg) {
+        if ($scope[msg] instanceof Function) $scope[msg]();
+      });
+    };
 
     $scope.setGmail = function () {
       $window.navigator.registerProtocolHandler("mailto","https://mail.google.com/mail/?extsrc=mailto&url=%s","Gmail")
@@ -148,7 +186,7 @@
   angular.module('job.controllers', ['job.services'])
   .controller('ListJobCtrl', ['$scope', '$location', 'JobServices', 'JobsOfMemo', 'JobsForUser', 'allFilter', 'searchJobs', ListJobCtrl
   ])
-  .controller('JobDetailCtrl', ['$scope', '$modal', 'Job', JobDetailCtrl
+  .controller('JobDetailCtrl', ['$scope', '$modal', 'AuthService', 'Job', JobDetailCtrl
   ])
   .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', 'job', '$localStorage', '$http', '$modalInstance', '$location', 
     ApplyJobModalCtrl
