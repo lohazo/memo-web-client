@@ -6,7 +6,7 @@
       <h3 ng-if="playerFooter.question.result == 1" translate="TEXT_CORRECT"><span class="lighter" ng-if="playerFooter.question.result === 1" ng-bind-html="playerFooter.question.answer"></span></h3>
       <h3 ng-if="playerFooter.question.result == 0" translate="TEXT_CORRECT_ANSWER"><span class="lighter" ng-if="playerFooter.question.result == 0">{{playerFooter.question.correctAnswer}}</span></h3>
       <div class="clearfix" ng-if="!playerFooter.settings.leftButtons.hide">
-        <a title class="radius button report" dropdown-toggle="#report-dropdown" ng-click="playerFooter.reportDropdownClick()">{{BTN_REPORT_BUG | translate}}</a>
+        <a title class="radius button report" dropdown-toggle="#report-dropdown" ng-click="playerFooter.reportDropdownClick()">{{'BTN_REPORT_BUG' | translate}}</a>
         <ul id="report-dropdown" class="f-dropdown" show-on-click="true">
           <li><input type="checkbox" id="1"><label for="1"><span class="box icon-checkmark"></span>{{'LABEL_CHECK_BOX_1' | translate}}</label></li>
           <li><input type="checkbox" id="2"><label for="2"><span class="box icon-checkmark"></span>{{'LABEL_CHECK_BOX_2' | translate}}</label></li>
