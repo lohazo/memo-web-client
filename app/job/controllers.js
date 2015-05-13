@@ -2,12 +2,15 @@
   'use strict';
 
 
-  function ListJobCtrl ($scope, $location, JobServices, JobsOfMemo, JobsForUser, allFilter, searchJobs) {
+  function ListJobCtrl ($scope, $location, JobServices, JobsOfMemo, JobsForUser, allFilter, searchJobs, MemoTracking) {
     $scope.max_page = 5;
     $scope.JobsOfMemo = JobsOfMemo.data;
     $scope.JobsForUser = JobsForUser.data;
     $scope.list_fields = allFilter.data.filter_by_fields;
     $scope.list_locations = allFilter.data.filter_by_locations;
+    $scope.trackingClickJobDetail = function (job) {
+      MemoTracking.track('job/' + job._id);
+    };
 
     if (!JobsForUser.data.message) {
       $scope.tabs = [{
@@ -78,7 +81,7 @@
     };
   }
 
-  function JobDetailCtrl ($scope, $modal, AuthService, Job) {
+  function JobDetailCtrl ($scope, $modal, AuthService, Job, MemoTracking) {
     $scope.job = Job.data;
 
     $scope.isAuthenticated = AuthService.isAuthenticated;
@@ -124,6 +127,7 @@
     };
 
     $scope.applyForJob = function (job) {
+      MemoTracking.track('jobs apply');
       var modalInstance = $modal.open ({
         templateUrl: '/job/_apply-job-popup.html',
         controller: 'ApplyJobModalCtrl',
@@ -184,9 +188,9 @@
 
   angular.module('job').controller('Tabs', function ($scope) {})
   angular.module('job.controllers', ['job.services'])
-  .controller('ListJobCtrl', ['$scope', '$location', 'JobServices', 'JobsOfMemo', 'JobsForUser', 'allFilter', 'searchJobs', ListJobCtrl
+  .controller('ListJobCtrl', ['$scope', '$location', 'JobServices', 'JobsOfMemo', 'JobsForUser', 'allFilter', 'searchJobs', 'MemoTracking', ListJobCtrl
   ])
-  .controller('JobDetailCtrl', ['$scope', '$modal', 'AuthService', 'Job', JobDetailCtrl
+  .controller('JobDetailCtrl', ['$scope', '$modal', 'AuthService', 'Job', 'MemoTracking', JobDetailCtrl
   ])
   .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', 'job', '$localStorage', '$http', '$modalInstance', '$location', 
     ApplyJobModalCtrl
