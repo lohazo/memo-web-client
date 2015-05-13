@@ -1,10 +1,14 @@
 (function (angular) {
   'use strict';
 
-  function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal) {
+  function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking) {
     $scope.$on('$routeChangeSuccess', function () {
       $scope.path = $location.path();
     });
+    
+    $scope.trackingClickJobs = function () {
+      MemoTracking.track('jobs');
+    };
 
     $scope.logout = function () {
       AuthService.logout();
@@ -24,7 +28,7 @@
   }
 
   angular.module('header', []);
-  angular.module('header').controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'AuthService', '$modal',
+  angular.module('header').controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'AuthService', '$modal', 'MemoTracking',
       HeaderCtrl
     ])
     .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
