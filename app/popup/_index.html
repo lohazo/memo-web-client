@@ -1,1 +1,9 @@
-asdfhaskj
+<div class="popup-modal">
+  <div class="row">
+    <img ng-src="{{popup.popup_image}}" />
+  </div>
+  <div class="row">
+    <a class="small radius button">{{popup.first_button_text}}</a>
+    <a class="small radius button" ng-href="{{popup.last_button_url}}" target="_blank" ng-click="openPopup()">{{popup.last_button_text}}</a>
+  </div>
+</div>

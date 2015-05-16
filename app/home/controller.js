@@ -18,11 +18,19 @@
 
     function getPopup() {
       PopupServices.getPopup().success(function (data) {
-        var modalInstance = $modal.open({
-          templateUrl: 'popup/_index.html',
-          controller: 'PopupL0BCtrl',
-          windowClass: 'buy-guide-popup-modal',
-        });
+        console.log(data)
+        if (data) {
+          var modalInstance = $modal.open({
+            templateUrl: 'popup/_index.html',
+            controller: 'PopupL0BCtrl',
+            // windowClass: 'popup-modal',
+            resolve: {
+              dataPopup: function () {
+                return data
+              }
+            }
+          });
+        };
       });
     }
 
@@ -287,7 +295,13 @@
     }
   }
 
-  function PopupL0BCtrl($scope) {
+  function PopupL0BCtrl($scope, dataPopup, PopupServices, MemoTracking) {
+    $scope.popup = dataPopup;
+
+    $scope.openPopup = function () {
+      PopupServices.openPopup(dataPopup);
+      MemoTracking.track(dataPopup.type);
+    };
   }
 
   angular.module('home.controller', ['app.services', 'message.directives'])
@@ -309,6 +323,6 @@
     .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', SecretGiftCtrl])
     .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl])
     .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl])
-    .controller('PopupL0BCtrl', ['$scope', PopupL0BCtrl]);
+    .controller('PopupL0BCtrl', ['$scope', 'dataPopup', 'PopupServices', 'MemoTracking', PopupL0BCtrl]);
 
 }(window.angular));
