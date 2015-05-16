@@ -4,7 +4,7 @@
   function HomeCtrl($scope) {}
 
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
-    Message, ReferralService, Leaderboard) {
+    Message, ReferralService, Leaderboard, PopupServices, $modal) {
     $scope.leaderboardData = [];
 
     $scope.shareMaxSkill = function () {
@@ -15,6 +15,18 @@
         FB.ui(data, function (response) {});
       });
     };
+
+    function getPopup() {
+      PopupServices.getPopup().success(function (data) {
+        var modalInstance = $modal.open({
+          templateUrl: 'popup/_index.html',
+          controller: 'PopupL0BCtrl',
+          windowClass: 'buy-guide-popup-modal',
+        });
+      });
+    }
+
+    getPopup();
 
     function getProfile() {
       return Profile.getProfile().then(function () {
@@ -275,10 +287,13 @@
     }
   }
 
+  function PopupL0BCtrl($scope) {
+  }
+
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$window', '$location', 'Profile', 'TreeBuilder',
-      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', HomeMainCtrl
+      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal', HomeMainCtrl
     ])
     .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
       CampaignVerifyCodeCtrl
@@ -293,6 +308,7 @@
     ])
     .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', SecretGiftCtrl])
     .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl])
-    .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl]);
+    .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl])
+    .controller('PopupL0BCtrl', ['$scope', PopupL0BCtrl]);
 
 }(window.angular));
