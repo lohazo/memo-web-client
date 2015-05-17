@@ -1,8 +1,54 @@
 .popup-modal {
+  width: 840px;
   min-height: 530px !important;
-  outline: none;
-  min-width: 840px !important;
-  border: 0;
-  position: fixed;
+  padding: 20px;
   top: 110px !important;
+  position: fixed;
+  outline: none;
+  border: 0;
+  .popup-inner {
+    height: 450px;
+    width: 95%;
+    border: 0;
+    top: 20px !important;
+    position: fixed;
+    .popup-content {
+      width: 800px;
+      height: 400px;
+      background-image: url("assets/img/Popup/popup-L0B-img.png");
+      margin-bottom: 20px;
+      .scholarship-native-image {
+        width: 422px;
+        height: 180px;
+        top: 220px;
+        margin-left: 360px;
+        position: fixed;
+      }
+    }
+    .popup-tollbar {
+      .first-button.button {
+        width: 270px;
+        padding: 10px;
+        margin: 0 0 0 40px;
+        font-size: 36px;
+        color: $steel;
+        background-color: $smoke;
+        &:hover {
+          background-color: scale-color($smoke, $lightness: -20%);
+        }
+      }
+      .last-button {
+        width: 270px;
+        padding: 10px;
+        margin: 0 40px 0 80px;
+        font-size: 36px;
+        font-weight: bold;
+        color: $white;
+        background-color: $primary-color;
+        &:hover {
+          background-color: scale-color($primary-color, $lightness: -20%);
+        }
+      }
+    }
+  }
 }

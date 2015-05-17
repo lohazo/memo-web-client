@@ -19,11 +19,11 @@
     function getPopup() {
       PopupServices.getPopup().success(function (data) {
         console.log(data)
-        if (data) {
+        if (data._id) {
           var modalInstance = $modal.open({
             templateUrl: 'popup/_index.html',
             controller: 'PopupL0BCtrl',
-            // windowClass: 'popup-modal',
+            windowClass: 'popup-modal',
             resolve: {
               dataPopup: function () {
                 return data
@@ -295,13 +295,17 @@
     }
   }
 
-  function PopupL0BCtrl($scope, dataPopup, PopupServices, MemoTracking) {
+  function PopupL0BCtrl($scope, dataPopup, PopupServices, MemoTracking, $modalInstance) {
     $scope.popup = dataPopup;
 
     $scope.openPopup = function () {
       PopupServices.openPopup(dataPopup);
       MemoTracking.track(dataPopup.type);
     };
+
+    $scope.closePopup = function () {
+      $modalInstance.close();
+    }
   }
 
   angular.module('home.controller', ['app.services', 'message.directives'])
@@ -323,6 +327,6 @@
     .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', SecretGiftCtrl])
     .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl])
     .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl])
-    .controller('PopupL0BCtrl', ['$scope', 'dataPopup', 'PopupServices', 'MemoTracking', PopupL0BCtrl]);
+    .controller('PopupL0BCtrl', ['$scope', 'dataPopup', 'PopupServices', 'MemoTracking', '$modalInstance', PopupL0BCtrl]);
 
 }(window.angular));
