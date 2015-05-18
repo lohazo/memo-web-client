@@ -41,7 +41,8 @@
       speak: 'questionSpeak',
       translate: 'questionTranslate',
       failure: 'questionFailure',
-      success: 'questionSuccess'
+      success: 'questionSuccess',
+      lastScreen: 'questionLastScreen'
     };
 
     var footerTplId = {
@@ -65,16 +66,20 @@
     };
 
     $scope.quit = function (afterDoingTest, returnPath) {
-      // Call Feedback API
-      MemoTracker.track('quit exam lesson');
-      if (afterDoingTest) {
-        Exam.sendFeedbackLogs();
-      }
-      delete $scope.exam;
-      if (returnPath === '/skill') {
-        returnPath += '/' + $routeParams.id;
-      }
-      $location.url(returnPath);
+      if (Exam.question().last_screen.is_enabled) {
+        $scope.questionTpl = questionTplId.lastScreen;
+      } else {
+        // Call Feedback API
+        MemoTracker.track('quit exam lesson');
+        if (afterDoingTest) {
+          Exam.sendFeedbackLogs();
+        }
+        delete $scope.exam;
+        if (returnPath === '/skill') {
+          returnPath += '/' + $routeParams.id;
+        }
+        $location.url(returnPath);
+      };
     };
 
     $scope.finish = function () {
@@ -253,6 +258,19 @@
         templateUrl: 'forum/_discussion-exam.html',
         windowClass: 'discussion-popup-modal',
         controller: 'DiscussionExamModalCtrl'
+      });
+    };
+
+    $scope.openPopupScholarshipInLastScreen = function (data) {
+      var modalInstance = $modal.open({
+        templateUrl: 'exam/_scholarship-popup-modal.html',
+        windowClass: 'scholarship-popup-modal',
+        resolve: {
+          url: function () {
+            return data.last_screen.button_url;
+          }
+        },
+        controller: 'ScholarshipPopupModalCtrl'
       });
     };
 

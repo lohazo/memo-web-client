@@ -40,6 +40,31 @@
       padding-top: 30px;
       text-align: center;
     }
+    .last-screen-left {
+      height: 450px;
+      text-align: center;
+      .last-screen-img {
+        width: 400px;
+        height: 400px;
+      }
+    }
+    .last-screen-right {
+      padding-top: 30px;
+      text-align: left;
+      .content {
+        padding: 70px 40px 20px 0;
+      }
+      .toolbar {
+        .continue-button {
+          font-size: 16px;
+          background-color: $iron;
+          color: $oil;
+          &:hover {
+            background-color: scale-color($iron, $lightness: -20%);
+          }
+        }
+      }
+    }
     .lesson-finish-ant {
       background-postition: 0 0;
       background-size: cover;

@@ -2,7 +2,7 @@
   <div class="row player lesson-page">
     <div class="container">
       <header>
-        <div class="small-4 columns text-center track" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess'">
+        <div class="small-4 columns text-center track" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess' && questionTpl != 'questionLastScreen'">
           <div class="row">
             <div class="small-8 columns">
               <a ng-if="examType == 'checkpoint'" href="" ng-click="quit(false, '/')" translate="BTN_QUIT"></a>
@@ -13,7 +13,7 @@
             </div>
           </div>
         </div>
-        <div class="small-8 columns" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess'">
+        <div class="small-8 columns" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess' && questionTpl != 'questionLastScreen'">
           <div class="distinct progress question-{{questions.length}}" >
             <span class="ant jump-{{ant}}"></span>
             <span class="done meter" ng-repeat="i in getNumber(answered) track by $index">
@@ -22,7 +22,7 @@
             </span>
           </div>
         </div>
-        <div class="small-4 columns" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess'">
+        <div class="small-4 columns" ng-if="questionTpl != 'questionFailure' && questionTpl != 'questionSuccess' && questionTpl != 'questionLastScreen'">
           <div class="row">
             <div class="small-5 columns inventory">
               <span class="item" ng-repeat="item in availableItems">
@@ -45,8 +45,9 @@
         <question-translate ng-if="questionTpl == 'questionTranslate'" answer="question.userAnswer"></question-translate>
         <question-failure ng-if="questionTpl == 'questionFailure'" answer="question.userAnswer"></question-failure>
         <question-success ng-if="questionTpl == 'questionSuccess'" answer="question.userAnswer"></question-success>
+        <question-last-screen ng-if="questionTpl == 'questionLastScreen'" answer="question.userAnswer"></question-lastScreen>
       </div>
-      <footer>
+      <footer ng-if="questionTpl != 'questionLastScreen'">
       <footer-question ng-if="footerTpl == 'footer'"></footer-question>
     <footer-failure ng-if="footerTpl == 'footerFailure'"></footer-failure>
   <footer-success ng-if="footerTpl == 'footerSuccess'"></footer-success>
