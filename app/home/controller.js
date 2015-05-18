@@ -4,7 +4,7 @@
   function HomeCtrl($scope) {}
 
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
-    Message, ReferralService, Leaderboard) {
+    Message, ReferralService, Leaderboard, PopupServices, $modal) {
     $scope.leaderboardData = [];
 
     $scope.shareMaxSkill = function () {
@@ -15,6 +15,25 @@
         FB.ui(data, function (response) {});
       });
     };
+
+    function getPopup() {
+      PopupServices.getPopup().success(function (data) {
+        if (data._id) {
+          var modalInstance = $modal.open({
+            templateUrl: 'popup/_index.html',
+            controller: 'PopupL0BCtrl',
+            windowClass: 'popup-modal',
+            resolve: {
+              dataPopup: function () {
+                return data
+              }
+            }
+          });
+        };
+      });
+    }
+
+    getPopup();
 
     function getProfile() {
       return Profile.getProfile().then(function () {
@@ -275,10 +294,23 @@
     }
   }
 
+  function PopupL0BCtrl($scope, dataPopup, PopupServices, MemoTracking, $modalInstance) {
+    $scope.popup = dataPopup;
+
+    $scope.openPopup = function () {
+      PopupServices.openPopup(dataPopup);
+      MemoTracking.track(dataPopup.type);
+    };
+
+    $scope.closePopup = function () {
+      $modalInstance.close();
+    }
+  }
+
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$window', '$location', 'Profile', 'TreeBuilder',
-      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', HomeMainCtrl
+      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal', HomeMainCtrl
     ])
     .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
       CampaignVerifyCodeCtrl
@@ -293,6 +325,7 @@
     ])
     .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', SecretGiftCtrl])
     .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl])
-    .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl]);
+    .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl])
+    .controller('PopupL0BCtrl', ['$scope', 'dataPopup', 'PopupServices', 'MemoTracking', '$modalInstance', PopupL0BCtrl]);
 
 }(window.angular));
