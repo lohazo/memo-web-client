@@ -104,6 +104,8 @@
       BTN_SKIP_TUTORIAL: 'Bỏ qua hướng dẫn',
       BTN_RETURN: 'Quay lại',
       BTN_SEARCH: 'Tìm kiếm',
+      BTN_GET_T_SHIRT: 'Nhận áo phông',
+      BTN_GET_T_SHIRT_GUIDE: 'Hướng dẫn nhận áo',
 
       LABEL_REFERRAL_CODE: 'Nhập code từ bạn bè',
       LABEL_OWNER_MEMOCOIN: 'Bạn đang có',
@@ -130,6 +132,7 @@
       LABEL_CHECK_BOX_2: 'Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi',
       LABEL_CHECK_BOX_3: 'Âm thanh không chính xác',
 
+      TEXT_TOPICA_MEMO: 'TOPICA Memo',
       TEXT_STRENGTHEN_EXAM: 'Luyện tập củng cố kĩ năng',
       TEXT_STRENGTHEN: 'Độ mạnh',
       TEXT_LIST_JOB_TITLE: 'Danh sách việc làm',
@@ -211,7 +214,7 @@
       TEXT_ITEM_LUCKY_START_DESCRIPTION: 'Đặt cược 7 MemoCoin, bạn sẽ nhận được 14 MemoCoin nếu làm bài liên tục trong 7 ngày',
       TEXT_ITEM_PROGRESS_QUIZ: 'Bài kiểm tra Tiếng Anh',
       TEXT_ITEM_PROGRESS_QUIZ_DESCRIPTION: 'Bạn sẽ biết được trình độ của mình ngay sau khi làm bài kiểm tra tiếng Anh',
-      TEXT_ITEM_T_SHIRT: 'Áo phông Kiến Memo',
+      TEXT_ITEM_T_SHIRT: 'áo phông',
       TEXT_ITEM_T_SHIRT_DESCRIPTION: 'Mỗi tháng, chỉ có 200 học viên đủ combo 5 có cơ hội giành được chiếc áo phông Kiến Memo vô cùng đáng yêu này!',
       TEXT_ITEM_GIFT_1M: 'Gói học bổng 500,000 VNĐ',
       TEXT_ITEM_GIFT_1M_DESCRIPTION: 'Học ít nhất 5 ngày liên tiếp để sở hữu học bổng trị giá 500,000 VNĐ của Topica Native - chương trình luyện nói với 100+ giáo viên Âu, Úc, Mỹ dành cho người đủ 18 tuổi trở lên. GIẢM GIÁ TRỰC TIẾP vào học phí ngay khi đăng ký một khóa bất kỳ!',
