@@ -572,7 +572,24 @@
         }
 
         return str;
-      }
+      };
+
+      Question.createLastScreenText = function (data) {
+        // data = {is_enable:, offsets: [{offset:[], text: '', bold: true/false, color: ''}], button_url:, button_text, text: ''}
+
+        var text = data.text.split('');
+        data.offsets.forEach(function (offset, i) {
+          var shiftIndex = i * 2;
+          var openTag = '<b style="color: {color}; font-family: \'Clear Sans Bold\';">';
+          var closeTag = '</b>';
+
+          text.splice(offset.offset[0] + shiftIndex, 0, openTag.replace('{color}', offset.color));
+          shiftIndex += offset.offset[1] + 1;
+          text.splice(offset.offset[0] + shiftIndex, 0, closeTag);
+        });
+
+        return text.join('');
+      };
 
       return Question;
     }]);

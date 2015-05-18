@@ -18,6 +18,14 @@
     };
   }
 
+  function questionLastScreen() {
+    return {
+      restrict: 'EA',
+      scope: true,
+      templateUrl: 'components/question/_question-last-screen.html'
+    };
+  }
+
   angular.module('question', [
       'question.select',
       'question.translate',
@@ -30,7 +38,8 @@
     ]);
   angular.module('question')
     .directive('questionFailure', questionFailure)
-    .directive('questionSuccess', questionSuccess);
+    .directive('questionSuccess', questionSuccess)
+    .directive('questionLastScreen', questionLastScreen);
   
 
 }(window.angular));

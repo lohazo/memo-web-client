@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function ExamCtrl($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker,
+  function ExamCtrl($scope, $timeout, $routeParams, $sce, $location, Exam, Question, Sound, MemoTracker,
     Skill, $modal, $localStorage, ForumServices, Profile) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
@@ -41,7 +41,8 @@
       speak: 'questionSpeak',
       translate: 'questionTranslate',
       failure: 'questionFailure',
-      success: 'questionSuccess'
+      success: 'questionSuccess',
+      lastScreen: 'questionLastScreen'
     };
 
     var footerTplId = {
@@ -65,16 +66,64 @@
     };
 
     $scope.quit = function (afterDoingTest, returnPath) {
-      // Call Feedback API
-      MemoTracker.track('quit exam lesson');
-      if (afterDoingTest) {
-        Exam.sendFeedbackLogs();
+      if (Exam.question().last_screen && Exam.question().last_screen.is_enabled) {
+        $scope.questionTpl = questionTplId.lastScreen;
+        $scope.testText = Question.creatLastScreenText(Exam.question().last_screen);
+        // $scope.testText = Question.createLastScreenText({
+        //     "text": "Chúc mừng test264! Bạn là một trong những học viên xuất sắc của TOPICA Memo khi đã có 5 Combo. TOPICA Memo tri ân bạn với một học bổng luyện nói tiếng Anh với hơn 100 giảng viên Âu, Mỹ, Úc...Trị giá 500,000 VNĐ từ TOPICA Native với giá chỉ 24 MemoCoin",
+        //     "offsets": [{
+        //       "text": "test264",
+        //       "offset": [10, 7],
+        //       "color": "#333333",
+        //       "bold": true
+        //     }, {
+        //       "text": "TOPICA Memo",
+        //       "offset": [64, 11],
+        //       "color": "#810c15",
+        //       "bold": true
+        //     }, {
+        //       "text": "5",
+        //       "offset": [86, 1],
+        //       "color": "#333333",
+        //       "bold": true
+        //     }, {
+        //       "text": "TOPICA Memo",
+        //       "offset": [95, 11],
+        //       "color": "#810c15",
+        //       "bold": true
+        //     }, {
+        //       "text": "500,000",
+        //       "offset": [199, 7],
+        //       "color": "#333333",
+        //       "bold": true
+        //     }, {
+        //       "text": "TOPICA Native",
+        //       "offset": [214, 13],
+        //       "color": "#810c15",
+        //       "bold": true
+        //     }, {
+        //       "text": "24",
+        //       "offset": [240, 2],
+        //       "color": "#333333",
+        //       "bold": true
+        //     }],
+        //     "is_enabled": false,
+        //     "button_url": "",
+        //     "button_text": "MUA HỌC BỔNG NGAY"
+        // });
+        //$scope.testText = $sce.trustAsHtml($scope.testText.replace('!', '!<br />'));
+      } else {
+        // Call Feedback API
+        MemoTracker.track('quit exam lesson');
+        if (afterDoingTest) {
+          Exam.sendFeedbackLogs();
+        }
+        delete $scope.exam;
+        if (returnPath === '/skill') {
+          returnPath += '/' + $routeParams.id;
+        }
+        $location.url(returnPath);
       }
-      delete $scope.exam;
-      if (returnPath === '/skill') {
-        returnPath += '/' + $routeParams.id;
-      }
-      $location.url(returnPath);
     };
 
     $scope.finish = function () {
@@ -256,6 +305,19 @@
       });
     };
 
+    $scope.openPopupScholarshipInLastScreen = function (data) {
+      var modalInstance = $modal.open({
+        templateUrl: 'exam/_scholarship-popup-modal.html',
+        windowClass: 'scholarship-popup-modal',
+        resolve: {
+          url: function () {
+            return data.last_screen.button_url;
+          }
+        },
+        controller: 'ScholarshipPopupModalCtrl'
+      });
+    };
+
     $scope.openScholarshipPopup = function () {
       ExamServices.getUrlScholarshipPopup().success(function (data) {
         $scope.scholarshipPopupUrl = data.popup_url;
@@ -280,10 +342,11 @@
         windowClass: 'max-course-popup-modal',
         controller: 'MaxCoursePopupModalCtrl'
       });
-    }    
+    }
   }
 
-  function DiscussionExamModalCtrl($scope, $location, Exam, ExamStrengthen, $localStorage, ForumServices, $modalInstance) {
+  function DiscussionExamModalCtrl($scope, $location, Exam, ExamStrengthen, $localStorage, ForumServices,
+    $modalInstance) {
     $scope.question = Exam.question() || ExamStrengthen.question();
     $scope.requestData = {
       content: ''
@@ -296,7 +359,7 @@
     $scope.data.question_log_id = $scope.question.question_log_id;
     $scope.data.base_course_id = $localStorage.auth.user.current_course_id;
 
-    if ($scope.question.type == 'judge' ) {
+    if ($scope.question.type == 'judge') {
       $scope.data.title = $scope.question.question;
       $scope.data.content = $scope.question.hints;
     } else if ($scope.question.type == 'name' || $scope.question.type == 'select') {
@@ -330,7 +393,6 @@
         $scope.getPost.follow = false;
       });
     };
-
 
     $scope.createComment = function () {
       $scope.requestData.id = $scope.getPost._id;
@@ -397,10 +459,12 @@
 
   angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
-      '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
+      '$scope', '$timeout', '$routeParams', '$sce', '$location', 'Exam', 'Question', 'Sound',
       'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', ExamCtrl
     ])
-    .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage', 'ForumServices', '$modalInstance', DiscussionExamModalCtrl])
+    .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage',
+      'ForumServices', '$modalInstance', DiscussionExamModalCtrl
+    ])
     .controller('ScholarshipPopupModalCtrl', ['$scope', 'url', '$sce', ScholarshipPopupModalCtrl])
     .controller('MaxCoursePopupModalCtrl', ['$scope', '$modalInstance', 'AppSetting', MaxCoursePopupModalCtrl]);
 }(window.angular));
