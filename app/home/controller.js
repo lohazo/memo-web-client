@@ -289,7 +289,7 @@
         templateUrl: 'plaza/_buy-guide-popup.html',
         controller: ['$scope', '$sce', '$modalInstance', function ($scope, $sce, $modalInstance) {
           $scope.trustedResource = $sce.trustAsResourceUrl(API +
-            '/plaza_items/claim_gift_1m?platform=web&&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' +
+            '/plaza_items/claim_t_shirt?platform=web&&localize=vi&quantity=1&base_item_id=t_shirt&auth_token=' +
             Profile.auth_token +
             '&verification_code=' + Profile.verification_code);
         }],
