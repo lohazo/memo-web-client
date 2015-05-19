@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function ExamCtrl($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker,
+  function ExamCtrl($scope, $timeout, $routeParams, $sce, $location, Exam, Question, Sound, MemoTracker,
     Skill, $modal, $localStorage, ForumServices, Profile, AppSetting) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
@@ -488,7 +488,7 @@
 
   angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
-      '$scope', '$timeout', '$routeParams', '$location', 'Exam', 'Question', 'Sound',
+      '$scope', '$timeout', '$routeParams', '$sce', '$location', 'Exam', 'Question', 'Sound',
       'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', 'AppSetting', ExamCtrl
     ])
     .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage',
