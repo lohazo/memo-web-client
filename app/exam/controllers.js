@@ -5,11 +5,15 @@
     Skill, $modal, $localStorage, ForumServices, Profile, AppSetting) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
+    
     if (AppSetting.sharedSettings) {
-      $scope.should_forum = AppSetting.sharedSettings.functionaly.should_forum;
-    } else {
-      $scope.should_forum = false;
+      if (AppSetting.sharedSettings.functionaly) {
+        $scope.should_forum = AppSetting.sharedSettings.functionaly.should_forum;
+      } else {
+        $scope.should_forum =  true;
+      };
     };
+    
     
     $scope.shouldPlaySlow = false;
     var threeFirstSkills = ['en-vi_co_ban_1', 'en-vi_co_ban_2',

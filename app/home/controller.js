@@ -6,12 +6,15 @@
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
     Message, ReferralService, Leaderboard, PopupServices, $modal) {
     $scope.leaderboardData = [];
+
     if (AppSetting.sharedSettings) {
-      $scope.should_weakest_word = AppSetting.sharedSettings.functionaly.should_weakest_word;
-      $scope.should_share_facebook = AppSetting.sharedSettings.functionaly.should_share_facebook;
-    } else {
-      $scope.should_weakest_word = false;
-      $scope.should_share_facebook = false;
+      if (AppSetting.sharedSettings.functionaly) {
+        $scope.should_weakest_word = AppSetting.sharedSettings.functionaly.should_weakest_word;
+        $scope.should_share_facebook = AppSetting.sharedSettings.functionaly.should_share_facebook;
+      } else {
+        $scope.should_weakest_word =  true;
+        $scope.should_share_facebook =  true;
+      };
     };
     
     $scope.shareMaxSkill = function () {

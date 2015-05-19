@@ -13,12 +13,14 @@
       var output = angular.copy(data);
       if (!output.message) {
         output.posts = output.posts.map(function (post) {
-          post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000); 
+          post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
           if (AppSetting.sharedSettings) {
-            post.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
-          } else {
-            post.should_profile= false;
-          };
+            if (AppSetting.sharedSettings.functionaly) {
+              post.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
+            } else {
+              post.should_profile =  true;
+            };
+          }; 
           return post;
         });
         output.current_page = output.next_page > 0 ? output.next_page - 1 : output.total_page;
@@ -26,10 +28,12 @@
           output.sticky_posts = output.sticky_posts.map(function (post) {
             post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
             if (AppSetting.sharedSettings) {
-              post.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
-            } else {
-              post.should_profile= false;
-            };
+              if (AppSetting.sharedSettings.functionaly) {
+                post.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
+              } else {
+                post.should_profile =  true;
+              };
+            }; 
             return post;
           });
         }

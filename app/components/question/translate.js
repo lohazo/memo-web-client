@@ -3,13 +3,15 @@
   'use strict';
 
   function QuestionTranslateCtrl($scope, ngAudio, Words, $element, AppSetting) {
-
     if (AppSetting.sharedSettings) {
-      $scope.should_dictionary = AppSetting.sharedSettings.functionaly.should_dictionary;
-    } else {
-      $scope.should_dictionary = false;
+      if (AppSetting.sharedSettings.functionaly) {
+        $scope.should_dictionary = AppSetting.sharedSettings.functionaly.should_dictionary;
+      } else {
+        $scope.should_dictionary =  true;
+      };
     };
     
+
     function tokenize(inputString) {
       var tokens = inputString.split(' ');
 

@@ -58,7 +58,7 @@
       return AppServices.getSharedSettings()
         .then(function (response) {
           $localStorage.appSharedSettings = response.data;
-          Setting.sharedSettings = response.data;
+          Setting.sharedSettings = response.data;    
         });
     };
 
