@@ -6,14 +6,23 @@
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
     Message, ReferralService, Leaderboard, PopupServices, $modal) {
     $scope.leaderboardData = [];
-
+    if (AppSetting.sharedSettings) {
+      $scope.should_weakest_word = AppSetting.sharedSettings.functionaly.should_weakest_word;
+      $scope.should_share_facebook = AppSetting.sharedSettings.functionaly.should_share_facebook;
+    } else {
+      $scope.should_weakest_word = false;
+      $scope.should_share_facebook = false;
+    };
+    
     $scope.shareMaxSkill = function () {
+     if (AppSetting.sharedSettings.functionaly.should_share_facebook) {
       return AppSetting.getMaxSkillFacebookContent().then(function (response) {
         var data = response.data;
         data.method = 'feed';
 
         FB.ui(data, function (response) {});
       });
+     };
     };
 
     function getPopup() {
@@ -77,7 +86,7 @@
     }
 
     function takeATour() {
-      if (AppSetting.shouldDisplayTour()) {
+      if (AppSetting.shouldDisplayTour() && AppSetting.sharedSettings.functionaly.should_take_a_tour) {
         $scope.displayTour = AppSetting.displayTour;
         $location.path('/welcome');
       }
@@ -155,7 +164,7 @@
     });
   }
 
-  function PlacementTestModalCtrl($scope, $modal) {
+  function PlacementTestModalCtrl($scope, $modal, AppSetting) {
 
     $scope.profile = {};
     $scope.displayTour = false;
@@ -175,7 +184,7 @@
     };
 
     $scope.$watch('profile', function () {
-      if ($scope.profile.is_beginner && $scope.profile.allow_placement_test) {
+      if ($scope.profile.is_beginner && $scope.profile.allow_placement_test && AppSetting.sharedSettings.functionaly.should_placement_test) {
         $scope.open();
       }
     });
@@ -190,7 +199,7 @@
     });
   }
 
-  function RefCodeModalCtrl($scope, $modal, ReferralService) {
+  function RefCodeModalCtrl($scope, $modal, ReferralService, AppSetting) {
     $scope.profile = {};
     $scope.openRefModal = function () {
       var modalInstance = $modal.open({
@@ -207,7 +216,7 @@
     };
 
     $scope.$watch('profile', function () {
-      if ($scope.profile.ref_code_popup_display) {
+      if ($scope.profile.ref_code_popup_display && AppSetting.sharedSettings.functionaly.should_referral) {
         $scope.openRefModal();
       }
     });
@@ -339,11 +348,11 @@
     .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
       CampaignVerifyCodeCtrl
     ])
-    .controller('PlacementTestModalCtrl', ['$scope', '$modal', 'ReferralService', PlacementTestModalCtrl])
+    .controller('PlacementTestModalCtrl', ['$scope', '$modal', 'AppSetting', 'ReferralService', PlacementTestModalCtrl])
     .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance',
       PlacementTestModalInstanceCtrl
     ])
-    .controller('RefCodeModalCtrl', ['$scope', '$modal', 'ReferralService', RefCodeModalCtrl])
+    .controller('RefCodeModalCtrl', ['$scope', '$modal', 'ReferralService', 'AppSetting', RefCodeModalCtrl])
     .controller('RefCodeModalInstanceCtrl', ['$scope', '$modalInstance', '$route', 'ReferralService',
       RefCodeModalInstanceCtrl
     ])

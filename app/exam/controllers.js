@@ -2,9 +2,15 @@
   'use strict';
 
   function ExamCtrl($scope, $timeout, $routeParams, $sce, $location, Exam, Question, Sound, MemoTracker,
-    Skill, $modal, $localStorage, ForumServices, Profile) {
+    Skill, $modal, $localStorage, ForumServices, Profile, AppSetting) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
+    if (AppSetting.sharedSettings) {
+      $scope.should_forum = AppSetting.sharedSettings.functionaly.should_forum;
+    } else {
+      $scope.should_forum = false;
+    };
+    
     $scope.shouldPlaySlow = false;
     var threeFirstSkills = ['en-vi_co_ban_1', 'en-vi_co_ban_2',
       'en-vi_nhung_nhom_tu_thong_dung'
@@ -226,20 +232,43 @@
     $scope.check = function () {
       if ($scope.question.userAnswer && $scope.question.userAnswer.length >
         0) {
-        $scope.result = Question.check($scope.question, $scope.question.userAnswer);
-        $scope.footerTpl = "footerResult";
 
-        if (!$scope.result.result) {
-          Exam.skip();
-          Sound.playHeartLostSound();
-          $scope.hearts = Exam.hearts();
-          $scope.checkState();
+        if (Profile.getUser().current_course_id == "en-th" && ($scope.question.type == "translate" || $scope.question
+            .type == "name")) {
+          Question.asyncCheck($scope.question).success(function (data) {
+            var result = data;
+            result.answerOptions = data.type === 3 ? Question.createHTMLForTypo(data) : false;
+            $scope.result = result;
+            $scope.footerTpl = "footerResult";
+
+            if (!$scope.result.result) {
+              Exam.skip();
+              Sound.playHeartLostSound();
+              $scope.hearts = Exam.hearts();
+              $scope.checkState();
+            } else {
+              Exam.check();
+              Sound.playCorrectSound();
+            }
+            $scope.answered = Exam.answered();
+            $scope.questionState = 'answered';
+          });
         } else {
-          Exam.check();
-          Sound.playCorrectSound();
-        }
-        $scope.answered = Exam.answered();
-        $scope.questionState = 'answered';
+          $scope.result = Question.check($scope.question, $scope.question.userAnswer);
+          $scope.footerTpl = "footerResult";
+
+          if (!$scope.result.result) {
+            Exam.skip();
+            Sound.playHeartLostSound();
+            $scope.hearts = Exam.hearts();
+            $scope.checkState();
+          } else {
+            Exam.check();
+            Sound.playCorrectSound();
+          }
+          $scope.answered = Exam.answered();
+          $scope.questionState = 'answered';
+        };
       }
     };
 
@@ -460,7 +489,7 @@
   angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
       '$scope', '$timeout', '$routeParams', '$sce', '$location', 'Exam', 'Question', 'Sound',
-      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', ExamCtrl
+      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', 'AppSetting', ExamCtrl
     ])
     .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage',
       'ForumServices', '$modalInstance', DiscussionExamModalCtrl
