@@ -2,8 +2,14 @@
 
   'use strict';
 
-  function QuestionTranslateCtrl($scope, ngAudio, Words, $element) {
+  function QuestionTranslateCtrl($scope, ngAudio, Words, $element, AppSetting) {
 
+    if (AppSetting.sharedSettings) {
+      $scope.should_dictionary = AppSetting.sharedSettings.functionaly.should_dictionary;
+    } else {
+      $scope.should_dictionary = false;
+    };
+    
     function tokenize(inputString) {
       var tokens = inputString.split(' ');
 
@@ -134,7 +140,7 @@
 
   angular.module('question.translate', []);
   angular.module('question.translate')
-    .controller('QuestionTranslateCtrl', ['$scope', 'ngAudio', 'Words', '$element', QuestionTranslateCtrl])
+    .controller('QuestionTranslateCtrl', ['$scope', 'ngAudio', 'Words', '$element', 'AppSetting', QuestionTranslateCtrl])
     .directive('questionTranslate', QuestionTranslateDirective);
 
 }(window.angular));
