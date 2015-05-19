@@ -1,7 +1,19 @@
 (function (angular) {
   'use strict';
 
-  function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking) {
+  function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting) {
+    if (AppSetting.sharedSettings) {
+      $scope.should_weakest_word = AppSetting.sharedSettings.functionaly.should_weakest_word;
+      $scope.should_forum = AppSetting.sharedSettings.functionaly.should_forum;
+      $scope.should_jobs = AppSetting.sharedSettings.functionaly.should_jobs;
+      $scope.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
+    } else {
+      $scope.should_weakest_word = false;
+      $scope.should_forum = false;
+      $scope.should_jobs = false;
+      $scope.should_profile = false;
+    };
+    
     $scope.$on('$routeChangeSuccess', function () {
       $scope.path = $location.path();
     });
@@ -28,7 +40,7 @@
   }
 
   angular.module('header', []);
-  angular.module('header').controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'AuthService', '$modal', 'MemoTracking',
+  angular.module('header').controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'AuthService', '$modal', 'MemoTracking', 'AppSetting',
       HeaderCtrl
     ])
     .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {

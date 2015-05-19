@@ -68,7 +68,14 @@
     $scope.showTheLeaderboard();
   }
 
-  function LeaderboardHomeCtrl($scope) {
+  function LeaderboardHomeCtrl($scope, AppSetting) {
+    if (AppSetting.sharedSettings) {
+      $scope.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
+    } else {
+      $scope.should_profile = false;
+    };
+   
+
     $scope.$watch('leaderboardData', function () {
       if ($scope.leaderboardData.length > 0) {
         $scope.tabs = [{
@@ -101,7 +108,7 @@
 
   angular.module('leaderboard.controllers', [])
     .controller('LeaderboardCtrl', ['$scope', 'Leaderboard', LeaderboardCtrl])
-    .controller('LeaderboardHomeCtrl', ['$scope', 'Leaderboard', LeaderboardHomeCtrl])
+    .controller('LeaderboardHomeCtrl', ['$scope', 'AppSetting', 'Leaderboard', LeaderboardHomeCtrl])
     .controller('LeaderboardEmailInviteCtrl', ['$scope', 'Leaderboard',
       LeaderboardEmailInviteCtrl
     ]);

@@ -4,7 +4,7 @@
   'use strict';
 
   function ListPostCtrl($scope, $location, AuthService, ForumServices, allPosts, subscribers, followingPosts,
-    searchPosts) {
+    searchPosts, $translate, AppSetting) {
     $scope.max_page = 5;
 
     $scope.isAuthenticated = AuthService.isAuthenticated;
@@ -13,13 +13,23 @@
       var output = angular.copy(data);
       if (!output.message) {
         output.posts = output.posts.map(function (post) {
-          post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
+          post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000); 
+          if (AppSetting.sharedSettings) {
+            post.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
+          } else {
+            post.should_profile= false;
+          };
           return post;
         });
         output.current_page = output.next_page > 0 ? output.next_page - 1 : output.total_page;
         if (output.sticky_posts) {
           output.sticky_posts = output.sticky_posts.map(function (post) {
             post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
+            if (AppSetting.sharedSettings) {
+              post.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
+            } else {
+              post.should_profile= false;
+            };
             return post;
           });
         }
@@ -30,20 +40,24 @@
     $scope.subscribers = subscribers.data;
     $scope.allPosts = convertToViewData(allPosts.data);
     $scope.followingPosts = convertToViewData(followingPosts.data);
+    
+    $translate('LABEL_ALL_POST').then(function (LABEL_ALL_POST) {
+      $scope.tabs = [{
+        title: LABEL_ALL_POST,
+        data: $scope.allPosts,
+        active: true
+      }];
+    });
 
-    $scope.tabs = [{
-      title: 'Tất cả',
-      data: $scope.allPosts,
-      active: true
-    }];
-
-    if ($scope.isAuthenticated()) {
-      $scope.tabs.push({
-        title: 'Đang theo dõi',
-        data: $scope.followingPosts,
-        active: false
-      });
-    }
+    $translate('LABEL_FOLLOWING_POST').then(function (LABEL_FOLLOWING_POST) {
+      if ($scope.isAuthenticated()) {
+        $scope.tabs.push({
+          title: LABEL_FOLLOWING_POST,
+          data: $scope.followingPosts,
+          active: false
+        });
+      }
+    });
 
     if ($location.search().keywords) {
       $scope.searchPosts = convertToViewData(searchPosts.data);
@@ -398,7 +412,7 @@
 
   angular.module('forum.controllers', ['forum.services'])
     .controller('ListPostCtrl', ['$scope', '$location', 'AuthService', 'ForumServices', 'allPosts', 'subscribers',
-      'followingPosts', 'searchPosts', ListPostCtrl
+      'followingPosts', 'searchPosts', '$translate', 'AppSetting', ListPostCtrl
     ])
     .controller('CreatePostCtrl', ['$scope', 'AuthService', 'ForumServices', '$location', 'subscribers',
       CreatePostCtrl

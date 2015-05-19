@@ -65,8 +65,13 @@ angular.module('skill.tree', [])
     return {
       strict: 'EA',
       scope: true,
-      controller: ['$scope', '$location', '$localStorage', function ($scope, $location, $localStorage) {
+      controller: ['$scope', '$location', '$localStorage', 'AppSetting', function ($scope, $location, $localStorage, AppSetting) {
         $scope.popupClicked = !!$localStorage.popupClicked;
+        if (AppSetting.sharedSettings) {
+          $scope.should_checkpoint = AppSetting.sharedSettings.functionaly.should_checkpoint;
+        } else {
+          $scope.should_checkpoint = false;
+        };
         $scope.goToPlaza = function () {
           if (!$scope.popupClicked) {
             $scope.popupClicked = true;
