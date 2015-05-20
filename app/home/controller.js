@@ -289,11 +289,35 @@
         windowClass: 'buy-guide-popup-modal',
       });
     };
+    vm.openTShirtInfoModal = function () {
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_buy-guide-popup.html',
+        controller: 'SecretGiftTShirtModalCtrl',
+        windowClass: 'buy-guide-popup-modal',
+      });
+    };
+    vm.openClaimTShirtModal = function (Profile) {
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_buy-guide-popup.html',
+        controller: ['$scope', '$sce', '$modalInstance', function ($scope, $sce, $modalInstance) {
+          $scope.trustedResource = $sce.trustAsResourceUrl(API +
+            '/plaza_items/claim_t_shirt?platform=web&&localize=vi&quantity=1&base_item_id=t_shirt&auth_token=' +
+            Profile.auth_token +
+            '&verification_code=' + Profile.verification_code);
+        }],
+        windowClass: 'buy-guide-popup-modal',
+      });
+    };
   }
 
   function SecretGiftModalCtrl($scope, $sce, $modalInstance) {
     $scope.trustedResource = $sce.trustAsResourceUrl(
       '//staging.memo.edu.vn/native/web?disable_back_button=true');
+  }
+
+  function SecretGiftTShirtModalCtrl($scope, $sce, $modalInstance) {
+    $scope.trustedResource = $sce.trustAsResourceUrl(
+      '//services.memo.edu.vn/v2/api/plaza_items/buy_t_shirt?platform=web');
   }
 
   function NativeCtrl($scope, $modal) {
@@ -337,6 +361,7 @@
     ])
     .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', SecretGiftCtrl])
     .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl])
+    .controller('SecretGiftTShirtModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftTShirtModalCtrl])
     .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl])
     .controller('PopupL0BCtrl', ['$scope', 'dataPopup', 'PopupServices', 'MemoTracking', '$modalInstance', PopupL0BCtrl]);
 
