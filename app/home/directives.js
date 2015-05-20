@@ -127,8 +127,7 @@
       return {
         restrict: 'EA',
         scope: true,
-        // controller: 'BannerCtrl',
-        // controllerAs: 'banner',
+        controller: 'BannerCtrl',
         templateUrl: 'components/banner/_banner-update-birthday.html'
       };
     });

@@ -351,7 +351,6 @@
       TEXT_UPLOAD_CV: 'Gửi hồ sơ',
       TEXT_NATIVE_SCHOLARY_DEADLINE: 'Áp dụng cho tất cả học viên đã từng có 03 ngày học liên tiếp <br> (từ nay đến hết 10/5)',
       TEXT_SALES_OFF: 'Chỉ còn',
-      TEXT_SALES_OFF: 'Chỉ còn',
       TEXT_TOOLTIP_INPUT_EMAIL: 'Nhập email của bạn vào',
       TEXT_TOOLTIP_COMBO: 'Combo là số ngày bạn học Memo liên tiếp.',
       TEXT_TOOTIP_XP: 'Xp là điểm kinh nghiệm tích lũy khi làm xong bài.',
@@ -401,7 +400,7 @@
     'profile', 'skill', 'report', 'exam',
     'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
     'words', 'referral', 'question',
-    'notification', 'download', 'adsense', 'forum', 'job', 'memo.dropdown', 'weakestWord', 'popup'
+    'notification', 'download', 'adsense', 'forum', 'job', 'memo.dropdown', 'weakestWord', 'popup', 'banner'
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
     'GooglePlusProvider', '$logProvider', '$translateProvider',
     AppConfig
