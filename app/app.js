@@ -397,9 +397,9 @@
     'angular-loading-bar', 'angularMoment', 'angulartics', 'angulartics.google.analytics', 'angularFileUpload',
     'pascalprecht.translate',
     'app.controllers', 'app.directives',
-    'header', 'landingpage', 'login', 'settings', 'home', 'course',
+    'header', 'landingpage', 'login', 'home', 'course',
     'profile', 'skill', 'report', 'exam',
-    'feedback', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
+    'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
     'words', 'referral', 'question',
     'notification', 'download', 'adsense', 'forum', 'job', 'memo.dropdown', 'weakestWord', 'popup'
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
