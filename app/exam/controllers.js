@@ -5,10 +5,11 @@
     Skill, $modal, $localStorage, ForumServices, Profile, AppSetting) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
-    if (AppSetting.sharedSettings) {
+
+    if (AppSetting.sharedSettings.functionaly) {
       $scope.should_forum = AppSetting.sharedSettings.functionaly.should_forum;
     } else {
-      $scope.should_forum = false;
+      $scope.should_forum = true;
     };
     
     $scope.shouldPlaySlow = false;
