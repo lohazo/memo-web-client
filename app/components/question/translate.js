@@ -6,7 +6,7 @@
     if (AppSetting.sharedSettings.functionaly) {
       $scope.should_dictionary = AppSetting.sharedSettings.functionaly.should_dictionary;
     } else {
-      $scope.should_dictionary =  true;
+      $scope.should_dictionary = true;
     };
 
     function tokenize(inputString) {

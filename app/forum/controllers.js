@@ -17,7 +17,7 @@
           if (AppSetting.sharedSettings.functionaly) {
             post.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
           } else {
-            post.should_profile =  true;
+            post.should_profile = true;
           };
           return post;
         });
@@ -28,7 +28,7 @@
             if (AppSetting.sharedSettings.functionaly) {
               post.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
             } else {
-              post.should_profile =  true;
+              post.should_profile = true;
             };
             return post;
           });

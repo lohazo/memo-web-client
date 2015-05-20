@@ -9,7 +9,7 @@
         $scope.should_short_cut = AppSetting.sharedSettings.functionaly.should_short_cut;
         $scope.should_grammar = AppSetting.sharedSettings.functionaly.should_grammar;
       } else {
-        $scope.should_weakest_word =  true;
+        $scope.should_weakest_word = true;
         $scope.should_do_lesson = true;
         $scope.should_short_cut = true;
         $scope.should_grammar = true;

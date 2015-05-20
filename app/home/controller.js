@@ -12,8 +12,8 @@
         $scope.should_weakest_word = AppSetting.sharedSettings.functionaly.should_weakest_word;
         $scope.should_share_facebook = AppSetting.sharedSettings.functionaly.should_share_facebook;
       } else {
-        $scope.should_weakest_word =  true;
-        $scope.should_share_facebook =  true;
+        $scope.should_weakest_word = true;
+        $scope.should_share_facebook = true;
       };
     });
     
@@ -128,10 +128,10 @@
 
     // Chain calls
     getProfile()
+      .then(AppSetting.getSharedSettings)
       .then(Message.list)
       .then(getProfileDetail)
       .then(getStatus)
-      .then(AppSetting.getSharedSettings)
       .then(TreeBuilder.getIconSets)
       .then(buildTree)
       .then(takeATour)

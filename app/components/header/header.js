@@ -9,7 +9,7 @@
         $scope.should_jobs = AppSetting.sharedSettings.functionaly.should_jobs;
         $scope.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
       } else {
-        $scope.should_weakest_word =  true;
+        $scope.should_weakest_word = true;
         $scope.should_forum = true;
         $scope.should_jobs = true;
         $scope.should_profile = true;

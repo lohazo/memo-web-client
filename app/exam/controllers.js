@@ -9,7 +9,7 @@
     if (AppSetting.sharedSettings.functionaly) {
       $scope.should_forum = AppSetting.sharedSettings.functionaly.should_forum;
     } else {
-      $scope.should_forum =  true;
+      $scope.should_forum = true;
     };
     
     $scope.shouldPlaySlow = false;

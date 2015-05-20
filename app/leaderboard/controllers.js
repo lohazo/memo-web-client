@@ -73,7 +73,7 @@
       if (AppSetting.sharedSettings.functionaly) {
         $scope.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
       } else {
-        $scope.should_profile =  true;
+        $scope.should_profile = true;
       };
     });
 

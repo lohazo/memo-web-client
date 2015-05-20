@@ -72,11 +72,10 @@ angular.module('skill.tree', [])
           if (AppSetting.sharedSettings.functionaly) {
             $scope.should_checkpoint = AppSetting.sharedSettings.functionaly.should_checkpoint;
           } else {
-            $scope.should_checkpoint =  true;
+            $scope.should_checkpoint = true;
           };
-        });
+        });        
         
-
         $scope.goToPlaza = function () {
           if (!$scope.popupClicked) {
             $scope.popupClicked = true;
