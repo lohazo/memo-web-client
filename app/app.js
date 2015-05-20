@@ -107,6 +107,7 @@
       BTN_JOIN_EVENT: 'THAM GIA NGAY',
       BTN_REGISTER: 'Đăng ký',
       BTN_BUY_NOW: 'MUA NGAY',
+      BTN_LEARN_NOW: 'TÌM HIỂU NGAY',
 
       LABEL_REFERRAL_CODE: 'Nhập code từ bạn bè',
       LABEL_OWNER_MEMOCOIN: 'Bạn đang có',
@@ -384,7 +385,7 @@
       TEXT_PLACEHOLDER_EMAIL: 'Email (VD: example@gmail.com)',
       TEXT_PLACEHOLDER_PASSWORD: 'Mật khẩu',
       TEXT_PLACEHOLDER_PHONE: 'Điện thoại (không bắt buộc)',
-      TEXT_PLACEHOLDER_REFERAL_CODE: 'Code chia sẻ từ bạn bè (không bắt buộc)',
+      TEXT_PLACEHOLDER_REFERAL_CODE: 'Code chia sẻ từ bạn bè (không bắt buộc)'
     });
 
     $translateProvider.preferredLanguage('vi');
