@@ -103,10 +103,13 @@
       BTN_SKIP_TUTORIAL: 'Bỏ qua hướng dẫn',
       BTN_RETURN: 'Quay lại',
       BTN_SEARCH: 'Tìm kiếm',
+      BTN_GET_T_SHIRT: 'Nhận áo phông',
+      BTN_GET_T_SHIRT_GUIDE: 'Hướng dẫn nhận áo',
       BTN_STRENGTHEN_EXAM: 'Củng cố kĩ năng',
       BTN_JOIN_EVENT: 'THAM GIA NGAY',
       BTN_REGISTER: 'Đăng ký',
       BTN_BUY_NOW: 'MUA NGAY',
+      BTN_LEARN_NOW: 'TÌM HIỂU NGAY',
 
       LABEL_REFERRAL_CODE: 'Nhập code từ bạn bè',
       LABEL_OWNER_MEMOCOIN: 'Bạn đang có',
@@ -133,7 +136,8 @@
       LABEL_CHECK_BOX_1: 'Tiếng Anh không được tự nhiên hoặc có lỗi',
       LABEL_CHECK_BOX_2: 'Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi',
       LABEL_CHECK_BOX_3: 'Âm thanh không chính xác',
-
+    
+      TEXT_TOPICA_MEMO: 'TOPICA Memo',
       TEXT_ITEM_PROGRESS_QUIZ_WARNING_TEXT: 'Bài làm của bạn sẽ bị mất. Bạn có chắc chắn muốn thoát không?',
       TEXT_STRENGTHEN_EXAM: 'Luyện tập củng cố kĩ năng',
       TEXT_STRENGTHEN: 'Độ mạnh',
@@ -401,10 +405,10 @@
     'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
     'words', 'referral', 'question',
     'notification', 'download', 'adsense', 'forum', 'job', 'memo.dropdown', 'weakestWord', 'popup', 'banner'
-  ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
-    'GooglePlusProvider', '$logProvider', '$translateProvider',
-    AppConfig
-  ]).run(['$rootScope', '$location', '$localStorage', 'amMoment', function ($rootScope, $location, $localStorage,
+    ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider', 
+      'GooglePlusProvider', '$logProvider', '$translateProvider', 
+      AppConfig
+    ]).run(['$rootScope', '$location', '$localStorage', 'amMoment', function ($rootScope, $location, $localStorage,
     amMoment) {
     amMoment.changeLocale('vi');
 
@@ -417,7 +421,8 @@
 
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
       if ($localStorage.auth) {
-        if (!$localStorage.auth.loggedIn && notRequireLoginPaths[next.originPath]) {
+        if (!$localStorage.auth.loggedIn && notRequireLoginPaths[
+        next.originPath]) {
           $location.url('/');
         }
       } else {
@@ -432,12 +437,11 @@
           loggedIn: false,
           trial: false
         }
-        $rootScope.$broadcast('event:auth-logoutConfirmed');
-        if ($location.host().match(/(^memo.|.net.vn$|.local$)/g)) {
-          alert('Bạn hoặc ai đó đã đăng nhập vào tài khoản này trên thiết bị khác. Vui lòng đăng nhập lại!');
-        }
+    $rootScope.$broadcast('event:auth-logoutConfirmed');
+      if ($location.host().match(/(^memo.|.net.vn$|.local$)/g)) {
+        alert('Bạn hoặc ai đó đã đăng nhập vào tài khoản này trên thiết bị khác. Vui lòng đăng nhập lại!');
       }
-    });
+    }});
   }]);
 
 }(window.angular));
