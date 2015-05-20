@@ -59,7 +59,7 @@
         .then(function (response) {
           $localStorage.appSharedSettings = response.data;
           Setting.sharedSettings = response.data;
-          $rootScope.$broadcast('getSharedSettings', Setting.sharedSettings);
+          $rootScope.$broadcast('getSharedSettings', $localStorage.appSharedSettings);
         });
     };
 

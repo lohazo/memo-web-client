@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting, $route) {
+  function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting) {
     $scope.$on('getSharedSettings', function(){
       if (AppSetting.sharedSettings.functionaly) {
         $scope.should_weakest_word =  AppSetting.sharedSettings.functionaly.should_weakest_word;
@@ -42,7 +42,7 @@
   }
 
   angular.module('header', []);
-  angular.module('header').controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'AuthService', '$modal', 'MemoTracking', 'AppSetting', '$localStorage', '$route',
+  angular.module('header').controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'AuthService', '$modal', 'MemoTracking', 'AppSetting',
       HeaderCtrl
     ])
     .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
