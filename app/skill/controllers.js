@@ -14,7 +14,6 @@
         $scope.should_short_cut = true;
         $scope.should_grammar = true;
       };
-    });
       
       $scope.iconSets = AppSetting.sharedSettings.web_skill_base_icon_urls;
       $scope.skill = Skill.skill($routeParams.id);
