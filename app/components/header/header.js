@@ -2,18 +2,20 @@
   'use strict';
 
   function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting) {
-    if (AppSetting.sharedSettings) {
-      $scope.should_weakest_word = AppSetting.sharedSettings.functionaly.should_weakest_word;
-      $scope.should_forum = AppSetting.sharedSettings.functionaly.should_forum;
-      $scope.should_jobs = AppSetting.sharedSettings.functionaly.should_jobs;
-      $scope.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
-    } else {
-      $scope.should_weakest_word = false;
-      $scope.should_forum = false;
-      $scope.should_jobs = false;
-      $scope.should_profile = false;
-    };
-    
+    $scope.$on('getSharedSettings', function(){
+      if (AppSetting.sharedSettings.functionaly) {
+        $scope.should_weakest_word =  AppSetting.sharedSettings.functionaly.should_weakest_word;
+        $scope.should_forum = AppSetting.sharedSettings.functionaly.should_forum;
+        $scope.should_jobs = AppSetting.sharedSettings.functionaly.should_jobs;
+        $scope.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
+      } else {
+        $scope.should_weakest_word = true;
+        $scope.should_forum = true;
+        $scope.should_jobs = true;
+        $scope.should_profile = true;
+      };
+    });
+
     $scope.$on('$routeChangeSuccess', function () {
       $scope.path = $location.path();
     });
