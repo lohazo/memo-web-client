@@ -6,6 +6,11 @@
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
     Message, ReferralService, Leaderboard, PopupServices, $modal) {
     $scope.leaderboardData = [];
+
+    $scope.trackingBannerNative = function () {
+      MemoTracker.track('skill tree plaza ad click');
+      $location.url('/plaza');
+    }
     
     $scope.$on('getSharedSettings', function(){
       if (AppSetting.sharedSettings.functionaly) {

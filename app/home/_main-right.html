@@ -11,25 +11,11 @@
 <div class="container" style="margin-bottom: 20px; border: 2px solid #ffbb33; padding-top: 60px;" ng-if="!profile.referral_user && should_share_facebook">
   <div class="row" campaign-verify-code></div>
 </div>
-<div class="container" style="margin-bottom: 20px; border: 2px solid #810c15;padding:0;">
-  <header class="row collapse" style="text-align: center; margin-top:20px;">
-    <img style="cursor: pointer" src="assets/img/memo.png" alt="" click-event-track tracking-data='{"memoEnabled":true,"eventName":"skill tree plaza ad click","to":"/plaza"}'>
-  </header>
-  <section class="row">
-    <div class="large-16 columns text-center" style="padding:0;">
-      <div style="color: #810C15;font-size: 16px;margin-top: 10px;font-weight: 600;"><!-- Chương trình ưu đãi tháng 5!<br>  --><p style="font-size: 18px;line-height: 25px;margin-bottom: 15px;font-weight: 600;" translate="TEXT_SCHOLARSHIP_500K"></p></div>
-      <div>
-        <img src="assets/img/native.png" alt="">
-      </div>
-      <p style="margin-top:15px;margin-bottom: 10px;font-size:20px;">{{'TEXT_SALES_OFF' | translate}} <b>30</b> <span style="display:inline-block;vertical-align:bottom;width:26px;height:30px;background:url('assets/img/icon-system-01.png')no-repeat;background-position: 0 0;"></span> <span>{{'TEXT_AND' | translate}}</span> <b>5</b> <span style="display:inline-block;vertical-align:bottom;width:30px;height:30px;background:url('assets/img/icon-system-01.png')no-repeat;background-position:-26px 0;"></span></p>
-      <!-- <p>Áp dụng cho tất cả học viên đã từng có 03 ngày học liên tiếp <br> (từ nay đến hết 10/5)</p> -->
-      <div style="padding:0 30px; margin-bottom:20px;">
-        <a class="small radius secondary button memo-button expand" click-event-track tracking-data='{"memoEnabled":true,"eventName":"skill tree plaza ad click","to":"/plaza"}'>{{'BTN_BUY_NOW' | translate}}</a>
-      <!-- <a href="" ng-click="openNativeModal()" style="margin-top: 10px;text-decoration: underline; display: block" translate="TEXT_LEARN_TOPICA_NATIVE"></a> -->
-
-      </div>
-    </div>
-  </section>
+<div class="banner-sa-native" alt="" ng-click="trackingBannerNative()" >
+<!--   <div style="padding:0 30px; margin-bottom:20px;margin-top:410px;"> -->
+  <div class="banner-toolbar">
+    <a class="small radius button banner-button" ng-click="trackingBannerNative()">{{'BTN_LEARN_NOW' | translate}}</a>
+  </div>
 </div>
 <div class="container box-list-top" style="margin-bottom: 20px;">
   <div class="row leaderboard" leaderboard leaderboard-data="leaderboardData"></div>
