@@ -6,8 +6,8 @@
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
     Message, ReferralService, Leaderboard, PopupServices, $modal) {
     $scope.leaderboardData = [];
-
-    if (AppSetting.sharedSettings) {
+    
+    $scope.$on('getSharedSettings', function(){
       if (AppSetting.sharedSettings.functionaly) {
         $scope.should_weakest_word = AppSetting.sharedSettings.functionaly.should_weakest_word;
         $scope.should_share_facebook = AppSetting.sharedSettings.functionaly.should_share_facebook;
@@ -15,7 +15,7 @@
         $scope.should_weakest_word =  true;
         $scope.should_share_facebook =  true;
       };
-    };
+    });
     
     $scope.shareMaxSkill = function () {
      if (AppSetting.sharedSettings.functionaly.should_share_facebook) {

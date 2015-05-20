@@ -3,7 +3,7 @@
 
   function SkillCtrl($scope, $rootScope, $routeParams, AppSetting, Skill, User) {
     if (User && User.auth_token) {
-      if (AppSetting.sharedSettings) {
+      $scope.$on('getSharedSettings', function(){
         if (AppSetting.sharedSettings.functionaly) {
           $scope.should_weakest_word = AppSetting.sharedSettings.functionaly.should_weakest_word;
           $scope.should_do_lesson = AppSetting.sharedSettings.functionaly.should_do_lesson;
@@ -15,12 +15,7 @@
           $scope.should_short_cut = true;
           $scope.should_grammar = true;
         };
-      } else {
-        $scope.should_weakest_word =  true;
-        $scope.should_do_lesson = true;
-        $scope.should_short_cut = true;
-        $scope.should_grammar = true;
-      };
+      });
       
       $scope.iconSets = AppSetting.sharedSettings.web_skill_base_icon_urls;
       $scope.skill = Skill.skill($routeParams.id);

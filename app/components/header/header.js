@@ -2,7 +2,7 @@
   'use strict';
 
   function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting, $route) {
-    if (AppSetting.sharedSettings) {
+    $scope.$on('getSharedSettings', function(){
       if (AppSetting.sharedSettings.functionaly) {
         $scope.should_weakest_word =  AppSetting.sharedSettings.functionaly.should_weakest_word;
         $scope.should_forum = AppSetting.sharedSettings.functionaly.should_forum;
@@ -14,12 +14,7 @@
         $scope.should_jobs = true;
         $scope.should_profile = true;
       };
-    } else {
-      $scope.should_weakest_word =  true;
-      $scope.should_forum = true;
-      $scope.should_jobs = true;
-      $scope.should_profile = true;
-    };
+    });
 
     $scope.$on('$routeChangeSuccess', function () {
       $scope.path = $location.path();

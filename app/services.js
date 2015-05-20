@@ -43,7 +43,7 @@
     };
   }
 
-  function AppSetting($localStorage, AppServices, WordsFactory) {
+  function AppSetting($localStorage, AppServices, WordsFactory, $rootScope) {
     var Setting = {};
     Setting.sharedSettings = $localStorage.appSharedSettings || null;
 
@@ -58,7 +58,8 @@
       return AppServices.getSharedSettings()
         .then(function (response) {
           $localStorage.appSharedSettings = response.data;
-          Setting.sharedSettings = response.data;    
+          Setting.sharedSettings = response.data;
+          $rootScope.$broadcast('getSharedSettings', Setting.sharedSettings);
         });
     };
 
@@ -223,7 +224,7 @@
     .factory('HttpInterceptor', ['$rootScope', '$q', '$location', '$localStorage',
       HttpInterceptor
     ])
-    .factory('AppSetting', ['$localStorage', 'AppServices', 'Words', AppSetting])
+    .factory('AppSetting', ['$localStorage', 'AppServices', 'Words', '$rootScope', AppSetting])
     .factory('AppServices', ['$http', '$q', '$localStorage', 'API', AppServices])
     .factory('Message', ['MessageService', Message])
     .factory('MessageService', ['$http', '$q', '$localStorage', 'API', MessageService])

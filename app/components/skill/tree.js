@@ -68,13 +68,13 @@ angular.module('skill.tree', [])
       controller: ['$scope', '$location', '$localStorage', 'AppSetting', function ($scope, $location, $localStorage, AppSetting) {
         $scope.popupClicked = !!$localStorage.popupClicked;
         
-        if (AppSetting.sharedSettings) {
+        $scope.$on('getSharedSettings', function(){
           if (AppSetting.sharedSettings.functionaly) {
             $scope.should_checkpoint = AppSetting.sharedSettings.functionaly.should_checkpoint;
           } else {
             $scope.should_checkpoint =  true;
           };
-        };
+        });
         
 
         $scope.goToPlaza = function () {
