@@ -5,7 +5,7 @@
     </div>
     <div class="banner-options">
       <select name="day" ng-model="birthday.day" class="option-day">
-        <option value="" selected="selected">dd</option>
+        <option value="" selected="selected">DD</option>
         <option value="01">1</option>
         <option value="02">2</option>
         <option value="03">3</option>
@@ -39,7 +39,7 @@
         <option value="31">31</option>
       </select>
       <select name="month" ng-model="birthday.month" class="option-month">
-        <option value="" selected="selected">mm</option>
+        <option value="" selected="selected">MM</option>
         <option value="01">Tháng 1</option>
         <option value="02">Tháng 2</option>
         <option value="03">Tháng 3</option>
@@ -53,10 +53,9 @@
         <option value="11">Tháng 11</option>
         <option value="12">Tháng 12</option>
       </select>
-     <!--  <input type="text" class="option-year"  ng-model="birthday.year" size="10" maxlength="4" placeholder="Năm" /> -->
-    <select name="year" ng-model="birthday.year" class="option-year">
-      <option value="">yyyy</option>
-        <option value="01" selected="selected">1990</option>
+      <select name="year" ng-model="birthday.year" class="option-year">
+        <option value="" selected="selected">YYYY</option>
+        <option value="01">1990</option>
         <option value="02">1991</option>
         <option value="03">Tháng 3</option>
         <option value="04">Tháng 4</option>
@@ -68,7 +67,7 @@
         <option value="10">Tháng 10</option>
         <option value="11">Tháng 11</option>
         <option value="12">Tháng 12</option>
-    </select>
+      </select>
     </div>
     <div class="banner-tollbar">
       <a class="small radius button update-button" ng-click="updateBirthday()">Cập nhật thông tin</a>

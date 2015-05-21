@@ -2,12 +2,15 @@
 
   'use strict';
 
-  function BannerCtrl ($scope, ProfileServices) {
+  function BannerCtrl ($scope, ProfileServices, Profile) {
     $scope.birthday = {
       day: '',
       month: '',
       year: ''
     };
+
+    $scope.birth_day = Profile.user.birth_day;
+    console.log($scope.birth_day);
 
     $scope.updateBirthday = function () {
       if ($scope.birthday.day.length <= 0) {
@@ -36,7 +39,7 @@
   }
 
   angular.module('banner.controller', [])
-    .controller('BannerCtrl', ['$scope', 'ProfileServices', 
+    .controller('BannerCtrl', ['$scope', 'ProfileServices', 'Profile', 
       BannerCtrl
     ]);
 
