@@ -10,7 +10,6 @@
     };
 
     $scope.birth_day = Profile.user.birth_day;
-    console.log($scope.birth_day);
 
     $scope.updateBirthday = function () {
       if ($scope.birthday.day.length <= 0) {
@@ -28,12 +27,13 @@
         return;
       }
 
-      // convert birthday to time stamp
+      // convert birthday data to time stamp
       var newDate = $scope.birthday.day + "/" + $scope.birthday.month + "/" + $scope.birthday.year;
       var birthday = new Date(newDate).getTime();
 
       ProfileServices.updateBirthday({birth_day: birthday}).success(function () {
         $scope.profileDetail.virtual_money += 5;
+        $scope.profile.birth_day = true;
       });
     };
   }

@@ -18,15 +18,15 @@
     .banner-options {
       @include grid-row;
       .option-day {
-        @include grid-column($columns: 4);
+        width: 50px;
         margin-right: 5px;
       }
       .option-month {
-        @include grid-column($columns: 6);
+        width: 90px;
         margin-right: 5px;
       }
       .option-year {
-        @include grid-column($columns: 5);
+        width: 70px;
         margin-right: 5px;
       }
     }
