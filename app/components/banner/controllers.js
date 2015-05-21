@@ -31,7 +31,7 @@
       var newDate = $scope.birthday.day + "/" + $scope.birthday.month + "/" + $scope.birthday.year;
       var birthday = new Date(newDate).getTime();
 
-      ProfileServices.updateBirthday({birth_day: birthday}).success(function () {
+      ProfileServices.updateBirthday({birth_day: newDate}).success(function () {
         $scope.profileDetail.virtual_money += 5;
         $scope.profile.birth_day = true;
       });
