@@ -25,6 +25,7 @@
     "moment-timezone": "~0.3.1",
     "angular-file-upload": "~1.1.5",
     "Chart.js": "~1.0.2",
+    "angularjs-datepicker": "~0.2.4"
   },
   "resolutions": {
     "angular": "1.4.0-rc.0"
