@@ -69,6 +69,18 @@
 
       return deferred.promise;
     };
+    
+    /*
+     * data = {birth_day: 12345}
+     */
+    Services.updateBirthday = function (data) {
+      
+      var userId = $localStorage.auth.user._id;
+      
+      data.auth_token = $localStorage.auth.user.auth_token;
+
+      return $http.post(API + '/users/' + userId + '/update_birthday', data);
+    }
 
     return Services;
   }

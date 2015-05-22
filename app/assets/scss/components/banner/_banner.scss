@@ -1,0 +1,45 @@
+.banner {
+  @include grid-row;
+  border: none;
+  outline: none;
+  min-height: 153px !important;
+  .banner-inner {
+    @include grid-column($columns: 16, $collapse: true);
+    .banner-header {
+      @include grid-row;
+      margin-bottom: 10px;
+      font-size: 16px;
+      text-align: center;
+      .text-memo {
+        color: $primary-color;
+        font-weight: bold;
+      }
+    }
+    .banner-options {
+      @include grid-row;
+      .option-day {
+        width: 50px;
+        margin-right: 5px;
+      }
+      .option-month {
+        width: 90px;
+        margin-right: 5px;
+      }
+      .option-year {
+        width: 70px;
+        margin-right: 5px;
+      }
+    }
+    .banner-tollbar {
+      @include grid-row;
+      .update-button {
+        @include grid-column($columns: 16);
+        background-color: $primary-color;
+        color: $white;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0px;
+      }
+    }
+  }
+}
