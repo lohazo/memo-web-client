@@ -292,7 +292,7 @@
               popup_image: data.popup_image,
               last_button_url: data.last_button_url,
               last_button_text: 'Nhận học bổng ngay',
-              first_button_text: 'Bỏ qua (bạn sẽ nhận được 5 Memocoin)'
+              first_button_text: 'Bỏ qua (nhận 5 Memocoin)'
             };
             $scope.closePopup = function () {
               parentScope.profileDetail.virtual_money += 5;
@@ -306,7 +306,7 @@
               $modalInstance.dismiss();
             };
           }],
-          windowClass: 'buy-guide-popup-modal'
+          windowClass: 'popup-modal'
         });
       } else {
         vm.openClaimScholarModal(Profile);

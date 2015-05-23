@@ -2,27 +2,19 @@
   width: 840px;
   min-height: 530px !important;
   padding: 20px;
-  top: 110px !important;
+  top: 70px !important;
   position: fixed;
   outline: none;
   border: 0;
   .popup-inner {
-    height: 450px;
-    width: 95%;
-    border: 0;
-    top: 20px !important;
-    position: fixed;
     .popup-content {
       width: 800px;
-      height: 400px;
       margin-bottom: 20px;
+      margin-top: -15px;
     }
-    .popup-tollbar {
-      .first-button.button {
+    .popup-toolbar {
+      .first-button {
         width: 270px;
-        padding: 10px;
-        margin: 0 0 0 40px;
-        font-size: 36px;
         color: $steel;
         background-color: $smoke;
         &:hover {
@@ -31,9 +23,6 @@
       }
       .last-button {
         width: 270px;
-        padding: 10px;
-        margin: 0 40px 0 80px;
-        font-size: 36px;
         font-weight: bold;
         color: $white;
         background-color: $primary-color;
