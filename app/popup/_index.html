@@ -5,10 +5,10 @@
   <div class="popup-tollbar">
     <div class="row">
       <div class="large-8 columns">
-        <a class="large radius button first-button" ng-click="closePopup()">{{popup.first_button_text}}</a>
+        <a class="large radius button first-button" ng-click="closePopup()" ng-bind-html="popup.first_button_text"></a>
       </div>
       <div class="large-8 columns">
-        <a class="large radius button last-button" ng-href="{{popup.last_button_url}}" target="_blank" ng-click="openPopup()">{{popup.last_button_text}}</a>
+        <a class="large radius button last-button" ng-click="openPopup()">{{popup.last_button_text}}</a>
       </div>
     </div>
   </div>
