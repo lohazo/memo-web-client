@@ -14,13 +14,13 @@
         <li class="menu-item" ng-class="{'active': path == '/'}">
           <a href="/" target="_self" translate="BTN_HOME"></a>
         </li>
-        <li class="menu-item" ng-class="{'active': path.indexOf('/jobs') >= 0}" ng-if="should_jobs">
+        <li class="menu-item" ng-class="{'active': path.indexOf('/jobs') >= 0}" ng-if="sharedSettings.functionaly.should_jobs">
           <a ng-click="trackingClickJobs()" ng-href="/jobs">{{'BTN_JOB' | translate}}</a>
         </li>
-        <li class="menu-item" ng-class="{'active': path.indexOf('/forum') >= 0}" ng-if="should_forum">
+        <li class="menu-item" ng-class="{'active': path.indexOf('/forum') >= 0}" ng-if="sharedSettings.functionaly.should_forum">
           <a href="/forum" target="_self" translate="BTN_FORUM"></a>
         </li>
-        <li class="menu-item" ng-class="{'active': path.indexOf('/weakestword') >= 0}" ng-if="should_weakest_word">
+        <li class="menu-item" ng-class="{'active': path.indexOf('/weakestword') >= 0}" ng-if="sharedSettings.functionaly.should_weakest_word">
           <a href="/weakestword" target="_self" translate="BTN_WORDS"></a>
         </li> 
       </ul>
@@ -32,7 +32,7 @@
             <img src="assets/img/button-05.png" alt="" />
           </a>
           <ul id="dropdown-setting" class="f-dropdown" dropdown-align="right">
-            <li><a href="/profile" target="_self" translate="LABEL_USER_PROFILE" ng-if="should_profile"></a></li>
+            <li><a href="/profile" target="_self" translate="LABEL_USER_PROFILE" ng-if="sharedSettings.functionaly.should_profile"></a></li>
             <li><a href="/setting/account" target="_self" translate="LABEL_SETTINGS"></a></li>
             <li><a ng-click="showShortcutPopup()" translate="LABEL_KEYBOARD_SHORTCUT"></a></li>
             <li><a ng-click="logout()" translate="LABEL_LOG_OUT"></a></li>

@@ -11,26 +11,27 @@
       MemoTracker.track('skill tree plaza ad click');
       $location.url('/plaza');
     }
-    
-    $scope.$on('getSharedSettings', function(){
-      if (AppSetting.sharedSettings.functionaly) {
-        $scope.should_weakest_word = AppSetting.sharedSettings.functionaly.should_weakest_word;
-        $scope.should_share_facebook = AppSetting.sharedSettings.functionaly.should_share_facebook;
-      } else {
-        $scope.should_weakest_word = true;
-        $scope.should_share_facebook = true;
-      };
+
+    $scope.sharedSettings = {
+      functionaly: {
+        should_weakest_word: true,
+        should_share_facebook:  true
+      }
+    }
+
+    $scope.$on('event-sharedSettingsLoaded', function () {
+      $scope.sharedSettings = AppSetting.sharedSettings;
     });
     
     $scope.shareMaxSkill = function () {
-     if (AppSetting.sharedSettings.functionaly.should_share_facebook) {
-      return AppSetting.getMaxSkillFacebookContent().then(function (response) {
-        var data = response.data;
-        data.method = 'feed';
+      if (AppSetting.sharedSettings.functionaly.should_share_facebook) {
+        return AppSetting.getMaxSkillFacebookContent().then(function (response) {
+          var data = response.data;
+          data.method = 'feed';
 
-        FB.ui(data, function (response) {});
-      });
-     };
+          FB.ui(data, function (response) {});
+        });
+      };
     };
 
     function getPopup() {
@@ -94,7 +95,7 @@
     }
 
     function takeATour() {
-      if (AppSetting.shouldDisplayTour() && AppSetting.sharedSettings.functionaly.should_take_a_tour) {
+      if (AppSetting.shouldDisplayTour()) {
         $scope.displayTour = AppSetting.displayTour;
         $location.path('/welcome');
       }
@@ -134,6 +135,10 @@
     // Chain calls
     getProfile()
       .then(AppSetting.getSharedSettings)
+      .then(function () {
+        $scope.sharedSettings = AppSetting.shared_settings;
+        $rootScope.$broadcast('event-sharedSettingsLoaded');
+      })
       .then(Message.list)
       .then(getProfileDetail)
       .then(getStatus)
@@ -192,13 +197,14 @@
     };
 
     $scope.$watch('profile', function () {
-      if ($scope.profile.is_beginner && $scope.profile.allow_placement_test && AppSetting.sharedSettings.functionaly.should_placement_test) {
+      if ($scope.profile.is_beginner && $scope.profile.allow_placement_test) {
         $scope.open();
       }
     });
   }
 
-  function PlacementTestModalInstanceCtrl($scope, $modalInstance) {
+  function PlacementTestModalInstanceCtrl($scope, $modalInstance, Profile) {
+    $scope.profile = Profile.user;
     $scope.close = function () {
       $modalInstance.close();
     };
@@ -356,8 +362,10 @@
     .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
       CampaignVerifyCodeCtrl
     ])
-    .controller('PlacementTestModalCtrl', ['$scope', '$modal', 'AppSetting', 'ReferralService', PlacementTestModalCtrl])
-    .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance',
+    .controller('PlacementTestModalCtrl', ['$scope', '$modal', 'AppSetting', 'ReferralService',
+      PlacementTestModalCtrl
+    ])
+    .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance', 'Profile',
       PlacementTestModalInstanceCtrl
     ])
     .controller('RefCodeModalCtrl', ['$scope', '$modal', 'ReferralService', 'AppSetting', RefCodeModalCtrl])

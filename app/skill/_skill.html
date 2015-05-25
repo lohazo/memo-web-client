@@ -5,9 +5,9 @@
         <div class="{{(skill.finished_lesson == skill.lessons.length && skill.strength_gap >= 4) ? 'success' : '' }} {{skill.theme_color === '#99cc00' ? 'green' : (skill.theme_color === '#ff4444' ? 'red' : 'blue')}} skill skill-{{skill.order + 1}}">
           <div class="icon" style="background-image: url('{{iconSets.lesson}}');"></div>
           <h4 class="name">{{skill.title}}</h4>
-          <div class="level" ng-if="skill.finished_lesson == skill.lessons.length && skill.strength_gap < 4 && should_weakest_word"><span>{{'TEXT_STRENGTHEN' | translate}} :</span> {{skill.strength_gap}}/4</div>
-          <a ng-if="skill.allow_shortcut && (skill.finished_lesson < skill.lessons.length) && should_short_cut" ng-href="/shortcut/{{skill._id}}" class="test-out memo-button" tooltip="{{'TEXT_TOOLTIP_SHORTCUT_EXAM' | translate}}" tooltip-placement="bottom" translate="BTN_SHORTCUT_EXAM"></a>
-          <a ng-if="skill.finished_lesson == skill.lessons.length && should_weakest_word" ng-href="/skill/{{skill._id}}/practice" class="small radius button transparent" translate="TEXT_STRENGTHEN_EXAM"></a>
+          <div class="level" ng-if="skill.finished_lesson == skill.lessons.length && skill.strength_gap < 4 && sharedSettings.functionaly.should_weakest_word"><span>{{'TEXT_STRENGTHEN' | translate}} :</span> {{skill.strength_gap}}/4</div>
+          <a ng-if="skill.allow_shortcut && (skill.finished_lesson < skill.lessons.length) && sharedSettings.functionaly.should_short_cut" ng-href="/shortcut/{{skill._id}}" class="test-out memo-button" tooltip="{{'TEXT_TOOLTIP_SHORTCUT_EXAM' | translate}}" tooltip-placement="bottom" translate="BTN_SHORTCUT_EXAM"></a>
+          <a ng-if="skill.finished_lesson == skill.lessons.length && sharedSettings.functionaly.should_weakest_word" ng-href="/skill/{{skill._id}}/practice" class="small radius button transparent" translate="TEXT_STRENGTHEN_EXAM"></a>
         </div>
       </div>
       <div class="small-12 columns lessons">
@@ -21,12 +21,12 @@
               <div class="small-16 small-centered columns objectives">
                 {{skill.lessons[$index].objectives.join(', ')}}
               </div>
-              <a ng-if="$index < skill.finished_lesson && should_do_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button" translate="BTN_REPLAY_EXAM"></a>
-              <a ng-if="$index == skill.finished_lesson && should_do_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button memo-1 memo-2 memo-3 memo-4 memo-5" translate="BTN_START_EXAM"></a>
-              <a ng-if="$index > skill.finished_lesson && should_do_lesson" class="disabled memo-button"><i class="icon-lock"></i> {{'BTN_LOCK_EXAM' | translate}}</a>
+              <a ng-if="$index < skill.finished_lesson && sharedSettings.functionaly.should_do_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button" translate="BTN_REPLAY_EXAM"></a>
+              <a ng-if="$index == skill.finished_lesson && sharedSettings.functionaly.should_do_lesson" ng-href="/skill/{{skill._id}}/{{$index + 1}}" class="memo-button memo-1 memo-2 memo-3 memo-4 memo-5" translate="BTN_START_EXAM"></a>
+              <a ng-if="$index > skill.finished_lesson && sharedSettings.functionaly.should_do_lesson" class="disabled memo-button"><i class="icon-lock"></i> {{'BTN_LOCK_EXAM' | translate}}</a>
             </div>
           </div>
-          <div ng-switch on="showGrammar" ng-if="should_grammar">
+          <div ng-switch on="showGrammar" ng-if="sharedSettings.functionaly.should_grammar">
             <div ng-switch-when="en-vi_co_ban_1" grammar-co-ban-1>
             </div>
             <div ng-switch-when="en-vi_co_ban_2" grammar-co-ban-2>

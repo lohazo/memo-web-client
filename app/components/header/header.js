@@ -2,18 +2,17 @@
   'use strict';
 
   function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting) {
-    $scope.$on('getSharedSettings', function(){
-      if (AppSetting.sharedSettings.functionaly) {
-        $scope.should_weakest_word =  AppSetting.sharedSettings.functionaly.should_weakest_word;
-        $scope.should_forum = AppSetting.sharedSettings.functionaly.should_forum;
-        $scope.should_jobs = AppSetting.sharedSettings.functionaly.should_jobs;
-        $scope.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
-      } else {
-        $scope.should_weakest_word = true;
-        $scope.should_forum = true;
-        $scope.should_jobs = true;
-        $scope.should_profile = true;
-      };
+    $scope.sharedSettings = {
+      functionaly: {
+        should_weakest_word: true,
+        should_forum:  true,
+        should_jobs: true,
+        should_profile: true
+      }
+    }
+
+    $scope.$on('event-sharedSettingsLoaded', function () {
+      $scope.sharedSettings = AppSetting.sharedSettings;
     });
 
     $scope.$on('$routeChangeSuccess', function () {
@@ -23,6 +22,10 @@
     $scope.trackingClickJobs = function () {
       MemoTracking.track('jobs');
     };
+
+    $scope.$on('event-sharedSettingsLoaded', function () {
+      $scope.sharedSettings = AppSetting.sharedSettings;
+    });
 
     $scope.logout = function () {
       AuthService.logout();
@@ -43,7 +46,7 @@
 
   angular.module('header', []);
   angular.module('header').controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'AuthService', '$modal', 'MemoTracking', 'AppSetting',
-      HeaderCtrl
+    HeaderCtrl
     ])
     .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
       $scope.cancel = function () {

@@ -69,12 +69,14 @@
   }
 
   function LeaderboardHomeCtrl($scope, AppSetting) {
-    $scope.$on('getSharedSettings', function(){
-      if (AppSetting.sharedSettings.functionaly) {
-        $scope.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
-      } else {
-        $scope.should_profile = true;
-      };
+    $scope.sharedSettings = {
+      functionaly: {
+        should_profile: true
+      }
+    }
+
+    $scope.$on('event-sharedSettingsLoaded', function () {
+      $scope.sharedSettings = AppSetting.sharedSettings;
     });
 
     $scope.$watch('leaderboardData', function () {
