@@ -122,5 +122,13 @@
         controllerAs: 'gift',
         templateUrl: 'home/_verify-box.html'
       };
+    })
+    .directive('bannerUpdateBirthday', function () {
+      return {
+        restrict: 'EA',
+        scope: true,
+        controller: 'BannerCtrl',
+        templateUrl: 'components/banner/_banner-update-birthday.html'
+      };
     });
 }(window.angular));

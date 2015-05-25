@@ -22,7 +22,7 @@
     $scope.$on('event-sharedSettingsLoaded', function () {
       $scope.sharedSettings = AppSetting.sharedSettings;
     });
-    
+
     $scope.shareMaxSkill = function () {
       if (AppSetting.sharedSettings.functionaly.should_share_facebook) {
         return AppSetting.getMaxSkillFacebookContent().then(function (response) {
@@ -268,19 +268,56 @@
 
   function SecretGiftCtrl($scope, $http, $modal, API) {
     var vm = this;
-    vm.isOpen = false;
+    vm.isOpen = 1;
     vm.openGift = function (Profile) {
       $http.get(API + '/daily_gift/open_gift?platform=web&auth_token=' + Profile.auth_token)
         .success(function (data) {
-          vm.isOpen = true;
+          vm.isOpen = 2;
           vm.type = Object.keys(data).filter(function (key) {
             return data[key] > 0;
-          });
+          })[0];
           vm.value = data[vm.type];
 
           vm.type == 'memocoin' ? $scope.profileDetail.virtual_money += vm.value : false;
+
+          if (vm.type == 'gift_1m') {
+            $scope.profile.daily_gift_popup_display = false;
+            vm.openGetScholarModal($scope, data);
+            vm.isOpen = 0;
+          }
         });
     };
+
+    vm.openGetScholarModal = function (parentScope, data) {
+      if (data.popup_enable) {
+        var modalInstance = $modal.open({
+          templateUrl: 'popup/_index.html',
+          controller: ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+            $scope.popup = {
+              popup_image: data.popup_image,
+              last_button_url: data.last_button_url,
+              last_button_text: 'Nhận học bổng ngay',
+              first_button_text: 'Bỏ qua (nhận 5 Memocoin)'
+            };
+            $scope.closePopup = function () {
+              parentScope.profileDetail.virtual_money += 5;
+              $http.get(API + '/daily_gift/choose_other_gift?platform=web&auth_token=' + parentScope.profile
+                .auth_token).success(function () {
+                $modalInstance.dismiss();
+              });
+            };
+            $scope.openPopup = function () {
+              vm.openClaimScholarModal(parentScope.profile);
+              $modalInstance.dismiss();
+            };
+          }],
+          windowClass: 'popup-modal'
+        });
+      } else {
+        vm.openClaimScholarModal(Profile);
+      }
+    };
+
     vm.openNativeInfoModal = function () {
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
@@ -288,6 +325,7 @@
         windowClass: 'buy-guide-popup-modal',
       });
     };
+
     vm.openClaimScholarModal = function (Profile) {
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
@@ -300,6 +338,7 @@
         windowClass: 'buy-guide-popup-modal',
       });
     };
+
     vm.openTShirtInfoModal = function () {
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
@@ -307,6 +346,7 @@
         windowClass: 'buy-guide-popup-modal',
       });
     };
+
     vm.openClaimTShirtModal = function (Profile) {
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
@@ -357,7 +397,8 @@
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$window', '$location', 'Profile', 'TreeBuilder',
-      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal', HomeMainCtrl
+      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal',
+      HomeMainCtrl
     ])
     .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
       CampaignVerifyCodeCtrl
@@ -376,6 +417,8 @@
     .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl])
     .controller('SecretGiftTShirtModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftTShirtModalCtrl])
     .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl])
-    .controller('PopupL0BCtrl', ['$scope', 'dataPopup', 'PopupServices', 'MemoTracking', '$modalInstance', PopupL0BCtrl]);
+    .controller('PopupL0BCtrl', ['$scope', 'dataPopup', 'PopupServices', 'MemoTracking', '$modalInstance',
+      PopupL0BCtrl
+    ]);
 
 }(window.angular));

@@ -2,13 +2,13 @@
   <div class="popup-content">
     <img ng-src="{{popup.popup_image}}" />
   </div>
-  <div class="popup-tollbar">
+  <div class="popup-toolbar">
     <div class="row">
-      <div class="large-8 columns">
-        <a class="large radius button first-button" ng-click="closePopup()">{{popup.first_button_text}}</a>
+      <div class="large-8 columns text-center">
+        <a class="radius button first-button" ng-click="closePopup()" ng-bind-html="popup.first_button_text"></a>
       </div>
-      <div class="large-8 columns">
-        <a class="large radius button last-button" ng-href="{{popup.last_button_url}}" target="_blank" ng-click="openPopup()">{{popup.last_button_text}}</a>
+      <div class="large-8 columns text-center">
+        <a class="radius button last-button" ng-click="openPopup()">{{popup.last_button_text}}</a>
       </div>
     </div>
   </div>
