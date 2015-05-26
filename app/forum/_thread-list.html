@@ -12,7 +12,7 @@
           <a ng-href="/forum/post/create" title="" class="small radius gold button" translate="BTN_CREATE_POST"></a>
         </div>
       </div>
-      <div class="main-post">{{should_profile}}
+      <div class="main-post">
         <div class="tabs">
           <tabset vertical="false" type="navType">
           <tab class="tabs-heading" ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
@@ -22,13 +22,13 @@
               <div class="post-content">
                 <p class="title" title=""><img tooltip-placement="top" tooltip="{{'TEXT_TOOLTIP_STICKY_POST' | translate}}" ng-src="assets/img/Forum/sticky-posts-icon.png" /><a ng-href="/forum/post/{{post.slug}}" ng-bind="post.title"></a></p>
                 <p class="post-detail">
-                  <a ng-href="/profile/{{post.user._id}}" ng-if="!should_profile" class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo" ng-href="/forum?filter={{post.base_course_id}}">{{post.course_name}}</a>
+                  <a ng-href="/profile/{{post.user._id}}" ng-if="!sharedSettings.functionaly.should_profile" class="admin">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo" ng-href="/forum?filter={{post.base_course_id}}">{{post.course_name}}</a>
                 </p>
                 <p class="post-detail">
-                  <a class="admin" ng-if="should_profile">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo" ng-href="/forum?filter={{post.base_course_id}}">{{post.course_name}}</a>
+                  <a class="admin" ng-if="sharedSettings.functionaly.should_profile">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo" ng-href="/forum?filter={{post.base_course_id}}">{{post.course_name}}</a>
                 </p>
                 <p class="post-detail">
-                  <a class="admin" ng-if="!should_profile">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo" ng-href="/forum?filter={{post.base_course_id}}">{{post.course_name}}</a>
+                  <a class="admin" ng-if="!sharedSettings.functionaly.should_profile">{{post.user.name}}</a> - {{post.created_time | amDateFormat:'Do MMMM, YYYY'}} - <a class="memo" ng-href="/forum?filter={{post.base_course_id}}">{{post.course_name}}</a>
                 </p>
                 <div class="post-toolbar">
                   <div class="total-vote left" ng-bind="post.up_vote_count"></div>

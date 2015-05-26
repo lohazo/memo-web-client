@@ -12,14 +12,15 @@
       $location.url('/plaza');
     }
 
-    $scope.$on('getSharedSettings', function () {
-      if (AppSetting.sharedSettings.functionaly) {
-        $scope.should_weakest_word = AppSetting.sharedSettings.functionaly.should_weakest_word;
-        $scope.should_share_facebook = AppSetting.sharedSettings.functionaly.should_share_facebook;
-      } else {
-        $scope.should_weakest_word = true;
-        $scope.should_share_facebook = true;
-      };
+    $scope.sharedSettings = {
+      functionaly: {
+        should_weakest_word: true,
+        should_share_facebook:  true
+      }
+    }
+
+    $scope.$on('event-sharedSettingsLoaded', function () {
+      $scope.sharedSettings = AppSetting.sharedSettings;
     });
 
     $scope.shareMaxSkill = function () {
@@ -114,7 +115,7 @@
     }
 
     function takeATour() {
-      if (AppSetting.shouldDisplayTour() && AppSetting.sharedSettings.functionaly.should_take_a_tour) {
+      if (AppSetting.shouldDisplayTour()) {
         $scope.displayTour = AppSetting.displayTour;
         $location.path('/welcome');
       }
@@ -154,6 +155,10 @@
     // Chain calls
     getProfile()
       .then(AppSetting.getSharedSettings)
+      .then(function () {
+        $scope.sharedSettings = AppSetting.shared_settings;
+        $rootScope.$broadcast('event-sharedSettingsLoaded');
+      })
       .then(Message.list)
       .then(getProfileDetail)
       .then(getStatus)
@@ -212,14 +217,14 @@
     };
 
     $scope.$watch('profile', function () {
-      if ($scope.profile.is_beginner && $scope.profile.allow_placement_test && AppSetting.sharedSettings.functionaly
-        .should_placement_test) {
+      if ($scope.profile.is_beginner && $scope.profile.allow_placement_test) {
         $scope.open();
       }
     });
   }
 
-  function PlacementTestModalInstanceCtrl($scope, $modalInstance) {
+  function PlacementTestModalInstanceCtrl($scope, $modalInstance, Profile) {
+    $scope.profile = Profile.user;
     $scope.close = function () {
       $modalInstance.close();
     };
@@ -423,7 +428,7 @@
     .controller('PlacementTestModalCtrl', ['$scope', '$modal', 'AppSetting', 'ReferralService',
       PlacementTestModalCtrl
     ])
-    .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance',
+    .controller('PlacementTestModalInstanceCtrl', ['$scope', '$modalInstance', 'Profile',
       PlacementTestModalInstanceCtrl
     ])
     .controller('RefCodeModalCtrl', ['$scope', '$modal', 'ReferralService', 'AppSetting', RefCodeModalCtrl])

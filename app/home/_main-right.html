@@ -11,7 +11,7 @@
 <div class="container" style="margin-bottom: 20px; border: 2px solid #ffbb33; padding: 10px;" ng-if="!profile.birth_day">
   <div class="row" banner-update-birthday></div>
 </div>
-<div class="container" style="margin-bottom: 20px; border: 2px solid #ffbb33; padding-top: 60px;" ng-if="!profile.referral_user && should_share_facebook">
+<div class="container" style="margin-bottom: 20px; border: 2px solid #ffbb33; padding-top: 60px;" ng-if="!profile.referral_user && sharedSettings.functionaly.should_share_facebook">
   <div class="row" campaign-verify-code></div>
 </div>
 <div class="banner-sa-native" alt="" ng-click="trackingBannerNative()" >
