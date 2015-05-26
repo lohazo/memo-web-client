@@ -43,12 +43,32 @@
             windowClass: 'popup-modal',
             resolve: {
               dataPopup: function () {
-                return data
+                return data;
               }
+            }
+          });
+
+          modalInstance.result.then(function (msg) {
+            if (msg === 'openClaimScholarModal') {
+              openClaimScholarModal($scope.profile);
             }
           });
         };
       });
+
+      var openClaimScholarModal = function (Profile) {
+        var modalInstance = $modal.open({
+          templateUrl: 'plaza/_buy-guide-popup.html',
+          controller: ['$scope', '$sce', '$modalInstance', 'API', function ($scope, $sce, $modalInstance,
+            API) {
+            $scope.trustedResource = $sce.trustAsResourceUrl(API +
+              '/plaza_items/claim_gift_1m?platform=web&&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' +
+              Profile.auth_token +
+              '&verification_code=' + Profile.verification_code);
+          }],
+          windowClass: 'buy-guide-popup-modal',
+        });
+      };
     }
 
     getPopup();
@@ -385,8 +405,10 @@
     $scope.popup = dataPopup;
 
     $scope.openPopup = function () {
-      PopupServices.openPopup(dataPopup);
       MemoTracking.track(dataPopup.type);
+      PopupServices.openPopup(dataPopup).success(function () {
+        $modalInstance.close('openClaimScholarModal');
+      });
     };
 
     $scope.closePopup = function () {
@@ -417,7 +439,8 @@
     .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl])
     .controller('SecretGiftTShirtModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftTShirtModalCtrl])
     .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl])
-    .controller('PopupL0BCtrl', ['$scope', 'dataPopup', 'PopupServices', 'MemoTracking', '$modalInstance',
+    .controller('PopupL0BCtrl', ['$scope', 'dataPopup', 'PopupServices', 'MemoTracking',
+      '$modalInstance',
       PopupL0BCtrl
     ]);
 
