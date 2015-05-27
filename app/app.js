@@ -136,7 +136,7 @@
       LABEL_CHECK_BOX_1: 'Tiếng Anh không được tự nhiên hoặc có lỗi',
       LABEL_CHECK_BOX_2: 'Các gợi ý nghĩa của từ khi di chuột sai hoặc có lỗi',
       LABEL_CHECK_BOX_3: 'Âm thanh không chính xác',
-    
+
       TEXT_TOPICA_MEMO: 'TOPICA Memo',
       TEXT_ITEM_PROGRESS_QUIZ_WARNING_TEXT: 'Bài làm của bạn sẽ bị mất. Bạn có chắc chắn muốn thoát không?',
       TEXT_STRENGTHEN_EXAM: 'Luyện tập củng cố kĩ năng',
@@ -350,7 +350,7 @@
       TEXT_DONOT_UPLOAD_CV: 'Bạn chưa chọn file CV để upload',
       TEXT_REQUIRED: 'Các trường hợp đánh dấu <span class="required-text">(*)</span> là bắt buộc',
       TEXT_INTRO: 'Giới thiệu',
-      TEXT_CV_IMPORT: 'CV đính kèm', 
+      TEXT_CV_IMPORT: 'CV đính kèm',
       TEXT_FORMAT_CV: 'Hỗ trợ định dạng .doc, docx, .pdf nhỏ hơn 512KB',
       TEXT_UPLOAD_CV: 'Gửi hồ sơ',
       TEXT_NATIVE_SCHOLARY_DEADLINE: 'Áp dụng cho tất cả học viên đã từng có 03 ngày học liên tiếp <br> (từ nay đến hết 10/5)',
@@ -397,19 +397,21 @@
   angular.module('app', [
     'ngRoute', 'ngStorage', 'ngAudio', 'ngCookies', 'angular.filter',
     'mm.foundation', 'angles', 'facebook', 'googleplus',
-    'angular-loading-bar', 'angularMoment', 'angulartics', 'angulartics.google.analytics', 'angularFileUpload',
+    'angular-loading-bar', 'angularMoment', 'angulartics', 'angulartics.google.analytics',
+    'angularFileUpload',
     'pascalprecht.translate',
     'app.controllers', 'app.directives',
     'header', 'landingpage', 'login', 'home', 'course',
     'profile', 'skill', 'report', 'exam',
     'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
     'words', 'referral', 'question',
-    'notification', 'download', 'adsense', 'forum', 'job', 'memo.dropdown', 'weakestWord', 'popup', 'banner'
-    ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider', 
-      'GooglePlusProvider', '$logProvider', '$translateProvider', 
-      AppConfig
-    ]).run(['$rootScope', '$location', '$localStorage', 'amMoment', function ($rootScope, $location, $localStorage,
-    amMoment) {
+    'notification', 'download', 'adsense', 'forum', 'job', 'memo.dropdown', 'weakestWord',
+    'popup', 'banner'
+  ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
+    'GooglePlusProvider', '$logProvider', '$translateProvider',
+    AppConfig
+  ]).run(['$rootScope', '$templateCache', '$location', '$localStorage', 'amMoment', function (
+    $rootScope, $templateCache, $location, $localStorage, amMoment) {
     amMoment.changeLocale('vi');
 
     var notRequireLoginPaths = {
@@ -420,9 +422,13 @@
     };
 
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
+      if (typeof (current) !== 'undefined') {
+        $templateCache.remove(current.templateUrl);
+      }
+
       if ($localStorage.auth) {
         if (!$localStorage.auth.loggedIn && notRequireLoginPaths[
-        next.originPath]) {
+            next.originPath]) {
           $location.url('/');
         }
       } else {
@@ -437,11 +443,14 @@
           loggedIn: false,
           trial: false
         }
-    $rootScope.$broadcast('event:auth-logoutConfirmed');
-      if ($location.host().match(/(^memo.|.net.vn$|.local$)/g)) {
-        alert('Bạn hoặc ai đó đã đăng nhập vào tài khoản này trên thiết bị khác. Vui lòng đăng nhập lại!');
+        $rootScope.$broadcast('event:auth-logoutConfirmed');
+        if ($location.host().match(/(^memo.|.net.vn$|.local$)/g)) {
+          alert(
+            'Bạn hoặc ai đó đã đăng nhập vào tài khoản này trên thiết bị khác. Vui lòng đăng nhập lại!'
+          );
+        }
       }
-    }});
+    });
   }]);
 
 }(window.angular));
