@@ -8,7 +8,7 @@
     $scope.max_page = 5;
 
     $scope.$on('event-sharedSettingsLoaded', function () {
-      post.should_profile = AppSetting.sharedSettings.functionaly.should_profile;
+      $scope.sharedSettings = AppSetting.sharedSettings;
     });
 
     $scope.isAuthenticated = AuthService.isAuthenticated;
@@ -18,14 +18,12 @@
       if (!output.message) {
         output.posts = output.posts.map(function (post) {
           post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
-          post.should_profile = true;
           return post;
         });
         output.current_page = output.next_page > 0 ? output.next_page - 1 : output.total_page;
         if (output.sticky_posts) {
           output.sticky_posts = output.sticky_posts.map(function (post) {
             post.created_time = Math.round((new Date('' + post.created_at)).getTime() / 1000);
-            post.should_profile = true;
             return post;
           });
         }
