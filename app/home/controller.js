@@ -299,6 +299,7 @@
           vm.value = data[vm.type];
 
           vm.type == 'memocoin' ? $scope.profileDetail.virtual_money += vm.value : false;
+          vm.type == 'exp' ? $scope.profileDetail.total_exp += vm.value : false;
 
           if (vm.type == 'gift_1m') {
             $scope.profile.daily_gift_popup_display = false;
