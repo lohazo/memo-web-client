@@ -26,6 +26,7 @@
         font-size: $button-font-med;
         width: 100%;
         text-align: left;
+        position: relative;
         &:hover {
             background-color: $primary-color;
             border-radius: $global-radius;
@@ -37,6 +38,11 @@
         }
         img {
             margin-right: 25px;
+        }
+        span{
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
         }
     }
 }

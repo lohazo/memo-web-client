@@ -10,14 +10,15 @@
     $scope.trackingBannerNative = function () {
       MemoTracker.track('skill tree plaza ad click');
       $location.url('/plaza');
-    }
+    };
 
     $scope.sharedSettings = {
       functionaly: {
         should_weakest_word: true,
-        should_share_facebook:  true
+        should_share_facebook: true,
+        should_banner_update_birthday: true
       }
-    }
+    };
 
     $scope.$on('event-sharedSettingsLoaded', function () {
       $scope.sharedSettings = AppSetting.sharedSettings;
@@ -35,43 +36,43 @@
     };
 
     function getPopup() {
-      PopupServices.getPopup().success(function (data) {
-        if (data._id) {
-          var modalInstance = $modal.open({
-            templateUrl: 'popup/_index.html',
-            controller: 'PopupL0BCtrl',
-            windowClass: 'popup-modal',
-            resolve: {
-              dataPopup: function () {
-                return data;
+      if (AppSetting.sharedSettings.functionaly.should_popup_gift1m_skill_tree) {
+        PopupServices.getPopup().success(function (data) {
+          if (data._id) {
+            var modalInstance = $modal.open({
+              templateUrl: 'popup/_index.html',
+              controller: 'PopupL0BCtrl',
+              windowClass: 'popup-modal',
+              resolve: {
+                dataPopup: function () {
+                  return data;
+                }
               }
-            }
-          });
+            });
 
-          modalInstance.result.then(function (msg) {
-            if (msg === 'openClaimScholarModal') {
-              openClaimScholarModal($scope.profile);
-            }
+            modalInstance.result.then(function (msg) {
+              if (msg === 'openClaimScholarModal') {
+                openClaimScholarModal($scope.profile);
+              }
+            });
+          };
+        });
+
+        var openClaimScholarModal = function (Profile) {
+          var modalInstance = $modal.open({
+            templateUrl: 'plaza/_buy-guide-popup.html',
+            controller: ['$scope', '$sce', '$modalInstance', 'API', function ($scope, $sce, $modalInstance,
+              API) {
+              $scope.trustedResource = $sce.trustAsResourceUrl(API +
+                '/plaza_items/claim_gift_1m?platform=web&&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' +
+                Profile.auth_token +
+                '&verification_code=' + Profile.verification_code);
+            }],
+            windowClass: 'buy-guide-popup-modal',
           });
         };
-      });
-
-      var openClaimScholarModal = function (Profile) {
-        var modalInstance = $modal.open({
-          templateUrl: 'plaza/_buy-guide-popup.html',
-          controller: ['$scope', '$sce', '$modalInstance', 'API', function ($scope, $sce, $modalInstance,
-            API) {
-            $scope.trustedResource = $sce.trustAsResourceUrl(API +
-              '/plaza_items/claim_gift_1m?platform=web&&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' +
-              Profile.auth_token +
-              '&verification_code=' + Profile.verification_code);
-          }],
-          windowClass: 'buy-guide-popup-modal',
-        });
-      };
+      }
     }
-
-    getPopup();
 
     function getProfile() {
       return Profile.getProfile().then(function () {
@@ -166,6 +167,7 @@
       .then(buildTree)
       .then(takeATour)
       .then(getLeaderboardData)
+      .then(getPopup)
       .then(AppSetting.getWords);
   }
 
@@ -297,7 +299,7 @@
             return data[key] > 0;
           })[0];
           vm.value = data[vm.type];
-
+          
           vm.type == 'memocoin' ? $scope.profileDetail.virtual_money += vm.value : false;
           vm.type == 'exp' ? $scope.profileDetail.total_exp += vm.value : false;
 
