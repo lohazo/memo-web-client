@@ -4,7 +4,14 @@
   'use strict';
 
   function ListPostCtrl($scope, $location, AuthService, ForumServices, allPosts, subscribers, followingPosts,
-    searchPosts, $translate, AppSetting) {
+    searchPosts, $translate, AppSetting, $rootScope, $localStorage) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
+    $translate.use($localStorage.auth.user.display_lang);
+
     $scope.max_page = 5;
 
     $scope.$on('event-sharedSettingsLoaded', function () {
@@ -154,7 +161,14 @@
     };
   }
 
-  function CreatePostCtrl($scope, AuthService, ForumServices, $location, subscribers) {
+  function CreatePostCtrl($scope, AuthService, ForumServices, $location, subscribers, AppSetting, $rootScope, $translate, $localStorage) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
+    $translate.use($localStorage.auth.user.display_lang);
+
     $scope.data = {
       title: '',
       content: '',
@@ -209,7 +223,14 @@
     $scope.getListSubscription();
   }
 
-  function PostDetailCtrl($scope, AuthService, $sce, ForumServices, $location, Post, subscribers) {
+  function PostDetailCtrl($scope, AuthService, $sce, ForumServices, $location, Post, subscribers, AppSetting, $rootScope, $translate, $localStorage) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
+    $translate.use($localStorage.auth.user.display_lang);
+
     $scope.isAuthenticated = AuthService.isAuthenticated;
     $scope.post = Post.data;
     var description = $scope.post.content.split('.')[0];
@@ -406,13 +427,13 @@
 
   angular.module('forum.controllers', ['forum.services'])
     .controller('ListPostCtrl', ['$scope', '$location', 'AuthService', 'ForumServices', 'allPosts', 'subscribers',
-      'followingPosts', 'searchPosts', '$translate', 'AppSetting', ListPostCtrl
+      'followingPosts', 'searchPosts', '$translate', 'AppSetting', '$rootScope', '$localStorage', ListPostCtrl
     ])
-    .controller('CreatePostCtrl', ['$scope', 'AuthService', 'ForumServices', '$location', 'subscribers',
+    .controller('CreatePostCtrl', ['$scope', 'AuthService', 'ForumServices', '$location', 'subscribers', 'AppSetting', '$rootScope', '$translate', '$localStorage',
       CreatePostCtrl
     ])
     .controller('PostDetailCtrl', ['$scope', 'AuthService', '$sce', 'ForumServices', '$location', 'Post',
-      'subscribers',
+      'subscribers', 'AppSetting', '$rootScope', '$translate', '$localStorage',
       PostDetailCtrl
     ]);
 }(window.angular));

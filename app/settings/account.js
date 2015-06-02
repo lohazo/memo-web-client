@@ -1,7 +1,9 @@
 (function (angular) {
   'use strict';
 
-  function AccountSetting($localStorage, Profile) {
+  function AccountSetting($localStorage, Profile, AppSetting, $rootScope, $translate) {
+    $translate.use($localStorage.auth.user.display_lang);
+
     var User = {};
     User.setting = $localStorage.auth.accountSetting || {
       microEnabled: 1,
@@ -19,7 +21,14 @@
     return User;
   }
 
-  function AccountSettingCtrl($scope, $localStorage, AccountSetting, $upload, $http) {
+  function AccountSettingCtrl($scope, $localStorage, AccountSetting, $upload, $http, AppSetting, $rootScope, $translate) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
+    $translate.use($localStorage.auth.user.display_lang);
+
     $scope.user = $localStorage.auth.user;
     $scope.setting = AccountSetting.setting;
 
@@ -79,9 +88,9 @@
   }
 
   angular.module('settings.account', [])
-    .controller('AccountSettingCtrl', ['$scope', '$localStorage', 'AccountSetting', '$upload', '$http',
+    .controller('AccountSettingCtrl', ['$scope', '$localStorage', 'AccountSetting', '$upload', '$http', 'AppSetting', '$rootScope', '$translate',
       AccountSettingCtrl
     ])
-    .factory('AccountSetting', ['$localStorage', 'Profile', AccountSetting]);
+    .factory('AccountSetting', ['$localStorage', 'Profile', 'AppSetting', '$rootScope', '$translate', AccountSetting]);
 
 }(window.angular));

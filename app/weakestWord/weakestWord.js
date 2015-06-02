@@ -8,7 +8,14 @@
   	});
   }
 
-  function ListWeakestWordCtrl($scope, $location, ngAudio, WeakestWordServices) {
+  function ListWeakestWordCtrl($scope, $location, ngAudio, WeakestWordServices, AppSetting, $rootScope, $translate, $localStorage) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
+    $translate.use($localStorage.auth.user.display_lang);
+
     $scope.max_page = 5;
 
     function convertTime(data) {
@@ -112,6 +119,6 @@
 
   angular.module('weakestWord', [])
     .config(['$routeProvider', weakestWordConfig])
-    .controller('ListWeakestWordCtrl', ['$scope', '$location', 'ngAudio', 'WeakestWordServices', ListWeakestWordCtrl])
+    .controller('ListWeakestWordCtrl', ['$scope', '$location', 'ngAudio', 'WeakestWordServices', 'AppSetting', '$rootScope', '$translate', '$localStorage', ListWeakestWordCtrl])
     .factory('WeakestWordServices', ['$http', '$q', '$localStorage', 'API', WeakestWordServices]);
 }(window.angular));
