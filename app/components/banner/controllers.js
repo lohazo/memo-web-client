@@ -32,7 +32,7 @@
       var birthday = new Date(newDate).getTime();
 
       ProfileServices.updateBirthday({birth_day: newDate}).success(function () {
-        $scope.profileDetail.virtual_money += 5;
+        $scope.profileDetail.total_exp += 50;
         $scope.profile.birth_day = true;
       });
     };
