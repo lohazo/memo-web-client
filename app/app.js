@@ -214,7 +214,7 @@
       TEXT_REFERRAL_CODE: 'Nhận 3 MemoCoin khi nhập code chia sẻ từ bạn bè',
       TEXT_PLAZA: 'Plaza',
       TEXT_MEMO_COIN: 'MemoCoin',
-      TEXT_EXP: 'EXP',
+      TEXT_EXP: 'XP',
       TEXT_LUCKY_STAR: 'Ngôi sao may mắn',   
       TEXT_COMBO_PROTECT_DAILY_GIFT: 'Streak_freeze',
       TEXT_BUY_GUIDE: 'Hướng dẫn mua vật phẩm',
