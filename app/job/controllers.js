@@ -2,7 +2,14 @@
   'use strict';
 
 
-  function ListJobCtrl ($scope, $location, JobServices, JobsOfMemo, JobsForUser, allFilter, searchJobs, MemoTracking) {
+  function ListJobCtrl ($scope, $location, JobServices, JobsOfMemo, JobsForUser, allFilter, searchJobs, MemoTracking, AppSetting, $rootScope, $translate, $localStorage) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    })
+
+    $translate.use($localStorage.auth.user.display_lang);
+
     $scope.max_page = 5;
     $scope.JobsOfMemo = JobsOfMemo.data;
     $scope.JobsForUser = JobsForUser.data;
@@ -81,7 +88,14 @@
     };
   }
 
-  function JobDetailCtrl ($scope, $modal, AuthService, Job, MemoTracking) {
+  function JobDetailCtrl ($scope, $modal, AuthService, Job, MemoTracking, AppSetting, $rootScope, $translate, $localStorage) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    })
+
+    $translate.use($localStorage.auth.user.display_lang);
+
     $scope.job = Job.data;
 
     $scope.isAuthenticated = AuthService.isAuthenticated;
@@ -149,7 +163,14 @@
     };
   }
   
-  function ApplyJobModalCtrl ($scope, JobServices, id, job, $localStorage, $http, $modalInstance, $location) {
+  function ApplyJobModalCtrl ($scope, JobServices, id, job, $localStorage, $http, $modalInstance, $location, AppSetting, $rootScope, $translate) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    })
+
+    $translate.use($localStorage.auth.user.display_lang);
+
     var fd = new FormData();
     $scope.job = job;
 
@@ -188,11 +209,11 @@
 
   angular.module('job').controller('Tabs', function ($scope) {})
   angular.module('job.controllers', ['job.services'])
-  .controller('ListJobCtrl', ['$scope', '$location', 'JobServices', 'JobsOfMemo', 'JobsForUser', 'allFilter', 'searchJobs', 'MemoTracking', ListJobCtrl
+  .controller('ListJobCtrl', ['$scope', '$location', 'JobServices', 'JobsOfMemo', 'JobsForUser', 'allFilter', 'searchJobs', 'MemoTracking', 'AppSetting', '$rootScope', '$translate', '$localStorage', ListJobCtrl
   ])
-  .controller('JobDetailCtrl', ['$scope', '$modal', 'AuthService', 'Job', 'MemoTracking', JobDetailCtrl
+  .controller('JobDetailCtrl', ['$scope', '$modal', 'AuthService', 'Job', 'MemoTracking', 'AppSetting', '$rootScope', '$translate', '$localStorage', JobDetailCtrl
   ])
-  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', 'job', '$localStorage', '$http', '$modalInstance', '$location', 
+  .controller('ApplyJobModalCtrl', ['$scope', 'JobServices', 'id', 'job', '$localStorage', '$http', '$modalInstance', '$location', 'AppSetting', '$rootScope', '$translate', 
     ApplyJobModalCtrl
   ]);
 

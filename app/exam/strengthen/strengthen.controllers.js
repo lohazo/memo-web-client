@@ -2,7 +2,14 @@
   'use strict';
 
   function CoursePracticeCtrl($scope, $timeout, $location, Exam, Question, Sound, MemoTracker,
-    Skill, $modal, $localStorage, ForumServices) {
+    Skill, $modal, $localStorage, ForumServices, AppSetting, $rootScope, $translate) {
+    
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
+    $translate.use($localStorage.auth.user.display_lang);
 
     var requestData = {
       type: 'strengthen_all'
@@ -233,7 +240,14 @@
   }
 
   function SkillPracticeCtrl($scope, $timeout, $routeParams, $location, Exam, Question, Sound, MemoTracker,
-    Skill, $modal, $localStorage, ForumServices) {
+    Skill, $modal, $localStorage, ForumServices, AppSetting, $rootScope, $translate) {
+    
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
+    $translate.use($localStorage.auth.user.display_lang);
 
     var requestData = {
       type: 'strengthen_skill',
@@ -466,9 +480,9 @@
 
   angular.module('exam.strengthen')
     .controller('CoursePracticeCtrl', ['$scope', '$timeout', '$location', 'ExamStrengthen',
-      'Question', 'Sound', 'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', CoursePracticeCtrl
+      'Question', 'Sound', 'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'AppSetting', '$rootScope', '$translate', CoursePracticeCtrl
     ])
     .controller('SkillPracticeCtrl', ['$scope', '$timeout', '$routeParams', '$location', 'ExamStrengthen',
-      'Question', 'Sound', 'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', SkillPracticeCtrl
+      'Question', 'Sound', 'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'AppSetting', '$rootScope', '$translate', SkillPracticeCtrl
     ]);
 }(window.angular));

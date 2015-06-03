@@ -32,7 +32,14 @@
     return Setting;
   }
 
-  function SettingNotificationCtrl($scope, SettingNotification) {
+  function SettingNotificationCtrl($scope, SettingNotification, $translate, AppSetting, $rootScope, $localStorage) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
+    $translate.use($localStorage.auth.user.display_lang);
+    
     $scope.settings = SettingNotification.settings;
 
     $scope.saveChanges = function () {
@@ -50,7 +57,7 @@
   angular.module('settings.notification', [])
     .factory('SettingServices', ['$http', '$q', '$localStorage', 'API', SettingServices])
     .factory('SettingNotification', ['SettingServices', '$localStorage', SettingNotification])
-    .controller('SettingNotificationCtrl', ['$scope', 'SettingNotification',
+    .controller('SettingNotificationCtrl', ['$scope', 'SettingNotification', '$translate', 'AppSetting', '$rootScope', '$localStorage',
       SettingNotificationCtrl
     ]);
 

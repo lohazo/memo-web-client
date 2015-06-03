@@ -1,7 +1,14 @@
 (function (angular) {
   'use strict';
 
-  function PlazaCtrl($scope, $sce, $location, Plaza, Profile, ReferralService, $modal, res1, res2, res3) {
+  function PlazaCtrl($scope, $sce, $location, Plaza, Profile, ReferralService, $modal, res1, res2, res3, AppSetting, $rootScope, $translate, $localStorage) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    })
+
+    $translate.use($localStorage.auth.user.display_lang);
+    
     $scope.profile = Profile.user;
     $scope.profileDetail = Profile.detail;
     $scope.plaza = Plaza.data;
@@ -155,7 +162,7 @@
 
   angular.module('plaza.controllers', [])
     .controller('PlazaCtrl', ['$scope', '$sce', '$location', 'Plaza', 'Profile', 'ReferralService', '$modal', 'res1',
-      'res2', 'res3', PlazaCtrl
+      'res2', 'res3', 'AppSetting', '$rootScope', '$translate', '$localStorage', PlazaCtrl
     ])
     .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
       ProgressQuizConfirmModalCtrl

@@ -2,7 +2,13 @@
 
   'use strict';
 
-  function SettingLanguageCtrl($scope, Course) {
+  function SettingLanguageCtrl($scope, Course, AppSetting, $rootScope, $translate, $localStorage) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
+    $translate.use($localStorage.auth.user.display_lang);
 
     Course.listUserCourses().then(function () {
       $scope.userCourses = Course.userCourses;
@@ -19,6 +25,6 @@
   }
 
   angular.module('settings.languages', [])
-    .controller('SettingLanguageCtrl', ['$scope', 'Course', SettingLanguageCtrl]);
+    .controller('SettingLanguageCtrl', ['$scope', 'Course', 'AppSetting', '$rootScope', '$translate', '$localStorage', SettingLanguageCtrl]);
 
 }(window.angular));
