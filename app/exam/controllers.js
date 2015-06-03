@@ -2,15 +2,22 @@
   'use strict';
 
   function ExamCtrl($scope, $timeout, $routeParams, $sce, $location, Exam, Question, Sound, MemoTracker,
-    Skill, $modal, $localStorage, ForumServices, Profile, AppSetting) {
+    Skill, $modal, $localStorage, ForumServices, Profile, AppSetting, $rootScope, $translate) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
 
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
+    $translate.use($localStorage.auth.user.display_lang);
+
     $scope.sharedSettings = {
       functionaly: {
-        should_forum:  true
+        should_forum: true
       }
-    }
+    };
 
     $scope.$on('event-sharedSettingsLoaded', function () {
       $scope.sharedSettings = AppSetting.sharedSettings;
@@ -77,7 +84,7 @@
     };
 
     $scope.quit = function (afterDoingTest, returnPath) {
-      if (Exam.question().last_screen && Exam.question().last_screen.is_enabled) {
+      if (Exam.question().last_screen && Exam.question().last_screen.is_enabled && AppSetting.sharedSettings.functionaly.should_last_screen) {
         $scope.questionTpl = questionTplId.lastScreen;
         $scope.testText = Question.creatLastScreenText(Exam.question().last_screen);
         // $scope.testText = Question.createLastScreenText({
@@ -380,11 +387,19 @@
   }
 
   function DiscussionExamModalCtrl($scope, $location, Exam, ExamStrengthen, $localStorage, ForumServices,
-    $modalInstance) {
+    $modalInstance, AppSetting, $rootScope, $translate) {
     $scope.question = Exam.question() || ExamStrengthen.question();
     $scope.requestData = {
       content: ''
     }
+
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    })
+
+    $translate.use($localStorage.auth.user.display_lang);
+
     $scope.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
@@ -494,10 +509,10 @@
   angular.module('exam.controllers', ['ngSanitize'])
     .controller('ExamCtrl', [
       '$scope', '$timeout', '$routeParams', '$sce', '$location', 'Exam', 'Question', 'Sound',
-      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', 'AppSetting', ExamCtrl
+      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', 'AppSetting', '$rootScope', '$translate', ExamCtrl
     ])
     .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage',
-      'ForumServices', '$modalInstance', DiscussionExamModalCtrl
+      'ForumServices', '$modalInstance', 'AppSetting', '$rootScope', '$translate', DiscussionExamModalCtrl
     ])
     .controller('ScholarshipPopupModalCtrl', ['$scope', 'url', '$sce', ScholarshipPopupModalCtrl])
     .controller('MaxCoursePopupModalCtrl', ['$scope', '$modalInstance', 'AppSetting', MaxCoursePopupModalCtrl]);

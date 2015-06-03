@@ -14,7 +14,12 @@
     });
   }
 
-  function ProgressQuizCtrl($scope, ProgressQuiz) {
+  function ProgressQuizCtrl($scope, ProgressQuiz, AppSetting, $rootScope) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
     var ctrl = this;
     // ProgressQuiz.start().then(function () {
     $scope.progressQuiz = ProgressQuiz;
@@ -25,5 +30,5 @@
       'adaptiveTest.progressQuiz.introScreen', 'adaptiveTest.progressQuiz.finishScreen'
     ])
     .config(['$routeProvider', ProgressQuizConfig])
-    .controller('ProgressQuizCtrl', ['$scope', 'ProgressQuiz', ProgressQuizCtrl]);
+    .controller('ProgressQuizCtrl', ['$scope', 'ProgressQuiz', 'AppSetting', '$rootScope', ProgressQuizCtrl]);
 }(window.angular));

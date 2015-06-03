@@ -7,10 +7,22 @@
       <div class="small-16 columns answers">
         <div class="row">
           <form>
-            <div class="image image-{{$index + 1}}" ng-repeat="option in options track by $index" ng-click="selectAnswer($index + 1)" popover="{{'TEXT_TOOLTIP_SHORTCUT_KEYBOARD' | translate}}" popover-trigger="mouseenter" popover-placement="bottom" translate-values='{ value: {{$index + 1}}}'>
-              <img ng-src="{{option.image_file}}" />
-              <input type="radio" name="answer" value="{{option.text}}" ng-model="select.userAnswer"/>
-              <label>{{option.text}}</label>
+            <div ng-repeat="option in options track by $index">
+              <div class="image image-{{$index + 1}}" ng-click="selectAnswer($index + 1)" popover="{{'TEXT_TOOLTIP_SHORTCUT_KEYBOARD_1' | translate}}" popover-trigger="mouseenter" popover-placement="bottom" ng-if="$index == 0">
+                <img ng-src="{{option.image_file}}" />
+                <input type="radio" name="answer" value="{{option.text}}" ng-model="select.userAnswer"/>
+                <label>{{option.text}}</label>
+              </div>
+              <div class="image image-{{$index + 1}}" ng-click="selectAnswer($index + 1)" popover="{{'TEXT_TOOLTIP_SHORTCUT_KEYBOARD_2' | translate}}" popover-trigger="mouseenter" popover-placement="bottom" ng-if="$index == 1">
+                <img ng-src="{{option.image_file}}" />
+                <input type="radio" name="answer" value="{{option.text}}" ng-model="select.userAnswer"/>
+                <label>{{option.text}}</label>
+              </div>
+              <div class="image image-{{$index + 1}}" ng-click="selectAnswer($index + 1)" popover="{{'TEXT_TOOLTIP_SHORTCUT_KEYBOARD_3' | translate}}" popover-trigger="mouseenter" popover-placement="bottom" ng-if="$index == 2">
+                <img ng-src="{{option.image_file}}" />
+                <input type="radio" name="answer" value="{{option.text}}" ng-model="select.userAnswer"/>
+                <label>{{option.text}}</label>
+              </div>
             </div>
           </form>
         </div>

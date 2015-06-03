@@ -107,7 +107,14 @@
     return SettingProfile;
   }
 
-  function SettingProfileCtrl($scope, Profile, SettingProfile, $localStorage) {
+  function SettingProfileCtrl($scope, Profile, SettingProfile, $localStorage, AppSetting, $rootScope, $translate) {
+    AppSetting.getSharedSettings().then(function () {
+      $scope.sharedSettings = AppSetting.shared_settings;
+      $rootScope.$broadcast('event-sharedSettingsLoaded');
+    });
+
+    $translate.use($localStorage.auth.user.display_lang);
+    
     updateUser();
 
     $scope.name = $localStorage.auth.user.name;
@@ -149,7 +156,7 @@
   }
 
   angular.module('settings.profile', [])
-    .controller('SettingProfileCtrl', ['$scope', 'Profile', 'SettingProfile', '$localStorage',
+    .controller('SettingProfileCtrl', ['$scope', 'Profile', 'SettingProfile', '$localStorage', 'AppSetting', '$rootScope', '$translate',
       SettingProfileCtrl
     ])
     .factory('SettingProfileService', ['$http', '$q', '$localStorage', 'API',
