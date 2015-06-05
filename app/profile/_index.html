@@ -8,13 +8,13 @@
           <strong ng-bind="profileDetail.username"></strong>
         </p>
         <div class="row add-user-name">
-          <p><img src="assets/img/005.png" alt="" width="40">{{profileDetail.combo_days || 0}} <span>{{'TEXT_COMBO_DAY' | translate}}</span></p>
+          <p><img src="assets/img/005.png" alt="">{{profileDetail.combo_days || 0}} <span>{{'TEXT_COMBO_DAY' | translate}}</span></p>
         </div>
         <div class="row choose-language-profile">
           <div class="large-16 columns">
             <div class="row top-language-profile" ng-repeat="row in ownedCourses">
               <div class="language-profile" ng-repeat="course in row" ng-if="course">
-                <img ng-src="assets/img/{{course._id}}.png" alt="">
+                <img ng-src="assets/img/{{course._id}}.png" alt="" width="40">
                 <span title="" style="color:#810c15;font-weight: 700;">{{course.course_name}}</span> <br>
                 <span>Level {{course.level}}</span>
               </div>
