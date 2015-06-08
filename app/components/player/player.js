@@ -4,10 +4,7 @@
   function PlayerCtrl($scope) {
     $scope.sharedSettings = {
       functionaly: {
-        should_weakest_word: true,
-        should_forum:  true,
-        should_jobs: true,
-        should_profile: true
+        should_forum:  true
       }
     };
 
