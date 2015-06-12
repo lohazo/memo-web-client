@@ -144,7 +144,7 @@
       TEXT_LIST_JOB_TITLE: 'Danh sách việc làm',
       TEXT_HOT_LINE_TO_APPLY_JOB: '0972865329',
       TEXT_APPLE_BY_HOT_LINE: 'Hoặc gọi tới HOT LINE',
-      TEXT_EMAIL_TO_APPLY_JOB: 'memo@job.edu.vn',
+      TEXT_EMAIL_TO_APPLY_JOB: ' memo@topica.edu.vn',
       TEXT_APPLY_BY_EMAIL: 'Gửi email kèm CV của bạn tới',
       TEXT_APPLY_JOB_TITLE: 'Bạn muốn ứng tuyển vị trí này ?',
       TEXT_JOB_INFORMATION_TITLE: "Thông tin công việc",
