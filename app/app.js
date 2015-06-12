@@ -142,7 +142,7 @@
       TEXT_STRENGTHEN_EXAM: 'Luyện tập củng cố kĩ năng',
       TEXT_STRENGTHEN: 'Độ mạnh',
       TEXT_LIST_JOB_TITLE: 'Danh sách việc làm',
-      TEXT_HOT_LINE_TO_APPLY_JOB: '0986103650',
+      TEXT_HOT_LINE_TO_APPLY_JOB: '0972865329',
       TEXT_APPLE_BY_HOT_LINE: 'Hoặc gọi tới HOT LINE',
       TEXT_EMAIL_TO_APPLY_JOB: 'memo@job.edu.vn',
       TEXT_APPLY_BY_EMAIL: 'Gửi email kèm CV của bạn tới',
