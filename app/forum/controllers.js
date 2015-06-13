@@ -216,7 +216,7 @@
 
     $scope.getListSubscription = function () {
       ForumServices.getListSubscription().success(function (data) {
-        $scope.listSubscriptions = data.list_subscriptions;
+        $scope.listSubscriptions = data.list_subscriptions.slice(0,2);
       });
     };
 
