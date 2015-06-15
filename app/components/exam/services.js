@@ -369,7 +369,7 @@
     };
   }
 
-  function ExamServices($http, $q, $localStorage, API) {
+  function ExamServices($http, $q, $localStorage, API, $location) {
     var Services = {};
 
     function transformRequest(obj) {
@@ -382,6 +382,7 @@
     Services.start = function (data) {
       var deferred = $q.defer();
       var auth_token = $localStorage.auth.user.auth_token;
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       var requestData = {
         type: data.type,
@@ -398,7 +399,7 @@
         requestData.skill_id = data.skill_id;
       }
 
-      $http.post(API + '/exams/start', requestData)
+      $http.post(API + '/exams/start?platform=web&localize=' + localize, requestData)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -415,6 +416,7 @@
     Services.finish = function (data) {
       var deferred = $q.defer();
       var auth_token = $localStorage.auth.user.auth_token;
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       var requestData = {
         type: data.type,
@@ -434,7 +436,7 @@
         requestData.skill_id = data.skill_id;
       }
 
-      $http.post(API + '/exams/finish', requestData)
+      $http.post(API + '/exams/finish?platform=web&localize=' + localize, requestData)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -446,6 +448,7 @@
     Services.fail = function (data) {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       var requestData = {
         type: data.type,
@@ -457,7 +460,7 @@
         requestData.checkpoint_position = data.checkpoint_position;
       }
 
-      $http.post(API + '/exams/fail', data)
+      $http.post(API + '/exams/fail?platform=web&localize=' + localize, data)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -467,16 +470,18 @@
 
     Services.getUrlScholarshipPopup = function () {
       var authToken = $localStorage.auth.user.auth_token;
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
-      var endpoint = API + '/popup/?auth_token=' + authToken;
+      var endpoint = API + '/popup/?platform=web&localize=' + localize + '&auth_token=' + authToken;
 
       return $http.get(endpoint);
     }
 
     Services.openScholarshipPopup = function () {
       var authToken = $localStorage.auth.user.auth_token;
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
-      var endpoint = API + '/popup/open/?auth_token=' + authToken;
+      var endpoint = API + '/popup/open/?platform=web&localize=' + localize + '&auth_token=' + authToken;
 
       return $http.get(endpoint);
     }
@@ -492,5 +497,5 @@
     .factory('ExamStrengthen', ['$localStorage', '$window',
       'ExamServices', 'Feedback', 'PlazaServices', 'MemoTracking', ExamStrengthen
     ])
-    .factory('ExamServices', ['$http', '$q', '$localStorage', 'API', ExamServices]);
+    .factory('ExamServices', ['$http', '$q', '$localStorage', 'API', '$location', ExamServices]);
 }(window.angular));
