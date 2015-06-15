@@ -23,7 +23,9 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
       var userId = $localStorage.auth.user._id;
-      $http.get(API + '/users/' + userId + '/owned_courses?auth_token=' + authToken)
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
+
+      $http.get(API + '/users/' + userId + '/owned_courses?platform=web&localize=' + localize + '&auth_token=' + authToken)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -35,11 +37,12 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
       var userId = $localStorage.auth.user._id;
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       // data = {base_course_id: 1254}
       data.auth_token = authToken;
 
-      $http.post(API + '/users/' + userId + '/select_course', data)
+      $http.post(API + '/users/' + userId + '/select_course?platform=web&localize=' + localize, data)
         .error(function (data, status, headers, config) {
           if (status === 422) {
             $location.path('/course');
