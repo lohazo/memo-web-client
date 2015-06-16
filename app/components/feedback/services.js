@@ -50,6 +50,6 @@
 
   angular.module('feedback.services', []);
   angular.module('feedback.services')
-    .factory('FeedbackServices', ['$http', '$q', '$localStorage', 'API', FeedbackServices])
+    .factory('FeedbackServices', ['$http', '$q', '$localStorage', 'API', '$location', FeedbackServices])
     .factory('Feedback', ['FeedbackServices', FeedbackFactory]);
 }(window.angular));
