@@ -1,11 +1,12 @@
 (function (angular) {
   'use strict';
 
-  function WordsFactory($http, $q, $localStorage, API) {
+  function WordsFactory($http, $q, $localStorage, API, $location) {
     var httpConfig = {
       ignoreLoadingBar: true
     };
     var Factory = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     function transformRequest(obj) {
       var str = [];
@@ -40,7 +41,7 @@
       var words = $localStorage.words || {};
       var version = words.version || 0;
 
-      $http.get(API + '/shared_settings/all_words.json?version=' + version, httpConfig)
+      $http.get(API + '/shared_settings/all_words.json?platform=web&localize=' + localize + '&version=' + version, httpConfig)
         .then(function (response) {
           if (version != response.data.version) {
             $localStorage.words = response.data;
@@ -61,7 +62,7 @@
 
       data.auth_token = authToken;
 
-      $http.post(API + '/users/' + userId + '/update_owned_word', data, {
+      $http.post(API + '/users/' + userId + '/update_owned_word?platform=web&localize=' + localize, data, {
           ignoreLoadingBar: true
         })
         .then(function (response) {
@@ -78,5 +79,5 @@
 
   angular.module('words', []);
   angular.module('words')
-    .factory('Words', ['$http', '$q', '$localStorage', 'API', WordsFactory]);
+    .factory('Words', ['$http', '$q', '$localStorage', 'API', '$location', WordsFactory]);
 }(window.angular));
