@@ -371,6 +371,7 @@
 
   function ExamServices($http, $q, $localStorage, API, $location) {
     var Services = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     function transformRequest(obj) {
       var str = [];
@@ -382,7 +383,6 @@
     Services.start = function (data) {
       var deferred = $q.defer();
       var auth_token = $localStorage.auth.user.auth_token;
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       var requestData = {
         type: data.type,
@@ -416,7 +416,6 @@
     Services.finish = function (data) {
       var deferred = $q.defer();
       var auth_token = $localStorage.auth.user.auth_token;
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       var requestData = {
         type: data.type,
@@ -448,7 +447,6 @@
     Services.fail = function (data) {
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       var requestData = {
         type: data.type,
@@ -470,7 +468,6 @@
 
     Services.getUrlScholarshipPopup = function () {
       var authToken = $localStorage.auth.user.auth_token;
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       var endpoint = API + '/popup/?platform=web&localize=' + localize + '&auth_token=' + authToken;
 
@@ -479,7 +476,6 @@
 
     Services.openScholarshipPopup = function () {
       var authToken = $localStorage.auth.user.auth_token;
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       var endpoint = API + '/popup/open/?platform=web&localize=' + localize + '&auth_token=' + authToken;
 

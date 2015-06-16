@@ -3,12 +3,12 @@
 
   function CourseServices($http, $q, $location, $localStorage, API) {
     var Services = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     Services.listCourses = function () {
       var deferred = $q.defer();
       var userId = $localStorage.auth.user._id;
-      var authToken = $localStorage.auth.user.auth_token;
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
+      var authToken = $localStorage.auth.user.auth_token;      
 
       $http.get(API + '/users/' + userId + '/available_courses?platform=web&localize=' + localize +
           '&auth_token=' + authToken)
@@ -23,7 +23,6 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
       var userId = $localStorage.auth.user._id;
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       $http.get(API + '/users/' + userId + '/owned_courses?platform=web&localize=' + localize + '&auth_token=' + authToken)
         .then(function (response) {
@@ -37,7 +36,6 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
       var userId = $localStorage.auth.user._id;
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       // data = {base_course_id: 1254}
       data.auth_token = authToken;

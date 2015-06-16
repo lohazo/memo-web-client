@@ -3,10 +3,10 @@
 
   function FeedbackServices($http, $q, $localStorage, API, $location) {
     var Services = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     Services.create = function (data) {
       var auth_token = $localStorage.auth.user.auth_token;
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
       data.auth_token = auth_token;
       data.platform = 'web';
       // data = {auth_token, feedbacks: [{

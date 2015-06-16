@@ -3,12 +3,12 @@
 
   function AdaptiveTestServices($http, $localStorage, API, $location) {
     var Services = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     /*
      * data = {type: progess_quiz/placement_test}
      */
     Services.start = function (data) {
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
       data.auth_token = $localStorage.auth.user.auth_token;
       data.platform = 'web';
 
@@ -19,7 +19,6 @@
      * data = {_id: progress_quiz_log_id, exam_token, answer:{question_log_id: true/false}, type}
      */
     Services.submitAnswer = function (data) {
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
       data.auth_token = $localStorage.auth.user.auth_token;
       data.platform = 'web';
 
