@@ -15,6 +15,7 @@ angular.module('report', [])
           requestData.platform = 'web';
           requestData.version = '1.0.3';
           requestData.localize = localize;
+          
           $http.post(API + '/feedbacks/report_bugs', requestData)
             .then(function (response) {
               deferred.resolve(response);
