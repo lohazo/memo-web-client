@@ -1,18 +1,19 @@
 (function (angular) {
   'use strict';
 
-  function LoginFactory($http, $q, $localStorage, API) {
+  function LoginFactory($http, $q, $localStorage, API, $location) {
     var Service = {};
 
     Service.loginProcessing = false;
 
     Service.register = function (data) {
       var deferred = $q.defer();
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       if (!Service.loginProcessing) {
         Service.loginProcessing = true;
 
-        $http.post(API + '/users', data)
+        $http.post(API + '/users?platform=web&localize=' + localize, data)
           .then(function (response) {
             deferred.resolve(response);
             Service.loginProcessing = false;
@@ -29,11 +30,12 @@
       var deferred = $q.defer();
       var access_token = data.g_access_token || data.access_token;
       var gmail = data.gmail;
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       if (!Service.loginProcessing) {
         Service.loginProcessing = true;
 
-        $http.post(API + '/users/login?access_token=' + access_token, data)
+        $http.post(API + '/users/login?platform=web&localize=' + localize + '&access_token=' + access_token, data)
           .then(function (response) {
             deferred.resolve(response);
             Service.loginProcessing = false;
@@ -226,7 +228,7 @@
   }
 
   angular.module('login')
-    .factory('LoginService', ['$http', '$q', '$localStorage', 'API', LoginFactory])
+    .factory('LoginService', ['$http', '$q', '$localStorage', 'API', '$location', LoginFactory])
     .factory('AuthService', ['$q', '$rootScope', '$location', '$cookies', '$localStorage', 'Facebook', 'GooglePlus',
       'EcoTracking',
       'MemoTracking', 'LoginService', 'ReferralService', AuthService
