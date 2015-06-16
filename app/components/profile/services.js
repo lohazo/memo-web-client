@@ -63,7 +63,7 @@
       // data = {username: 'asonetuh'/ password: 'anoethuasto'/ email: 'asoentuh'}
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      $http.put(API + '/users/' + userId, data)
+      $http.put(API + '/users/' + userId + '?platform=web&localize=' + localize , data)
         .then(function (response) {
           deferred.resolve(response);
         });
