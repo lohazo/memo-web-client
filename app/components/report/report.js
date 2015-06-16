@@ -2,17 +2,19 @@
 
 angular.module('report', [])
   .factory('ReportServices', [
-    '$http', '$q', '$localStorage', 'API',
-    function ($http, $q, $localStorage, API) {
+    '$http', '$q', '$localStorage', 'API', '$location',
+    function ($http, $q, $localStorage, API, $location) {
 
       return {
         reportBug: function (data) {
           var deferred = $q.defer();
           var requestData = {};
+          var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
           requestData.feedback = data.content;
           requestData.auth_token = $localStorage.auth.user.auth_token;
           requestData.platform = 'web';
           requestData.version = '1.0.3';
+          requestData.localize = localize;
           $http.post(API + '/feedbacks/report_bugs', requestData)
             .then(function (response) {
               deferred.resolve(response);
