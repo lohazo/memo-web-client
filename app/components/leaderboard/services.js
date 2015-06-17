@@ -1,8 +1,9 @@
 (function (angular) {
   'use strict';
 
-  function LeaderboardServices($http, $q, $localStorage, API) {
+  function LeaderboardServices($http, $q, $localStorage, API, $location) {
     var Services = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     Services.leaderboard = function (data) {
       // data = {page:, [type: week/month]}
@@ -13,7 +14,7 @@
       data.auth_token = authToken;
       data.page = data.page || 0;
 
-      $http.get(API + '/users/' + userId + '/leaderboard?type=' + data.type + '&page=' + data
+      $http.get(API + '/users/' + userId + '/leaderboard?platform=web&localize=' + localize + '&type=' + data.type + '&page=' + data
           .page + '&auth_token=' + data.auth_token)
         .then(function (response) {
           deferred.resolve(response);
@@ -34,7 +35,7 @@
         auth_token: authToken,
         fb_access_token: fbAccessToken
       };
-      $http.post(API + '/users/' + userId + '/search_facebook_friends', data)
+      $http.post(API + '/users/' + userId + '/search_facebook_friends?platform=web&localize=' + localize, data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -54,7 +55,7 @@
       data.page = data.page || 0;
       data.id = userId;
 
-      $http.post(API + '/users/' + userId + '/search_friends?auth_token=' + authToken +
+      $http.post(API + '/users/' + userId + '/search_friends?platform=web&localize=' + localize + '&auth_token=' + authToken +
           '&page=' + data.page + '&keywords=' + data.keywords)
         .then(function (response) {
           deferred.resolve(response);
@@ -74,7 +75,7 @@
       var userId = $localStorage.auth.user._id;
       data.auth_token = authToken;
 
-      $http.post(API + '/users/' + userId + '/follow_friend', data)
+      $http.post(API + '/users/' + userId + '/follow_friend?platform=web&localize=' + localize, data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -93,7 +94,7 @@
       var userId = $localStorage.auth.user._id;
       data.auth_token = authToken;
 
-      $http.post(API + '/users/' + userId + '/unfollow_friend', data)
+      $http.post(API + '/users/' + userId + '/unfollow_friend?platform=web&localize=' + localize, data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -112,7 +113,7 @@
 
       data.auth_token = authToken;
 
-      $http.post(API + '/users/' + userId + '/invite_by_mail', data)
+      $http.post(API + '/users/' + userId + '/invite_by_mail?platform=web&localize=' + localize, data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -191,7 +192,7 @@
     .factory('Leaderboard', ['$q', '$localStorage', 'LeaderboardServices', 'Facebook',
       LeaderboardFactory
     ])
-    .factory('LeaderboardServices', ['$http', '$q', '$localStorage', 'API',
+    .factory('LeaderboardServices', ['$http', '$q', '$localStorage', 'API', '$location',
       LeaderboardServices
     ]);
 

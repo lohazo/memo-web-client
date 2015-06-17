@@ -1,10 +1,10 @@
 (function (angular) {
   'use strict';
 
-  function UserServices($http, $q, $localStorage) {
+  function UserServices($http, $q, $localStorage, $location) {
     var Services = this;
 
-    var apiEndpoint = 'http://staging.memo.edu.vn/v2/api/users';
+    var apiEndpoint = 'http://staging.memo.edu.vn/v2/api/users?platform=web&localize=' + localize;
 
     Services.create = function (data) {
       if (!data) return false;
@@ -22,5 +22,5 @@
 
   angular.module('user', []);
   angular.module('user')
-    .factory('UserServices', ['$http', '$q', '$localStorage', UserServices]);
+    .factory('UserServices', ['$http', '$q', '$localStorage', '$location', UserServices]);
 }(window.angular));

@@ -3,13 +3,13 @@
 
   function LoginFactory($http, $q, $localStorage, API, $location) {
     var Service = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     Service.loginProcessing = false;
 
     Service.register = function (data) {
       var deferred = $q.defer();
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
-
+      
       if (!Service.loginProcessing) {
         Service.loginProcessing = true;
 
@@ -30,7 +30,6 @@
       var deferred = $q.defer();
       var access_token = data.g_access_token || data.access_token;
       var gmail = data.gmail;
-      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
       if (!Service.loginProcessing) {
         Service.loginProcessing = true;
@@ -51,7 +50,7 @@
     Service.logout = function () {
       var user = $localStorage.auth.user;
 
-      return $http.post(API + '/users/' + user._id + '/logout', {
+      return $http.post(API + '/users/' + user._id + '/logout?platform=web&localize=' + localize, {
         auth_token: user.auth_token
       });
     };
@@ -69,7 +68,7 @@
 
     Service.profile = function (data) {
       var deferred = $q.defer();
-      $http.get(API + '/users/' + data._id + '?auth_token=' + data.auth_token)
+      $http.get(API + '/users/' + data._id + '?platform=web&localize=' + localize + '&auth_token=' + data.auth_token)
         .then(function (response) {
           deferred.resolve(response);
         });

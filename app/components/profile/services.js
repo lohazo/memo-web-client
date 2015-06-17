@@ -3,6 +3,7 @@
 
   function ProfileServices($http, $q, $location, $localStorage, API) {
     var Services = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     Services.profile = function (data) {
       // data = {_id: }
@@ -12,14 +13,14 @@
         'auth_token': $localStorage.auth.user.auth_token
       };
 
-      var endpoint = API + '/users/' + requestData._id + '/profile_details?auth_token=' +
+      var endpoint = API + '/users/' + requestData._id + '/profile_details?platform=web&localize=' + localize + '&auth_token=' +
         requestData.auth_token;
 
       if (data) {
         endpoint += data.friend_id && data.friend_id.length > 0 ? '&friend_id=' + data.friend_id : '';
       }
 
-      $http.get(API + '/users?auth_token=' + requestData.auth_token)
+      $http.get(API + '/users?platform=web&localize=' + localize + '&auth_token=' + requestData.auth_token)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -41,7 +42,7 @@
         'auth_token': $localStorage.auth.user.auth_token
       };
 
-      var endpoint = API + '/users/' + requestData._id + '/profile_details?auth_token=' +
+      var endpoint = API + '/users/' + requestData._id + '/profile_details?platform=web&localize=' + localize + '&auth_token=' +
         requestData.auth_token;
 
       if (data) {
@@ -62,7 +63,7 @@
       // data = {username: 'asonetuh'/ password: 'anoethuasto'/ email: 'asoentuh'}
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      $http.put(API + '/users/' + userId, data)
+      $http.put(API + '/users/' + userId + '?platform=web&localize=' + localize , data)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -79,7 +80,7 @@
       
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      return $http.post(API + '/users/' + userId + '/update_birthday', data);
+      return $http.post(API + '/users/' + userId + '/update_birthday?platform=web&localize=' + localize, data);
     }
 
     return Services;

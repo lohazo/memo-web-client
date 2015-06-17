@@ -1,13 +1,16 @@
 (function (angular, localStorage) {
   'use strict';
 
-  function MemoTracking($http, $q, $localStorage, APP_VERSION) {
+  function MemoTracking($http, $q, $localStorage, APP_VERSION, $location) {
     var BASE_URL = 'http://services.memo.edu.vn/v2/trackings/track';
     var tracker = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     tracker.track = function (eventName, data, callback) {
       var deferred = $q.defer();
       var requestData = {
+        platform: 'web',
+        localize: localize,
         event_name: 'Web ' + APP_VERSION + ' ' + eventName,
         user_id: $localStorage.auth.user._id,
         unique_id: localStorage.eco_user ? JSON.parse(localStorage.eco_user).user_id : ''
@@ -25,13 +28,14 @@
     return tracker;
   }
 
-  function EcoTracking($http, $q, $routeParams, $cookies, $localStorage) {
+  function EcoTracking($http, $q, $routeParams, $cookies, $localStorage, $location) {
     var BASE_URL = 'http://eco-tracking.memo.edu.vn';
     var tracker = {};
     var isCalled = 0;
     var httpConfig = {
       ignoreLoadingBar: true
     };
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     function transformRequest(obj) {
       var str = [];
@@ -55,7 +59,7 @@
     };
     tracker.createFrame = function () {
       var ifrm = document.createElement('iframe');
-      ifrm.setAttribute('src', BASE_URL + '/tracking_frame/index');
+      ifrm.setAttribute('src', BASE_URL + '/tracking_frame/index?platform=web&localize=' + localize);
       ifrm.setAttribute('style', 'display:none;width:0px;height:0px;');
       document.body.appendChild(ifrm);
       return ifrm;
@@ -78,6 +82,8 @@
       data.name = "Enter page";
       data.browsing_domain = document.URL;
       data.referrer_url = document.referrer;
+      data.platform = 'web';
+      data.localize = localize;
 
       return $http.post(BASE_URL + '/users/track', data, {
           ignoreLoadingBar: true,
@@ -98,6 +104,8 @@
       var user = JSON.parse(localStorage.eco_user);
 
       var requestData = {
+        platform: 'web',
+        localize: localize,
         name: eventName,
         cookie: $cookies.eco_uuid,
         user_id: user.user_id,
@@ -139,6 +147,8 @@
       }
 
       var requestData = {
+        platform: 'web',
+        localize: localize,
         name: eventName,
         cookie: $cookies.eco_uuid,
         user_id: user.user_id,
@@ -200,9 +210,9 @@
   }
 
   angular.module('tracking.services', ['ngCookies'])
-    .factory('MemoTracking', ['$http', '$q', '$localStorage', 'APP_VERSION', MemoTracking])
+    .factory('MemoTracking', ['$http', '$q', '$localStorage', 'APP_VERSION', '$location', MemoTracking])
     .factory('EcoTracking', [
-      '$http', '$q', '$routeParams', '$cookies', '$localStorage', EcoTracking
+      '$http', '$q', '$routeParams', '$cookies', '$localStorage', '$location', EcoTracking
     ])
     .factory('Mixpanel', MixpanelFactory);
 
