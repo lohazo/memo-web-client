@@ -1,8 +1,36 @@
-<div message-list></div>
-<div class="row main home-page">
-  <div style="display:none;" placement-test-modal></div>
-  <div style="display:none;" referral-popup-modal></div>
-  <div class="main-left" main-left></div>
-  <div class="main-center" main-center></div>
-  <div class="main-right" main-right></div>
+<div class="main home-page">
+  <div class="head">
+    <div class="head-left">
+      <div class="course-icon">
+        <img src="assets/img/new/en-vi-course-icon.png" alt="">
+      </div>
+      <div class="course-title">Kĩ năng Tiếng Anh</div>
+      <div class="course-option">
+        <a href="/course" title="">Đổi khóa học</a>
+      </div>
+    </div>
+    <div class="head-right">
+      <a href="" title="" class="small radius button strengthen-button">Củng cố kĩ năng</a>
+    </div>
+  </div>
+  <div class="content row">
+      <div class="small-3 columns" ng-repeat="island in islands">
+        <div><span>{{island.title}}</span>   <img src="assets/img/new/finished-lesson-icon.png" alt="" ng-if="island.is_unlock">
+        </div>
+        <div>
+          <img src="{{island.icon_url}}" alt="">
+        </div>
+        <div>progressBar 
+        </div>
+        <div>
+          {{island.finished_lesson}}/{{island.lessons_length}} Kỹ năng
+        </div>
+        <div>
+          <a href="" title="" class="small radius button" ng-if="island.finished_lesson == island.lessons_length">Củng cố từ vựng yếu</a>
+          <a href="" title="" class="small radius button" ng-if="!(island.finished_lesson == 0) && island.finished_lesson < island.lessons_length">Vào học</a>
+          <a href="" title="" class="small radius button disabled" ng-if="island.finished_lesson == 0">Vào học</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

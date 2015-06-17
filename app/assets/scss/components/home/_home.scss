@@ -1,130 +1,51 @@
 .home-page, .plaza {
   &.main {
-    margin-top: 40px;
-    .main-left, .main-right {
-      @include grid-column($columns: 4);
-      .pratice-button {
-        @include button($padding: $button-tny, $radius: $global-radius);
-        color: $white;
-        margin-bottom: 0;
-        margin-top: 20px;
-        font-size: 16px;
-        background: $primary-color url("assets/img/pratice-button.png") 10px center no-repeat;
-        background-origin: content-box;
-        text-align: right;
-        padding-right: 35px;
-      }
-    }
-    .main-center {
-      @include grid-column($columns: 8);
-    }
-    .main-left, .main-center, .main-right {
-      .tooltip {
-        border-radius: 5px;
-      }
-      min-height: 580px;
-      .container {
-        background-color: $white;
-        border-radius: 15px;
-        padding: 20px;
-      }
-      .share {
-        background: url("assets/img/facebook-share.png") center no-repeat;
-        width: 110px;
-        height: 40px;
-      }
-    }
-    .container {
-      .row {
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: auto;
-        padding-right: auto;
-      }
-    }
-    .main-center .container {
-      float: left;
-      width: 100%;
-      h4 {
-        line-height: 60px;
-        margin: 0;
-        padding-left: 20px;
-      }
-      .fanto-store {
-        height: 40px;
-        line-height: 40px;
-        padding-top: 0;
-        padding-bottom: 0;
-        margin-bottom: 0;
-        margin-top: 10px;
-      }
-      .max-skill {
-        margin-top: 50px;
-        text-align: center;
-      }
-    }
-    .main-right {
-      .container {
-        .facebook-search, .memo-search, .email-invitation {
-          height: 40px;
-          line-height: 40px;
-          padding: 0;
-          margin-bottom: 10px;
-        }
-      }
-      .social-bar {
-        margin-top: 10px;
+    margin: 20px 20px 10px 20px;
+    width: 1326px;
+    height: 478px;
+    background-color: $white;
+    .head {
+      padding: 15px;
+      @include grid-row;
+      margin: 0;
+      min-height: 40px;
+      .head-left {
+        @include grid-column($columns: 8);
+        float: left;
         padding: 5px;
-        li {
-          background-color: $white;
-          border-radius: 10px;
-          width: 80px;
-          margin-left: 5px;
-          margin-right: 5px;
-          min-height: 40px;
+        .course-icon {
+          @include grid-column($columns: 1);
+          padding: 0;
+          margin-right: 10px;
+          text-align: center;
+        }
+        .course-title {
+          @include grid-column($columns: 6);
+          padding: 0;
+          top: 50%;
+          font-size: 24px;
+          text-align: center;
+        }
+        .course-option {
+          @include grid-column($columns: 3);
+          padding: 0;
+          text-align: center;
         }
       }
-      .banner-sa-native {
-        cursor: pointer;
-        background: url("assets/img/Banner/Banner-SA-native.png") center no-repeat;
-        width: 261px;
-        height: 497px;
-        padding: 20px;
-        margin-bottom: 20px;
-        .banner-toolbar {
-          margin-top: 410px;
-          text-align: center;
-          .banner-button {
-            width: 211px;
-            height: 44px;
-            padding: 10px 0 10px 0;
-            font-weight: bold;
-            color: $white;
-            background-color: $primary-color;
-            &:hover {
-              background-color: scale-color($primary-color, $lightness: -20%);
-            }
-          }
-        }
+      .head-right {
+        float: right;
+      }
+    }
+    .content {
+      padding: 15px;
+      margin: 0;
+      .island {
+        width: 195px;
+        height: 375px;
+        background-color: #f2f3f4;
       }
     }
   }
-}
-
-.panel {
-  border: medium none !important;
-  width: 1110px !important;
-  margin: 0px auto;
-  border-radius: 12px;
-  margin-top: 25px;
-  padding: 5px;
-}
-
-.panel a > img {
-  height: 25px;
-  width: 25px;
-  text-align: right;
-  float: right;
 }
 
 @import "placement-test-modal";
