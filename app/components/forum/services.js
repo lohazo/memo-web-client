@@ -31,7 +31,7 @@
       var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
       var endpoint = API + '/posts';
       
-      endpoint += data.id ? '/' + data.id + '&platform=web&localize=' + localize : '';
+      endpoint += data.id ? '/' + data.id + '?platform=web&localize=' + localize : '';
       endpoint += data.slug ? '/post_details?slug=' + data.slug + '&platform=web&localize=' + localize : '';
 
       if (authToken.length > 0) {
