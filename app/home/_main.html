@@ -20,7 +20,7 @@
         <div>
           <img src="{{island.icon_url}}" alt="">
         </div>
-        <div>progressBar 
+        <div><progressbar max="island.lessons_length" value="island.finished_lesson"><span style="color:black; white-space:nowrap;">{{island.finished_lesson}} / {{island.lessons_length}}</span></progressbar> 
         </div>
         <div>
           {{island.finished_lesson}}/{{island.lessons_length}} Kỹ năng

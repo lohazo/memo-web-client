@@ -5,6 +5,11 @@
 
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
     Message, ReferralService, Leaderboard, PopupServices, $modal) {
+    $scope.max = 12;
+    $scope.dynamic = 6;
+    $scope.double = function () {
+      $scope.dynamic = $scope.dynamic * 2;
+    }
     $scope.islands = [{
       title: 'Đảo Kiến số 1',
       is_unlock: true,
@@ -37,7 +42,7 @@
       title: 'Đảo Kiến số 5',
       is_unlock: false,
       lessons_length: 15,
-      finished_lesson: 0,
+      finished_lesson: 10,
       strength_gap: 0,
       icon_url: 'https://lh3.googleusercontent.com/-UFh1SmnNPgI/VYHPcAqlUTI/AAAAAAACDxc/SO0NJal0Rrc/s0/island-5-icon.png'
     }]
