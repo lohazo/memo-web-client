@@ -62,12 +62,13 @@
     return PlacementTest;
   }
 
-  function PlacementTestServices($http, $q, API, $localStorage) {
+  function PlacementTestServices($http, $q, API, $localStorage, $location) {
 
     return {
       start: function () {
         var deferred = $q.defer();
         var authToken = $localStorage.auth.user.auth_token;
+        var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
         var requestData = {
           platform: 'web',
@@ -76,7 +77,7 @@
           speak_enabled: false
         };
 
-        $http.post(API + '/adaptive_tests/start', requestData)
+        $http.post(API + '/adaptive_tests/start?platform=web&localize=' + localize, requestData)
           .then(function (response) {
             deferred.resolve(response);
           });
@@ -85,13 +86,14 @@
       },
       submitAnswer: function (data) {
         var deferred = $q.defer();
+        var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
         data.auth_token = $localStorage.auth.user.auth_token;
         data.platform = 'web';
         data.speak_enabled = false;
         data.type = 'placement_test';
 
-        $http.post(API + '/adaptive_tests/' + data.id + '/submit_answer', data)
+        $http.post(API + '/adaptive_tests/' + data.id + '/submit_answer?platform=web&localize=' + localize, data)
           .then(function (response) {
             deferred.resolve(response);
           });
@@ -106,6 +108,6 @@
     .factory('PlacementTestFactory', ['PlacementTestServices', 'Mixpanel', 'MemoTracking', '$localStorage',
       PlacementTestFactory
     ])
-    .factory('PlacementTestServices', ['$http', '$q', 'API', '$localStorage', PlacementTestServices]);
+    .factory('PlacementTestServices', ['$http', '$q', 'API', '$localStorage', '$location', PlacementTestServices]);
 
 }(window.angular));

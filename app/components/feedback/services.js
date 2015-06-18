@@ -1,8 +1,9 @@
 (function (angular) {
   'use strict';
 
-  function FeedbackServices($http, $q, $localStorage, API) {
+  function FeedbackServices($http, $q, $localStorage, API, $location) {
     var Services = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     Services.create = function (data) {
       var auth_token = $localStorage.auth.user.auth_token;
@@ -14,7 +15,7 @@
       // "is_auto":true}]}
       var deferred = $q.defer();
 
-      $http.post(API + '/feedbacks/report_answers', data)
+      $http.post(API + '/feedbacks/report_answers?platform=web&localize=' + localize, data)
         .then(function (response) {
           deferred.resolve(response);
         });
@@ -49,6 +50,6 @@
 
   angular.module('feedback.services', []);
   angular.module('feedback.services')
-    .factory('FeedbackServices', ['$http', '$q', '$localStorage', 'API', FeedbackServices])
+    .factory('FeedbackServices', ['$http', '$q', '$localStorage', 'API', '$location', FeedbackServices])
     .factory('Feedback', ['FeedbackServices', FeedbackFactory]);
 }(window.angular));

@@ -1,14 +1,15 @@
 (function (angular) {
   'use strict';
 
-  function PlazaServices($http, $q, $localStorage, API) {
+  function PlazaServices($http, $q, $localStorage, API, $location) {
     var Services = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     Services.get = function () {
       var deferred = $q.defer();
 
       var authToken = $localStorage.auth.user.auth_token;
-      $http.get(API + '/plaza_items?platform=web&localize=vi&auth_token=' + authToken)
+      $http.get(API + '/plaza_items?platform=web&localize=' + localize + '&auth_token=' + authToken)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -30,7 +31,7 @@
       data.platform = 'web';
       data.localize = 'vi';
 
-      $http.post(API + '/plaza_items/' + data.base_item_id + '/buy', data)
+      $http.post(API + '/plaza_items/' + data.base_item_id + '/buy?platform=web&localize=' + localize, data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -53,7 +54,7 @@
       data.platform = 'web';
       data.localize = 'vi';
 
-      $http.post(API + '/plaza_items/' + data.base_item_id + '/use', data)
+      $http.post(API + '/plaza_items/' + data.base_item_id + '/use?platform=web&localize=' + localize, data)
         .then(function (response) {
           deferred.resolve(response);
         }, function (response) {
@@ -100,6 +101,6 @@
 
   angular.module('plaza.services', [])
     .factory('Plaza', ['PlazaServices', '$localStorage', PlazaFactory])
-    .factory('PlazaServices', ['$http', '$q', '$localStorage', 'API', PlazaServices]);
+    .factory('PlazaServices', ['$http', '$q', '$localStorage', 'API', '$location', PlazaServices]);
 
 }(window.angular));

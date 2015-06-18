@@ -5,18 +5,19 @@
 (function (angular) {
   'use strict';
 
-  function ReferralService($http, $q, $localStorage, API) {
+  function ReferralService($http, $q, $localStorage, API, $location) {
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
     var Apis = {
         // GET
-        status: '/referral/referral_status?auth_token=',
-        close_popup: '/referral/close_pop_up?auth_token=',
+        status: '/referral/referral_status?platform=web&localize=' + localize + '&auth_token=',
+        close_popup: '/referral/close_pop_up?platform=web&localize=' + localize + '&auth_token=',
 
         // POST
-        submit_code: '/referral/submit_referral_code',
-        check_code: '/referral/check_referral_code',
-        verify_rewards: '/referral/verify_rewards',
-        join_campaign: '/referral/join_campaign',
-        claim_rewards: '/referral/claim_rewards'
+        submit_code: '/referral/submit_referral_code?platform=web&localize=' + localize,
+        check_code: '/referral/check_referral_code?platform=web&localize=' + localize,
+        verify_rewards: '/referral/verify_rewards?platform=web&localize=' + localize,
+        join_campaign: '/referral/join_campaign?platform=web&localize=' + localize,
+        claim_rewards: '/referral/claim_rewards?platform=web&localize=' + localize
       },
       Referral = {};
     Referral.status = 0;
@@ -129,5 +130,5 @@
   }
 
   angular.module('referral.services', [])
-    .factory('ReferralService', ['$http', '$q', '$localStorage', 'API', ReferralService])
+    .factory('ReferralService', ['$http', '$q', '$localStorage', 'API', '$location', ReferralService])
 })(window.angular);

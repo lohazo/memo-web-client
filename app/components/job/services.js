@@ -1,11 +1,12 @@
 (function (angular) {
   'use strict';
 
-  function JobServices($http, $localStorage, API) {
+  function JobServices($http, $localStorage, API, $location) {
   	var Services = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
   	Services.getJobs = function (data) {
-  		var endpoint = API + '/jobs?page=1';
+  		var endpoint = API + '/jobs?page=1&platform=web&localize=' + localize;
       if (!data) {
         var data = {};
       }
@@ -18,13 +19,13 @@
   	};
 
     Services.getFilter = function () {
-      var endpoint = API + '/jobs/all_filters';
+      var endpoint = API + '/jobs/all_filters?platform=web&localize=' + localize;
 
       return $http.get(endpoint);
     }
 
   	Services.searchJobs = function (data) {
-  		var endpoint = API + '/jobs/search?page=1';
+  		var endpoint = API + '/jobs/search?page=1&platform=web&localize=' + localize;
       if (!data) {
         var data = {};
       }
@@ -45,7 +46,7 @@
   		endpoint += data.slug ? '/' + data.slug : '';
 
       if (authToken.length > 0) {
-        endpoint += data.slug ? '?auth_token=' + authToken : '';
+        endpoint += data.slug ? '?platform=web&localize=' + localize + '&auth_token=' + authToken : '';
       };
 
   		return $http.get(endpoint);
@@ -56,7 +57,7 @@
 
       data.auth_token = authToken;
 
-      return $http.post(API + '/jobs/apply', data);
+      return $http.post(API + '/jobs/apply?platform=web&localize=' + localize, data);
   	};
 
   	Services.uploadCV = function (data) {
@@ -64,7 +65,7 @@
 
       data.auth_token = authToken;
 
-      return $http.post(API + '/jobs/upload_cv?auth_token=' + authToken,data,{
+      return $http.post(API + '/jobs/upload_cv?platform=web&localize=' + localize + '&auth_token=' + authToken,data,{
         withCredentials: false,
         headers: {'Content-Type': undefined },
         transformRequest: angular.identity
@@ -75,5 +76,5 @@
   }
 
   angular.module('job.services', [])
-    .factory('JobServices', ['$http', '$localStorage', 'API', JobServices]);
+    .factory('JobServices', ['$http', '$localStorage', 'API', '$location', JobServices]);
 })(window.angular);

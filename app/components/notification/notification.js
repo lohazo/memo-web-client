@@ -1,14 +1,15 @@
 (function (angular) {
   'use strict';
 
-  function NotificationService($http, $q, $localStorage, API) {
+  function NotificationService($http, $q, $localStorage, API, $location) {
     var Service = {};
+    var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
 
     Service.getInAppNotifications = function (data) {
       // data = {page: 1};
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
-      $http.get(API + '/in_app_notifications?auth_token=' + authToken + '&page=' + (data.page ||
+      $http.get(API + '/in_app_notifications?platform=web&localize=' + localize + '&auth_token=' + authToken + '&page=' + (data.page ||
           1), {
           ignoreLoadingBar: true
         })
@@ -25,7 +26,7 @@
       var deferred = $q.defer();
       var authToken = $localStorage.auth.user.auth_token;
 
-      $http.post(API + '/in_app_notifications/check_all', {
+      $http.post(API + '/in_app_notifications/check_all?platform=web&localize=' + localize, {
           auth_token: authToken
         }, {
           ignoreLoadingBar: true
@@ -44,7 +45,7 @@
       var deferred = $q.defer();
       data.auth_token = $localStorage.auth.user.auth_token;
 
-      $http.post(API + '/in_app_notifications/open', data)
+      $http.post(API + '/in_app_notifications/open?platform=web&localize=' + localize, data)
         .then(function (response) {
           deferred.resolve(response);
         })
@@ -117,7 +118,7 @@
     'notification.gift'
   ]);
   angular.module('notification')
-    .factory('NotificationService', ['$http', '$q', '$localStorage', 'API', NotificationService])
+    .factory('NotificationService', ['$http', '$q', '$localStorage', 'API', '$location', NotificationService])
     .controller('NotificationDropdownButtonCtrl', ['$scope', '$interval', 'NotificationService', 'MemoTracking',
       NotificationDropdownButtonCtrl
     ])
