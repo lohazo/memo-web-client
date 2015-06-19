@@ -20,6 +20,13 @@ angular.module('app.directives', [])
       templateUrl: 'components/header/_header.html'
     };
   })
+  .directive('appFooter', function () {
+    return {
+      restrict: 'EA',
+      scope: true,
+      templateUrl: 'components/footer/_footer.html'
+    };
+  })
   .directive('facebookShareButton', function (AppSetting, MemoTracking) {
     function displayFeedDialog(response, trackingData) {
       var trackingData = angular.fromJson(trackingData);

@@ -1,48 +1,71 @@
 .home-page, .plaza {
   &.main {
     margin: 20px 20px 10px 20px;
-    width: 1326px;
+    width: auto;
     height: 478px;
     background-color: $white;
-    .head {
-      padding: 15px;
-      @include grid-row;
-      margin: 0;
-      min-height: 40px;
-      .head-left {
-        @include grid-column($columns: 8);
-        float: left;
-        padding: 5px;
-        .course-icon {
-          @include grid-column($columns: 1);
-          padding: 0;
+    .container {
+      padding: 15px 20px 30px 20px;
+      .head {
+        margin-bottom: 15px;
+        height: 40px;
+        .head-left {
+          @include grid-column($columns: 8);
+          float: left;
+          .course-icon {
+            width: 40px;
+            padding: 0;
+            margin-right: 10px;
+            text-align: center;
+          }
+          .course-title {
+            width: 200px;
+            font-size: 24px;
+            vertical-align: middle;
+          }
+          .course-option {
+            width: 200px;
+            font-size: 14px;
+            vertical-align: -webkit-baseline-middle;
+          }
+        }
+        .head-right {
+          float: right;
+          .strengthen-button {
+            width: 196px;
+            height: 40px;
+            border: 2px solid $gold;
+            font-size: 16px;
+            background-color: $white;
+            color: $gold;
+            padding: 5px;
+          }
+        }
+      }
+      .content {
+        padding: 5px 10px 30px;
+        margin: 0;
+        .island {
+          height: 375px;
+          background-color: #f2f3f4;
           margin-right: 10px;
           text-align: center;
+          .island-title{
+
+          }
+          .island-icon {
+
+          }
+          .island-progress-bar{
+
+          }
+          .island-status{
+
+          }
+          .island-button-bars {
+
+          }
         }
-        .course-title {
-          @include grid-column($columns: 6);
-          padding: 0;
-          top: 50%;
-          font-size: 24px;
-          text-align: center;
-        }
-        .course-option {
-          @include grid-column($columns: 3);
-          padding: 0;
-          text-align: center;
-        }
-      }
-      .head-right {
-        float: right;
-      }
-    }
-    .content {
-      padding: 15px;
-      margin: 0;
-      .island {
-        width: 195px;
-        height: 375px;
-        background-color: #f2f3f4;
       }
     }
   }
