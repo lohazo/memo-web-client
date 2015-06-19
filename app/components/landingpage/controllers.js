@@ -37,8 +37,8 @@ angular.module('landingpage.controllers', [])
   ])
   .controller('LpHeadCtrl', [
     '$scope', '$window',
-    'Mixpanel', 'AuthService', '$modalInstance',
-    function ($scope, $window, Mixpanel, AuthService, $modalInstance) {
+    'Mixpanel', 'AuthService',
+    function ($scope, $window, Mixpanel, AuthService) {
       $scope.user = {};
       $scope.error = '';
 
@@ -52,13 +52,10 @@ angular.module('landingpage.controllers', [])
       };
       
       $scope.register = function () {
-        AuthService.register($scope.user).then( displayMessageOnFail);
+        AuthService.register($scope.user).then(closeModal, displayMessageOnFail);
       };
 
       function closeModal(data) {
-        if ($modalInstance) {
-          $modalInstance.close();
-        }
       }
 
       function displayMessageOnFail(response) {

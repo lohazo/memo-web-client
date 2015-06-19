@@ -15,7 +15,6 @@
     <div class="form-container">
       <div class="form-title">
         <span>Tham gia ngay !</span>
-        <p class="error">{{error}}</p>
       </div>
       <div class="form-input">
         <input class="username" ng-model="user.username" type="text" placeholder="Tên đăng nhập" required tooltip="Tên đăng nhập chứa 6 đến 14 ký tự, bao gồm các ký tự a-z, A-Z, 0-9. Không được có ký tự đặc biệt hay dấu cách."   tooltip-trigger="focus" tooltip-placement="left">
@@ -29,6 +28,7 @@
       <div class="form-input">
         <input class="name" ng-model="user.referral_code" type="text" placeholder="Code chia sẻ từ bạn bè (không bắt buộc)" tooltip="Điền code chia sẻ bạn nhận được tại đây"  tooltip-trigger="focus" tooltip-placement="left" class="form-control">
       </div>
+      <p class="form-error">{{error}}</p>
       <div class="form-button">
         <a href="" title="" class="small radius button register-button" ng-click="register()">ĐĂNG KÍ</a>
       </div>

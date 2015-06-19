@@ -63,12 +63,7 @@
             font-size: 24px;
             font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 40px;
-            .error {
-              margin-bottom: 5px;
-              margin-top: 0px;
-              font-size: 16px;
-            }
+            margin-bottom: 30px;
           }
           .form-input {
             margin-bottom: 15px;
@@ -76,6 +71,13 @@
               border-radius: 5px;
               padding: 5px 15px 5px 15px;
             }
+          }
+          .form-error {
+            margin-bottom: 5px;
+            margin-top: 0px;
+            font-size: 16px;
+            color: #f44;
+            text-align: center;
           }
           .form-button {
             padding-top: 5px;
