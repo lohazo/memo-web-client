@@ -25,13 +25,47 @@ angular.module('landingpage.controllers', [])
   ])
   .controller('LpHeaderCtrl', [
     '$scope', '$routeParams',
-    'MolServices',
-    function ($scope, $routeParams, MolServices) {
+    'MolServices', 'AuthService',
+    function ($scope, $routeParams, MolServices, AuthService) {
+      $scope.user = {};
       var data = $routeParams;
       data.preview = '1';
   // MolServices.saveC2(data);
       $scope.showLoginCTA = function () {
         return data.code_chanel && data.code_chanel === 'REF001'
+      };
+
+      $scope.login = function () {
+        var user = angular.fromJson(angular.toJson($scope.user));
+        delete user.password;
+        if (user.referral_code && user.referral_code !== "") {
+          AuthService.checkCode({
+              referral_code: user.referral_code
+            })
+            .then(function () {
+              delete $scope.user.referral_code;
+              AuthService.login($scope.user)
+                .then(function () {
+                  AuthService.submitReferralCode({
+                    referral_code: user.referral_code
+                  });
+                });
+            });
+        } else {
+          delete $scope.user.referral_code;
+          AuthService.login($scope.user);
+        }
+      };
+
+      $scope.FbLogin = function () {
+        AuthService.FbLogin()
+          .then(function (response) {
+            AuthService.login(response)
+          });
+      };
+
+      $scope.GLogin = function () {
+        AuthService.GLogin();
       };
     }
   ])

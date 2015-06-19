@@ -8,27 +8,23 @@
   <top-bar-section>
   <!-- Right Nav Section -->
     <ul class="right">
-      <li class="has-form">
-        <div class="login-box">
-          <div class="login-box_social-login">
-            <i id="facebook-login" class="webicon facebook" style="margin-bottom:5px;"></i>
-            <i id="google-login" class="webicon googleplus" style="margin-bottom:5px;"></i>
-          </div>
-          <div class="login-box_middle">hoặc</div>
-          <div class="login-box_local-login">
-            <form id="login-form">
-              <div class="login-box_local-login_username">
-                <input class="radius" type="text" name="username" placeholder="Tên đăng nhập/email">  
-              </div>
-              <div class="login-box_local-login_password">
-                <input class="radius" type="password" name="password" placeholder="Mật khẩu">
-              </div>
-              <div class="login-box_local-login_submit">
-                <button class="tiny radius button">Đăng nhập</button>  
-              </div>
-            </form>
-          </div>
-        </div>
+      <li>
+        <input class="username" ng-model="user.username" type="text" placeholder="Tên đăng nhập/email">
+      </li>
+      <li>
+        <input class="password" ng-model="user.password" type="password" placeholder="Mật khẩu">
+      </li>
+      <li class="login">
+        <a href="" title="" class="small radius button login-button" ng-click="login()">Đăng nhập</a>
+      </li>
+      <li class="text">
+        <span>hoặc</span>
+      </li>
+      <li class="facebook-login">
+        <a href="" title="" class="small radius button social-login-button facebook" ng-click="FbLogin()"></a>
+      </li>
+      <li class="google-login">
+        <a href="" title="" class="small radius button social-login-button google" ng-click="GLogin()"></a>
       </li>
     </ul>
   </top-bar-section>
