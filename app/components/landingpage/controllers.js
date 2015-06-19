@@ -37,8 +37,11 @@ angular.module('landingpage.controllers', [])
   ])
   .controller('LpHeadCtrl', [
     '$scope', '$window',
-    'Mixpanel',
-    function ($scope, $window, Mixpanel) {
+    'Mixpanel', 'AuthService', '$modalInstance',
+    function ($scope, $window, Mixpanel, AuthService, $modalInstance) {
+      $scope.user = {};
+      $scope.error = '';
+
       $scope.toAppStore = function () {
         $window.location.href =
           'https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls=1&mt=8';
@@ -47,6 +50,22 @@ angular.module('landingpage.controllers', [])
       $scope.toPlayStore = function () {
         $window.location.href = 'https://play.google.com/store/apps/details?id=vn.topica.memo';
       };
+      
+      $scope.register = function () {
+        AuthService.register($scope.user).then( displayMessageOnFail);
+      };
+
+      function closeModal(data) {
+        if ($modalInstance) {
+          $modalInstance.close();
+        }
+      }
+
+      function displayMessageOnFail(response) {
+        if (response.data) {
+          $scope.error = response.data.error || response.data.message;
+        }
+      }
     }
   ])
   .controller('LpInfoCtrl', ['$scope', '$window', 'Mixpanel', function ($scope, $window, Mixpanel) {

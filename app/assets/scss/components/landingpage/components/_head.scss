@@ -17,8 +17,8 @@
       .ant {
         background: url("assets/img/landingpage/1-ant.png") no-repeat;
         top: 290px;
-        width: 400px;
-        height: 250px;
+        width: 410px;
+        height: 260px;
         position: absolute;
         z-index: 1;
         @include animation(bounceInUp 1s);
@@ -28,7 +28,7 @@
         height: 111px;
         width: 149px;
         top: 240px;
-        left: 192px;
+        left: 100px;
         @include animation(bounceInUp 1.3s);
       }
       .chat-2 {
@@ -48,11 +48,48 @@
         @include animation(bounceInUp 2.1s);
       }
       .form-register {
-        left: 800px;
+        left: 600px;
+        top: 120px;
         position: absolute;
         width: 390px;
-        height: 380px;
+        min-height: 380px;
+        background-color: $white;
         border: 1px solid $primary-color;
+        border-radius: 5px;
+        .form-container {
+          padding: 20px 30px 20px 30px;
+          .form-title {
+            color: $primary-color;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            .error {
+              margin-bottom: 5px;
+              margin-top: 0px;
+              font-size: 16px;
+            }
+          }
+          .form-input {
+            margin-bottom: 15px;
+            .username, .email, .password, .code {
+              border-radius: 5px;
+              padding: 5px 15px 5px 15px;
+            }
+          }
+          .form-button {
+            padding-top: 5px;
+            .register-button {
+              height: 50px;
+              width: 100%;
+              font-size: 22px;
+              font-weight: bold;
+              text-align: center;
+              padding: 10px;
+              margin: 0;
+            }
+          }
+        }
       }
     }
     .container {
