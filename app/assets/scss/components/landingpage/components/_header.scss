@@ -15,7 +15,7 @@
         width: 125px;
         height: 30px;
         border: 1px solid $aluminum;
-        border-radius: 5px;
+        border-radius: 2px;
         margin-right: 5px;
         font-size: 12px;
         color: $oil;
@@ -28,6 +28,7 @@
           font-size: 12px;
           font-weight: bold;
           padding: 5px 10px 5px 10px;
+          border-radius: 2px;
         }
       }
       .text {
