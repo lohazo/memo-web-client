@@ -7,13 +7,28 @@
   </ul>
   <top-bar-section>
   <!-- Right Nav Section -->
-  <ul class="right">
-    <li style="color: #999999;margin-top: 20px;margin-right: 0px" ng-show="showLoginCTA()">
-      <span>Hãy đăng nhập để điền code chia sẻ</span>
-    </li>
-    <li class="has-form" ng-controller="LoginModalCtrl">
-      <a href="" class="reverse login button" ng-click="open()">Đăng nhập</a>
-    </li>
-  </ul>
+    <ul class="right">
+      <li style="color: #999999;margin-top: 20px;margin-right: 0px" ng-show="showLoginCTA()">
+        <span translate="TEXT_SHOW_LOGIC_CTA"></span>
+      </li>
+      <li>
+        <input class="username" ng-model="user.username" type="text" placeholder="Tên đăng nhập/email">
+      </li>
+      <li>
+        <input class="password" ng-model="user.password" type="password" placeholder="Mật khẩu">
+      </li>
+      <li class="login">
+        <a href="" title="" class="small radius button login-button" ng-click="login()">Đăng nhập</a>
+      </li>
+      <li class="text">
+        <span>hoặc</span>
+      </li>
+      <li class="facebook-login">
+        <a href="" title="" class="small radius button social-login-button facebook" ng-click="FbLogin()"></a>
+      </li>
+      <li class="google-login">
+        <a href="" title="" class="small radius button social-login-button google" ng-click="GLogin()"></a>
+      </li>
+    </ul>
   </top-bar-section>
 </top-bar>
