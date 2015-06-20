@@ -2,6 +2,21 @@
 
   'use strict';
 
+  function BannerServices ($http, $localStorage, API, $location) {
+    var Services = {};
+
+    Services.getBanner = function () {
+      var authToken = $localStorage.auth.user.auth_token;
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
+
+      var endpoint = API + '/banner/?platform=web&localize=' + localize + '&auth_token=' + authToken ;
+
+      return $http.get(endpoint);
+    };
+
+    return Services;
+  }
+
   function BannerCtrl ($scope, ProfileServices, Profile) {
     $scope.birthday = {
       day: '',
@@ -39,6 +54,7 @@
   }
 
   angular.module('banner.controller', [])
+    .factory('BannerServices', ['$http', '$localStorage', 'API', '$location', BannerServices])
     .controller('BannerCtrl', ['$scope', 'ProfileServices', 'Profile', 
       BannerCtrl
     ]);
