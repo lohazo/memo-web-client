@@ -14,7 +14,7 @@
 <div class="container" style="margin-bottom: 20px; border: 2px solid #ffbb33; padding-top: 60px;" ng-if="!profile.referral_user && sharedSettings.functionaly.should_share_facebook">
   <div class="row" campaign-verify-code></div>
 </div>
-<div class="banner-sa-native" alt="">
+<div class="banner-sa-native" alt="" ng-show="banner">
   <img src="{{banner.banner_image}}" alt="" />
 <!--   <div style="padding:0 30px; margin-bottom:20px;margin-top:410px;"> -->
   <div class="banner-toolbar">
