@@ -13,25 +13,26 @@
       width: 30px;
       height: 30px;
     }
+    .user .icon {
+      background: url("assets/img/landingpage/user-icon.png") no-repeat;
+    }
     .android .icon {
-      background: url("assets/img/icon1.png") no-repeat;
-      width: 20px;
+      background: url("assets/img/landingpage/android-icon.png") no-repeat;
     }
     .ios .icon {
-      background: url("assets/img/icon2.png") no-repeat;
-      width: 35px;
+      background: url("assets/img/landingpage/ios-icon.png") no-repeat;
     }
     .window .icon {
-      background: url("assets/img/icon3.png") no-repeat;
-      width: 30px;
+      background: url("assets/img/landingpage/wp-icon.png") no-repeat;
     }
     .pc .icon {
-      background: url("assets/img/icon4.png") no-repeat;
+      background: url("assets/img/landingpage/web-icon.png") no-repeat;
     }
     .text {
       text-transform: uppercase;
       font-weight: 700;
       color: $white;
+      margin: 0px;
     }
     .number {
       text-transform: uppercase;

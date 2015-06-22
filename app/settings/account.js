@@ -21,7 +21,7 @@
     return User;
   }
 
-  function AccountSettingCtrl($scope, $localStorage, AccountSetting, $upload, $http, AppSetting, $rootScope, $translate) {
+  function AccountSettingCtrl($scope, $localStorage, AccountSetting, $upload, $http, AppSetting, $rootScope, $translate, $location) {
     AppSetting.getSharedSettings().then(function () {
       $scope.sharedSettings = AppSetting.shared_settings;
       $rootScope.$broadcast('event-sharedSettingsLoaded');
@@ -68,7 +68,8 @@
       var fd = new FormData();
       var auth_token = $localStorage.auth.user.auth_token;
       var userId = $localStorage.auth.user._id;
-      var uploadUrl = 'http://services.memo.edu.vn/v2/api/users/' + userId + '/avatar?auth_token=' + auth_token;
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
+      var uploadUrl = 'http://services.memo.edu.vn/v2/api/users/' + userId + '/avatar?platform=web&localize=' + localize + '&auth_token=' + auth_token;
       fd.append("file", element.files[0]);
       
       $http.post(uploadUrl, fd, {
@@ -88,7 +89,7 @@
   }
 
   angular.module('settings.account', [])
-    .controller('AccountSettingCtrl', ['$scope', '$localStorage', 'AccountSetting', '$upload', '$http', 'AppSetting', '$rootScope', '$translate',
+    .controller('AccountSettingCtrl', ['$scope', '$localStorage', 'AccountSetting', '$upload', '$http', 'AppSetting', '$rootScope', '$translate', '$location',
       AccountSettingCtrl
     ])
     .factory('AccountSetting', ['$localStorage', 'Profile', 'AppSetting', '$rootScope', '$translate', AccountSetting]);

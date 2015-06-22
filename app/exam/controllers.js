@@ -86,50 +86,7 @@
     $scope.quit = function (afterDoingTest, returnPath) {
       if (Exam.question().last_screen && Exam.question().last_screen.is_enabled && AppSetting.sharedSettings.functionaly.should_last_screen) {
         $scope.questionTpl = questionTplId.lastScreen;
-        $scope.testText = Question.creatLastScreenText(Exam.question().last_screen);
-        // $scope.testText = Question.createLastScreenText({
-        //     "text": "Chúc mừng test264! Bạn là một trong những học viên xuất sắc của TOPICA Memo khi đã có 5 Combo. TOPICA Memo tri ân bạn với một học bổng luyện nói tiếng Anh với hơn 100 giảng viên Âu, Mỹ, Úc...Trị giá 500,000 VNĐ từ TOPICA Native với giá chỉ 24 MemoCoin",
-        //     "offsets": [{
-        //       "text": "test264",
-        //       "offset": [10, 7],
-        //       "color": "#333333",
-        //       "bold": true
-        //     }, {
-        //       "text": "TOPICA Memo",
-        //       "offset": [64, 11],
-        //       "color": "#810c15",
-        //       "bold": true
-        //     }, {
-        //       "text": "5",
-        //       "offset": [86, 1],
-        //       "color": "#333333",
-        //       "bold": true
-        //     }, {
-        //       "text": "TOPICA Memo",
-        //       "offset": [95, 11],
-        //       "color": "#810c15",
-        //       "bold": true
-        //     }, {
-        //       "text": "500,000",
-        //       "offset": [199, 7],
-        //       "color": "#333333",
-        //       "bold": true
-        //     }, {
-        //       "text": "TOPICA Native",
-        //       "offset": [214, 13],
-        //       "color": "#810c15",
-        //       "bold": true
-        //     }, {
-        //       "text": "24",
-        //       "offset": [240, 2],
-        //       "color": "#333333",
-        //       "bold": true
-        //     }],
-        //     "is_enabled": false,
-        //     "button_url": "",
-        //     "button_text": "MUA HỌC BỔNG NGAY"
-        // });
-        //$scope.testText = $sce.trustAsHtml($scope.testText.replace('!', '!<br />'));
+        $scope.lastScreenText = Question.createLastScreenText(Exam.question().last_screen);
       } else {
         // Call Feedback API
         MemoTracker.track('quit exam lesson');
