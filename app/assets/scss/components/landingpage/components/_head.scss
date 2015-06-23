@@ -49,7 +49,7 @@
       }
       .form-register {
         left: 600px;
-        top: 120px;
+        top: 60px;
         position: absolute;
         width: 390px;
         min-height: 380px;
@@ -63,11 +63,18 @@
             font-size: 24px;
             font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+          }
+          .form-hook {
+            margin-bottom: 10px;
+            /*height: 35px;*/
+            margin-top: 0px;
+            font-size: 14px;
+            font-weight: bold;
           }
           .form-input {
             margin-bottom: 15px;
-            .username, .email, .password, .code {
+            .username, .email, .password, .referral-code {
               border-radius: 5px;
               padding: 5px 15px 5px 15px;
             }
