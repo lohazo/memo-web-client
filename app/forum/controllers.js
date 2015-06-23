@@ -5,12 +5,14 @@
 
   function ListPostCtrl($scope, $location, AuthService, ForumServices, allPosts, subscribers, followingPosts,
     searchPosts, $translate, AppSetting, $rootScope, $localStorage) {
-    AppSetting.getSharedSettings().then(function () {
-      $scope.sharedSettings = AppSetting.shared_settings;
-      $rootScope.$broadcast('event-sharedSettingsLoaded');
-    });
+    if (AuthService.isAuthenticated == true) {
+      AppSetting.getSharedSettings().then(function () {
+        $scope.sharedSettings = AppSetting.shared_settings;
+        $rootScope.$broadcast('event-sharedSettingsLoaded');
+      });
 
-    $translate.use($localStorage.auth.user.display_lang);
+      $translate.use($localStorage.auth.user.display_lang);
+    };
 
     $scope.max_page = 5;
 
@@ -162,12 +164,14 @@
   }
 
   function CreatePostCtrl($scope, AuthService, ForumServices, $location, subscribers, AppSetting, $rootScope, $translate, $localStorage) {
-    AppSetting.getSharedSettings().then(function () {
-      $scope.sharedSettings = AppSetting.shared_settings;
-      $rootScope.$broadcast('event-sharedSettingsLoaded');
-    });
+    if (AuthService.isAuthenticated == true) {
+      AppSetting.getSharedSettings().then(function () {
+        $scope.sharedSettings = AppSetting.shared_settings;
+        $rootScope.$broadcast('event-sharedSettingsLoaded');
+      });
 
-    $translate.use($localStorage.auth.user.display_lang);
+      $translate.use($localStorage.auth.user.display_lang);
+    };
 
     $scope.data = {
       title: '',
@@ -224,12 +228,14 @@
   }
 
   function PostDetailCtrl($scope, AuthService, $sce, ForumServices, $location, Post, subscribers, AppSetting, $rootScope, $translate, $localStorage) {
-    AppSetting.getSharedSettings().then(function () {
-      $scope.sharedSettings = AppSetting.shared_settings;
-      $rootScope.$broadcast('event-sharedSettingsLoaded');
-    });
+    if (AuthService.isAuthenticated == true) {
+      AppSetting.getSharedSettings().then(function () {
+        $scope.sharedSettings = AppSetting.shared_settings;
+        $rootScope.$broadcast('event-sharedSettingsLoaded');
+      });
 
-    $translate.use($localStorage.auth.user.display_lang);
+      $translate.use($localStorage.auth.user.display_lang);
+    };
 
     $scope.isAuthenticated = AuthService.isAuthenticated;
     $scope.post = Post.data;
