@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  function PlazaCtrl($scope, $sce, $location, Plaza, Profile, ReferralService, $modal, res1, res2, res3, AppSetting, $rootScope, $translate, $localStorage) {
+  function PlazaCtrl($scope, $sce, $location, Plaza, Profile, ReferralService, $modal, res1, res2, res3, AppSetting, $rootScope, $translate, $localStorage, BannerServices) {
     AppSetting.getSharedSettings().then(function () {
       $scope.sharedSettings = AppSetting.shared_settings;
       $rootScope.$broadcast('event-sharedSettingsLoaded');
@@ -124,6 +124,14 @@
       }
       // alert("Bạn đã mua đồ thành công !!!")
     };
+
+    function getBanner() {
+      BannerServices.getBanner().success(function (data) {
+        $scope.banner = data;
+      });
+    };
+
+    getBanner();
   }
 
   function ProgressQuizConfirmModalCtrl($scope, $modalInstance, id, Plaza) {
@@ -162,7 +170,7 @@
 
   angular.module('plaza.controllers', [])
     .controller('PlazaCtrl', ['$scope', '$sce', '$location', 'Plaza', 'Profile', 'ReferralService', '$modal', 'res1',
-      'res2', 'res3', 'AppSetting', '$rootScope', '$translate', '$localStorage', PlazaCtrl
+      'res2', 'res3', 'AppSetting', '$rootScope', '$translate', '$localStorage', 'BannerServices', PlazaCtrl
     ])
     .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
       ProgressQuizConfirmModalCtrl
