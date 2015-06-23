@@ -25,8 +25,8 @@ angular.module('landingpage.controllers', [])
   ])
   .controller('LpHeaderCtrl', [
     '$scope', '$routeParams',
-    'MolServices', 'AuthService',
-    function ($scope, $routeParams, MolServices, AuthService) {
+    'MolServices', 'AuthService', '$element',
+    function ($scope, $routeParams, MolServices, AuthService, $element) {
       $scope.user = {};
       var data = $routeParams;
       data.preview = '1';
@@ -34,6 +34,12 @@ angular.module('landingpage.controllers', [])
       $scope.showLoginCTA = function () {
         return data.code_chanel && data.code_chanel === 'REF001'
       };
+
+      $element.bind('keypress', function (e) {
+        if (e.keyCode === 13) {
+          $scope.login();
+        }
+      });
 
       $scope.login = function () {
         var user = angular.fromJson(angular.toJson($scope.user));
@@ -87,6 +93,17 @@ angular.module('landingpage.controllers', [])
       
       $scope.register = function () {
         AuthService.register($scope.user).then(closeModal, displayMessageOnFail);
+      };
+
+      $scope.FbLogin = function () {
+        AuthService.FbLogin()
+          .then(function (response) {
+            AuthService.login(response)
+          });
+      };
+
+      $scope.GLogin = function () {
+        AuthService.GLogin();
       };
 
       function closeModal(data) {
