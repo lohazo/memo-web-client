@@ -2,27 +2,25 @@
 
   'use strict';
 
-  function PopupServices ($http, $localStorage, API) {
+  function PopupServices ($http, $localStorage, API, $location) {
     var Services = {};
 
     Services.getPopup = function () {
       var authToken = $localStorage.auth.user.auth_token;
-      var endpoint = API + '/popup/?platform=web&auth_token=' + authToken ;
+      var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
+      var endpoint = 'http://staging.memo.edu.vn/v3/api/popup?platform=web&auth_token=' + authToken ;
 
       return $http.get(endpoint);
     };
 
-    Services.openPopup = function (data) {
-      var authToken = $localStorage.auth.user.auth_token;
-      var endpoint = API + '/popup/open/?platform=web&auth_token=' + authToken;
-      endpoint += data._id ? '&popup_id=' + data._id : '';
-
-      return $http.get(endpoint);
-    };
-    
     return Services;
   }
 
+  function PopupCtrl ($scope, dataPopup) {
+    $scope.popup = dataPopup;
+  }
+
   angular.module('popup', [])
-    .factory('PopupServices', ['$http', '$localStorage', 'API', PopupServices]);
+    .factory('PopupServices', ['$http', '$localStorage', 'API', '$location', PopupServices])
+    .controller('PopupCtrl', ['$scope', 'dataPopup', PopupCtrl]);
 }(window.angular));

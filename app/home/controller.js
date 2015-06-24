@@ -36,42 +36,35 @@
     };
 
     function getPopup() {
-      if (AppSetting.sharedSettings.functionaly.should_popup_gift1m_skill_tree) {
-        PopupServices.getPopup().success(function (data) {
-          if (data._id) {
-            var modalInstance = $modal.open({
-              templateUrl: 'popup/_index.html',
-              controller: 'PopupL0BCtrl',
-              windowClass: 'popup-modal',
-              resolve: {
-                dataPopup: function () {
-                  return data;
-                }
-              }
-            });
-
-            modalInstance.result.then(function (msg) {
-              if (msg === 'openClaimScholarModal') {
-                openClaimScholarModal($scope.profile);
-              }
-            });
-          };
-        });
-
-        var openClaimScholarModal = function (Profile) {
-          var modalInstance = $modal.open({
-            templateUrl: 'plaza/_buy-guide-popup.html',
-            controller: ['$scope', '$sce', '$modalInstance', 'API', function ($scope, $sce, $modalInstance,
-              API) {
-              $scope.trustedResource = $sce.trustAsResourceUrl(API +
-                '/plaza_items/claim_gift_1m?platform=web&&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' +
-                Profile.auth_token +
-                '&verification_code=' + Profile.verification_code);
-            }],
-            windowClass: 'buy-guide-popup-modal',
-          });
-        };
-      }
+      PopupServices.getPopup();
+      var data = [{
+        "_id": "5559fb3873657208e5d60200",
+        "row": 12,
+        "col": 12,
+        "objects": [{
+          "_id": {
+            "$oid": "558821f94a616e2307020000"
+          },
+          "col_index": 1,
+          "col_span": 11,
+          "order": 1,
+          "row_index": 1,
+          "row_span": 11,
+          "type": "webview",
+          "url": "asd"
+          }
+        ]
+      }];
+      var modalInstance = $modal.open({
+        templateUrl: 'popup/_index.html',
+        controller: 'PopupCtrl',
+        windowClass: 'popup-modal',
+        resolve: {
+          dataPopup: function () {
+            return data;
+          }
+        }
+      })
     }
 
     function getProfile() {
