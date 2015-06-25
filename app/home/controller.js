@@ -36,35 +36,43 @@
     };
 
     function getPopup() {
-      PopupServices.getPopup();
-      var data = [{
-        "_id": "5559fb3873657208e5d60200",
-        "row": 12,
-        "col": 12,
-        "objects": [{
-          "_id": {
-            "$oid": "558821f94a616e2307020000"
-          },
-          "col_index": 1,
-          "col_span": 11,
-          "order": 1,
-          "row_index": 1,
-          "row_span": 11,
-          "type": "webview",
-          "url": "asd"
-          }
-        ]
-      }];
-      var modalInstance = $modal.open({
-        templateUrl: 'popup/_index.html',
-        controller: 'PopupCtrl',
-        windowClass: 'popup-modal',
-        resolve: {
-          dataPopup: function () {
-            return data;
-          }
-        }
-      })
+      PopupServices.getPopup().success(function (data) {
+        // $scope.popup = data;
+
+      });
+        
+      $scope.popup = {
+          _id: "5559fb3873657208e5d60200",
+          row: 2,
+          col: 8,
+          objects: [{
+            col_index: 1,
+            col_span: 11,
+            order: 1,
+            row_index: 1,
+            row_span: 11,
+            type:"exit",
+            url: "http://memo.edu.vn"
+          },{
+            col_index: -1,
+            col_span: 11,
+            order: 1,
+            row_index: 1,
+            row_span: 11,
+            type:"webview",
+            url: "http://memo.edu.vn/plaza"
+          }]
+        };
+      // var modalInstance = $modal.open({
+      //   templateUrl: 'popup/_index.html',
+      //   // controller: 'PopupCtrl',
+      //   windowClass: 'popup-modal',
+      //   // resolve: {
+      //   //   dataPopup: function () {
+      //   //     return data;
+      //   //   }
+      //   // }
+      // })
     }
 
     function getProfile() {

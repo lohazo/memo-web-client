@@ -16,11 +16,10 @@
     return Services;
   }
 
-  function PopupCtrl ($scope, dataPopup) {
-    $scope.popup = dataPopup;
+  function PopupCtrl ($scope) {
   }
 
   angular.module('popup', [])
     .factory('PopupServices', ['$http', '$localStorage', 'API', '$location', PopupServices])
-    .controller('PopupCtrl', ['$scope', 'dataPopup', PopupCtrl]);
+    .controller('PopupCtrl', ['$scope', PopupCtrl]);
 }(window.angular));

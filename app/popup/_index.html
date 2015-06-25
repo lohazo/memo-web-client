@@ -1,20 +1,8 @@
-<!-- <div class="popup-inner">
-  <div class="popup-content">
-    <img ng-src="{{popup.popup_image}}" />
-  </div>
-  <div class="popup-toolbar">
-    <div class="row">
-      <div class="large-8 columns text-center">
-        <a class="radius button first-button" ng-click="closePopup()" ng-bind-html="popup.first_button_text"></a>
-      </div>
-      <div class="large-8 columns text-center">
-        <a class="radius button last-button" ng-click="openPopup()">{{popup.last_button_text}}</a>
-      </div>
+<div ng-show="popup" class="reveal-modal-bg fade in" ng-class="{in: animate}" ng-click="close($event)" style="display: block;display: block;opacity: 0.5;" modal-backdrop=""></div>
+<div ng-show="popup">
+  <div  tabindex="-1" class="reveal-modal fade popup-modal in" ng-class="{in: animate}" style="visibility: visible; top:120px;width: {{popup.col*1120/16}}px;height: {{popup.row*310/16}}px;margin-top: 20px;display: block; visibility: visible;display: block; visibility: visible" modal-window="" window-class="popup-modal" animate="animate">
+    <img src="{{popup.objects.url}}" alt="" />
+    <div ng-repeat="object in popup.objects">
     </div>
   </div>
-</div> -->
-
-{{popup}}
-<div class="small-{{popup.col * 4 / 3}} columns">
-  
 </div>
