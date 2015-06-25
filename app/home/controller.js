@@ -4,12 +4,11 @@
   function HomeCtrl($scope) {}
 
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
-    Message, ReferralService, Leaderboard, PopupServices, $modal) {
+    Message, ReferralService, Leaderboard, PopupServices, $modal, BannerServices) {
     $scope.leaderboardData = [];
 
     $scope.trackingBannerNative = function () {
       MemoTracker.track('skill tree plaza ad click');
-      $location.url('/plaza');
     };
 
     $scope.sharedSettings = {
@@ -73,6 +72,12 @@
       //   //   }
       //   // }
       // })
+    }
+
+    function getBanner() {
+      BannerServices.getBanner().success(function (data) {
+        $scope.banner = data;
+      });
     }
 
     function getProfile() {
@@ -169,6 +174,7 @@
       .then(takeATour)
       .then(getLeaderboardData)
       .then(getPopup)
+      .then(getBanner)
       .then(AppSetting.getWords);
   }
 
@@ -423,7 +429,7 @@
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$window', '$location', 'Profile', 'TreeBuilder',
-      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal',
+      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal', 'BannerServices',
       HomeMainCtrl
     ])
     .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
