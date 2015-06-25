@@ -4,7 +4,7 @@
 <div class="container" style="margin-bottom: 20px; border: 2px solid #ffbb33; padding-top: 60px;" ng-if="!profile.referral_user && sharedSettings.functionaly.should_share_facebook">
   <div class="row" campaign-verify-code></div>
 </div>
-<div class="banner-sa-native" alt="">
+<div class="banner-sa-native" alt="" ng-show="banner.banner_image">
   <img src="{{banner.banner_image}}" alt="" />
   <div class="banner-toolbar">
     <a class="small radius button banner-button" href="{{banner.button_url}}" ng-click="trackingBannerNative()" ng-show="banner.banner_image">{{banner.button_text}}</a>
