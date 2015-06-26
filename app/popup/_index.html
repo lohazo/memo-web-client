@@ -1,8 +1,12 @@
 <div ng-show="popup" class="reveal-modal-bg fade in" ng-class="{in: animate}" ng-click="close($event)" style="display: block;display: block;opacity: 0.5;" modal-backdrop=""></div>
 <div ng-show="popup">
-  <div  tabindex="-1" class="reveal-modal fade popup-modal in" ng-class="{in: animate}" style="visibility: visible; top:120px;width: {{popup.col*1120/16}}px;height: {{popup.row*310/16}}px;margin-top: 20px;display: block; visibility: visible;display: block; visibility: visible" modal-window="" window-class="popup-modal" animate="animate">
-    <img src="{{popup.objects.url}}" alt="" />
+  <div tabindex="-1" class="reveal-modal fade in" ng-class="{in: animate}" style="visibility: visible; top:120px;width: {{popup.col*1120/16}}px;height: 100px;margin-top: 20px;display: block; visibility: visible;display: block; visibility: visible;padding: 0px" modal-window="">
+    <img src="{{popup.popup_image_url}}" alt="" />
+    <a href="" title="" ng-click="close()">TEST</a>
     <div ng-repeat="object in popup.objects">
+    <div ng-show="object.col_index == 1">
+      <a href="{{object.url}}" title=""><img src="{{object.image_url}}" alt=""></a>
+    </div>
     </div>
   </div>
 </div>

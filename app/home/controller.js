@@ -34,6 +34,10 @@
       };
     };
 
+    $scope.close = function () {
+      console.log("test");
+    };
+
     function getPopup() {
       PopupServices.getPopup().success(function (data) {
         // $scope.popup = data;
@@ -41,7 +45,10 @@
       });
         
       $scope.popup = {
-          _id: "5559fb3873657208e5d60200",
+          type: "Explain_gift1m",
+          first_button_text: "TIẾP TỤC HỌC",
+          last_button_text: "TOPICA NATIVE",
+          popup_image_url: "http://admin.memo.edu.vn/uploads/popup/MM0142__1_.png",
           row: 2,
           col: 8,
           objects: [{
@@ -51,15 +58,17 @@
             row_index: 1,
             row_span: 11,
             type:"exit",
-            url: "http://memo.edu.vn"
+            url: "http://memo.local/plaza",
+            image_url: "http://i.imgur.com/ZNUM2xC.png" 
           },{
-            col_index: -1,
+            col_index: 0,
             col_span: 11,
             order: 1,
             row_index: 1,
             row_span: 11,
             type:"webview",
-            url: "http://memo.edu.vn/plaza"
+            url: "http://memo.local",
+            image_url: "http://i.imgur.com/p9zJE1I.png" 
           }]
         };
       // var modalInstance = $modal.open({
