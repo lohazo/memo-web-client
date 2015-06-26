@@ -34,7 +34,7 @@
       };
     };
 
-    $scope.close = function () {
+    $scope.test = function () {
       console.log("test");
     };
 
