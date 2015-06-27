@@ -7,7 +7,7 @@
         <a href="/course" title="" class="course-option">Đổi khóa học</a>
       </div>
       <div class="head-right">
-        <a href="" title="" class="small radius button strengthen-button">Củng cố kĩ năng</a>
+        <a href="/practice" title="" class="small radius button strengthen-button">Củng cố kĩ năng</a>
       </div>
     </div>
     <div class="content">
@@ -30,7 +30,7 @@
           </div>
           <div class="island-button-bar">
             <a href="" title="" class="small radius button" ng-if="island.finished_lesson == island.lessons_length">Củng cố từ vựng yếu</a>
-            <a href="" title="" class="small radius button" ng-if="!(island.finished_lesson == 0) && island.finished_lesson < island.lessons_length">Vào học</a>
+            <a href="/island/{{island.id}}" title="" class="small radius button" ng-if="!(island.finished_lesson == 0) && island.finished_lesson < island.lessons_length">Vào học</a>
             <a href="" title="" class="small radius button disabled" ng-if="island.finished_lesson == 0">Vào học</a>
           </div>
         </li>

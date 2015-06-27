@@ -49,7 +49,7 @@
   <header ng-if="!auth.loggedIn && (currentPath.indexOf('/forum') < 0)" class="fixed contain-to-grid" landing-header></header>
   <header ng-if="auth.loggedIn || (currentPath.indexOf('/forum') >= 0)" class="fixed contain-to-grid" app-header></header>
   <div ng-view></div>
-  <footer app-footer></footer>
+  <footer ng-if="auth.loggedIn" app-footer></footer>
 
   <script src="vendors/jquery/dist/jquery.min.js"></script>
   <script src="vendors/angular/angular.min.js"></script>
@@ -235,6 +235,7 @@
   <script src="components/banner/controllers.js"></script>
   <!-- Island -->
   <script src="island/island.js"></script>
+  <script src="island/directives.js"></script>
 
   <script>(function() {
   var _fbq = window._fbq || (window._fbq = []);
