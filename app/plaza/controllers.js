@@ -8,6 +8,8 @@
     })
 
     $translate.use($localStorage.auth.user.display_lang);
+
+    window.location.hash = '#gift_1m';
     
     $scope.profile = Profile.user;
     $scope.profileDetail = Profile.detail;
