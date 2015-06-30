@@ -5,7 +5,7 @@
 
   function ListPostCtrl($scope, $location, AuthService, ForumServices, allPosts, subscribers, followingPosts,
     searchPosts, $translate, AppSetting, $rootScope, $localStorage) {
-    if (AuthService.isAuthenticated == true) {
+    if (AuthService.isAuthenticated() == true) {
       AppSetting.getSharedSettings().then(function () {
         $scope.sharedSettings = AppSetting.shared_settings;
         $rootScope.$broadcast('event-sharedSettingsLoaded');
@@ -164,7 +164,7 @@
   }
 
   function CreatePostCtrl($scope, AuthService, ForumServices, $location, subscribers, AppSetting, $rootScope, $translate, $localStorage) {
-    if (AuthService.isAuthenticated == true) {
+    if (AuthService.isAuthenticated() == true) {
       AppSetting.getSharedSettings().then(function () {
         $scope.sharedSettings = AppSetting.shared_settings;
         $rootScope.$broadcast('event-sharedSettingsLoaded');
@@ -228,7 +228,7 @@
   }
 
   function PostDetailCtrl($scope, AuthService, $sce, ForumServices, $location, Post, subscribers, AppSetting, $rootScope, $translate, $localStorage) {
-    if (AuthService.isAuthenticated == true) {
+    if (AuthService.isAuthenticated() == true) {
       AppSetting.getSharedSettings().then(function () {
         $scope.sharedSettings = AppSetting.shared_settings;
         $rootScope.$broadcast('event-sharedSettingsLoaded');
