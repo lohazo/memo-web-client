@@ -44,6 +44,11 @@
       });
     }
 
+    $scope.popup = function (data) {
+      MemoTracker.track(data);
+      console.log(data);
+    }
+
     function getBanner() {
       BannerServices.getBanner().success(function (data) {
         $scope.banner = data;
@@ -380,21 +385,6 @@
       });
     }
   }
-
-  // function PopupL0BCtrl($scope, dataPopup, PopupServices, MemoTracking, $modalInstance) {
-  //   $scope.popup = dataPopup;
-
-  //   // $scope.openPopup = function () {
-  //   //   MemoTracking.track(dataPopup.type);
-  //   //   PopupServices.openPopup(dataPopup).success(function () {
-  //   //     $modalInstance.close('openClaimScholarModal');
-  //   //   });
-  //   // };
-
-  //   $scope.closePopup = function () {
-  //     $modalInstance.close();
-  //   }
-  // }
 
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
