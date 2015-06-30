@@ -3,7 +3,7 @@
 
 
   function ListJobCtrl ($scope, $location, JobServices, JobsOfMemo, JobsForUser, allFilter, searchJobs, MemoTracking, AppSetting, $rootScope, $translate, $localStorage, AuthService) {
-    if (AuthService.isAuthenticated == true) {
+    if (AuthService.isAuthenticated() == true) {
       AppSetting.getSharedSettings().then(function () {
         $scope.sharedSettings = AppSetting.shared_settings;
         $rootScope.$broadcast('event-sharedSettingsLoaded');
@@ -91,7 +91,7 @@
   }
 
   function JobDetailCtrl ($scope, $modal, AuthService, Job, MemoTracking, AppSetting, $rootScope, $translate, $localStorage) {
-    if (AuthService.isAuthenticated == true) {
+    if (AuthService.isAuthenticated() == true) {
       AppSetting.getSharedSettings().then(function () {
         $scope.sharedSettings = AppSetting.shared_settings;
         $rootScope.$broadcast('event-sharedSettingsLoaded');
