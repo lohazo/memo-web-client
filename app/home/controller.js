@@ -34,53 +34,14 @@
       };
     };
 
-    $scope.test = function () {
-      console.log("test");
+    $scope.close = function() {
+      $scope.popups = false;
     };
 
     function getPopup() {
       PopupServices.getPopup().success(function (data) {
-        // $scope.popup = data;
-
+        $scope.popups = data;
       });
-        
-      $scope.popup = {
-          type: "Explain_gift1m",
-          first_button_text: "TIẾP TỤC HỌC",
-          last_button_text: "TOPICA NATIVE",
-          popup_image_url: "http://admin.memo.edu.vn/uploads/popup/MM0142__1_.png",
-          row: 2,
-          col: 8,
-          objects: [{
-            col_index: 1,
-            col_span: 11,
-            order: 1,
-            row_index: 1,
-            row_span: 11,
-            type:"exit",
-            url: "http://memo.local/plaza",
-            image_url: "http://i.imgur.com/ZNUM2xC.png" 
-          },{
-            col_index: 0,
-            col_span: 11,
-            order: 1,
-            row_index: 1,
-            row_span: 11,
-            type:"webview",
-            url: "http://memo.local",
-            image_url: "http://i.imgur.com/p9zJE1I.png" 
-          }]
-        };
-      // var modalInstance = $modal.open({
-      //   templateUrl: 'popup/_index.html',
-      //   // controller: 'PopupCtrl',
-      //   windowClass: 'popup-modal',
-      //   // resolve: {
-      //   //   dataPopup: function () {
-      //   //     return data;
-      //   //   }
-      //   // }
-      // })
     }
 
     function getBanner() {
@@ -420,20 +381,20 @@
     }
   }
 
-  function PopupL0BCtrl($scope, dataPopup, PopupServices, MemoTracking, $modalInstance) {
-    $scope.popup = dataPopup;
+  // function PopupL0BCtrl($scope, dataPopup, PopupServices, MemoTracking, $modalInstance) {
+  //   $scope.popup = dataPopup;
 
-    $scope.openPopup = function () {
-      MemoTracking.track(dataPopup.type);
-      PopupServices.openPopup(dataPopup).success(function () {
-        $modalInstance.close('openClaimScholarModal');
-      });
-    };
+  //   // $scope.openPopup = function () {
+  //   //   MemoTracking.track(dataPopup.type);
+  //   //   PopupServices.openPopup(dataPopup).success(function () {
+  //   //     $modalInstance.close('openClaimScholarModal');
+  //   //   });
+  //   // };
 
-    $scope.closePopup = function () {
-      $modalInstance.close();
-    }
-  }
+  //   $scope.closePopup = function () {
+  //     $modalInstance.close();
+  //   }
+  // }
 
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
@@ -457,10 +418,6 @@
     .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', SecretGiftCtrl])
     .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl])
     .controller('SecretGiftTShirtModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftTShirtModalCtrl])
-    .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl])
-    .controller('PopupL0BCtrl', ['$scope', 'dataPopup', 'PopupServices', 'MemoTracking',
-      '$modalInstance',
-      PopupL0BCtrl
-    ]);
+    .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl]);
 
 }(window.angular));

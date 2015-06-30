@@ -1,12 +1,9 @@
-<div ng-show="popup" class="reveal-modal-bg fade in" ng-class="{in: animate}" ng-click="close($event)" style="display: block;display: block;opacity: 0.5;" modal-backdrop=""></div>
-<div ng-show="popup">
-  <div tabindex="-1" class="reveal-modal fade in" ng-class="{in: animate}" style="visibility: visible; top:120px;width: {{popup.col*1120/16}}px;height: 100px;margin-top: 20px;display: block; visibility: visible;display: block; visibility: visible;padding: 0px" modal-window="">
-    <img src="{{popup.popup_image_url}}" alt="" />
-    <a href="" title="" ng-click="close()">TEST</a>
-    <div ng-repeat="object in popup.objects">
-    <div ng-show="object.col_index == 1">
-      <a href="{{object.url}}" title=""><img src="{{object.image_url}}" alt=""></a>
-    </div>
-    </div>
+<div ng-show="popups">
+  <div class="reveal-modal-bg fade in" ng-class="{in: animate}" ng-click="close($event)" style="display: block;display: block;opacity: 0.5;" modal-backdrop=""></div>
+  <div tabindex="-1" class="reveal-modal fade in" ng-class="{in: animate}" style="visibility: visible; top:120px;width: {{popups.col*1120/16}}px;min-height: {{popups.row*370/16}}px !important;;margin-top: 20px;display: block; visibility: visible;display: block; visibility: visible;padding: 0px" modal-window="">
+    <div ng-repeat="popup in popups.objects" style="top: {{popup.row_index*350/popups.row}}px;left: {{popup.col_index*700/popups.col}}px;width: {{popup.col_span*700/popups.col}}px;height: {{popup.row_span*350/popups.row}}px;position:absolute">
+      <img src="{{popup.image}}" alt="" style="width: {{popup.col_span*700/popups.col}}px;height: {{popup.row_span*350/popups.row}}px" ng-if="popup.type == 'image'" />  
+      <a href="{{popup.url}}" title="" ><img src="{{popup.image}}" alt="" style="width: {{popup.col_span*700/popups.col}}px;height: {{popup.row_span*350/popups.row}}px" ng-if="popup.type !== ('image' && 'navigate')" /> </a>
+    </div>        
   </div>
 </div>

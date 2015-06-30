@@ -8,7 +8,7 @@
     Services.getPopup = function () {
       var authToken = $localStorage.auth.user.auth_token;
       var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
-      var endpoint = 'http://staging.memo.edu.vn/v3/api/popup?platform=web&auth_token=' + authToken ;
+      var endpoint = 'http://staging.memo.edu.vn/v3/api/popup?platform=web&localize=' + localize + '&auth_token=' + authToken ;
 
       return $http.get(endpoint);
     };
