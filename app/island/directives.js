@@ -1,13 +1,42 @@
-(function (angular) {
-  'use strict';
+(function (angular){
+	'use strict';
 
-  angular.module('island.directives', [])
-    .directive('newSkill', function() {
-    return {
-      restrict: 'EA',
-      scope: true,
-      replace: true,
-      template: '<svg><polygon class="hex" points="42,0 80,0 110,24 122,60 110,98 80,120 42,120 12,98 0,60 12,24" stroke="{{skill.theme_color}}" fill="{{skill.theme_color}}"></polygon></svg> '
-    };
-  })
-}(window.angular));
+	angular.module('island.directives',[])
+		.directive('appIsland',function(){
+			return {
+				strict:"EA",
+				scope:true,
+				controller:'IslandMainCtrol',
+				templateUrl:'island/_island-main.html'
+			}
+		})
+		.directive('islandLeft',function(){
+			return {
+				strict:"EA",
+				scope:true,
+				templateUrl:'island/_island-left.html'
+			}
+		})
+		.directive('islandCenter',function(){
+			return {
+				strict:"EA",
+				scope:true,
+				templateUrl:'island/_island-center.html'
+			}
+		})
+		.directive('islandRight',function(){
+			return {
+				strict:"EA",
+				scope:true,
+				templateUrl:'island/_island-right.html'
+			}
+		})
+		.directive('skillSvg',function(){
+			return {
+				strict:'EA',
+				scope:true,
+				templateUrl:'island/_skill.html'
+			}
+		})
+}(window.angular))
+
