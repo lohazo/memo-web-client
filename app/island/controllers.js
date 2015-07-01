@@ -1,4 +1,5 @@
 (function (angular) {
+
 	'use strict';
 	function IslandMainCtrol($scope, $route, $routeParams, $location, Skill){
 		$scope.skills = Skill.skills();		
