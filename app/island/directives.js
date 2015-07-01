@@ -1,4 +1,4 @@
-(function (angular) {
+(function (angular){
 	'use strict';
 
 	angular.module('island.directives',[])
@@ -6,7 +6,7 @@
 			return {
 				strict:"EA",
 				scope:true,
-				controller:'IslandCtrl',
+				controller:'IslandMainCtrol',
 				templateUrl:'island/_island-main.html'
 			}
 		})
@@ -31,6 +31,11 @@
 				templateUrl:'island/_island-right.html'
 			}
 		})
-
-
-}(window.angular));
+		.directive('skillSvg',function(){
+			return {
+				strict:'EA',
+				scope:true,
+				templateUrl:'island/_skill.html'
+			}
+		})
+}(window.angular))

@@ -1,12 +1,14 @@
 (function (angular) {
   'use strict';
 
-  function IslandConfig($routeProvider) {
-    $routeProvider.when('/island', {
-      templateUrl: 'island/_index.html',
+  function IslandConfig($routeProvider, $locationProvider) {
+    $routeProvider.when('/island/:id', {
+      templateUrl: 'island/_index.html',     
+      controller:'IslandMainCtrol'
     });
+    
   }
 
   angular.module('island', ['island.controllers','island.directives'])
-    .config(['$routeProvider', IslandConfig]);
+    .config(['$routeProvider','$locationProvider', IslandConfig]);
 }(window.angular));
