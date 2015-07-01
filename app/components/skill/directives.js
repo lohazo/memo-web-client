@@ -170,3 +170,52 @@ angular.module('skill.directives', [])
         templateUrl: 'skill/_skill-dieu-kien-hoan-thanh.html'
       };
     })
+    .directive('grammarCauHoi', function(){
+      return{
+        restrict: 'EA',
+        scope: true,
+        templateUrl: 'skill/_skill-cau-hoi.html'
+      };
+    })
+    .directive('grammarLienTu', function(){
+      return{
+        restrict: 'EA',
+        scope: true,
+        templateUrl: 'skill/_skill-lien-tu.html'
+      };
+    })
+    .directive('grammarThoiGian', function(){
+      return{
+        restrict: 'EA',
+        scope: true,
+        templateUrl: 'skill/_skill-thoi-gian.html'
+      };
+    })
+    .directive('grammarTinhTu1', function(){
+      return{
+        restrict: 'EA',
+        scope: true,
+        templateUrl: 'skill/_skill-tinh-tu-1.html'
+      };
+    })
+    .directive('grammarPhoTu', function(){
+      return{
+        restrict: 'EA',
+        scope: true,
+        templateUrl: 'skill/_skill-pho-tu.html'
+      };
+    })
+    .directive('grammarTanNgu', function(){
+      return{
+        restrict: 'EA',
+        scope: true,
+        templateUrl: 'skill/_skill-tan-ngu.html'
+      };
+    })
+    .directive('grammarDongTuNguyenMau', function(){
+      return{
+        restrict: 'EA',
+        scope: true,
+        templateUrl: 'skill/_skill-dong-tu-nguyen-mau.html'
+      };
+    })

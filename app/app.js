@@ -44,6 +44,8 @@
         'https://www.googleapis.com/auth/userinfo.profile'
     });
 
+    // $translateProvider.useSanitizeValueStrategy('sanitize');
+
     $translateProvider.translations('vi', {
       BTN_LOGIN: 'Đăng nhập',
       BTN_SIGNUP: 'Tạo tài khoản',
