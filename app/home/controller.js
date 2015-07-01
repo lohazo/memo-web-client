@@ -7,6 +7,10 @@
     Message, ReferralService, Leaderboard, PopupServices, $modal, BannerServices) {
     $scope.leaderboardData = [];
 
+    $scope.closePopup = function () {
+      $scope.popups = false;
+    };
+ 
     $scope.trackingBannerNative = function () {
       MemoTracker.track('skill tree plaza ad click');
     };
@@ -34,19 +38,17 @@
       };
     };
 
-    $scope.close = function() {
-      $scope.popups = false;
-    };
-
     function getPopup() {
       PopupServices.getPopup().success(function (data) {
         $scope.popups = data;
       });
     }
 
-    $scope.popup = function (data) {
+    $scope.clickPopup = function (data) {
       MemoTracker.track(data);
-      console.log(data);
+      if (data !== 'exit') {
+        PopupServices.openPopup(data);
+      };
     }
 
     function getBanner() {
