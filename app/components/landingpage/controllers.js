@@ -25,8 +25,8 @@ angular.module('landingpage.controllers', [])
   ])
   .controller('LpHeaderCtrl', [
     '$scope', '$routeParams',
-    'MolServices', 'AuthService', '$element',
-    function ($scope, $routeParams, MolServices, AuthService, $element) {
+    'MolServices', 'AuthService', '$element', '$modal',
+    function ($scope, $routeParams, MolServices, AuthService, $element, $modal) {
       $scope.user = {};
       var data = $routeParams;
       data.preview = '1';
@@ -72,6 +72,18 @@ angular.module('landingpage.controllers', [])
 
       $scope.GLogin = function () {
         AuthService.GLogin();
+      };
+
+      $scope.openForgetPassword = function () {
+        var modalInstance = $modal.open({
+          template: '<div forget-modal></div>',
+          controller: 'ForgetPasswordModalInstanceCtrl',
+          windowClass: 'forget-modal'
+        });
+
+        modalInstance.result.then(function (msg) {
+          if ($scope[msg] instanceof Function) $scope[msg]();
+        });
       };
     }
   ])
