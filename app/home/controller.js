@@ -36,6 +36,9 @@
 
     function getPopup() {
       PopupServices.getPopup().success(function (data) {
+        if (data !== '') {
+          $scope.showPopup = true;
+        };
         var modalInstance = $modal.open({
           templateUrl: 'popup/_index.html',
           controller: 'PopupCtrl',
@@ -46,6 +49,11 @@
               return data;
             },
           }
+        });
+
+        modalInstance.result.then(function (msg) {
+          console.log(msg);
+          if ($scope[msg] instanceof Function) $scope[msg]();
         });
       });
     }

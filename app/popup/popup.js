@@ -24,16 +24,41 @@
     return Services;
   }
 
-  function PopupCtrl ($scope, popups, PopupServices, MemoTracker) {
+  function PopupCtrl ($scope, popups, PopupServices, MemoTracker, $modalInstance, $modal) {
     $scope.popups = popups;
 
     $scope.clickPopup = function (data) {
       MemoTracker.track(data.type);
       PopupServices.openPopup(data);
+      if (data.type == 'exit' || data.type == 'nevershow') {
+        $scope.cancel();
+      };
+      if (data.type == 'webview') {
+        $scope.cancel();
+        $scope.openWebview(data);
+      };
     };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+
+    $scope.openWebview = function (data) {
+      var modalInstance = $modal.open({
+        templateUrl: 'plaza/_buy-guide-popup.html',
+        controller: ['$scope', '$sce', '$modalInstance', function ($scope, $sce, $modalInstance) {
+          $scope.trustedResource = $sce.trustAsResourceUrl(data.url);
+        }],
+        windowClass: 'buy-guide-popup-modal',
+      });
+    };
+  }
+
+  function PopupWebviewModalCtrl ($scope, $sce, $modalInstance) {
+
   }
 
   angular.module('popup', [])
     .factory('PopupServices', ['$http', '$localStorage', 'API', '$location', PopupServices])
-    .controller('PopupCtrl', ['$scope', 'popups', 'PopupServices', 'MemoTracking', PopupCtrl]);
+    .controller('PopupCtrl', ['$scope', 'popups', 'PopupServices', 'MemoTracking', '$modalInstance', '$modal', PopupCtrl]);
 }(window.angular));

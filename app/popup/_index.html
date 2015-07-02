@@ -1,6 +1,6 @@
 <div ng-repeat="popup in popups.objects">
   <img src="{{popup.image}}" alt="" style="width: {{popup.col_span*650/16}}px;height: auto;top: {{popup.row_index*550/popups.row}}px;left: {{popup.col_index*650/popups.col}}px;position: absolute;z-index: {{popup.order}};display: inline-block;background-size: 100%;" ng-if="popup.type == 'image'" />
-  <a href="{{popup.url}}" title="" ng-if="popup.type !== ('image' && 'navigate')" ng-click="clickPopup(popup)">
+  <a href="" title="" ng-if="popup.type !== ('image' && 'navigate')" ng-click="clickPopup(popup)">
     <img src="{{popup.image}}" alt="" style="width: {{popup.col_span*650/16}}px;height: auto;top: {{popup.row_index*550/popups.row}}px;left: {{popup.col_index*650/popups.col}}px;position: absolute;z-index: {{popup.order}};display: inline-block;background-size: 100%;" />
   </a>
   <a href="/{{popup.url}}" title="" ng-if="popup.type !== 'image' && popup.type == 'navigate'" ng-click="clickPopup(popup)">
