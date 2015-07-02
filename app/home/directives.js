@@ -10,14 +10,6 @@
         templateUrl: 'home/_main.html'
       };
     })
-    .directive('popupNative', function () {
-      return {
-        strict: 'EA',
-        scope: true,
-        controller: 'HomeMainCtrl',
-        templateUrl: 'popup/_index.html',
-      }
-    })
     .directive('mainLeft', function () {
       return {
         strict: 'EA',

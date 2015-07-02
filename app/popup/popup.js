@@ -24,10 +24,16 @@
     return Services;
   }
 
-  function PopupCtrl ($scope) {
+  function PopupCtrl ($scope, popups, PopupServices, MemoTracker) {
+    $scope.popups = popups;
+
+    $scope.clickPopup = function (data) {
+      MemoTracker.track(data.type);
+      PopupServices.openPopup(data);
+    };
   }
 
   angular.module('popup', [])
     .factory('PopupServices', ['$http', '$localStorage', 'API', '$location', PopupServices])
-    .controller('PopupCtrl', ['$scope', PopupCtrl]);
+    .controller('PopupCtrl', ['$scope', 'popups', 'PopupServices', 'MemoTracking', PopupCtrl]);
 }(window.angular));

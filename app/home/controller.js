@@ -6,10 +6,6 @@
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
     Message, ReferralService, Leaderboard, PopupServices, $modal, BannerServices) {
     $scope.leaderboardData = [];
-
-    $scope.closePopup = function () {
-      $scope.popups = false;
-    };
  
     $scope.trackingBannerNative = function () {
       MemoTracker.track('skill tree plaza ad click');
@@ -40,15 +36,18 @@
 
     function getPopup() {
       PopupServices.getPopup().success(function (data) {
-        $scope.popups = data;
+        var modalInstance = $modal.open({
+          templateUrl: 'popup/_index.html',
+          controller: 'PopupCtrl',
+          windowClass: 'popup-modal',
+          backdrop: 'static',
+          resolve: {
+            popups: function () {
+              return data;
+            },
+          }
+        });
       });
-    }
-
-    $scope.clickPopup = function (data) {
-      MemoTracker.track(data);
-      if (data !== 'exit') {
-        PopupServices.openPopup(data);
-      };
     }
 
     function getBanner() {

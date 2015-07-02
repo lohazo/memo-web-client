@@ -1,15 +1,9 @@
-<div ng-show="popups">
-  <div class="reveal-modal-bg fade in" ng-class="{in: animate}" ng-click="close($event)" style="display: block;display: block;opacity: 0.5;" modal-backdrop=""></div>
-  <div tabindex="-1" class="reveal-modal fade in" ng-class="{in: animate}" style="visibility: visible; top:120px;width: {{popups.col*1120/16}}px;min-height: {{popups.row*350/16}}px !important;;margin-top: 20px;display: block; visibility: visible;display: block; visibility: visible;padding: 0px" modal-window="">
-    <a ng-click="closePopup()" style="top: -35px;right: -15px;z-index: 999;font-size: 2.5rem;line-height: 1;position: absolute;top: 0.5rem;right: 0.6875rem;color: #aaa;font-weight: bold;">×</a>
-    <div ng-repeat="popup in popups.objects" style="top: {{popup.row_index*350/popups.row}}px;left: {{popup.col_index*700/popups.col}}px;width: {{popup.col_span*700/popups.col}}px;height: {{popup.row_span*350/popups.row}}px;position:absolute">
-      <img src="{{popup.image}}" alt="" style="width: {{popup.col_span*700/popups.col}}px;height: {{popup.row_span*350/popups.row}}px" ng-if="popup.type == 'image'" />  
-      <a href="{{popup.url}}" title="" ng-if="popup.type !== ('image' && 'navigate')" ng-click="clickPopup(popup)">
-        <img src="{{popup.image}}" alt="" style="width: {{popup.col_span*700/popups.col}}px;height: {{popup.row_span*350/popups.row}}px" /> 
-      </a>
-      <a href="/{{popup.url}}" title="" ng-if="popup.type == 'navigate'" ng-click="clickPopup(popup)">
-        <img src="{{popup.image}}" alt="" style="width: {{popup.col_span*700/popups.col}}px;height: {{popup.row_span*350/popups.row}}px" />
-      </a>
-    </div>        
-  </div>
+<div ng-repeat="popup in popups.objects">
+  <img src="{{popup.image}}" alt="" style="width: {{popup.col_span*650/16}}px;height: auto;top: {{popup.row_index*550/popups.row}}px;left: {{popup.col_index*650/popups.col}}px;position: absolute;z-index: {{popup.order}};display: inline-block;background-size: 100%;" ng-if="popup.type == 'image'" />
+  <a href="{{popup.url}}" title="" ng-if="popup.type !== ('image' && 'navigate')" ng-click="clickPopup(popup)">
+    <img src="{{popup.image}}" alt="" style="width: {{popup.col_span*650/16}}px;height: auto;top: {{popup.row_index*550/popups.row}}px;left: {{popup.col_index*650/popups.col}}px;position: absolute;z-index: {{popup.order}};display: inline-block;background-size: 100%;" />
+  </a>
+  <a href="/{{popup.url}}" title="" ng-if="popup.type !== 'image' && popup.type == 'navigate'" ng-click="clickPopup(popup)">
+    <img src="{{popup.image}}" alt="" style="width: {{popup.col_span*650/16}}px;height: auto;top: {{popup.row_index*550/popups.row}}px;left: {{popup.col_index*650/popups.col}}px;position: absolute;z-index: {{popup.order}};display: inline-block;background-size: 100%;" />
+  </a>
 </div>
