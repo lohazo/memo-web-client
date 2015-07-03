@@ -36,7 +36,7 @@
 
     function getPopup() {
       PopupServices.getPopup().success(function (data) {
-        if (data !== '') {
+        if (data._id) {
           var modalInstance = $modal.open({
             templateUrl: 'popup/_index.html',
             controller: 'PopupCtrl',
