@@ -37,24 +37,23 @@
     function getPopup() {
       PopupServices.getPopup().success(function (data) {
         if (data !== '') {
-          $scope.showPopup = true;
-        };
-        var modalInstance = $modal.open({
-          templateUrl: 'popup/_index.html',
-          controller: 'PopupCtrl',
-          windowClass: 'popup-modal',
-          backdrop: 'static',
-          resolve: {
-            popups: function () {
-              return data;
-            },
-          }
-        });
+          var modalInstance = $modal.open({
+            templateUrl: 'popup/_index.html',
+            controller: 'PopupCtrl',
+            windowClass: 'popup-modal',
+            backdrop: 'static',
+            resolve: {
+              popups: function () {
+                return data;
+              },
+            }
+          });
 
-        modalInstance.result.then(function (msg) {
-          console.log(msg);
-          if ($scope[msg] instanceof Function) $scope[msg]();
-        });
+          modalInstance.result.then(function (msg) {
+            console.log(msg);
+            if ($scope[msg] instanceof Function) $scope[msg]();
+          });
+        };
       });
     }
 
