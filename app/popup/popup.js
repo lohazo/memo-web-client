@@ -16,7 +16,7 @@
     Services.openPopup = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
       var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
-      var endpoint = 'http://staging.memo.edu.vn/v3/api/popup/open?auth_token=' + authToken + '&platform=web&popup_id=' + data._id + '&popup_type=' + data.type + '&localize=' + localize;
+      var endpoint = 'http://staging.memo.edu.vn/v3/api/popup/open?auth_token=' + authToken + '&platform=web&popup_id=' + data.id + '&popup_type=' + data.type + '&localize=' + localize;
 
       return $http.get(endpoint);
     }
@@ -28,8 +28,10 @@
     $scope.popups = popups;
 
     $scope.clickPopup = function (data) {
+      data.id = popups._id;
+
       MemoTracker.track(data.type);
-      PopupServices.openPopup($scope.popups);
+      PopupServices.openPopup(data);
       if (data.type == 'exit' || data.type == 'nevershow') {
         $scope.cancel();
       };
