@@ -29,7 +29,7 @@
 
     $scope.clickPopup = function (data) {
       MemoTracker.track(data.type);
-      PopupServices.openPopup(data);
+      PopupServices.openPopup($scope.popups);
       if (data.type == 'exit' || data.type == 'nevershow') {
         $scope.cancel();
       };
