@@ -89,10 +89,15 @@ angular.module('landingpage.controllers', [])
   ])
   .controller('LpHeadCtrl', [
     '$scope', '$window',
-    'Mixpanel', 'AuthService',
-    function ($scope, $window, Mixpanel, AuthService) {
+    'Mixpanel', 'AuthService', '$route',
+    function ($scope, $window, Mixpanel, AuthService, $route) {
       $scope.user = {};
       $scope.error = '';
+      $scope.ref_code = $route.current.params.ref_code;
+
+      if ($route.current.params.ref_code) {
+        $scope.user.referral_code = $route.current.params.ref_code;
+      };
 
       $scope.toAppStore = function () {
         $window.location.href =
