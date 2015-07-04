@@ -1,0 +1,32 @@
+.islandleft{
+	background:white;
+	padding:20px;
+	text-align:center;
+	&>h3{
+		color:#333333;
+		font-size:24px;
+		font-family:'roboto';
+	}
+	&>.change_island{
+		border:1px solid #810c15;
+		box-shadow:0 0 5px #888888;
+		margin-bottom: 10px;
+		&>h4{
+			background:#810c15;
+			margin:0;
+			&>a{
+			font-size:16px;
+			color:white;
+			text-transform:uppercase;
+			font-family: 'roboto';
+			}
+		}
+		&>.island_skill{
+			display: none;
+		}
+		&>.island_skill.active{
+			display: inherit;
+		}
+	}
+
+}

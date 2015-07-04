@@ -1,0 +1,21 @@
+<div class="islandleft">
+	<h3>Chuyển đao nhanh</h3>
+	<div class="change_island" ng-repeat="item in islandBuilder.island_data.skill_total track by $index">
+		<h4><a href="/island/{{$index+1}}">Đảo kiến số {{$index+1}}</a></h4>
+		<div 
+		ng-if="$index+1==param.id ? ac='active' : ac=''"
+		class="island_skill {{ac}}" style="position:relative;">
+			<svg 
+			ng-if="islandBuilder.island_data.skill_finish[$index]==islandBuilder.island_data.skill_total[$index] ? (color = '#ffba33') : (color = '#999999')" 
+			height="6" width="156" style="border-radius: 6px;">
+				<line x1="0" y1="3" x2="156" y2="3" style="stroke:{{color}};stroke-width:6" />
+			</svg>
+			<svg 
+			ng-if = "color!='#ffba33'"
+			height="6" width="{{islandBuilder.island_data.skill_finish[$index]/islandBuilder.island_data.skill_total[$index]*156}}" style="border-radius: 6px; position:absolute;top:12px;left:31px">
+				<line x1="0" y1="3" x2="120" y2="3" style="stroke:#33b5e4;stroke-width:6" />
+			</svg>
+			<p style="margin-bottom:10px;">{{islandBuilder.island_data.skill_finish[$index]}}/{{islandBuilder.island_data.skill_total[$index]}} Kỹ năng</p>
+		</div>	
+	</div>
+</div>

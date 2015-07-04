@@ -1,8 +1,40 @@
-<div message-list></div>
-<div class="row main home-page">
-  <div style="display:none;" placement-test-modal></div>
-  <div style="display:none;" referral-popup-modal></div>
-  <div class="main-left" main-left></div>
-  <div class="main-center" main-center></div>
-  <div class="main-right" main-right></div>
+<div class="main home-page">
+  <div class="container">
+    <div class="head">
+      <div class="head-left">
+        <img src="assets/img/new/en-vi-course-icon.png" alt="" class="course-icon">
+        <span class="course-title">Kĩ năng Tiếng Anh</span>
+        <a href="/course" title="" class="course-option">Đổi khóa học</a>
+      </div>
+      <div class="head-right">
+        <a href="/practice" title="" class="small radius button strengthen-button">Củng cố kĩ năng</a>
+      </div>
+    </div>
+    <div class="content">
+      <ul class="small-block-grid-5">
+        <li class="island" ng-repeat="island in islands">
+          <div class="island-title">
+            <span>{{island.title}}</span>
+            <img src="assets/img/new/finished-lesson-icon.png" alt="" ng-if="island.is_unlock">
+          </div>
+          <div class="island-icon">
+            <img src="{{island.icon_url}}" alt="">
+          </div>
+          <div class="island-progress-bar">
+            <progressbar max="island.lessons_length" value="island.finished_lesson">
+              <span style="color:black; white-space:nowrap;">{{island.finished_lesson}} / {{island.lessons_length}}</span>
+            </progressbar>
+          </div>
+          <div class="island-status">
+            {{island.finished_lesson}}/{{island.lessons_length}} Kỹ năng
+          </div>
+          <div class="island-button-bar">
+            <a href="" title="" class="small radius button" ng-if="island.finished_lesson == island.lessons_length">Củng cố từ vựng yếu</a>
+            <a href="/island/{{island.id}}" title="" class="small radius button" ng-if="!(island.finished_lesson == 0) && island.finished_lesson < island.lessons_length">Vào học</a>
+            <a href="" title="" class="small radius button disabled" ng-if="island.finished_lesson == 0">Vào học</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
