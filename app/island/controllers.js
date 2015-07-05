@@ -2,7 +2,36 @@
 
 	'use strict';
 	function IslandMainCtrol($scope, $route, $routeParams, $location, Skill){
-		$scope.skills = Skill.skills();		
+		var get_island_data = Skill.skills();
+		console.log(get_island_data);
+
+		function get_data_color_skills(start_point, end_point){
+			var data_color_skills = [];
+			for (var i = start_point; i<=end_point; i++){
+				data_color_skills.push(get_island_data[i].theme_color);
+			}
+			return data_color_skills;
+		}
+
+		function get_data_weakest_words(start_point,end_point){
+			var data_weakest_words = [];
+			for (var i = start_point; i<= end_point; i++){
+				data_weakest_words.push(get_island_data[i].strength_gap);
+			}
+			return data_weakest_words;
+		}
+
+		function get_lessons(start_point,end_point){
+			var data_lessons = [];
+			for (var i = start_point; i<= end_point; i++){
+				data_lessons.push(get_island_data[i].lessons.length);
+			}
+			return data_lessons;
+
+		}
+
+
+
 		$scope.check_weakestWord = 'show';
 		$scope.param = $routeParams;
 		var views=[],data_views = [],line_views = [],islands_data;
@@ -47,7 +76,7 @@
 			weakest_word_polygon : ['44,118 78,118 84,114 38,114','36,112 86,112 92,108 30,108','28,106 94,106 100,102 22,102','20,100 102,100 108,96 14,96'],
 			icon_type : false,
 			icon_url : 'assets/img/skill-pack.png',
-			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4']
+			color_skill : get_data_color_skills(0,7)
 		};
 		views[1] = {
 			skill_height:'height:1950px',
@@ -90,7 +119,7 @@
 			weakest_word_polygon : ['44,118 78,118 84,114 38,114','36,112 86,112 92,108 30,108','28,106 94,106 100,102 22,102','20,100 102,100 108,96 14,96'],
 			icon_type : false,
 			icon_url : 'assets/img/skill-pack.png',
-			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4']
+			color_skill : get_data_color_skills(8,15)
 		};
 		views[2] = {
 			skill_height:'height:2800px',
@@ -149,7 +178,7 @@
 			weakest_word_polygon : ['44,118 78,118 84,114 38,114','36,112 86,112 92,108 30,108','28,106 94,106 100,102 22,102','20,100 102,100 108,96 14,96'],
 			icon_type : false,
 			icon_url : 'assets/img/skill-pack.png',
-			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
+			color_skill : get_data_color_skills(16,27)
 		};
 		views[3] = {
 			skill_height:'height:3380px',
@@ -208,7 +237,7 @@
 			weakest_word_polygon : ['44,118 78,118 84,114 38,114','36,112 86,112 92,108 30,108','28,106 94,106 100,102 22,102','20,100 102,100 108,96 14,96'],
 			icon_type : false,
 			icon_url : 'assets/img/skill-pack.png',
-			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
+			color_skill : get_data_color_skills(28,39)
 		};
 		views[4] = {
 			skill_height:'height:3360px',
@@ -279,40 +308,40 @@
 			weakest_word_polygon : ['44,118 78,118 84,114 38,114','36,112 86,112 92,108 30,108','28,106 94,106 100,102 22,102','20,100 102,100 108,96 14,96'],
 			icon_type : false,
 			icon_url : 'assets/img/skill-pack.png',
-			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
+			color_skill : get_data_color_skills(40,54)
 		};
 
 		data_views[0] = {
-			weakest_word : [1,2,3,4,0,0,0,0],
-			lesson : [3,3,3,3,4,5,6,7],
+			weakest_word : get_data_weakest_words(0,7),
+			lesson : get_lessons(0,7),
 			lesson_finish : [3,3,3,3,2,0,0,0],
 			section : ['cơ bản 1','cơ bản 2','cơ bản 3','cơ bản','cơ bản','cơ bản','cơ bản','cơ bản'],
 			unlocked:[true,true,true,true,true,false,false,false]
 		};
 		data_views[1] = {
-			weakest_word : [1,2,3,4,0,0,0,0],
-			lesson : [3,3,3,3,4,5,6,7],
+			weakest_word : get_data_weakest_words(8,15),
+			lesson : get_lessons(8,15),
 			lesson_finish : [3,3,3,3,2,0,0,0],
 			section : ['cơ bản 21','cơ bản 22','cơ bản 23','cơ bản 2','cơ bản 2','cơ bản 2','cơ bản 2','cơ bản 2'],
 			unlocked:[true,true,true,true,true,false,false,false]
 		};
 		data_views[2] = {
-			weakest_word : [1,2,2,3,4,0,0,0,0,0,0,0],
-			lesson : [3,3,3,3,4,5,6,7,2,4,5,6],
+			weakest_word : get_data_weakest_words(16,27),
+			lesson : get_lessons(16,27),
 			lesson_finish : [3,3,3,3,4,2,0,0,0,0,0,0],
 			section : ['cơ bản 31','cơ bản 32','cơ bản 33','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3'],
 			unlocked:[true,true,true,true,true,true,false,false,false,false,false,false]
 		};
 		data_views[3] = {
-			weakest_word : [1,2,2,3,4,0,0,0,0,0,0,0],
-			lesson : [3,3,3,3,4,5,6,7,2,4,5,6],
+			weakest_word : get_data_weakest_words(28,39),
+			lesson : get_lessons(28,39),
 			lesson_finish : [3,3,3,3,4,2,0,0,0,0,0,0],
 			section : ['cơ bản 41','cơ bản 42','cơ bản 43','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4'],
 			unlocked:[true,true,true,true,true,true,false,false,false,false,false,false]
 		};
 		data_views[4] = {
-			weakest_word : [1,2,2,3,4,4,4,0,0,0,0,0,0,0,0],
-			lesson : [3,3,3,3,4,5,6,7,2,4,5,6,1,2,8],
+			weakest_word : get_data_weakest_words(40,54),
+			lesson : get_lessons(40,54),
 			lesson_finish : [3,3,3,3,4,5,6,3,0,0,0,0,0,0,0],
 			section : ['cơ bản 51','cơ bản 52','cơ bản 53','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5'],
 			unlocked:[true,true,true,true,true,true,true,true,true,false,false,false,false,false,false]
