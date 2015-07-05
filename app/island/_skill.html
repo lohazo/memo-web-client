@@ -1,32 +1,36 @@
 <div style="position:absolute;top:0;left:0;z-index:1">
-	<div
-	ng-if = "(islandBuilder.skills.data_view[param.id-1].lesson_finish[$index] / islandBuilder.skills.data_view[param.id-1].lesson[$index]) == 1 ? (check_weakestWord = '#ffba33') : (check_weakestWord='#dddddd')"
-	ng-init = "weakest_word_number=islandBuilder.skills.data_view[param.id-1].weakest_word[$index];
-	weakest_word_color = 'rgba(255,255,255,1)'"
+	<div align="center"
+	ng-if = "(islandBuilder.skills.data_view[param.id-1].lesson_finish[$index] == islandBuilder.skills.data_view[param.id-1].lesson[$index] && islandBuilder.skills.data_view[param.id-1].weakest_word[$index]==4) ? (color_skill = '#ffba33') : (islandBuilder.skills.data_view[param.id-1].lesson_finish[$index] == islandBuilder.skills.data_view[param.id-1].lesson[$index]?(color_skill=islandBuilder.skills.data_view[param.id-1].color_skill[$index]) : (color_skill='#dddddd'))"
 	ng-repeat="view in islandBuilder.skills.view[param.id-1].width_positions track by $index" class = "skill_svg" 
-	style = "width : 122px;height:180px;
-	margin-left : {{29+(islandBuilder.skills.view[param.id-1].width_positions[$index]*90)}}px;
-	margin-right : 29px;
+	style = "width : 180px;height:180px;
+	margin-left : {{view*90}}px;
+	
 	margin-bottom : {{islandBuilder.skills.view[param.id-1].height_positions[$index].height*90}}px;
 	display : {{islandBuilder.skills.view[param.id-1].height_positions[$index].row}};">
-	<!-- da giac 10 canh va weakest word -->
-		<svg height = "122" width = "122" version = "1.1" xmlns = "http://www.w3.org/2000/svg" xmlns:xlink = "http://www.w3.org/1999/xlink"
-		>
-		<!-- da giac 10 canh -->
-			<polygon 
-			ng-if = "(check_weakestWord!='#ffba33' && islandBuilder.skills.data_view[param.id-1].unlocked[$index]==true) ? check_weakestWord = islandBuilder.skills.view[param.id-1].color_skill[$index] :check_weakestWord"
-			points = "{{islandBuilder.skills.view[param.id-1].points}}"
-				style = "fill:{{check_weakestWord}};fill-rule:nonzero;" />
-		<!-- weakest word -->
-			<polygon 
-			ng-repeat = "item in islandBuilder.skills.view[param.id-1].weakest_word_polygon track by $index"
-			ng-if = "$index<weakest_word_number ? (weakest_word_color='rgba(255, 255, 255, 1)') : (weakest_word_color='rgba(255,255,255,0.3)');check_weakestWord=='#ffba33'"
-			style = "fill:{{weakest_word_color}};fill-rule:nonzero;"
-			points = "{{islandBuilder.skills.view[param.id-1].weakest_word_polygon[$index]}}"/>
-		</svg>
+		<a href="skill/{{islandBuilder.skills.data_view[param.id-1].id[$index]}}">
+			<!-- da giac 10 canh va weakest word -->
+			<svg height = "122" width = "122" version = "1.1" xmlns = "http://www.w3.org/2000/svg" xmlns:xlink = "http://www.w3.org/1999/xlink"
+			>
+			<!-- da giac 10 canh -->
+				<polygon 
+				ng-init = "number_ww = islandBuilder.skills.data_view[param.id-1].weakest_word[$index]"
+				points = "{{islandBuilder.skills.view[param.id-1].points}}"
+					style = "fill:{{color_skill}};fill-rule:nonzero;" />
+			<!-- weakest word -->
+				<polygon 
+				ng-repeat = "item in islandBuilder.skills.view[param.id-1].weakest_word_polygon track by $index"
+				ng-if = "color_skill=='#dddddd' ? false : ($index < number_ww ? color_ww = 'white' : color_ww = 'rgba(255,255,255,0.3)')"
+				style = "fill:{{color_ww}};fill-rule:nonzero;"
+				points = "{{item}}"/>
+			</svg>
+		</a>
 		<!-- section(slug) -->
 		<div class = "skill-section" style = "text-align:center">
-			<h4 style = "font-size:23px; font-weight:bold;margin:0;line-height:26px;text-transform: capitalize;">{{islandBuilder.skills.data_view[param.id-1].section[$index]}}</h4>
+			<h4>
+				<a href="skill/{{islandBuilder.skills.data_view[param.id-1].id[$index]}}"
+				style = "font-size:23px; font-weight:bold;margin:0;line-height:26px;text-transform: capitalize;color:black">
+					{{islandBuilder.skills.data_view[param.id-1].section[$index]}}</a>
+			</h4>
 			<p style="font-size:23px; color:#999999;margin:0;line-height:26px">{{islandBuilder.skills.data_view[param.id-1].lesson_finish[$index]}}/{{islandBuilder.skills.data_view[param.id-1].lesson[$index]}}</p>
 		</div>
 	</div>
@@ -45,12 +49,12 @@
 <div class="svg_line" ng-init= "color_point = '#999999'" style="position:absolute">
 	<svg width = "540" height = "{{islandBuilder.line[param.id-1].height}}">
 		<polyline 
-		points="{{islandBuilder.line[param.id-1].points[0]}}" style="fill:rgba(255,255,255,0);stroke:#ffba33;stroke-width:6" />
+		points="{{islandBuilder.line[param.id-1].points_line_complete}}" style="fill:rgba(255,255,255,0);stroke:#ffba33;stroke-width:6" />
 		<polyline 
-		points="{{islandBuilder.line[param.id-1].points[1]}}" style="fill:rgba(255,255,255,0);stroke:#999999;stroke-width:6" />
+		points="{{islandBuilder.line[param.id-1].points_line}}" style="fill:rgba(255,255,255,0);stroke:#999999;stroke-width:6" />
 		<circle ng-repeat ="circle in islandBuilder.line[param.id-1].points_skill_x track by $index" 
 		ng-if = "islandBuilder.line[param.id-1].points_skill_type[$index]==1 ? color_point = '#ffba33' : (islandBuilder.line[param.id-1].points_skill_type[$index]==0 ? color_point='#810c15' : color_point='#999999')"
-		cx="{{islandBuilder.line[param.id-1].points_skill_x[$index]*90}}" cy="{{islandBuilder.line[param.id-1].points_skill_y[$index]*90}}" r="10" stroke="white" stroke-width="3" fill="{{color_point}}"/>
-		<circle ng-repeat ="circle in islandBuilder.line[param.id-1].points_skill_x track by $index" cx="{{islandBuilder.line[param.id-1].points_skill_x[$index]*90}}" cy="{{islandBuilder.line[param.id-1].points_skill_y[$index]*90}}" r="12" stroke="#d1d1d1" stroke-width="2" fill="rgba(0,0,0,0)"/>
+		cx="{{circle*90}}" cy="{{islandBuilder.line[param.id-1].points_skill_y[$index]*90}}" r="10" stroke="white" stroke-width="3" fill="{{color_point}}"/>
+		<circle ng-repeat ="circle in islandBuilder.line[param.id-1].points_skill_x track by $index" cx="{{circle*90}}" cy="{{islandBuilder.line[param.id-1].points_skill_y[$index]*90}}" r="12" stroke="#d1d1d1" stroke-width="2" fill="rgba(0,0,0,0)"/>
 	</svg>
 </div>
