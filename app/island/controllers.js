@@ -6,10 +6,72 @@
 		$scope.check_weakestWord = 'show';
 		console.log(Skill.skills());
 		$scope.param = $routeParams;
-		
-
 		var views=[],data_views = [],line_views = [],islands_data;
 		var each_row_element = [[1,2,2,1,2],[1,2,2,1,2],[1,2,1,2,1,2,1,2],[2,1,2,1,2,1,2,1],[2,2,3,2,1,2,3]];
+		var each_island_skill = [[0,7],[8,15],[16,27],[28,39],[40,54]];
+
+		//function conver du lieu
+
+		function get_ids(each_island_skill){
+			var data_ids = [];
+			for (var i = each_island_skill[0]; i <= each_island_skill[1]; i++){
+				data_ids.push($scope.skills[i]._id);
+			}
+			return data_ids;
+		}
+		
+		function get_weakest_words(each_island_skill){
+			var data_weakest_words = [];
+			for (var i = each_island_skill[0]; i <= each_island_skill[1]; i++){
+				data_weakest_words.push($scope.skills[i].strength_gap);
+			}
+			return data_weakest_words;
+		}
+		
+		function get_lessons(each_island_skill){
+			var data_lessons = [];
+			for (var i = each_island_skill[0]; i <= each_island_skill[1]; i++){
+				data_lessons.push($scope.skills[i].lessons.length);
+			}
+			return data_lessons;
+		}
+
+		function get_lesson_finishs(each_island_skill){
+			var data_lesson_finishs = [];
+			for (var i = each_island_skill[0]; i <= each_island_skill[1]; i++){
+				data_lesson_finishs.push($scope.skills[i].finished_lesson);
+			}
+			return data_lesson_finishs;
+		}
+
+		function get_sections(each_island_skill){
+			var data_sections = [];
+			for (var i = each_island_skill[0]; i <= each_island_skill[1]; i++){
+				data_sections.push($scope.skills[i].title);
+			}
+			return data_sections;
+		}
+
+		function get_unlockeds(each_island_skill){
+			var data_unlockeds = [];
+			for (var i = each_island_skill[0]; i <= each_island_skill[1]; i++){
+				data_unlockeds.push($scope.skills[i].unlocked);
+			}
+			return data_unlockeds;
+		}
+
+		function get_unlockeds(each_island_skill){
+			var data_unlockeds = [];
+			for (var i = each_island_skill[0]; i <= each_island_skill[1]; i++){
+				data_unlockeds.push($scope.skills[i].unlocked);
+			}
+			return data_unlockeds;
+		}		
+		console.log(get_unlockeds(each_island_skill[0]));
+
+		//end function conver du lieu
+
+		
 		views[0] = {
 			skill_height : 'height : 1950px',
 			width_positions : [1,4,2,1,0,3,1,0],
@@ -278,8 +340,8 @@
 			lesson_finish : [3,3,3,3,2,0,0,0],
 			section : ['cơ bản 1','cơ bản 2','cơ bản 3','cơ bản','cơ bản','cơ bản','cơ bản','cơ bản'],
 			unlocked : [true,true,true,true,true,false,false,false],
-			icon_type : false,
-			icon_url : 'assets/img/skill-pack.png',
+			icon_url_unlock : 'assets/img/skills-pack-unlocked-70.png',
+			icon_url_lock : 'assets/img/skills-pack-locked-70.png',
 			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4']
 		};
 		data_views[1] = {
@@ -289,8 +351,8 @@
 			lesson_finish : [3,3,3,3,2,0,0,0],
 			section : ['cơ bản 21','cơ bản 22','cơ bản 23','cơ bản 2','cơ bản 2','cơ bản 2','cơ bản 2','cơ bản 2'],
 			unlocked : [true,true,true,true,true,false,false,false],
-			icon_type : false,
-			icon_url : 'assets/img/skill-pack.png',
+			icon_url_unlock : 'assets/img/skills-pack-unlocked-70.png',
+			icon_url_lock : 'assets/img/skills-pack-locked-70.png',
 			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4']
 		};
 		data_views[2] = {
@@ -300,8 +362,8 @@
 			lesson_finish : [3,3,3,3,4,2,0,0,0,0,0,0],
 			section : ['cơ bản 31','cơ bản 32','cơ bản 33','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3'],
 			unlocked : [true,true,true,true,true,true,false,false,false,false,false,false],
-			icon_type : false,
-			icon_url : 'assets/img/skill-pack.png',
+			icon_url_unlock : 'assets/img/skills-pack-unlocked-70.png',
+			icon_url_lock : 'assets/img/skills-pack-locked-70.png',
 			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
 		};
 		data_views[3] = {
@@ -311,8 +373,8 @@
 			lesson_finish : [3,3,3,3,4,2,0,0,0,0,0,0],
 			section : ['cơ bản 41','cơ bản 42','cơ bản 43','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4'],
 			unlocked : [true,true,true,true,true,true,false,false,false,false,false,false],
-			icon_type : false,
-			icon_url : 'assets/img/skill-pack.png',
+			icon_url_unlock : 'assets/img/skills-pack-unlocked-70.png',
+			icon_url_lock : 'assets/img/skills-pack-locked-70.png',
 			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
 		};
 		data_views[4] = {
@@ -322,8 +384,8 @@
 			lesson_finish : [3,3,3,3,4,5,6,3,0,0,0,0,0,0,0],
 			section : ['cơ bản 51','cơ bản 52','cơ bản 53','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5'],
 			unlocked : [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-			icon_type : false,
-			icon_url : 'assets/img/skill-pack.png',
+			icon_url_unlock : 'assets/img/skills-pack-unlocked-70.png',
+			icon_url_lock : 'assets/img/skills-pack-locked-70.png',
 			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
 		};
 
