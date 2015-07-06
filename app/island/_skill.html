@@ -1,18 +1,19 @@
 <div style="position:absolute;top:0;left:0;z-index:1">
 	<div align="center"
-	ng-if = "(islandBuilder.skills.data_view[param.id-1].lesson_finish[$index] == islandBuilder.skills.data_view[param.id-1].lesson[$index] && islandBuilder.skills.data_view[param.id-1].weakest_word[$index]==4) ? (color_skill = '#ffba33') : (islandBuilder.skills.data_view[param.id-1].lesson_finish[$index] == islandBuilder.skills.data_view[param.id-1].lesson[$index]?(color_skill=islandBuilder.skills.data_view[param.id-1].color_skill[$index]) : (color_skill='#dddddd'))"
+	ng-if = "(islandBuilder.skills.data_view[param.id-1].lesson_finish[$index] == islandBuilder.skills.data_view[param.id-1].lesson[$index] && islandBuilder.skills.data_view[param.id-1].weakest_word[$index]==4) ? (color_skill = '#ffba33') : (islandBuilder.skills.data_view[param.id-1].unlocked[$index] ? (color_skill=islandBuilder.skills.data_view[param.id-1].color_skill[$index]) : (color_skill='#dddddd'))"
 	ng-repeat="view in islandBuilder.skills.view[param.id-1].width_positions track by $index" class = "skill_svg" 
 	style = "width : 180px;height:180px; position:relative; margin-left : {{view*90}}px;
 	margin-bottom : {{islandBuilder.skills.view[param.id-1].height_positions[$index].height*90}}px;
 	display : {{islandBuilder.skills.view[param.id-1].height_positions[$index].row}};">
 		
-		<a href="skill/{{islandBuilder.skills.data_view[param.id-1].id[$index]}}">
+		<a ng-if="color_skill == '#dddddd' ? href_skill = '#' : href_skill = 'skill/'+islandBuilder.skills.data_view[param.id-1].id[$index]" 
+		href="{{href_skill}}">
 			<div ng-if = "color_skill=='#dddddd' ? icon_url = 'assets/img/skills-pack-locked-70.png':icon_url='assets/img/skills-pack-unlocked-70.png'"
-		 style="position:absolute; width:70px; height:70px; left:50%; margin-left:-35px;top:10px;background:url({{icon_url}}) -{{conver_surplus_ten(get_number_skill_before()+$index)*70}}px -{{conver_int_ten(get_number_skill_before()+$index)*70}}px;">
+		 	style="position:absolute; width:70px; height:70px; left:50%; margin-left:-35px;top:10px;background:url({{icon_url}}) -{{conver_surplus_ten(get_number_skill_before()+$index)*70}}px -{{conver_int_ten(get_number_skill_before()+$index)*70}}px;">
 		</div>
 			<!-- da giac 10 canh va weakest word -->
-			<svg height = "122" width = "122" version = "1.1" xmlns = "http://www.w3.org/2000/svg" xmlns:xlink = "http://www.w3.org/1999/xlink"
-			>
+			<svg height = "122" width = "122" version = "1.1" xmlns = "http://www.w3.org/2000/svg" xmlns:xlink = "http://www.w3.org/1999/xlink" 
+			ng-if = "islandBuilder.skills.data_view[param.id-1].lesson[$index]==islandBuilder.skills.data_view[param.id-1].lesson_finish[$index] ? lesson_f = true : lesson_f = 'false'">
 			<!-- da giac 10 canh -->
 				<polygon 
 				ng-init = "number_ww = islandBuilder.skills.data_view[param.id-1].weakest_word[$index]"
@@ -21,7 +22,7 @@
 			<!-- weakest word -->
 				<polygon 
 				ng-repeat = "item in islandBuilder.skills.view[param.id-1].weakest_word_polygon track by $index"
-				ng-if = "color_skill=='#dddddd' ? false : ($index < number_ww ? color_ww = 'white' : color_ww = 'rgba(255,255,255,0.3)')"
+				ng-if = "lesson_f == 'false' ? false : ($index < number_ww ? color_ww = 'white' : color_ww = 'rgba(255,255,255,0.3)')"
 				style = "fill:{{color_ww}};fill-rule:nonzero;"
 				points = "{{item}}"/>
 			</svg>
@@ -29,7 +30,7 @@
 		<!-- section(slug) -->
 		<div class = "skill-section" style = "text-align:center">
 			<h4>
-				<a href="skill/{{islandBuilder.skills.data_view[param.id-1].id[$index]}}"
+				<a href="{{href_skill}}"
 				style = "font-size:23px; font-weight:bold;margin:0;line-height:26px;text-transform: capitalize;color:black">
 					{{islandBuilder.skills.data_view[param.id-1].section[$index]}}</a>
 			</h4>

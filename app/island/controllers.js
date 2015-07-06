@@ -66,17 +66,9 @@
 		function get_sections(each_island_skill){
 			var data_sections = [];
 			for (var i = each_island_skill[0]; i <= each_island_skill[1]; i++){
-				data_sections.push($scope.skills[i].title);
+				data_sections.push($scope.skills[i].slug);
 			}
 			return data_sections;
-		}
-
-		function get_unlockeds(each_island_skill){
-			var data_unlockeds = [];
-			for (var i = each_island_skill[0]; i <= each_island_skill[1]; i++){
-				data_unlockeds.push($scope.skills[i].unlocked);
-			}
-			return data_unlockeds;
 		}
 
 		function get_unlockeds(each_island_skill){
@@ -97,17 +89,95 @@
 		// ket thuc du lieu phan data_view
 
 		// du lieu phan island_data
-		
-		
-
-		// du lieu phan duong
-		function get_points_skill_types(){
-			for (var i = 0 ; i < each_point_element.length; i++){
-				for (var j = 0; j < each_point_element[i].length; j++){
-					
+		function get_skill_finish_each_islands(){
+			var total_finish_skills = 0, data_skill_finish_each_islands = [];
+			for(var i = 0; i < $scope.skills.length; i++){
+				if ($scope.skills[i].finished_lesson == $scope.skills[i].lessons.length) {
+					total_finish_skills++;
 				}
 			}
+			for (var i = 0; i < island_skill_number.length; i++){
+				if (total_finish_skills >= island_skill_number[i]) {
+					data_skill_finish_each_islands.push(island_skill_number[i]);
+					total_finish_skills -= island_skill_number[i];
+				}
+				else{
+					data_skill_finish_each_islands.push(total_finish_skills);
+					total_finish_skills=0;
+				}
+			}
+			return data_skill_finish_each_islands;
 		}
+		
+		function get_skill_unlocked_each_islands(){
+			var total_unlocked_skills = 0, data_skill_unlocked_each_islands = [];
+			for (var i = 0 ; i < $scope.skills.length; i++){
+				if($scope.skills[i].unlocked){
+					total_unlocked_skills++;
+				}
+			}
+			for (var i = 0 ; i < island_skill_number.length; i++){
+				if (total_unlocked_skills >= island_skill_number[i]) {
+					data_skill_unlocked_each_islands.push(island_skill_number[i]);
+					total_unlocked_skills -= island_skill_number[i];
+				}
+				else{
+					data_skill_unlocked_each_islands.push(total_unlocked_skills);
+					total_unlocked_skills=0;
+				}
+			}
+			return data_skill_unlocked_each_islands;
+		}
+	
+		console.log(get_lesson_finishs(each_island_skill[0]));
+		// du lieu phan line
+		// function get_points_skill_types(){
+		// 	var data_finish_skill_each_island = [] ,data_finish_skill_each_island_array = [[],[],[],[],[]];
+		// 	var j = 0;
+		// 	var data_points_skill_types = [[],[],[],[],[]];
+		// 	for (var i = 0 ; i < $scope.skills.length; i++){
+		// 		if ($scope.skills[i].finished_lesson==$scope.skills[i].lessons.length) {
+		// 			data_finish_skill_each_island.push(true);
+		// 		}
+		// 		else{
+		// 			data_finish_skill_each_island.push(false);
+		// 		}
+		// 	}
+		// 	for (var i = 0 ; i < data_finish_skill_each_island.length; i++){
+		// 		data_finish_skill_each_island_array[j].push(data_finish_skill_each_island[i]);
+		// 		if(i==7 || i == 15 || i == 27 || i == 39){
+		// 			j++;
+		// 		}
+		// 	}
+
+		// 	// [[1,2,2,1,2],[1,2,2,1,2],[1,2,1,2,1,2,1,2],[2,1,0,2,1,2,1,2,1],[2,2,3,2,1,2,3]];
+		// 	for (var i = 0 ; i < each_point_element.length ; i++){
+		// 		var flag = true;
+		// 		for (var j = 0 ; j < each_point_element[i].length; j++){
+		// 			if (each_point_element[i][j] >= 1) {
+		// 				data_finish_skill_each_island_array[i].splice(j,each_point_element[i][j]-1);
+		// 				if(data_finish_skill_each_island_array[i][j]==true){
+		// 					data_points_skill_types.push(1);
+		// 				}
+		// 				else{
+		// 					data_points_skill_types.push(-1);
+		// 				}
+		// 			}
+		// 			else{
+		// 				if (flag) {
+		// 					data_points_skill_types.push(0);
+		// 					flag=false;
+		// 				}
+		// 				else{
+
+		// 				}
+						
+		// 			}
+		// 		}
+		// 	}
+		// 	console.log(data_finish_skill_each_island_array);
+		// }
+		// get_points_skill_types();
 
 
 		//end function conver du lieu
@@ -375,49 +445,49 @@
 		};
 
 		data_views[0] = {
-			id : ['en-vi_co_ban_1','en-vi_co_ban_1','en-vi_co_ban_1','en-vi_co_ban_1','en-vi_co_ban_1','en-vi_co_ban_1','en-vi_co_ban_1','en-vi_co_ban_1'],
-			weakest_word : [1,2,3,4,0,0,0,0],
-			lesson : [3,3,3,3,4,5,6,7],
-			lesson_finish : [3,3,3,3,2,0,0,0],
-			section : ['cơ bản 1','cơ bản 2','cơ bản 3','cơ bản','cơ bản','cơ bản','cơ bản','cơ bản'],
-			unlocked : [true,true,true,true,true,false,false,false],
-			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4']
+			id : get_ids(each_island_skill[0]),
+			weakest_word : get_weakest_words(each_island_skill[0]),
+			lesson : get_lessons(each_island_skill[0]),
+			lesson_finish : get_lesson_finishs(each_island_skill[0]),
+			section : get_sections(each_island_skill[0]),
+			unlocked : get_unlockeds(each_island_skill[0]),
+			color_skill : get_color_skills(each_island_skill[0])
 		};
 		data_views[1] = {
-			id : ['en-vi_quan_ao','en-vi_quan_ao','en-vi_quan_ao','en-vi_quan_ao','en-vi_quan_ao','en-vi_quan_ao','en-vi_quan_ao','en-vi_quan_ao'],
-			weakest_word : [1,2,3,4,0,0,0,0],
-			lesson : [3,3,3,3,4,5,6,7],
-			lesson_finish : [3,3,3,3,2,0,0,0],
-			section : ['cơ bản 21','cơ bản 22','cơ bản 23','cơ bản 2','cơ bản 2','cơ bản 2','cơ bản 2','cơ bản 2'],
-			unlocked : [true,true,true,true,true,false,false,false],
-			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4']
+			id : get_ids(each_island_skill[1]),
+			weakest_word : get_weakest_words(each_island_skill[1]),
+			lesson : get_lessons(each_island_skill[1]),
+			lesson_finish : get_lesson_finishs(each_island_skill[1]),
+			section : get_sections(each_island_skill[1]),
+			unlocked : get_unlockeds(each_island_skill[1]),
+			color_skill : get_color_skills(each_island_skill[1])
 		};
 		data_views[2] = {
-			id : ['en-vi_nghe_nghiep','en-vi_nghe_nghiep','en-vi_nghe_nghiep','en-vi_nghe_nghiep','en-vi_nghe_nghiep','en-vi_nghe_nghiep','en-vi_nghe_nghiep','en-vi_nghe_nghiep','en-vi_nghe_nghiep','en-vi_nghe_nghiep','en-vi_nghe_nghiep','en-vi_nghe_nghiep'],
-			weakest_word : [1,2,2,3,4,0,0,0,0,0,0,0],
-			lesson : [3,3,3,3,4,5,6,7,2,4,5,6],
-			lesson_finish : [3,3,3,3,4,2,0,0,0,0,0,0],
-			section : ['cơ bản 31','cơ bản 32','cơ bản 33','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3'],
-			unlocked : [true,true,true,true,true,true,false,false,false,false,false,false],
-			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
+			id : get_ids(each_island_skill[2]),
+			weakest_word : get_weakest_words(each_island_skill[2]),
+			lesson : get_lessons(each_island_skill[2]),
+			lesson_finish : get_lesson_finishs(each_island_skill[2]),
+			section : get_sections(each_island_skill[2]),
+			unlocked : get_unlockeds(each_island_skill[2]),
+			color_skill : get_color_skills(each_island_skill[2])
 		};
 		data_views[3] = {
-			id : ['en-vi_dong_tu_thi_qua_khu','en-vi_dong_tu_thi_qua_khu','en-vi_dong_tu_thi_qua_khu','en-vi_dong_tu_thi_qua_khu','en-vi_dong_tu_thi_qua_khu','en-vi_dong_tu_thi_qua_khu','en-vi_dong_tu_thi_qua_khu','en-vi_dong_tu_thi_qua_khu','en-vi_dong_tu_thi_qua_khu','en-vi_dong_tu_thi_qua_khu','en-vi_dong_tu_thi_qua_khu','en-vi_dong_tu_thi_qua_khu'],
-			weakest_word : [1,2,2,3,4,0,0,0,0,0,0,0],
-			lesson : [3,3,3,3,4,5,6,7,2,4,5,6],
-			lesson_finish : [3,3,3,3,4,2,0,0,0,0,0,0],
-			section : ['cơ bản 41','cơ bản 42','cơ bản 43','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4'],
-			unlocked : [true,true,true,true,true,true,false,false,false,false,false,false],
-			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
+			id : get_ids(each_island_skill[3]),
+			weakest_word : get_weakest_words(each_island_skill[3]),
+			lesson : get_lessons(each_island_skill[3]),
+			lesson_finish : get_lesson_finishs(each_island_skill[3]),
+			section : get_sections(each_island_skill[3]),
+			unlocked : get_unlockeds(each_island_skill[3]),
+			color_skill : get_color_skills(each_island_skill[3])
 		};
 		data_views[4] = {
-			id : ['en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds','en-vi_danh_dong_tu_gerunds'],
-			weakest_word : [1,2,2,3,4,4,4,0,0,0,0,0,0,0,0],
-			lesson : [3,3,3,3,4,5,6,7,2,4,5,6,1,2,8],
-			lesson_finish : [3,3,3,3,4,5,6,3,0,0,0,0,0,0,0],
-			section : ['cơ bản 51','cơ bản 52','cơ bản 53','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5'],
-			unlocked : [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
+			id : get_ids(each_island_skill[4]),
+			weakest_word : get_weakest_words(each_island_skill[4]),
+			lesson : get_lessons(each_island_skill[4]),
+			lesson_finish : get_lesson_finishs(each_island_skill[4]),
+			section : get_sections(each_island_skill[4]),
+			unlocked : get_unlockeds(each_island_skill[4]),
+			color_skill : get_color_skills(each_island_skill[4])
 		};
 
 		line_views[0] = {
@@ -463,8 +533,8 @@
 
 		islands_data = {
 			skill_total : island_skill_number,
-			skill_finish_each_island : [8,8,4,0,0],
-			skill_unlocked_each_island : [8,8,6,0,0]
+			skill_finish_each_island : get_skill_finish_each_islands(),
+			skill_unlocked_each_island : get_skill_unlocked_each_islands()
 		};
 
 		$scope.islandBuilder = {
