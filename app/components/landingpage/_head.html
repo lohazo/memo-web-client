@@ -16,6 +16,28 @@
       <div class="form-title">
         <span>Tham gia ngay !</span>
       </div>
+      <div class="row">
+        <div class="large-16 columns">
+          <p class="form-hook">Đăng kí với 1 click để tìm và thi đua với bạn bè</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-8 columns">
+          <a class="large-16 small radius facebook button" facebook-login-button style="margin-bottom:10px;margin-top: 0px;height:50px;">
+            Facebook
+          </a>
+        </div>
+        <div class="large-8 columns">
+          <a class="large-16 small radius google button" ng-click="GLogin()" style="margin-bottom:5px;height:50px;background-color: #d13f2d">
+            Google+
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="day_divider"style="margin-top: 5px;margin-bottom: 10px">
+          <hr role="separator" aria-hidden="true"><div class="day_divider_label">hoặc</div>
+        </div>
+      </div>
       <div class="form-input">
         <input class="username" ng-model="user.username" type="text" placeholder="Tên đăng nhập" required tooltip="Tên đăng nhập chứa 6 đến 14 ký tự, bao gồm các ký tự a-z, A-Z, 0-9. Không được có ký tự đặc biệt hay dấu cách."   tooltip-trigger="focus" tooltip-placement="left">
       </div>
@@ -26,7 +48,8 @@
         <input class="password" ng-model="user.password" type="password" placeholder="Mật khẩu" required tooltip="Hãy ghi nhớ mật khẩu của bạn, cẩn thận kẻo quên nhé :3"  tooltip-trigger="focus" tooltip-placement="left" class="form-control">
       </div>
       <div class="form-input">
-        <input class="name" ng-model="user.referral_code" type="text" placeholder="Code chia sẻ từ bạn bè (không bắt buộc)" tooltip="Điền code chia sẻ bạn nhận được tại đây"  tooltip-trigger="focus" tooltip-placement="left" class="form-control">
+        <input class="referral-code" ng-model="user.referral_code" type="text" placeholder="Code chia sẻ từ bạn bè (không bắt buộc)" tooltip="Điền code chia sẻ bạn nhận được tại đây"  tooltip-trigger="focus" tooltip-placement="left" class="form-control" ng-if="!ref_code">
+        <input class="referral-code" type="text" placeholder="{{ref_code}}" class="form-control" disabled ng-if="ref_code">
       </div>
       <p class="form-error">{{error}}</p>
       <div class="form-button">

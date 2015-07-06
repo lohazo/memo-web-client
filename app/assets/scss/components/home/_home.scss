@@ -1,11 +1,12 @@
-.home-page, .plaza {
-  &.main {
+.new-home-page, {
+  &.new-main {
     margin: 20px 20px 10px 20px;
     width: auto;
     height: 478px;
     background-color: $white;
     .container {
       padding: 15px 20px 30px 20px;
+      height: auto;
       .head {
         margin-bottom: 15px;
         height: 40px;
@@ -45,30 +46,187 @@
       .content {
         padding: 5px 10px 30px;
         margin: 0;
-        .island {
-          height: 375px;
-          background-color: #f2f3f4;
-          margin-right: 10px;
-          text-align: center;
-          .island-title{
-
-          }
-          .island-icon {
-
-          }
-          .island-progress-bar{
-
-          }
-          .island-status{
-
-          }
-          .island-button-bars {
-
+        display: block;
+        .islands {
+          padding-left: 80px;
+          .island {
+            height: 375px;
+            background-color: #f2f3f4;
+            margin-right: 20px;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+            width: 200px;
+            display: inline-block;
+            float: left;
+            .island-title{
+              padding: 5px 0 0 30px;
+              float: left;
+              font-size: 18px;
+              text-align: center;
+              margin-bottom: 15px;
+            }
+            .island-icon {
+              text-align: center;
+              margin-bottom: 25px;
+            }
+            .progress{
+              height: 4px;
+              padding-left: 20px;
+              background-color: #33b5e5;
+              -webkit-transition: width 1s ease-out;
+              transition: width 1s ease-out;
+              .meter {
+                background-color: #c6e5f1;
+                -webkit-transition: width 1s ease-out;
+                transition: width 1s ease-out;
+              }
+            }
+            .island-status{
+              text-align: center;
+              font-size: 16px;
+              margin-bottom: 20px;
+            }
+            .island-button {
+              width: 166px;
+              height: 40px;
+              text-align: center;
+              vertical-align: middle;
+              font-size: 14px;
+              padding: 10px 0;
+              margin: 0;
+            }
           }
         }
       }
     }
   }
+}
+.home-page, .plaza {
+  &.main {
+    margin-top: 40px;
+    .main-left, .main-right {
+      @include grid-column($columns: 4);
+      .pratice-button {
+        @include button($padding: $button-tny, $radius: $global-radius);
+        color: $white;
+        margin-bottom: 0;
+        margin-top: 20px;
+        font-size: 16px;
+        background: $primary-color url("assets/img/pratice-button.png") 10px center no-repeat;
+        background-origin: content-box;
+        text-align: right;
+        padding-right: 35px;
+      }
+    }
+    .main-center {
+      @include grid-column($columns: 8);
+    }
+    .main-left, .main-center, .main-right {
+      .tooltip {
+        border-radius: 5px;
+      }
+      min-height: 580px;
+      .container {
+        background-color: $white;
+        border-radius: 15px;
+        padding: 20px;
+      }
+      .share {
+        background: url("assets/img/Banner/Banner-home-share-facebook.png") center no-repeat;
+        width: 240px;
+        height: 240px;
+      }
+    }
+    .container {
+      .row {
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: auto;
+        padding-right: auto;
+      }
+    }
+    .main-center .container {
+      float: left;
+      width: 100%;
+      h4 {
+        line-height: 60px;
+        margin: 0;
+        padding-left: 20px;
+      }
+      .fanto-store {
+        height: 40px;
+        line-height: 40px;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        margin-top: 10px;
+      }
+      .max-skill {
+        margin-top: 50px;
+        text-align: center;
+      }
+    }
+    .main-right {
+      .container {
+        .facebook-search, .memo-search, .email-invitation {
+          height: 40px;
+          line-height: 40px;
+          padding: 0;
+          margin-bottom: 10px;
+        }
+      }
+      .social-bar {
+        margin-top: 10px;
+        padding: 5px;
+        li {
+          background-color: $white;
+          border-radius: 10px;
+          width: 80px;
+          margin-left: 5px;
+          margin-right: 5px;
+          min-height: 40px;
+        }
+      }
+      .banner-sa-native {
+        width: 261px;
+        height: 497px;
+        margin-bottom: 20px;
+        .banner-toolbar {
+          text-align: center;
+          .banner-button {
+            width: 211px;
+            height: 44px;
+            padding: 10px 0 10px 0;
+            font-weight: bold;
+            color: $white;
+            background-color: $primary-color;
+            z-index: 1;
+            top: -60px;
+            &:hover {
+              background-color: scale-color($primary-color, $lightness: -20%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.panel {
+  border: medium none !important;
+  width: 1110px !important;
+  margin: 0px auto;
+  border-radius: 12px;
+  margin-top: 25px;
+  padding: 5px;
+}
+
+.panel a > img {
+  height: 25px;
+  width: 25px;
+  text-align: right;
+  float: right;
 }
 
 @import "placement-test-modal";
