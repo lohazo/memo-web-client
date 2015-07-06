@@ -6,6 +6,7 @@
     background-color: $white;
     .container {
       padding: 15px 20px 30px 20px;
+      height: auto;
       .head {
         margin-bottom: 15px;
         height: 40px;
@@ -45,26 +46,54 @@
       .content {
         padding: 5px 10px 30px;
         margin: 0;
+        display: block;
         .island {
           height: 375px;
           background-color: #f2f3f4;
-          margin-right: 10px;
+          margin-right: 20px;
           text-align: center;
+          padding: 15px;
+          border-radius: 5px;
+          width: 200px;
+          display: inline-block;
+          float: left;
           .island-title{
-
+            padding: 5px 0 0 30px;
+            float: left;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 15px;
           }
           .island-icon {
-
+            text-align: center;
+            margin-bottom: 25px;
           }
-          .island-progress-bar{
-
+          .progress{
+            height: 4px;
+            padding-left: 20px;
+            background-color: #33b5e5;
+            -webkit-transition: width 1s ease-out;
+            transition: width 1s ease-out;
+            .meter {
+              background-color: #c6e5f1;
+              -webkit-transition: width 1s ease-out;
+              transition: width 1s ease-out;
+            }
           }
           .island-status{
-
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 20px;
           }
-          .island-button-bars {
-
-          }
+            .island-button {
+              width: 166px;
+              height: 40px;
+              text-align: center;
+              vertical-align: middle;
+              font-size: 14px;
+              padding: 10px 0;
+              margin: 0;
+            }
         }
       }
     }
