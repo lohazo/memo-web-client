@@ -21,7 +21,7 @@
     return User;
   }
 
-  function AccountSettingCtrl($scope, $localStorage, AccountSetting, $upload, $http, AppSetting, $rootScope, $translate, $location) {
+  function AccountSettingCtrl($scope, $localStorage, AccountSetting, FileUploader, $http, AppSetting, $rootScope, $translate, $location) {
     AppSetting.getSharedSettings().then(function () {
       $scope.sharedSettings = AppSetting.shared_settings;
       $rootScope.$broadcast('event-sharedSettingsLoaded');
@@ -89,7 +89,7 @@
   }
 
   angular.module('settings.account', [])
-    .controller('AccountSettingCtrl', ['$scope', '$localStorage', 'AccountSetting', '$upload', '$http', 'AppSetting', '$rootScope', '$translate', '$location',
+    .controller('AccountSettingCtrl', ['$scope', '$localStorage', 'AccountSetting', 'FileUploader', '$http', 'AppSetting', '$rootScope', '$translate', '$location',
       AccountSettingCtrl
     ])
     .factory('AccountSetting', ['$localStorage', 'Profile', 'AppSetting', '$rootScope', '$translate', AccountSetting]);

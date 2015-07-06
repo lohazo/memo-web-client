@@ -33,6 +33,12 @@
   <link rel="stylesheet" href="vendors/angular-loading-bar/src/loading-bar.css">
   <link rel="stylesheet" href="app.css"/>
   <script src="vendors/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+  <script>
+    (function() {var _fbq = window._fbq || (window._fbq = []);if (!_fbq.loaded) {var fbds = document.createElement('script');fbds.async = true;fbds.src = '//connect.facebook.net/en_US/fbds.js';var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(fbds, s);_fbq.loaded = true;}_fbq.push(['addPixelId', '903514436381563']);})();
+    window._fbq = window._fbq || [];
+    window._fbq.push(['track', 'PixelInitialized', {}]);
+  </script>
+  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=903514436381563&amp;ev=PixelInitialized" /></noscript>
 </head>
 <body ng-class="{landingpage: (!auth.loggedIn && (currentPath.indexOf('/forum') < 0))}" ng-controller="AppCtrl" ng-keydown="keydown(event=$event)">
   <div id="fb-root"></div>
@@ -84,7 +90,7 @@
   <script src="vendors/moment/locale/vi.js"></script>
   <script src="vendors/angulartics/dist/angulartics.min.js"></script>
   <script src="vendors/angulartics/dist/angulartics-ga.min.js"></script>
-  <script src="vendors/ng-file-upload/angular-file-upload.js"></script>
+  <script src="vendors/angular-file-upload/angular-file-upload.js"></script>
   <script src="vendors/angular-translate/angular-translate.js"></script> 
   <!-- App -->
   <script src="app.js"></script>

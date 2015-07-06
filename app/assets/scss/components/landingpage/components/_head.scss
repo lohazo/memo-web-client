@@ -3,12 +3,22 @@
     background: url("assets/img/landingpage/pattern01.png") repeat;
     min-height: 600px;
     &.appear {
+      .sa {
+        margin-top: 70px;
+        text-align: center;
+        .sa-1, .sa-2 {
+          font-weight: 700;
+        }
+        .sa-2 {
+          text-transform: uppercase;
+          color: $primary-color;
+        }
+      }
       .ant {
         background: url("assets/img/landingpage/1-ant.png") no-repeat;
-        left: 580px;
-        bottom: 80px;
-        width: 540px;
-        height: 335px;
+        top: 290px;
+        width: 410px;
+        height: 260px;
         position: absolute;
         z-index: 1;
         @include animation(bounceInUp 1s);
@@ -17,25 +27,77 @@
         background: url("assets/img/landingpage/01a_06.png") no-repeat;
         height: 111px;
         width: 149px;
-        top: 115px;
-        left: 625px;
+        top: 240px;
+        left: 100px;
         @include animation(bounceInUp 1.3s);
       }
       .chat-2 {
         background: url("assets/img/landingpage/01a_03.png") no-repeat;
         width: 172px;
         height: 135px;
-        top: 40px;
-        left: 780px;
+        top: 190px;
+        left: 230px;
         @include animation(bounceInUp 1.6s);
       }
       .chat-3 {
         background: url("assets/img/landingpage/01a_09.png") no-repeat;
         width: 103px;
         height: 103px;
-        top: 120px;
-        left: 1007px;
+        top: 245px;
+        left: 400px;
         @include animation(bounceInUp 2.1s);
+      }
+      .form-register {
+        left: 600px;
+        top: 60px;
+        position: absolute;
+        width: 390px;
+        min-height: 380px;
+        background-color: $white;
+        border: 2px solid $primary-color;
+        border-radius: 5px;
+        .form-container {
+          padding: 20px 30px 20px 30px;
+          .form-title {
+            color: $primary-color;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+          }
+          .form-hook {
+            margin-bottom: 10px;
+            margin-top: 0px;
+            font-size: 14px;
+            font-weight: bold;
+          }
+          .form-input {
+            margin-bottom: 15px;
+            .username, .email, .password, .referral-code {
+              border-radius: 5px;
+              padding: 5px 15px 5px 15px;
+            }
+          }
+          .form-error {
+            margin-bottom: 5px;
+            margin-top: 0px;
+            font-size: 16px;
+            color: #f44;
+            text-align: center;
+          }
+          .form-button {
+            padding-top: 5px;
+            .register-button {
+              height: 50px;
+              width: 100%;
+              font-size: 22px;
+              font-weight: bold;
+              text-align: center;
+              padding: 10px;
+              margin: 0;
+            }
+          }
+        }
       }
     }
     .container {

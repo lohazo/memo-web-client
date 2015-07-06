@@ -1,35 +1,10 @@
 .popup-modal {
-  width: 840px;
-  min-height: 530px !important;
-  padding: 20px;
-  top: 70px !important;
+  width: 650px;
+  min-height: 550px !important;
+  height: auto;
   position: fixed;
+  padding: 0 !important;
   outline: none;
   border: 0;
-  .popup-inner {
-    .popup-content {
-      width: 800px;
-      margin-bottom: 20px;
-      margin-top: -15px;
-    }
-    .popup-toolbar {
-      .first-button {
-        width: 270px;
-        color: $steel;
-        background-color: $smoke;
-        &:hover {
-          background-color: scale-color($smoke, $lightness: -20%);
-        }
-      }
-      .last-button {
-        width: 270px;
-        font-weight: bold;
-        color: $white;
-        background-color: $primary-color;
-        &:hover {
-          background-color: scale-color($primary-color, $lightness: -20%);
-        }
-      }
-    }
-  }
+  top: 110px !important;
 }

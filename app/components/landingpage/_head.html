@@ -1,24 +1,60 @@
 <div class="row container" ReferralLandingpageCtrl>
-  <div class="large-6 large-offset-1 sa">
-    <div class="row">
-      <h2 class="sa-1">Học tiếng Anh</h2>
-      <h2 class="sa-2">Miễn phí trọn đời</h2>
+  <div class="large-6 large-offset-1 slider-landingpage">
+    <div class="sa">
+      <div class="row">
+        <h2 class="sa-1">Học tiếng Anh</h2>
+        <h2 class="sa-2">Miễn phí trọn đời</h2>
+      </div>
     </div>
-    <div class="row" ng-controller="LoginModalCtrl">
-      <a href="" class="large radius button register" ng-click="openRegister()">BẮT ĐẦU NGAY</a>
-    </div>
-    <div class="row">
-      <ul class="inline-list">
-        <li><a ng-href="/downloads?platform=Android&code_chanel=WEB_ANDROID&redirect=https://play.google.com/store/apps/details?id%3Dvn.topica.memo" class="android" target="_blank"></a></li>
-        <li><a ng-href="/downloads?platform=iOS&code_chanel=WEB_IOS&redirect=https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls%3D1&mt%3D8" class="ios" target="_blank"></a></li>
-        <li><a ng-href="/downloads?platform=windows_phone&code_chanel=WEB_WINPHONE&redirect=http://www.windowsphone.com/vi-vn/store/app/topica-memo/be98f876-f3e6-49a2-991d-78782129c557" class="window" target="_blank"></a></li>
-      </ul>
+    <div class="ant"></div>
+    <div class="chat chat-1"></div>
+    <div class="chat chat-2"></div>
+    <div class="chat chat-3"></div>
+  </div>
+  <div class="large-8 large-offset-1 form-register">
+    <div class="form-container">
+      <div class="form-title">
+        <span>Tham gia ngay !</span>
+      </div>
+      <div class="row">
+        <div class="large-16 columns">
+          <p class="form-hook">Đăng kí với 1 click để tìm và thi đua với bạn bè</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-8 columns">
+          <a class="large-16 small radius facebook button" facebook-login-button style="margin-bottom:10px;margin-top: 0px;height:50px;">
+            Facebook
+          </a>
+        </div>
+        <div class="large-8 columns">
+          <a class="large-16 small radius google button" ng-click="GLogin()" style="margin-bottom:5px;height:50px;background-color: #d13f2d">
+            Google+
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="day_divider"style="margin-top: 5px;margin-bottom: 10px">
+          <hr role="separator" aria-hidden="true"><div class="day_divider_label">hoặc</div>
+        </div>
+      </div>
+      <div class="form-input">
+        <input class="username" ng-model="user.username" type="text" placeholder="Tên đăng nhập" required tooltip="Tên đăng nhập chứa 6 đến 14 ký tự, bao gồm các ký tự a-z, A-Z, 0-9. Không được có ký tự đặc biệt hay dấu cách."   tooltip-trigger="focus" tooltip-placement="left">
+      </div>
+      <div class="form-input">
+        <input class="email" ng-model="user.email" type="email" placeholder="Email (VD: example@gmail.com)" required tooltip="Nhập email chính xác sẽ giúp Memo song hành cùng bạn trong suốt quá trình học"  tooltip-trigger="focus" tooltip-placement="left" class="form-control">
+      </div>
+      <div class="form-input">
+        <input class="password" ng-model="user.password" type="password" placeholder="Mật khẩu" required tooltip="Hãy ghi nhớ mật khẩu của bạn, cẩn thận kẻo quên nhé :3"  tooltip-trigger="focus" tooltip-placement="left" class="form-control">
+      </div>
+      <div class="form-input">
+        <input class="referral-code" ng-model="user.referral_code" type="text" placeholder="Code chia sẻ từ bạn bè (không bắt buộc)" tooltip="Điền code chia sẻ bạn nhận được tại đây"  tooltip-trigger="focus" tooltip-placement="left" class="form-control" ng-if="!ref_code">
+        <input class="referral-code" type="text" placeholder="{{ref_code}}" class="form-control" disabled ng-if="ref_code">
+      </div>
+      <p class="form-error">{{error}}</p>
+      <div class="form-button">
+        <a href="" title="" class="small radius button register-button" ng-click="register()">ĐĂNG KÍ</a>
+      </div>
     </div>
   </div>
-  <div class="large-8 large-offset-1 slider-landingpage">
-    <div class="ant"></div>
-  <div class="chat chat-1"></div>
-  <div class="chat chat-2"></div>
-  <div class="chat chat-3"></div>
-    </div>
 </div>

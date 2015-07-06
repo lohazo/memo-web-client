@@ -25,20 +25,80 @@ angular.module('landingpage.controllers', [])
   ])
   .controller('LpHeaderCtrl', [
     '$scope', '$routeParams',
-    'MolServices',
-    function ($scope, $routeParams, MolServices) {
+    'MolServices', 'AuthService', '$element', '$modal',
+    function ($scope, $routeParams, MolServices, AuthService, $element, $modal) {
+      $scope.user = {};
       var data = $routeParams;
       data.preview = '1';
   // MolServices.saveC2(data);
       $scope.showLoginCTA = function () {
         return data.code_chanel && data.code_chanel === 'REF001'
       };
+
+      $element.bind('keypress', function (e) {
+        if (e.keyCode === 13) {
+          $scope.login();
+        }
+      });
+
+      $scope.login = function () {
+        var user = angular.fromJson(angular.toJson($scope.user));
+        delete user.password;
+        if (user.referral_code && user.referral_code !== "") {
+          AuthService.checkCode({
+              referral_code: user.referral_code
+            })
+            .then(function () {
+              delete $scope.user.referral_code;
+              AuthService.login($scope.user)
+                .then(function () {
+                  AuthService.submitReferralCode({
+                    referral_code: user.referral_code
+                  });
+                });
+            });
+        } else {
+          delete $scope.user.referral_code;
+          AuthService.login($scope.user);
+        }
+      };
+
+      $scope.FbLogin = function () {
+        AuthService.FbLogin()
+          .then(function (response) {
+            AuthService.login(response)
+          });
+      };
+
+      $scope.GLogin = function () {
+        AuthService.GLogin();
+      };
+
+      $scope.openForgetPassword = function () {
+        var modalInstance = $modal.open({
+          template: '<div forget-modal></div>',
+          controller: 'ForgetPasswordModalInstanceCtrl',
+          windowClass: 'forget-modal'
+        });
+
+        modalInstance.result.then(function (msg) {
+          if ($scope[msg] instanceof Function) $scope[msg]();
+        });
+      };
     }
   ])
   .controller('LpHeadCtrl', [
     '$scope', '$window',
-    'Mixpanel',
-    function ($scope, $window, Mixpanel) {
+    'Mixpanel', 'AuthService', '$route',
+    function ($scope, $window, Mixpanel, AuthService, $route) {
+      $scope.user = {};
+      $scope.error = '';
+      $scope.ref_code = $route.current.params.ref_code;
+
+      if ($route.current.params.ref_code) {
+        $scope.user.referral_code = $route.current.params.ref_code;
+      };
+
       $scope.toAppStore = function () {
         $window.location.href =
           'https://itunes.apple.com/us/app/topica-memo-hoc-ngoai-ngu/id932238745?ls=1&mt=8';
@@ -47,6 +107,30 @@ angular.module('landingpage.controllers', [])
       $scope.toPlayStore = function () {
         $window.location.href = 'https://play.google.com/store/apps/details?id=vn.topica.memo';
       };
+      
+      $scope.register = function () {
+        AuthService.register($scope.user).then(closeModal, displayMessageOnFail);
+      };
+
+      $scope.FbLogin = function () {
+        AuthService.FbLogin()
+          .then(function (response) {
+            AuthService.login(response)
+          });
+      };
+
+      $scope.GLogin = function () {
+        AuthService.GLogin();
+      };
+
+      function closeModal(data) {
+      }
+
+      function displayMessageOnFail(response) {
+        if (response.data) {
+          $scope.error = response.data.error || response.data.message;
+        }
+      }
     }
   ])
   .controller('LpInfoCtrl', ['$scope', '$window', 'Mixpanel', function ($scope, $window, Mixpanel) {
