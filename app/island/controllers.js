@@ -11,6 +11,16 @@
 		var each_point_element = [[1,2,2,1,2],[1,2,2,1,2],[1,2,1,2,1,2,1,2],[2,1,0,2,1,2,1,2,1],[2,2,3,2,1,2,3]];
 		var each_island_skill = [[0,7],[8,15],[16,27],[28,39],[40,54]];
 		var island_skill_number = [8,8,12,12,15];
+		var points_line_island = []
+		points_line_island = {points:
+			['270,90 270,270 360,360 450,450 450,585 270,585 270,720 270,990 90,1170 90,1260 90,1350 270,1530 270,1620',
+		'270,90 270,270 360,360 450,450 450,585 90,585 90,720 90,990 180,1080 270,1170 270,1260 270,1440',
+		'270,90 270,270 360,360 450,450 450,585 270,585 270,720 270,1080 180,1170 90,1260 90,1530 180,1620 270,1710 270,1890 270,2160 270,2340',
+		'270,90 270,180 90,360 90,450 90,540 270,720 450,900 450,990, 450,1260 450,1350 270,1530 90,1530 90,1710 90,1980 270,1980 270,2070 450,2250 450,2340 450,2430 270,2610 270,2790',
+		'270,90 270,180 90,360 90,450 90,720 270,900 270,1125 450,1125, 450,1260 450,1350 360,1440 270,1530 90,1530 90,1800 90,2070 270,2250 270,2520'],
+		position_x:[[3,4,3,3,1],[3,4,1,2,3],[3,4,3,3,2,2,3,3],[3,1,3,5,5,1,3,5,3],[3,1,3,5,4,1,3]],
+		position_y:[[1,4,8,11,14],[1,4,8,12,14],[1,4,8,11,13,18,21,24],[1,5,8,11,14,19,22,26,29],[1,5,10,14,16,20,25]]
+	}
 
 		$scope.conver_int_ten = function(number){
 			return parseInt(number/11);
@@ -29,7 +39,7 @@
 			return data_number_skill_before;
 		}
 
-		//function conver du lieu
+	//function conver du lieu
 
 		//du lieu phan data_view
 		function get_ids(each_island_skill){
@@ -87,7 +97,7 @@
 			}
 			return data_color_skills;
 		}
-		// ket thuc du lieu phan data_view
+		
 
 		// du lieu phan island_data
 		function get_skill_finish_each_islands(){
@@ -130,56 +140,59 @@
 			return data_skill_unlocked_each_islands;
 		}
 	
-		console.log(get_lesson_finishs(each_island_skill[0]));
-		// du lieu phan line
-		function get_points_skill_types(){
-			var data_finish_skill_each_island = [] ,data_finish_skill_each_island_array = [[],[],[],[],[]];
-			var j = 0;
-			var data_points_skill_types = [[],[],[],[],[]];
-			for (var i = 0 ; i < $scope.skills.length; i++){
-				if ($scope.skills[i].finished_lesson==$scope.skills[i].lessons.length) {
-					data_finish_skill_each_island.push(true);
-				}
-				else{
-					data_finish_skill_each_island.push(false);
-				}
-			}
-			for (var i = 0 ; i < data_finish_skill_each_island.length; i++){
-				data_finish_skill_each_island_array[j].push(data_finish_skill_each_island[i]);
-				if(i==7 || i == 15 || i == 27 || i == 39){
-					j++;
-				}
-			}
 
-			for (var i = 0 ; i < each_point_element.length ; i++){
-				var flag = true;
-				for (var j = 0 ; j < each_point_element[i].length; j++){
-					if (each_point_element[i][j] >= 1) {
-						data_finish_skill_each_island_array[i].splice(j,each_point_element[i][j]-1);
-						if(data_finish_skill_each_island_array[i][j]==true){
-							data_points_skill_types.push(1);
-						}
-						else{
-							data_points_skill_types.push(-1);
-						}
+		//du lieu phan line
+		function get_points_skill_types(each_point_element , each_island_skill){
+			var data_points_array = [], k = each_island_skill[0], data_points_skill_types = [];
+			for (var i = 0; i < each_point_element.length; i++){
+				data_points_array[i] = [];
+				if (each_point_element[i]==0) {
+					if (data_points_array[i-1]==2) {
+						data_points_array[i].push(2);
 					}
 					else{
-						if (flag) {
-							data_points_skill_types.push(0);
-							flag=false;
-						}
-						else{
-
-						}
+						data_points_array[i].push(0);
 					}
+					k++;
+				}
+				for(var j = 0 ; j < each_point_element[i]; j++){
+					if($scope.skills[k].lessons.length == $scope.skills[k].finished_lesson){
+						data_points_array[i].push(2);
+					}
+					else if($scope.skills[k].unlocked){
+						data_points_array[i].push(1);
+					}
+					else{
+						data_points_array[i].push(0);
+					}
+					k++;
 				}
 			}
-			console.log(data_finish_skill_each_island_array);
+			
+			for(var i = 0; i< data_points_array.length ; i++) {
+			if (data_points_array[i].indexOf(0) >= 0) {
+				data_points_skill_types.push(-1);
+			} else if (data_points_array[i].indexOf(1) >=0) {
+				data_points_skill_types.push(0);
+			} else {
+				data_points_skill_types.push(1);
+			}
 		}
-		// get_points_skill_types();
+			return data_points_skill_types;
+		}
 
+		function get_points_lines(get_points_skill_types, index_line){
+			var position_red = get_points_skill_types.indexOf(0);
+			var position_x = points_line_island.position_x[index_line][position_red];
+			var position_y = points_line_island.position_y[index_line][position_red];
+			var point_break = position_x*90+','+position_y*90;
+			var grey_lines = points_line_island.points[index_line];
+			// console.log(points_line_island.points[index_line].lastIndexOf(point_break));
+			return points_line_island.points[index_line].substring(grey_lines.lastIndexOf(point_break), grey_lines.length);
 
-		//end function conver du lieu
+		}
+		
+	//end function conver du lieu
 
 		
 		views[0] = {
@@ -491,43 +504,43 @@
 
 		line_views[0] = {
 			points_line_complete : '270,90 270,270 360,360 450,450 450,585 270,585 270,720 270,990 90,1170 90,1260 90,1350 270,1530 270,1620',
-			points_line : '270,720 270,990 90,1170 90,1260 90,1350 270,1530 270,1620',
+			points_line : get_points_lines(get_points_skill_types(each_point_element[0] , each_island_skill[0]),0),
 			height : '1620',
 			points_skill_x : [3,4,3,3,1],
 			points_skill_y : [1,4,8,11,14],
-			points_skill_type : [1,1,0,-1,-1]
+			points_skill_type : get_points_skill_types(each_point_element[0], each_island_skill[0])
 		};
 		line_views[1] = {
 			points_line_complete : '270,90 270,270 360,360 450,450 450,585 90,585 90,720 90,990 180,1080 270,1170 270,1260 270,1440',
-			points_line : '90,720 90,990 180,1080 270,1170 270,1260 270,1440',
+			points_line : get_points_lines(get_points_skill_types(each_point_element[1] , each_island_skill[1]),1),
 			height : '1440',
 			points_skill_x : [3,4,1,2,3],
 			points_skill_y : [1,4,8,12,14],
-			points_skill_type : [1,1,0,-1,-1]
+			points_skill_type : get_points_skill_types(each_point_element[1], each_island_skill[1])
 		};
 		line_views[2] = {
 			points_line_complete : '270,90 270,270 360,360 450,450 450,585 270,585 270,720 270,1080 180,1170 90,1260 90,1530 180,1620 270,1710 270,1890 270,2160 270,2340',
-			points_line : '270,990 270,1080 180,1170 90,1260 90,1530 180,1620 270,1710 270,1890 270,2160 270,2340',
+			points_line : get_points_lines(get_points_skill_types(each_point_element[2] , each_island_skill[2]),2),
 			height : '2340',
 			points_skill_x : [3,4,3,3,2,2,3,3],
 			points_skill_y : [1,4,8,11,13,18,21,24],
-			points_skill_type : [1,1,1,0,-1,-1,-1,-1]
+			points_skill_type : get_points_skill_types(each_point_element[2], each_island_skill[2])
 		};
 		line_views[3] = {
 			points_line_complete : '270,90 270,180 90,360 90,450 90,540 270,720 450,900 450,990, 450,1260 450,1350 270,1530 90,1530 90,1710 90,1980 270,1980 270,2070 450,2250 450,2340 450,2430 270,2610 270,2790',
-			points_line : '450,1260 450,1350 270,1530 90,1530 90,1710 90,1980 270,1980 270,2070 450,2250 450,2340 450,2430 270,2610 270,2790',
+			points_line : get_points_lines(get_points_skill_types(each_point_element[3] , each_island_skill[3]),3),
 			height : '2790',
 			points_skill_x : [3,1,3,5,5,1,3,5,3],
 			points_skill_y : [1,5,8,11,14,19,22,26,29],
-			points_skill_type : [1,1,1,1,0,-1,-1,-1,-1]
+			points_skill_type : get_points_skill_types(each_point_element[3], each_island_skill[3])
 		};
 		line_views[4] = {
 			points_line_complete : '270,90 270,180 90,360 90,450 90,720 270,900 270,1125 450,1125, 450,1260 450,1350 360,1440 270,1530 90,1530 90,1800 90,2070 270,2250 270,2520',
-			points_line : '450,1260 450,1350 360,1440 270,1530 90,1530 90,1800 90,2070 270,2250 270,2520',
+			points_line : get_points_lines(get_points_skill_types(each_point_element[4] , each_island_skill[4]),4),
 			height : '2520',
 			points_skill_x : [3,1,3,5,4,1,3],
 			points_skill_y : [1,5,10,14,16,20,25],
-			points_skill_type : [1,1,1,0,-1,-1,-1]
+			points_skill_type : get_points_skill_types(each_point_element[4], each_island_skill[4])
 		};
 
 		islands_data = {
