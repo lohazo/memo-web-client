@@ -131,52 +131,50 @@
 	
 		console.log(get_lesson_finishs(each_island_skill[0]));
 		// du lieu phan line
-		// function get_points_skill_types(){
-		// 	var data_finish_skill_each_island = [] ,data_finish_skill_each_island_array = [[],[],[],[],[]];
-		// 	var j = 0;
-		// 	var data_points_skill_types = [[],[],[],[],[]];
-		// 	for (var i = 0 ; i < $scope.skills.length; i++){
-		// 		if ($scope.skills[i].finished_lesson==$scope.skills[i].lessons.length) {
-		// 			data_finish_skill_each_island.push(true);
-		// 		}
-		// 		else{
-		// 			data_finish_skill_each_island.push(false);
-		// 		}
-		// 	}
-		// 	for (var i = 0 ; i < data_finish_skill_each_island.length; i++){
-		// 		data_finish_skill_each_island_array[j].push(data_finish_skill_each_island[i]);
-		// 		if(i==7 || i == 15 || i == 27 || i == 39){
-		// 			j++;
-		// 		}
-		// 	}
+		function get_points_skill_types(){
+			var data_finish_skill_each_island = [] ,data_finish_skill_each_island_array = [[],[],[],[],[]];
+			var j = 0;
+			var data_points_skill_types = [[],[],[],[],[]];
+			for (var i = 0 ; i < $scope.skills.length; i++){
+				if ($scope.skills[i].finished_lesson==$scope.skills[i].lessons.length) {
+					data_finish_skill_each_island.push(true);
+				}
+				else{
+					data_finish_skill_each_island.push(false);
+				}
+			}
+			for (var i = 0 ; i < data_finish_skill_each_island.length; i++){
+				data_finish_skill_each_island_array[j].push(data_finish_skill_each_island[i]);
+				if(i==7 || i == 15 || i == 27 || i == 39){
+					j++;
+				}
+			}
 
-		// 	// [[1,2,2,1,2],[1,2,2,1,2],[1,2,1,2,1,2,1,2],[2,1,0,2,1,2,1,2,1],[2,2,3,2,1,2,3]];
-		// 	for (var i = 0 ; i < each_point_element.length ; i++){
-		// 		var flag = true;
-		// 		for (var j = 0 ; j < each_point_element[i].length; j++){
-		// 			if (each_point_element[i][j] >= 1) {
-		// 				data_finish_skill_each_island_array[i].splice(j,each_point_element[i][j]-1);
-		// 				if(data_finish_skill_each_island_array[i][j]==true){
-		// 					data_points_skill_types.push(1);
-		// 				}
-		// 				else{
-		// 					data_points_skill_types.push(-1);
-		// 				}
-		// 			}
-		// 			else{
-		// 				if (flag) {
-		// 					data_points_skill_types.push(0);
-		// 					flag=false;
-		// 				}
-		// 				else{
+			for (var i = 0 ; i < each_point_element.length ; i++){
+				var flag = true;
+				for (var j = 0 ; j < each_point_element[i].length; j++){
+					if (each_point_element[i][j] >= 1) {
+						data_finish_skill_each_island_array[i].splice(j,each_point_element[i][j]-1);
+						if(data_finish_skill_each_island_array[i][j]==true){
+							data_points_skill_types.push(1);
+						}
+						else{
+							data_points_skill_types.push(-1);
+						}
+					}
+					else{
+						if (flag) {
+							data_points_skill_types.push(0);
+							flag=false;
+						}
+						else{
 
-		// 				}
-						
-		// 			}
-		// 		}
-		// 	}
-		// 	console.log(data_finish_skill_each_island_array);
-		// }
+						}
+					}
+				}
+			}
+			console.log(data_finish_skill_each_island_array);
+		}
 		// get_points_skill_types();
 
 
