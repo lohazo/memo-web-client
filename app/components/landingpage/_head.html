@@ -48,7 +48,8 @@
         <input class="password" ng-model="user.password" type="password" placeholder="Mật khẩu" required tooltip="Hãy ghi nhớ mật khẩu của bạn, cẩn thận kẻo quên nhé :3"  tooltip-trigger="focus" tooltip-placement="left" class="form-control">
       </div>
       <div class="form-input">
-        <input class="referral-code" ng-model="user.referral_code" type="text" placeholder="Code chia sẻ từ bạn bè (không bắt buộc)" tooltip="Điền code chia sẻ bạn nhận được tại đây"  tooltip-trigger="focus" tooltip-placement="left" class="form-control">
+        <input class="referral-code" ng-model="user.referral_code" type="text" placeholder="Code chia sẻ từ bạn bè (không bắt buộc)" tooltip="Điền code chia sẻ bạn nhận được tại đây"  tooltip-trigger="focus" tooltip-placement="left" class="form-control" ng-if="!ref_code">
+        <input class="referral-code" type="text" placeholder="{{ref_code}}" class="form-control" disabled ng-if="ref_code">
       </div>
       <p class="form-error">{{error}}</p>
       <div class="form-button">
