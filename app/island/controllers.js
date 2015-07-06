@@ -9,6 +9,7 @@
 		var views=[],data_views = [],line_views = [],islands_data;
 		var each_point_element = [[1,2,2,1,2],[1,2,2,1,2],[1,2,1,2,1,2,1,2],[2,1,0,2,1,2,1,2,1],[2,2,3,2,1,2,3]];
 		var each_island_skill = [[0,7],[8,15],[16,27],[28,39],[40,54]];
+		var island_skill_number = [8,8,12,12,15];
 
 		$scope.conver_int_ten = function(number){
 			return parseInt(number/11);
@@ -19,7 +20,7 @@
 		}
 
 		$scope.get_number_skill_before = function(){
-			var island_skill_number = [8,8,12,12,15];
+			
 			var data_number_skill_before = 0;
 			for (var i = 0; i<$scope.param.id-1; i++){
 				data_number_skill_before += island_skill_number[i];
@@ -29,6 +30,7 @@
 
 		//function conver du lieu
 
+		//du lieu phan data_view
 		function get_ids(each_island_skill){
 			var data_ids = [];
 			for (var i = each_island_skill[0]; i <= each_island_skill[1]; i++){
@@ -92,10 +94,21 @@
 			}
 			return data_color_skills;
 		}
-		
-		function get_points_skill_types(index){
+		// ket thuc du lieu phan data_view
 
+		// du lieu phan island_data
+		
+		
+
+		// du lieu phan duong
+		function get_points_skill_types(){
+			for (var i = 0 ; i < each_point_element.length; i++){
+				for (var j = 0; j < each_point_element[i].length; j++){
+					
+				}
+			}
 		}
+
 
 		//end function conver du lieu
 
@@ -449,9 +462,9 @@
 		};
 
 		islands_data = {
-			skill_total : [8,8,12,12,15],
-			skill_finish : [8,8,4,0,0],
-			skill_unlocked : [8,8,6,0,0]
+			skill_total : island_skill_number,
+			skill_finish_each_island : [8,8,4,0,0],
+			skill_unlocked_each_island : [8,8,6,0,0]
 		};
 
 		$scope.islandBuilder = {
