@@ -1,0 +1,20 @@
+<div class="container" ng-if="profile.daily_gift_popup_display" style="margin-bottom:20px;border:2px solid #ffbb33;border-radius:20px;" secret-gift>
+</div>
+<div class="container" ng-if="profile.show_verify_box" style="margin-bottom:20px;border:2px solid #ffbb33;border-radius:20px;" verify-box>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="small-8 columns">
+      <h4><a ng-href="/setting/direction"><span>{{'TEXT_SKILL' | translate}}</span> {{profile.current_course_name}}</a></h4>
+    </div>
+    <div class="small-8 columns to-store">
+      <a ng-href="/plaza" class="small-14 third memo-button right" target="_self" translate="BTN_PLAZA">
+        <!--<img ng-src="assets/img/cart.png" />-->
+      </a>
+    </div>
+  </div>
+  <div class="hexagon skills" skill-tree></div>
+  <div class="small-16 columns max-skill" ng-if="profile.max_skill">
+    <a ng-click="shareMaxSkill()"><img ng-src="assets/img/max-course-icon.png" /></a>
+  </div>
+</div>

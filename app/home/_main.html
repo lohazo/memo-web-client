@@ -1,4 +1,4 @@
-<div class="main home-page">
+<div class="new-main new-home-page">
   <div class="container">
     <div class="head">
       <div class="head-left">
@@ -12,7 +12,7 @@
     </div>
     <div class="content">
       <ul>
-        <li class="island" ng-repeat="island in islands">
+        <li class="island" ng-repeat="island in islands track by $index">
           <div class="island-title">
             <span>{{island.title}}</span>
             <img src="assets/img/new/finished-lesson-icon.png" alt="" ng-if="island.is_unlock">
@@ -30,7 +30,7 @@
           </div>
           <div >
             <a href="" title="" class="small radius button island-button" ng-if="island.finished_lesson == island.lessons_length">Củng cố từ vựng yếu</a>
-            <a href="/island/{{island.id}}" title="" class="small radius button island-button" ng-if="!(island.finished_lesson == 0) && island.finished_lesson < island.lessons_length">Vào học</a>
+            <a href="/island/{{$index + 1}}" title="" class="small radius button island-button" ng-if="!(island.finished_lesson == 0) && island.finished_lesson < island.lessons_length">Vào học</a>
             <a href="" title="" class="small radius button island-button disabled" ng-if="island.finished_lesson == 0">Vào học</a>
           </div>
         </li>
