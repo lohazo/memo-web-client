@@ -1,10 +1,11 @@
 (function (angular) {
 
 	'use strict';
-	function IslandMainCtrol($scope, $route, $routeParams, $location, Skill){
+	function IslandMainCtrol($scope, $route, $routeParams, $location, Skill, Plaza){
 		$scope.skills = Skill.skills();		
 		$scope.check_weakestWord = 'show';
 		$scope.param = $routeParams;
+
 		var views=[],data_views = [],line_views = [],islands_data;
 		views[0] = {
 			skill_height:'height:1950px',
@@ -370,7 +371,7 @@
 	}
 
 	angular.module('island.controllers', [])
-    .controller('IslandMainCtrol', ['$scope','$route', '$routeParams', '$location', 'Skill', IslandMainCtrol
+    .controller('IslandMainCtrol', ['$scope','$route', '$routeParams', '$location', 'Skill', 'Plaza', IslandMainCtrol
     ]);
 
 }(window.angular));
