@@ -7,8 +7,25 @@
 		console.log(Skill.skills());
 		$scope.param = $routeParams;
 		var views=[],data_views = [],line_views = [],islands_data;
-		var each_row_element = [[1,2,2,1,2],[1,2,2,1,2],[1,2,1,2,1,2,1,2],[2,1,2,1,2,1,2,1],[2,2,3,2,1,2,3]];
+		var each_point_element = [[1,2,2,1,2],[1,2,2,1,2],[1,2,1,2,1,2,1,2],[2,1,0,2,1,2,1,2,1],[2,2,3,2,1,2,3]];
 		var each_island_skill = [[0,7],[8,15],[16,27],[28,39],[40,54]];
+
+		$scope.conver_int_ten = function(number){
+			return parseInt(number/11);
+		}
+		
+		$scope.conver_surplus_ten = function(number){
+			return number%11;
+		}
+
+		$scope.get_number_skill_before = function(){
+			var island_skill_number = [8,8,12,12,15];
+			var data_number_skill_before = 0;
+			for (var i = 0; i<$scope.param.id-1; i++){
+				data_number_skill_before += island_skill_number[i];
+			}
+			return data_number_skill_before;
+		}
 
 		//function conver du lieu
 
@@ -66,8 +83,19 @@
 				data_unlockeds.push($scope.skills[i].unlocked);
 			}
 			return data_unlockeds;
-		}		
-		console.log(get_unlockeds(each_island_skill[0]));
+		}
+
+		function get_color_skills(each_island_skill){
+			var data_color_skills = [];
+			for (var i = each_island_skill[0]; i <= each_island_skill[1]; i++){
+				data_color_skills.push($scope.skills[i].theme_color);
+			}
+			return data_color_skills;
+		}
+		
+		function get_points_skill_types(index){
+
+		}
 
 		//end function conver du lieu
 
@@ -340,8 +368,6 @@
 			lesson_finish : [3,3,3,3,2,0,0,0],
 			section : ['cơ bản 1','cơ bản 2','cơ bản 3','cơ bản','cơ bản','cơ bản','cơ bản','cơ bản'],
 			unlocked : [true,true,true,true,true,false,false,false],
-			icon_url_unlock : 'assets/img/skills-pack-unlocked-70.png',
-			icon_url_lock : 'assets/img/skills-pack-locked-70.png',
 			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4']
 		};
 		data_views[1] = {
@@ -351,8 +377,6 @@
 			lesson_finish : [3,3,3,3,2,0,0,0],
 			section : ['cơ bản 21','cơ bản 22','cơ bản 23','cơ bản 2','cơ bản 2','cơ bản 2','cơ bản 2','cơ bản 2'],
 			unlocked : [true,true,true,true,true,false,false,false],
-			icon_url_unlock : 'assets/img/skills-pack-unlocked-70.png',
-			icon_url_lock : 'assets/img/skills-pack-locked-70.png',
 			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4']
 		};
 		data_views[2] = {
@@ -362,8 +386,6 @@
 			lesson_finish : [3,3,3,3,4,2,0,0,0,0,0,0],
 			section : ['cơ bản 31','cơ bản 32','cơ bản 33','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3','cơ bản 3'],
 			unlocked : [true,true,true,true,true,true,false,false,false,false,false,false],
-			icon_url_unlock : 'assets/img/skills-pack-unlocked-70.png',
-			icon_url_lock : 'assets/img/skills-pack-locked-70.png',
 			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
 		};
 		data_views[3] = {
@@ -373,8 +395,6 @@
 			lesson_finish : [3,3,3,3,4,2,0,0,0,0,0,0],
 			section : ['cơ bản 41','cơ bản 42','cơ bản 43','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4','cơ bản 4'],
 			unlocked : [true,true,true,true,true,true,false,false,false,false,false,false],
-			icon_url_unlock : 'assets/img/skills-pack-unlocked-70.png',
-			icon_url_lock : 'assets/img/skills-pack-locked-70.png',
 			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
 		};
 		data_views[4] = {
@@ -384,8 +404,6 @@
 			lesson_finish : [3,3,3,3,4,5,6,3,0,0,0,0,0,0,0],
 			section : ['cơ bản 51','cơ bản 52','cơ bản 53','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5','cơ bản 5'],
 			unlocked : [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-			icon_url_unlock : 'assets/img/skills-pack-unlocked-70.png',
-			icon_url_lock : 'assets/img/skills-pack-locked-70.png',
 			color_skill : ['#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00','#ff4444','#33b5e4','#99cc00']
 		};
 

@@ -5,10 +5,11 @@
 	style = "width : 180px;height:180px; position:relative; margin-left : {{view*90}}px;
 	margin-bottom : {{islandBuilder.skills.view[param.id-1].height_positions[$index].height*90}}px;
 	display : {{islandBuilder.skills.view[param.id-1].height_positions[$index].row}};">
-		<div style="position:absolute; width:70px; height:70px; left:50%; margin-left:-35px;top:10px;background:url({{islandBuilder.skills.data_view[param.id].icon_url_unlock}}) -70px -50px;">
-			
-		</div>
+		
 		<a href="skill/{{islandBuilder.skills.data_view[param.id-1].id[$index]}}">
+			<div ng-if = "color_skill=='#dddddd' ? icon_url = 'assets/img/skills-pack-locked-70.png':icon_url='assets/img/skills-pack-unlocked-70.png'"
+		 style="position:absolute; width:70px; height:70px; left:50%; margin-left:-35px;top:10px;background:url({{icon_url}}) -{{conver_surplus_ten(get_number_skill_before()+$index)*70}}px -{{conver_int_ten(get_number_skill_before()+$index)*70}}px;">
+		</div>
 			<!-- da giac 10 canh va weakest word -->
 			<svg height = "122" width = "122" version = "1.1" xmlns = "http://www.w3.org/2000/svg" xmlns:xlink = "http://www.w3.org/1999/xlink"
 			>
