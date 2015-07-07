@@ -1,16 +1,15 @@
-<div style="position:absolute;top:0;left:0;z-index:1">
-	<div align="center"
+<div class="skill_builder">
+	<div class="skill" align="center"
 	ng-if = "(islandBuilder.skills.data_view[param.id-1].lesson_finish[$index] == islandBuilder.skills.data_view[param.id-1].lesson[$index] && islandBuilder.skills.data_view[param.id-1].weakest_word[$index]==4) ? (color_skill = '#ffba33') : (islandBuilder.skills.data_view[param.id-1].unlocked[$index] ? (color_skill=islandBuilder.skills.data_view[param.id-1].color_skill[$index]) : (color_skill='#dddddd'))"
 	ng-repeat="view in islandBuilder.skills.view[param.id-1].width_positions track by $index" class = "skill_svg" 
-	style = "width : 180px;height:180px; position:relative; margin-left : {{view*90}}px;
+	style = "margin-left : {{view*90}}px;
 	margin-bottom : {{islandBuilder.skills.view[param.id-1].height_positions[$index].height*90}}px;
 	display : {{islandBuilder.skills.view[param.id-1].height_positions[$index].row}};">
-		
 		<a ng-if="color_skill == '#dddddd' ? href_skill = '#' : href_skill = 'skill/'+islandBuilder.skills.data_view[param.id-1].id[$index]" 
 		href="{{href_skill}}">
-			<div ng-if = "color_skill=='#dddddd' ? icon_url = 'assets/img/skills-pack-locked-70.png':icon_url='assets/img/skills-pack-unlocked-70.png'"
-		 	style="position:absolute; width:70px; height:70px; left:50%; margin-left:-35px;top:10px;background:url({{icon_url}}) -{{conver_surplus_ten(get_number_skill_before()+$index)*70}}px -{{conver_int_ten(get_number_skill_before()+$index)*70}}px;">
-		</div>
+			<div class="icon_skill" ng-if = "color_skill=='#dddddd' ? icon_url = 'assets/img/skills-pack-locked-70.png':icon_url='assets/img/skills-pack-unlocked-70.png'"
+		 	style="background:url({{icon_url}}) -{{conver_surplus_eleven(get_number_skill_before()+$index)*70}}px -{{conver_int_eleven(get_number_skill_before()+$index)*70}}px;">
+			</div>
 			<!-- da giac 10 canh va weakest word -->
 			<svg height = "122" width = "122" version = "1.1" xmlns = "http://www.w3.org/2000/svg" xmlns:xlink = "http://www.w3.org/1999/xlink" 
 			ng-if = "islandBuilder.skills.data_view[param.id-1].lesson[$index]==islandBuilder.skills.data_view[param.id-1].lesson_finish[$index] ? lesson_f = true : lesson_f = 'false'">
@@ -28,28 +27,31 @@
 			</svg>
 		</a>
 		<!-- section(slug) -->
-		<div class = "skill-section" style = "text-align:center">
+		<div class = "skill-section">
 			<h4>
-				<a href="{{href_skill}}"
-				style = "font-size:23px; font-weight:bold;margin:0;line-height:26px;text-transform: capitalize;color:black">
-					{{islandBuilder.skills.data_view[param.id-1].section[$index]}}</a>
+				<a href="{{href_skill}}">
+					{{islandBuilder.skills.data_view[param.id-1].section[$index]}}
+				</a>
 			</h4>
-			<p style="font-size:23px; color:#999999;margin:0;line-height:26px">{{islandBuilder.skills.data_view[param.id-1].lesson_finish[$index]}}/{{islandBuilder.skills.data_view[param.id-1].lesson[$index]}}</p>
+			<p>{{islandBuilder.skills.data_view[param.id-1].lesson_finish[$index]}}/{{islandBuilder.skills.data_view[param.id-1].lesson[$index]}}</p>
 		</div>
 	</div>
 	<!-- da giac 10 canh complete -->
-	<div style = "text-align:center;" class="svg_complete">
-		<svg width="172" height="168">
+	<div style = "text-align:center; position:relative" class="svg_complete">
+		<img src="assets/img/skill_complete.png" width="100; ">
+		<a href="checkpoint/{{islandBuilder.skills.data_view[param.id-1].check_point}}">
+			<svg width="172" height="168">
 			<polygon 
 			ng-if = "islandBuilder.skills.data_view[param.id-1].lesson_finish[islandBuilder.skills.data_view[param.id-1].lesson.length-1]==islandBuilder.skills.data_view[param.id-1].lesson[islandBuilder.skills.data_view[param.id-1].lesson.length-1] ? (color_complete='#ffba33') : (color_complete='#679e42')"
 			points = "{{islandBuilder.skills.view[param.id-1].points_complete}}"
 				style = "fill:{{color_complete}};fill-rule:nonzero;" />
 		</svg>
-		<div style="color:black;font-size:23px;font-weight:bold;position:relative">Bài kiểm tra</div>
+		<div>Bài kiểm tra</div>
+		</a>
 	</div>
 </div>
 <!-- line -->
-<div class="svg_line" ng-init= "color_point = '#999999'" style="position:absolute">
+<div class="svg_line" ng-init= "color_point = '#999999'">
 	<svg width = "540" height = "{{islandBuilder.line[param.id-1].height}}">
 		<polyline 
 		points="{{islandBuilder.line[param.id-1].points_line_complete}}" style="fill:rgba(255,255,255,0);stroke:#ffba33;stroke-width:6" />

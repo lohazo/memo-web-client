@@ -7,10 +7,10 @@
 		</h4>
 		<div 
 		ng-if="$index+1==param.id ? ac='active' : ac=''"
-		class="island_skill {{ac}}" style="position:relative;">
+		class="island_skill {{ac}}">
 			<svg 
 			ng-if="islandBuilder.island_data.skill_finish_each_island[$index]==islandBuilder.island_data.skill_total[$index] ? (color = '#ffba33') : (color = '#999999')" 
-			height="6" width="156" style="border-radius: 6px;">
+			height="6" width="156">
 				<line x1="0" y1="3" x2="156" y2="3" style="stroke:{{color}};stroke-width:6" />
 			</svg>
 			<svg 
@@ -18,7 +18,7 @@
 			height="6" width="{{islandBuilder.island_data.skill_finish_each_island[$index]/islandBuilder.island_data.skill_total[$index]*156}}" style="border-radius: 6px; position:absolute;top:12px;left:31px">
 				<line x1="0" y1="3" x2="{{islandBuilder.island_data.skill_finish_each_island[$index]/islandBuilder.island_data.skill_total[$index]*156}}" y2="3" style="stroke:#33b5e4;stroke-width:6" />
 			</svg>
-			<p style="margin-bottom:10px;">{{islandBuilder.island_data.skill_finish_each_island[$index]}}/{{islandBuilder.island_data.skill_total[$index]}} Kỹ năng</p>
+			<p >{{islandBuilder.island_data.skill_finish_each_island[$index]}}/{{islandBuilder.island_data.skill_total[$index]}} Kỹ năng</p>
 		</div>	
 	</div>
 </div>
