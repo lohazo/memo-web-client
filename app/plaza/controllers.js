@@ -1,13 +1,15 @@
 (function (angular) {
   'use strict';
 
-  function PlazaCtrl($scope, $sce, $location, Plaza, Profile, ReferralService, $modal, res1, res2, res3, AppSetting, $rootScope, $translate, $localStorage) {
+  function PlazaCtrl($scope, $sce, $location, Plaza, Profile, ReferralService, $modal, res1, res2, res3, AppSetting, $rootScope, $translate, $localStorage, BannerServices, $window) {
     AppSetting.getSharedSettings().then(function () {
       $scope.sharedSettings = AppSetting.shared_settings;
       $rootScope.$broadcast('event-sharedSettingsLoaded');
     })
 
     $translate.use($localStorage.auth.user.display_lang);
+
+    $window.location.hash = '#gift_1m';
     
     $scope.profile = Profile.user;
     $scope.profileDetail = Profile.detail;
@@ -124,6 +126,14 @@
       }
       // alert("Bạn đã mua đồ thành công !!!")
     };
+
+    function getBanner() {
+      BannerServices.getBanner().success(function (data) {
+        $scope.banner = data;
+      });
+    };
+
+    getBanner();
   }
 
   function ProgressQuizConfirmModalCtrl($scope, $modalInstance, id, Plaza) {
@@ -162,7 +172,7 @@
 
   angular.module('plaza.controllers', [])
     .controller('PlazaCtrl', ['$scope', '$sce', '$location', 'Plaza', 'Profile', 'ReferralService', '$modal', 'res1',
-      'res2', 'res3', 'AppSetting', '$rootScope', '$translate', '$localStorage', PlazaCtrl
+      'res2', 'res3', 'AppSetting', '$rootScope', '$translate', '$localStorage', 'BannerServices', '$window', PlazaCtrl
     ])
     .controller('ProgressQuizConfirmModalCtrl', ['$scope', '$modalInstance', 'id', 'Plaza',
       ProgressQuizConfirmModalCtrl

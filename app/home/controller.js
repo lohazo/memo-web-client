@@ -4,12 +4,11 @@
   function HomeCtrl($scope) {}
 
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
-    Message, ReferralService, Leaderboard, PopupServices, $modal) {
+    Message, ReferralService, Leaderboard, PopupServices, $modal, BannerServices) {
     $scope.leaderboardData = [];
-
+ 
     $scope.trackingBannerNative = function () {
       MemoTracker.track('skill tree plaza ad click');
-      $location.url('/plaza');
     };
     $scope.trackingUdemy = function () {
       MemoTracker.track('skill tree udemy af click');
@@ -39,42 +38,32 @@
     };
 
     function getPopup() {
-      if (AppSetting.sharedSettings.functionaly.should_popup_gift1m_skill_tree) {
-        PopupServices.getPopup().success(function (data) {
-          if (data._id) {
-            var modalInstance = $modal.open({
-              templateUrl: 'popup/_index.html',
-              controller: 'PopupL0BCtrl',
-              windowClass: 'popup-modal',
-              resolve: {
-                dataPopup: function () {
-                  return data;
-                }
-              }
-            });
-
-            modalInstance.result.then(function (msg) {
-              if (msg === 'openClaimScholarModal') {
-                openClaimScholarModal($scope.profile);
-              }
-            });
-          };
-        });
-
-        var openClaimScholarModal = function (Profile) {
+      PopupServices.getPopup().success(function (data) {
+        if (data._id) {
           var modalInstance = $modal.open({
-            templateUrl: 'plaza/_buy-guide-popup.html',
-            controller: ['$scope', '$sce', '$modalInstance', 'API', function ($scope, $sce, $modalInstance,
-              API) {
-              $scope.trustedResource = $sce.trustAsResourceUrl(API +
-                '/plaza_items/claim_gift_1m?platform=web&&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' +
-                Profile.auth_token +
-                '&verification_code=' + Profile.verification_code);
-            }],
-            windowClass: 'buy-guide-popup-modal',
+            templateUrl: 'popup/_index.html',
+            controller: 'PopupCtrl',
+            windowClass: 'popup-modal',
+            backdrop: 'static',
+            resolve: {
+              popups: function () {
+                return data;
+              },
+            }
+          });
+
+          modalInstance.result.then(function (msg) {
+            console.log(msg);
+            if ($scope[msg] instanceof Function) $scope[msg]();
           });
         };
-      }
+      });
+    }
+
+    function getBanner() {
+      BannerServices.getBanner().success(function (data) {
+        $scope.banner = data;
+      });
     }
 
     function getProfile() {
@@ -171,6 +160,7 @@
       .then(takeATour)
       .then(getLeaderboardData)
       .then(getPopup)
+      .then(getBanner)
       .then(AppSetting.getWords);
   }
 
@@ -407,25 +397,10 @@
     }
   }
 
-  function PopupL0BCtrl($scope, dataPopup, PopupServices, MemoTracking, $modalInstance) {
-    $scope.popup = dataPopup;
-
-    $scope.openPopup = function () {
-      MemoTracking.track(dataPopup.type);
-      PopupServices.openPopup(dataPopup).success(function () {
-        $modalInstance.close('openClaimScholarModal');
-      });
-    };
-
-    $scope.closePopup = function () {
-      $modalInstance.close();
-    }
-  }
-
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$window', '$location', 'Profile', 'TreeBuilder',
-      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal',
+      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal', 'BannerServices',
       HomeMainCtrl
     ])
     .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
@@ -444,10 +419,6 @@
     .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', SecretGiftCtrl])
     .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl])
     .controller('SecretGiftTShirtModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftTShirtModalCtrl])
-    .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl])
-    .controller('PopupL0BCtrl', ['$scope', 'dataPopup', 'PopupServices', 'MemoTracking',
-      '$modalInstance',
-      PopupL0BCtrl
-    ]);
+    .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl]);
 
 }(window.angular));

@@ -29,9 +29,9 @@
         padding: 20px;
       }
       .share {
-        background: url("assets/img/facebook-share.png") center no-repeat;
-        width: 110px;
-        height: 40px;
+        background: url("assets/img/Banner/Banner-home-share-facebook.png") center no-repeat;
+        width: 240px;
+        height: 240px;
       }
     }
     .container {
@@ -99,14 +99,10 @@
         }
       }
       .banner-sa-native {
-        cursor: pointer;
-        background: url("assets/img/Banner/Banner-SA-native.png") center no-repeat;
         width: 261px;
         height: 497px;
-        padding: 20px;
         margin-bottom: 20px;
         .banner-toolbar {
-          margin-top: 410px;
           text-align: center;
           .banner-button {
             width: 211px;
@@ -115,6 +111,8 @@
             font-weight: bold;
             color: $white;
             background-color: $primary-color;
+            z-index: 1;
+            top: -60px;
             &:hover {
               background-color: scale-color($primary-color, $lightness: -20%);
             }

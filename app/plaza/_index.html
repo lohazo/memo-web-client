@@ -18,9 +18,11 @@
                 <img ng-src="{{item.icon_url}}" />
               </div>
               <div class="plaza-item-intro">
-                <span class="plaza-item-name" ng-bind="item.name"></span>
+                <span class="plaza-item-name" ng-bind="item.name" ng-if="item._id == 'gift_1m'" id="gift_1m" ></span>
+                <span class="plaza-item-name" ng-bind="item.name" ng-if="item._id !== 'gift_1m'"></span>
                 <p class="plaza-item-desc" ng-bind="item.info"></p>
-                <a class="plaza-item-guide" ng-if="item.buy_guide_url" ng-click="buyGuide(item._id)"><b><u>{{'TEXT_BUY_GUIDE' | translate}}</u></b></a>
+                <a class="plaza-item-guide" ng-if="item.buy_guide_url && item._id !== 'invite_item'" ng-click="buyGuide(item._id)"><b><u>{{'TEXT_BUY_GUIDE' | translate}}</u></b></a>
+                <a class="plaza-item-guide" ng-if="item.buy_guide_url && item._id == 'invite_item'" ng-click="buyGuide(item._id)"><b><u>{{'TEXT_INVITE_FRIEND_GUIDE' | translate}}</u></b></a>
               </div>
               <div class="plaza-item-buttons">
                 <a title="" class="radius button expand" ng-if="item.can_buy && !item.confirm_before_buy && !item.is_locked" ng-click="buy(item._id)">

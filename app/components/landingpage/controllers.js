@@ -25,8 +25,8 @@ angular.module('landingpage.controllers', [])
   ])
   .controller('LpHeaderCtrl', [
     '$scope', '$routeParams',
-    'MolServices', 'AuthService',
-    function ($scope, $routeParams, MolServices, AuthService) {
+    'MolServices', 'AuthService', '$element', '$modal',
+    function ($scope, $routeParams, MolServices, AuthService, $element, $modal) {
       $scope.user = {};
       var data = $routeParams;
       data.preview = '1';
@@ -34,6 +34,12 @@ angular.module('landingpage.controllers', [])
       $scope.showLoginCTA = function () {
         return data.code_chanel && data.code_chanel === 'REF001'
       };
+
+      $element.bind('keypress', function (e) {
+        if (e.keyCode === 13) {
+          $scope.login();
+        }
+      });
 
       $scope.login = function () {
         var user = angular.fromJson(angular.toJson($scope.user));
@@ -67,14 +73,31 @@ angular.module('landingpage.controllers', [])
       $scope.GLogin = function () {
         AuthService.GLogin();
       };
+
+      $scope.openForgetPassword = function () {
+        var modalInstance = $modal.open({
+          template: '<div forget-modal></div>',
+          controller: 'ForgetPasswordModalInstanceCtrl',
+          windowClass: 'forget-modal'
+        });
+
+        modalInstance.result.then(function (msg) {
+          if ($scope[msg] instanceof Function) $scope[msg]();
+        });
+      };
     }
   ])
   .controller('LpHeadCtrl', [
     '$scope', '$window',
-    'Mixpanel', 'AuthService',
-    function ($scope, $window, Mixpanel, AuthService) {
+    'Mixpanel', 'AuthService', '$route',
+    function ($scope, $window, Mixpanel, AuthService, $route) {
       $scope.user = {};
       $scope.error = '';
+      $scope.ref_code = $route.current.params.ref_code;
+
+      if ($route.current.params.ref_code) {
+        $scope.user.referral_code = $route.current.params.ref_code;
+      };
 
       $scope.toAppStore = function () {
         $window.location.href =
@@ -87,6 +110,19 @@ angular.module('landingpage.controllers', [])
       
       $scope.register = function () {
         AuthService.register($scope.user).then(closeModal, displayMessageOnFail);
+      };
+
+      $scope.FbLogin = function () {
+        AuthService.FbLogin()
+          .then(function (response) {
+            response.referral_code = $route.current.params.ref_code;
+            AuthService.login(response)
+          });
+      };
+
+      $scope.GLogin = function () {
+        var data = $route.current.params.ref_code;
+        AuthService.GLogin(data);
       };
 
       function closeModal(data) {

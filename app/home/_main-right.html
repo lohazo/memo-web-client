@@ -1,23 +1,13 @@
-<!-- <div class="container" style="margin-bottom: 10px;text-align: center">
-  <div class="row">
-    <div class="banner" style="margin-bottom: 10px;">
-      <a ng-href="http://bit.ly/MemoAvengers" target="_blank"><img src="assets/img/banner-avenger-event.png" /></a>  
-    </div>
-    <div class="banner-toolbar">
-      <a class=" large-16 small radius button" style="margin: 0px; border: 2px solid #ffbb33;color: #810c15;background-color: #fff;font-size: 20px;height: 40px;padding: 5px" ng-href="http://bit.ly/MemoAvengers" target="_blank">THAM GIA NGAY</a>
-    </div>
-  </div>
-</div> -->
 <div class="container" style="margin-bottom: 20px; border: 2px solid #ffbb33; padding: 10px;" ng-if="!profile.birth_day">
   <div class="row" banner-update-birthday></div>
 </div>
 <div class="container" style="margin-bottom: 20px; border: 2px solid #ffbb33; padding-top: 60px;" ng-if="!profile.referral_user && sharedSettings.functionaly.should_share_facebook">
   <div class="row" campaign-verify-code></div>
 </div>
-<div class="banner-sa-native" alt="" ng-click="trackingBannerNative()" >
-<!--   <div style="padding:0 30px; margin-bottom:20px;margin-top:410px;"> -->
+<div class="banner-sa-native" alt="" ng-show="banner.banner_image">
+  <img src="{{banner.banner_image}}" alt="" />
   <div class="banner-toolbar">
-    <a class="small radius button banner-button" ng-click="trackingBannerNative()">{{'BTN_LEARN_NOW' | translate}}</a>
+    <a class="small radius button banner-button" href="{{banner.button_url}}" ng-click="trackingBannerNative()" ng-show="banner.banner_image">{{banner.button_text}}</a>
   </div>
 </div>
 <div class="udemy-banner">

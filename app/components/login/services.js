@@ -30,11 +30,12 @@
       var deferred = $q.defer();
       var access_token = data.g_access_token || data.access_token;
       var gmail = data.gmail;
+      var referral_code = data.referral_code;
 
       if (!Service.loginProcessing) {
         Service.loginProcessing = true;
 
-        $http.post(API + '/users/login?platform=web&localize=' + localize + '&access_token=' + access_token, data)
+        $http.post(API + '/users/login?platform=web&localize=' + localize + '&access_token=' + access_token + '&referral_code=' + referral_code, data)
           .then(function (response) {
             deferred.resolve(response);
             Service.loginProcessing = false;
@@ -172,12 +173,13 @@
       return deferred.promise;
     };
 
-    Service.GLogin = function () {
+    Service.GLogin = function (data) {
       var requestData = {};
       return GooglePlus.login().then(function (gAuthResult) {
         requestData.g_access_token = gAuthResult.access_token;
         GooglePlus.getUser().then(function (response) {
           requestData.gmail = response.result.email;
+          requestData.referral_code = data;
           LoginService.login(requestData).then(loginCallback);
         });
       });

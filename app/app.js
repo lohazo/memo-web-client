@@ -44,6 +44,8 @@
         'https://www.googleapis.com/auth/userinfo.profile'
     });
 
+    // $translateProvider.useSanitizeValueStrategy('sanitize');
+
     $translateProvider.translations('vi', {
       BTN_LOGIN: 'Đăng nhập',
       BTN_SIGNUP: 'Tạo tài khoản',
@@ -218,6 +220,7 @@
       TEXT_LUCKY_STAR: 'Ngôi sao may mắn',   
       TEXT_COMBO_PROTECT_DAILY_GIFT: 'Streak_freeze',
       TEXT_BUY_GUIDE: 'Hướng dẫn mua vật phẩm',
+      TEXT_INVITE_FRIEND_GUIDE: 'Hướng dẫn mời bạn bè',
       TEXT_ITEM_HEALTH_POTION: 'Bình hồi máu',
       TEXT_ITEM_HEALTH_POTION_DESCRIPTION: 'Bạn sẽ có thêm 1 Máu trong trường hợp bạn đã mất hết Máu khi thực hiện một bài học.',
       TEXT_ITEM_LUCKY_START: 'Ngôi sao may mắn',
