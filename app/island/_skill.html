@@ -37,16 +37,16 @@
 		</div>
 	</div>
 	<!-- da giac 10 canh complete -->
-	<div style = "text-align:center; position:relative" class="svg_complete">
-		<img src="assets/img/skill_complete.png" width="100; ">
-		<a href="checkpoint/{{islandBuilder.skills.data_view[param.id-1].check_point}}">
+	<div style = "" class="svg_complete">
+		<a href="checkpoint/{{islandBuilder.skills.data_view[param.id-1].check_point}}" style="position:relative">
+			<img src="assets/img/skill_complete.png" width="100;" style="position:absolute;">
 			<svg width="172" height="168">
-			<polygon 
-			ng-if = "islandBuilder.skills.data_view[param.id-1].lesson_finish[islandBuilder.skills.data_view[param.id-1].lesson.length-1]==islandBuilder.skills.data_view[param.id-1].lesson[islandBuilder.skills.data_view[param.id-1].lesson.length-1] ? (color_complete='#ffba33') : (color_complete='#679e42')"
-			points = "{{islandBuilder.skills.view[param.id-1].points_complete}}"
-				style = "fill:{{color_complete}};fill-rule:nonzero;" />
-		</svg>
-		<div>Bài kiểm tra</div>
+				<polygon 
+					ng-if = "islandBuilder.skills.data_view[param.id-1].lesson_finish[islandBuilder.skills.data_view[param.id-1].lesson.length-1]==islandBuilder.skills.data_view[param.id-1].lesson[islandBuilder.skills.data_view[param.id-1].lesson.length-1] ? (color_complete='#ffba33') : (color_complete='#679e42')"
+					points = "{{islandBuilder.skills.view[param.id-1].points_complete}}"
+					style = "fill:{{color_complete}};fill-rule:nonzero;" />
+			</svg>
+			<div>Bài kiểm tra</div>
 		</a>
 	</div>
 </div>

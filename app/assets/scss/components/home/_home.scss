@@ -1,107 +1,3 @@
-.new-home-page, {
-  &.new-main {
-    margin: 20px 20px 10px 20px;
-    width: auto;
-    height: 478px;
-    background-color: $white;
-    .container {
-      padding: 15px 20px 30px 20px;
-      height: auto;
-      .head {
-        margin-bottom: 15px;
-        height: 40px;
-        .head-left {
-          @include grid-column($columns: 8);
-          float: left;
-          .course-icon {
-            width: 40px;
-            padding: 0;
-            margin-right: 10px;
-            text-align: center;
-          }
-          .course-title {
-            width: 200px;
-            font-size: 24px;
-            vertical-align: middle;
-          }
-          .course-option {
-            width: 200px;
-            font-size: 14px;
-            vertical-align: -webkit-baseline-middle;
-          }
-        }
-        .head-right {
-          float: right;
-          .strengthen-button {
-            width: 196px;
-            height: 40px;
-            border: 2px solid $gold;
-            font-size: 16px;
-            background-color: $white;
-            color: $gold;
-            padding: 5px;
-          }
-        }
-      }
-      .content {
-        padding: 5px 10px 30px;
-        margin: 0;
-        display: block;
-        .islands {
-          padding-left: 80px;
-          .island {
-            height: 375px;
-            background-color: #f2f3f4;
-            margin-right: 20px;
-            text-align: center;
-            padding: 15px;
-            border-radius: 5px;
-            width: 200px;
-            display: inline-block;
-            float: left;
-            .island-title{
-              padding: 5px 0 0 30px;
-              float: left;
-              font-size: 18px;
-              text-align: center;
-              margin-bottom: 15px;
-            }
-            .island-icon {
-              text-align: center;
-              margin-bottom: 25px;
-            }
-            .progress{
-              height: 4px;
-              padding-left: 20px;
-              background-color: #33b5e5;
-              -webkit-transition: width 1s ease-out;
-              transition: width 1s ease-out;
-              .meter {
-                background-color: #c6e5f1;
-                -webkit-transition: width 1s ease-out;
-                transition: width 1s ease-out;
-              }
-            }
-            .island-status{
-              text-align: center;
-              font-size: 16px;
-              margin-bottom: 20px;
-            }
-            .island-button {
-              width: 166px;
-              height: 40px;
-              text-align: center;
-              vertical-align: middle;
-              font-size: 14px;
-              padding: 10px 0;
-              margin: 0;
-            }
-          }
-        }
-      }
-    }
-  }
-}
 .home-page, .plaza {
   &.main {
     margin-top: 40px;
@@ -228,7 +124,103 @@
   text-align: right;
   float: right;
 }
-
-@import "placement-test-modal";
-@import "share-code-modal";
-@import "components/banner/banner";
+.new-home-page{
+  margin: 20px;
+  .container{
+    background: white;
+    margin-bottom: 10px;
+    &>.content{
+      padding: 0 20px;
+      &>.head{
+        padding-top: 20px;
+        .head-left-btn{
+          padding-bottom: 0;
+        }
+        .head-left{
+          img{
+            margin-top: -10px;
+          }
+          h3{
+            display: inline-block;
+            margin: 0;
+            font-size: 24px;
+            color: #666666;
+          }
+          a{
+            color: #810c15;
+            font-size: 14px;
+          }
+        }
+        .head-right{
+          a{
+            height: 40px;
+            background:#ffbb33;
+            font-size: 16px;
+            line-height: 6px;
+            color: white;
+          }
+        }
+      }
+      .main-island{
+        &>.list-island{
+          &>li{
+            &>.island_unit{
+              background: #f2f3f4;
+              text-align: center;
+              &>.head_island{
+                padding-top: 10px;
+                padding-bottom: 5px;
+                h4{
+                  display: inline-block;
+                  font-size: 18px;
+                  color: #333333;
+                }
+              }
+              &>img{
+                display: inline-block;
+              }
+              &>.streng-island{
+                background: #e0e0e0;
+                height: 4px;
+                margin: 30px 20px 5px 20px;
+                padding: 0;
+              }
+              &>.island_unit_btn{
+                padding: 10px;
+                &>a{
+                background: #ffbb33;
+                color: white;
+                height: 45px;
+                line-height: 11px;
+                font-size: 16px;
+                margin-bottom: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+      .footer-home-page-list-item{
+        &>li{
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin: 0;
+          &>a{
+            margin: 0;
+            height: 45px;
+            line-height: 0;
+            img{
+              margin-right: 10px;
+              height: 18px;
+            }
+          }
+        }
+        &>li.share-fb{
+          a{
+            background: #3b5998;
+          }
+        }
+      }
+    }
+  }
+}

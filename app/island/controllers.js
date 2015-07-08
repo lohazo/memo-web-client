@@ -3,10 +3,8 @@
 	'use strict';
 	function IslandMainCtrol($scope, $route, $routeParams, $location, Skill, Plaza){
 		$scope.skills = Skill.skills();		
-		console.log($scope.skills);
 		$scope.check_weakestWord = 'show';
 		$scope.param = $routeParams;
-
 		var views=[],data_views = [],line_views = [],islands_data;
 		var each_point_element = [[1,2,2,1,2],[1,2,2,1,2],[1,2,1,2,1,2,1,2],[2,1,0,2,1,2,1,2,1],[2,2,3,2,1,2,3]];
 		var each_island_skill = [[0,7],[8,15],[16,27],[28,39],[40,54]];
@@ -165,7 +163,7 @@
 					k++;
 				}
 			}
-			
+			console.log(data_points_array);
 			for(var i = 0; i< data_points_array.length ; i++) {
 			if (data_points_array[i].indexOf(0) >= 0) {
 				data_points_skill_types.push(-1);
@@ -177,7 +175,7 @@
 		}
 			return data_points_skill_types;
 		}
-
+		get_points_skill_types(each_point_element[3], each_island_skill[3]);
 		$scope.check_point_red = 0;
 		function get_points_lines(get_points_skill_types, index_line){
 			var position_red = get_points_skill_types.indexOf(0);

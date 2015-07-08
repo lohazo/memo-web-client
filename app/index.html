@@ -55,7 +55,6 @@
   <header ng-if="!auth.loggedIn && (currentPath.indexOf('/forum') < 0)" class="fixed contain-to-grid" landing-header></header>
   <header ng-if="auth.loggedIn || (currentPath.indexOf('/forum') >= 0)" class="fixed contain-to-grid" app-header></header>
   <div ng-view></div>
-  <footer ng-if="auth.loggedIn" app-footer></footer>
 
   <script src="vendors/jquery/dist/jquery.min.js"></script>
   <script src="vendors/angular/angular.min.js"></script>

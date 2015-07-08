@@ -1,38 +1,67 @@
-<div class="new-main new-home-page">
-  <div class="container">
-    <div class="head">
-      <div class="head-left">
-        <img src="assets/img/new/en-vi-course-icon.png" alt="" class="course-icon">
-        <span class="course-title">Kĩ năng Tiếng Anh</span>
-        <a href="/course" title="" class="course-option">Đổi khóa học</a>
+<div class="new-home-page">
+  <div class="container ">
+    <div class="content home-main">
+      <div class="head">
+        <ul class="small-block-grid-5">
+          <li style="width:40%">
+            <div class="head-left">
+              <img src="assets/img/new/en-vi-course-icon.png" alt="">
+              <h3>Kỹ năng Tiếng Anh</h3>
+              <a href="/course">Đổi khóa học</a>
+            </div>
+          </li>
+          <li></li>
+          <li></li>
+          <li class="head-left-btn">
+            <div class="head-right">
+              <a class="button expand radius" href="practice">Củng cố kỹ năng</a>
+            </div>
+          </li>
+        </ul>
       </div>
-      <div class="head-right">
-        <a href="/practice" title="" class="small radius button strengthen-button">Củng cố kĩ năng</a>
+      <div class="main-island">
+        <ul class="small-block-grid-5 list-island">
+          <li ng-repeat="island in islands track by $index">
+            <div class="island_unit" 
+              ng-if="island.finished_lesson==island.lessons_length ? (att_island='1'):(island.finished_lesson>0 ? att_island='0' : att_island='-1')">
+              <div class="head_island">
+                <h4>{{island.title}}</h4>
+                <img ng-if = "att_island=='1'"
+                 src="assets/img/new/finished-lesson-icon.png" alt="">
+              </div>
+              <!-- xu ly sau khi linh gui anh -->
+              <img ng-if="att_island=='-1' ? i='1':i='0'" src="{{island.icon_url[i]}}" alt="">
+              <div ng-if="att_island=='1' ? (color_str='#ffbb33'):(color_str='#33b5e5')"
+                class="progress radius streng-island" style="border:none;">
+                <span class="meter" style="width:{{island.finished_lesson * 100 / island.lessons_length}}%; background:{{color_str}}"></span>
+              </div>
+              <p>{{island.finished_lesson}}/{{island.lessons_length}} Kỹ năng</p>
+              <div class="island_unit_btn" 
+              ng-if="att_island=='1' ? (color_btn = '#ffbb33'): (island.unlocked==true ? color_btn='#99cc00' : color_btn='#d1d5d8')">
+                <a style="background:{{color_btn}}" class= "button expand radius" href="island/{{$index+1}}"
+                ng-if="att_island=='1' ? text = 'Củng cố từ vựng yếu' : text='Vào học'">{{text}}</a>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="content">
-      <ul class="islands">
-        <li class="island" ng-repeat="island in islands track by $index">
-          <div class="island-title">
-            <span>{{island.title}}</span>
-            <img src="assets/img/new/finished-lesson-icon.png" alt="" ng-if="island.is_unlock">
-          </div>
-          <div class="island-icon">
-            <img src="{{island.icon_url}}" alt="">
-          </div>
-          <div class="island-progress-bar">
-            <progressbar max="island.lessons_length" class="progress" value="island.finished_lesson">
-              <span class="meter" style="width: 55%"></span>
-            </progressbar>
-          </div>
-          <div class="island-status">
-            {{island.finished_lesson}}/{{island.lessons_length}} Kỹ năng
-          </div>
-          <div >
-            <a href="" title="" class="small radius button island-button" ng-if="island.finished_lesson == island.lessons_length">Củng cố từ vựng yếu</a>
-            <a href="/island/{{$index + 1}}" title="" class="small radius button island-button" ng-if="!(island.finished_lesson == 0) && island.finished_lesson < island.lessons_length">Vào học</a>
-            <a href="" title="" class="small radius button island-button disabled" ng-if="island.finished_lesson == 0">Vào học</a>
-          </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="container footer-home-page">
+    <div class="content footer-home-page-content">
+      <ul class="small-block-grid-5 footer-home-page-list-item">
+        <li>
+          <a href="plaza/" class="button expand radius"><img src="assets/img/footer-plaza.png" alt="">Memo Plaza</a>
+        </li>
+        <li>
+          <a href="" ng-click="popup_test()" class="button expand radius"><img src="assets/img/footer-rank.png" alt="">Bảng xếp hạng</a>
+        </li>
+        <li>
+          <a href="#" class="button expand radius"><img src="assets/img/footer-report.png" alt="">Báo lỗi, góp ý</a>
+        </li>
+        <li class="share-fb">
+          <a href="#" class="button expand radius share ng-isolate-scope" tracking-data="{&quot;memoEnabled&quot;:&quot;true&quot;,&quot;eventName&quot;:&quot;viral campaign share profile&quot;}" facebook-share-button="" share-type="referral-code" share-data="a8024"><img src="assets/img/footer-share.png" alt="">Chia sẻ</a>
         </li>
       </ul>
     </div>

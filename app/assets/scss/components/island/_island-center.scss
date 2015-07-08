@@ -34,10 +34,14 @@
 				}
 			}
 			&>.svg_complete{
-				&>img{
-					position:absolute; left:50%; margin-left:-60px; margin-top:22px;
-				}
+				text-align:center;
 				&>a{
+					&>img{
+						position: absolute;
+						left: 50%;
+						margin-left: -60px;
+						margin-top: 15px;
+					}
 					&>div{
 						color:black;font-size:23px;font-weight:bold;position:relative;
 					}
