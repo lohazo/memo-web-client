@@ -142,25 +142,26 @@
 			for (var i = 0; i < each_point_element.length; i++){
 				data_points_array[i] = [];
 				if (each_point_element[i]==0) {
-					if (data_points_array[i-1]==2) {
+					if(data_points_array[i-1]==2){
 						data_points_array[i].push(2);
 					}
 					else{
 						data_points_array[i].push(0);
 					}
-					k++;
 				}
-				for(var j = 0 ; j < each_point_element[i]; j++){
-					if($scope.skills[k].lessons.length == $scope.skills[k].finished_lesson){
-						data_points_array[i].push(2);
+				else{
+					for(var j = 0 ; j < each_point_element[i]; j++){
+						if($scope.skills[k].lessons.length == $scope.skills[k].finished_lesson){
+							data_points_array[i].push(2);
+						}
+						else if($scope.skills[k].unlocked){
+							data_points_array[i].push(1);
+						}
+						else{
+							data_points_array[i].push(0);
+						}
+						k++;
 					}
-					else if($scope.skills[k].unlocked){
-						data_points_array[i].push(1);
-					}
-					else{
-						data_points_array[i].push(0);
-					}
-					k++;
 				}
 			}
 			for(var i = 0; i< data_points_array.length ; i++) {
@@ -174,24 +175,26 @@
 		}
 			return data_points_skill_types;
 		}
-		get_points_skill_types(each_point_element[3], each_island_skill[3]);
-		$scope.check_point_red = 0;
+		$scope.check_point_red = 4;
 		function get_points_lines(get_points_skill_types, index_line){
 			var position_red = get_points_skill_types.indexOf(0);
-			var grey_lines = points_line_island.points[index_line];
-			var position_x = points_line_island.position_x[index_line][position_red];
-			var position_y = points_line_island.position_y[index_line][position_red];
-			var point_break = position_x*90+','+position_y*90;
-			if (position_red >= 0) {
-				$scope.check_point_red = index_line;
-			return points_line_island.points[index_line].substring(grey_lines.lastIndexOf(point_break), grey_lines.length);
+			var complete_lines = points_line_island.points[index_line];
+			if (position_red>=0) {
+				var position_x = points_line_island.position_x[index_line][position_red];
+				var position_y = points_line_island.position_y[index_line][position_red];
+				var point_break = position_x*90+','+position_y*90;
+				var position_break = complete_lines.indexOf(point_break);
+				$scope.check_point_red=index_line;
+				return complete_lines.substring(position_break);
 			}
-			else if(index_line>$scope.check_point_red){
-				return grey_lines;
+			else if(index_line<$scope.check_point_red){
+				return '';
 			}
 			else{
-				return  '';
+				return complete_lines;
 			}
+			
+			
 		}
 		
 	//end function conver du lieu
