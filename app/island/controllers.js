@@ -163,7 +163,6 @@
 					k++;
 				}
 			}
-			console.log(data_points_array);
 			for(var i = 0; i< data_points_array.length ; i++) {
 			if (data_points_array[i].indexOf(0) >= 0) {
 				data_points_skill_types.push(-1);
