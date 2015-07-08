@@ -10,6 +10,9 @@
     $scope.trackingBannerNative = function () {
       MemoTracker.track('skill tree plaza ad click');
     };
+    $scope.trackingUdemy = function () {
+      MemoTracker.track('skill tree udemy af click');
+    };
 
     $scope.sharedSettings = {
       functionaly: {
