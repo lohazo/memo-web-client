@@ -11,6 +11,9 @@
       MemoTracker.track('skill tree plaza ad click');
       $location.url('/plaza');
     };
+    $scope.trackingUdemy = function () {
+      MemoTracker.track('skill tree udemy af click');
+    };
 
     $scope.sharedSettings = {
       functionaly: {

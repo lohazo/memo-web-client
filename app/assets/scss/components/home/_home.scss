@@ -64,6 +64,20 @@
       }
     }
     .main-right {
+      .udemy-banner{
+        margin-bottom: 20px;
+        position: relative;
+        &>a{
+          width: 160px;
+          background: #8d1c1c;
+          padding: 0;
+          line-height: 40px;
+          position: absolute;
+          bottom: -3px;
+          left: 50%;
+          margin-left: -80px;
+        }
+      }
       .container {
         .facebook-search, .memo-search, .email-invitation {
           height: 40px;
