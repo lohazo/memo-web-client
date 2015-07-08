@@ -1,4 +1,4 @@
-(function (angular) {
+(function (window, angular) {
   'use strict';
 
   function LoginFactory($http, $q, $localStorage, API, $location) {
@@ -9,7 +9,7 @@
 
     Service.register = function (data) {
       var deferred = $q.defer();
-      
+
       if (!Service.loginProcessing) {
         Service.loginProcessing = true;
 
@@ -35,7 +35,8 @@
       if (!Service.loginProcessing) {
         Service.loginProcessing = true;
 
-        $http.post(API + '/users/login?platform=web&localize=' + localize + '&access_token=' + access_token + '&referral_code=' + referral_code, data)
+        $http.post(API + '/users/login?platform=web&localize=' + localize + '&access_token=' + access_token +
+            '&referral_code=' + referral_code, data)
           .then(function (response) {
             deferred.resolve(response);
             Service.loginProcessing = false;
@@ -80,8 +81,7 @@
   }
 
   function AuthService($q, $rootScope, $location, $cookies, $localStorage, Facebook, GooglePlus, EcoTracker,
-    MemoTracker,
-    LoginService, ReferralService) {
+    MemoTracker, LoginService, ReferralService) {
     var Service = {};
 
     Service.checkCode = function (data) {
@@ -189,6 +189,7 @@
       var hostElements = $location.host().split('.');
       var domain = hostElements.shift().match(/^memo/g) ? $location.host() : hostElements.join('.');
       LoginService.logout().then(function () {
+        window.onbeforeunload = true;
         $localStorage.$reset();
         $localStorage.displayTour = null;
         $localStorage.auth = null;
@@ -231,7 +232,6 @@
   angular.module('login')
     .factory('LoginService', ['$http', '$q', '$localStorage', 'API', '$location', LoginFactory])
     .factory('AuthService', ['$q', '$rootScope', '$location', '$cookies', '$localStorage', 'Facebook', 'GooglePlus',
-      'EcoTracking',
-      'MemoTracking', 'LoginService', 'ReferralService', AuthService
+      'EcoTracking', 'MemoTracking', 'LoginService', 'ReferralService', AuthService
     ]);
-}(window.angular));
+}(window, window.angular));

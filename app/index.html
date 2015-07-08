@@ -32,6 +32,17 @@
   <link rel="stylesheet" href="vendors/html5-boilerplate/css/main.css">
   <link rel="stylesheet" href="vendors/angular-loading-bar/src/loading-bar.css">
   <link rel="stylesheet" href="app.css"/>
+  <style>
+    .e_img_banner {
+      z-index: 99999;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      width: 99.8%;
+      background: #810C15 none repeat scroll 0% 0%;
+    }
+  </style>
   <script src="vendors/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   <script>
     (function() {var _fbq = window._fbq || (window._fbq = []);if (!_fbq.loaded) {var fbds = document.createElement('script');fbds.async = true;fbds.src = '//connect.facebook.net/en_US/fbds.js';var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(fbds, s);_fbq.loaded = true;}_fbq.push(['addPixelId', '903514436381563']);})();
@@ -51,6 +62,7 @@
   '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-N6X84R');</script>
   <!-- End Google Tag Manager -->
+  <img class="e_img_banner" style="display:none" src="assets/img/hop-tac-vs-topica.png">
 
   <header ng-if="!auth.loggedIn && (currentPath.indexOf('/forum') < 0)" class="fixed contain-to-grid" landing-header></header>
   <header ng-if="auth.loggedIn || (currentPath.indexOf('/forum') >= 0)" class="fixed contain-to-grid" app-header></header>
@@ -58,6 +70,37 @@
   <footer app-footer></footer>
 
   <script src="vendors/jquery/dist/jquery.min.js"></script>
+  <script>
+    (function (window, document, $, undefined) {
+      'use strict';
+      /*jslint browser:true */
+      /*jslint regexp:true */
+      /*jslint camelcase:false */
+      /*jshint unused:false */
+      /*jshint undef:false */
+      var localStorage = window.localStorage;
+      var confirm;
+      confirm = true;
+      if (!window.onbeforeunload) {
+        window.onbeforeunload = function (e) {
+          var auth = localStorage.getItem('ngStorage-auth');
+          var authObj = (auth && auth.length > 0) ? JSON.parse(auth) : false;
+
+          if (confirm && authObj && !authObj.loggedIn) {
+            $('.e_img_banner').show();
+            setTimeout(function () {
+              location.href =
+                'http://kyna.vn/nhom-khoa-hoc/bo-5-ky-nang-giao-tiep-cho-nguoi-di-lam/105008?utm_source=memo_kyna&utm_medium=banner&utm_campaign=landing_page_1';
+            }, 500);
+            confirm = false;
+            var string =
+              'Khám phá ngay BỘ 5 KỸ NĂNG GIAO TIẾP giúp bạn tự tin tỏa sáng của Kyna.vn. HÃY Ở LẠI để khám khá và nhận tư vấn miễn phí!';
+            return string;
+          }
+        };
+      }
+    })(window, document, jQuery);
+  </script>
   <script src="vendors/angular/angular.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0-rc.0/angular-cookies.min.js"></script>
   <script src="vendors/angular-animate/angular-animate.min.js"></script>
