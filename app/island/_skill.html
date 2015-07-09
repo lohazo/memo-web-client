@@ -37,7 +37,7 @@
 		</div>
 	</div>
 	<!-- da giac 10 canh complete -->
-	<div style = "" class="svg_complete">
+	<!-- <div style = "" class="svg_complete">
 		<a href="checkpoint/{{islandBuilder.skills.data_view[param.id-1].check_point}}" style="position:relative">
 			<img src="assets/img/skill_complete.png" width="100;" style="position:absolute;">
 			<svg width="172" height="168">
@@ -48,6 +48,18 @@
 			</svg>
 			<div>Bài kiểm tra</div>
 		</a>
+	</div> -->
+	<div class="checkpoint"
+		ng-if = "islandBuilder.line[param.id-1].points_skill_type[islandBuilder.line[param.id-1].points_skill_type.length-1]==1 ? color_complete='#999999' : color_complete='#ffbb33'">
+		<div
+			ng-if="color_complete=='#999999' ? (text_complete = 'Bạn đã vượt qua checkpoint này') : text_complete = 'Kiểm tra rút ngắn kĩ năng'">
+			<a ng-if="param.id!=5 ? ((color_complete=='#999999'||islandBuilder.skills.data_view[param.id-1].unlocked[0]==false) ? href_checkpoint = '#' : href_checkpoint='checkpoint/'+islandBuilder.skills.data_view[param.id-1].check_point) : false"
+				class="button expand radius" style="background:{{color_complete}}" href="{{href_checkpoint}}">{{text_complete}}
+			</a>
+			<div ng-if="param.id==5" align="center">
+				<img src="assets/img/sucess.png">
+			</div>
+		</div>
 	</div>
 </div>
 <!-- line -->

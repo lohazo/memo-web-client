@@ -35,17 +35,17 @@
 					}
 				}
 			}
-			&>.svg_complete{
-				text-align:center;
-				&>a{
-					&>img{
-						position: absolute;
-						left: 50%;
-						margin-left: -60px;
-						margin-top: 15px;
+			&>.checkpoint{
+				&>div{
+					width:380px;margin:0 auto;
+					&>a{
+						margin:0;font-family:'Roboto';font-weight:bold; font-size:24px;height:80px;line-height:45px;
 					}
 					&>div{
-						color:black;font-size:23px;font-weight:bold;position:relative;font-weight:500;
+						margin-top:-20px;
+						&>img{
+							margin-left:26px;
+						}
 					}
 				}
 			}
