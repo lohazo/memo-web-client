@@ -6,16 +6,23 @@
 		color:#333333;
 		font-size:24px;
 		font-family:'roboto';
+		font-weight: 500;
 	}
 	&>.change_island{
 		border:1px solid #810c15;
 		box-shadow:0 0 5px #888888;
 		margin-bottom: 10px;
+		border-radius: 3px;
+		&>div>svg{
+			border-radius: 3px;
+		}
 		&>h4{
+			height: 36px;
 			background:#810c15;
 			margin:0;
 			&>a{
 			font-size:16px;
+			font-weight: 500;
 			color:white;
 			text-transform:uppercase;
 			font-family: 'roboto';

@@ -49,35 +49,35 @@
 
 
       $scope.islands = [{
-        title: 'Đảo Kiến số 1',
+        title: 'Tổ Kiến số 1',
         finished_lesson: get_skill_finish_each_island(0),
         lessons_length: 8,
         strength_gap: 4,
         unlocked: get_skill_unlock_each_island(0),
         icon_url: ['assets/img/island/island-1.png','assets/img/island/island-1-disable.png']
       },{
-        title: 'Đảo Kiến số 2',
+        title: 'Tổ Kiến số 2',
         finished_lesson: get_skill_finish_each_island(1),
         lessons_length: 8,
         strength_gap: 4,
         unlocked: get_skill_unlock_each_island(1),
         icon_url: ['assets/img/island/island-2.png','assets/img/island/island-2-disable.png']
       },{
-        title: 'Đảo Kiến số 3',
+        title: 'Tổ Kiến số 3',
         finished_lesson: get_skill_finish_each_island(2),
         lessons_length: 12,
         strength_gap: 0,
         unlocked: get_skill_unlock_each_island(2),
         icon_url: ['assets/img/island/island-3.png','assets/img/island/island-3-disable.png']
       },{
-        title: 'Đảo Kiến số 4',
+        title: 'Tổ Kiến số 4',
         finished_lesson: get_skill_finish_each_island(3),
         lessons_length: 12,
         strength_gap: 0,
         unlocked: get_skill_unlock_each_island(3),
         icon_url: ['assets/img/island/island-4.png','assets/img/island/island-4-disable.png']
       },{
-        title: 'Đảo Kiến số 5',
+        title: 'Tổ Kiến số 5',
         finished_lesson: get_skill_finish_each_island(4),
         lessons_length: 15,
         strength_gap: 0,

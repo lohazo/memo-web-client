@@ -35,10 +35,10 @@
                 class="progress radius streng-island" style="border:none;">
                 <span class="meter" style="width:{{island.finished_lesson * 100 / island.lessons_length}}%; background:{{color_str}}"></span>
               </div>
-              <p>{{island.finished_lesson}}/{{island.lessons_length}} Kỹ năng</p>
-              <div class="island_unit_btn" 
-              ng-if="att_island=='1' ? (color_btn = '#ffbb33'): (island.unlocked==true ? color_btn='#99cc00' : color_btn='#d1d5d8')">
-                <a style="background:{{color_btn}}" class= "button expand radius" href="island/{{$index+1}}"
+              <p ng-if="att_island=='1' ? (color_btn = '#ffbb33'): (island.unlocked==true ? color_btn='#99cc00' : color_btn='#d1d5d8')">{{island.finished_lesson}}/{{island.lessons_length}} Kỹ năng</p>
+              <div ng-if ="color_btn=='#d1d5d8' ? href_island='#' : href_island='island/'+($index+1)" class="island_unit_btn">
+                <a 
+                style="background:{{color_btn}}" class= "button expand radius" href="{{href_island}}"
                 ng-if="att_island=='1' ? text = 'Củng cố từ vựng yếu' : text='Vào học'">{{text}}</a>
               </div>
             </div>
