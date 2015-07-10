@@ -29,7 +29,6 @@
                 <img ng-if = "att_island=='1'"
                  src="assets/img/new/finished-lesson-icon.png" alt="">
               </div>
-              <!-- xu ly sau khi linh gui anh -->
               <img ng-if="att_island=='-1' ? i='1':i='0'" src="{{island.icon_url[i]}}" alt="">
               <div ng-if="att_island=='1' ? (color_str='#ffbb33'):(color_str='#33b5e5')"
                 class="progress radius streng-island" style="border:none;">
@@ -55,7 +54,7 @@
           <a href="plaza/" class="button small radius"><img src="assets/img/footer-plaza.png" alt="">Memo Plaza</a>
         </li>
         <li>
-          <a href="" ng-click="popup_test()" class="button small radius"><img src="assets/img/footer-rank.png" alt="">Bảng xếp hạng</a>
+          <a href="#" class="button small radius"><img src="assets/img/footer-rank.png" alt="">Bảng xếp hạng</a>
         </li>
         <li>
           <a href="#" class="button small radius"><img src="assets/img/footer-report.png" alt="">Báo lỗi, góp ý</a>
