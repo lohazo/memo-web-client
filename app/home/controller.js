@@ -236,10 +236,10 @@
         $scope.sharedSettings = AppSetting.shared_settings;
         $rootScope.$broadcast('event-sharedSettingsLoaded');
       })
-      .then(Message.list)
       .then(getProfileDetail)
-      .then(getStatus)
       .then(getIsland)
+      .then(Message.list)
+      .then(getStatus)
       .then(TreeBuilder.getIconSets)
       .then(buildTree)
       .then(takeATour)
