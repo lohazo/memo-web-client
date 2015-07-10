@@ -56,8 +56,8 @@
         <li>
           <a href="#" class="button small radius"><img src="assets/img/footer-rank.png" alt="">Bảng xếp hạng</a>
         </li>
-        <li>
-          <a href="#" class="button small radius"><img src="assets/img/footer-report.png" alt="">Báo lỗi, góp ý</a>
+        <li ng-controller="ReportCtrl">
+          <a href="#" class="button small radius" ng-click="reportPopup()"><img src="assets/img/footer-report.png" alt="">Báo lỗi, góp ý</a>
         </li>
         <li class="share-fb">
           <a href="#" class="button small radius share ng-isolate-scope" tracking-data="{&quot;memoEnabled&quot;:&quot;true&quot;,&quot;eventName&quot;:&quot;viral campaign share profile&quot;}" facebook-share-button="" share-type="referral-code" share-data="a8024"><img src="assets/img/footer-share.png" alt="">Chia sẻ</a>
