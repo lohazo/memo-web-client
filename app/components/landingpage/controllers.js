@@ -115,12 +115,14 @@ angular.module('landingpage.controllers', [])
       $scope.FbLogin = function () {
         AuthService.FbLogin()
           .then(function (response) {
+            response.referral_code = $route.current.params.ref_code;
             AuthService.login(response)
           });
       };
 
       $scope.GLogin = function () {
-        AuthService.GLogin();
+        var data = $route.current.params.ref_code;
+        AuthService.GLogin(data);
       };
 
       function closeModal(data) {
