@@ -30,7 +30,7 @@
     $scope.clickPopup = function (data) {
       data.id = popups._id;
 
-      MemoTracker.track(data._id);
+      MemoTracker.track('popup_click ' + '' + data._id);
       PopupServices.openPopup(data);
       if (data.type == 'exit' || data.type == 'nevershow') {
         $scope.cancel();

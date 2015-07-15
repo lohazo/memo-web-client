@@ -1,0 +1,77 @@
+<div class="skill_builder">
+	<div class="skill" align="center"
+	ng-if = "(islandBuilder.skills.data_view[param.id-1].lesson_finish[$index] == islandBuilder.skills.data_view[param.id-1].lesson[$index] && islandBuilder.skills.data_view[param.id-1].weakest_word[$index]==4) ? (color_skill = '#ffba33') : (islandBuilder.skills.data_view[param.id-1].unlocked[$index] ? (color_skill=islandBuilder.skills.data_view[param.id-1].color_skill[$index]) : (color_skill='#dddddd'))"
+	ng-repeat="view in islandBuilder.skills.view[param.id-1].width_positions track by $index" class = "skill_svg" 
+	style = "margin-left : {{view*90}}px;
+	margin-bottom : {{islandBuilder.skills.view[param.id-1].height_positions[$index].height*90}}px;
+	display : {{islandBuilder.skills.view[param.id-1].height_positions[$index].row}};">
+		<a ng-if="color_skill == '#dddddd' ? href_skill = '#' : href_skill = 'skill/'+islandBuilder.skills.data_view[param.id-1].id[$index]" 
+		href="{{href_skill}}">
+			<div class="icon_skill" ng-if = "color_skill=='#dddddd' ? icon_url = 'assets/img/skills-pack-locked-70.png':icon_url='assets/img/skills-pack-unlocked-70.png'"
+		 	style="background:url({{icon_url}}) -{{conver_surplus_eleven(get_number_skill_before()+$index)*70}}px -{{conver_int_eleven(get_number_skill_before()+$index)*70}}px;">
+			</div>
+			<!-- da giac 10 canh va weakest word -->
+			<svg height = "122" width = "122" version = "1.1" xmlns = "http://www.w3.org/2000/svg" xmlns:xlink = "http://www.w3.org/1999/xlink" 
+			ng-if = "islandBuilder.skills.data_view[param.id-1].lesson[$index]==islandBuilder.skills.data_view[param.id-1].lesson_finish[$index] ? lesson_f = true : lesson_f = 'false'">
+			<!-- da giac 10 canh -->
+				<polygon 
+				ng-init = "number_ww = islandBuilder.skills.data_view[param.id-1].weakest_word[$index]"
+				points = "{{islandBuilder.skills.view[param.id-1].points}}"
+					style = "fill:{{color_skill}};fill-rule:nonzero;" />
+			<!-- weakest word -->
+				<polygon 
+				ng-repeat = "item in islandBuilder.skills.view[param.id-1].weakest_word_polygon track by $index"
+				ng-if = "lesson_f == 'false' ? false : ($index < number_ww ? color_ww = 'white' : color_ww = 'rgba(255,255,255,0.3)')"
+				style = "fill:{{color_ww}};fill-rule:nonzero;"
+				points = "{{item}}"/>
+			</svg>
+		</a>
+		<!-- section(slug) -->
+		<div class = "skill-section">
+			<h4>
+				<a href="{{href_skill}}">
+					{{islandBuilder.skills.data_view[param.id-1].section[$index]}}
+				</a>
+			</h4>
+			<p>{{islandBuilder.skills.data_view[param.id-1].lesson_finish[$index]}}/{{islandBuilder.skills.data_view[param.id-1].lesson[$index]}}</p>
+		</div>
+	</div>
+	<!-- da giac 10 canh complete -->
+	<!-- <div style = "" class="svg_complete">
+		<a href="checkpoint/{{islandBuilder.skills.data_view[param.id-1].check_point}}" style="position:relative">
+			<img src="assets/img/skill_complete.png" width="100;" style="position:absolute;">
+			<svg width="172" height="168">
+				<polygon 
+					ng-if = "islandBuilder.skills.data_view[param.id-1].lesson_finish[islandBuilder.skills.data_view[param.id-1].lesson.length-1]==islandBuilder.skills.data_view[param.id-1].lesson[islandBuilder.skills.data_view[param.id-1].lesson.length-1] ? (color_complete='#ffba33') : (color_complete='#679e42')"
+					points = "{{islandBuilder.skills.view[param.id-1].points_complete}}"
+					style = "fill:{{color_complete}};fill-rule:nonzero;" />
+			</svg>
+			<div>Bài kiểm tra</div>
+		</a>
+	</div> -->
+	<div class="checkpoint"
+		ng-if = "islandBuilder.line[param.id-1].points_skill_type[islandBuilder.line[param.id-1].points_skill_type.length-1]==1 ? color_complete='#999999' : color_complete='#ffbb33'">
+		<div
+			ng-if="color_complete=='#999999' ? (text_complete = 'Bạn đã vượt qua checkpoint này') : text_complete = 'Kiểm tra rút ngắn kĩ năng'">
+			<a ng-if="param.id!=5 ? ((color_complete=='#999999'||islandBuilder.skills.data_view[param.id-1].unlocked[0]==false) ? href_checkpoint = '#' : href_checkpoint='checkpoint/'+islandBuilder.skills.data_view[param.id-1].check_point) : false"
+				class="button expand radius" style="background:{{color_complete}}" href="{{href_checkpoint}}">{{text_complete}}
+			</a>
+			<div ng-if="param.id==5" align="center">
+				<img src="assets/img/sucess.png">
+			</div>
+		</div>
+	</div>
+</div>
+<!-- line -->
+<div class="svg_line" ng-init= "color_point = '#999999'">
+	<svg width = "540" height = "{{islandBuilder.line[param.id-1].height}}">
+		<polyline 
+		points="{{islandBuilder.line[param.id-1].points_line_complete}}" style="fill:rgba(255,255,255,0);stroke:#ffba33;stroke-width:6" />
+		<polyline 
+		points="{{islandBuilder.line[param.id-1].points_line}}" style="fill:rgba(255,255,255,0);stroke:#999999;stroke-width:6" />
+		<circle ng-repeat ="circle in islandBuilder.line[param.id-1].points_skill_x track by $index" 
+		ng-if = "islandBuilder.line[param.id-1].points_skill_type[$index]==1 ? color_point = '#ffba33' : (islandBuilder.line[param.id-1].points_skill_type[$index]==0 ? color_point='#810c15' : color_point='#999999')"
+		cx="{{circle*90}}" cy="{{islandBuilder.line[param.id-1].points_skill_y[$index]*90}}" r="10" stroke="white" stroke-width="3" fill="{{color_point}}"/>
+		<circle ng-repeat ="circle in islandBuilder.line[param.id-1].points_skill_x track by $index" cx="{{circle*90}}" cy="{{islandBuilder.line[param.id-1].points_skill_y[$index]*90}}" r="12" stroke="#d1d1d1" stroke-width="2" fill="rgba(0,0,0,0)"/>
+	</svg>
+</div>

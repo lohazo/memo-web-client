@@ -4,7 +4,88 @@
   function HomeCtrl($scope) {}
 
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
-    Message, ReferralService, Leaderboard, PopupServices, $modal, BannerServices) {
+    Message, ReferralService, Leaderboard, PopupServices, $modal, BannerServices, Skill, $localStorage) {
+    function getIsland() {
+      $scope.skill_content = Skill.skills();
+
+      var total_skill_island = [8,8,12,12,15];
+      $scope.max = 12;
+      $scope.dynamic = 6;
+      $scope.double = function () {
+        $scope.dynamic = $scope.dynamic * 2;
+      }
+      function get_skill_finish_each_island(index_number){
+        var data_skill_finish_each_island = [], total_skill_finish=0;
+        for(var i = 0 ; i < $scope.skill_content.length; i++){
+          if($scope.skill_content[i].finished_lesson==$scope.skill_content[i].lessons.length){
+            total_skill_finish++;
+          }
+        }
+        for(var i = 0 ; i<total_skill_island.length; i++){
+          if(total_skill_finish>=total_skill_island[i]){
+            data_skill_finish_each_island.push(total_skill_island[i]);
+            total_skill_finish-=total_skill_island[i];
+          }
+          else{
+            data_skill_finish_each_island.push(total_skill_finish);
+            total_skill_finish=0;
+          }
+        }
+        return data_skill_finish_each_island[index_number];
+      }
+
+      function get_skill_unlock_each_island(index_number){
+        var data_skill_unlock_each_island = [];
+        for(var i = 0 ; i < total_skill_island.length; i++){
+          if (get_skill_finish_each_island(i)>0 || get_skill_finish_each_island(i-1)==total_skill_island[i-1]) {
+            data_skill_unlock_each_island.push(true);
+          }
+          else{
+            data_skill_unlock_each_island.push(false);
+          }
+        }
+        return data_skill_unlock_each_island[index_number];
+      }
+
+
+      $scope.islands = [{
+        title: 'Tổ Kiến số 1',
+        finished_lesson: get_skill_finish_each_island(0),
+        lessons_length: 8,
+        strength_gap: 4,
+        unlocked: get_skill_unlock_each_island(0),
+        icon_url: ['assets/img/island/island-1.png','assets/img/island/island-1-disable.png']
+      },{
+        title: 'Tổ Kiến số 2',
+        finished_lesson: get_skill_finish_each_island(1),
+        lessons_length: 8,
+        strength_gap: 4,
+        unlocked: get_skill_unlock_each_island(1),
+        icon_url: ['assets/img/island/island-2.png','assets/img/island/island-2-disable.png']
+      },{
+        title: 'Tổ Kiến số 3',
+        finished_lesson: get_skill_finish_each_island(2),
+        lessons_length: 12,
+        strength_gap: 0,
+        unlocked: get_skill_unlock_each_island(2),
+        icon_url: ['assets/img/island/island-3.png','assets/img/island/island-3-disable.png']
+      },{
+        title: 'Tổ Kiến số 4',
+        finished_lesson: get_skill_finish_each_island(3),
+        lessons_length: 12,
+        strength_gap: 0,
+        unlocked: get_skill_unlock_each_island(3),
+        icon_url: ['assets/img/island/island-4.png','assets/img/island/island-4-disable.png']
+      },{
+        title: 'Tổ Kiến số 5',
+        finished_lesson: get_skill_finish_each_island(4),
+        lessons_length: 15,
+        strength_gap: 0,
+        unlocked:get_skill_unlock_each_island(4),
+        icon_url: ['assets/img/island/island-5.png','assets/img/island/island-5-disable.png']
+      }]
+    }
+    
     $scope.leaderboardData = [];
  
     $scope.trackingBannerNative = function () {
@@ -36,6 +117,12 @@
         });
       };
     };
+
+    $scope.popup_test = function(){
+      var modalInstance = $modal.open({
+        templateUrl: 'popup/_index.html',
+      });
+    }
 
     function getPopup() {
       PopupServices.getPopup().success(function (data) {
@@ -152,8 +239,9 @@
         $scope.sharedSettings = AppSetting.shared_settings;
         $rootScope.$broadcast('event-sharedSettingsLoaded');
       })
-      .then(Message.list)
       .then(getProfileDetail)
+      .then(getIsland)
+      .then(Message.list)
       .then(getStatus)
       .then(TreeBuilder.getIconSets)
       .then(buildTree)
@@ -400,7 +488,7 @@
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$window', '$location', 'Profile', 'TreeBuilder',
-      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal', 'BannerServices',
+      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal', 'BannerServices', 'Skill', '$localStorage',
       HomeMainCtrl
     ])
     .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',

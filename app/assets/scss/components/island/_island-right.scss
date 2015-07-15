@@ -1,0 +1,19 @@
+.islandright{
+	&>.island_plaza{
+		padding: 20px;
+		background: white;
+		margin-bottom: 20px;
+	}
+	&>.island_rank{
+		height: 476px;
+		background: white;
+		&>h3{
+			padding-top: 15px;
+			font-family: 'roboto';
+			font-size: 24px;
+			color: #333333;
+			text-align: center;
+		}
+	}
+
+}

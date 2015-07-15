@@ -12,8 +12,12 @@
       </div>
       <div class="small-12 columns lessons">
         <div class="row">
-          <div class="small-16 columns right grammar-note">
-            &nbsp;
+          <div 
+            ng-if = "skill.order<8 ? island = '1' : (skill.order<16 ? island='2' :(skill.order<28 ? island='3':(skill.order<40?island='4':(island='5'))))"
+            class="small-16 columns right grammar-note" style="height:39px;margin-bottom:10px;padding:0;margin-right:20px; position:relative">
+            
+            <a href="island/{{island}}" style="position:absolute;bottom:0;right:0;height:40px;width:180px;background:#810c15;margin:0;font-weight:bold;font-size:16px; font-family:'Clear Sans';line-height:11px" class="button small radius">Trở lại tổ kiến {{island}}</a>
+            <div>{{island}}</div>
           </div>
           <div class="row {{skill.theme_color === '#99cc00' ? 'green1' : (skill.theme_color === '#ff4444' ? 'red1' : 'blue1')}} skill-{{skill.order + 1}}">
             <div class="{{$index < skill.finished_lesson ? 'past' : ($index == skill.finished_lesson ? 'unlocked' : 'locked')}} lesson text-center" ng-repeat="lesson in skill.lessons track by $index">
