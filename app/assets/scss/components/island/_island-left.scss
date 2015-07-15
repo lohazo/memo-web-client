@@ -1,0 +1,45 @@
+.islandleft{
+	background:white;
+	padding:20px;
+	text-align:center;
+	&>h3{
+		margin-top: 0;
+		margin-bottom: 20px;
+		color:#333333;
+		font-size:24px;
+		font-family:'roboto';
+		font-weight: 500;
+	}
+	&>.change_island{
+		border:1px solid #810c15;
+		box-shadow:0 0 5px #888888;
+		margin-bottom: 10px;
+		border-radius: 3px;
+		&>div>svg{
+			border-radius: 3px;
+		}
+		&>h4{
+			height: 36px;
+			background:#810c15;
+			margin:0;
+			&>a{
+			font-size:16px;
+			font-weight: 500;
+			color:white;
+			text-transform:uppercase;
+			font-family: 'roboto';
+			}
+		}
+		&>.island_skill{
+			display: none;
+			position: relative;
+			&>p{
+				margin-bottom: 10px;
+			}
+		}
+		&>.island_skill.active{
+			display: inherit;
+		}
+	}
+
+}
