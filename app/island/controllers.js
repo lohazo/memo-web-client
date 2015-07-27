@@ -569,8 +569,16 @@
 		}
 	}
 
+	function islandRightCtrl ($scope, BannerServices, MemoTracker){
+		BannerServices.getBanner().success(function (data){
+			$scope.banner = data;
+			MemoTracker.track('test');
+		})
+	}
+
 	angular.module('island.controllers', [])
     .controller('IslandMainCtrol', ['$scope','$route', '$routeParams', '$location', 'Skill', 'Plaza', IslandMainCtrol
-    ]);
+    ])
+    .controller('islandRightCtrl', ['$scope', 'BannerServices', 'MemoTracking', islandRightCtrl]);
 
 }(window.angular));

@@ -28,6 +28,7 @@
 			return {
 				strict:"EA",
 				scope:true,
+				controller:'islandRightCtrl',
 				templateUrl:'island/_island-right.html'
 			}
 		})
