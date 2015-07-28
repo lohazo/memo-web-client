@@ -6,6 +6,9 @@
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
     Message, ReferralService, Leaderboard, PopupServices, $modal, BannerServices, Skill, $localStorage) {
     function getIsland() {
+      $scope.trackingSwapIsland = function () {
+        MemoTracker.track('swap island');
+      };
       $scope.skill_content = Skill.skills();
 
       var total_skill_island = [8,8,12,12,15];

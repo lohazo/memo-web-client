@@ -3,7 +3,7 @@
 	<div class="change_island" ng-repeat="item in islandBuilder.island_data.skill_unlocked_each_island track by $index" 
 	ng-if = "item > 0 ? color_title = '#810c15': color_title = '#dddddd'" style="border:1px solid {{color_title}}">
 		<h4 style="background:{{color_title}}">
-			<a ng-if = "color_title == '#dddddd' ? href_title = '#' : href_title = 'island/'+($index+1)" href="{{href_title}}">Tổ kiến số {{$index+1}}</a>
+			<a ng-if = "color_title == '#dddddd' ? href_title = '#' : href_title = 'island/'+($index+1)" ng-click="trackingSwapIsland()" href="{{href_title}}">Tổ kiến số {{$index+1}}</a>
 		</h4>
 		<div 
 		ng-if="$index+1==param.id ? ac='active' : ac=''"

@@ -43,7 +43,7 @@
               <div ng-if ="color_btn=='#d1d5d8' ? href_island='#' : href_island='island/'+($index+1)" class="island_unit_btn">
                 <a 
                 style="background:{{color_btn}}" class= "button expand radius" href="{{href_island}}"
-                ng-if="att_island=='1' ? text = 'Củng cố từ vựng yếu' : text='Vào học'">{{text}}</a>
+                ng-if="att_island=='1' ? text = 'Củng cố từ vựng yếu' : text='Vào học'" ng-click="trackingSwapIsland()">{{text}}</a>
               </div>
             </div>
           </li>

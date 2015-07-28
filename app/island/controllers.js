@@ -1,10 +1,13 @@
 (function (angular) {
 
 	'use strict';
-	function IslandMainCtrol($scope, $route, $routeParams, $location, Skill, Plaza){
+	function IslandMainCtrol($scope, $route, $routeParams, $location, Skill, Plaza, MemoTracker){
 		$scope.skills = Skill.skills();		
 		$scope.check_weakestWord = 'show';
 		$scope.param = $routeParams;
+		$scope.trackingSwapIsland = function () {
+			MemoTracker.track('swap island');
+		};
 		var views=[],data_views = [],line_views = [],islands_data;
 		var each_point_element = [[1,2,2,1,2],[1,2,2,1,2],[1,2,1,2,1,2,1,2],[2,1,0,2,1,2,1,2,1],[2,2,3,2,1,2,3]];
 		var each_island_skill = [[0,7],[8,15],[16,27],[28,39],[40,54]];
@@ -572,12 +575,11 @@
 	function islandRightCtrl ($scope, BannerServices, MemoTracker){
 		BannerServices.getBanner().success(function (data){
 			$scope.banner = data;
-			MemoTracker.track('test');
 		})
 	}
 
 	angular.module('island.controllers', [])
-    .controller('IslandMainCtrol', ['$scope','$route', '$routeParams', '$location', 'Skill', 'Plaza', IslandMainCtrol
+    .controller('IslandMainCtrol', ['$scope','$route', '$routeParams', '$location', 'Skill', 'Plaza', 'MemoTracking', IslandMainCtrol
     ])
     .controller('islandRightCtrl', ['$scope', 'BannerServices', 'MemoTracking', islandRightCtrl]);
 
