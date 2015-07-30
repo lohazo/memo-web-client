@@ -1,7 +1,8 @@
 (function (angular) {
   'use strict';
 
-  function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting) {
+  function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting, $localStorage) {
+    $scope.user_avatar = $localStorage.auth.profile_detail.url_avatar;
     $scope.sharedSettings = {
       functionaly: {
         should_weakest_word: true,
@@ -9,7 +10,7 @@
         should_jobs: true,
         should_profile: true
       }
-    }
+    };
 
     $scope.$on('event-sharedSettingsLoaded', function () {
       $scope.sharedSettings = AppSetting.sharedSettings;
@@ -45,7 +46,7 @@
   }
 
   angular.module('header', []);
-  angular.module('header').controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'AuthService', '$modal', 'MemoTracking', 'AppSetting',
+  angular.module('header').controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'AuthService', '$modal', 'MemoTracking', 'AppSetting', '$localStorage',
     HeaderCtrl
     ])
     .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
