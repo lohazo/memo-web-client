@@ -28,7 +28,7 @@
       <ul class="right" ng-if="auth.loggedIn">
         <li>
           <a href="/profile">
-            <img style="width: 40px;height: 40px;border-radius: 50%;" src="{{user_avatar}}" />
+            <img style="width: 40px;height: 40px;border-radius: 50%;" src="{{user_avatar || 'assets/img/profile-avatar-big.png'}}" />
           </a>
         </li>
         <li class="has-form notification" notification-dropdown-button></li>

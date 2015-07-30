@@ -8,7 +8,7 @@
     Services.getPopup = function () {
       var authToken = $localStorage.auth.user.auth_token;
       var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
-      var endpoint = 'http://services.memo.edu.vn/v3/api/popup?platform=web&localize=' + localize + '&auth_token=' + authToken ;
+      //var endpoint = 'http://services.memo.edu.vn/v3/api/popup?platform=web&localize=' + localize + '&auth_token=' + authToken ;
 
       return $http.get(endpoint);
     };
@@ -16,7 +16,7 @@
     Services.openPopup = function (data) {
       var authToken = $localStorage.auth.user.auth_token;
       var localize = ["topicamemo.com", "memo.topica.asia"].indexOf($location.host()) > -1 ? 'th' : 'vi';
-      var endpoint = 'http://services.memo.edu.vn/v3/api/popup/open?auth_token=' + authToken + '&platform=web&popup_id=' + data.id + '&popup_type=' + data.type + '&localize=' + localize;
+      //var endpoint = 'http://services.memo.edu.vn/v3/api/popup/open?auth_token=' + authToken + '&platform=web&popup_id=' + data.id + '&popup_type=' + data.type + '&localize=' + localize;
 
       return $http.get(endpoint);
     }

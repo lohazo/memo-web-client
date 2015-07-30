@@ -2,17 +2,25 @@
     <div class="small-8 columns">
         <div class="row">
             <h4>THÀNH TÍCH CÁ NHÂN</h4>
-            <p>NHÓM HUY HIỆU SỐ 1</p>
-            <img src="aaaaa" alt="line"/>
         </div>
-        <div class="row">
-            <a href="#">&lsaquo;</a>
+        <div ng-repeat="badge in badges">
             <div class="row">
-                <img src="badge" alt="badge image"/>
-                <img src=""# alt="new"/>
+                <p>{{badge.title}}</p>
+                <img src="" alt="line"/>
+                <a href="#">&lsaquo;</a>
+                <div ng-repeat="item in badge.items track by $index">
+                    <div class="row">
+                        <div class="small-3 columns">
+                            <img ng-if="$index >= badge.level " src="{{item.lock_image}}" style="width: 40px;height: 40px;border-radius: 50%" alt="badge image"/>
+                            <img ng-if="$index < badge.level " src="{{item.unlock_image}}" style="width: 40px;height: 40px;border-radius: 50%" alt="badge image"/>
+                            <span>{{item.name}}</span>
+                            <img src="" alt="new"/>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">&rsaquo;</a>
             </div>
-            <a href="#">&rsaquo;</a>
         </div>
     </div>
-    <div class="small-4 columns">444444444444444444444444</div>
+    <div class="small-4 columns">new feeds</div>
 </div>
