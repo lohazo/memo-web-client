@@ -10,7 +10,7 @@
             <div ng-repeat="item in badge.items track by $index">
                 <div class="">
                     <div class="small-3 columns badge-item">
-                        <a ng-if="item.is_lock" ng-click="test(item)">
+                        <a ng-if="item.is_lock" ng-click="openBadgeModal(item)">
                             <img src="{{item.lock_image}}" style="width: 100px;height: 100px;" alt="badge image" />
                             <!--<span>{{item.name}}</span>-->
                         </a>

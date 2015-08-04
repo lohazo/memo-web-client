@@ -2,7 +2,7 @@
   'use strict';
 
   function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting, $localStorage) {
-    $scope.user_avatar = $localStorage.auth.profile_detail.url_avatar;
+    // $scope.user_avatar = $localStorage.auth.profile_detail.url_avatar;
     $scope.sharedSettings = {
       functionaly: {
         should_weakest_word: true,
