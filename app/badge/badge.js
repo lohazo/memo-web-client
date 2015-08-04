@@ -2,7 +2,7 @@
     'use strict';
     function badgeConfig ($routeProvider) {
         $routeProvider.when('/badge', {
-            templateUrl:'badge/badge.html',
+            templateUrl:'badge/_badge.html',
             controller: 'badgeCtrl'
         })
     }

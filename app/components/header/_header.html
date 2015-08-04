@@ -14,15 +14,18 @@
         <li class="menu-item" ng-class="{'active': path == '/'}">
           <a href="/" target="_self" translate="BTN_HOME"></a>
         </li>
-        <li class="menu-item" ng-class="{'active': path.indexOf('/jobs') >= 0}" ng-if="sharedSettings.functionaly.should_jobs">
-          <a ng-click="trackingClickJobs()" ng-href="/jobs">{{'BTN_JOB' | translate}}</a>
-        </li>
+        <!--<li class="menu-item" ng-class="{'active': path.indexOf('/jobs') >= 0}" ng-if="sharedSettings.functionaly.should_jobs">-->
+          <!--<a ng-click="trackingClickJobs()" ng-href="/jobs">{{'BTN_JOB' | translate}}</a>-->
+        <!--</li>-->
         <li class="menu-item" ng-class="{'active': path.indexOf('/forum') >= 0}" ng-if="sharedSettings.functionaly.should_forum">
           <a href="/forum" target="_self" translate="BTN_FORUM"></a>
         </li>
         <li class="menu-item" ng-class="{'active': path.indexOf('/weakestword') >= 0}" ng-if="sharedSettings.functionaly.should_weakest_word">
           <a href="/weakestword" target="_self" translate="BTN_WORDS"></a>
-        </li> 
+        </li>
+        <li class="menu-item">
+          <a href="/badge">Thành tích</a>
+        </li>
       </ul>
       <!-- Right Nav Section -->
       <ul class="right" ng-if="auth.loggedIn">

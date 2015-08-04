@@ -1,0 +1,33 @@
+<div class="container  home-page">
+    <div class="small-12 columns container main">
+        <div class=" badge-title">
+            <h4 style="color: #ffffff;">THÀNH TÍCH CÁ NHÂN</h4>
+        </div>
+        <div class="row badge-group" ng-repeat="badge in badges">
+            <p style="margin: 0px">{{badge.title}}</p>
+            <img src="assets/img/badge-line.png" alt="line"/>
+            <!--<a href="#">&lsaquo;</a>-->
+            <div ng-repeat="item in badge.items track by $index">
+                <div class="">
+                    <div class="small-3 columns badge-item">
+                        <a ng-if="item.is_lock" ng-click="test(item)">
+                            <img src="{{item.lock_image}}" style="width: 100px;height: 100px;" alt="badge image" />
+                            <!--<span>{{item.name}}</span>-->
+                        </a>
+                        <div ng-if="!item.is_lock">
+                            <a ng-click="test(item)" >
+                            <img class="new" src="assets/img/badge-new.png" alt="new"/>
+                            <img src="{{item.unlock_image}}" style="width: 100px;height: 100px;" alt="badge image" />
+                            <!--<span>{{item.name}}</span>-->
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<a href="#">&rsaquo;</a>-->
+        </div>
+    </div>
+    <div class="small-4 columns badge-main-right">
+        new feeds
+    </div>
+</div>

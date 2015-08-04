@@ -12,6 +12,24 @@
             return $http.get(endpoint);
         };
 
+        Services.getTotalBadge = function () {
+            var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
+            var userId = $localStorage.auth.user._id;
+
+            var endpoint = API + '/users/' + userId + '/total_new_badge?auth_token=' + authToken + '&platform=web&localize=' + localize;
+
+            return $http.get(endpoint);
+        };
+
+        Services.getHighestOwnedBadges = function () {
+            var authToken = $localStorage.auth.user ? $localStorage.auth.user.auth_token : '';
+            var userId = $localStorage.auth.user._id;
+
+            var endpoint = API + '/users/' + userId + '/highest_owned_badges?auth_token=' + authToken + '&platform=web&localize=' + localize;
+
+            return $http.get(endpoint);
+        };
+
         return Services;
     }
 
