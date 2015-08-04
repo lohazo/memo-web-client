@@ -22,22 +22,22 @@
           </div>
         </div>
         <div class="row badges">
-          <div ng-repeat="badge in badges">
+          <div class="small-4 columns" ng-repeat="badge in badges">
             <a ng-click="openBadgeModal(badge)">
               <img src="{{badge.unlock_image}}" style="width: 100px;height: 100px;" alt="badge image" />
             </a>
           </div>
         </div>
-        <div class="row">
+        <div class="small-8 columns">
           <canvas linechart options="chartOptions" data="expChart" width="220" height="150"></canvas>
         </div>
       </div>
     </div>
   </div>
-  <div class="main-right leaderboard-profile">
-    <div class="container box-list-top" style="margin-bottom: 20px;">
-      <div class="row leaderboard" leaderboard-data="leaderboardData" leaderboard></div>
-    </div>
-    <div google-ads-width="260px" google-ads-height="260px" google-ads-client="ca-pub-6371733042680225" google-ads-slot="2331196993" google-ads></div>
-  </div>
+  <!--<div class="main-right leaderboard-profile">-->
+    <!--<div class="container box-list-top" style="margin-bottom: 20px;">-->
+      <!--<div class="row leaderboard" leaderboard-data="leaderboardData" leaderboard></div>-->
+    <!--</div>-->
+    <!--<div google-ads-width="260px" google-ads-height="260px" google-ads-client="ca-pub-6371733042680225" google-ads-slot="2331196993" google-ads></div>-->
+  <!--</div>-->
 </div>

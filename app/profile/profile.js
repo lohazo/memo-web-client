@@ -96,7 +96,7 @@
             data: $scope.profileDetail.exp_chart.exp
           }]
         };
-        $rootScope.$broadcast('event-profileLoaded', Profile.detail);
+        //$rootScope.$broadcast('event-profileLoaded', Profile.detail);
       });
 
     badgeServices.getHighestOwnedBadges().success(function (data) {
