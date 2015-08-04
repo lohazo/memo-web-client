@@ -80,11 +80,30 @@
     $scope.profileDetail = Profile.detail;
     $scope.leaderboardData = [];
 
+    Profile.getProfileDetail()
+      .then(function () {
+        $scope.profileDetail = Profile.detail;
+        $scope.expChart = {
+          labels: $scope.profileDetail.exp_chart.days,
+          datasets: [{
+            label: "",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "#848484",
+            pointColor: "#810c15",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: $scope.profileDetail.exp_chart.exp
+          }]
+        };
+        $rootScope.$broadcast('event-profileLoaded', Profile.detail);
+      });
+
     badgeServices.getHighestOwnedBadges().success(function (data) {
       $scope.badges = data.owned_badges;
     });
 
-    $scope.test = function (badge) {
+    $scope.openBadgeModal = function (badge) {
       var modalInstance = $modal.open({
         templateUrl: 'badge/_badge-modal.html',
         controller: 'BadgeModalCtrl',
