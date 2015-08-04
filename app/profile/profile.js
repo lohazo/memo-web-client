@@ -75,10 +75,27 @@
     ];
   }
 
-  function ProfileCtrl($scope, $routeParams, Profile, res1, res2, res3) {
+  function ProfileCtrl($scope, $routeParams, Profile, res1, res2, res3, $modal, badgeServices) {
     $scope.profile = Profile.user;
     $scope.profileDetail = Profile.detail;
     $scope.leaderboardData = [];
+
+    badgeServices.getHighestOwnedBadges().success(function (data) {
+      $scope.badges = data.owned_badges;
+    });
+
+    $scope.test = function (badge) {
+      var modalInstance = $modal.open({
+        templateUrl: 'badge/_badge-modal.html',
+        controller: 'BadgeModalCtrl',
+        windowClass: 'badge-modal',
+        resolve: {
+          badge: function () {
+            return badge;
+          }
+        }
+      });
+    };
 
     var ownedCourses = $scope.profileDetail.owned_courses;
     $scope.ownedCourses = [];
@@ -94,7 +111,7 @@
   }
 
   angular.module('profile', ['profile.services'])
-    .controller('ProfileCtrl', ['$scope', '$routeParams', 'Profile', 'res1', 'res2', 'res3', ProfileCtrl])
+    .controller('ProfileCtrl', ['$scope', '$routeParams', 'Profile', 'res1', 'res2', 'res3', '$modal', 'badgeServices', ProfileCtrl])
     .controller('ProfileFriendCtrl', ['$scope', 'profileDetail', 'res1', 'res2', 'res3',
       ProfileFriendCtrl
     ])

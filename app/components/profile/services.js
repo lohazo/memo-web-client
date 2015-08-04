@@ -81,7 +81,7 @@
       data.auth_token = $localStorage.auth.user.auth_token;
 
       return $http.post(API + '/users/' + userId + '/update_birthday?platform=web&localize=' + localize, data);
-    }
+    };
 
     return Services;
   }
