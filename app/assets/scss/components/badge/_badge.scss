@@ -1,51 +1,64 @@
 .badge-container {
-
-}
-.main {
-  background-color: #FFF;
-  border-radius: 15px;
-  padding: 20px;
-  margin-top: 40px;
-}
-.badge-group {
-  padding-bottom: 30px;
-  padding-left: 20px;
-  margin: 0 !important;
-}
-.badge-title {
-  background-color: #810C15;
-  h4 {
-    padding-left: 20px;
+  @include grid-row;
+  padding-top: 42px;
+  .main-left {
+    @include grid-column($columns: 13);
+    .badge-panel {
+      padding: 20px;
+      @include grid-row;
+      .badge-header {
+        background-color: $primary-color;
+        color: $white;
+        height: 48px;
+        padding: 10px 30px;
+        font-size: 18px;
+      }
+      .badge-content {
+        .badges {
+          padding: 30px;
+          .badge {
+            margin-bottom: 30px;
+            .title {
+              color: $steel;
+              font-size: 16px;
+              line-height: 24px;
+              margin: 0;
+            }
+            .badge-progress {
+              width: 100%;
+            }
+            .badge-item {
+              margin-top: 15px;
+            }
+            .new {
+              position: absolute;
+              left: 56px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .main-right {
+    @include grid-column($columns: 3);
+    .badge-panel {
+      margin-top: 0px !important;
+      padding: 25px 20px;
+      .badge-title {
+        font-size: 20px;
+        color: $oil;
+        padding-bottom: 15px;
+        border-bottom: 1px solid $smoke;
+      }
+    }
   }
 }
-.badge-item {
-  margin-top: 15px;
-}
-.badge-modal {
-  background: url("assets/img/badge-background.png") #ffffff;
-  min-height: 200px;
-  height: 350px !important;
-  outline: none;
-  max-width: 500px !important;
+.panel {
+  @include panel($bg: $white);
+  width: 100% !important;
   border: 0;
-  position: fixed;
-  top: 110px !important;
+  border-radius: 20px;
 }
-.new {
-  position: absolute;
-  left: 56px;
-}
-
-.badge-main-right {
-  background-color: #FFF;
-  border-radius: 15px;
-  padding: 20px;
-  margin-top: 40px;
-}
-.no-margin {
-  margin: 0;
-}
-
 
 
 

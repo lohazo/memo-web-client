@@ -1,33 +1,44 @@
-<div class="container  home-page">
-    <div class="small-12 columns container main">
-        <div class=" badge-title">
-            <h4 style="color: #ffffff;">THÀNH TÍCH CÁ NHÂN</h4>
-        </div>
-        <div class="row badge-group" ng-repeat="badge in badges">
-            <p style="margin: 0px">{{badge.title}}</p>
-            <img src="assets/img/badge-line.png" alt="line"/>
-            <!--<a href="#">&lsaquo;</a>-->
-            <div ng-repeat="item in badge.items track by $index">
-                <div class="">
-                    <div class="small-3 columns badge-item">
-                        <a ng-if="item.is_lock" ng-click="openBadgeModal(item)">
-                            <img src="{{item.lock_image}}" style="width: 100px;height: 100px;" alt="badge image" />
-                            <!--<span>{{item.name}}</span>-->
-                        </a>
-                        <div ng-if="!item.is_lock">
-                            <a ng-click="test(item)" >
-                            <img class="new" src="assets/img/badge-new.png" alt="new"/>
-                            <img src="{{item.unlock_image}}" style="width: 100px;height: 100px;" alt="badge image" />
-                            <!--<span>{{item.name}}</span>-->
-                            </a>
-                        </div>
-                    </div>
+<section class="badge-container">
+  <section class="main-left">
+    <section class="panel badge-panel">
+      <div class="badge-header">
+        <span>THÀNH TÍCH CÁ NHÂN</span>
+      </div>
+      <div class="badge-content">
+        <div class="badges">
+          <div class="badge" ng-repeat="badge in badges">
+            <div class="row">
+              <div class="small-16 columns">
+                <span class="title">{{badge.title}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="small-16 columns">
+                <img class="badge-progress" src="assets/img/badge-line.png" alt="line"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="small-16 columns">
+                <div class="item" ng-repeat="item in badge.items track by $index">
+                  <div class="small-3 columns badge-item">
+                    <a ng-if="item.is_lock" ng-click="openBadgeModal(item)">
+                      <img src="{{item.lock_image}}" style="width: 100px;height: 100px;" alt="badge image" />
+                    </a>
+                    <a ng-click="openBadgeModal(item)" ng-if="!item.is_lock">
+                      <img class="new" src="assets/img/badge-new.png" alt="new" ng-if="is_new" />
+                      <img src="{{item.unlock_image}}" style="width: 100px;height: 100px;" alt="badge image" />
+                    </a>
+                  </div>
                 </div>
             </div>
-            <!--<a href="#">&rsaquo;</a>-->
+          </div>
         </div>
-    </div>
-    <div class="small-4 columns badge-main-right">
-        new feeds
-    </div>
-</div>
+      </div>
+    </section>
+  </section>
+  <section class="main-right">
+    <section class="panel badge-panel">
+      <div class="badge-title">New feeds</div>
+    </section>
+  </section>
+</section>
