@@ -1,8 +1,11 @@
 (function (angular) {
   'use strict';
 
-  function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting, $localStorage) {
-    // $scope.user_avatar = $localStorage.auth.profile_detail.url_avatar;
+  function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting, $localStorage, badgeServices) {
+    $scope.user_avatar = $localStorage.auth.profile_detail.url_avatar;
+    badgeServices.getTotalBadge().success(function (data){
+      $scope.total_badge_notice = data.total;
+    });
     $scope.sharedSettings = {
       functionaly: {
         should_weakest_word: true,
@@ -46,7 +49,7 @@
   }
 
   angular.module('header', []);
-  angular.module('header').controller('HeaderCtrl', ['$rootScope', '$scope', '$location', 'AuthService', '$modal', 'MemoTracking', 'AppSetting', '$localStorage',
+  angular.module('header').controller('HeaderCtrl', ['$scope', '$rootScope', '$location', 'AuthService', '$modal', 'MemoTracking', 'AppSetting', '$localStorage', 'badgeServices',
     HeaderCtrl
     ])
     .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {

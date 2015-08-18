@@ -33,6 +33,7 @@
             .new {
               position: absolute;
               left: 56px;
+              width: 55px;
             }
           }
         }
@@ -61,8 +62,8 @@
 }
 .badge-modal {
   background: url("assets/img/badge-background.png") #ffffff;
-  min-height: 200px;
-  height: 350px !important;
+  min-height: 350px;
+  height: auto !important;
   outline: none;
   max-width: 500px !important;
   border: 0;

@@ -1,43 +1,66 @@
 <div class="row main home-page">
   <div class="main-left left-profile">
-    <div class="container container-page-profile">
-      <div class="row user-info-profile">
-        <p>
-          <img ng-src="{{profileDetail.url_avatar || 'assets/img/profile-avatar-big.png'}}" alt=""/>
-           <br>
-          <strong ng-bind="profileDetail.username"></strong>
-        </p>
-        <div class="row add-user-name">
-          <p><img src="assets/img/005.png" alt="">{{profileDetail.combo_days || 0}} <span>{{'TEXT_COMBO_DAY' | translate}}</span></p>
-        </div>
-        <div class="row choose-language-profile">
-          <div class="large-16 columns">
-            <div class="row top-language-profile" ng-repeat="row in ownedCourses">
-              <div class="language-profile" ng-repeat="course in row" ng-if="course">
-                <img ng-src="assets/img/{{course._id}}.png" alt="" width="40">
-                <span title="" style="color:#810c15;font-weight: 700;">{{course.course_name}}</span> <br>
-                <span>Level {{course.level}}</span>
+
+
+    <div class="container container-page-profile profile-tab" style="float: left; width: 100%;">
+      <tabset justified="true">
+        <tab heading="THÔNG TIN CÁ NHÂN">
+          <div class="large-8 columns">
+            <div class="row user-info-profile">
+              <p>
+                <img ng-src="{{profileDetail.url_avatar || 'assets/img/profile-avatar-big.png'}}" alt=""/>
+                 <br>
+                <strong ng-bind="profileDetail.username"></strong>
+              </p>
+              <div class="row add-user-name">
+                <p><img src="assets/img/005.png" alt="">{{profileDetail.combo_days || 0}} </p>
+                <p><img src="assets/img/006.png" alt="">{{profileDetail.virtual_money || 0}} </p>
+                <p><img src="assets/img/007.png" alt="">{{profileDetail.total_exp || 0}} </p>
+              </div>
+              <div class="row add-user-name referral" style="margin-top: 15px;">
+                <p> <span>{{'TEXT_SHARE_REFERRAL_CODE' | translate}}</span> {{profileDetail.referral_code}}</p>
+              </div>
+              <div class="line" style="border-bottom: 3px solid #999999; margin-top: 20px;"></div>
+
+              <div class="row" style="margin-top: 20px;">
+                <ul ng-repeat="badge in badges" style="list-style: none;display: inline-block;">
+                  <li>
+                    <a ng-click="openBadgeModal(badge)">
+                      <img src="{{badge.unlock_image}}" style="width: 72px;height: 72px;" alt="badge image" />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+          <div class="large-8 columns">
+            <canvas linechart options="chartOptions" data="expChart" width="350" height="244"></canvas>
+            <div class="line" style="border-bottom: 3px solid #999999; margin-top: 20px;"></div>
+          </div>
+        </tab>
+        <tab heading="CÁC KHÓA HỌC">
+          <div class="row choose-language-profile">
+            <div class="large-16 columns">
+              <div class="row top-language-profile" ng-repeat="row in ownedCourses">
+                <div class="language-profile" ng-repeat="course in row" ng-if="course">
+                  <img ng-src="assets/img/{{course._id}}.png" alt="" width="40">
+                  <span title="" style="color:#810c15;font-weight: 700;">{{course.course_name}}</span> <br>
+                  <span>Level {{course.level}}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row badges">
-          <div class="small-4 columns" ng-repeat="badge in badges">
-            <a ng-click="openBadgeModal(badge)">
-              <img src="{{badge.unlock_image}}" style="width: 100px;height: 100px;" alt="badge image" />
-            </a>
-          </div>
-        </div>
-        <div class="small-8 columns">
-          <canvas linechart options="chartOptions" data="expChart" width="220" height="150"></canvas>
-        </div>
-      </div>
+        </tab>
+      </tabset>
     </div>
+
+
   </div>
-  <!--<div class="main-right leaderboard-profile">-->
-    <!--<div class="container box-list-top" style="margin-bottom: 20px;">-->
-      <!--<div class="row leaderboard" leaderboard-data="leaderboardData" leaderboard></div>-->
-    <!--</div>-->
-    <!--<div google-ads-width="260px" google-ads-height="260px" google-ads-client="ca-pub-6371733042680225" google-ads-slot="2331196993" google-ads></div>-->
-  <!--</div>-->
+  <div class="main-right leaderboard-profile">
+    <div class="container box-list-top" style="margin-bottom: 20px;">
+      <div class="row leaderboard" leaderboard-data="leaderboardData" leaderboard></div>
+    </div>
+    <div google-ads-width="260px" google-ads-height="260px" google-ads-client="ca-pub-6371733042680225" google-ads-slot="2331196993" google-ads></div>
+  </div>
 </div>

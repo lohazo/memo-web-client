@@ -19,23 +19,23 @@
     };
   }
 
-  function BadgeModalCtrl ($scope, badge) {
+  function BadgeModalCtrl ($scope, badge, $localStorage) {
       $scope.badge = badge;
       $scope.shareBadge = function () {
         // console.log($scope.badge)
         var data = {
-          caption: badge.badge_category, //name
-          description: badge._description,
+          caption: 'http://memo.edu.vn', //name
+          description: 'TOPICA Memo là ứng dụng học tiếng Anh hoàn toàn MIỄN PHÍ. Các bài học được thiết kế dưới dạng trò chơi khiến cho việc học tiếng Anh chưa bao giờ DỄ DÀNG và THÚ VỊ đến thế. Tham gia học với kiến '+ $localStorage.auth.user.username +' ngay để tiến bộ từng ngày!',
           link: "http://memo.edu.vn",
-          name: badge.name,
-          picture: badge.unlock_image,
+          name: 'Chúc mừng '+ $localStorage.auth.user.username +' đã dành được huy hiệu ' + badge.name,
+          picture: badge.share_image,
           method: 'feed'
-        }
+        };
         FB.ui(data, function (response) {});
       }
   }
 
   angular.module('badge.controllers', ['badge.services'])
     .controller('badgeCtrl', ['$scope', 'badgeServices', '$modal', badgeCtrl])
-    .controller('BadgeModalCtrl', ['$scope', 'badge', BadgeModalCtrl]);
+    .controller('BadgeModalCtrl', ['$scope', 'badge', '$localStorage', BadgeModalCtrl]);
 }(window.angular));

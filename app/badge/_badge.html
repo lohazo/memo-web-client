@@ -25,7 +25,7 @@
                       <img src="{{item.lock_image}}" style="width: 100px;height: 100px;" alt="badge image" />
                     </a>
                     <a ng-click="openBadgeModal(item)" ng-if="!item.is_lock">
-                      <img class="new" src="assets/img/badge-new.png" alt="new" ng-if="is_new" />
+                      <img class="new" src="assets/img/badge-new.png" alt="new" ng-if="item.is_new" />
                       <img src="{{item.unlock_image}}" style="width: 100px;height: 100px;" alt="badge image" />
                     </a>
                   </div>
