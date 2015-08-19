@@ -2,7 +2,6 @@
   'use strict';
 
   function HeaderCtrl($scope, $rootScope, $location, AuthService, $modal, MemoTracking, AppSetting, $localStorage, badgeServices) {
-    $scope.user_avatar = $localStorage.auth.profile_detail.url_avatar;
     badgeServices.getTotalBadge().success(function (data){
       $scope.total_badge_notice = data.total;
     });
@@ -18,6 +17,14 @@
     $scope.$on('event-sharedSettingsLoaded', function () {
       $scope.sharedSettings = AppSetting.sharedSettings;
     });
+
+    if (!$localStorage.auth) {
+      $scope.user_avatar = '/img/avatar1.jpg';
+    } else {
+      $scope.$on('get-profile', function () {
+        $scope.user_avatar = $localStorage.auth.profile_detail.url_avatar;
+      });
+    }
 
     $scope.$on('$routeChangeSuccess', function () {
       $scope.path = $location.path();
