@@ -22,7 +22,7 @@
               </div>
               <div class="line" style="border-bottom: 3px solid #999999; margin-top: 20px;"></div>
 
-              <div class="row" style="margin-top: 20px;">
+              <div class="row" style="margin-top: 20px;" ng-show="enable_badge">
                 <ul ng-repeat="badge in badges" style="list-style: none;display: inline-block;">
                   <li>
                     <a ng-click="openBadgeModal(badge)">

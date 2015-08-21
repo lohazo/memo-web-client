@@ -26,6 +26,12 @@
       });
     }
 
+    if ($localStorage.auth) {
+      $scope.$on('get-profile', function () {
+        $scope.enable_badge = $localStorage.auth.profile_detail.enable_badge;
+      });
+    }
+
     $scope.$on('$routeChangeSuccess', function () {
       $scope.path = $location.path();
     });

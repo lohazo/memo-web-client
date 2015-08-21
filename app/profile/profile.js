@@ -79,6 +79,8 @@
     $scope.profile = Profile.user;
     $scope.profileDetail = Profile.detail;
     $scope.leaderboardData = [];
+    $scope.enable_badge = Profile.detail.enable_badge;
+    console.log($scope.enable_badge);
 
     Profile.getProfileDetail()
       .then(function () {

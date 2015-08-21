@@ -34,7 +34,7 @@
             <img style="width: 40px;height: 40px;border-radius: 50%;" src="{{user_avatar || 'assets/img/profile-avatar-big.png'}}" />
           </a>
         </li>
-        <li class="has-form notification">
+        <li class="has-form notification" ng-show="enable_badge">
           <a href="/badge" class="button">
             <img style="width: 40px;height: 40px;border-radius: 50%;" src="{{'assets/img/cup.png'}}" />
             <div class="indicator" ng-class="{'has-notification': total_badge_notice > 0}">{{total_badge_notice}}</div>
