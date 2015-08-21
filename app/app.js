@@ -412,7 +412,7 @@
     'feedback', 'settings', 'plaza', 'gamification', 'leaderboard', 'tracking', 'welcome',
     'words', 'referral', 'question',
     'notification', 'download', 'adsense', 'forum', 'job', 'memo.dropdown', 'weakestWord',
-    'popup', 'banner', 'island'
+    'popup', 'banner', 'island', 'badge'
   ]).config(['$routeProvider', '$locationProvider', '$httpProvider', 'FacebookProvider',
     'GooglePlusProvider', '$logProvider', '$translateProvider',
     AppConfig

@@ -75,10 +75,48 @@
     ];
   }
 
-  function ProfileCtrl($scope, $routeParams, Profile, res1, res2, res3) {
+  function ProfileCtrl($scope, $routeParams, Profile, res1, res2, res3, $modal, badgeServices) {
     $scope.profile = Profile.user;
     $scope.profileDetail = Profile.detail;
     $scope.leaderboardData = [];
+    $scope.enable_badge = Profile.detail.enable_badge;
+    console.log($scope.enable_badge);
+
+    Profile.getProfileDetail()
+      .then(function () {
+        $scope.profileDetail = Profile.detail;
+        $scope.expChart = {
+          labels: $scope.profileDetail.exp_chart.days,
+          datasets: [{
+            label: "",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "#848484",
+            pointColor: "#810c15",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: $scope.profileDetail.exp_chart.exp
+          }]
+        };
+        //$rootScope.$broadcast('event-profileLoaded', Profile.detail);
+      });
+
+    badgeServices.getHighestOwnedBadges().success(function (data) {
+      $scope.badges = data.owned_badges;
+    });
+
+    $scope.openBadgeModal = function (badge) {
+      var modalInstance = $modal.open({
+        templateUrl: 'badge/_badge-modal.html',
+        controller: 'BadgeModalCtrl',
+        windowClass: 'badge-modal',
+        resolve: {
+          badge: function () {
+            return badge;
+          }
+        }
+      });
+    };
 
     var ownedCourses = $scope.profileDetail.owned_courses;
     $scope.ownedCourses = [];
@@ -94,7 +132,7 @@
   }
 
   angular.module('profile', ['profile.services'])
-    .controller('ProfileCtrl', ['$scope', '$routeParams', 'Profile', 'res1', 'res2', 'res3', ProfileCtrl])
+    .controller('ProfileCtrl', ['$scope', '$routeParams', 'Profile', 'res1', 'res2', 'res3', '$modal', 'badgeServices', ProfileCtrl])
     .controller('ProfileFriendCtrl', ['$scope', 'profileDetail', 'res1', 'res2', 'res3',
       ProfileFriendCtrl
     ])

@@ -81,12 +81,12 @@
       data.auth_token = $localStorage.auth.user.auth_token;
 
       return $http.post(API + '/users/' + userId + '/update_birthday?platform=web&localize=' + localize, data);
-    }
+    };
 
     return Services;
   }
 
-  function ProfileFactory(ProfileServices, $localStorage) {
+  function ProfileFactory(ProfileServices, $localStorage, $rootScope) {
     var Profile = {};
 
     if (!$localStorage.auth) {
@@ -123,6 +123,7 @@
           if (!(data && data._id)) {
             Profile.detail = response.data;
             $localStorage.auth.profile_detail = Profile.detail;
+            $rootScope.$broadcast('get-profile');
           }
         });
     };
@@ -139,5 +140,5 @@
     .factory('ProfileServices', ['$http', '$q', '$location', '$localStorage', 'API',
       ProfileServices
     ])
-    .factory('Profile', ['ProfileServices', '$localStorage', ProfileFactory]);
+    .factory('Profile', ['ProfileServices', '$localStorage', '$rootScope', ProfileFactory]);
 }(window.angular));
