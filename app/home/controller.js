@@ -4,8 +4,9 @@
   function HomeCtrl($scope) {}
 
   function HomeMainCtrl($scope, $rootScope, $window, $location, Profile, TreeBuilder, AppSetting, MemoTracker,
-    Message, ReferralService, Leaderboard, PopupServices, $modal, BannerServices, Skill, $localStorage) {
+    Message, ReferralService, Leaderboard, PopupServices, $modal, BannerServices, Skill, $localStorage, badgeServices) {
     function getIsland() {
+      //$scope.test = "abc";
       $scope.trackingSwapIsland = function () {
         MemoTracker.track('swap island');
       };
@@ -156,6 +157,10 @@
       });
     }
 
+    function getTotalBadge() {
+      badgeServices.getTotalBadge();
+    }
+
     function getProfile() {
       return Profile.getProfile().then(function () {
         $scope.profile = Profile.getUser();
@@ -252,6 +257,7 @@
       .then(getLeaderboardData)
       .then(getPopup)
       .then(getBanner)
+      .then(getTotalBadge)
       .then(AppSetting.getWords);
   }
 
@@ -372,7 +378,7 @@
     };
   }
 
-  function SecretGiftCtrl($scope, $http, $modal, API) {
+  function SecretGiftCtrl($scope, $http, $modal, API, Profile) {
     var vm = this;
     vm.isOpen = 1;
     vm.openGift = function (Profile) {
@@ -429,18 +435,17 @@
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
         controller: 'SecretGiftModalCtrl',
-        windowClass: 'buy-guide-popup-modal',
+        windowClass: 'buy-guide-popup-modal'
       });
     };
-
     vm.openClaimScholarModal = function (Profile) {
       var modalInstance = $modal.open({
         templateUrl: 'plaza/_buy-guide-popup.html',
         controller: ['$scope', '$sce', '$modalInstance', function ($scope, $sce, $modalInstance) {
           $scope.trustedResource = $sce.trustAsResourceUrl(API +
-            '/plaza_items/claim_gift_1m?platform=web&&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' +
-            Profile.auth_token +
-            '&verification_code=' + Profile.verification_code);
+            '/plaza_items/claim_gift_1m?platform=web&localize=vi&quantity=1&base_item_id=gift_1m&auth_token=' +
+            Profile.detail.auth_token +
+            '&verification_code=' + Profile.detail.verification_code);
         }],
         windowClass: 'buy-guide-popup-modal',
       });
@@ -491,7 +496,7 @@
   angular.module('home.controller', ['app.services', 'message.directives'])
     .controller('HomeCtrl', ['$scope', HomeCtrl])
     .controller('HomeMainCtrl', ['$scope', '$rootScope', '$window', '$location', 'Profile', 'TreeBuilder',
-      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal', 'BannerServices', 'Skill', '$localStorage',
+      'AppSetting', 'MemoTracking', 'Message', 'ReferralService', 'Leaderboard', 'PopupServices', '$modal', 'BannerServices', 'Skill', '$localStorage', 'badgeServices',
       HomeMainCtrl
     ])
     .controller('CampaignVerifyCodeCtrl', ['$scope', '$route', 'ReferralService', 'Profile',
@@ -507,7 +512,7 @@
     .controller('RefCodeModalInstanceCtrl', ['$scope', '$modalInstance', '$route', 'ReferralService',
       RefCodeModalInstanceCtrl
     ])
-    .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', SecretGiftCtrl])
+    .controller('SecretGiftCtrl', ['$scope', '$http', '$modal', 'API', 'Profile', SecretGiftCtrl])
     .controller('SecretGiftModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftModalCtrl])
     .controller('SecretGiftTShirtModalCtrl', ['$scope', '$sce', '$modalInstance', SecretGiftTShirtModalCtrl])
     .controller('NativeCtrl', ['$scope', '$modal', NativeCtrl]);

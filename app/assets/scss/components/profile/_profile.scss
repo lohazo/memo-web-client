@@ -3,8 +3,8 @@
     background-color: $iron;
     border-radius: 50%;
     &.big {
-      height: 120px;
-      width: 120px;
+      height: 100px;
+      width: 100px;
     }
     &.small {
       height: 60px;
@@ -236,3 +236,20 @@
 }
 
 /*----------------------------------------------------------------------------------*/
+
+.tabbable {
+  .tabs {
+    border-bottom: 2px solid #810C15;
+    dd.active {
+      border-bottom: 2px solid #810C15;
+    }
+    dd {
+      a:hover {
+        background-color: #FFFFFF;
+      }
+      a {
+        background-color: #FFFFFF;
+      }
+    }
+  }
+}
