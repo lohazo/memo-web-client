@@ -6,11 +6,10 @@
     <div class="row">
       <div class="small-16 small-centered columns">
 	<div class="row">
-	  <div class="small-5 columns buttons">
-	    <span class="speaker" ng-click="speaker.play()"></span>
+		<div class="row columns answer" style="margin-left: 50px;">
+
+		<span class="speaker" ng-click="speaker.play()"></span>
 	    <span class="slow-speaker" ng-click="speaker.slowPlay()"></span>
-	  </div>
-	  <div class="small-11 columns answer">
 	    <div class="row" style="margin-left: 5px;">
 	      <input id="myText" type="text" ng-model="answer" placeholder="{{'TEXT_PLACEHOLDER_LISTEN_QUESTION' | translate}}"/>
 	    </div>
