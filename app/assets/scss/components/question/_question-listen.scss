@@ -17,7 +17,7 @@
             cursor: pointer;
           }
           .big-speaker {
-            background: url("assets/img/lesson-speaker.png") no-repeat;
+            background: url("assets/img/lesson-speaker1.png") no-repeat;
             display: block;
             position: absolute;
             width: 95px;
@@ -57,35 +57,38 @@
     h4.name {
       margin-bottom: 40px;
     }
+    .speaker {
+      background: url("assets/img/lesson-speaker1.png") no-repeat;
+      display: block;
+      position: absolute;
+      width: 94px;
+      height: 74px;
+      top: -17px;
+      left: 118px;
+    }
+    .slow-speaker {
+      background: url("assets/img/lesson-speaker-slow.png") no-repeat;
+      display: block;
+      position: absolute;
+      width: 94px;
+      height: 73px;
+      top: -18px;
+      left: 212px;
+    }
     .buttons {
       position: relative;
       height: 110px;
       > span {
         cursor: pointer;
       }
-      .speaker {
-        background: url("assets/img/lesson-speaker.png") no-repeat;
-        display: block;
-        position: absolute;
-        width: 95px;
-        height: 95px;
-        top: 0;
-      }
-      .slow-speaker {
-        background: url("assets/img/lesson-speaker-slow.png") no-repeat;
-        display: block;
-        position: absolute;
-        width: 55px;
-        height: 55px;
-        top: 56px;
-        left: 100px;
-      }
+
     }
     .answer {
       padding-top: 66px;
       input[type="text"] {
         border: 1px solid $gainsboro;
         border-radius: 10px;
+        width: 380px;
         height: 40px;
         padding-left: 10px;
         vertical-align: middle;

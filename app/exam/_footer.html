@@ -1,10 +1,12 @@
-<div class="container">
+<div class="container footer-wrap">
   <div class="small-8 columns">
-    <a href="" class="small-4 skip memo-button" ng-click="skip()" translate="BTN_SKIP"></a>
+    <a href="" class="left small-4 left material-button normal" ng-click="skip()" translate="BTN_SKIP"></a>
   </div>
   <div class="small-4 columns">
   </div>
-  <div class="small-4 columns hover-button-text">
-    <a href="" class="right small-9 {{question.userAnswer ? '' : 'disabled' }} check memo-button" ng-click="check()" popover="{{'TEXT_SHORTCUT_ENTER_KEYBOARD' | translate}}" popover-trigger="mouseenter" popover-placement="left">{{'BTN_CHECK' | translate}}</a>
+  <div class="small-8 columns hover-button-text">
+    <a href="" class="right small-9 {{question.userAnswer ? '' : 'disabled' }} right material-button normal" ng-click="check()" popover="{{'TEXT_SHORTCUT_ENTER_KEYBOARD' | translate}}" popover-trigger="mouseenter" popover-placement="left">{{'BTN_CHECK' | translate}}</a>
   </div>
+  <div class="footer-divider normal"></div>
 </div>
+

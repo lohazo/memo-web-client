@@ -1,18 +1,19 @@
-<div class="container {{result.result ? 'success' : 'fail'}}">
-  <div class="small-8 columns">
+<div class="container footer-wrap {{result.result ? 'success' : 'fail'}}">
+  <div class="small-6 columns">
     <div class="row">
       <div class="small-2 columns text-center">
-        <h3 class="icon-{{result.result ? 'checkmark' : 'close'}}"></h3>
+        <!--<h3 class="icon-{{result.result ? 'checkmark' : 'close'}}"></h3>-->
+        <a href="" class="left small-4 left material-button {{result.result ? 'success' : 'fail'}}"></a>
       </div>
       <div class="small-14 columns">
-        <h4 class="result" ng-if="result.result && result.answerOptions" translate="TEXT_RESULT_ANSWER"></h4>
-        <h4 class="result" ng-if="!result.result" translate="TEXT_CORRECT_ANSWER"></h4>
-        <h4 class="result" ng-if="result.result && !result.answerOptions" translate="TEXT_CORRECT"></h4>
+        <h4 class="result {{result.result ? 'success' : 'fail'}}" ng-if="result.result && result.answerOptions" translate="TEXT_RESULT_ANSWER"></h4>
+        <h4 class="result {{result.result ? 'success' : 'fail'}}" ng-if="!result.result" translate="TEXT_CORRECT_ANSWER"></h4>
+        <h4 class="result {{result.result ? 'success' : 'fail'}}" ng-if="result.result && !result.answerOptions" translate="TEXT_CORRECT"></h4>
       </div>
     </div>
     <div class="row">
       <div class="small-2 columns"></div>
-      <div class="small-14 columns">
+      <div class="small-14 columns text-center">
         <h4 ng-if="!result.result" class="correct answer">{{result.correctAnswer}}</h4>
         <h4 ng-if="result.result && result.answerOptions" ng-bind-html="result.answerOptions"></h4>
       </div>
@@ -20,22 +21,23 @@
     <div class="row">
       <div class="small-2 columns"></div>
       <div class="small-14 columns">
-        <div class="row">
-          <div class="small-5 columns" style="padding-left: 0;">
-            <a ng-href="" memo-dropdown="#report-dropdown" class="small-16 memo-button report">{{'BTN_REPORT_BUG' | translate}}</a>
-            <div id="report-dropdown" class="f-dropdown" report-dropdown show-on-click="true" scroll-to-focus="true"></div>
-          </div>
-          <div class="small-6 columns">
-            <a href="" class="small-14 memo-button discussion" ng-if="sharedSettings.functionaly.should_forum" ng-click="discussion()">{{'BTN_DICUSSION' | translate}}</a>
-          </div>
-          <div class="small-4 columns"></div>
-        </div>
+
       </div>
     </div>
   </div>
-  <div class="small-4 columns">
+  <div class="small-4 columns" style="margin-top: 80px;">
+    <div class="row">
+      <div class="" style="float: right; margin-right: 75px;">
+        <a ng-href="" memo-dropdown="#report-dropdown" class="small-16 report"><img src="assets/img/{{result.result ? 'speech-bubble.png' : 'speech-bubble-fail.png'}}" alt=""/></a>
+        <div id="report-dropdown" class="f-dropdown" report-dropdown show-on-click="true" scroll-to-focus="true"></div>
+      </div>
+      <div class="" style="float: right;margin-right: 30px;">
+        <a href="" class="small-14 discussion" ng-if="sharedSettings.functionaly.should_forum" ng-click="discussion()"><img src="assets/img/{{result.result ? 'exclamation.png' : 'exclamation-fail.png'}}" alt=""/></a>
+      </div>
+    </div>
   </div>
-  <div class="small-4 columns">
-    <a href="" class="right small-9 memo-button continue" ng-click="nextQuestion()" translate="BTN_CONTINUE"></a>
+  <div class="small-6 columns">
+    <a href="" class="right small-9 continue material-button {{result.result ? 'success' : 'fail'}}" ng-click="nextQuestion()" translate="BTN_CONTINUE"></a>
   </div>
+  <div class="footer-divider {{result.result ? 'success' : 'fail'}}"></div>
 </div>

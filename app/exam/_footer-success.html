@@ -1,11 +1,13 @@
-<div class="container success">
+<div class="container footer-wrap">
   <div class="small-8 columns">
     <!-- <a href="" class="small-6 skip memo-button" ng-click="replay()">Xem lại bài học</a> -->
+    <a href="" class="left small-4 left material-button success"></a>
   </div>
   <div class="small-4 columns">
   </div>
   <div class="small-4 columns">
-    <a href="" class="right small-9 check memo-button" ng-if="examType == 'shortcut' || examType == 'lesson' || examType == 'strengthen_skill'" ng-click="quit(true, '/skill')" translate="BTN_CONTINUE"></a>
-    <a href="" class="right small-9 check memo-button" ng-if="examType == 'checkpoint' || examType == 'placement_test' || examType == 'strengthen_all'" ng-click="quit(true, '/')" translate="BTN_CONTINUE"></a>
+    <a href="" class="right small-9 check material-button success" ng-if="examType == 'shortcut' || examType == 'lesson' || examType == 'strengthen_skill'" ng-click="quit(true, '/skill')" translate="BTN_CONTINUE"></a>
+    <a href="" class="right small-9 check material-button success" ng-if="examType == 'checkpoint' || examType == 'placement_test' || examType == 'strengthen_all'" ng-click="quit(true, '/')" translate="BTN_CONTINUE"></a>
   </div>
+  <div class="footer-divider success"></div>
 </div>

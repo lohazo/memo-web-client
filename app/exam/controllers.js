@@ -2,9 +2,12 @@
   'use strict';
 
   function ExamCtrl($scope, $timeout, $routeParams, $sce, $location, Exam, Question, Sound, MemoTracker,
-    Skill, $modal, $localStorage, ForumServices, Profile, AppSetting, $rootScope, $translate) {
+    Skill, $modal, $localStorage, ForumServices, Profile, AppSetting, $rootScope, $translate, $interval, roundProgressService) {
     var examType = $location.path().split('/')[1].trim();
     var skill = Skill.skill($routeParams.id);
+
+
+
 
     AppSetting.getSharedSettings().then(function () {
       $scope.sharedSettings = AppSetting.shared_settings;
@@ -260,6 +263,7 @@
           $scope.question.userAnswer = "";
           $scope.questionTpl = questionTplId[$scope.question.type];
           $scope.isAutoFeedback = Exam.isAutoFeedback();
+          $scope.current+= 1;
         }, 1);
       }
     };
@@ -275,6 +279,7 @@
         $scope.questionTpl = questionTplId[$scope.question.type];
         $scope.isAutoFeedback = Exam.isAutoFeedback();
         $scope.availableItems = Exam.availableItems();
+        $scope.max =$scope.questions.length
       });
     };
 
@@ -340,7 +345,56 @@
         windowClass: 'max-course-popup-modal',
         controller: 'MaxCoursePopupModalCtrl'
       });
-    }
+    };
+
+    $scope.current=         0;
+    $scope.max =            0;
+    $scope.timerCurrent =   0;
+    $scope.uploadCurrent =  0;
+    $scope.stroke =         10;
+    $scope.radius =         50;
+    $scope.isSemi =         false;
+    $scope.rounded =        false;
+    $scope.responsive =     false;
+    $scope.clockwise =      true;
+    $scope.currentColor =   '#ffbb33';
+    $scope.bgColor =        '#999999';
+    $scope.duration =       800;
+    $scope.currentAnimation = 'easeOutCubic';
+
+    $scope.increment = function(){
+
+      $scope.current+= 10;
+      console.log(amount)
+    };
+
+    $scope.decrement = function(amount){
+      $scope.current-=(amount || 1);
+    };
+
+    $scope.animations = [];
+
+    angular.forEach(roundProgressService.animations, function(value, key){
+      $scope.animations.push(key);
+    });
+
+    $scope.getStyle = function(){
+      return {
+        'top': $scope.isSemi ? 'auto' : '50%',
+        'bottom': $scope.isSemi ? '5%' : 'auto',
+        'left': '50%',
+        'transform': ($scope.isSemi ? '' : 'translateY(-50%) ') + 'translateX(-50%)',
+        'font-size': $scope.radius/3.5 + 'px'
+      };
+    };
+
+    $scope.getColor = function(){
+      return $scope.gradient ? 'url(#gradient)' : $scope.currentColor;
+    };
+
+    var getPadded = function(val){
+      return val < 10 ? ('0' + val) : val;
+    };
   }
 
   function DiscussionExamModalCtrl($scope, $location, Exam, ExamStrengthen, $localStorage, ForumServices,
@@ -463,14 +517,16 @@
     };
   }
 
-  angular.module('exam.controllers', ['ngSanitize'])
+
+  angular.module('exam.controllers', ['ngSanitize', 'angular-svg-round-progress'])
     .controller('ExamCtrl', [
       '$scope', '$timeout', '$routeParams', '$sce', '$location', 'Exam', 'Question', 'Sound',
-      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', 'AppSetting', '$rootScope', '$translate', ExamCtrl
+      'MemoTracking', 'Skill', '$modal', '$localStorage', 'ForumServices', 'Profile', 'AppSetting', '$rootScope', '$translate', '$interval', 'roundProgressService', ExamCtrl
     ])
     .controller('DiscussionExamModalCtrl', ['$scope', '$location', 'Exam', 'ExamStrengthen', '$localStorage',
       'ForumServices', '$modalInstance', 'AppSetting', '$rootScope', '$translate', DiscussionExamModalCtrl
     ])
+      //.controller('demoCtrl', ['$scope', '$interval', 'roundProgressService', demoCtrl])
     .controller('ScholarshipPopupModalCtrl', ['$scope', 'url', '$sce', ScholarshipPopupModalCtrl])
     .controller('MaxCoursePopupModalCtrl', ['$scope', '$modalInstance', 'AppSetting', MaxCoursePopupModalCtrl]);
 }(window.angular));
