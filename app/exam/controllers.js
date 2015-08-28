@@ -358,7 +358,7 @@
     $scope.responsive =     false;
     $scope.clockwise =      true;
     $scope.currentColor =   '#ffbb33';
-    $scope.bgColor =        '#eaeaea';
+    $scope.bgColor =        '#999999';
     $scope.duration =       800;
     $scope.currentAnimation = 'easeOutCubic';
 
